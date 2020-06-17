@@ -2,7 +2,7 @@
   <div class="login">
     <Nav />
     <login />
-    <Products />
+    <!-- <Products /> -->
 
 
 

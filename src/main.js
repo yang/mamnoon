@@ -9,8 +9,8 @@ import VueScrollactive from 'vue-scrollactive';
 import "bootstrap/dist/css/bootstrap.css";
 
 const base = axios.create({
-  baseURL: "http://localhost:4000"
-// baseURL: "http://sheltered-shore-34206.herokuapp.com/"
+  // baseURL: "http://localhost:4000"
+baseURL: "https://sheltered-shore-34206.herokuapp.com/"
 });
 
 Vue.prototype.$http = base;
