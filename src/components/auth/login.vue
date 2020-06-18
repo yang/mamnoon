@@ -59,28 +59,42 @@ export default {
     };
   },
   methods: {
-    async loginUser() {
+    // async loginUser() {
+    //   try {
+    //     console.log(this.login);
+
+
+
+    //     // let response = await this.$http.post("/user/login", this.login, {
+    //     //       headers: {
+    //     //       "lick" : "cock",
+    //     //       "Access-Control-Allow-Origin": "*"
+    //     //       }
+    //     // });
+
+
+    //     let response = await this.$http.post("/user/login", this.login);
+
+    //     let token = response.data.token;
+    //     localStorage.setItem("jwt", token);
+    //     if (token) {
+    //       swal("Success", "Login Successful", "Error");
+    //       this.$router.push("/home");
+    //     }
+    //   } catch (err) {
+    //     swal("Error", "Something Went Wrong", "error");
+    //     console.log(err.response);
+    //   }
+    // },
+async loginUser() {
       try {
-        console.log(this.login);
 
 
 
-        // let response = await this.$http.post("/user/login", this.login, {
-        //       headers: {
-        //       "lick" : "cock",
-        //       "Access-Control-Allow-Origin": "*"
-        //       }
-        // });
+  this.$router.push("/home");
 
 
-        let response = await this.$http.post("/user/login", this.login);
 
-        let token = response.data.token;
-        localStorage.setItem("jwt", token);
-        if (token) {
-          swal("Success", "Login Successful", "Error");
-          this.$router.push("/home");
-        }
       } catch (err) {
         swal("Error", "Something Went Wrong", "error");
         console.log(err.response);
