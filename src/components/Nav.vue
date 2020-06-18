@@ -13,6 +13,7 @@
     <Logo />
   </div>
 </div>
+
     </div>
     <template v-if="$mq === 'lg'">
     <nav v-if="$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header">
