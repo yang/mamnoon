@@ -44,6 +44,7 @@
             :data-item-name="item.name"
             :data-item-price="item.price"
             :data-item-id="item.name"
+            :data-item-image="item.img"
             type="button"
             class="snipcart-add-item"
             data-item-url="/"

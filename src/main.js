@@ -139,29 +139,29 @@ const store = new Vuex.Store({
           caviarButton: true,
           items: [
             {
-              name: 'shirt',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/1.jpg',
+              name: "Za'tar Wrap",
+              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/1.jpg',
               price: 5.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
-              name: 'watch',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/2.jpg',
+              name: "Lamb Shawarma",
+              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/2.jpg',
               price: 10.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
-              name: 'hat',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/3.jpg',
+              name: 'Chicken Shawarma',
+              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/3.jpg',
               price: 12.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
-              name: 'cookbook',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/1.jpg',
+              name: 'Fleifleh',
+              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/4.jpg',
               price: 12.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
@@ -175,29 +175,29 @@ const store = new Vuex.Store({
           caviarButton: true,
           items: [
             {
-              name: 'shirt',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/1.jpg',
+              name: "labneh",
+              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/pantry/1.jpg',
               price: 5.00,
               description: '',
               snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
-              name: 'watch',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/2.jpg',
+              name: 'hummus',
+              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/pantry/2.jpg',
               price: 10.00,
               description: '',
               snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
-              name: 'hat',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/3.jpg',
+              name: 'baba ganoush',
+              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/pantry/3.jpg',
               price: 12.00,
               description: '',
               snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
-              name: 'cookbook',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/1.jpg',
+              name: "za'tar",
+              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/pantry/1.jpg',
               price: 12.00,
               description: '',
               snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
