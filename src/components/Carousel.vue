@@ -5,21 +5,19 @@
 <!-- {{index}} -->
 
         <div v-if="offering.visible" class="carousel">
-       <h4>{{offering.title}}</h4>
+        <h4 v-if="!offering.insideHeader">{{offering.title}}   <span v-if="offering.tock">{{currentDay}}</span></h4>
       <carousel :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
-
-
-
-
 
 <template v-if="index === 0" slot="prev"><span class="prev"><Prev /></span></template>
 <template v-else class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
  
 
           <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
-            <!-- {{item.name}} ${{item.price}} -->
-            
-            <img v-bind:src="item.img" />
+
+                   <h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /   {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
+              
+<img v-if="offering.tock" v-bind:src="'https://affectionate-gates-5cf4d4.netlify.app/img/ala/' + currentDay + '.jpg'" />
+<img v-else v-bind:src="item.img" />    
             {{item.description}}
    
 
@@ -34,11 +32,65 @@
 
 
 
+            <template v-if="item.snipCartLink">
+              <div class="order-bottom">
+                {{item.name}}
+                       <div class="order-panel">
+              <!-- <a :href="item.snipCartLink" target="_blank"><Order /></a> -->
+
+
+
+          <button
+            :data-item-name="item.name"
+            :data-item-price="item.price"
+            :data-item-id="item.name"
+            type="button"
+            class="snipcart-add-item"
+            data-item-url="/"
+          >
+
+
+            <Order />
+          </button>
+
+
+
+                            </div>
+                            </div>
+            </template>
+
+
+
+
+
+
+
 
 <div v-if="item.quote">
-{{item.quote}}
-</div>
 
+<div v-if="item.quote.length > 40">
+<span class="sm">{{item.quote}}<br>{{item.author}}</span>
+</div>
+<div v-else-if="item.quote.length > 20">
+<span class="md">{{item.quote}}<br>{{item.author}}</span>
+</div>
+<div v-else>
+<span class="lg">{{item.quote}}<br>{{item.author}}</span>
+</div>
+</div>
+<div v-if="offering.tockButton" class="order-bottom order-top">
+  
+  <span class="month">
+  {{item.month}}
+  </span>
+<div class="days">
+<span v-for="(day,index) in item.days" v-bind:key="day">
+  <span @click="dayChange(index)">
+    {{index + 1}}
+  </span>
+</span>
+</div>
+</div>
           </div>
 
 
@@ -49,7 +101,12 @@
 <template v-if="index === 0" slot="next"><span class="next"><Next /> </span></template>
 <template v-else class="subnext" slot="next"><span class="next"><Next /> </span></template>
 
+
+
+
+
         </carousel>  
+
 
 
 <div v-if="offering.tockButton" class="order-bottom">
@@ -61,6 +118,18 @@
                 </div>
               </div>
 </div>
+
+<!-- 
+<div v-if="offering.caviarButton" class="order-bottom">
+              <div id="mama-dummy-button" class="TockButton-buttonContainer" style="cursor: pointer;">
+                <div data-tock-reserve="true" class="TockButton-link">
+                  <div class="TockButton TockButton-blue">
+                    <span class="TockWidget-B2" @click="loggit()"><Order /></span>
+                  </div>
+                </div>
+              </div>
+</div> -->
+
         </div>
 
       </section>
@@ -111,6 +180,15 @@ export default {
     return this.$store.state.inventory
   },
   methods: {
+    dayChange(e) {
+// console.log(123)
+
+
+
+
+this.currentDay = e + 1
+
+    },
     loggit () {
       console.log(134)
     },
@@ -141,7 +219,15 @@ export default {
       } else {
         this.$store.commit('reserveFamilyMeal', { timeslot })
       }
+    },
+    changedAlert(){
+      console.log('changed')
     }
+  },
+  created(){
+    var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+this.currentDay = dd  
   }
 }
 </script>
@@ -221,19 +307,26 @@ h4{
 
 
 .is-fullheight.familymeal [id^=carousel_prev_]{
-  position: absolute;
-  bottom:30px;
-  top: initial;
-  left: 33%;
-  // display: none;
+
+    position: absolute;
+    bottom: 120px;
+    top: initial;
+    left: 3%;
+    z-index: 20;
 }
 
 .is-fullheight.familymeal [id^=carousel_next_]{
-  position: absolute;
-bottom: 30px;
-  top: initial;
-  right: 33%;
-  // display: none;
+
+
+
+
+
+    position: absolute;
+    bottom: 120px;
+    top: initial;
+    right: 3%;
+    z-index: 20;
+
 }
 
 
@@ -254,6 +347,11 @@ bottom: 30px;
 
 }
   
+.order-bottom.order-top{
+background: #F1765B;
+min-height: 90px;
+text-align: center;
+}
 
 .order-panel{
     padding: 10px 0;
@@ -284,4 +382,125 @@ bottom: 30px;
 
 }
 
+
+
+
+#testimonials .owl-item{
+  color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  height: 100%;
+  margin-top: 16px;
+
+    &:nth-child(odd){
+background: #F1765B;
+    }
+
+
+    &:nth-child(even){
+      background: #F58E58;
+    }
+
+
+}
+
+
+ .owl-stage {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.owl-item{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: auto !important;
+}
+
+
+#testimonials .owl-item > div{
+  padding: 30px;
+  text-align: left;
+  padding-top: 15px;
+}
+
+
+#testimonials .owl-item > div > div{
+  text-align: left;
+}
+
+
+
+.sm{
+  font-size: 16px;
+}
+
+.md{
+  font-size: 24px;
+}
+
+
+.lg{
+font-size: 64px;
+}
+
+
+.days{
+
+margin: 10px auto 5px;
+  width: 80%;
+
+}
+.days span{
+color: white;
+display: inline-block;
+font-style: italic;
+margin-left: 5px;
+margin-right: 5px;
+line-height: 30px;
+cursor: pointer;
+}
+
+.month{
+  color: white;
+display: inline-block;
+font-style: italic;
+margin-left: 5px;
+margin-right: 5px;
+// line-height: 30px;
+cursor: pointer;
+}
+
+
+
+
+
+.insideHeader{
+  margin-bottom: 20px;
+  margin-top: -15px;
+}
+
+
+
+
+button.snipcart-add-item{
+  border: 0;
+  background: transparent;
+
+
+
+&:focus,
+&:active {
+  outline: none;
+  box-shadow: none;
+}
+
+
+}
 </style>

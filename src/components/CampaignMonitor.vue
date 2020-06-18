@@ -111,7 +111,7 @@ export default {
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight: 500;
     letter-spacing: .25px;
-    padding: 5px 35px 5px 10px;
+    padding: 12px 35px 12px 10px;
 
     &:focus,
     &:active{

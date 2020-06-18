@@ -9,8 +9,8 @@ import VueScrollactive from 'vue-scrollactive';
 import "bootstrap/dist/css/bootstrap.css";
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
-baseURL: "https://sheltered-shore-34206.herokuapp.com/"
+  baseURL: "http://localhost:4000"
+// baseURL: "https://sheltered-shore-34206.herokuapp.com"
 });
 
 Vue.prototype.$http = base;
@@ -34,6 +34,10 @@ const vuexLocalStorage = new VuexPersist({
   storage: window.localStorage
 })
 
+
+// var today = new Date();
+// var dd = String(today.getDate()).padStart(2, '0');
+
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
@@ -43,17 +47,22 @@ const store = new Vuex.Store({
     cart: 0,
     userName: 'joe',
     inventory: {
+      currentDay: String(new Date().getDate()).padStart(2, '0'),
       offerings: [
         {
           visible: true,
-          title: 'Family Meal Calendar',
+          title: 'family meal calendar',
           category: 'familymeal',
           slideNo: 1,
+          tock: true,
           tockButton: true,
+          insideHeader: true,
           items: [
             {
               name: 'monday family meal',
               img: 'https://affectionate-gates-5cf4d4.netlify.app/img/1.jpg',
+              month: "june",
+              days: 31,
               price: 40.00,
               today: true,
               // description: 'Family Meal - Meat or Vegetarian- Pick Up',
@@ -70,6 +79,8 @@ const store = new Vuex.Store({
             {
               name: 'tuesday',
               img: 'https://affectionate-gates-5cf4d4.netlify.app/img/2.jpg',
+              month: "july",
+              days: 31,
               price: 40.00,
               today: false,
               // description: 'Family Meal - Meat or Vegetarian- Pick Up',
@@ -86,6 +97,8 @@ const store = new Vuex.Store({
             {
               name: 'wednesday',
               img: 'https://affectionate-gates-5cf4d4.netlify.app/img/3.jpg',
+              month: "august",
+              days: 31,
               price: 40.00,
               today: false,
               // description: 'Family Meal - Meat or Vegetarian- Pick Up',
@@ -102,6 +115,8 @@ const store = new Vuex.Store({
             {
               name: 'thursday',
               img: 'https://affectionate-gates-5cf4d4.netlify.app/img/4.jpg',
+              month: "september",
+              days: 31,
               price: 40.00,
               today: false,
               // description: 'Family Meal - Meat or Vegetarian- Pick Up',
@@ -121,6 +136,7 @@ const store = new Vuex.Store({
           visible: true,
           title: 'A La Carte',
           category: 'alacarte',
+          caviarButton: true,
           items: [
             {
               name: 'shirt',
@@ -149,34 +165,42 @@ const store = new Vuex.Store({
               price: 12.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            },
+            }
+          ]
+        },
+        {
+          visible: true,
+          title: 'Pantry',
+          category: 'alacarte',
+          caviarButton: true,
+          items: [
             {
               name: 'shirt',
               img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/1.jpg',
               price: 5.00,
               description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
+              snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
               name: 'watch',
               img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/2.jpg',
               price: 10.00,
               description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
+              snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
               name: 'hat',
               img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/3.jpg',
               price: 12.00,
               description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
+              snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             },
             {
               name: 'cookbook',
               img: 'https://affectionate-gates-5cf4d4.netlify.app/img/ala/1.jpg',
               price: 12.00,
               description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
+              snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             }
           ]
         },
@@ -265,16 +289,131 @@ const store = new Vuex.Store({
           visible: true,
           title: 'Testimonials',
           category: 'testimonials',
-          slideNo: 1,
+          // slideNo: 1,
           items: [
             {
-              quote: "Thank you! so so good!!!! YUM - Diane Najm"
+              quote: "Thank you! so so good!!!! YUM",
+              author: "- Diane Najm"
             },
             {
-              quote: "The Pick up was easy and the food was great! Thank you for making us feel like we were dining out and a little more normal. Hope to see you soon. - Teri Pollastro"
+              quote: "The Pick up was easy and the food was great! Thank you for making us feel like we were dining out and a little more normal. Hope to see you soon.",
+              author: "- Teri Pollastro"
             },
             {
-              quote: "Amazing meal, thank you!! - Lindsay O"
+              quote: "Amazing meal, thank you!!",
+              author: "- Lindsay O"
+            },
+            {
+              quote: "Pickup was a breeze and the food was amazing, will definitely order again thank you for letting us enjoy the wonders of a great meal at home",
+              author: "- Jane Ng visited on 2020-04-24"
+            },
+
+            {
+              quote: "WEll, the food was superb! The lamb the best ever! And, in the midst of these hard times, I really appreciated the warmth and good positive energy of the staff. Thanks! So glad you're here.",
+              author: "- Lyn Kratz visited on 2020-04-24"
+            },
+
+            {
+              quote: "Love love love!! The food at Mamnoon, never had anything we didn’t thoroughly enjoy!!",
+              author: "- Lori Woods visited on 2020-04-24"
+            },
+
+            {
+              quote: "Your food was AMAZING! WE loved it and will be back. Thank you for creating such delicious dishes!",
+              author: "- Diane Sweeney visited on 2020-04-24"
+            },
+
+            {
+              quote: "The food was AMAZING! Thank you! <3",
+              author: "- Christina Bachynskyi visited on 2020-05-05"
+            },
+
+            {
+              quote: "Love your take out meals. Thanks for giving me something to look forward to every week.",
+              author: "- Erik Fraker visited on 2020-05-06"
+            },
+
+            {
+              quote: "Delicious food, good portions, friendly and safe service, loved the little sweet treat! Thank you for being open.",
+              author: "- Kristen Simpson visited on 2020-05-07"
+            },
+
+            {
+              quote: "this was the best meal I've had in months. the staff is amazing too!",
+              author: "- Johnny Shum visited on 2020-05-08"
+            },
+
+            {
+              quote: "Impeccable in every possible way!",
+              author: "- Heidi Arvish visited on 2020-05-09"
+            },
+
+            {
+              quote: "So tasty. Best takeout food. Thank you for making mother's day awesome.",
+              author: "- Kristen Sharp visited on 2020-05-09"
+            },
+
+            {
+              quote: "You guys are one of our favorite restaurants in Seattle. Family was Very good value, and super yummy! Very happy. We love you guys. Keep fighting and we will keep supporting you!",
+              author: "- Angie Armstrong visited on 2020-05-13"
+            },
+
+            {
+              quote: "Easy to order, easy pickup. Outstanding food! Thanks, we’ll be back soon.",
+              author: "- Michael Vernon visited on 2020-05-14"
+            },
+
+            {
+              quote: "Thanks for the best birthday dinner ever! (and a milestone one, at that ;-) )The chicken stayed nice and crispy on the way home, the sides were all great, and the wine was fantastic! I'm looking forward to eating in the restaurant again whenever that becomes possible, but in the meantime we will definitely be ordering take-out again. Best of luck to all at Mamnoon, and stay safe and healthy.",
+              author: "- Jennifer Chase-Rappaport visited on 2020-05-14"
+            },
+
+            {
+              quote: "The whole meal was amazing.... and such generous portions. We're adding this meal to our regular rotation :)",
+              author: "- Stephanie Glass visited on 2020-05-14"
+            },
+
+            {
+              quote: "Continues to be my favorite restaurant in Seattle.",
+              author: "- Ben Bayder visited on 2020-05-14"
+            },
+
+            {
+              quote: "Wow, what a delicious dinner. Also the labne and hummous were super authentic to what I used to eat in the Middle East.",
+              author: "- Sarah Standish visited on 2020-05-16"
+            },
+
+            {
+              quote: "We are absolutely obsessed with your restaurant! You are doing a phenomenal job and we are so happy to support you!",
+              author: "- Marisa Gronholz visited on 2020-05-23"
+            },
+
+            {
+              quote: "The team was enthusiastic and super friendly. The food of course was excellent!",
+              author: "- Lyn Kratz visited on 2020-04-24"
+            },
+
+            {
+              quote: "Super yummy, great value, travelled well. Excellent!",
+              author: "- James Greenfield visited on 2020-05-27"
+            },
+
+            {
+              quote: "Always a delight to have Mamnoon for dinner. From the warm welcome and efficient staff, to the phenomenal flavors of the food and inventive, delicious cocktails -- Mamnoon continues to deliver joy to our family.",
+              author: "- Stephanie DeVaan visited on 2020-05-28"
+            },
+
+            {
+              quote: "Your process is efficient, from the descriptions online to the ordering to the pick-up. All very smooth. This was our first dinner on the deck of the summer and it was a lovely evening, an excellent meal (REALLY excellent!), and a really nice wine! Thank you for making our evening special!",
+              author: "-  Peg Balachowski visited on 2020-05-28"
+            },
+            {
+              quote: "Thank you so much for this special food. The family meal was the best meal we have had in months. Best potatoes my husband has ever had. Thank you for making this possible during such bitter times. All the best to the Mamnoon and Tock families. You brought goodness to a dark day.",
+              author: "- Cynthia McWilliams visited on 2020-05-29"
+            },
+            {
+              quote: "Thank you so much for calling me and letting me know about how you wanted to honor my order despite the uncertainty around the curfew and protests in the area. I wanted to have a special meal for my 2nd wedding anniversary and this was certainly it. Thank you for making it happen! By the way I came here after I got engaged a little over 2 years ago, so this place has a special place in my heart :)",
+              author: "- Apoorva Chandra visited on 2020-06-02"
             }
           ]
         }

@@ -1,7 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-
+import AxiosPlugin from 'vue-axios-cors';
+ 
+Vue.use(AxiosPlugin)
 Vue.use(VueRouter);
 
 // const routes = [
@@ -38,18 +40,18 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     name: "home",
     component: Home,
     meta: {
-      requiresAuth: true
+      requiresAuth: false
     }
   },
-  {
-    path: "/",
-    name: "login",
-    component: () => import("../views/login.vue")
-  },
+  // {
+  //   path: "/",
+  //   name: "login",
+  //   component: () => import("../views/login.vue")
+  // },
   {
     path: "/register",
     name: "register",

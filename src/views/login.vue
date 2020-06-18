@@ -2,12 +2,10 @@
   <div class="login">
     <Nav />
     <login />
-    <!-- <Products /> -->
 
 
 
-slideshowddd
-<SlideShow />
+
 
 
 

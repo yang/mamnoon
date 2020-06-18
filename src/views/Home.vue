@@ -11,7 +11,7 @@
               <li class="list-group-item">Email : {{ user.email }}</li>
               </ul>
 <ul style="display:none;">
-  <li v-for="(item, index) in products">
+  <li v-for="(item, index) in products" v-bind:key="item">
     {{ item }}
   </li>
   </ul>
