@@ -27,7 +27,7 @@
           />
 
           <p>
-            Dont have an account??<router-link to="/register"
+            Dont have an account??&nbsp;<router-link to="/register"
               >click here</router-link
             >
           </p>
@@ -54,47 +54,27 @@ export default {
     return {
       login: {
         email: "",
-        password: ""
+        password: "",
+        name: ""
       }
     };
   },
   methods: {
-    // async loginUser() {
-    //   try {
-    //     console.log(this.login);
-
-
-
-    //     // let response = await this.$http.post("/user/login", this.login, {
-    //     //       headers: {
-    //     //       "lick" : "cock",
-    //     //       "Access-Control-Allow-Origin": "*"
-    //     //       }
-    //     // });
-
-
-    //     let response = await this.$http.post("/user/login", this.login);
-
-    //     let token = response.data.token;
-    //     localStorage.setItem("jwt", token);
-    //     if (token) {
-    //       swal("Success", "Login Successful", "Error");
-    //       this.$router.push("/home");
-    //     }
-    //   } catch (err) {
-    //     swal("Error", "Something Went Wrong", "error");
-    //     console.log(err.response);
-    //   }
-    // },
-async loginUser() {
+    async loginUser() {
       try {
 
 
-
-  this.$router.push("/home");
-
+ 
 
 
+        let response = await this.$http.post("/user/login", this.login);
+
+        let token = response.data.token;
+        localStorage.setItem("jwt", token);
+        if (token) {
+          swal("Success", "Login Successful", "Error");
+          this.$router.push("/home");
+        }
       } catch (err) {
         swal("Error", "Something Went Wrong", "error");
         console.log(err.response);

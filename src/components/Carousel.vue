@@ -1,27 +1,26 @@
 <template>
     <main>
-      <section :id="offering.category" v-for="(offering,index) in offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
-<!-- {{index}} -->
+
+  <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
         <div v-if="offering.visible" class="carousel">
         <h4 v-if="!offering.insideHeader">{{offering.title}}   <span v-if="offering.tock">{{currentDay}}</span></h4>
       <carousel :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
 
+
 <template v-if="index === 0" slot="prev"><span class="prev"><Prev /></span></template>
 <template v-else class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
  
 
-          <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
+<div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
 
-                   <h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /   {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
+<h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /   {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
               
 <img v-if="offering.tock" v-bind:src="'https://affectionate-gates-5cf4d4.netlify.app/img/ala/' + currentDay + '.jpg'" />
-<img v-else v-bind:src="item.img" />    
+<img v-else v-bind:src="item.image" />    
             {{item.description}}
-   
-
-            <template v-if="item.caviarLink">
+               <template v-if="item.caviarLink">
               <div class="order-bottom">
                 {{item.name}}
                        <div class="order-panel">
@@ -29,36 +28,24 @@
                             </div>
                             </div>
             </template>
-
-
-
-            <template v-if="item.snipCartLink">
+            <template v-if="item.statistics">
               <div class="order-bottom">
                 {{item.name}}
                        <div class="order-panel">
-              <!-- <a :href="item.snipCartLink" target="_blank"><Order /></a> -->
-
-
-
-          <button
-            :data-item-name="item.name"
-            :data-item-price="item.price"
-            :data-item-id="item.name"
-            :data-item-image="item.img"
-            type="button"
-            class="snipcart-add-item"
-            data-item-url="/"
-          >
-
-
-            <Order />
-          </button>
-
-
-
+                              <button class="snipcart-add-item"
+                            v-bind:data-item-id="item.name"
+                            v-bind:data-item-price="item.price"
+                            v-bind:data-item-image="item.image"
+                            v-bind:data-item-name="item.name">
+                            <Order />
+                            </button>
                             </div>
                             </div>
             </template>
+
+
+
+
 
 
 
@@ -180,6 +167,12 @@ export default {
   data () {
     return this.$store.state.inventory
   },
+    data() {
+    return {
+      inventory: this.$store.state.inventory,
+      // products: ''
+    };
+  },
   methods: {
     dayChange(e) {
 // console.log(123)
@@ -224,11 +217,17 @@ this.currentDay = e + 1
     changedAlert(){
       console.log('changed')
     }
+    //     async showProducts() {
+    //       let response = await this.$http.get('/product/snipcartproducts') 
+    //       this.products = response.data.body.items
+    // }  
   },
   created(){
     var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 this.currentDay = dd  
+  
+    // this.showProducts()
   }
 }
 </script>

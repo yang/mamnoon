@@ -60,7 +60,7 @@ const store = new Vuex.Store({
           items: [
             {
               name: 'monday family meal',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/1.jpg',
+              image: 'https://affectionate-gates-5cf4d4.netlify.app/img/1.jpg',
               month: "june",
               days: 31,
               price: 40.00,
@@ -78,7 +78,7 @@ const store = new Vuex.Store({
             },
             {
               name: 'tuesday',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/2.jpg',
+              image: 'https://affectionate-gates-5cf4d4.netlify.app/img/2.jpg',
               month: "july",
               days: 31,
               price: 40.00,
@@ -96,7 +96,7 @@ const store = new Vuex.Store({
             },
             {
               name: 'wednesday',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/3.jpg',
+              image: 'https://affectionate-gates-5cf4d4.netlify.app/img/3.jpg',
               month: "august",
               days: 31,
               price: 40.00,
@@ -114,7 +114,7 @@ const store = new Vuex.Store({
             },
             {
               name: 'thursday',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/4.jpg',
+              image: 'https://affectionate-gates-5cf4d4.netlify.app/img/4.jpg',
               month: "september",
               days: 31,
               price: 40.00,
@@ -137,151 +137,93 @@ const store = new Vuex.Store({
           title: 'A La Carte',
           category: 'alacarte',
           caviarButton: true,
+          slideNo: 2,
           items: [
             {
-              name: "Za'tar Wrap",
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/1.jpg',
+              name: "Mamnoon",
+              image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/1.jpg',
               price: 5.00,
               description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
+              caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
             },
             {
-              name: "Lamb Shawarma",
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/2.jpg',
+              name: "Mamnoon Street",
+              image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/2.jpg',
               price: 10.00,
-              description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            },
-            {
-              name: 'Chicken Shawarma',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/3.jpg',
-              price: 12.00,
-              description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            },
-            {
-              name: 'Fleifleh',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/4.jpg',
-              price: 12.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             }
           ]
         },
-        {
-          visible: true,
-          title: 'Pantry',
-          category: 'alacarte',
-          caviarButton: true,
-          items: [
-            {
-              name: "labneh",
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/pantry/1.jpg',
-              price: 5.00,
-              description: '',
-              snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            },
-            {
-              name: 'hummus',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/pantry/2.jpg',
-              price: 10.00,
-              description: '',
-              snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            },
-            {
-              name: 'baba ganoush',
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/pantry/3.jpg',
-              price: 12.00,
-              description: '',
-              snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            },
-            {
-              name: "za'tar",
-              img: 'https://affectionate-gates-5cf4d4.netlify.app/img/pantry/1.jpg',
-              price: 12.00,
-              description: '',
-              snipCartLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            }
-          ]
-        },
         // {
         //   visible: true,
-        //   title: 'Bar Pickup',
-        //   category: 'barpickup',
+        //   title: 'Mamnoon Street',
+        //   category: 'alacarte',
+        //   caviarButton: true,
         //   items: [
         //     {
-        //       name: 'shirt',
-        //       img: 'https://placeimg.com/200/200/any?7',
-        //       price: 20.00
+        //       name: "Za'tar Wrap",
+        //       image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/1.jpg',
+        //       price: 5.00,
+        //       description: '',
+        //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
         //     },
         //     {
-        //       name: 'watch',
-        //       img: 'https://placeimg.com/200/200/any?8',
-        //       price: 20.00
+        //       name: "Lamb Shawarma",
+        //       image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/2.jpg',
+        //       price: 10.00,
+        //       description: '',
+        //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
         //     },
         //     {
-        //       name: 'hat',
-        //       img: 'https://placeimg.com/200/200/any?9',
-        //       price: 20.00
+        //       name: 'Chicken Shawarma',
+        //       image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/3.jpg',
+        //       price: 12.00,
+        //       description: '',
+        //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
         //     },
         //     {
-        //       name: 'cookbook',
-        //       img: 'https://placeimg.com/200/200/any?10',
-        //       price: 20.00
+        //       name: 'Fleifleh',
+        //       image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/4.jpg',
+        //       price: 12.00,
+        //       description: '',
+        //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
         //     }
         //   ]
         // },
         // {
         //   visible: true,
-        //   title: 'Pantry',
-        //   category: 'pantry',
+        //   title: 'Mamnoon',
+        //   category: 'alacarte2',
+        //   caviarButton: true,
         //   items: [
         //     {
-        //       name: 'shirt',
-        //       img: 'https://placeimg.com/200/200/any?7',
-        //       price: 20.00
+        //       name: "Za'tar Wrap",
+        //       image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/1.jpg',
+        //       price: 5.00,
+        //       description: '',
+        //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
         //     },
         //     {
-        //       name: 'watch',
-        //       img: 'https://placeimg.com/200/200/any?8',
-        //       price: 20.00
+        //       name: "Lamb Shawarma",
+        //       image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/2.jpg',
+        //       price: 10.00,
+        //       description: '',
+        //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
         //     },
         //     {
-        //       name: 'hat',
-        //       img: 'https://placeimg.com/200/200/any?9',
-        //       price: 20.00
+        //       name: 'Chicken Shawarma',
+        //       image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/3.jpg',
+        //       price: 12.00,
+        //       description: '',
+        //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
         //     },
         //     {
-        //       name: 'cookbook',
-        //       img: 'https://placeimg.com/200/200/any?10',
-        //       price: 20.00
-        //     }
-        //   ]
-        // },
-        // {
-        //   visible: true,
-        //   title: 'Merch',
-        //   category: 'merch',
-        //   items: [
-        //     {
-        //       name: 'shirt',
-        //       img: 'https://placeimg.com/200/200/any?7',
-        //       price: 20.00
-        //     },
-        //     {
-        //       name: 'watch',
-        //       img: 'https://placeimg.com/200/200/any?8',
-        //       price: 20.00
-        //     },
-        //     {
-        //       name: 'hat',
-        //       img: 'https://placeimg.com/200/200/any?9',
-        //       price: 20.00
-        //     },
-        //     {
-        //       name: 'cookbook',
-        //       img: 'https://placeimg.com/200/200/any?10',
-        //       price: 20.00
+        //       name: 'Fleifleh',
+        //       image: 'https://affectionate-gates-5cf4d4.netlify.app/img/cav/4.jpg',
+        //       price: 12.00,
+        //       description: '',
+        //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
         //     }
         //   ]
         // },
@@ -414,6 +356,10 @@ const store = new Vuex.Store({
             {
               quote: "Thank you so much for calling me and letting me know about how you wanted to honor my order despite the uncertainty around the curfew and protests in the area. I wanted to have a special meal for my 2nd wedding anniversary and this was certainly it. Thank you for making it happen! By the way I came here after I got engaged a little over 2 years ago, so this place has a special place in my heart :)",
               author: "- Apoorva Chandra visited on 2020-06-02"
+            },
+            {
+              quote: "Such excellent food! Always thrilled to get Mamnoon!",
+              author: "Lilium Pierson visited on 2020-06-18"
             }
           ]
         }
@@ -493,6 +439,25 @@ const store = new Vuex.Store({
       for (var k in state.inventory.offerings[0].items[0].availableFamilyMeals) {
         state.inventory.offerings[0].items[0].availableFamilyMeals[k].reserved = false
       }
+    },
+    async updateInventory(state, { inventoryAdd }){
+
+
+      state.inventory.offerings = state.inventory.offerings.filter(function( obj ) {
+        return obj.snipcart !== true;
+      });
+
+      state.inventory.offerings.push({
+        visible: true,
+        title: 'Pantry',
+        category: 'pantry',
+        caviarButton: true,
+        snipcart: true,
+        items: inventoryAdd
+      })
+
+
+
     }
   }
 })
@@ -505,5 +470,14 @@ const store = new Vuex.Store({
 new Vue({
   router,
   store: store,
-  render: h => h(App)
+  render: h => h(App),
+  async mounted () {
+    // axios
+    //   .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    //   .then(response => (this.info = response))
+
+    let response = await this.$http.get('/product/snipcartproducts') 
+  let inventoryAdd = response.data.body.items
+this.$store.commit('updateInventory', { inventoryAdd })
+  }
 }).$mount("#app");

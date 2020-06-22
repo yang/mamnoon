@@ -2,7 +2,7 @@
 <div class="nav-wrap">
 <div class="fixed-nav">
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
-    <button v-if="$route.name != 'login'" @click="logUserOut()" class="logButton">log out</button>
+    <button v-if="$route.name != 'login'" @click="logUserOut()" class="logButton">{{user.name}}, log out </button>
       <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
@@ -19,9 +19,10 @@
     <nav v-if="$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header">
         <div class="container">
           <scrollactive
+           :offset="180"
             ref="scrollactive"
             >    <ul id="menu">
-                <li v-for="offering in store.offerings" @click="toggleMenu()" v-bind:key="offering.title">
+                <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
                     <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.title.toLowerCase().trim()}}</a>
                     </li>
             </ul></scrollactive
@@ -37,9 +38,10 @@
         <nav v-if="$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive
+           :offset="180"
             ref="scrollactive"
             >    <ul id="menu" class="mobile-menu">
-                <li v-for="offering in store.offerings" @click="toggleMenu()" v-bind:key="offering.title">
+                <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
                     <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.title}}</a>
                     </li>
             </ul></scrollactive
@@ -50,7 +52,7 @@
     <div>
         <div class="container">
 
-ddd
+
         </div>
     </div>
 
@@ -60,7 +62,7 @@ ddd
 
 
 <script>
-
+import VueJwtDecode from "vue-jwt-decode";
 
 import Logo from "@/components/Logo";
 import Burger from "@/components/Burger";
@@ -75,9 +77,10 @@ export default {
   data () {
       return {
           mobNavExpanded: false,
-          logtext: ''
-
+          logtext: '',
+            user: {}
       }
+
   },
   methods: {
     logUserOut() {
@@ -88,11 +91,22 @@ export default {
         this.mobNavExpanded = !this.mobNavExpanded;
  
         console.log(this)
-    }
-  },
-  created(){
-      this.store = this.$store.state.inventory
+    },
+    getUserDetails() {
+      let token = localStorage.getItem("jwt");
+      let decoded = VueJwtDecode.decode(token);
+      this.user = decoded;
 
+
+      console.log(decoded)
+    },
+  },
+  created() {
+      this.store = this.$store.state
+
+  },
+    mounted() {
+      this.getUserDetails();
   }
   }
 
@@ -252,3 +266,9 @@ right: 0;
 
 
 </style>
+
+
+
+
+
+
