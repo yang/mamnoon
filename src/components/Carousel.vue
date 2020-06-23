@@ -216,18 +216,18 @@ this.currentDay = e + 1
     },
     changedAlert(){
       console.log('changed')
-    }
-    //     async showProducts() {
-    //       let response = await this.$http.get('/product/snipcartproducts') 
-    //       this.products = response.data.body.items
-    // }  
+    },
+        async showProducts() {
+          let response = await this.$http.get('/product/snipcartproducts') 
+          this.products = response.data.body.items
+    }  
   },
   created(){
     var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 this.currentDay = dd  
   
-    // this.showProducts()
+    this.showProducts()
   }
 }
 </script>
