@@ -41,7 +41,12 @@
 
 <h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
               
-<img v-if="offering.tock" v-bind:src="'https://affectionate-gates-5cf4d4.netlify.app/img/ala/' + currentDay + '.jpg'" />
+<!-- <img v-if="offering.tock" v-bind:src="'https://affectionate-gates-5cf4d4.netlify.app/img/ala/' + currentDay + '.jpg'" /> -->
+
+<img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
+
+
+
 <img v-else v-bind:src="item.image" />    
             {{item.description}}
                <template v-if="item.caviarLink">

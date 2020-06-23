@@ -141,14 +141,14 @@ const store = new Vuex.Store({
           items: [
             {
               name: "Mamnoon",
-              image: './assets/img/cav/1.jpg',
+              image: './assets/cav/1.jpg',
               price: 5.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
             },
             {
               name: "Mamnoon Street",
-              image: './assets/img/cav/2.jpg',
+              image: './assets/cav/2.jpg',
               price: 10.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
@@ -163,14 +163,14 @@ const store = new Vuex.Store({
         //   items: [
         //     {
         //       name: "Za'tar Wrap",
-        //       image: './assets/img/cav/1.jpg',
+        //       image: './assets/cav/1.jpg',
         //       price: 5.00,
         //       description: '',
         //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
         //     },
         //     {
         //       name: "Lamb Shawarma",
-        //       image: './assets/img/cav/2.jpg',
+        //       image: './assets/cav/2.jpg',
         //       price: 10.00,
         //       description: '',
         //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
@@ -199,14 +199,14 @@ const store = new Vuex.Store({
         //   items: [
         //     {
         //       name: "Za'tar Wrap",
-        //       image: './assets/img/cav/1.jpg',
+        //       image: './assets/cav/1.jpg',
         //       price: 5.00,
         //       description: '',
         //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
         //     },
         //     {
         //       name: "Lamb Shawarma",
-        //       image: './assets/img/cav/2.jpg',
+        //       image: './assets/cav/2.jpg',
         //       price: 10.00,
         //       description: '',
         //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
