@@ -3,28 +3,9 @@
 
 
 
+<CoverFlow />
 
 
-
-<section>
-<br><br><br><br><br><br><br><br>
-			<div id="preview-coverflow">
-				<img class="cover" src="demo/attic.jpg"/>
-				<img class="cover" src="demo/aurora.jpg"/>
-				<img class="cover" src="demo/barbecue.jpg"/>
-				<img class="cover" src="demo/blackswan.jpg"/>
-				<img class="cover" src="demo/chess.jpg"/>
-				<img class="cover" src="demo/fire.jpg"/>
-				<img class="cover" src="demo/keyboard.jpg"/>
-				<img class="cover" src="demo/locomotive.jpg"/>
-				<img class="cover" src="demo/diveevo.jpg"/>
-				<img class="cover" src="demo/person.jpg"/>
-				<img class="cover" src="demo/rose.jpg"/>
-				<img class="cover" src="demo/seagull.jpg"/>
-				<img class="cover" src="demo/solarpower.jpg"/>
-			</div>
-<br><br><br><br><br><br><br><br><br>
-  </section>
 
   <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
@@ -136,18 +117,7 @@
               </div>
 </div>
 
-<!-- 
-<div v-if="offering.caviarButton" class="order-bottom">
-              <div id="mama-dummy-button" class="TockButton-buttonContainer" style="cursor: pointer;">
-                <div data-tock-reserve="true" class="TockButton-link">
-                  <div class="TockButton TockButton-blue">
-                    <span class="TockWidget-B2" @click="loggit()"><Order /></span>
-                  </div>
-                </div>
-              </div>
-</div> -->
-
-        </div>
+</div>
 
       </section>
 
@@ -177,11 +147,11 @@ import Prev from "@/components/svgIcons/Prev";
 
 
 import Newsletter from "@/components/Newsletter";
-
+import CoverFlow from "@/components/CoverFlow";
 
 
 export default {
-  components: { carousel, Order, OrderStar, Next, Prev, Newsletter },
+  components: { carousel, Order, OrderStar, Next, Prev, Newsletter, CoverFlow },
   computed: {
     count () {
       return this.$store.state.count

@@ -8,6 +8,7 @@ import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
 import "bootstrap/dist/css/bootstrap.css";
 
+
 const base = axios.create({
   baseURL: "http://localhost:4000"
 // baseURL: "https://sheltered-shore-34206.herokuapp.com"
@@ -15,6 +16,8 @@ const base = axios.create({
 
 Vue.prototype.$http = base;
 Vue.config.productionTip = false;
+
+
 
 Vue.use(VueMq, {
   breakpoints: {
