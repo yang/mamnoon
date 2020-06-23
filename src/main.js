@@ -60,7 +60,7 @@ const store = new Vuex.Store({
           items: [
             {
               name: 'monday family meal',
-              image: '../assets/img/1.jpg',
+              image: './assets/img/1.jpg',
               month: "june",
               days: 31,
               price: 40.00,
@@ -78,7 +78,7 @@ const store = new Vuex.Store({
             },
             {
               name: 'tuesday',
-              image: '../assets/img/2.jpg',
+              image: './assets/img/2.jpg',
               month: "july",
               days: 31,
               price: 40.00,
@@ -96,7 +96,7 @@ const store = new Vuex.Store({
             },
             {
               name: 'wednesday',
-              image: '../assets/img/3.jpg',
+              image: './assets/img/3.jpg',
               month: "august",
               days: 31,
               price: 40.00,
@@ -114,7 +114,7 @@ const store = new Vuex.Store({
             },
             {
               name: 'thursday',
-              image: '../assets/img/4.jpg',
+              image: './assets/img/4.jpg',
               month: "september",
               days: 31,
               price: 40.00,
@@ -141,14 +141,14 @@ const store = new Vuex.Store({
           items: [
             {
               name: "Mamnoon",
-              image: '../assets/img/cav/1.jpg',
+              image: './assets/img/cav/1.jpg',
               price: 5.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
             },
             {
               name: "Mamnoon Street",
-              image: '../assets/img/cav/2.jpg',
+              image: './assets/img/cav/2.jpg',
               price: 10.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
@@ -163,14 +163,14 @@ const store = new Vuex.Store({
         //   items: [
         //     {
         //       name: "Za'tar Wrap",
-        //       image: '../assets/img/cav/1.jpg',
+        //       image: './assets/img/cav/1.jpg',
         //       price: 5.00,
         //       description: '',
         //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
         //     },
         //     {
         //       name: "Lamb Shawarma",
-        //       image: '../assets/img/cav/2.jpg',
+        //       image: './assets/img/cav/2.jpg',
         //       price: 10.00,
         //       description: '',
         //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
@@ -199,14 +199,14 @@ const store = new Vuex.Store({
         //   items: [
         //     {
         //       name: "Za'tar Wrap",
-        //       image: '../assets/img/cav/1.jpg',
+        //       image: './assets/img/cav/1.jpg',
         //       price: 5.00,
         //       description: '',
         //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
         //     },
         //     {
         //       name: "Lamb Shawarma",
-        //       image: '../assets/img/cav/2.jpg',
+        //       image: './assets/img/cav/2.jpg',
         //       price: 10.00,
         //       description: '',
         //       caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
