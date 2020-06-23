@@ -7,7 +7,7 @@ import router from "./router";
 import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
 import "bootstrap/dist/css/bootstrap.css";
-
+import coverflow from 'vue-coverflow'
 
 const base = axios.create({
   baseURL: "http://localhost:4000"
@@ -18,7 +18,7 @@ Vue.prototype.$http = base;
 Vue.config.productionTip = false;
 
 
-
+Vue.use(coverflow)
 Vue.use(VueMq, {
   breakpoints: {
     sm: 1080,

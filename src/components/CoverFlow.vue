@@ -78,11 +78,11 @@
 
 <script>
 
+// hello
+import coverflow from '../assets/js/jquery.coverflow.js'
+// import interpolate from '../assets/js/interpolate.js'
+import touchswipe from '../assets/js/jquery.touchSwipe.min.js'
 
-import coverflow from '../assets/js/coverflow.js'
-import interpolate from '../assets/js/interpolate.js'
-import touchswipe from '../assets/js/touchswipe.js'
-import reflection from '../assets/js/reflection.js'
 
 export default{
 	name: 'coverflow',
