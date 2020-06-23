@@ -6,9 +6,9 @@
       <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
-    <a v-if="$route.name === 'home'" class="burger" @click="toggleMenu()">
-        <Burger />
-    </a>
+    <!-- <a v-if="$route.name === 'home'" class="burger" @click="toggleMenu()"> -->
+        <!-- <Burger /> -->
+    <!-- </a> -->
     </template>
     <Logo />
   </div>
@@ -65,14 +65,14 @@
 import VueJwtDecode from "vue-jwt-decode";
 
 import Logo from "@/components/Logo";
-import Burger from "@/components/svgIcons/Burger";
+// import Burger from "@/components/svgIcons/Burger";
 
 
 
 export default {
     components: {
-    Logo,
-    Burger
+    Logo
+    // Burger
   },
   data () {
       return {
