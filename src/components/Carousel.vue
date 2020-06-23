@@ -2,6 +2,30 @@
     <main>
 
 
+
+
+
+
+<section>
+<br><br><br><br><br><br><br><br>
+			<div id="preview-coverflow">
+				<img class="cover" src="demo/attic.jpg"/>
+				<img class="cover" src="demo/aurora.jpg"/>
+				<img class="cover" src="demo/barbecue.jpg"/>
+				<img class="cover" src="demo/blackswan.jpg"/>
+				<img class="cover" src="demo/chess.jpg"/>
+				<img class="cover" src="demo/fire.jpg"/>
+				<img class="cover" src="demo/keyboard.jpg"/>
+				<img class="cover" src="demo/locomotive.jpg"/>
+				<img class="cover" src="demo/diveevo.jpg"/>
+				<img class="cover" src="demo/person.jpg"/>
+				<img class="cover" src="demo/rose.jpg"/>
+				<img class="cover" src="demo/seagull.jpg"/>
+				<img class="cover" src="demo/solarpower.jpg"/>
+			</div>
+<br><br><br><br><br><br><br><br><br>
+  </section>
+
   <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
         <div v-if="offering.visible" class="carousel">
@@ -15,7 +39,7 @@
 
 <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
 
-<h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /   {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
+<h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
               
 <img v-if="offering.tock" v-bind:src="'https://affectionate-gates-5cf4d4.netlify.app/img/ala/' + currentDay + '.jpg'" />
 <img v-else v-bind:src="item.image" />    
@@ -138,12 +162,12 @@
 import carousel from 'vue-owl-carousel'
 
 
-import Order from "@/components/Order";
-import OrderStar from "@/components/OrderStar";
+import Order from "@/components/svgIcons/Order";
+import OrderStar from "@/components/svgIcons/OrderStar";
 
 
-import Next from "@/components/Next";
-import Prev from "@/components/Prev";
+import Next from "@/components/svgIcons/Next";
+import Prev from "@/components/svgIcons/Prev";
 
 
 
@@ -503,4 +527,21 @@ button.snipcart-add-item{
 
 
 }
+
+.snipcart-modal__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 110 !important;
+    background-color: #f0f5f6;
+    top: 140px !important;
+}
+
+
+
 </style>

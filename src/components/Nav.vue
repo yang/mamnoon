@@ -65,7 +65,7 @@
 import VueJwtDecode from "vue-jwt-decode";
 
 import Logo from "@/components/Logo";
-import Burger from "@/components/Burger";
+import Burger from "@/components/svgIcons/Burger";
 
 
 

@@ -14,11 +14,7 @@
     {{ item }}
   </li>
   </ul>
-  <br><br><br></br>
-    <br><br><br></br>
-      <br><br><br></br>
-          <img alt="Vue logo" src="../assets/logo.png">
-        <br><br><br></br>
+
 <SlideShow />
 
 
