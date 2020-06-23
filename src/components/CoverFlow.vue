@@ -5,25 +5,70 @@
 
 		<div id="preview">
 			<div id="preview-coverflow">
-				<img class="cover" src="demo/attic.jpg"/>
-				<img class="cover" src="demo/aurora.jpg"/>
-				<img class="cover" src="demo/barbecue.jpg"/>
-				<img class="cover" src="demo/blackswan.jpg"/>
-				<img class="cover" src="demo/chess.jpg"/>
-				<img class="cover" src="demo/fire.jpg"/>
-				<img class="cover" src="demo/keyboard.jpg"/>
-				<img class="cover" src="demo/locomotive.jpg"/>
-				<img class="cover" src="demo/diveevo.jpg"/>
-				<img class="cover" src="demo/person.jpg"/>
-				<img class="cover" src="demo/rose.jpg"/>
-				<img class="cover" src="demo/seagull.jpg"/>
-				<img class="cover" src="demo/solarpower.jpg"/>
+
+				<div class="cover">
+
+<a href="http://hotmail.com" target="_blank">hotmail</a>
+					<button>1234</button>
+					124456<img  src="demo/attic.jpg"/>
+				</div>
+
+
+				<div class="cover">
+		<a href="http://hotmail.com" target="_blank">hotmail</a>
+						<button>1234</button>
+					124456<img  src="demo/attic.jpg"/>
+				</div>
+
+
+								<div class="cover">
+									<a href="http://hotmail.com" target="_blank">hotmail</a>
+										<button>1234</button>
+					124456<img  src="demo/attic.jpg"/>
+				</div>
+
+								<div class="cover">
+									<a href="http://hotmail.com" target="_blank">hotmail</a>
+										<button>1234</button>
+					124456<img  src="demo/attic.jpg"/>
+				</div>
+
+								<div class="cover">
+									<a href="http://hotmail.com" target="_blank">hotmail</a>
+										<button>1234</button>
+					124456<img  src="demo/attic.jpg"/>
+				</div>
+
+								<div class="cover">
+									<a href="http://hotmail.com" target="_blank">hotmail</a>
+										<button>1234</button>
+					124456<img  src="demo/attic.jpg"/>
+				</div>
+
+								<div class="cover">
+									<a href="http://hotmail.com" target="_blank">hotmail</a>
+										<button>1234</button>
+					124456<img  src="demo/attic.jpg"/>
+				</div>
+
+
 			</div>
 
 	
 		</div>
 
-
+				<!-- <img src="demo/aurora.jpg"/></div>
+				<img src="demo/barbecue.jpg"/></div>
+				<img src="demo/blackswan.jpg"/></div>
+				<img src="demo/chess.jpg"/></div>
+				<img src="demo/fire.jpg"/></div>
+				<img src="demo/keyboard.jpg"/></div>
+				<img src="demo/locomotive.jpg"/></div>
+				<img src="demo/diveevo.jpg"/></div>
+				<img src="demo/person.jpg"/></div>
+				<img src="demo/rose.jpg"/></div>
+				<img src="demo/seagull.jpg"/></div>
+				<img src="demo/solarpower.jpg"/></div> -->
 
 
 
