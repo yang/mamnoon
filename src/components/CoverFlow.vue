@@ -50,28 +50,8 @@
 										<button>1234</button>
 					124456<img  src="demo/attic.jpg"/>
 				</div>
-
-
 			</div>
-
-	
 		</div>
-
-				<!-- <img src="demo/aurora.jpg"/></div>
-				<img src="demo/barbecue.jpg"/></div>
-				<img src="demo/blackswan.jpg"/></div>
-				<img src="demo/chess.jpg"/></div>
-				<img src="demo/fire.jpg"/></div>
-				<img src="demo/keyboard.jpg"/></div>
-				<img src="demo/locomotive.jpg"/></div>
-				<img src="demo/diveevo.jpg"/></div>
-				<img src="demo/person.jpg"/></div>
-				<img src="demo/rose.jpg"/></div>
-				<img src="demo/seagull.jpg"/></div>
-				<img src="demo/solarpower.jpg"/></div> -->
-
-
-
   </div>
 </template>
 
