@@ -5,51 +5,9 @@
 
 		<div id="preview">
 			<div id="preview-coverflow">
+					<Coverslide v-for="(slid,index) in slidesLength" :key="index" />
 
-				<div class="cover">
-
-<a href="http://hotmail.com" target="_blank">hotmail</a>
-					<button>1234</button>
-					124456<img  src="demo/attic.jpg"/>
-				</div>
-
-
-				<div class="cover">
-		<a href="http://hotmail.com" target="_blank">hotmail</a>
-						<button>1234</button>
-					124456<img  src="demo/attic.jpg"/>
-				</div>
-
-
-								<div class="cover">
-									<a href="http://hotmail.com" target="_blank">hotmail</a>
-										<button>1234</button>
-					124456<img  src="demo/attic.jpg"/>
-				</div>
-
-								<div class="cover">
-									<a href="http://hotmail.com" target="_blank">hotmail</a>
-										<button>1234</button>
-					124456<img  src="demo/attic.jpg"/>
-				</div>
-
-								<div class="cover">
-									<a href="http://hotmail.com" target="_blank">hotmail</a>
-										<button>1234</button>
-					124456<img  src="demo/attic.jpg"/>
-				</div>
-
-								<div class="cover">
-									<a href="http://hotmail.com" target="_blank">hotmail</a>
-										<button>1234</button>
-					124456<img  src="demo/attic.jpg"/>
-				</div>
-
-								<div class="cover">
-									<a href="http://hotmail.com" target="_blank">hotmail</a>
-										<button>1234</button>
-					124456<img  src="demo/attic.jpg"/>
-				</div>
+			
 			</div>
 		</div>
   </div>
@@ -59,7 +17,21 @@
 <script>
 
 
+import Coverslide from "@/components/Coverslide.vue";
+
+
+
 export default{
+	data () {
+
+		return {
+			slidesLength: 10
+		}
+
+	},
+	components: {
+		Coverslide
+	},
 	name: 'coverflow',
 	mounted() {
 
@@ -546,11 +518,28 @@ export default{
 <style lang="scss">
 				#preview {
 					padding-bottom: 100px;
+					margin: 160px auto 200px;
 				}
+				
 				#preview-coverflow .cover {
 					cursor:		pointer;
 					width:		320px;
 					height:		240px;
-					box-shadow:	0 0 4em 1em white;
+					// box-shadow:	0 0 4em 1em white;
+
+
+
+
 				}
+
+
+#preview-coverflow .cover.cover.current{
+	display: block;
+    position: absolute;
+    left: 410px;
+    z-index: 7;
+    transform: scale(2, 2) perspective(555px) rotateY(0deg) !important;
+    filter: none;
+}
+
 </style>
