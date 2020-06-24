@@ -10,8 +10,8 @@ import "bootstrap/dist/css/bootstrap.css";
 
 
 const base = axios.create({
-  baseURL: "http://localhost:4000"
-// baseURL: "https://sheltered-shore-34206.herokuapp.com"
+  // baseURL: "http://localhost:4000"
+baseURL: "https://sheltered-shore-34206.herokuapp.com"
 });
 
 Vue.prototype.$http = base;
@@ -50,89 +50,89 @@ const store = new Vuex.Store({
     inventory: {
       currentDay: String(new Date().getDate()).padStart(2, '0'),
       offerings: [
-        {
-          visible: true,
-          title: 'plan ahead',
-          category: 'familymeal',
-          slideNo: 1,
-          tock: true,
-          tockButton: true,
-          insideHeader: true,
-          items: [
-            {
-              name: 'monday family meal',
-              image: './assets/img/1.jpg',
-              month: "june",
-              days: 31,
-              price: 40.00,
-              today: true,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: '',
-              availableFamilyMeals: [
-                { timeslot: '4:30', amountRemaining: 0, reserved: false },
-                { timeslot: '5:00', amountRemaining: 20, reserved: false },
-                { timeslot: '5:30', amountRemaining: 20, reserved: false },
-                { timeslot: '6:00', amountRemaining: 20, reserved: false },
-                { timeslot: '6:30', amountRemaining: 20, reserved: false },
-                { timeslot: '7:00', amountRemaining: 20, reserved: false }
-              ]
-            },
-            {
-              name: 'tuesday',
-              image: './assets/img/2.jpg',
-              month: "july",
-              days: 31,
-              price: 40.00,
-              today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: '',
-              availableFamilyMeals: [
-                { timeslot: '4:30', amountRemaining: 0, reserved: false },
-                { timeslot: '5:00', amountRemaining: 0, reserved: false },
-                { timeslot: '5:30', amountRemaining: 0, reserved: false },
-                { timeslot: '6:00', amountRemaining: 0, reserved: false },
-                { timeslot: '6:30', amountRemaining: 0, reserved: false },
-                { timeslot: '7:00', amountRemaining: 0, reserved: false }
-              ]
-            },
-            {
-              name: 'wednesday',
-              image: './assets/img/3.jpg',
-              month: "august",
-              days: 31,
-              price: 40.00,
-              today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: '',
-              availableFamilyMeals: [
-                { timeslot: '4:30', amountRemaining: 0, reserved: false },
-                { timeslot: '5:00', amountRemaining: 0, reserved: false },
-                { timeslot: '5:30', amountRemaining: 0, reserved: false },
-                { timeslot: '6:00', amountRemaining: 0, reserved: false },
-                { timeslot: '6:30', amountRemaining: 0, reserved: false },
-                { timeslot: '7:00', amountRemaining: 0, reserved: false }
-              ]
-            },
-            {
-              name: 'thursday',
-              image: './assets/img/4.jpg',
-              month: "september",
-              days: 31,
-              price: 40.00,
-              today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: '',
-              availableFamilyMeals: [
-                { timeslot: '4:30', amountRemaining: 0, reserved: false },
-                { timeslot: '5:00', amountRemaining: 0, reserved: false },
-                { timeslot: '5:30', amountRemaining: 0, reserved: false },
-                { timeslot: '6:00', amountRemaining: 0, reserved: false },
-                { timeslot: '6:30', amountRemaining: 0, reserved: false },
-                { timeslot: '7:00', amountRemaining: 0, reserved: false }
-              ]
-            }
-          ]
-        },
+        // {
+        //   visible: true,
+        //   title: 'plan ahead',
+        //   category: 'familymeal',
+        //   slideNo: 1,
+        //   tock: true,
+        //   tockButton: true,
+        //   insideHeader: true,
+        //   items: [
+        //     {
+        //       name: 'monday family meal',
+        //       image: './assets/img/1.jpg',
+        //       month: "june",
+        //       days: 31,
+        //       price: 40.00,
+        //       today: true,
+        //       // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+        //       description: '',
+        //       availableFamilyMeals: [
+        //         { timeslot: '4:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '5:00', amountRemaining: 20, reserved: false },
+        //         { timeslot: '5:30', amountRemaining: 20, reserved: false },
+        //         { timeslot: '6:00', amountRemaining: 20, reserved: false },
+        //         { timeslot: '6:30', amountRemaining: 20, reserved: false },
+        //         { timeslot: '7:00', amountRemaining: 20, reserved: false }
+        //       ]
+        //     },
+        //     {
+        //       name: 'tuesday',
+        //       image: './assets/img/2.jpg',
+        //       month: "july",
+        //       days: 31,
+        //       price: 40.00,
+        //       today: false,
+        //       // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+        //       description: '',
+        //       availableFamilyMeals: [
+        //         { timeslot: '4:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '5:00', amountRemaining: 0, reserved: false },
+        //         { timeslot: '5:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '6:00', amountRemaining: 0, reserved: false },
+        //         { timeslot: '6:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '7:00', amountRemaining: 0, reserved: false }
+        //       ]
+        //     },
+        //     {
+        //       name: 'wednesday',
+        //       image: './assets/img/3.jpg',
+        //       month: "august",
+        //       days: 31,
+        //       price: 40.00,
+        //       today: false,
+        //       // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+        //       description: '',
+        //       availableFamilyMeals: [
+        //         { timeslot: '4:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '5:00', amountRemaining: 0, reserved: false },
+        //         { timeslot: '5:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '6:00', amountRemaining: 0, reserved: false },
+        //         { timeslot: '6:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '7:00', amountRemaining: 0, reserved: false }
+        //       ]
+        //     },
+        //     {
+        //       name: 'thursday',
+        //       image: './assets/img/4.jpg',
+        //       month: "september",
+        //       days: 31,
+        //       price: 40.00,
+        //       today: false,
+        //       // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+        //       description: '',
+        //       availableFamilyMeals: [
+        //         { timeslot: '4:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '5:00', amountRemaining: 0, reserved: false },
+        //         { timeslot: '5:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '6:00', amountRemaining: 0, reserved: false },
+        //         { timeslot: '6:30', amountRemaining: 0, reserved: false },
+        //         { timeslot: '7:00', amountRemaining: 0, reserved: false }
+        //       ]
+        //     }
+        //   ]
+        // },
         {
           visible: true,
           title: 'order now',
