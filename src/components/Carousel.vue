@@ -10,11 +10,8 @@
 <section class="top-widget">
 
 <!-- order from tock: -->
-    <div class="tock-widget" style="">
-
-      <div id="Tock_widget_container" data-tock-display-mode="Button" data-tock-color-mode="White" data-tock-locale="en-us" data-tock-timezone="America/Los_Angeles"></div>
-    </div>
-
+ <div style="cursor:pointer;" id="mama-dummy-button" class="TockButton-buttonContainer"><div data-tock-reserve="true" class="TockButton-link"><div class="TockButton TockButton-blue"><span class="TockWidget-B2">Mama Family Meal</span></div></div></div>
+    
 <!-- order from tock -->
   </section>
 
