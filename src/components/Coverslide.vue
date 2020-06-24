@@ -11,8 +11,8 @@ June 23
 
 
 
-<div style="background: red">
-    <div class="tock-widget" style="position: absolute;right: 0;top: 50%;transform: translateY(-50%);">
+<div class="widgethover">
+    <div class="tock-widget" style="">
 
       <div id="Tock_widget_container" data-tock-display-mode="Button" data-tock-color-mode="White" data-tock-locale="en-us" data-tock-timezone="America/Los_Angeles"></div>
     </div>
@@ -46,6 +46,16 @@ height: 100px;
 background: #f05d5b;
 color: yellow;
 text-align: center;
+}
+
+
+
+.widgethover{
+background: #2e22e8;width: 100px;height: 100px;
+
+&:hover{
+    background: pink;
+}
 }
 
 
