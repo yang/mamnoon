@@ -37,7 +37,7 @@ export default{
 	data () {
 
 		return {
-			slidesLength: 10
+			slidesLength: 20
 		}
 
 	},
@@ -552,6 +552,18 @@ export default{
     z-index: 7;
     transform: scale(1.2, 1.2) perspective(555px) rotateY(0deg) !important;
     filter: none;
+}
+
+
+@media only screen and (max-width: 768px) {
+#preview-coverflow .cover.current{
+	display: block;
+    position: absolute;
+    left: 410px;
+    z-index: 7;
+    transform: scale(1, 1) perspective(555px) rotateY(0deg) !important;
+    filter: none;
+}
 }
 
 </style>
