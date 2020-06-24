@@ -6,6 +6,7 @@ June 23
 
         <img  src="demo/attic.jpg"/>
     <div class="bottom-button">
+            <a href="https://www.exploretock.com/mamnoonrestaurant/" target="_blank"><OrderStar/></a>
     </div>
     </div>
 </template>
@@ -26,8 +27,7 @@ components: {
 </script>
 
 <style lang="scss">
-.header,
-.bottom-button{
+.header{
 width: 100%;
 height: 100px;
 background: #f05d5b;
@@ -35,6 +35,19 @@ color: yellow;
 text-align: center;
 }
 
+
+.bottom-button{
+        background: #FFF367;
+}
+
+
+.bottom-button{
+width: 100%;
+height: 100px;
+  background: #FFF367;
+color: yellow;
+text-align: center;
+}
 
 
 .widgethover{

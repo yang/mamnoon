@@ -14,36 +14,7 @@
 <br>
 <br>
 <br>
-<section class="top-widget">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br><br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-
-<div style="cursor:pointer;" id="mama-dummy-button" class="TockButton-buttonContainer"><div data-tock-reserve="true" class="TockButton-link"><div class="TockButton TockButton-blue"><span class="TockWidget-B2">Mama Family Meal</span></div></div></div>
-
-
-
-  <div style="cursor:pointer;" id="mama-dummy-button" class="TockButton-buttonContainer">
-      <div data-tock-reserve="true" class="TockButton-link">
-        <div class="TockButton TockButton-blue">
-          <span class="TockWidget-B2">Mama Family Meal
-            </span>
-            </div>
-            </div>
-            </div>
-  </section>
-<br><br><br><br><br><br><br><br>
   <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
         <div v-if="offering.visible" class="carousel">
@@ -51,8 +22,13 @@
       <carousel :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
 
 
-<template v-if="index === 0" slot="prev"><span class="prev"><Prev /></span></template>
-<template v-else class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
+<!-- <template v-if="index === 0" slot="prev"><span class="prev"><Prev /></span></template> -->
+<!-- <template v-else class="subprev" slot="prev"><span class="prev"><Prev /></span></template> -->
+
+
+
+<template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
+
  
 
 <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
@@ -133,11 +109,8 @@
 
 
 
-<template v-if="index === 0" slot="next"><span class="next"><Next /> </span></template>
+<template v-if="index === 0" slot="next"></template>
 <template v-else class="subnext" slot="next"><span class="next"><Next /> </span></template>
-
-
-
 
 
         </carousel>  
@@ -342,28 +315,28 @@ h4{
 
 
 
-.is-fullheight.familymeal [id^=carousel_prev_]{
+// .is-fullheight.familymeal [id^=carousel_prev_]{
 
-    position: absolute;
-    bottom: 120px;
-    top: initial;
-    left: 3%;
-    z-index: 20;
-}
+//     position: absolute;
+//     bottom: 120px;
+//     top: initial;
+//     left: 3%;
+//     z-index: 20;
+// }
 
-.is-fullheight.familymeal [id^=carousel_next_]{
-
-
+// .is-fullheight.familymeal [id^=carousel_next_]{
 
 
 
-    position: absolute;
-    bottom: 120px;
-    top: initial;
-    right: 3%;
-    z-index: 20;
 
-}
+
+//     position: absolute;
+//     bottom: 120px;
+//     top: initial;
+//     right: 3%;
+//     z-index: 20;
+
+// }
 
 
 .is-fullheight,

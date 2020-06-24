@@ -3,10 +3,6 @@
 
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
 
 
 		<div id="preview">
@@ -49,7 +45,7 @@ export default{
 		Coverslide
 	},
 	name: 'coverflow',
-	mounted() {
+	beforeCreate() {
 
 
 //coverflow
@@ -534,7 +530,7 @@ export default{
 <style lang="scss">
 				#preview {
 					padding-bottom: 100px;
-					margin: 160px auto 200px;
+					margin: 0px auto 50px;
 				}
 
 				#preview-coverflow .cover {
@@ -554,7 +550,7 @@ export default{
     position: absolute;
     left: 410px;
     z-index: 7;
-    transform: scale(2, 2) perspective(555px) rotateY(0deg) !important;
+    transform: scale(1.2, 1.2) perspective(555px) rotateY(0deg) !important;
     filter: none;
 }
 

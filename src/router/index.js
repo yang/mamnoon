@@ -40,18 +40,18 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     name: "home",
     component: Home,
     meta: {
       requiresAuth: false
     }
   },
-  {
-    path: "/",
-    name: "login",
-    component: () => import("../views/login.vue")
-  },
+  // {
+  //   path: "/",
+  //   name: "login",
+  //   component: () => import("../views/login.vue")
+  // },
   {
     path: "/register",
     name: "register",
