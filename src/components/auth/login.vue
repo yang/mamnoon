@@ -60,33 +60,27 @@ export default {
     };
   },
   methods: {
-    // async loginUser() {
-       loginUser() {
-
-             this.$router.push("/home");
-      // try {
-
-
+    async loginUser() {
+      //  loginUser() {
+      //  this.$router.push("/home");
+      try {
  
-
-
-      //   let response = await this.$http.post("/user/login", this.login);
-
-      //   let token = response.data.token;
-      //   localStorage.setItem("jwt", token);
-      //   if (token) {
-      //     swal("Success", "Login Successful", "Error");
-      //     this.$router.push("/home");
-      //   }
-      // } catch (err) {
-      //   swal("Error", "Something Went Wrong", "error");
-      //   console.log(err.response);
-      // }
-    // }
+       let response = await this.$http.post("/user/login", this.login);
+        let token = response.data.token;
+        localStorage.setItem("jwt", token);
+        if (token) {
+          swal("Success", "Login Successful", "Error");
+          this.$router.push("/home");
+        }
+      } catch (err) {
+        swal("Error", "Something Went Wrong", "error");
+        console.log(err.response);
+      }
+    }
   
 }
 }
-}
+
 </script>
 
 
