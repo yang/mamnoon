@@ -1,6 +1,6 @@
 <template>
   <div>
-<Nav />
+<!-- <Nav /> -->
 
       <div class="container mt-5 nav-acc-header">
         <div class="row">

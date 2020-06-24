@@ -520,7 +520,7 @@ export default{
 					padding-bottom: 100px;
 					margin: 160px auto 200px;
 				}
-				
+
 				#preview-coverflow .cover {
 					cursor:		pointer;
 					width:		320px;
@@ -533,7 +533,7 @@ export default{
 				}
 
 
-#preview-coverflow .cover.cover.current{
+#preview-coverflow .cover.current{
 	display: block;
     position: absolute;
     left: 410px;
