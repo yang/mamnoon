@@ -68,7 +68,7 @@ export default {
     // },
     },
   mounted() {
-      this.getUserDetails();
+      // this.getUserDetails();
       // this.getUserProducts();
 
 

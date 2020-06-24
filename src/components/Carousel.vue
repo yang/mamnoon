@@ -7,6 +7,17 @@
 
 
 
+<section class="top-widget">
+
+<!-- order from tock: -->
+    <div class="tock-widget" style="">
+
+      <div id="Tock_widget_container" data-tock-display-mode="Button" data-tock-color-mode="White" data-tock-locale="en-us" data-tock-timezone="America/Los_Angeles"></div>
+    </div>
+
+<!-- order from tock -->
+  </section>
+
   <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
         <div v-if="offering.visible" class="carousel">
@@ -518,5 +529,12 @@ button.snipcart-add-item{
 }
 
 
+
+
+.top-widget{
+width: 100%;
+height: 500px;
+background: green;
+}
 
 </style>

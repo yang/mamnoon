@@ -9,16 +9,6 @@ June 23
    
   info
 
-
-
-<div class="widgethover">
-    <div class="tock-widget" style="">
-
-      <div id="Tock_widget_container" data-tock-display-mode="Button" data-tock-color-mode="White" data-tock-locale="en-us" data-tock-timezone="America/Los_Angeles"></div>
-    </div>
-  </div>
-
-   
     </div>
     </div>
 </template>
