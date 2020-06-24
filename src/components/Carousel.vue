@@ -6,15 +6,25 @@
 <CoverFlow />
 
 
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <section class="top-widget">
-
-<!-- order from tock: -->
- <div style="cursor:pointer;" id="mama-dummy-button" class="TockButton-buttonContainer"><div data-tock-reserve="true" class="TockButton-link"><div class="TockButton TockButton-blue"><span class="TockWidget-B2">Mama Family Meal</span></div></div></div>
-    
-<!-- order from tock -->
+  <div style="cursor:pointer;" id="mama-dummy-button" class="TockButton-buttonContainer">
+      <div data-tock-reserve="true" class="TockButton-link">
+        <div class="TockButton TockButton-blue">
+          <span class="TockWidget-B2">Mama Family Meal
+            </span>
+            </div>
+            </div>
+            </div>
   </section>
-
+<br><br><br><br><br><br><br><br>
   <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
         <div v-if="offering.visible" class="carousel">
