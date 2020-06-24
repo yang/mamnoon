@@ -66,6 +66,7 @@ export default {
       try {
  
        let response = await this.$http.post("/user/login", this.login);
+       console.log(response)
         let token = response.data.token;
         localStorage.setItem("jwt", token);
         if (token) {

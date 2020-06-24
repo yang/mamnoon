@@ -1,6 +1,7 @@
-// module.exports = {
-//     // options...
-//     devServer: {
-//           proxy: 'http://localhost:8080',
-//       }
-//   }
+// vue.config.js
+module.exports = {
+    // options...
+    devServer: {
+          proxy: 'https://sheltered-shore-34206.herokuapp.com',
+      }
+  }
