@@ -6,9 +6,6 @@ June 23
 
         <img  src="demo/attic.jpg"/>
     <div class="bottom-button">
-   
-  info
-<div id="Tock_widget_container" data-tock-display-mode="Button" data-tock-color-mode="Blue" data-tock-locale="en-us" data-tock-timezone="America/Los_Angeles"></div>
     </div>
     </div>
 </template>
