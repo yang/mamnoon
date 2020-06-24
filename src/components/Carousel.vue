@@ -3,7 +3,7 @@
 
 
 
-<CoverFlow />
+<CoverFlow :products="products" />
 
 
 <br>
@@ -179,7 +179,7 @@ export default {
     data() {
     return {
       inventory: this.$store.state.inventory,
-      // products: ''
+      products: ''
     };
   },
   methods: {

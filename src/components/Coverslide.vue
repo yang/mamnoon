@@ -1,10 +1,17 @@
 <template>
 <div class="cover">
     <div class="header">
-June 23
+<!-- {{postTitle}} -->
+<!-- {{image}} -->
+
+{{postPrice}}
+
+{{postTitle}}
+{{postName}}
+
+    <img :src="image"/>
     </div>
 
-        <img  src="demo/attic.jpg"/>
     <div class="bottom-button">
             <a href="https://www.exploretock.com/mamnoonrestaurant/" target="_blank"><OrderStar/></a>
     </div>
@@ -21,32 +28,31 @@ export default{
 name: 'coverslide',
 components: {
     OrderStar
-}
+},
+props: ['postTitle','image','postName']
 }
 
 </script>
 
 <style lang="scss">
 .header{
-width: 100%;
-height: 100px;
-background: #f05d5b;
-color: yellow;
-text-align: center;
+    width: 100%;
+    height: 100px;
+    background: #f05d5b;
+    color: yellow;
+    text-align: center;
+    img{
+        width: 100%;
+    }
 }
 
-
 .bottom-button{
-        background: #FFF367;
-}
-
-
-.bottom-button{
-width: 100%;
-height: 100px;
-  background: #FFF367;
-color: yellow;
-text-align: center;
+    width: 100%;
+    height: 92px;
+    background: #FFF367;
+    color: yellow;
+    text-align: center;
+    padding-top: 11px;
 }
 
 

@@ -7,7 +7,7 @@
 
 		<div id="preview">
 			<div id="preview-coverflow">
-					<Coverslide v-for="(slid,index) in slidesLength" :key="index" />
+					<Coverslide :image="prod.image" :postName="prod.name" :postTitle="prod.price" v-for="(prod,index) in products" :key="index" />
 
 
 
@@ -34,6 +34,7 @@ import Coverslide from "@/components/Coverslide.vue";
 
 
 export default{
+		name: 'coverflow',
 	data () {
 
 		return {
@@ -44,8 +45,8 @@ export default{
 	components: {
 		Coverslide
 	},
-	name: 'coverflow',
-	beforeCreate() {
+	props: ['products'],
+	mounted() {
 
 
 //coverflow

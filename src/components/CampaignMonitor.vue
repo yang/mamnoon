@@ -4,6 +4,10 @@
     <button class="no-button-style" @click="submitForm">
         <Send :sendText="subscribeText" :starState="starState" />
     </button>
+
+
+
+
   </div>
 </template>
 <script>
@@ -60,7 +64,7 @@ export default {
         email: this.emailAddress,
         data: this.id
       }
-      return fetch('https://createsend.com//t/getsecuresubscribelink', {
+      return fetch('https://createsend.com/e2e3735926e732e8/t/getsecuresubscribelink', {
         method: 'POST',
         body: new URLSearchParams(params),
         headers: new Headers({
