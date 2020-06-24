@@ -433,8 +433,8 @@ new Vue({
     //   .get('https://api.coindesk.com/v1/bpi/currentprice.json')
     //   .then(response => (this.info = response))
 
-    let response = await this.$http.get('/product/snipcartproducts') 
-  let inventoryAdd = response.data.body.items
-this.$store.commit('updateInventory', { inventoryAdd })
+//     let response = await this.$http.get('/product/snipcartproducts') 
+//   let inventoryAdd = response.data.body.items
+// this.$store.commit('updateInventory', { inventoryAdd })
   }
 }).$mount("#app");
