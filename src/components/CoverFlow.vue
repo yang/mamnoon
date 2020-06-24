@@ -1,15 +1,30 @@
 <template>
 <div>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 		<div id="preview">
 			<div id="preview-coverflow">
 					<Coverslide v-for="(slid,index) in slidesLength" :key="index" />
 
-			
+
+
+
 			</div>
 		</div>
+
+
+
+
+
+
+
   </div>
 </template>
 
