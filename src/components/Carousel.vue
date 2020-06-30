@@ -1,25 +1,37 @@
 <template>
     <main>
+      <section class="coverflowsection">
 
 
+   <!-- {{$store.state.inventory.offerings[0].items}} -->
 
-<CoverFlow :products="products" />
+        <CoverFlow :products="products" />
+     <!-- <br>
+       <button id="first">first</button>
+  <button id="goto6">Go to #6</button>
+  <button id="last">last</button> -->
+        <div class="bottom-button"><a href="https://www.exploretock.com/mamnoonrestaurant/" target="_blank">
+        <div class="outer">
+          <OrderStar />
+          
+          </div></a></div>
+      </section>
+<br>
+<br>
+<br>
 
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
   <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
-        <div v-if="offering.visible" class="carousel">
+        <div v-if="offering.visible" v-bind:class="{ carousel: !offering.reservationBlock, shortcarousel: offering.reservationBlock }">
         <h4 v-if="!offering.insideHeader">{{offering.title}}   <span v-if="offering.tock">{{currentDay}}</span></h4>
-      <carousel :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
+
+<p class="description-para">
+{{offering.description}}
+</p>
+
+      <carousel v-if="!offering.reservationBlock" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
 
 
 <!-- <template v-if="index === 0" slot="prev"><span class="prev"><Prev /></span></template> -->
@@ -126,9 +138,13 @@
                 </div>
               </div>
 </div>
-
+     <div class="width-container" v-if="offering.reservationBlock">
+      <Mbar /> <Mamnoon />
+      </div>
 </div>
 
+ 
+      
       </section>
 
 
@@ -154,14 +170,15 @@ import OrderStar from "@/components/svgIcons/OrderStar";
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
 
-
+import Mamnoon from "@/components/svgIcons/Mamnoon";
+import Mbar from "@/components/svgIcons/Mbar";
 
 import Newsletter from "@/components/Newsletter";
 import CoverFlow from "@/components/CoverFlow";
 
 
 export default {
-  components: { carousel, Order, OrderStar, Next, Prev, Newsletter, CoverFlow },
+  components: { carousel, Order, OrderStar, Next, Prev, Newsletter, CoverFlow, Mbar, Mamnoon },
   computed: {
     count () {
       return this.$store.state.count
@@ -179,7 +196,7 @@ export default {
     data() {
     return {
       inventory: this.$store.state.inventory,
-      products: ''
+      products: this.$store.state.inventory.offerings[0].items
     };
   },
   methods: {
@@ -227,8 +244,10 @@ this.currentDay = e + 1
       console.log('changed')
     },
         async showProducts() {
-          let response = await this.$http.get('/product/snipcartproducts') 
-          this.products = response.data.body.items
+          // let response = await this.$http.get('/product/snipcartproducts') 
+let response = this.$store.state.inventory.offerings[0]
+
+          this.products = response
     }  
   },
   created(){
@@ -339,9 +358,15 @@ h4{
 // }
 
 
-.is-fullheight,
-.familymeal{
+
+
+  .is-fullheight{
   padding: 20px 0 0 0;
+  }
+
+// .is-fullheight,
+.familymeal{
+  padding: 0 0 0 0;
   }
 
 
@@ -534,6 +559,56 @@ button.snipcart-add-item{
 width: 100%;
 height: 500px;
 background: green;
+}
+
+
+
+
+
+.coverflowsection{
+    padding: 20px 0 0 0;
+    height: 600px;
+background-color: #F05D5B;
+overflow: hidden;
+position: relative;
+  h4{
+    color: #FFF367;
+  } 
+  p{
+    color: white;
+    width: 80%;
+    margin: 20px auto;
+  }
+}
+
+
+
+.bottom-button{
+position: absolute;
+bottom: 0;
+}
+
+
+.width-container{
+width: 100%;
+overflow: auto;
+}
+
+
+section{
+  clear: both;
+}
+
+
+.shortcarousel{
+      margin-bottom: 100px;
+}
+
+
+.description-para{
+  color: white;
+  margin: 10px auto 20px;
+  width: 80%;
 }
 
 </style>

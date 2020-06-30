@@ -43,97 +43,105 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    loggedIn: false,
     count: 0,
     names: [],
     shoppingCartItems: [],
     cart: 0,
     userName: 'joe',
     inventory: {
+      snipCartItems: [],
       currentDay: String(new Date().getDate()).padStart(2, '0'),
       offerings: [
-        // {
-        //   visible: true,
-        //   title: 'plan ahead',
-        //   category: 'familymeal',
-        //   slideNo: 1,
-        //   tock: true,
-        //   tockButton: true,
-        //   insideHeader: true,
-        //   items: [
-        //     {
-        //       name: 'monday family meal',
-        //       image: './assets/img/1.jpg',
-        //       month: "june",
-        //       days: 31,
-        //       price: 40.00,
-        //       today: true,
-        //       // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-        //       description: '',
-        //       availableFamilyMeals: [
-        //         { timeslot: '4:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '5:00', amountRemaining: 20, reserved: false },
-        //         { timeslot: '5:30', amountRemaining: 20, reserved: false },
-        //         { timeslot: '6:00', amountRemaining: 20, reserved: false },
-        //         { timeslot: '6:30', amountRemaining: 20, reserved: false },
-        //         { timeslot: '7:00', amountRemaining: 20, reserved: false }
-        //       ]
-        //     },
-        //     {
-        //       name: 'tuesday',
-        //       image: './assets/img/2.jpg',
-        //       month: "july",
-        //       days: 31,
-        //       price: 40.00,
-        //       today: false,
-        //       // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-        //       description: '',
-        //       availableFamilyMeals: [
-        //         { timeslot: '4:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '5:00', amountRemaining: 0, reserved: false },
-        //         { timeslot: '5:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '6:00', amountRemaining: 0, reserved: false },
-        //         { timeslot: '6:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '7:00', amountRemaining: 0, reserved: false }
-        //       ]
-        //     },
-        //     {
-        //       name: 'wednesday',
-        //       image: './assets/img/3.jpg',
-        //       month: "august",
-        //       days: 31,
-        //       price: 40.00,
-        //       today: false,
-        //       // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-        //       description: '',
-        //       availableFamilyMeals: [
-        //         { timeslot: '4:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '5:00', amountRemaining: 0, reserved: false },
-        //         { timeslot: '5:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '6:00', amountRemaining: 0, reserved: false },
-        //         { timeslot: '6:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '7:00', amountRemaining: 0, reserved: false }
-        //       ]
-        //     },
-        //     {
-        //       name: 'thursday',
-        //       image: './assets/img/4.jpg',
-        //       month: "september",
-        //       days: 31,
-        //       price: 40.00,
-        //       today: false,
-        //       // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-        //       description: '',
-        //       availableFamilyMeals: [
-        //         { timeslot: '4:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '5:00', amountRemaining: 0, reserved: false },
-        //         { timeslot: '5:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '6:00', amountRemaining: 0, reserved: false },
-        //         { timeslot: '6:30', amountRemaining: 0, reserved: false },
-        //         { timeslot: '7:00', amountRemaining: 0, reserved: false }
-        //       ]
-        //     }
-        //   ]
-        // },
+        {
+          visible: false,
+          title: 'plan ahead',
+          category: 'familymeal',
+          slideNo: 1,
+          tock: true,
+          tockButton: true,
+          insideHeader: true,
+          items: [
+            {
+              name: 'monday',
+              image: './assets/img/1.jpg',
+              month: "june",
+              days: 31,
+              price: 40.00,
+              today: true,
+              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+              description: '',
+              // availableFamilyMeals: [
+              //   { timeslot: '4:30', amountRemaining: 0, reserved: false },
+              //   { timeslot: '5:00', amountRemaining: 20, reserved: false },
+              //   { timeslot: '5:30', amountRemaining: 20, reserved: false },
+              //   { timeslot: '6:00', amountRemaining: 20, reserved: false },
+              //   { timeslot: '6:30', amountRemaining: 20, reserved: false },
+              //   { timeslot: '7:00', amountRemaining: 20, reserved: false }
+              // ]
+            },
+            {
+              name: 'tuesday',
+              image: './assets/img/2.jpg',
+              month: "july",
+              days: 31,
+              price: 40.00,
+              today: false,
+              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+              description: ''
+            },
+            {
+              name: 'wednesday',
+              image: './assets/img/3.jpg',
+              month: "august",
+              days: 31,
+              price: 40.00,
+              today: false,
+              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+              description: ''
+            },
+            {
+              name: 'thursday',
+              image: './assets/img/4.jpg',
+              month: "september",
+              days: 31,
+              price: 40.00,
+              today: false,
+              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+              description: ''
+            },
+            {
+              name: 'friday',
+              image: './assets/img/5.jpg',
+              month: "september",
+              days: 31,
+              price: 40.00,
+              today: false,
+              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+              description: ''
+            },
+            {
+              name: 'saturday',
+              image: './assets/img/5.jpg',
+              month: "september",
+              days: 31,
+              price: 40.00,
+              today: false,
+              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+              description: ''
+            },
+            {
+              name: 'sunday',
+              image: './assets/img/1.jpg',
+              month: "september",
+              days: 31,
+              price: 40.00,
+              today: false,
+              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
+              description: ''
+            },
+          ]
+        },
         {
           visible: true,
           title: 'order now',
@@ -156,6 +164,13 @@ const store = new Vuex.Store({
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
             }
           ]
+        },
+        {
+          visible: true,
+          title: 'reservations',
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque",
+          category: 'reservations',
+          reservationBlock: true,
         },
         {
           visible: true,
@@ -400,6 +415,9 @@ const store = new Vuex.Store({
     async updateInventory(state, { inventoryAdd }){
 
 
+
+      // state.inventory.snipCartItems
+
       state.inventory.offerings = state.inventory.offerings.filter(function( obj ) {
         return obj.snipcart !== true;
       });
@@ -415,6 +433,9 @@ const store = new Vuex.Store({
 
 
 
+    },
+    showMessage () {
+      console.log('this is th emesae')
     }
   }
 })
@@ -429,12 +450,8 @@ new Vue({
   store: store,
   render: h => h(App),
   async mounted () {
-    // axios
-    //   .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-    //   .then(response => (this.info = response))
-
-//     let response = await this.$http.get('/product/snipcartproducts') 
-//   let inventoryAdd = response.data.body.items
-// this.$store.commit('updateInventory', { inventoryAdd })
+    let response = await this.$http.get('/product/snipcartproducts') 
+    let inventoryAdd = response.data.body.items
+    this.$store.commit('updateInventory', { inventoryAdd })
   }
 }).$mount("#app");

@@ -2,7 +2,18 @@
 <div class="nav-wrap">
 <div class="fixed-nav">
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
-    <button v-if="$route.name != 'login'" @click="logUserOut()" class="logButton">{{user.name}}, log out </button>
+
+
+
+        <template v-if="this.$store.state.loggedIn">
+    <button v-if="$route.name != 'login'" @click="logUserOut()" class="logButton">log out</button>
+        </template>
+        <template v-else>
+    <!-- <button v-if="$route.name != 'login'" @click="logUserOut()" class="logButton">log in</button> -->
+    <router-link v-if="$route.name != 'login'" class="logButton" to="/login">log in</router-link>
+        </template>
+
+
       <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
@@ -21,7 +32,11 @@
           <scrollactive
            :offset="180"
             ref="scrollactive"
-            >    <ul id="menu">
+            >   
+             <ul id="menu">
+
+
+
                 <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
                     <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.title.toLowerCase().trim()}}</a>
                     </li>
@@ -85,7 +100,8 @@ export default {
   methods: {
     logUserOut() {
       localStorage.removeItem("jwt");
-      this.$router.push("/");
+      this.$store.commit('logOut')
+    //   this.$router.push("/");
     },
     toggleMenu(){
         this.mobNavExpanded = !this.mobNavExpanded;
@@ -262,6 +278,8 @@ right: 0;
     font-weight: 700;
     font-size: 18px;
     padding: 0 25px;
+    line-height: 90px;
+    text-decoration: none;
 }
 
 

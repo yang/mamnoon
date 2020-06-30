@@ -1,20 +1,12 @@
 <template>
 <div class="cover">
     <div class="header">
-<!-- {{postTitle}} -->
-<!-- {{image}} -->
 
-{{postPrice}}
-
-{{postTitle}}
-{{postName}}
 
     <img :src="image"/>
+
     </div>
 
-    <div class="bottom-button">
-            <a href="https://www.exploretock.com/mamnoonrestaurant/" target="_blank"><OrderStar/></a>
-    </div>
     </div>
 </template>
 
@@ -29,7 +21,8 @@ name: 'coverslide',
 components: {
     OrderStar
 },
-props: ['postTitle','image','postName']
+// props: ['postTitle','image','postName']
+props: ['image']
 }
 
 </script>

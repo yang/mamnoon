@@ -71,7 +71,11 @@ export default {
         localStorage.setItem("jwt", token);
         if (token) {
           swal("Success", "Login Successful", "Error");
-          this.$router.push("/home");
+          this.$router.push("/");
+// this.$store.commit('logIn', { timeslot })
+this.$store.commit('logIn')
+console.log(this.$store.state.loggedIn)
+
         }
       } catch (err) {
         swal("Error", "Something Went Wrong", "error");
