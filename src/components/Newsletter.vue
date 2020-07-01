@@ -61,6 +61,33 @@ components: {
     }
 }
 
+@media only screen and (max-width: 960px) {
+.newsletter-section{
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+    padding-bottom: 0px;
+    h4{
+        text-align: left;
+    }
+    .pad-cont{
+        padding: 30px;
+    }
+
+
+    &:first-child{
+        .pad-cont{
+            padding-bottom:0;
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+
+
+}
 
 
 .thick-white{

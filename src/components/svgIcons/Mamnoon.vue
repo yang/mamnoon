@@ -81,9 +81,32 @@ svg{
     text-align: center;
 }
 
+
+
 }
 
 
+@media only screen and (max-width: 768px) {
+ .halfwidth-orange{
+    height: 150px;
+    width: 50%;
+    display: inline-block;
+    background: #F9A658;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+
+svg{
+    width: 80%;
+    margin: 62px auto 0;
+    text-align: center;
+}
+
+
+
+}
+
+}
 
 
         </style>

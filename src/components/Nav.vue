@@ -214,6 +214,13 @@ ul#menu li.active{
     position: relative;
     text-align: center;
 }
+@media only screen and (max-width: 768px) {
+.full-width-logo{
+
+    text-align: left;
+}
+}
+
 
 
 .full-width-logo .collapse{

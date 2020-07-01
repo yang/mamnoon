@@ -5,10 +5,6 @@
 
 <div>
 <h4>plan ahead - family meal calendar</h4>
-<p id="description">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque
-</p>
-
 	</div>
 
 <!-- {{products.items}} -->
@@ -18,6 +14,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <!-- <button id="prevFlow">prev</button> -->
   <!-- <button id="goto6">Go to #6</button> -->
   <div id="title" data-current=""></div>
+  <p id="mealdescription" data-description="">
+</p>
 <!-- <div id="current-index"></div> -->
   <!-- <button id="nextFlow">next</button> -->
 
@@ -27,7 +25,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 
 
-<div v-for="(prod, index) in products.items" :key="index" class="cover" :data="prod.name">
+<div v-for="(prod, index) in products.items" :key="index" class="cover" :data="prod.name" :data-description="prod.description">
 
 <!-- {{prod.name}} -->
 <img :src="prod.image" />
@@ -170,7 +168,22 @@ showMessage(){
 font-weight: bold;
 text-align: center;
 width: 100%;
-margin-bottom: 30px;
+// margin-bottom: 30px;
 }
+
+
+
+.coverflow .cover{
+
+
+	opacity: .7;
+
+&.current{
+	opacity: 1;
+}
+
+}
+
+
 
  </style>

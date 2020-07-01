@@ -101,4 +101,25 @@ export default {
     text-align: center;
   }
 }
+
+
+@media only screen and (max-width: 768px) {
+.halfwidth-yellow {
+  height: 150px;
+  width: 50%;
+  display: inline-block;
+  background: #fff367;
+  float: left;
+  text-align: center;
+      cursor: pointer;
+  svg {
+    width: 80%;
+    margin: 40px auto 0;
+    text-align: center;
+  }
+}
+
+
+}
+
 </style>

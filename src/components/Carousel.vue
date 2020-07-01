@@ -1,6 +1,6 @@
 <template>
     <main>
-      <section class="coverflowsection">
+      <section id="familymeal" class="coverflowsection">
 
 
    <!-- {{$store.state.inventory.offerings[0].items}} -->
@@ -31,29 +31,13 @@
 {{offering.description}}
 </p>
 
-      <carousel v-if="!offering.reservationBlock" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
+      <carousel v-if="offering.responsive" :responsive=" {0:{items:1},768:{items:3}}" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
+      <template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
+      <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
+      <h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
+      <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
 
-
-<!-- <template v-if="index === 0" slot="prev"><span class="prev"><Prev /></span></template> -->
-<!-- <template v-else class="subprev" slot="prev"><span class="prev"><Prev /></span></template> -->
-
-
-
-<template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
-
- 
-
-<div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
-
-<h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
-              
-<!-- <img v-if="offering.tock" v-bind:src="'https://affectionate-gates-5cf4d4.netlify.app/img/ala/' + currentDay + '.jpg'" /> -->
-
-<img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
-
-
-
-<img v-else v-bind:src="item.image" />    
+      <img v-else v-bind:src="item.image" />    
             {{item.description}}
                <template v-if="item.caviarLink">
               <div class="order-bottom">
@@ -126,6 +110,125 @@
 
 
         </carousel>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <carousel v-else-if="!offering.reservationBlock" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
+      <template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
+      <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
+      <h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
+      <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
+
+      <img v-else v-bind:src="item.image" />    
+            {{item.description}}
+               <template v-if="item.caviarLink">
+              <div class="order-bottom">
+                {{item.name}}
+                       <div class="order-panel">
+              <a :href="item.caviarLink" target="_blank"><Order /></a>
+                            </div>
+                            </div>
+            </template>
+            <template v-if="item.statistics">
+              <div class="order-bottom">
+                {{item.name}}
+                       <div class="order-panel">
+                              <button class="snipcart-add-item"
+                            v-bind:data-item-id="item.name"
+                            v-bind:data-item-price="item.price"
+                            v-bind:data-item-image="item.image"
+                            v-bind:data-item-name="item.name">
+                            <Order />
+                            </button>
+                            </div>
+                            </div>
+            </template>
+
+
+
+
+
+
+
+
+
+
+
+
+<div v-if="item.quote">
+
+<div v-if="item.quote.length > 40">
+<span class="sm">{{item.quote}}<br>{{item.author}}</span>
+</div>
+<div v-else-if="item.quote.length > 20">
+<span class="md">{{item.quote}}<br>{{item.author}}</span>
+</div>
+<div v-else>
+<span class="lg">{{item.quote}}<br>{{item.author}}</span>
+</div>
+</div>
+<div v-if="offering.tockButton" class="order-bottom order-top">
+  
+  <span class="month">
+  {{item.month}}
+  </span>
+<div class="days">
+<span v-for="(day,index) in item.days" v-bind:key="day">
+  <span @click="dayChange(index)">
+    {{index + 1}}
+  </span>
+</span>
+</div>
+</div>
+          </div>
+
+
+
+
+
+
+<template v-if="index === 0 || index === 1" slot="next"></template>
+<template v-else class="subnext" slot="next"><span class="next"><Next /> </span></template>
+
+
+        </carousel> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -324,6 +427,12 @@ h4{
   top:0px;
   left: 33%;
   // display: none;
+
+
+@media only screen and (max-width: 768px) {
+  left: 5%;
+}
+
 }
 
 .is-fullheight [id^=carousel_next_]{
@@ -331,6 +440,12 @@ h4{
   top: 0px;
   right: 33%;
   // display: none;
+
+
+@media only screen and (max-width: 768px) {
+  right: 5%;
+}
+
 }
 
 
@@ -578,10 +693,18 @@ position: relative;
   p{
     color: white;
     width: 80%;
-    margin: 20px auto;
+    margin: 10px auto 20px;
+    text-align: center;
   }
 }
 
+@media only screen and (max-width: 640px) {
+.coverflowsection{
+    height: 740px;
+
+
+}
+}
 
 
 .bottom-button{

@@ -375,6 +375,7 @@
 					$('#title').attr('data-current', that.options.index)
 					$('#current-index').text(that.options.index);
 					$('#title').text(this.childNodes[that.options.index].getAttribute('data'));
+					$('#mealdescription').text(this.childNodes[that.options.index].getAttribute('data-description'));
 
 					that._callback('after');
 					

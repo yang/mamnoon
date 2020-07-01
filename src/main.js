@@ -63,82 +63,74 @@ const store = new Vuex.Store({
           insideHeader: true,
           items: [
             {
-              name: 'monday',
+              name: 'Monday, June 29',
               image: './assets/img/1.jpg',
               month: "june",
               days: 31,
               price: 40.00,
               today: true,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: '',
-              // availableFamilyMeals: [
-              //   { timeslot: '4:30', amountRemaining: 0, reserved: false },
-              //   { timeslot: '5:00', amountRemaining: 20, reserved: false },
-              //   { timeslot: '5:30', amountRemaining: 20, reserved: false },
-              //   { timeslot: '6:00', amountRemaining: 20, reserved: false },
-              //   { timeslot: '6:30', amountRemaining: 20, reserved: false },
-              //   { timeslot: '7:00', amountRemaining: 20, reserved: false }
-              // ]
+              description: '4th of July Grill Kit - pick up on the 3rd, 3pm - 9pm',
             },
             {
-              name: 'tuesday',
+              name: 'Tuesday, June 30',
               image: './assets/img/2.jpg',
               month: "july",
               days: 31,
               price: 40.00,
               today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: ''
+              // description: 'Meat or Vegetarian- Pick Up',
+              description: 'Shish Taouk'
             },
             {
-              name: 'wednesday',
+              name: 'Wednesday, July 1',
               image: './assets/img/3.jpg',
               month: "august",
               days: 31,
               price: 40.00,
               today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: ''
+              // description: 'Meat or Vegetarian- Pick Up',
+              description: 'Mamnoon Fried Chicken'
             },
             {
-              name: 'thursday',
+              name: 'Thursday, July 2',
               image: './assets/img/4.jpg',
               month: "september",
               days: 31,
               price: 40.00,
               today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: ''
+              // description: 'Meat or Vegetarian- Pick Up',
+              description: 'Potato Kibbeh-Pick Up'
             },
             {
-              name: 'friday',
+              name: 'Friday, July 3',
               image: './assets/img/5.jpg',
               month: "september",
               days: 31,
               price: 40.00,
               today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: ''
+              description: 'Meat or Vegetarian- Pick Up',
+              // description: ''
             },
             {
-              name: 'saturday',
+              name: 'Saturday, July 4',
               image: './assets/img/5.jpg',
               month: "september",
               days: 31,
               price: 40.00,
               today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: ''
+              description: 'Mamnoon Beef and Lamb Kefta',
+              // description: ''
             },
             {
-              name: 'sunday',
+              name: 'Sunday, July 5',
               image: './assets/img/1.jpg',
               month: "september",
               days: 31,
               price: 40.00,
               today: false,
-              // description: 'Family Meal - Meat or Vegetarian- Pick Up',
-              description: ''
+              // description: 'Meat or Vegetarian- Pick Up',
+              description: 'Potato Kibbeh-Pick Up'
+              // description: ''
             },
           ]
         },
@@ -178,7 +170,7 @@ const store = new Vuex.Store({
           visible: true,
           title: 'Testimonials',
           category: 'testimonials',
-          // slideNo: 1,
+          responsive: true,
           items: [
             {
               quote: "Thank you! so so good!!!! YUM",
@@ -428,6 +420,7 @@ const store = new Vuex.Store({
         visible: true,
         title: 'Mama Shop',
         category: 'mama-shop',
+        responsive: true,
         caviarButton: true,
         snipcart: true,
         items: inventoryAdd
