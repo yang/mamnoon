@@ -428,7 +428,7 @@ h4{
   left: 33%;
   // display: none;
 
-
+cursor: pointer;
 @media only screen and (max-width: 768px) {
   left: 5%;
 }
@@ -440,7 +440,7 @@ h4{
   top: 0px;
   right: 33%;
   // display: none;
-
+cursor: pointer;
 
 @media only screen and (max-width: 768px) {
   right: 5%;
