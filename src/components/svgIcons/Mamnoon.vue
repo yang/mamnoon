@@ -1,5 +1,5 @@
 <template>
-  <div class="halfwidth-orange" id="reservembarbutton">
+  <div class="halfwidth-orange" id="reservemamnoonbutton">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05">
       <defs>
 

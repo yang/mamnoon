@@ -171,6 +171,8 @@ const store = new Vuex.Store({
           description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque",
           category: 'reservations',
           reservationBlock: true,
+          mbarTrigger: 'reservembarbutton',
+          mamnoonTrigger: 'reservemamnoonbutton'
         },
         {
           visible: true,
