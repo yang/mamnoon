@@ -5,21 +5,21 @@
 
 
 
-        <template v-if="this.$store.state.loggedIn">
+        <!-- <template v-if="this.$store.state.loggedIn">
     <button v-if="$route.name != 'login'" @click="logUserOut()" class="logButton">log out</button>
         </template>
         <template v-else>
-    <!-- <button v-if="$route.name != 'login'" @click="logUserOut()" class="logButton">log in</button> -->
+<button v-if="$route.name != 'login'" @click="logUserOut()" class="logButton">log in</button>
     <router-link v-if="$route.name != 'login'" class="logButton" to="/login">log in</router-link>
-        </template>
+        </template> -->
 
 
       <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
-    <!-- <a v-if="$route.name === 'home'" class="burger" @click="toggleMenu()"> -->
+    <a v-if="$route.name === 'home'" class="burger" @click="toggleMenu()">
         <!-- <Burger /> -->
-    <!-- </a> -->
+    </a>
     </template>
     <Logo />
   </div>
