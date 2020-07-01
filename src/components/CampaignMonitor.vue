@@ -20,14 +20,13 @@ export default {
     },
   data() {
     return {
-      id: 'e2e3735926e732e8',
-      emailName: 'cm-',
+      id:
+        '30FEA77E7D0A9B8D7616376B90063231D39C7C96A1D7376C38AE60E1910A82A10202394E8D6AA574431DCB69ECEA19B52C2754C5E2F6A48DEA4ACA3762773CE1',
+      emailName: 'cm-wodku-wodku',
       emailAddress: '',
-      subscribeText: 'send',
-      sendText: 'send',
-      starState: '#f58e58'
-    }
-  },
+      subscribeText: 'send'
+        }
+        },
   methods: {
     submitEmail(secureUrl) {
       const params = {}
@@ -41,7 +40,7 @@ export default {
         })
       })
         .then(response => {
-          this.subscribeText = 'thanks!'
+          this.subscribeText = 'thx!'
           this.starState = '#f58e58'
           setTimeout(() => {
             this.subscribeText = 'send'
@@ -115,7 +114,7 @@ export default {
     font-weight: 500;
     letter-spacing: .25px;
     padding: 12px 35px 12px 10px;
-
+    width: 240px;
     &:focus,
     &:active{
         outline: none;
@@ -124,3 +123,4 @@ export default {
 }
 
 </style>
+

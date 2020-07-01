@@ -16,9 +16,7 @@
           
           </div></a></div>
       </section>
-<br>
-<br>
-<br>
+
 
 
 
@@ -27,13 +25,13 @@
         <div v-if="offering.visible" v-bind:class="{ carousel: !offering.reservationBlock, shortcarousel: offering.reservationBlock }">
         <h4 v-if="!offering.insideHeader">{{offering.title}}   <span v-if="offering.tock">{{currentDay}}</span></h4>
 
-<p class="description-para">
+<p v-if="offering.description" class="description-para">
 {{offering.description}}
 </p>
 
-      <carousel v-if="offering.responsive" :responsive=" {0:{items:1},768:{items:3}}" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
+      <carousel v-if="offering.responsive" :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
       <template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
-      <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
+      <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 10px;width: 100%;">
       <h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
       <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
 
@@ -73,16 +71,25 @@
 
 
 
-<div v-if="item.quote">
+<div class="height-100" v-if="item.quote">
 
-<div v-if="item.quote.length > 40">
-<span class="sm">{{item.quote}}<br>{{item.author}}</span>
+<div class="quote-container" v-if="item.quote.length > 60">
+<div class="xs">{{item.quote}}</div>
+<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
 </div>
-<div v-else-if="item.quote.length > 20">
-<span class="md">{{item.quote}}<br>{{item.author}}</span>
+
+
+<div class="quote-container" v-else-if="item.quote.length > 40">
+<div class="sm">{{item.quote}}</div>
+<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
 </div>
-<div v-else>
-<span class="lg">{{item.quote}}<br>{{item.author}}</span>
+<div class="quote-container" v-else-if="item.quote.length > 20">
+<div class="md">{{item.quote}}</div>
+<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
+</div>
+<div class="quote-container" v-else>
+<div class="md">{{item.quote}}</div>
+<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
 </div>
 </div>
 <div v-if="offering.tockButton" class="order-bottom order-top">
@@ -168,9 +175,14 @@
 
 
 
-<div v-if="item.quote">
+<!-- <div v-if="item.quote">
 
-<div v-if="item.quote.length > 40">
+
+<div v-if="item.quote.length > 60">
+  ie
+<span class="xs">{{item.quote}}<br>{{item.author}}</span>
+</div>
+<div v-else-if="item.quote.length > 40">
 <span class="sm">{{item.quote}}<br>{{item.author}}</span>
 </div>
 <div v-else-if="item.quote.length > 20">
@@ -179,7 +191,7 @@
 <div v-else>
 <span class="lg">{{item.quote}}<br>{{item.author}}</span>
 </div>
-</div>
+</div> -->
 <div v-if="offering.tockButton" class="order-bottom order-top">
   
   <span class="month">
@@ -518,19 +530,11 @@ text-align: center;
 
 
 .carousel{
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 
 
-@media only screen and (max-width: 1080px) {
-
-.carousel{
-  margin-bottom: 40px;
-}
-
-
-}
 
 
 
@@ -541,7 +545,7 @@ text-align: center;
   font-size: 18px;
   font-weight: 500;
   height: 100%;
-  margin-top: 16px;
+  margin-top: 10px;
 
     &:nth-child(odd){
 background: #F1765B;
@@ -586,13 +590,16 @@ background: #F1765B;
 }
 
 
-
-.sm{
+.xs{
   font-size: 16px;
 }
 
+.sm{
+  font-size: 22px;
+}
+
 .md{
-  font-size: 24px;
+  font-size: 18px;
 }
 
 
@@ -683,7 +690,9 @@ background: green;
 
 .coverflowsection{
     padding: 20px 0 0 0;
-    height: 600px;
+    // height: 600px;
+    height: 530px;
+    margin-bottom: 80px;
 background-color: #F05D5B;
 overflow: hidden;
 position: relative;
@@ -700,7 +709,7 @@ position: relative;
 
 @media only screen and (max-width: 640px) {
 .coverflowsection{
-    height: 740px;
+    height: 530px;
 
 
 }
@@ -725,7 +734,7 @@ section{
 
 
 .shortcarousel{
-      margin-bottom: 100px;
+      margin-bottom: 80px;
 }
 
 
@@ -735,4 +744,26 @@ section{
   width: 80%;
 }
 
+
+
+.height-100{
+  height: 100%;
+    width: 100%;
+}
+
+
+.quote-container{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 80px;
+
+}
+
+.quote-author{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #FFF367;
+}
 </style>

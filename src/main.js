@@ -184,18 +184,18 @@ const store = new Vuex.Store({
             },
             {
               quote: "Amazing meal, thank you!!",
-              author: "- Lindsay",
+              author: "Lindsay",
               authorLast: 'O'
             },
             {
               quote: "Pickup was a breeze and the food was amazing, will definitely order again thank you for letting us enjoy the wonders of a great meal at home",
-              author: "- Jane",
+              author: "Jane",
               authorLast: 'N'
             },
 
             {
               quote: "WEll, the food was superb! The lamb the best ever! And, in the midst of these hard times, I really appreciated the warmth and good positive energy of the staff. Thanks! So glad you're here.",
-              author: "- Lyn",
+              author: "Lyn",
               authorLast: 'K'
             },
 
@@ -249,83 +249,83 @@ const store = new Vuex.Store({
 
             {
               quote: "You guys are one of our favorite restaurants in Seattle. Family was Very good value, and super yummy! Very happy. We love you guys. Keep fighting and we will keep supporting you!",
-              author: "- Angie Armstrong visited on 2020-05-13",
-              authorLast: ''
+              author: "Angie",
+              authorLast: 'A'
             },
 
             {
               quote: "Easy to order, easy pickup. Outstanding food! Thanks, we’ll be back soon.",
-              author: "- Michael Vernon visited on 2020-05-14",
-              authorLast: ''
+              author: "Michael",
+              authorLast: 'V'
             },
 
             {
               quote: "Thanks for the best birthday dinner ever! (and a milestone one, at that ;-) )The chicken stayed nice and crispy on the way home, the sides were all great, and the wine was fantastic! I'm looking forward to eating in the restaurant again whenever that becomes possible, but in the meantime we will definitely be ordering take-out again. Best of luck to all at Mamnoon, and stay safe and healthy.",
-              author: "- Jennifer Chase-Rappaport visited on 2020-05-14",
-              authorLast: ''
+              author: "Jennifer",
+              authorLast: 'C'
             },
 
             {
               quote: "The whole meal was amazing.... and such generous portions. We're adding this meal to our regular rotation :)",
-              author: "- Stephanie Glass visited on 2020-05-14",
-              authorLast: ''
+              author: "Stephanie",
+              authorLast: 'G'
             },
 
             {
               quote: "Continues to be my favorite restaurant in Seattle.",
-              author: "- Ben Bayder visited on 2020-05-14",
-              authorLast: ''
+              author: "Ben",
+              authorLast: 'B'
             },
 
             {
               quote: "Wow, what a delicious dinner. Also the labne and hummous were super authentic to what I used to eat in the Middle East.",
-              author: "- Sarah Standish visited on 2020-05-16",
-              authorLast: ''
+              author: "Sarah",
+              authorLast: 'S'
             },
 
             {
               quote: "We are absolutely obsessed with your restaurant! You are doing a phenomenal job and we are so happy to support you!",
-              author: "- Marisa Gronholz visited on 2020-05-23",
-              authorLast: ''
+              author: "Marisa",
+              authorLast: 'G'
             },
 
             {
               quote: "The team was enthusiastic and super friendly. The food of course was excellent!",
-              author: "- Lyn Kratz visited on 2020-04-24",
-              authorLast: ''
+              author: "Lyn",
+              authorLast: 'K'
             },
 
             {
               quote: "Super yummy, great value, travelled well. Excellent!",
-              author: "- James Greenfield visited on 2020-05-27",
-              authorLast: ''
+              author: "James",
+              authorLast: 'G'
             },
 
             {
               quote: "Always a delight to have Mamnoon for dinner. From the warm welcome and efficient staff, to the phenomenal flavors of the food and inventive, delicious cocktails -- Mamnoon continues to deliver joy to our family.",
-              author: "- Stephanie DeVaan visited on 2020-05-28",
-              authorLast: ''
+              author: "Stephanie",
+              authorLast: 'D'
             },
 
             {
               quote: "Your process is efficient, from the descriptions online to the ordering to the pick-up. All very smooth. This was our first dinner on the deck of the summer and it was a lovely evening, an excellent meal (REALLY excellent!), and a really nice wine! Thank you for making our evening special!",
-              author: "-  Peg Balachowski visited on 2020-05-28",
-              authorLast: ''
+              author: "Peg",
+              authorLast: 'B'
             },
             {
               quote: "Thank you so much for this special food. The family meal was the best meal we have had in months. Best potatoes my husband has ever had. Thank you for making this possible during such bitter times. All the best to the Mamnoon and Tock families. You brought goodness to a dark day.",
-              author: "- Cynthia McWilliams visited on 2020-05-29",
-              authorLast: ''
+              author: "Cynthia",
+              authorLast: 'M'
             },
             {
               quote: "Thank you so much for calling me and letting me know about how you wanted to honor my order despite the uncertainty around the curfew and protests in the area. I wanted to have a special meal for my 2nd wedding anniversary and this was certainly it. Thank you for making it happen! By the way I came here after I got engaged a little over 2 years ago, so this place has a special place in my heart :)",
-              author: "- Apoorva Chandra visited on 2020-06-02",
-              authorLast: ''
+              author: "Apoorva",
+              authorLast: 'C'
             },
             {
               quote: "Such excellent food! Always thrilled to get Mamnoon!",
-              author: "Lilium Pierson visited on 2020-06-18",
-              authorLast: ''
+              author: "Lilium",
+              authorLast: 'P'
             }
           ]
         }

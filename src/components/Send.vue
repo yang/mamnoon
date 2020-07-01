@@ -24,7 +24,7 @@ export default {
 
 
   .cls-star {
-    /* fill: #f58e58; */
+    fill: #f58e58;
   }
   .cls-sendTextStar {
     font-size: 16.79px;
