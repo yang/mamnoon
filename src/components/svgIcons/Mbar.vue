@@ -1,9 +1,7 @@
 <template>
-  <div class="halfwidth-yellow" id="reservembarbutton">
+  <div class="halfwidth-yellow" @click="openLink(linkOut)">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.89 27.14">
-      <defs>
-
-      </defs>
+      <defs />
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">
           <path class="cls-178" d="M71.45,27.14V24.93l-.51.4v1.81Z" />
@@ -68,37 +66,39 @@
 
 <script>
 export default {
-        name: 'mamnoonstreet',
-        data (){
-            return{
-            link: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            }
-        }
-
+  name: "mamnoonstreet",
+  data() {
+    return {
+      link: "https://www.trycaviar.com/m/mamnoon-street-6597"
+    };
+  },
+  props: ["linkOut"],
+  methods: {
+    openLink(e) {
+      window.open(e, "_blank");
+      console.log(e);
+    }
+  }
 };
 </script>
 
         <style lang="scss">
-  .cls-178 {
-    fill: #49494a;
-  }
-
-
-    .halfwidth-yellow{
-        height: 150px;
-        width: 50%;
-        display: inline-block;
-        background: #FFF367;
-        float: left;
-        text-align: center;
-            svg{
-               width: 40%;
-                margin: 40px auto 0;
-                text-align: center;
-            }
-
+.cls-178 {
+  fill: #49494a;
 }
 
-
-
-        </style>
+.halfwidth-yellow {
+  height: 150px;
+  width: 50%;
+  display: inline-block;
+  background: #fff367;
+  float: left;
+  text-align: center;
+      cursor: pointer;
+  svg {
+    width: 40%;
+    margin: 40px auto 0;
+    text-align: center;
+  }
+}
+</style>

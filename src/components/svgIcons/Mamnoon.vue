@@ -1,5 +1,5 @@
 <template>
-  <div class="halfwidth-orange" id="reservemamnoonbutton">
+  <div class="halfwidth-orange" @click="openLink(linkOut2)">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05">
       <defs>
 
@@ -48,6 +48,13 @@ export default {
             return{
             link: 'https://merchant-api.trycaviar.com/m/mamnoon-628'
             }
+        },
+        props: ['linkOut2'],
+        methods:{
+              openLink(e){ 
+          window.open(e, "_blank");    
+      console.log(e)
+    }
         }
 
 };
@@ -66,6 +73,7 @@ export default {
     background: #F9A658;
     float: left;
     text-align: center;
+    cursor: pointer;
 
 svg{
     width: 40%;

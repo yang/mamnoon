@@ -121,7 +121,7 @@
 
 
 
-<template v-if="index === 0" slot="next"></template>
+<template v-if="index === 0 || index === 1" slot="next"></template>
 <template v-else class="subnext" slot="next"><span class="next"><Next /> </span></template>
 
 
@@ -139,7 +139,8 @@
               </div>
 </div>
      <div class="width-container" v-if="offering.reservationBlock">
-      <Mbar /> <Mamnoon />
+  
+<Mbar :linkOut="offering.mbarTrigger" /><Mamnoon :linkOut2="offering.mamnoonTrigger" />
       </div>
 </div>
 
