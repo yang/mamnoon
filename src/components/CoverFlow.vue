@@ -7,84 +7,33 @@
 <h4>plan ahead - family meal calendar</h4>
 	</div>
 
-<!-- {{products.items}} -->
-
-
-
-<!-- <button id="prevFlow">prev</button> -->
-  <!-- <button id="goto6">Go to #6</button> -->
-  <div id="title" data-current=""></div>
-  <p id="mealdescription" data-description="">
-</p>
-<!-- <div id="current-index"></div> -->
-  <!-- <button id="nextFlow">next</button> -->
-
-
-
-<div class="coverflow">
-
-
-
-<div v-for="(prod, index) in products.items" :key="index" class="cover" :data="prod.name" :data-description="prod.description">
-
-<!-- {{prod.name}} -->
-<img :src="prod.image" />
-</div> 
-
-  <!-- <div class="cover">A</div>
-  <div class="cover">B</div>
-  <div class="cover">C</div>
-  <div class="cover">D</div>
-  <div class="cover">E</div>
-  <div class="cover">F</div>
-  <div class="cover">G</div>
-  <div class="cover">H</div>
-  <div class="cover">I</div>
-  <div class="cover">J</div>
-  <div class="cover">K</div>
-  <div class="cover">L</div> -->
-
-
-</div>
-
-
-<!-- <div id="preview" class="coverflow">
-	<div id="preview-coverflow">
-<div v-for="(prod, index) in products.items" :key="index" class="cover">
-    <div class="header">
-{{prod.name}}
-<img :src="prod.image" />
-{{prod.price}}
-	</div>
-</div>
-</div>
-</div> -->
-
-<!-- <div v-for="prod in products.items" :key="index">
-
-{{prod.name}}
-<img :src="prod.image" />
-{{prod.title}}
-
-</div> -->
-
-		<!-- <div id="preview" class="coverflow">
-			<div id="preview-coverflow"> -->
-
-
-<!-- {{products.items}} -->
 
 
 
 
 
-					<!-- <Coverslide :image="prod.image" v-for="(prod,index) in products.items" :key="index" /> -->
 
 
 
+	<div id="container"></div>
+    <!-- <div style="width:480px;">
+		<div style="float:right;">Focused: <b id="focusindex">0</b> | Clicked: <b id="clickindex">0</b></div>
+		<p>
+			<a href="javascript:;" @click="coverflow().left();">Left</a> - <a href="javascript:;" @click="coverflow().right();">Right</a>
+		</p>
+		<p>
+			<a href="javascript:;" @click="coverflow().prev();">Previous</a> - <a href="javascript:;" @click="coverflow().next();">Next</a>
+		</p>
+		<p>
+			<input id="toval" value="0" size="1"> <a href="javascript:;" @click="coverflow().to(document.getElementById('toval').value);">To</a>
+		</p>
+	</div> -->
+	
+	<!-- <button @click="reset()">Reset</button> -->
+	<!-- <button @click="coverflow().remove()">Remove</button> -->
 
-			<!-- </div>
-		</div> -->
+
+
   </div>
 </template>
 
@@ -92,98 +41,93 @@
 <script>
 
 
-import Coverslide from "@/components/Coverslide.vue";
 
 
 
-export default{
+
+export default {
 		name: 'coverflow',
-	data () {
-		return {
-			slidesLength: 20,
-	
-		}
+  mounted(){
+	  console.log(123)
+	  this.reset();
+  },
+  methods: {
+	  reset () {
+		  console.log(123);
+		  			coverflow('container').remove();
+			
+			//$('#container').coverflow({
+			coverflow('container').setup({
+				width: '100%',
+				item: 1,
+				rotatedelay: 2000,
+				// mousewheel: false,
+				// mode: 'flash',
+				// backgroundcolor: '009900',
+				// backgroundopacity: 0,
+				// wmode: 'transparent',
+				// gradientcolor: 'ff0000',
+				// showduration: true,
+				playlist: [
+	{
+		"title": "golden pebble road",
+		"description": "",
+		"image": "https://luwes.github.io/js-cover-flow/media/DSC00435.jpg",
+		"link": "http://www.google.com/"
 	},
-	components: {
-		Coverslide
+	{
+		"title": "luminous sky",
+		"description": "another spectacular masterpiece of nature",
+		"image": "https://luwes.github.io/js-cover-flow/media/DSC00358.jpg"
 	},
-	props: ['products'],
-    methods: {
-showMessage(){
-	this.$store.commit('showMessage')
-}
+	{
+		"title": "volcano valley",
+		"description": "",
+		"image": "https://luwes.github.io/js-cover-flow/media/IMG_0044.jpg"
+	},
+	{
+		"title": "sheep hill path",
+		"description": "",
+		"image": "https://luwes.github.io/js-cover-flow/media/DSC00435.jpg"
+	},
+	{
+		"title": "saw tooth ridge",
+		"description": "",
+		"image": "https://luwes.github.io/js-cover-flow/media/DSC00736.jpg"
+	},
+	{
+		"title": "winter long",
+		"description": "what a massive and unbelievable winter we're having!",
+		"image": "https://luwes.github.io/js-cover-flow/media/IMG_0028.jpg"
+	},
+	{
+		"title": "unreachable peak",
+		"description": "",
+		"image": "https://luwes.github.io/js-cover-flow/media/DSC01313.jpg"
 	}
+],
 
+				coverwidth: 180,
+				coverheight: 150,
+				fixedsize: true,
+				textoffset: 50
+			})
+			.on('ready', function() {
+
+				// this.on('focus', function(index) {
+				// 	document.getElementById('focusindex').innerHTML = index;
+				// });
+				
+				// this.on('click', function(index, link) {
+				// 	document.getElementById('clickindex').innerHTML = index;
+					
+				// 	console.log(link);
+				// 	if (link) {
+				// 		window.open(link, '_blank');
+				// 	}
+				// });
+			});
+	  }
+  }
 }
 </script>
-<style lang="scss">
-// 				#preview {
-// 					padding-bottom: 100px;
-// 					margin: 30px auto 50px;
-// 				}
-
-// 				#preview-coverflow .cover {
-// 					cursor:		pointer;
-// 					width:		320px;
-// 					height:		240px;
-// 					// box-shadow:	0 0 4em 1em white;
-
-
-
-
-// 				}
-
-
-// #preview-coverflow .cover.current{
-// 	display: block;
-//     position: absolute;
-//     left: 410px;
-//     z-index: 7;
-//     transform: scale(1, 1) perspective(555px) rotateY(0deg) !important;
-//     filter: none;
-// }
-
-
-// @media only screen and (max-width: 768px) {
-// #preview-coverflow .cover.current{
-// 	display: block;
-//     position: absolute;
-//     left: 410px;
-//     z-index: 7;
-//     transform: scale(1, 1) perspective(555px) rotateY(0deg) !important;
-//     filter: none;
-// }
-// }
-
-				// #preview-coverflow .cover {
-				// 	cursor:		pointer;
-				// 	width:		320px;
-				// 	height:		240px;
-				// 	box-shadow:	0 0 4em 1em white;
-				// }
-		
-
-#title{
-	color: white;
-font-weight: bold;
-text-align: center;
-width: 100%;
-// margin-bottom: 30px;
-}
-
-
-
-.coverflow .cover{
-
-
-	opacity: .7;
-
-&.current{
-	opacity: 1;
-}
-
-}
-
-
-
- </style>

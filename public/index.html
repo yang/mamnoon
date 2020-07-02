@@ -42,8 +42,8 @@
 
 <!-- cover flow -->
 		<!-- jQuery/jQueryUI (hosted) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script> -->
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script> -->
 
 	
 
@@ -51,148 +51,85 @@
 		<!-- <script src="jquery.interpolate.min.js"></script> -->
 
 		<!-- Coverflow -->
-		<script src="jquery.coverflow.js"></script>
-		<script src="jquery.touchSwipe.min.js"></script>
+
+
+<style type="text/css">
+
+
+
+.coverflow {
+  z-index: 10;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -webkit-touch-callout: none; }
+
+.coverflow .coverflow-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.coverflow .coverflow-tray,
+.coverflow .coverflow-rect {
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+
+.coverflow .coverflow-tray,
+.coverflow .coverflow-cell {
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition: -moz-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  -ms-transition: -ms-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: -o-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.coverflow .coverflow-hit {
+  position: absolute;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden; }
+
+.coverflow .coverflow-cell canvas {
+  pointer-events: none;
+  outline: 1px solid transparent;
+  position: absolute; }
+
+.coverflow-text {
+  position: absolute;
+  width: 100%; }
+
+.coverflow-text h1,
+.coverflow-text h2 {
+  margin: 0; }
+
+/*# sourceMappingURL=coverflow.css.map */
+
+
+	</style>
+
 		
-		<style>
-			body {
-				font-family: "Segoe UI", Verdana, Helvetica, Arial, sans-serif;
-				font-size: 11px;
-			}
-
-			.coverflow {
-				height: 100px;
-				/* border-bottom: solid 2px black; */
-			}
-
-      .coverflow:focus{
-        outline: none;
-      }
-
-			.coverflow .cover {
-				width: 400px;
-				/* height: 400px; */
-				cursor: pointer;
-				font-size: 500%;
-				/* border: solid 2px black; */
-				text-align: center;
-
-				background: #e2e2e2; /* Old browsers */
-				/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-				background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UyZTJlMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2RiZGJkYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2QxZDFkMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZWZlZmUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-				background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
-				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
-				background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
-				background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
-				background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-8 */
-			
-				
-					
-			
-			
-			}
-			@media only screen and (max-width: 420px) {
-			.coverflow .cover {
-				width: 90%;
-			}
-		}
-			.coverflow .cover.current:after {
-				/* content:			' ';
-				background-color:	white;
-				display:			block;
-				position:			absolute;
-				width:				132px;
-				height:				16px;
-				left:				-16px;
-				bottom:				-16px; */
-			}
 
 
-      .coverflow img{
-        width: 100%;
-      }
-
-			/* CD covers */
-			.photos .cover {
-				cursor: pointer;
-				/*-webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255, 255, 255, .5)));*/
-			}
-
-			#photos-info {
-				position:		relative;
-				text-align:		center;
-				z-index:		1000;
-				text-shadow:	0 0 8px white;
-			}
-
-			#photos-name {
-				font-size: 200%;
-				font-weight: bold;
-			}
-
-			.clearfix {
-				clear: both;
-			}
-		</style>
-		
-		<script>
-			$(function() {
-
-				// Alphabet
-
-				$('.coverflow').coverflow();
-
-				$('#first').click(function() {
-					$('.coverflow').coverflow('index', 0);
-				});
-
-				$('#last').click(function() {
-					$('.coverflow').coverflow('index', -1);
-				});
-
-
-				$('#prevFlow').click(function() {
-          let prev = $('#title').data('current') - 1
-          $('.coverflow').coverflow('index', prev);
- 
-          $('#title').attr('data-current', prev)
-
-				});
-
-				$('#nextFlow').click(function() {
-       
-            let next = $('#title').data('current') + 1
-          $('.coverflow').coverflow('index', next);
-       $('#title').attr('data-current', next)
-				});
-
-
-
-				$('#goto6').click(function() {
-					$('.coverflow').coverflow('index', 6-1);	// zero-based index!
-				});
-				
-				$('#keyboard').click(function() {
-					$('.coverflow').coverflow('option', 'enableKeyboard', $(this).is(':checked'));
-				});
-				
-				$('#wheel').click(function() {
-					$('.coverflow').coverflow('option', 'enableWheel', $(this).is(':checked'));
-				});
-				
-				$('#click').click(function() {
-					$('.coverflow').coverflow('option', 'enableClick', $(this).is(':checked'));
-				});
-
-
-			});
-		</script>
 
 
 <!--cover flow-->
-
+<script src="coverflow.js"></script>
 </head>
 
   <body>
@@ -204,23 +141,7 @@
 
 
 
-<!--cover flow-->
 
-
-<!-- <div style="position:absolute;background:rgba(255,255,255,.75);z-index:1000;padding:10px"> -->
-  <!-- <button id="first">first</button>
-  <button id="goto6">Go to #6</button>
-  <button id="last">last</button> -->
-  <!-- <br/><label for="keyboard"><input type="checkbox" id="keyboard" checked/>Keyboard</label>
-  <br/><label for="click"><input type="checkbox" id="click" checked/>Click/tap</label>
-  <br/><label for="wheel"><input type="checkbox" id="wheel" checked/>Scroll wheel</label>
-</div> -->
-<!-- <br><br><br><br><br><br><br><br><br><br><br> -->
-
-
-
-<!--cover flow-->
-    
     <div id="app"></div>
 
 	
@@ -229,6 +150,10 @@
 
 
 	
+
+
+
+
 
 
 

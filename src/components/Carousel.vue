@@ -5,7 +5,7 @@
 
    <!-- {{$store.state.inventory.offerings[0].items}} -->
 
-        <CoverFlow :products="products" />
+        <CoverFlow />
      <!-- <br>
        <button id="first">first</button>
   <button id="goto6">Go to #6</button>
