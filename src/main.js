@@ -14,7 +14,8 @@ import "bootstrap/dist/css/bootstrap.css";
 
 const base = axios.create({
   // baseURL: "http://localhost:4000"
-baseURL: "https://bearded-mountie-24711.herokuapp.com/"
+// baseURL: "https://bearded-mountie-24711.herokuapp.com/"
+baseURL: "https://nameless-river-06458.herokuapp.com/"
 });
 
 
@@ -54,6 +55,7 @@ const store = new Vuex.Store({
     userName: 'joe',
     inventory: {
       snipCartItems: [],
+      tockMeals: [],
       currentDay: String(new Date().getDate()).padStart(2, '0'),
       offerings: [
         {
@@ -73,6 +75,7 @@ const store = new Vuex.Store({
               price: 40.00,
               today: true,
               description: '4th of July Grill Kit - pick up on the 3rd, 3pm - 9pm',
+              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
             },
             {
               title: 'Tuesday, June 30',
@@ -82,7 +85,8 @@ const store = new Vuex.Store({
               price: 40.00,
               today: false,
               // description: 'Meat or Vegetarian- Pick Up',
-              description: 'Shish Taouk'
+              description: 'Shish Taouk',
+              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
             },
             {
               title: 'Wednesday, July 1',
@@ -92,7 +96,8 @@ const store = new Vuex.Store({
               price: 40.00,
               today: false,
               // description: 'Meat or Vegetarian- Pick Up',
-              description: 'Mamnoon Fried Chicken'
+              description: 'Mamnoon Fried Chicken',
+              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
             },
             {
               title: 'Thursday, July 2',
@@ -102,7 +107,8 @@ const store = new Vuex.Store({
               price: 40.00,
               today: false,
               // description: 'Meat or Vegetarian- Pick Up',
-              description: 'Potato Kibbeh-Pick Up'
+              description: 'Potato Kibbeh-Pick Up',
+              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
             },
             {
               title: 'Friday, July 3',
@@ -113,6 +119,7 @@ const store = new Vuex.Store({
               today: false,
               description: 'Meat or Vegetarian- Pick Up',
               // description: ''
+              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
             },
             {
               title: 'Saturday, July 4',
@@ -122,6 +129,7 @@ const store = new Vuex.Store({
               price: 40.00,
               today: false,
               description: 'Mamnoon Beef and Lamb Kefta',
+              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
               // description: ''
             },
             {
@@ -132,7 +140,8 @@ const store = new Vuex.Store({
               price: 40.00,
               today: false,
               // description: 'Meat or Vegetarian- Pick Up',
-              description: 'Potato Kibbeh-Pick Up'
+              description: 'Potato Kibbeh-Pick Up',
+              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
               // description: ''
             },
           ]
@@ -413,7 +422,11 @@ const store = new Vuex.Store({
 
 
 
-      // state.inventory.snipCartItems
+  
+
+
+
+
 
       state.inventory.offerings = state.inventory.offerings.filter(function( obj ) {
         return obj.snipcart !== true;
@@ -430,6 +443,13 @@ const store = new Vuex.Store({
       })
 
 
+
+    },
+    updateTockMeals(state, { inventoryTockAdd }){
+  
+      state.inventory.tockMeals = []
+      state.inventory.tockMeals = inventoryTockAdd
+      console.log(inventoryTockAdd)
 
     },
     showMessage () {
@@ -451,5 +471,18 @@ new Vue({
     let response = await this.$http.get('/product/snipcartproducts') 
     let inventoryAdd = response.data.body.items
     this.$store.commit('updateInventory', { inventoryAdd })
+
+
+
+
+
+    let responseTock = await this.$http.get('/product/tockmeals') 
+    let inventoryTockAdd = responseTock.data.tockMeals
+
+    this.$store.commit('updateTockMeals', { inventoryTockAdd })
+
+  
+
+
   }
 }).$mount("#app");

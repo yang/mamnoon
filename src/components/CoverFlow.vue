@@ -7,16 +7,11 @@
 <h4>plan ahead - family meal calendar</h4>
 	</div>
 
-
-
-
-
-<!-- {{products.items}} -->
-
-
 <div class="title">{{title}}</div>
 <div class="description">{{description}}</div>
-
+<a v-key="tock" v-for="tock in $store.state.inventory.tockMeals" :href="'https://www.exploretock.com/mamnoonrestaurant/experience/' + tock.createdLink">
+{{tock.titleNameCreated}}
+</a><br>
 	<div id="container"></div>
     <div style="width:480px;display:none;">
 		<div style="float:right;">Focused: <b id="focusindex">0</b> | Clicked: <b id="clickindex">0</b></div>
@@ -37,6 +32,10 @@
 
 
 
+  <!-- <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}"> -->
+
+
+
 
 
   </div>
@@ -54,7 +53,7 @@ export default {
 		name: 'coverflow',
 		data(){
 			return{
-			products: this.products.items,
+			productsList: this.products.items,
 			title: this.products.items[0].title,
 			description: this.products.items[0].description
 		}
@@ -117,7 +116,8 @@ this.description = this.products.items[index].description
 .description{
 color: white;
 text-align: center;
-width: 100%;
+width: 80%;
+margin: 0 auto;
 }
 .title{
 	font-weight: bold;
