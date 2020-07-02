@@ -9,7 +9,7 @@
 
 <div class="title">{{title}}</div>
 <div class="description">{{description}}</div>
-<a v-key="tock" v-for="tock in $store.state.inventory.tockMeals" :href="'https://www.exploretock.com/mamnoonrestaurant/experience/' + tock.createdLink">
+<a :key="tock" v-for="tock in $store.state.inventory.tockMeals" :href="'https://www.exploretock.com/mamnoonrestaurant/experience/' + tock.createdLink">
 {{tock.titleNameCreated}}
 </a><br>
 	<div id="container"></div>
