@@ -7,7 +7,10 @@ import router from "./router";
 import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
 import "bootstrap/dist/css/bootstrap.css";
-
+import {CoverFlow, CoverFlowSlide} from 'vue-flipster'
+  
+Vue.component('CoverFlow', CoverFlow)
+Vue.component('CoverFlowSlide', CoverFlowSlide)
 
 const base = axios.create({
   // baseURL: "http://localhost:4000"

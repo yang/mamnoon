@@ -2,7 +2,7 @@
   <div>
     <input v-model="emailAddress" type="email" placeholder="enter your email" class="lap-right-pad" />
     <button class="no-button-style" @click="submitForm">
-        <Send :sendText="subscribeText" :starState="starState" />
+        <Send :sendText="subscribeText" />
     </button>
 
 

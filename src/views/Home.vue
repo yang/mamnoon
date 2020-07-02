@@ -17,11 +17,6 @@
 
 <SlideShow />
 
-
-
-
-
-
 <!-- <Products /> -->
           </div>
         </div>
