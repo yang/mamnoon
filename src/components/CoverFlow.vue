@@ -14,8 +14,8 @@
 <!-- {{products.items}} -->
 
 
-title: {{title}}
-description: {{description}}
+<div class="title">{{title}}</div>
+<div class="description">{{description}}</div>
 
 	<div id="container"></div>
     <div style="width:480px;display:none;">
@@ -79,55 +79,29 @@ this.description = this.products.items[index].description
 
 
 		let that = this
-
-		  console.log(123);
-		  			coverflow('container').remove();
+			coverflow('container').remove();
 			
 			//$('#container').coverflow({
 			coverflow('container').setup({
 				width: '100%',
 				item: 0,
 				rotatedelay: 0,
-				// mousewheel: false,
-				// mode: 'flash',
 				backgroundcolor: '#F05D5B',
-				// backgroundopacity: 0,
-				// wmode: 'transparent',
-				// gradientcolor: 'ff0000',
-				// showduration: true,
 				reflectionopacity: 0,
 				playlist: this.products.items,
 				coverwidth: 240,
 				coverheight: 200,
-				fixedsize: true,
+				fixedsize: false,
 				textoffset: 50,
 				coverangle: 50
 			})
 			.on('ready', function() {
 
-
-					// 		document.getElementById('focusindex').innerHTML = index;
-
-
-					// that.returnProducts(index)
-
 				this.on('focus', function(index) {
-					// console.log(this.config.playlist[index])
 					document.getElementById('focusindex').innerHTML = index;
-
-
 					that.returnProducts(index)
 				});
-				
-				// this.on('click', function(index, link) {
-				// 	document.getElementById('clickindex').innerHTML = index;
-					
-				// 	console.log(link);
-				// 	if (link) {
-				// 		window.open(link, '_blank');
-				// 	}
-				// });
-			});
+		});
 	  }
   }
 }
@@ -137,5 +111,23 @@ this.description = this.products.items[index].description
 <style lang="scss">
 .coverflow-text{
 	display: none;
+}
+
+.title,
+.description{
+color: white;
+text-align: center;
+width: 100%;
+}
+.title{
+	font-weight: bold;
+	margin-bottom: 6px;
+	margin-top: 12px;
+}
+
+#container.coverflow,
+#container.coverflow:focus,
+#container.coverflow:active{
+	outline: none;
 }
 </style>
