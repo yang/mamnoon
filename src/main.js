@@ -66,7 +66,7 @@ const store = new Vuex.Store({
           insideHeader: true,
           items: [
             {
-              name: 'Monday, June 29',
+              title: 'Monday, June 29',
               image: './assets/img/1.jpg',
               month: "june",
               days: 31,
@@ -75,7 +75,7 @@ const store = new Vuex.Store({
               description: '4th of July Grill Kit - pick up on the 3rd, 3pm - 9pm',
             },
             {
-              name: 'Tuesday, June 30',
+              title: 'Tuesday, June 30',
               image: './assets/img/2.jpg',
               month: "july",
               days: 31,
@@ -85,7 +85,7 @@ const store = new Vuex.Store({
               description: 'Shish Taouk'
             },
             {
-              name: 'Wednesday, July 1',
+              title: 'Wednesday, July 1',
               image: './assets/img/3.jpg',
               month: "august",
               days: 31,
@@ -95,7 +95,7 @@ const store = new Vuex.Store({
               description: 'Mamnoon Fried Chicken'
             },
             {
-              name: 'Thursday, July 2',
+              title: 'Thursday, July 2',
               image: './assets/img/4.jpg',
               month: "september",
               days: 31,
@@ -105,7 +105,7 @@ const store = new Vuex.Store({
               description: 'Potato Kibbeh-Pick Up'
             },
             {
-              name: 'Friday, July 3',
+              title: 'Friday, July 3',
               image: './assets/img/5.jpg',
               month: "september",
               days: 31,
@@ -115,7 +115,7 @@ const store = new Vuex.Store({
               // description: ''
             },
             {
-              name: 'Saturday, July 4',
+              title: 'Saturday, July 4',
               image: './assets/img/5.jpg',
               month: "september",
               days: 31,
@@ -125,7 +125,7 @@ const store = new Vuex.Store({
               // description: ''
             },
             {
-              name: 'Sunday, July 5',
+              title: 'Sunday, July 5',
               image: './assets/img/1.jpg',
               month: "september",
               days: 31,

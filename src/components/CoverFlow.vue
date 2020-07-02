@@ -11,7 +11,7 @@
 
 
 
-
+<!-- {{products.items}} -->
 
 
 
@@ -51,6 +51,7 @@ export default {
 	  console.log(123)
 	  this.reset();
   },
+  	props: ['products'],
   methods: {
 	  reset () {
 		  console.log(123);
@@ -63,54 +64,18 @@ export default {
 				rotatedelay: 2000,
 				// mousewheel: false,
 				// mode: 'flash',
-				// backgroundcolor: '009900',
+				backgroundcolor: '#F05D5B',
 				// backgroundopacity: 0,
 				// wmode: 'transparent',
 				// gradientcolor: 'ff0000',
 				// showduration: true,
-				playlist: [
-	{
-		"title": "golden pebble road",
-		"description": "",
-		"image": "https://luwes.github.io/js-cover-flow/media/DSC00435.jpg",
-		"link": "http://www.google.com/"
-	},
-	{
-		"title": "luminous sky",
-		"description": "another spectacular masterpiece of nature",
-		"image": "https://luwes.github.io/js-cover-flow/media/DSC00358.jpg"
-	},
-	{
-		"title": "volcano valley",
-		"description": "",
-		"image": "https://luwes.github.io/js-cover-flow/media/IMG_0044.jpg"
-	},
-	{
-		"title": "sheep hill path",
-		"description": "",
-		"image": "https://luwes.github.io/js-cover-flow/media/DSC00435.jpg"
-	},
-	{
-		"title": "saw tooth ridge",
-		"description": "",
-		"image": "https://luwes.github.io/js-cover-flow/media/DSC00736.jpg"
-	},
-	{
-		"title": "winter long",
-		"description": "what a massive and unbelievable winter we're having!",
-		"image": "https://luwes.github.io/js-cover-flow/media/IMG_0028.jpg"
-	},
-	{
-		"title": "unreachable peak",
-		"description": "",
-		"image": "https://luwes.github.io/js-cover-flow/media/DSC01313.jpg"
-	}
-],
-
-				coverwidth: 180,
-				coverheight: 150,
+				reflectionopacity: 0,
+				playlist: this.products.items,
+				coverwidth: 240,
+				coverheight: 200,
 				fixedsize: true,
-				textoffset: 50
+				textoffset: 50,
+				coverangle: 50
 			})
 			.on('ready', function() {
 

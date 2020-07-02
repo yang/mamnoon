@@ -5,7 +5,7 @@
 
    <!-- {{$store.state.inventory.offerings[0].items}} -->
 
-        <CoverFlow />
+        <CoverFlow :products="products" />
      <!-- <br>
        <button id="first">first</button>
   <button id="goto6">Go to #6</button>
@@ -717,8 +717,11 @@ position: relative;
 
 
 .bottom-button{
-position: absolute;
-bottom: 0;
+  position: absolute;
+  bottom: 0;
+  background: #FFF367;
+  width: 100%;
+  padding: 10px 0;
 }
 
 
