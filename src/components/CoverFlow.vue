@@ -72,7 +72,7 @@ export default {
 			return{
 			productsList: this.$store.state.inventory.tockMeals,
 			title: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].title : 'loading...',
-			description: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].title : 'loading...',
+			description: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].description : 'loading...',
 			link: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].createdLink : 'loading...',
 
 		}
@@ -93,7 +93,7 @@ export default {
 
 	  this.productsList = newCount
 	  this.title = newCount[0].title
-	  this.description = newCount[0].title
+	  this.description = newCount[0].description
 	  this.link = newCount[0].createdLink
       this.reset();
     }
@@ -101,10 +101,9 @@ export default {
   methods: {
 		returnProducts(index) {
 
-// console.log(this.title[index].title)
 
 this.title = this.$store.state.inventory.tockMeals[index].title
-this.description = this.$store.state.inventory.tockMeals[index].title
+this.description = this.$store.state.inventory.tockMeals[index].description
 this.link = this.$store.state.inventory.tockMeals[index].createdLink
 
 // this.title = this.title[index]
@@ -154,9 +153,20 @@ this.link = this.$store.state.inventory.tockMeals[index].createdLink
 .link{
 color: white;
 text-align: center;
-width: 80%;
+width: 60%;
 margin: 0 auto;
 }
+
+
+@media only screen and (max-width: 1080px) {
+.title,
+.description,
+.link{
+width: 80%;
+}
+}
+
+
 .title{
 	font-weight: bold;
 	margin-bottom: 6px;
