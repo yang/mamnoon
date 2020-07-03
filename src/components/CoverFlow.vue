@@ -4,24 +4,12 @@
 
 
 <div>
-<h4>plan ahead - family meal calendar</h4>
+<h4>family meal calendar</h4>
 	</div>
 <div v-if="title" class="title">{{title}}</div>
 <div v-if="description" class="description">{{description}}</div>
 <!-- <div v-if="link !== 'loading...'" class="link"><a target="_blank" :href="link">Order</a></div> -->
-
-
 <!-- {{ $store.state.inventory.tockMeals }} -->
-
-<div :key="tock.titleNameCreated" v-for="tock in $store.state.inventory.tockMeals" style="display:none;">
-
-	<a target="_blank" :href="tock.createdLink">
-	{{tock.title}}
-	</a>
-
-	
-
-</div>
 	<div id="container"></div>
     <div style="width:480px;display:none;">
 		<div style="float:right;">Focused: <b id="focusindex">0</b> | Clicked: <b id="clickindex">0</b></div>
@@ -177,5 +165,10 @@ width: 80%;
 #container.coverflow:focus,
 #container.coverflow:active{
 	outline: none;
+	overflow: hidden;
+    margin-top: 40px;
+	.coverflow-wrap{
+		transform: scale(1.75);
+	}
 }
 </style>

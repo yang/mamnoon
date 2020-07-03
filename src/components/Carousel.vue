@@ -453,10 +453,7 @@ cursor: pointer;
 @media only screen and (max-width: 768px) {
   right: 5%;
 }
-
 }
-
-
 
 // .is-fullheight.familymeal [id^=carousel_prev_]{
 
@@ -468,31 +465,20 @@ cursor: pointer;
 // }
 
 // .is-fullheight.familymeal [id^=carousel_next_]{
-
-
-
-
-
 //     position: absolute;
 //     bottom: 120px;
 //     top: initial;
 //     right: 3%;
 //     z-index: 20;
-
 // }
 
-
-
-
-  .is-fullheight{
+.is-fullheight{
   padding: 20px 0 0 0;
   }
 
-// .is-fullheight,
 .familymeal{
   padding: 0 0 0 0;
-  }
-
+}
 
 .order-bottom{
   background: #FFF367;
@@ -506,34 +492,23 @@ cursor: pointer;
 }
   
 .order-bottom.order-top{
-background: #F1765B;
-min-height: 90px;
-text-align: center;
+  background: #F1765B;
+  min-height: 90px;
+  text-align: center;
 }
 
 .order-panel{
     padding: 10px 0;
 }
 
-
-
 #mama-dummy-button{
   width: 70px;
   margin: 0 auto;
 }
 
-
-
-
 .carousel{
   margin-bottom: 80px;
 }
-
-
-
-
-
-
 
 #testimonials .owl-item{
   color: #ffffff;
@@ -687,7 +662,9 @@ background: green;
 .coverflowsection{
     padding: 20px 0 0 0;
     // height: 600px;
-    height: 530px;
+    // height: 510px;
+    // height: 600px;
+        height: 600px;
     margin-bottom: 80px;
 background-color: #F05D5B;
 overflow: hidden;
@@ -704,11 +681,16 @@ position: relative;
 }
 
 @media only screen and (max-width: 640px) {
-.coverflowsection{
-    height: 530px;
-
-
+  .coverflowsection{
+    height: 660px;
+  }
 }
+
+
+@media only screen and (max-width: 480px) {
+  .coverflowsection{
+    height: 800px;
+  }
 }
 
 

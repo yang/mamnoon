@@ -106,7 +106,7 @@ export default {
     toggleMenu(){
         this.mobNavExpanded = !this.mobNavExpanded;
  
-        console.log(this)
+        // console.log(this)
     },
     getUserDetails() {
       let token = localStorage.getItem("jwt");
