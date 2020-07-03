@@ -8,7 +8,7 @@
 	</div>
 <div v-if="title" class="title">{{title}}</div>
 <div v-if="description" class="description">{{description}}</div>
-<div v-if="link !== 'loading...'" class="link"><a target="_blank" :href="link">Order</a></div>
+<!-- <div v-if="link !== 'loading...'" class="link"><a target="_blank" :href="link">Order</a></div> -->
 
 
 <!-- {{ $store.state.inventory.tockMeals }} -->
@@ -19,7 +19,7 @@
 	{{tock.title}}
 	</a>
 
-	<!-- <img :src="tock.image" /> -->
+	
 
 </div>
 	<div id="container"></div>
@@ -38,7 +38,18 @@
 	
 	<!-- <button @click="reset()">Reset</button> -->
 	<!-- <button @click="coverflow().remove()">Remove</button> -->
+        <div class="bottom-button">
+	
+				<!-- {{link.length}} -->
+			<a :href="link" target="_blank">
+        <div class="outer">
+			
+          <OrderStar />
+          
+          </div></a>
 
+		
+		  </div>
 
   </div>
 </template>
@@ -47,12 +58,16 @@
 <script>
 
 
+import OrderStar from "@/components/svgIcons/OrderStar";
 
 
 
 
 export default {
 		name: 'coverflow',
+		components:{
+			OrderStar
+		},
 		data(){
 			return{
 			productsList: this.$store.state.inventory.tockMeals,
@@ -64,8 +79,7 @@ export default {
 		},
   mounted(){
 	  this.reset();
-	//   this.showState();
-  },
+	},
 	  props: ['products'],
 	   computed: {
     count () {
@@ -76,14 +90,12 @@ export default {
   },
 	watch: {
     count (newCount, oldCount) {
-      // Our fancy notification (2).
-	 console.log('newCount: ') 
-	  console.log(newCount)
+
 	  this.productsList = newCount
 	  this.title = newCount[0].title
 	  this.description = newCount[0].title
 	  this.link = newCount[0].createdLink
-	  	  this.reset();
+      this.reset();
     }
   },
   methods: {

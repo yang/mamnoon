@@ -10,11 +10,7 @@
        <button id="first">first</button>
   <button id="goto6">Go to #6</button>
   <button id="last">last</button> -->
-        <div class="bottom-button"><a href="https://www.exploretock.com/mamnoonrestaurant/" target="_blank">
-        <div class="outer">
-          <OrderStar />
-          
-          </div></a></div>
+
       </section>
 
 
@@ -280,7 +276,7 @@ import carousel from 'vue-owl-carousel'
 
 
 import Order from "@/components/svgIcons/Order";
-import OrderStar from "@/components/svgIcons/OrderStar";
+
 
 
 import Next from "@/components/svgIcons/Next";
@@ -294,7 +290,7 @@ import CoverFlow from "@/components/CoverFlow";
 
 
 export default {
-  components: { carousel, Order, OrderStar, Next, Prev, Newsletter, CoverFlow, Mbar, Mamnoon },
+  components: { carousel, Order, Next, Prev, Newsletter, CoverFlow, Mbar, Mamnoon },
   computed: {
     count () {
       return this.$store.state.count

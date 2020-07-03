@@ -13,9 +13,10 @@ import "bootstrap/dist/css/bootstrap.css";
 // Vue.component('CoverFlowSlide', CoverFlowSlide)
 
 const base = axios.create({
-  baseURL: "http://localhost:4000"
+  // baseURL: "http://localhost:4000"
 // baseURL: "https://bearded-mountie-24711.herokuapp.com/"
 // baseURL: "https://nameless-river-06458.herokuapp.com/"
+baseURL: 'https://young-hamlet-03679.herokuapp.com/'
 });
 
 
