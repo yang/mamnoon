@@ -6,12 +6,22 @@
 <div>
 <h4>plan ahead - family meal calendar</h4>
 	</div>
+<div v-if="title" class="title">{{title}}</div>
+<div v-if="description" class="description">{{description}}</div>
+<div v-if="link !== 'loading...'" class="link"><a target="_blank" :href="link">Order</a></div>
 
-<div class="title">{{title}}</div>
-<div class="description">{{description}}</div>
-<a :key="tock" v-for="tock in $store.state.inventory.tockMeals" :href="'https://www.exploretock.com/mamnoonrestaurant/experience/' + tock.createdLink">
-{{tock.titleNameCreated}}
-</a><br>
+
+<!-- {{ $store.state.inventory.tockMeals }} -->
+
+<div :key="tock.titleNameCreated" v-for="tock in $store.state.inventory.tockMeals" style="display:none;">
+
+	<a target="_blank" :href="tock.createdLink">
+	{{tock.title}}
+	</a>
+
+	<!-- <img :src="tock.image" /> -->
+
+</div>
 	<div id="container"></div>
     <div style="width:480px;display:none;">
 		<div style="float:right;">Focused: <b id="focusindex">0</b> | Clicked: <b id="clickindex">0</b></div>
@@ -30,14 +40,6 @@
 	<!-- <button @click="coverflow().remove()">Remove</button> -->
 
 
-
-
-  <!-- <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}"> -->
-
-
-
-
-
   </div>
 </template>
 
@@ -53,27 +55,49 @@ export default {
 		name: 'coverflow',
 		data(){
 			return{
-			productsList: this.products.items,
-			title: this.products.items[0].title,
-			description: this.products.items[0].description
+			productsList: this.$store.state.inventory.tockMeals,
+			title: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].title : 'loading...',
+			description: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].title : 'loading...',
+			link: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].createdLink : 'loading...',
+
 		}
 		},
   mounted(){
 	  this.reset();
+	//   this.showState();
   },
-  	props: ['products'],
+	  props: ['products'],
+	   computed: {
+    count () {
+      return this.$store.state.inventory.tockMeals
+      // Or return basket.getters.fruitsCount
+      // (depends on your design decisions).
+    }
+  },
+	watch: {
+    count (newCount, oldCount) {
+      // Our fancy notification (2).
+	 console.log('newCount: ') 
+	  console.log(newCount)
+	  this.productsList = newCount
+	  this.title = newCount[0].title
+	  this.description = newCount[0].title
+	  this.link = newCount[0].createdLink
+	  	  this.reset();
+    }
+  },
   methods: {
-	  returnProducts(index) {
+		returnProducts(index) {
+
 // console.log(this.title[index].title)
 
-this.title = this.products.items[index].title
-this.description = this.products.items[index].description
-
-
-
+this.title = this.$store.state.inventory.tockMeals[index].title
+this.description = this.$store.state.inventory.tockMeals[index].title
+this.link = this.$store.state.inventory.tockMeals[index].createdLink
 
 // this.title = this.title[index]
-	  },
+
+},
 	  reset () {
 
 
@@ -87,7 +111,8 @@ this.description = this.products.items[index].description
 				rotatedelay: 0,
 				backgroundcolor: '#F05D5B',
 				reflectionopacity: 0,
-				playlist: this.products.items,
+				// playlist: this.products.items,
+				playlist: this.$store.state.inventory.tockMeals,
 				coverwidth: 240,
 				coverheight: 200,
 				fixedsize: false,
@@ -113,7 +138,8 @@ this.description = this.products.items[index].description
 }
 
 .title,
-.description{
+.description,
+.link{
 color: white;
 text-align: center;
 width: 80%;

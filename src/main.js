@@ -13,9 +13,9 @@ import "bootstrap/dist/css/bootstrap.css";
 // Vue.component('CoverFlowSlide', CoverFlowSlide)
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
+  baseURL: "http://localhost:4000"
 // baseURL: "https://bearded-mountie-24711.herokuapp.com/"
-baseURL: "https://nameless-river-06458.herokuapp.com/"
+// baseURL: "https://nameless-river-06458.herokuapp.com/"
 });
 
 
@@ -75,7 +75,7 @@ const store = new Vuex.Store({
               price: 40.00,
               today: true,
               description: '4th of July Grill Kit - pick up on the 3rd, 3pm - 9pm',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
+              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
             },
             {
               title: 'Tuesday, June 30',
@@ -86,7 +86,7 @@ const store = new Vuex.Store({
               today: false,
               // description: 'Meat or Vegetarian- Pick Up',
               description: 'Shish Taouk',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
+              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
             },
             {
               title: 'Wednesday, July 1',
@@ -97,7 +97,7 @@ const store = new Vuex.Store({
               today: false,
               // description: 'Meat or Vegetarian- Pick Up',
               description: 'Mamnoon Fried Chicken',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
+              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
             },
             {
               title: 'Thursday, July 2',
@@ -108,7 +108,7 @@ const store = new Vuex.Store({
               today: false,
               // description: 'Meat or Vegetarian- Pick Up',
               description: 'Potato Kibbeh-Pick Up',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
+              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
             },
             {
               title: 'Friday, July 3',
@@ -119,7 +119,7 @@ const store = new Vuex.Store({
               today: false,
               description: 'Meat or Vegetarian- Pick Up',
               // description: ''
-              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
+              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
             },
             {
               title: 'Saturday, July 4',
@@ -129,7 +129,7 @@ const store = new Vuex.Store({
               price: 40.00,
               today: false,
               description: 'Mamnoon Beef and Lamb Kefta',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
+              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
               // description: ''
             },
             {
@@ -141,7 +141,7 @@ const store = new Vuex.Store({
               today: false,
               // description: 'Meat or Vegetarian- Pick Up',
               description: 'Potato Kibbeh-Pick Up',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/search?date=2020-07-03&size=1&time=19%3A00'
+              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
               // description: ''
             },
           ]
@@ -419,15 +419,7 @@ const store = new Vuex.Store({
       }
     },
     async updateInventory(state, { inventoryAdd }){
-
-
-
   
-
-
-
-
-
       state.inventory.offerings = state.inventory.offerings.filter(function( obj ) {
         return obj.snipcart !== true;
       });
@@ -441,15 +433,39 @@ const store = new Vuex.Store({
         snipcart: true,
         items: inventoryAdd
       })
+  },
+    updateTockMeals(state, { inventoryTockAdd }){
 
+      function lookup( name ) {
+        for(var i = 0, len = state.inventory.tockMeals.length; i < len; i++) {
+            if( state.inventory.tockMeals[ i ].createdLink === name )
+                return true;
+        }
+        return false;
+    }
 
+    inventoryTockAdd.forEach(function(e){
+      if( !lookup( e.createdLink ) ) {
+        state.inventory.tockMeals.push(e);
+      }
+    })
 
     },
-    updateTockMeals(state, { inventoryTockAdd }){
-  
-      state.inventory.tockMeals = []
-      state.inventory.tockMeals = inventoryTockAdd
-      console.log(inventoryTockAdd)
+    updateTockMealsStreet(state, { inventoryTockAddStreet }){
+
+      function lookup( name ) {
+          for(var i = 0, len = state.inventory.tockMeals.length; i < len; i++) {
+              if( state.inventory.tockMeals[ i ].createdLink === name )
+                  return true;
+          }
+          return false;
+      }
+
+      inventoryTockAddStreet.forEach(function(e){
+        if( !lookup( e.createdLink ) ) {
+          state.inventory.tockMeals.push(e);
+        }
+      })
 
     },
     showMessage () {
@@ -468,20 +484,22 @@ new Vue({
   store: store,
   render: h => h(App),
   async mounted () {
+
+
     let response = await this.$http.get('/product/snipcartproducts') 
     let inventoryAdd = response.data.body.items
     this.$store.commit('updateInventory', { inventoryAdd })
 
 
-
-
-
-    let responseTock = await this.$http.get('/product/tockmeals') 
+    let responseTock = await this.$http.get('/product/tockmeals')
     let inventoryTockAdd = responseTock.data.tockMeals
-
     this.$store.commit('updateTockMeals', { inventoryTockAdd })
 
-  
+
+    let responseTockStreet = await this.$http.get('/product/tockstreetmeals')
+    let inventoryTockAddStreet = responseTockStreet.data.tockMeals
+    this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
+
 
 
   }
