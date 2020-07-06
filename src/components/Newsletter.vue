@@ -2,10 +2,10 @@
     <section id="newsletter" class="section hero is-primary is-fullheight">
       <div class="newsletter-section">
         <div class="pad-cont">
-        <h4>
+        <h4 class="noselect">
             sign up for newsletter
         </h4>
-            <p class="thick-white">
+            <p class="thick-white noselect">
                 Lorem ipsum dolor sit amet, consectetur eiusmod tempor incididunt ut labore tempor incididunt
             </p> 
         </div>

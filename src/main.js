@@ -29,6 +29,18 @@ Vue.use(VueMq, {
 })
 
 
+
+var filter = function(text, length, clamp){
+  clamp = clamp || '...';
+  var node = document.createElement('div');
+  node.innerHTML = text;
+  var content = node.textContent;
+  return content.length > length ? content.slice(0, length) + clamp : content;
+};
+
+Vue.filter('truncate', filter);
+
+
 // vuexstoremethods
 Vue.use(VueScrollactive);
 
@@ -179,7 +191,7 @@ const store = new Vuex.Store({
         },
         {
           visible: true,
-          title: 'Testimonials',
+          title: 'testimonials',
           category: 'testimonials',
           responsive: true,
           items: [
@@ -289,7 +301,7 @@ const store = new Vuex.Store({
             },
 
             {
-              quote: "Wow, what a delicious dinner. Also the labne and hummous were super authentic to what I used to eat in the Middle East.",
+              quote: "Wow, what a delicious dinner. Also the labneh and hummous were super authentic to what I used to eat in the Middle East.",
               author: "Sarah",
               authorLast: 'S'
             },
@@ -425,7 +437,7 @@ const store = new Vuex.Store({
 
       state.inventory.offerings.push({
         visible: true,
-        title: 'Mama Shop',
+        title: 'mama shop',
         category: 'mama-shop',
         responsive: true,
         caviarButton: true,

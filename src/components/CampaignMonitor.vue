@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-model="emailAddress" type="email" placeholder="enter your email" class="lap-right-pad" />
+    <input v-model="emailAddress" type="email" placeholder="enter your email" class="lap-right-pad noselect" />
     <button class="no-button-style" @click="submitForm">
         <Send :sendText="subscribeText" />
     </button>

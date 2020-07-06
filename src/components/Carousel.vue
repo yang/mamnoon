@@ -19,16 +19,16 @@
   <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
 
         <div v-if="offering.visible" v-bind:class="{ carousel: !offering.reservationBlock, shortcarousel: offering.reservationBlock }">
-        <h4 v-if="!offering.insideHeader">{{offering.title}}   <span v-if="offering.tock">{{currentDay}}</span></h4>
+        <h4 class="noselect" v-if="!offering.insideHeader">{{offering.title}}   <span v-if="offering.tock">{{currentDay}}</span></h4>
 
-<p v-if="offering.description" class="description-para">
+<p v-if="offering.description" class="description-para noselect">
 {{offering.description}}
 </p>
 
       <carousel v-if="offering.responsive" :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
       <template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
       <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 10px;width: 100%;">
-      <h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
+      <h4 v-if="offering.insideHeader" class="insideHeader noselect">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
       <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
 
       <img v-else v-bind:src="item.image" />    
@@ -68,6 +68,9 @@
 
 
 <div class="height-100" v-if="item.quote">
+
+
+
 
 <div class="quote-container" v-if="item.quote.length > 60">
 <div class="xs">{{item.quote}}</div>
@@ -132,7 +135,7 @@
       <carousel v-else-if="!offering.reservationBlock" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
       <template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
       <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
-      <h4 v-if="offering.insideHeader" class="insideHeader">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
+      <h4 v-if="offering.insideHeader" class="insideHeader noselect">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
       <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
 
       <img v-else v-bind:src="item.image" />    
@@ -414,29 +417,13 @@ h4{
       margin: 0 auto;
 }
 
-// [id^=carousel_prev_]{
-//   position: absolute;
-//   top: 0;
-//   left: 33%;
-// }
-
-// [id^=carousel_next_]{
-//   position: absolute;
-//   top: 0;
-//   right: 33%;
-// }
-
-
-
-
 
 .is-fullheight [id^=carousel_prev_]{
   position: absolute;
   top:0px;
-  left: 33%;
-  // display: none;
+  left: 25%;
+  cursor: pointer;
 
-cursor: pointer;
 @media only screen and (max-width: 768px) {
   left: 5%;
 }
@@ -446,31 +433,13 @@ cursor: pointer;
 .is-fullheight [id^=carousel_next_]{
   position: absolute;
   top: 0px;
-  right: 33%;
-  // display: none;
-cursor: pointer;
+  right: 25%;
+  cursor: pointer;
 
 @media only screen and (max-width: 768px) {
   right: 5%;
 }
 }
-
-// .is-fullheight.familymeal [id^=carousel_prev_]{
-
-//     position: absolute;
-//     bottom: 120px;
-//     top: initial;
-//     left: 3%;
-//     z-index: 20;
-// }
-
-// .is-fullheight.familymeal [id^=carousel_next_]{
-//     position: absolute;
-//     bottom: 120px;
-//     top: initial;
-//     right: 3%;
-//     z-index: 20;
-// }
 
 .is-fullheight{
   padding: 20px 0 0 0;
@@ -570,7 +539,8 @@ background: #F1765B;
 }
 
 .md{
-  font-size: 18px;
+  // font-size: 18px;
+  font-size: 38px;
 }
 
 

@@ -18,7 +18,7 @@
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
     <a v-if="$route.name === 'home'" class="burger" @click="toggleMenu()">
-        <!-- <Burger /> -->
+        <Burger />
     </a>
     </template>
     <Logo />
@@ -53,7 +53,7 @@
         <nav v-if="$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive
-           :offset="180"
+           :offset="100"
             ref="scrollactive"
             >    <ul id="menu" class="mobile-menu">
                 <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
@@ -80,14 +80,14 @@
 import VueJwtDecode from "vue-jwt-decode";
 
 import Logo from "@/components/Logo";
-// import Burger from "@/components/svgIcons/Burger";
+import Burger from "@/components/svgIcons/Burger";
 
 
 
 export default {
     components: {
-    Logo
-    // Burger
+    Logo,
+    Burger
   },
   data () {
       return {
@@ -185,6 +185,12 @@ list-style-type: none;
 
 ul#menu li a{
 color: #ffffff;
+}
+
+
+ul#menu li a:hover{
+color: #FFF367;
+text-decoration: none;
 }
 
 

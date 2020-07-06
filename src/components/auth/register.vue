@@ -90,7 +90,7 @@ export default {
 
 
 .nav-acc-header{
-  padding-top: 140px;
+  padding-top: 160px;
 }
 
 
