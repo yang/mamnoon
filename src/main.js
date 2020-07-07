@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
 import VueMq from 'vue-mq'
 import App from "./App.vue";
+import GAuth from 'vue-google-oauth2';
 import router from "./router";
 import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
@@ -28,6 +29,9 @@ Vue.use(VueMq, {
   }
 })
 
+Vue.use(GAuth, {
+  clientId: '768834812579-007e5802er7gj3c93p8qa9568h8bj3na.apps.googleusercontent.com', scope: 'email', prompt: 'consent', fetch_basic_profile: false
+})
 
 
 var filter = function(text, length, clamp){

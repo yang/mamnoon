@@ -14,6 +14,12 @@
         </template> -->
 
 
+<GoogleAuth class="logButton googleInHeader" />
+
+
+
+
+
       <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
@@ -59,6 +65,9 @@
                 <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
                     <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.title}}</a>
                     </li>
+                    <li>
+                        <GoogleAuth />
+                    </li>
             </ul></scrollactive
           >
         </div>
@@ -81,13 +90,14 @@ import VueJwtDecode from "vue-jwt-decode";
 
 import Logo from "@/components/Logo";
 import Burger from "@/components/svgIcons/Burger";
-
+import GoogleAuth from "@/components/GoogleAuth";
 
 
 export default {
     components: {
     Logo,
-    Burger
+    Burger,
+    GoogleAuth
   },
   data () {
       return {
@@ -220,7 +230,22 @@ ul#menu li.active{
     position: relative;
     text-align: center;
 }
+
+@media only screen and (max-width: 992px) {
+
+
+.googleInHeader{
+    display: none;
+}
+
+}
+
+
 @media only screen and (max-width: 768px) {
+
+
+
+
 .full-width-logo{
 
     text-align: left;
@@ -293,6 +318,7 @@ right: 0;
     padding: 0 25px;
     line-height: 90px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 

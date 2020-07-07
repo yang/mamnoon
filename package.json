@@ -18,6 +18,7 @@
     "vue-axios-cors": "^1.0.1",
     "vue-coverflow": "^2.2.0",
     "vue-flipster": "^1.0.3",
+    "vue-google-oauth2": "^1.5.4",
     "vue-jwt-decode": "^0.1.0",
     "vue-mq": "^1.0.1",
     "vue-owl-carousel": "^2.0.3",

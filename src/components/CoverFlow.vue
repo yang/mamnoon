@@ -138,9 +138,9 @@ this.delivery = this.$store.state.inventory.tockMeals[index].delivery
 				});
 
 				this.on('click', function(index, link) {
-					document.getElementById('clickindex').innerHTML = index;
+					// document.getElementById('clickindex').innerHTML = index;
 					
-					console.log(link);
+					// console.log(link);
 					if (link) {
 						window.open(link, '_blank');
 					}
