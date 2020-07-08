@@ -151,6 +151,11 @@
       res
           </div>
 
+
+          <div id="reservembarbutton2">
+            res 2
+                </div>
+
     <div hidden id="snipcart" data-api-key="ZWMzNjdjM2MtOTQyNi00MjU2LTgwZjMtMzlhNmFiZDMwNDBlNjM3MjYyOTQ3OTQ3OTcxNTA1"></div>
     <script src="https://cdn.snipcart.com/themes/v3.0.15/default/snipcart.js"></script>
 
@@ -162,7 +167,7 @@
 
     <script>
     
-    SevenroomsWidget.init({
+    SevenroomsWidget.init([{
           venueId: 'mbarseattle',
           triggerId: 'reservembarbutton',
           type: 'reservations',
@@ -170,7 +175,15 @@
           defaultTime: '7:00PM',
           //allVenues: ['mbarseattle','mamnoon'],
       allVenues: ['mbarseattle'] 
-     })
+     },{
+          venueId: 'mbarseattle',
+          triggerId: 'reservembarbutton2',
+          type: 'reservations',
+          defaultPartySize: 2,
+          defaultTime: '7:00PM',
+          //allVenues: ['mbarseattle','mamnoon'],
+      allVenues: ['mbarseattle'] 
+     }])
     
     </script>
 
