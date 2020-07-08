@@ -8,7 +8,9 @@ import router from "./router";
 import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
 import "bootstrap/dist/css/bootstrap.css";
-
+import "./coverflow.js"
+import "./sevenRooms1.js"
+import "./sevenRooms2.js"
 
 // Vue.component('CoverFlow', CoverFlow)
 // Vue.component('CoverFlowSlide', CoverFlowSlide)

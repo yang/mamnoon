@@ -150,14 +150,6 @@ button[aria-label='close modal']:focus{
 	</style>
 
 
-
-		
-
-
-
-
-<!--cover flow-->
-<script src="coverflow.js"></script>
 </head>
 
   <body>
@@ -165,73 +157,42 @@ button[aria-label='close modal']:focus{
       <strong>We're sorry but authapp doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
 
-
-
-
-
-
     <div id="app"></div>
 
   
-
-      
     <div id="reservembarbutton">
       reserve mbar
-          </div>
+    </div>
 
 
-          <div id="reservemamnoonbutton">
-            reserve mamnoon
-                </div>
+    <div id="reservemamnoonbutton">
+      reserve mamnoon
+    </div>
 
     <div hidden id="snipcart" data-api-key="ZWMzNjdjM2MtOTQyNi00MjU2LTgwZjMtMzlhNmFiZDMwNDBlNjM3MjYyOTQ3OTQ3OTcxNTA1"></div>
     <script src="https://cdn.snipcart.com/themes/v3.0.15/default/snipcart.js"></script>
 
-
-	
-
-    <!-- <script src="https://www.sevenrooms.com/reservations/embed.js"></script> -->
-
     <script type="text/javascript" src="sevenRooms1.js"></script>
     <script type="text/javascript" src="sevenRooms2.js"></script>
-
-
-
-
-  
-
     <script>
-    
-    SevenroomsWidget.init({
-          venueId: 'mbarseattle',
-          triggerId: 'reservembarbutton',
-          type: 'reservations',
-          defaultPartySize: 2,
-          defaultTime: '7:00PM',
-          //allVenues: ['mbarseattle','mamnoon'],
-      allVenues: ['mbarseattle'] 
-     });
-    
+      SevenroomsWidget.init({
+        venueId: 'mbarseattle',
+        triggerId: 'reservembarbutton',
+        type: 'reservations',
+        defaultPartySize: 2,
+        defaultTime: '7:00PM',
+        allVenues: ['mbarseattle'] 
+      });
 
-
-
-
-  SevenroomsWidget2.init({
+      SevenroomsWidget2.init({
         venueId: 'mamnoon',
         triggerId: 'reservemamnoonbutton',
         type: 'reservations',
         defaultPartySize: 2,
         defaultTime: '7:00PM',
-        allVenues: ['mamnoon'],
-    })
-  
+        allVenues: ['mamnoon']
+      })
   </script>
-  
-
-
-
-
-
 
   </body>
 </html>
