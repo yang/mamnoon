@@ -13,9 +13,7 @@
 
       </section>
 
-    <div id="reservembarbutton">
-res
-    </div>
+
 
 
   <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
