@@ -144,14 +144,33 @@
 
     <div id="app"></div>
 
-	
+  
+
+      
+
+
     <div hidden id="snipcart" data-api-key="ZWMzNjdjM2MtOTQyNi00MjU2LTgwZjMtMzlhNmFiZDMwNDBlNjM3MjYyOTQ3OTQ3OTcxNTA1"></div>
     <script src="https://cdn.snipcart.com/themes/v3.0.15/default/snipcart.js"></script>
 
 
 	
 
+    <script src="https://www.sevenrooms.com/reservations/embed.js"></script>
 
+
+    <script>
+    
+    SevenroomsWidget.init({
+          venueId: 'mbarseattle',
+          triggerId: 'reservembarbutton',
+          type: 'reservations',
+          defaultPartySize: 2,
+          defaultTime: '7:00PM',
+          //allVenues: ['mbarseattle','mamnoon'],
+      allVenues: ['mbarseattle'] 
+     })
+    
+    </script>
 
 
 
