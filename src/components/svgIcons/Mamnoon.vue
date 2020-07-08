@@ -1,12 +1,8 @@
 <template>
-  <div class="halfwidth-orange" @click="openLink(linkOut2)" id="reservemamnoonbutton">
+  <!-- <div class="halfwidth-orange" @click="openLink(linkOut2)" id="reservemamnoonbutton"> -->
+  <div class="halfwidth-orange" @click="openSevenRooms('reservemamnoonbutton')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05">
       <defs>
-
-
-
-
-
       </defs>
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">
@@ -55,10 +51,13 @@ export default {
         },
         props: ['linkOut2'],
         methods:{
-              openLink(e){ 
-          window.open(e, "_blank");    
-      console.log(e)
-    }
+          openLink(e){ 
+            window.open(e, "_blank");    
+            console.log(e)
+          },
+          openSevenRooms(e){
+            document.getElementById(e).click();
+          }
         }
 
 };
