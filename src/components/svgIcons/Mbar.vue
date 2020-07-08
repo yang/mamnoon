@@ -1,5 +1,5 @@
 <template>
-  <div class="halfwidth-yellow" @click="openLink(linkOut)">
+  <div class="halfwidth-yellow" id="reservembarbutton">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.89 27.14">
       <defs />
       <g id="Layer_2" data-name="Layer 2">

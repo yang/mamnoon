@@ -121,7 +121,14 @@
 /*# sourceMappingURL=coverflow.css.map */
 
 
+
+button[aria-label='close modal']{
+background: green;
+}
+
 	</style>
+
+
 
 		
 
@@ -152,7 +159,7 @@
           </div>
 
 
-          <div id="reservembarbutton2">
+          <div id="reservemamnoonbutton">
             res 2
                 </div>
 
@@ -191,22 +198,19 @@
     
 
 
-     SevenroomsWidget2.init({
-          venueId: 'mbarseattle',
-          triggerId: 'reservembarbutton2',
-          type: 'reservations',
-          defaultPartySize: 2,
-          defaultTime: '7:00PM',
-          //allVenues: ['mbarseattle','mamnoon'],
-      allVenues: ['mbarseattle'] 
-     });
 
 
-    </script>
-
-
-
-
+  SevenroomsWidget2.init({
+        venueId: 'mamnoon',
+        triggerId: 'reservemamnoonbutton',
+        type: 'reservations',
+        defaultPartySize: 2,
+        defaultTime: '7:00PM',
+        allVenues: ['mamnoon'],
+    })
+  
+  </script>
+  
 
 
 

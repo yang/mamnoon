@@ -1,7 +1,11 @@
 <template>
-  <div class="halfwidth-orange" @click="openLink(linkOut2)">
+  <div class="halfwidth-orange" @click="openLink(linkOut2)" id="reservemamnoonbutton">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05">
       <defs>
+
+
+
+
 
       </defs>
       <g id="Layer_2" data-name="Layer 2">
