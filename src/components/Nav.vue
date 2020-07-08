@@ -15,12 +15,7 @@
 
 
 <GoogleAuth class="logButton googleInHeader" />
-
-
-
-
-
-      <div class="container">
+    <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
     <a v-if="$route.name === 'home'" class="burger" @click="toggleMenu()">
@@ -65,7 +60,7 @@
                 <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
                     <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.title}}</a>
                     </li>
-                    <li>
+                    <li class="cursor-pointer">
                         <GoogleAuth />
                     </li>
             </ul></scrollactive
@@ -319,8 +314,12 @@ right: 0;
     line-height: 90px;
     text-decoration: none;
     cursor: pointer;
+    z-index: 100;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
 
 </style>
 

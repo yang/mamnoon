@@ -14,8 +14,8 @@ import "bootstrap/dist/css/bootstrap.css";
 // Vue.component('CoverFlowSlide', CoverFlowSlide)
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
-baseURL: 'https://young-hamlet-03679.herokuapp.com/'
+  baseURL: "http://localhost:4000"
+// baseURL: 'https://young-hamlet-03679.herokuapp.com/'
 });
 
 
@@ -42,8 +42,16 @@ var filter = function(text, length, clamp){
   return content.length > length ? content.slice(0, length) + clamp : content;
 };
 
-Vue.filter('truncate', filter);
 
+
+var genUserName = function(text){
+  return text.split('@')[0];
+};
+
+
+
+Vue.filter('truncate', filter);
+Vue.filter('generateUsername', genUserName)
 
 // vuexstoremethods
 Vue.use(VueScrollactive);
@@ -68,6 +76,8 @@ const store = new Vuex.Store({
     shoppingCartItems: [],
     cart: 0,
     userName: 'joe',
+    userInfo: {},
+    vegetarian: false,
     inventory: {
       snipCartItems: [],
       tockMeals: [],
@@ -485,6 +495,12 @@ const store = new Vuex.Store({
     },
     showMessage () {
       console.log('this is th emesae')
+    },
+    updateCurrentUser(state, { currentUserInfo }){
+      state.userInfo = currentUserInfo
+    },
+    toggleVegetarian (state) {
+      state.vegetarian = !state.vegetarian
     }
   }
 })

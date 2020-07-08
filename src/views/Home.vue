@@ -15,6 +15,7 @@
   </li>
   </ul>
 
+<UserProfile v-if="this.$store.state.loggedIn === true" />
 <SlideShow />
 
 <!-- <Products /> -->
@@ -30,6 +31,9 @@ import VueJwtDecode from "vue-jwt-decode";
 
 import SlideShow from "@/components/SlideShow";
 
+
+import UserProfile from "@/components/UserProfile";
+
 import Products from "@/components/Products";
 import Nav from "@/components/Nav";
 
@@ -37,6 +41,7 @@ export default {
     components: {
     SlideShow,
     Products,
+    UserProfile,
     Nav
   },
   data() {

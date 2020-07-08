@@ -420,7 +420,7 @@ h4{
 
 .is-fullheight [id^=carousel_prev_]{
   position: absolute;
-  top:0px;
+  top: -2px;
   left: 25%;
   cursor: pointer;
 
@@ -432,7 +432,7 @@ h4{
 
 .is-fullheight [id^=carousel_next_]{
   position: absolute;
-  top: 0px;
+  top: -2px;
   right: 25%;
   cursor: pointer;
 

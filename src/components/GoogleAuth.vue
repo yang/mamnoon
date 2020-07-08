@@ -2,27 +2,26 @@
   <div class="hello">
       <!-- is signed in? : {{ isSignIn }}
       <br /><br /><br /> -->
-    <el-row>
       <!-- <button
         type="primary"
         icon="fas fa-edit"
         @click="handleClickLogin"
         :disabled="!isInit"
       >get authCode</button>&nbsp;&nbsp;&nbsp; -->
-      <button
+      <a
         type="primary"
         icon="fas fa-edit"
         @click="handleClickSignIn"
         v-if="!isSignIn"
         :disabled="!isInit"
-      >sign in</button>&nbsp;&nbsp;&nbsp;
-      <button
+      >sign in with google</a>&nbsp;&nbsp;&nbsp;
+      <a
         type="primary"
         icon="fas fa-edit"
         @click="handleClickSignOut"
         v-if="isSignIn"
         :disabled="!isInit"
-      >sign out</button>&nbsp;&nbsp;&nbsp;
+      >sign out</a>&nbsp;&nbsp;&nbsp;
       <!-- <button
         type="primary"
         icon="fas fa-edit"
@@ -32,7 +31,6 @@
       <!-- <i class="fas fa-edit"></i>
       <p>isInit: {{isInit}}</p>
       <p>isSignIn: {{isSignIn}}</p> -->
-    </el-row>
   </div>
 </template>
 
@@ -62,27 +60,39 @@ export default {
           console.error(error);
         });
     },
+    async showUserInfo(email){
+      console.log(email['Au'])
+      let response = await this.$http.get('/user/email/' + email['Au']) 
 
+      let currentUserInfo = response.data
+      this.$store.commit('updateCurrentUser', { currentUserInfo })
+  },
     handleClickSignIn() {
       this.$gAuth
         .signIn()
         .then(GoogleUser => {
-          //on success do something
-        //   console.log("GoogleUser", GoogleUser);
-        //   console.log("getId", GoogleUser.getId());
-        //   console.log("getBasicProfile", GoogleUser.getBasicProfile());
 
 
-            let getBasicProfile = GoogleUser.getBasicProfile();
-            console.log(getBasicProfile['Au'])
+          //logs
 
-        //    console.log("getBasicProfile au", GoogleUser.getBasicProfile('Au'));
-        //   console.log("getAuthResponse", GoogleUser.getAuthResponse());
-        //   console.log(
-        //     "getAuthResponse",
-        //     this.$gAuth.GoogleAuth.currentUser.get().getAuthResponse()
-        //   );
+
+  var profile = GoogleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId());
+  console.log('Full Name: ' + profile.getName());
+  console.log('Given Name: ' + profile.getGivenName());
+  console.log('Family Name: ' + profile.getFamilyName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+
+
+          //logs
+
+
+          this.showUserInfo(GoogleUser.getBasicProfile())
           this.isSignIn = this.$gAuth.isAuthorized;
+
+          this.$store.commit('logIn')
+
         })
         .catch(error => {
           //on fail do something
@@ -91,6 +101,8 @@ export default {
     },
 
     handleClickSignOut() {
+        localStorage.clear()
+        this.$store.commit('logOut')
       this.$gAuth
         .signOut()
         .then(() => {
@@ -102,6 +114,7 @@ export default {
           //on fail do something
           console.error(error);
         });
+
     },
 
     handleClickDisconnect() {
