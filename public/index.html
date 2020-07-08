@@ -122,8 +122,21 @@
 
 
 
-button[aria-label='close modal']{
-background: green;
+button[aria-label='close modal'],
+button[aria-label='close modal']:active,
+button[aria-label='close modal']:focus{
+    background-color: transparent !important;
+    background-image: url(assets/img/closeX.svg);
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 36px;
+    color: transparent !important;
+    font-size: 0;
+    outline: none;
+    background-size: 60% !important;
+    background-position: center center;
+    font-size: 0 !important;
+    margin-top: 5px;
 }
 
 
