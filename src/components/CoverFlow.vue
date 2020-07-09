@@ -18,8 +18,8 @@
 
 </div>
 <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div>
-
 	<div id="container"></div>
+
     <div style="width:480px;">
 
 	</div>
@@ -191,7 +191,12 @@ destroyed() {
 },
 	  reset (x) {
 		let that = this
-			coverflow('container').remove();
+
+	// coverflow('container').fadeOut()
+		// setTimeout(function(){ 
+			coverflow('container').remove()
+		// }, 1000);
+
 			coverflow('container').setup({
 				width: '100%',
 				item: 0,

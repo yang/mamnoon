@@ -1,13 +1,5 @@
 <template>
   <div class="hello">
-      <!-- is signed in? : {{ isSignIn }}
-      <br /><br /><br /> -->
-      <!-- <button
-        type="primary"
-        icon="fas fa-edit"
-        @click="handleClickLogin"
-        :disabled="!isInit"
-      >get authCode</button>&nbsp;&nbsp;&nbsp; -->
       <a
         type="primary"
         icon="fas fa-edit"
@@ -22,15 +14,6 @@
         v-if="isSignIn"
         :disabled="!isInit"
       >sign out</a>
-      <!-- <button
-        type="primary"
-        icon="fas fa-edit"
-        @click="handleClickDisconnect"
-        :disabled="!isInit"
-      >disconnect</button> -->
-      <!-- <i class="fas fa-edit"></i>
-      <p>isInit: {{isInit}}</p>
-      <p>isSignIn: {{isSignIn}}</p> -->
   </div>
 </template>
 
@@ -72,21 +55,7 @@ export default {
         .signIn()
         .then(GoogleUser => {
 
-
-          //logs
-
-
-  var profile = GoogleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId());
-  console.log('Full Name: ' + profile.getName());
-  console.log('Given Name: ' + profile.getGivenName());
-  console.log('Family Name: ' + profile.getFamilyName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail());
-
-
-          //logs
-
+          var profile = GoogleUser.getBasicProfile();
 
           this.showUserInfo(GoogleUser.getBasicProfile())
           this.isSignIn = this.$gAuth.isAuthorized;
@@ -103,12 +72,11 @@ export default {
     handleClickSignOut() {
         localStorage.clear()
         this.$store.commit('logOut')
-      this.$gAuth
+        this.$gAuth
         .signOut()
         .then(() => {
           //on success do something
           this.isSignIn = this.$gAuth.isAuthorized;
-          console.log("isSignIn", this.$gAuth.isAuthorized);
         })
         .catch(error => {
           //on fail do something
