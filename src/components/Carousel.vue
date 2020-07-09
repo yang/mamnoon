@@ -663,11 +663,27 @@ position: relative;
 
 
 .bottom-button{
+  // position: absolute;
+  // bottom: 0;
+  // background: #FFF367;
+  // width: 100%;
+  // padding: 10px 0;
+
+
+
+position: absolute;
+    bottom: 0;
+    background: #FFF367;
+    width: 100%;
+    padding: 10px 0;
+    height: 90px;
+
+
+a{
   position: absolute;
-  bottom: 0;
-  background: #FFF367;
   width: 100%;
-  padding: 10px 0;
+}
+
 }
 
 

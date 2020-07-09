@@ -1,8 +1,10 @@
 <template>
   <div>
 <Nav />
-
-      <div class="container mt-5 nav-acc-header">
+  <transition name="fade">
+<UserProfile v-if="this.$store.state.loggedIn === true" />
+</transition>
+      <div class="container mt-5 nav-acc-header" :class="{ morePadding: this.$store.state.loggedIn }">
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group" style="display:none;">
@@ -15,7 +17,8 @@
   </li>
   </ul>
 
-<UserProfile v-if="this.$store.state.loggedIn === true" />
+
+
 <SlideShow />
 
 <!-- <Products /> -->
@@ -79,7 +82,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 
 .fix-top-nav{
@@ -100,10 +103,27 @@ export default {
 
 .nav-acc-header{
   padding-top: 160px;
+
+transition: padding .5s ease;
+&.morePadding{
+    padding-top: 300px;
+}
+
 }
 
 
 @media only screen and (max-width: 1080px) {
+
+.nav-acc-header{
+  padding-top: 160px;
+
+transition: padding .5s ease;
+&.morePadding{
+    padding-top: 250px;
+}
+
+}
+
 
 .nav-acc-header{
   padding-top: 80px;

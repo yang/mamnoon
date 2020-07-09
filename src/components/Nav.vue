@@ -60,7 +60,7 @@
                 <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
                     <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.title}}</a>
                     </li>
-                    <li class="cursor-pointer">
+                    <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />
                     </li>
             </ul></scrollactive

@@ -4,16 +4,7 @@
 
 
 
-    <button class="toggleVeg" @click="toggleVegetarian">
-        <span v-if="$store.state.vegetarian === true">
-            M + V
-            </span>
-        <span v-else>
-            V
-            </span>
 
-
-            </button>
 
 
 <a class="left-button" onclick="coverflow().prev();"><Prev /></a>
@@ -22,8 +13,9 @@
 	</div>
 <div v-if="title" class="title noselect">
 <a :href="link" target="_blank">	
-	<span v-if="delivery">[DELIVERY]</span><span v-else>[PICKUP]</span> {{title}}
+	{{title | truncate(60, '...')}}
 </a>
+
 </div>
 <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div>
 
@@ -37,11 +29,27 @@
 
 			<a :href="link" target="_blank">
         <div class="outer">
-          <OrderStar />
+
+	 <transition name="fade">
+<template v-if="delivery">
+		<DeliveryStar />
+</template>
+<template v-else>
+	<PickupStar />
+	</template> 
+</transition>  
           
           </div></a>
 
-		
+
+
+<div class="toggleVegContainer">
+<button class="toggleVeg" :class='{redBackground: $store.state.vegetarian}' @click="toggleVegetarian">
+	<div class="lrbutton" :class='{lrExpanded: $store.state.vegetarian}'>
+		<div v-if="$store.state.vegetarian === true">M</div><div v-else>V</div>
+	</div>
+</button>
+</div>
 		  </div>
 
   </div>
@@ -52,6 +60,9 @@
 
 
 import OrderStar from "@/components/svgIcons/OrderStar";
+import PickupStar from "@/components/svgIcons/PickupStar";
+import DeliveryStar from "@/components/svgIcons/DeliveryStar";
+
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
 
@@ -61,6 +72,8 @@ export default {
 		name: 'coverflow',
 		components:{
 			OrderStar,
+			PickupStar,
+			DeliveryStar,
 			Prev,
 			Next
 		},
@@ -334,6 +347,123 @@ width: 80%;
 	position: absolute;
 	right: 10px;
 	top: 0;
+    position: absolute;
+    top: 0;
+}
+
+
+
+.toggleVegContainer{
+		position: absolute;
+	right: 10px;
+	top: 0;
+
+    top: 31px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "V";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+    content: "M";
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
+
+
+
+.toggleVeg{
+	width: 64px;
+	// text-align: left;
+	padding: 0;
+	border: 0;
+	background-color: #6bf7a3;
+	border-radius: 15px;
+
+	border: 2px solid transparent;
+	&.redBackground{
+			background-color: #F05D5B;
+	}
+
+
+&:active,
+&:focus{
+	outline: none;
+}
+
+
+	.lrbutton{
+	width: 30px;
+	background: #FFF367;
+	border-radius: 15px;
+	transition: all .5s ease;
+	border: 2px solid transparent;
+
+
+
+	&.lrExpanded{
+
+	margin-left: 30px;
+	}
+
+	}
+
 }
 
 </style>

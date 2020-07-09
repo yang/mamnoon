@@ -40,12 +40,21 @@ props: ['image']
 }
 
 .bottom-button{
-    width: 100%;
-    height: 92px;
+    // width: 100%;
+    // height: 92px;
+    // background: #FFF367;
+    // color: yellow;
+    // text-align: center;
+    // padding-top: 11px;
+    
+
+position: absolute;
+    bottom: 0;
     background: #FFF367;
-    color: yellow;
-    text-align: center;
-    padding-top: 11px;
+    width: 100%;
+    padding: 10px 0;
+    height: 90px;
+
 }
 
 

@@ -181,14 +181,14 @@ const store = new Vuex.Store({
           slideNo: 2,
           items: [
             {
-              name: "Mamnoon",
+              name: "mamnoon",
               image: './assets/cav/1.jpg',
               price: 5.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
             },
             {
-              name: "Mamnoon Street",
+              name: "mamnoon street",
               image: './assets/cav/2.jpg',
               price: 10.00,
               description: '',

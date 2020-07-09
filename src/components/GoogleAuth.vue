@@ -14,14 +14,14 @@
         @click="handleClickSignIn"
         v-if="!isSignIn"
         :disabled="!isInit"
-      >sign in with google</a>&nbsp;&nbsp;&nbsp;
+      >sign in with google</a>
       <a
         type="primary"
         icon="fas fa-edit"
         @click="handleClickSignOut"
         v-if="isSignIn"
         :disabled="!isInit"
-      >sign out</a>&nbsp;&nbsp;&nbsp;
+      >sign out</a>
       <!-- <button
         type="primary"
         icon="fas fa-edit"
