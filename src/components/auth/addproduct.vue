@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
 
-
         <form
           class="text-center border border-primary p-5"
           style="margin-top:70px;height:auto;padding-top:100px !important;"
@@ -24,8 +23,6 @@
           </center>
         </form>
 
-
-
       </div>
     </div>
   </div>
@@ -39,26 +36,27 @@ export default {
     return {
         product: {
         name: "",
-        id: ""
+        email: this.emailAddress
       }
      }
   },
+  props: ['emailAddress'],
   methods: {
     async addProduct() {
       try {
-
+console.log(this.product)
         let response = await this.$http.post("/user/addproduct", this.product);
         console.log(response);
          } catch (err) {
         console.log(err.response);
       }
-    },
-    getUserDetails() {
-      let token = localStorage.getItem("jwt");
-      let decoded = VueJwtDecode.decode(token);
-      this.product.id = decoded._id;
-      console.log(decoded._id)
-    },
+    }
+    // getUserDetails() {
+    //   let token = localStorage.getItem("jwt");
+    //   let decoded = VueJwtDecode.decode(token);
+    //   this.product.id = decoded._id;
+    //   console.log(decoded._id)
+    // },
   },
   created() {
     // this.getUserDetails();

@@ -32,9 +32,9 @@ Vue.use(VueMq, {
 })
 
 Vue.use(GAuth, {
-  clientId: '768834812579-007e5802er7gj3c93p8qa9568h8bj3na.apps.googleusercontent.com', scope: 'email', prompt: 'consent', fetch_basic_profile: false
+  clientId: '190034127812-vjtpck9bt7btor25njinff491j2ab16m.apps.googleusercontent.com', scope: 'email', prompt: 'consent', fetch_basic_profile: false
 })
-
+ 
 
 var filter = function(text, length, clamp){
   clamp = clamp || '...';
@@ -72,6 +72,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    userProfileModalVisible: true,
     loggedIn: false,
     count: 0,
     names: [],
@@ -503,7 +504,34 @@ const store = new Vuex.Store({
     },
     toggleVegetarian (state) {
       state.vegetarian = !state.vegetarian
+    },
+    hideUserModal (state) {
+      state.userProfileModalVisible = false
+    },
+    showUserModal (state) {
+      state.userProfileModalVisible = true
     }
+    // async importTestimonials (state, { testimonialAdd }) {
+    
+
+
+  
+    //     state.inventory.offerings = state.inventory.offerings.filter(function( obj ) {
+    //       return obj.snipcart !== true;
+    //     });
+  
+    //     state.inventory.offerings.push({
+    //       visible: true,
+    //       title: 'mama shop',
+    //       category: 'mama-shop',
+    //       responsive: true,
+    //       caviarButton: true,
+    //       snipcart: true,
+    //       items: inventoryAdd
+    //     })
+  
+
+    // }    
   }
 })
 

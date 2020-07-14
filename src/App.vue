@@ -38,4 +38,13 @@ html, body{
   opacity: 0;
 }
 
+
+.section-pad{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-bottom: 1px solid grey;
+  padding-bottom: 40px;
+}
+
+
 </style>

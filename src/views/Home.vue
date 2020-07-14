@@ -2,9 +2,14 @@
   <div>
 <Nav />
   <transition name="fade">
-<UserProfile v-if="this.$store.state.loggedIn === true" />
+    <template v-if="this.$store.state.userProfileModalVisible">
+<UserProfile v-if="this.$store.state.loggedIn" />
+    </template>
+
+
 </transition>
-      <div class="container mt-5 nav-acc-header" :class="{ morePadding: this.$store.state.loggedIn }">
+      <!-- <div class="container mt-5 nav-acc-header" :class="{ morePadding: this.$store.state.loggedIn }"> -->
+      <div class="container mt-5 nav-acc-header">
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group" style="display:none;">
@@ -102,7 +107,8 @@ export default {
 
 
 .nav-acc-header{
-  padding-top: 160px;
+  // padding-top: 160px;
+  padding-top: 130px;
 
 transition: padding .5s ease;
 &.morePadding{

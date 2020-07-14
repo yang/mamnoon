@@ -14,6 +14,21 @@
         </template> -->
 
 
+
+
+
+
+
+
+    <template v-if="!this.$store.state.userProfileModalVisible">
+
+<button v-if="this.$store.state.loggedIn" class="logButton2" @click="showUserModal">U</button>
+
+
+
+    </template>
+
+
 <GoogleAuth class="logButton googleInHeader" />
     <div class="container">
 <div class="full-width-logo">
@@ -103,6 +118,9 @@ export default {
 
   },
   methods: {
+    showUserModal () {
+    this.$store.commit('showUserModal')
+    },
     logUserOut() {
       localStorage.removeItem("jwt");
       this.$store.commit('logOut')
@@ -110,7 +128,7 @@ export default {
     },
     toggleMenu(){
         this.mobNavExpanded = !this.mobNavExpanded;
- 
+     this.$store.commit('hideUserModal')
         // console.log(this)
     },
     getUserDetails() {
@@ -120,7 +138,7 @@ export default {
 
 
       console.log(decoded)
-    },
+    }
   },
   created() {
       this.store = this.$store.state
@@ -316,6 +334,26 @@ right: 0;
     cursor: pointer;
     z-index: 100;
 }
+
+
+.logButton2{
+    position: absolute;
+right: 120px;
+    height: 100%;
+    border: 0;
+    background: #F1765B;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 0 25px;
+    line-height: 90px;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 100;
+}
+
+
+
 
 .cursor-pointer{
     cursor: pointer;
