@@ -211,6 +211,7 @@ const store = new Vuex.Store({
           title: 'testimonials',
           category: 'testimonials',
           responsive: true,
+        slideNo: 1,
           items: [
             {
               quote: "Thank you! so so good!!!! YUM",

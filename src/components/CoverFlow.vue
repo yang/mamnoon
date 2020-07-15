@@ -7,9 +7,8 @@
 
 
 
-<a class="left-button" onclick="coverflow().prev();"><Prev /></a>
-<a class="right-button" onclick="coverflow().next();"><Next /></a>
-<h4 class="noselect">family meal calendar, {{vegetarian}}</h4>
+
+<h4 class="noselect">family meal calendar</h4>
 	</div>
 <div v-if="title" class="title noselect">
 <a :href="link" target="_blank">	
@@ -25,7 +24,8 @@
 	</div>
 
         <div class="bottom-button">
-	
+	<a class="left-button" onclick="coverflow().prev();"><Prev /></a>
+<a class="right-button" onclick="coverflow().next();"><Next /></a>
 
 			<a :href="link" target="_blank">
         <div class="outer">
