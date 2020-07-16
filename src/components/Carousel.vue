@@ -1,375 +1,297 @@
 <template>
-    <main>
-      <section id="familymeal" class="coverflowsection">
+  <main>
+    <section id="familymeal" class="coverflowsection">
+      <CoverFlow :products="products" />
 
+    </section>
 
-   <!-- {{$store.state.inventory.offerings[0].items}} -->
+    <section
+      :id="offering.category"
+      v-for="(offering,index) in inventory.offerings"
+      v-bind:key="offering.title"
+      class="section hero is-primary is-fullheight"
+      v-bind:class="{familymeal : index === 0}"
+    >
+      <div
+        v-if="offering.visible"
+        v-bind:class="{ carousel: !offering.reservationBlock, shortcarousel: offering.reservationBlock }"
+      >
+        <h4 class="noselect" v-if="!offering.insideHeader">
+          {{offering.title}}
+          <span v-if="offering.tock">{{currentDay}}</span>
+        </h4>
 
-        <CoverFlow :products="products" />
-     <!-- <br>
-       <button id="first">first</button>
-  <button id="goto6">Go to #6</button>
-  <button id="last">last</button> -->
+        <p v-if="offering.description" class="description-para noselect">{{offering.description}}</p>
 
-      </section>
+        <carousel
+          v-if="offering.title === 'testimonials'"
+          :responsive=" {0:{items:1},768:{items:1},1080:{items:1}}"
+          :items="offering.slideNo ? offering.slideNo : 3"
+          :loop="false"
+          :dots="false"
+          :nav="false"
+        >
+          <template class="subprev" slot="prev">
+            <span class="prev">
+              <Prev />
+            </span>
+          </template>
+          <div
+            v-for="item in offering.items"
+            v-bind:key="item.name"
+            style="text-align:center;margin-top: 0px;width: 100%;"
+          >
+            <h4 v-if="offering.insideHeader" class="insideHeader noselect">
+              {{offering.title}} / {{item.month}} /
+              <span v-if="offering.tock">{{currentDay}}</span>
+            </h4>
+            <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
 
-
-
-
-  <section :id="offering.category" v-for="(offering,index) in inventory.offerings" v-bind:key="offering.title" class="section hero is-primary is-fullheight" v-bind:class="{familymeal : index === 0}">
-
-        <div v-if="offering.visible" v-bind:class="{ carousel: !offering.reservationBlock, shortcarousel: offering.reservationBlock }">
-        <h4 class="noselect" v-if="!offering.insideHeader">{{offering.title}}   <span v-if="offering.tock">{{currentDay}}</span></h4>
-
-<p v-if="offering.description" class="description-para noselect">
-{{offering.description}}
-</p>
-
-
-
-
-
-<carousel v-if="offering.title === 'testimonials'" :responsive=" {0:{items:1},768:{items:1},1080:{items:1}}" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
-
-      <template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
-      <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 10px;width: 100%;">
-      <h4 v-if="offering.insideHeader" class="insideHeader noselect">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
-      <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
-
-      <img v-else v-bind:src="item.image" />    
+            <img v-else v-bind:src="item.image" />
             {{item.description}}
-               <template v-if="item.caviarLink">
+            <template v-if="item.caviarLink">
               <div class="order-bottom">
                 {{item.name}}
-                       <div class="order-panel">
-              <a :href="item.caviarLink" target="_blank"><Order /></a>
-                            </div>
-                            </div>
-            </template>
-            <template v-if="item.statistics">
-              <div class="order-bottom">
-                {{item.name}}
-                       <div class="order-panel">
-                              <button class="snipcart-add-item"
-                            v-bind:data-item-id="item.name"
-                            v-bind:data-item-price="item.price"
-                            v-bind:data-item-image="item.image"
-                            v-bind:data-item-name="item.name">
-                            <Order />
-                            </button>
-                            </div>
-                            </div>
-            </template>
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="height-100" v-if="item.quote">
-
-
-
-
-<div class="quote-container" v-if="item.quote.length > 60">
-<div class="xs">{{item.quote}}</div>
-<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
-</div>
-
-
-<div class="quote-container" v-else-if="item.quote.length > 40">
-<div class="sm">{{item.quote}}</div>
-<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
-</div>
-<div class="quote-container" v-else-if="item.quote.length > 20">
-<div class="md">{{item.quote}}</div>
-<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
-</div>
-<div class="quote-container" v-else>
-<div class="md">{{item.quote}}</div>
-<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
-</div>
-</div>
-<div v-if="offering.tockButton" class="order-bottom order-top">
-  
-  <span class="month">
-  {{item.month}}
-  </span>
-<div class="days">
-<span v-for="(day,index) in item.days" v-bind:key="day">
-  <span @click="dayChange(index)">
-    {{index + 1}}
-  </span>
-</span>
-</div>
-</div>
-          </div>
-
-
-
-
-
-
-<template v-if="index === 0 || index === 1" slot="next"></template>
-<template v-else class="subnext" slot="next"><span class="next"><Next /> </span></template>
-
-
-</carousel>
-      <carousel v-else-if="offering.responsive" :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
-
-     
- 
-      <template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
-      <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 10px;width: 100%;">
-      <h4 v-if="offering.insideHeader" class="insideHeader noselect">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
-      <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
-
-      <img v-else v-bind:src="item.image" />    
-            {{item.description}}
-               <template v-if="item.caviarLink">
-              <div class="order-bottom">
-                {{item.name}}
-                       <div class="order-panel">
-              <a :href="item.caviarLink" target="_blank"><Order /></a>
-                            </div>
-                            </div>
-            </template>
-            <template v-if="item.statistics">
-              <div class="order-bottom">
-                {{item.name}}
-                       <div class="order-panel">
-                              <button class="snipcart-add-item"
-                            v-bind:data-item-id="item.name"
-                            v-bind:data-item-price="item.price"
-                            v-bind:data-item-image="item.image"
-                            v-bind:data-item-name="item.name"
-                            v-bind:data-item-description="item.description"
-                            v-bind:data-item-weight="item.weight">
-                            <Order />
-                            </button>
-                            </div>
-                            </div>
-            </template>
-
-<div class="height-100" v-if="item.quote">
-
-
-
-
-<div class="quote-container" v-if="item.quote.length > 60">
-<div class="xs">{{item.quote}}</div>
-<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
-</div>
-
-
-<div class="quote-container" v-else-if="item.quote.length > 40">
-<div class="sm">{{item.quote}}</div>
-<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
-</div>
-<div class="quote-container" v-else-if="item.quote.length > 20">
-<div class="md">{{item.quote}}</div>
-<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
-</div>
-<div class="quote-container" v-else>
-<div class="md">{{item.quote}}</div>
-<div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
-</div>
-</div>
-<div v-if="offering.tockButton" class="order-bottom order-top">
-  
-  <span class="month">
-  {{item.month}}
-  </span>
-<div class="days">
-<span v-for="(day,index) in item.days" v-bind:key="day">
-  <span @click="dayChange(index)">
-    {{index + 1}}
-  </span>
-</span>
-</div>
-</div>
-          </div>
-
-
-
-
-
-
-<template v-if="index === 0 || index === 1" slot="next"></template>
-<template v-else class="subnext" slot="next"><span class="next"><Next /> </span></template>
-
-
-        </carousel>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <carousel v-else-if="!offering.reservationBlock" :items="offering.slideNo ? offering.slideNo : 3" :loop="false" :dots="false" :nav="false">
-    
-      <template class="subprev" slot="prev"><span class="prev"><Prev /></span></template>
-      <div v-for="item in offering.items" v-bind:key="item.name" style="text-align:center;margin-top: 15px;">
-      <h4 v-if="offering.insideHeader" class="insideHeader noselect">{{offering.title}}  /  {{item.month}} / <span v-if="offering.tock">{{currentDay}}</span></h4>
-      <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
-
-      <img v-else v-bind:src="item.image" />    
-            {{item.description}}
-               <template v-if="item.caviarLink">
-              <div class="order-bottom">
-                {{item.name}}
-                       <div class="order-panel">
-              <a :href="item.caviarLink" target="_blank"><Order /></a>
-                            </div>
-                            </div>
-            </template>
-            <template v-if="item.statistics">
-              <div class="order-bottom">
-                {{item.name}}
-                       <div class="order-panel">
-                              <button class="snipcart-add-item"
-                            v-bind:data-item-id="item.name"
-                            v-bind:data-item-price="item.price"
-                            v-bind:data-item-image="item.image"
-                            v-bind:data-item-name="item.name">
-                            <Order />
-                            </button>
-                            </div>
-                            </div>
-            </template>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div v-if="item.quote">
-
-
-<div v-if="item.quote.length > 60">
-  ie
-<span class="xs">{{item.quote}}<br>{{item.author}}</span>
-</div>
-<div v-else-if="item.quote.length > 40">
-<span class="sm">{{item.quote}}<br>{{item.author}}</span>
-</div>
-<div v-else-if="item.quote.length > 20">
-<span class="md">{{item.quote}}<br>{{item.author}}</span>
-</div>
-<div v-else>
-<span class="lg">{{item.quote}}<br>{{item.author}}</span>
-</div>
-</div> -->
-<div v-if="offering.tockButton" class="order-bottom order-top">
-  
-  <span class="month">
-  {{item.month}}
-  </span>
-<div class="days">
-<span v-for="(day,index) in item.days" v-bind:key="day">
-  <span @click="dayChange(index)">
-    {{index + 1}}
-  </span>
-</span>
-</div>
-</div>
-          </div>
-
-
-
-
-
-
-<template v-if="index === 0 || index === 1" slot="next"></template>
-<template v-else class="subnext" slot="next"><span class="next"><Next /> </span></template>
-
-
-        </carousel> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div v-if="offering.tockButton" class="order-bottom">
-              <div id="mama-dummy-button" class="TockButton-buttonContainer" style="cursor: pointer;">
-                <div data-tock-reserve="true" class="TockButton-link">
-                  <div class="TockButton TockButton-blue">
-                    <span class="TockWidget-B2" @click="loggit()"><OrderStar /></span>
-                  </div>
+                <div class="order-panel">
+                  <a :href="item.caviarLink" target="_blank">
+                    <Order />
+                  </a>
                 </div>
               </div>
+            </template>
+            <template v-if="item.statistics">
+              <div class="order-bottom">
+                {{item.name}}
+                <div class="order-panel">
+                  <button
+                    class="snipcart-add-item"
+                    v-bind:data-item-id="item.name"
+                    v-bind:data-item-price="item.price"
+                    v-bind:data-item-image="item.image"
+                    v-bind:data-item-name="item.name"
+                  >
+                    <Order />
+                  </button>
+                </div>
+              </div>
+            </template>
+
+            <div class="height-100" v-if="item.quote">
+              <div class="l-col">
+                <div class="quote-container">
+                  <div class="xs" v-if="item.quote.length > 60">{{item.quote}}</div>
+                  <div class="sm" v-else-if="item.quote.length > 40">{{item.quote}}</div>
+                  <div class="md" v-else-if="item.quote.length > 20">{{item.quote}}</div>
+                  <div class="md" v-else>{{item.quote}}</div>
+                  <div class="quote-author">- {{item.author}} {{item.authorLast}}.</div>
+                </div>
+              </div>
+              <div class="r-col">
+                <img v-bind:src="item.imageTestimonial" />
+              </div>
+            </div>
+            <div v-if="offering.tockButton" class="order-bottom order-top">
+              <span class="month">{{item.month}}</span>
+              <div class="days">
+                <span v-for="(day,index) in item.days" v-bind:key="day">
+                  <span @click="dayChange(index)">{{index + 1}}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <template v-if="index === 0 || index === 1" slot="next"></template>
+          <template v-else class="subnext" slot="next">
+            <span class="next">
+              <Next />
+            </span>
+          </template>
+        </carousel>
+        <carousel
+          v-else-if="offering.responsive"
+          :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}"
+          :items="offering.slideNo ? offering.slideNo : 3"
+          :loop="false"
+          :dots="false"
+          :nav="false"
+        >
+          <template class="subprev" slot="prev">
+            <span class="prev">
+              <Prev />
+            </span>
+          </template>
+          <div
+            v-for="item in offering.items"
+            v-bind:key="item.name"
+            style="text-align:center;margin-top: 10px;width: 100%;"
+          >
+            <h4 v-if="offering.insideHeader" class="insideHeader noselect">
+              {{offering.title}} / {{item.month}} /
+              <span v-if="offering.tock">{{currentDay}}</span>
+            </h4>
+
+
+
+<div v-if="offering.mamaShop" class="relative-pos">
+<img v-bind:src="item.image" />
+     
+
+            <div class="itemDescription">
+              <div class="text-box">
+              {{item.description}}
+              </div>
+              </div>
+
 </div>
-     <div class="width-container" v-if="offering.reservationBlock">
-  
-<Mbar :linkOut="offering.mbarTrigger" /><Mamnoon :linkOut2="offering.mamnoonTrigger" />
+<div v-else>
+              <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
+
+            <img v-else v-bind:src="item.image" />
+  </div>
+
+
+            <template v-if="item.caviarLink">
+              <div class="order-bottom">
+                {{item.name}}
+                <div class="order-panel">
+                  <a :href="item.caviarLink" target="_blank">
+                    <Order />
+                  </a>
+                </div>
+              </div>
+            </template>
+            <template v-if="item.statistics">
+              <div class="order-bottom">
+                {{item.name}}
+                <div class="order-panel">
+                  <button
+                    class="snipcart-add-item"
+                    v-bind:data-item-id="item.name"
+                    v-bind:data-item-price="item.price"
+                    v-bind:data-item-image="item.image"
+                    v-bind:data-item-name="item.name"
+                    v-bind:data-item-description="item.description"
+                    v-bind:data-item-weight="item.weight"
+                  >
+                    <Order />
+                  </button>
+                </div>
+              </div>
+            </template>
+            <div v-if="offering.tockButton" class="order-bottom order-top">
+              <span class="month">{{item.month}}</span>
+              <div class="days">
+                <span v-for="(day,index) in item.days" v-bind:key="day">
+                  <span @click="dayChange(index)">{{index + 1}}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <template v-if="index === 0 || index === 1" slot="next"></template>
+          <template v-else class="subnext" slot="next">
+            <span class="next">
+              <Next />
+            </span>
+          </template>
+        </carousel>
+
+        <carousel
+          v-else-if="!offering.reservationBlock"
+          :items="offering.slideNo ? offering.slideNo : 3"
+          :loop="false"
+          :dots="false"
+          :nav="false"
+        >
+          <template class="subprev" slot="prev">
+            <span class="prev">
+              <Prev />
+            </span>
+          </template>
+          <div
+            v-for="item in offering.items"
+            v-bind:key="item.name"
+            style="text-align:center;margin-top: 15px;"
+          >
+            <h4 v-if="offering.insideHeader" class="insideHeader noselect">
+              {{offering.title}} / {{item.month}} /
+              <span v-if="offering.tock">{{currentDay}}</span>
+            </h4>
+            <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
+
+            <img v-else v-bind:src="item.image" />
+            {{item.description}}
+            <template v-if="item.caviarLink">
+              <div class="order-bottom">
+                {{item.name}}
+                <div class="order-panel">
+                  <a :href="item.caviarLink" target="_blank">
+                    <Order />
+                  </a>
+                </div>
+              </div>
+            </template>
+            <template v-if="item.statistics">
+              <div class="order-bottom">
+                {{item.name}}
+                <div class="order-panel">
+                  <button
+                    class="snipcart-add-item"
+                    v-bind:data-item-id="item.name"
+                    v-bind:data-item-price="item.price"
+                    v-bind:data-item-image="item.image"
+                    v-bind:data-item-name="item.name"
+                  >
+                    <Order />
+                  </button>
+                </div>
+              </div>
+            </template>
+
+            <div v-if="offering.tockButton" class="order-bottom order-top">
+              <span class="month">{{item.month}}</span>
+              <div class="days">
+                <span v-for="(day,index) in item.days" v-bind:key="day">
+                  <span @click="dayChange(index)">{{index + 1}}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <template v-if="index === 0 || index === 1" slot="next"></template>
+          <template v-else class="subnext" slot="next">
+            <span class="next">
+              <Next />
+            </span>
+          </template>
+        </carousel>
+
+        <div v-if="offering.tockButton" class="order-bottom">
+          <div id="mama-dummy-button" class="TockButton-buttonContainer" style="cursor: pointer;">
+            <div data-tock-reserve="true" class="TockButton-link">
+              <div class="TockButton TockButton-blue">
+                <span class="TockWidget-B2" @click="loggit()">
+                  <OrderStar />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="width-container" v-if="offering.reservationBlock">
+          <Mbar :linkOut="offering.mbarTrigger" />
+          <Mamnoon :linkOut2="offering.mamnoonTrigger" />
+        </div>
       </div>
-</div>
+    </section>
 
- 
-      
-      </section>
-
-
-
-<Newsletter />
+    <Newsletter />
   </main>
-
-
-
-
-
 </template>
 
 <script>
-
-import carousel from 'vue-owl-carousel'
-
+import carousel from "vue-owl-carousel";
 
 import Order from "@/components/svgIcons/Order";
-
-
 
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
@@ -380,24 +302,32 @@ import Mbar from "@/components/svgIcons/Mbar";
 import Newsletter from "@/components/Newsletter";
 import CoverFlow from "@/components/CoverFlow";
 
-
 export default {
-  components: { carousel, Order, Next, Prev, Newsletter, CoverFlow, Mbar, Mamnoon },
+  components: {
+    carousel,
+    Order,
+    Next,
+    Prev,
+    Newsletter,
+    CoverFlow,
+    Mbar,
+    Mamnoon
+  },
   computed: {
-    count () {
-      return this.$store.state.count
+    count() {
+      return this.$store.state.count;
     },
-    names () {
-      return this.$store.state.names
+    names() {
+      return this.$store.state.names;
     },
-    cart () {
-      return this.$store.state.cart
+    cart() {
+      return this.$store.state.cart;
     }
   },
-  data () {
-    return this.$store.state.inventory
+  data() {
+    return this.$store.state.inventory;
   },
-    data() {
+  data() {
     return {
       inventory: this.$store.state.inventory,
       products: this.$store.state.inventory.offerings[0].items
@@ -405,170 +335,157 @@ export default {
   },
   methods: {
     dayChange(e) {
-// console.log(123)
 
 
-
-
-this.currentDay = e + 1
-
+      this.currentDay = e + 1;
     },
-    loggit () {
-      console.log(134)
+    loggit() {
+      console.log(134);
     },
-    toggle: function (event) {
-      if (event.target.classList.contains('is-open')) {
-        this.$store.commit('decrement')
-        event.target.classList.remove('is-open')
+    toggle: function(event) {
+      if (event.target.classList.contains("is-open")) {
+        this.$store.commit("decrement");
+        event.target.classList.remove("is-open");
       } else {
-        event.target.classList.add('is-open')
-        this.$store.commit('increment')
+        event.target.classList.add("is-open");
+        this.$store.commit("increment");
       }
     },
-    increment () {
-      this.$store.commit('increment')
+    increment() {
+      this.$store.commit("increment");
     },
-    decrement () {
-      this.$store.commit('decrement')
+    decrement() {
+      this.$store.commit("decrement");
     },
-    increment2 (name) {
-      this.$store.commit('increment2', { name })
+    increment2(name) {
+      this.$store.commit("increment2", { name });
     },
-    removeFromCart (price) {
-      this.$store.commit('removeFromCart', { price })
+    removeFromCart(price) {
+      this.$store.commit("removeFromCart", { price });
     },
-    confirmOrder (timeslot) {
-      if (event.target.classList.contains('reserved')) {
-        this.$store.commit('unreserveFamilyMeal', { timeslot })
+    confirmOrder(timeslot) {
+      if (event.target.classList.contains("reserved")) {
+        this.$store.commit("unreserveFamilyMeal", { timeslot });
       } else {
-        this.$store.commit('reserveFamilyMeal', { timeslot })
+        this.$store.commit("reserveFamilyMeal", { timeslot });
       }
     },
-    changedAlert(){
-      console.log('changed')
+    changedAlert() {
+      console.log("changed");
     },
-        async showProducts() {
-          // let response = await this.$http.get('/product/snipcartproducts') 
-let response = this.$store.state.inventory.offerings[0]
+    async showProducts() {
+      // let response = await this.$http.get('/product/snipcartproducts')
+      let response = this.$store.state.inventory.offerings[0];
 
-          this.products = response
-    }  
+      this.products = response;
+    }
   },
-  created(){
+  created() {
     var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-this.currentDay = dd  
-  
-    this.showProducts()
+    var dd = String(today.getDate()).padStart(2, "0");
+    this.currentDay = dd;
+
+    this.showProducts();
   }
-}
+};
 </script>
 
 
 <style lang="scss">
-.reserved{
+.reserved {
   background: red;
 }
 
-.not-available{
+.not-available {
   background: #666666;
   color: #ffffff;
   pointer-events: none;
 }
 
-
-.order-button{
+.order-button {
   width: 33.33%;
   padding: 20px 0;
 }
 
-
-h4{
+h4 {
   text-align: center;
 }
 
 .is-fullheight,
 .familymeal,
-.narrow{
-  background-color: #F05D5B;
+.narrow {
+  background-color: #f05d5b;
 
-
-  h4{
-        color: #FFF367;
+  h4 {
+    color: #fff367;
   }
 }
 
-
-
-
-.section.hero.familymeal{
-      width: 88%;
-      margin: 0 auto;
+.section.hero.familymeal {
+  width: 88%;
+  margin: 0 auto;
 }
 
-
-.is-fullheight [id^=carousel_prev_]{
+.is-fullheight [id^="carousel_prev_"] {
   position: absolute;
   top: -2px;
   left: 25%;
   cursor: pointer;
 
-@media only screen and (max-width: 768px) {
-  left: 5%;
+  @media only screen and (max-width: 768px) {
+    left: 5%;
+  }
 }
 
-}
-
-.is-fullheight [id^=carousel_next_]{
+.is-fullheight [id^="carousel_next_"] {
   position: absolute;
   top: -2px;
   right: 25%;
   cursor: pointer;
 
-@media only screen and (max-width: 768px) {
-  right: 5%;
-}
-}
-
-.is-fullheight{
-  padding: 20px 0 0 0;
+  @media only screen and (max-width: 768px) {
+    right: 5%;
   }
+}
 
-.familymeal{
+.is-fullheight {
+  padding: 20px 0 0 0;
+}
+
+.familymeal {
   padding: 0 0 0 0;
 }
 
-.order-bottom{
-  background: #FFF367;
+.order-bottom {
+  background: #fff367;
   padding: 10px 0;
   color: black;
-  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
-    font-weight: 500;
-    line-height: 1.2;
-
+  font-weight: 500;
+  line-height: 1.2;
 }
-  
-.order-bottom.order-top{
-  background: #F1765B;
+
+.order-bottom.order-top {
+  background: #f1765b;
   min-height: 90px;
   text-align: center;
 }
 
-.order-panel{
-    padding: 10px 0;
+.order-panel {
+  padding: 10px 0;
 }
 
-#mama-dummy-button{
+#mama-dummy-button {
   width: 70px;
   margin: 0 auto;
 }
 
-.carousel{
+.carousel {
   margin-bottom: 80px;
 }
 
-#testimonials .owl-item{
+#testimonials .owl-item {
   color: #ffffff;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -576,162 +493,147 @@ h4{
   height: 100%;
   margin-top: 10px;
 
-    &:nth-child(odd){
-background: #F1765B;
-    }
+  &:nth-child(odd) {
+    background: #f1765b;
+  }
 
-
-    &:nth-child(even){
-      background: #F58E58;
-    }
-
-
+  &:nth-child(even) {
+    background: #f58e58;
+  }
 }
 
+.owl-stage {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 
- .owl-stage {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
-.owl-item{
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    height: auto !important;
+.owl-item {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: auto !important;
 }
 
-
-#testimonials .owl-item > div{
+#testimonials .owl-item .l-col {
   padding: 30px;
   text-align: left;
   padding-top: 15px;
+  width: 50%;
+  float: left;
+}
+
+#testimonials .owl-item .r-col {
+  padding: 0px;
+  width: 50%;
+  float: left;
+  img {
+    width: 100%;
+  }
 }
 
 
-#testimonials .owl-item > div > div{
+
+
+#testimonials .owl-item > div > div {
   text-align: left;
 }
 
-
-.xs{
+.xs {
   font-size: 16px;
 }
 
-.sm{
+.sm {
   font-size: 22px;
 }
 
-.md{
+.md {
   // font-size: 18px;
   font-size: 38px;
 }
 
-
-.lg{
-font-size: 64px;
+.lg {
+  font-size: 64px;
 }
 
-
-.days{
-
-margin: 10px auto 5px;
+.days {
+  margin: 10px auto 5px;
   width: 80%;
-
 }
-.days span{
-color: white;
-display: inline-block;
-font-style: italic;
-margin-left: 5px;
-margin-right: 5px;
-line-height: 30px;
-cursor: pointer;
-}
-
-.month{
+.days span {
   color: white;
-display: inline-block;
-font-style: italic;
-margin-left: 5px;
-margin-right: 5px;
-// line-height: 30px;
-cursor: pointer;
+  display: inline-block;
+  font-style: italic;
+  margin-left: 5px;
+  margin-right: 5px;
+  line-height: 30px;
+  cursor: pointer;
 }
 
+.month {
+  color: white;
+  display: inline-block;
+  font-style: italic;
+  margin-left: 5px;
+  margin-right: 5px;
+  // line-height: 30px;
+  cursor: pointer;
+}
 
-
-
-
-.insideHeader{
+.insideHeader {
   margin-bottom: 20px;
   margin-top: -15px;
 }
 
-
-
-
-button.snipcart-add-item{
+button.snipcart-add-item {
   border: 0;
   background: transparent;
 
-
-
-&:focus,
-&:active {
-  outline: none;
-  box-shadow: none;
-}
-
-
+  &:focus,
+  &:active {
+    outline: none;
+    box-shadow: none;
+  }
 }
 
 .snipcart-modal__container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    z-index: 110 !important;
-    background-color: #f0f5f6;
-    top: 140px !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 110 !important;
+  background-color: #f0f5f6;
+  top: 140px !important;
 }
 
-
-
-
-.top-widget{
-width: 100%;
-height: 500px;
-background: green;
+.top-widget {
+  width: 100%;
+  height: 500px;
+  background: green;
 }
 
-
-
-
-
-.coverflowsection{
-    padding: 20px 0 0 0;
-    // height: 600px;
-    // height: 510px;
-    // height: 600px;
-        height: 600px;
-    margin-bottom: 80px;
-background-color: #F05D5B;
-overflow: hidden;
-position: relative;
-  h4{
-    color: #FFF367;
-  } 
-  p{
+.coverflowsection {
+  padding: 20px 0 0 0;
+  // height: 600px;
+  // height: 510px;
+  // height: 600px;
+  height: 600px;
+  margin-bottom: 80px;
+  background-color: #f05d5b;
+  overflow: hidden;
+  position: relative;
+  h4 {
+    color: #fff367;
+  }
+  p {
     color: white;
     width: 80%;
     margin: 10px auto 20px;
@@ -740,86 +642,106 @@ position: relative;
 }
 
 @media only screen and (max-width: 640px) {
-  .coverflowsection{
+  .coverflowsection {
     height: 660px;
   }
 }
 
-
 @media only screen and (max-width: 480px) {
-  .coverflowsection{
+  .coverflowsection {
     height: 800px;
   }
 }
 
-
-.bottom-button{
+.bottom-button {
   // position: absolute;
   // bottom: 0;
   // background: #FFF367;
   // width: 100%;
   // padding: 10px 0;
 
-
-
-position: absolute;
-    bottom: 0;
-    background: #FFF367;
-    width: 100%;
-    padding: 10px 0;
-    height: 90px;
-
-
-a{
   position: absolute;
-  // width: 100%;
+  bottom: 0;
+  background: #fff367;
+  width: 100%;
+  padding: 10px 0;
+  height: 90px;
+
+  a {
+    position: absolute;
+    // width: 100%;
+  }
 }
 
+.width-container {
+  width: 100%;
+  overflow: auto;
 }
 
-
-.width-container{
-width: 100%;
-overflow: auto;
-}
-
-
-section{
+section {
   clear: both;
 }
 
-
-.shortcarousel{
-      margin-bottom: 80px;
+.shortcarousel {
+  margin-bottom: 80px;
 }
 
-
-.description-para{
+.description-para {
   color: white;
   margin: 10px auto 20px;
   width: 80%;
 }
 
-
-
-.height-100{
+.height-100 {
   height: 100%;
-    width: 100%;
+  width: 100%;
 }
 
-
-.quote-container{
-    position: relative;
-    height: 100%;
-    width: 100%;
-    padding-bottom: 80px;
-
+.quote-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 80px;
 }
 
-.quote-author{
+.quote-author {
   position: absolute;
   bottom: 0;
   right: 0;
-  color: #FFF367;
+  color: #fff367;
 }
+
+
+.itemDescription{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff367b5;
+    top: 0;
+    opacity: 0;
+    transition: all .5s ease;
+
+.text-box{
+      width: 80%;
+      margin: 0 auto;
+      font-weight: 100;
+      font-size: 36px;
+      margin-top: 100px;
+}
+
+}
+
+
+.relative-pos{
+  position: relative;
+  overflow: hidden;  
+    &:hover{
+      .itemDescription{
+        opacity: 1;
+      }
+    }
+}
+
+
+
 </style>

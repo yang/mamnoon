@@ -212,163 +212,190 @@ const store = new Vuex.Store({
           category: 'testimonials',
           responsive: true,
         slideNo: 1,
-          items: [
-            {
-              quote: "Thank you! so so good!!!! YUM",
-              author: "Diane",
-              authorLast: 'N'
-            },
-            {
-              quote: "The Pick up was easy and the food was great! Thank you for making us feel like we were dining out and a little more normal. Hope to see you soon.",
-              author: "Teri",
-              authorLast: 'P'
-            },
-            {
-              quote: "Amazing meal, thank you!!",
-              author: "Lindsay",
-              authorLast: 'O'
-            },
-            {
-              quote: "Pickup was a breeze and the food was amazing, will definitely order again thank you for letting us enjoy the wonders of a great meal at home",
-              author: "Jane",
-              authorLast: 'N'
-            },
-
-            {
-              quote: "WEll, the food was superb! The lamb the best ever! And, in the midst of these hard times, I really appreciated the warmth and good positive energy of the staff. Thanks! So glad you're here.",
-              author: "Lyn",
-              authorLast: 'K'
-            },
-
-            {
-              quote: "Love love love!! The food at Mamnoon, never had anything we didn’t thoroughly enjoy!!",
-              author: "Lori",
-              authorLast: 'S'
-            },
-
-            {
-              quote: "Your food was AMAZING! WE loved it and will be back. Thank you for creating such delicious dishes!",
-              author: "Diane",
-              authorLast: 'S'
-            },
-
-            {
-              quote: "The food was AMAZING! Thank you! <3",
-              author: "Christina",
-              authorLast: 'B'
-            },
-
-            {
-              quote: "Love your take out meals. Thanks for giving me something to look forward to every week.",
-              author: "Erik",
-              authorLast: 'F'
-            },
-
-            {
-              quote: "Delicious food, good portions, friendly and safe service, loved the little sweet treat! Thank you for being open.",
-              author: "Kristen",
-              authorLast: 'S'
-            },
-
-            {
-              quote: "this was the best meal I've had in months. the staff is amazing too!",
-              author: "Johnny",
-              authorLast: 'S'
-            },
-
-            {
-              quote: "Impeccable in every possible way!",
-              author: "Heidi",
-              authorLast: 'A'
-            },
-
-            {
-              quote: "So tasty. Best takeout food. Thank you for making mother's day awesome.",
-              author: "Kristen",
-              authorLast: "S"
-            },
-
-            {
-              quote: "You guys are one of our favorite restaurants in Seattle. Family was Very good value, and super yummy! Very happy. We love you guys. Keep fighting and we will keep supporting you!",
-              author: "Angie",
-              authorLast: 'A'
-            },
-
-            {
-              quote: "Easy to order, easy pickup. Outstanding food! Thanks, we’ll be back soon.",
-              author: "Michael",
-              authorLast: 'V'
-            },
-
-            {
-              quote: "Thanks for the best birthday dinner ever! (and a milestone one, at that ;-) )The chicken stayed nice and crispy on the way home, the sides were all great, and the wine was fantastic! I'm looking forward to eating in the restaurant again whenever that becomes possible, but in the meantime we will definitely be ordering take-out again. Best of luck to all at Mamnoon, and stay safe and healthy.",
-              author: "Jennifer",
-              authorLast: 'C'
-            },
-
-            {
-              quote: "The whole meal was amazing.... and such generous portions. We're adding this meal to our regular rotation :)",
-              author: "Stephanie",
-              authorLast: 'G'
-            },
-
-            {
-              quote: "Continues to be my favorite restaurant in Seattle.",
-              author: "Ben",
-              authorLast: 'B'
-            },
-
-            {
-              quote: "Wow, what a delicious dinner. Also the labneh and hummous were super authentic to what I used to eat in the Middle East.",
-              author: "Sarah",
-              authorLast: 'S'
-            },
-
-            {
-              quote: "We are absolutely obsessed with your restaurant! You are doing a phenomenal job and we are so happy to support you!",
-              author: "Marisa",
-              authorLast: 'G'
-            },
-
-            {
-              quote: "The team was enthusiastic and super friendly. The food of course was excellent!",
-              author: "Lyn",
-              authorLast: 'K'
-            },
-
-            {
-              quote: "Super yummy, great value, travelled well. Excellent!",
-              author: "James",
-              authorLast: 'G'
-            },
-
-            {
-              quote: "Always a delight to have Mamnoon for dinner. From the warm welcome and efficient staff, to the phenomenal flavors of the food and inventive, delicious cocktails -- Mamnoon continues to deliver joy to our family.",
-              author: "Stephanie",
-              authorLast: 'D'
-            },
-
-            {
-              quote: "Your process is efficient, from the descriptions online to the ordering to the pick-up. All very smooth. This was our first dinner on the deck of the summer and it was a lovely evening, an excellent meal (REALLY excellent!), and a really nice wine! Thank you for making our evening special!",
-              author: "Peg",
-              authorLast: 'B'
-            },
-            {
-              quote: "Thank you so much for this special food. The family meal was the best meal we have had in months. Best potatoes my husband has ever had. Thank you for making this possible during such bitter times. All the best to the Mamnoon and Tock families. You brought goodness to a dark day.",
-              author: "Cynthia",
-              authorLast: 'M'
-            },
-            {
-              quote: "Thank you so much for calling me and letting me know about how you wanted to honor my order despite the uncertainty around the curfew and protests in the area. I wanted to have a special meal for my 2nd wedding anniversary and this was certainly it. Thank you for making it happen! By the way I came here after I got engaged a little over 2 years ago, so this place has a special place in my heart :)",
-              author: "Apoorva",
-              authorLast: 'C'
-            },
-            {
-              quote: "Such excellent food! Always thrilled to get Mamnoon!",
-              author: "Lilium",
-              authorLast: 'P'
-            }
-          ]
+        items: [
+          {
+            quote: "Thank you! so so good!!!! YUM",
+            author: "Diane",
+            authorLast: 'N',
+            imageTestimonial: './assets/img/1.jpg'
+          },
+          {
+            quote: "The Pick up was easy and the food was great! Thank you for making us feel like we were dining out and a little more normal. Hope to see you soon.",
+            author: "Teri",
+            authorLast: 'P',
+            imageTestimonial: './assets/img/2.jpg'
+          },
+          {
+            quote: "Amazing meal, thank you!!",
+            author: "Lindsay",
+            authorLast: 'O',
+            imageTestimonial: './assets/img/3.jpg'
+          },
+          {
+            quote: "Pickup was a breeze and the food was amazing, will definitely order again thank you for letting us enjoy the wonders of a great meal at home",
+            author: "Jane",
+            authorLast: 'N',
+            imageTestimonial: './assets/img/4.jpg'
+          },
+      
+          {
+            quote: "WEll, the food was superb! The lamb the best ever! And, in the midst of these hard times, I really appreciated the warmth and good positive energy of the staff. Thanks! So glad you're here.",
+            author: "Lyn",
+            authorLast: 'K',
+            imageTestimonial: './assets/img/5.jpg'
+          },
+      
+          {
+            quote: "Love love love!! The food at Mamnoon, never had anything we didn’t thoroughly enjoy!!",
+            author: "Lori",
+            authorLast: 'S',
+            imageTestimonial: './assets/img/6.jpg'
+          },
+      
+          {
+            quote: "Your food was AMAZING! WE loved it and will be back. Thank you for creating such delicious dishes!",
+            author: "Diane",
+            authorLast: 'S',
+            imageTestimonial: './assets/img/7.jpg'
+          },
+      
+          {
+            quote: "The food was AMAZING! Thank you! <3",
+            author: "Christina",
+            authorLast: 'B',
+            imageTestimonial: './assets/img/6.jpg'
+          },
+      
+          {
+            quote: "Love your take out meals. Thanks for giving me something to look forward to every week.",
+            author: "Erik",
+            authorLast: 'F',
+            imageTestimonial: './assets/img/5.jpg'
+          },
+      
+          {
+            quote: "Delicious food, good portions, friendly and safe service, loved the little sweet treat! Thank you for being open.",
+            author: "Kristen",
+            authorLast: 'S',
+            imageTestimonial: './assets/img/4.jpg'
+          },
+      
+          {
+            quote: "this was the best meal I've had in months. the staff is amazing too!",
+            author: "Johnny",
+            authorLast: 'S',
+            imageTestimonial: './assets/img/3.jpg'
+          },
+      
+          {
+            quote: "Impeccable in every possible way!",
+            author: "Heidi",
+            authorLast: 'A',
+            imageTestimonial: './assets/img/2.jpg'
+          },
+      
+          {
+            quote: "So tasty. Best takeout food. Thank you for making mother's day awesome.",
+            author: "Kristen",
+            authorLast: "S",
+            imageTestimonial: './assets/img/1.jpg'
+          },
+      
+          {
+            quote: "You guys are one of our favorite restaurants in Seattle. Family was Very good value, and super yummy! Very happy. We love you guys. Keep fighting and we will keep supporting you!",
+            author: "Angie",
+            authorLast: 'A',
+            imageTestimonial: './assets/img/2.jpg'
+          },
+      
+          {
+            quote: "Easy to order, easy pickup. Outstanding food! Thanks, we’ll be back soon.",
+            author: "Michael",
+            authorLast: 'V',
+            imageTestimonial: './assets/img/3.jpg'
+          },
+      
+          {
+            quote: "Thanks for the best birthday dinner ever! (and a milestone one, at that ;-) )The chicken stayed nice and crispy on the way home, the sides were all great, and the wine was fantastic! I'm looking forward to eating in the restaurant again whenever that becomes possible, but in the meantime we will definitely be ordering take-out again. Best of luck to all at Mamnoon, and stay safe and healthy.",
+            author: "Jennifer",
+            authorLast: 'C',
+            imageTestimonial: './assets/img/4.jpg'
+          },
+      
+          {
+            quote: "The whole meal was amazing.... and such generous portions. We're adding this meal to our regular rotation :)",
+            author: "Stephanie",
+            authorLast: 'G',
+            imageTestimonial: './assets/img/5.jpg'
+          },
+      
+          {
+            quote: "Continues to be my favorite restaurant in Seattle.",
+            author: "Ben",
+            authorLast: 'B',
+            imageTestimonial: './assets/img/6.jpg'
+          },
+      
+          {
+            quote: "Wow, what a delicious dinner. Also the labneh and hummous were super authentic to what I used to eat in the Middle East.",
+            author: "Sarah",
+            authorLast: 'S',
+            imageTestimonial: './assets/img/7.jpg'
+          },
+      
+          {
+            quote: "We are absolutely obsessed with your restaurant! You are doing a phenomenal job and we are so happy to support you!",
+            author: "Marisa",
+            authorLast: 'G',
+            imageTestimonial: './assets/img/6.jpg'
+          },
+      
+          {
+            quote: "The team was enthusiastic and super friendly. The food of course was excellent!",
+            author: "Lyn",
+            authorLast: 'K',
+            imageTestimonial: './assets/img/5.jpg'
+          },
+      
+          {
+            quote: "Super yummy, great value, travelled well. Excellent!",
+            author: "James",
+            authorLast: 'G',
+            imageTestimonial: './assets/img/4.jpg'
+          },
+      
+          {
+            quote: "Always a delight to have Mamnoon for dinner. From the warm welcome and efficient staff, to the phenomenal flavors of the food and inventive, delicious cocktails -- Mamnoon continues to deliver joy to our family.",
+            author: "Stephanie",
+            authorLast: 'D',
+            imageTestimonial: './assets/img/3.jpg'
+          },
+      
+          {
+            quote: "Your process is efficient, from the descriptions online to the ordering to the pick-up. All very smooth. This was our first dinner on the deck of the summer and it was a lovely evening, an excellent meal (REALLY excellent!), and a really nice wine! Thank you for making our evening special!",
+            author: "Peg",
+            authorLast: 'B',
+            imageTestimonial: './assets/img/2.jpg'
+          },
+          {
+            quote: "Thank you so much for this special food. The family meal was the best meal we have had in months. Best potatoes my husband has ever had. Thank you for making this possible during such bitter times. All the best to the Mamnoon and Tock families. You brought goodness to a dark day.",
+            author: "Cynthia",
+            authorLast: 'M',
+            imageTestimonial: './assets/img/1.jpg'
+          },
+          {
+            quote: "Thank you so much for calling me and letting me know about how you wanted to honor my order despite the uncertainty around the curfew and protests in the area. I wanted to have a special meal for my 2nd wedding anniversary and this was certainly it. Thank you for making it happen! By the way I came here after I got engaged a little over 2 years ago, so this place has a special place in my heart :)",
+            author: "Apoorva",
+            authorLast: 'C',
+            imageTestimonial: './assets/img/2.jpg'
+          },
+          {
+            quote: "Such excellent food! Always thrilled to get Mamnoon!",
+            author: "Lilium",
+            authorLast: 'P',
+            imageTestimonial: './assets/img/3.jpg'
+          }
+        ]
         }
       ]
     }
@@ -461,7 +488,8 @@ const store = new Vuex.Store({
         caviarButton: true,
         snipcart: true,
         items: inventoryAdd,
-        slideNo: 6
+        slideNo: 6,
+        mamaShop: true
       })
   },
     updateTockMeals(state, { inventoryTockAdd }){

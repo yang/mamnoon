@@ -437,7 +437,8 @@ input:checked + .slider:before {
 
 
 .toggleVeg{
-	width: 64px;
+
+	width: 62px;
 	// text-align: left;
 	padding: 0;
 	border: 0;
@@ -445,6 +446,7 @@ input:checked + .slider:before {
 	border-radius: 15px;
 
 	border: 2px solid transparent;
+		border: 1px solid white;
 	&.redBackground{
 			background-color: #F05D5B;
 	}
