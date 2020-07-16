@@ -16,8 +16,8 @@ import "./sevenRooms2.js"
 // Vue.component('CoverFlowSlide', CoverFlowSlide)
 
 const base = axios.create({
-  baseURL: "http://localhost:4000"
-// baseURL: 'https://young-hamlet-03679.herokuapp.com/'
+  // baseURL: "http://localhost:4000"
+baseURL: 'https://young-hamlet-03679.herokuapp.com/'
 });
 
 
