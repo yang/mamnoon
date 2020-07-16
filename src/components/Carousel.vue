@@ -148,23 +148,14 @@
                             v-bind:data-item-id="item.name"
                             v-bind:data-item-price="item.price"
                             v-bind:data-item-image="item.image"
-                            v-bind:data-item-name="item.name">
+                            v-bind:data-item-name="item.name"
+                            v-bind:data-item-description="item.description"
+                            v-bind:data-item-weight="item.weight">
                             <Order />
                             </button>
                             </div>
                             </div>
             </template>
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="height-100" v-if="item.quote">
 
@@ -781,7 +772,7 @@ position: absolute;
 
 a{
   position: absolute;
-  width: 100%;
+  // width: 100%;
 }
 
 }

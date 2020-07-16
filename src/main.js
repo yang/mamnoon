@@ -460,7 +460,8 @@ const store = new Vuex.Store({
         responsive: true,
         caviarButton: true,
         snipcart: true,
-        items: inventoryAdd
+        items: inventoryAdd,
+        slideNo: 6
       })
   },
     updateTockMeals(state, { inventoryTockAdd }){

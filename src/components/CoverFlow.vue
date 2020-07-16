@@ -1,5 +1,12 @@
 <template>
 <div>
+	<div class="toggleVegContainer">
+<button class="toggleVeg" :class='{redBackground: $store.state.vegetarian}' @click="toggleVegetarian">
+	<div class="lrbutton" :class='{lrExpanded: $store.state.vegetarian}'>
+		<div v-if="$store.state.vegetarian === true">M</div><div v-else>V</div>
+	</div>
+</button>
+</div>
 <div class="position-relative">
 
 
@@ -27,7 +34,7 @@
 	<a class="left-button" onclick="coverflow().prev();"><Prev /></a>
 <a class="right-button" onclick="coverflow().next();"><Next /></a>
 
-			<a :href="link" target="_blank">
+			<a class="full-width" :href="link" target="_blank">
         <div class="outer">
 
 	 <transition name="fade">
@@ -43,13 +50,7 @@
 
 
 
-<div class="toggleVegContainer">
-<button class="toggleVeg" :class='{redBackground: $store.state.vegetarian}' @click="toggleVegetarian">
-	<div class="lrbutton" :class='{lrExpanded: $store.state.vegetarian}'>
-		<div v-if="$store.state.vegetarian === true">M</div><div v-else>V</div>
-	</div>
-</button>
-</div>
+
 		  </div>
 
   </div>
@@ -230,10 +231,11 @@ destroyed() {
 
 
 .left-button{
-cursor: pointer;
-position: absolute;
-left: 25%;
-    top: -2px;
+	cursor: pointer;
+	position: absolute;
+	left: 5%;
+	width: auto;
+	top: 30px;
 }
 
 
@@ -241,10 +243,11 @@ left: 25%;
 
 
 .right-button{
-cursor: pointer;
-position: absolute;
-right: 25%;
-    top: -2px;
+	cursor: pointer;
+	position: absolute;
+	right: 5%;
+	width: auto;
+	top: 30px;
 }
 
 
@@ -469,6 +472,11 @@ input:checked + .slider:before {
 
 	}
 
+}
+
+
+.bottom-button a.full-width{
+	width: 100%;
 }
 
 </style>
