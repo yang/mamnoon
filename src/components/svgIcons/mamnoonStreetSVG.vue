@@ -1,5 +1,6 @@
 <template>
-    <div class="halfwidth-yellow" @click="openSevenRooms('reservembarbutton')">
+<div>
+<!-- Generator: Adobe Illustrator 24.2.1, SVG Export Plug-In  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="282.6px"
 	 height="57.6px" viewBox="0 0 282.6 57.6" style="overflow:visible;enable-background:new 0 0 282.6 57.6;" xml:space="preserve">
 
@@ -113,78 +114,23 @@
 	</g>
 </g>
 </svg>
-  </div>
+
+
+</div>
+
 </template>
 
 
 <script>
-export default {
-  name: "mamnoonstreet",
-  data() {
-    return {
-      link: "https://www.trycaviar.com/m/mamnoon-street-6597"
-    };
-  },
-  props: ["linkOut","caviarLink"],
-  
-  methods: {
-    openLink(e) {
-      window.open(e, "_blank");
-      console.log(e);
-    },
-    openSevenRooms(e){
-		if(this.caviarLink){
-      window.open("https://www.trycaviar.com/m/mamnoon-street-6597", "_blank");
-		}else{
-      document.getElementById(e).click();
-		}
+export default{
+    name: 'MamnoonStreetSVG'
+}
 
-    }
-  }
-};
+
 </script>
 
-        <style lang="scss">
-.cls-178 {
-  fill: #49494a;
-}
 
-.halfwidth-yellow {
-  height: 150px;
-  width: 50%;
-  display: inline-block;
-  background: #fff367;
-  float: left;
-  text-align: center;
-      cursor: pointer;
-  svg {
-    width: 40%;
-    margin: 40px auto 0;
-    text-align: center;
-  }
-}
-
-
-@media only screen and (max-width: 768px) {
-.halfwidth-yellow {
-  height: 150px;
-  width: 50%;
-  display: inline-block;
-  background: #fff367;
-  float: right;
-  text-align: center;
-      cursor: pointer;
-  svg {
-    width: 80%;
-    margin: 40px auto 0;
-    text-align: center;
-  }
-}
-
-
-}
-
-
+<style lang="scss">
 
 	.st0-street{fill:#DF5857;}
 	.st1-street{fill:#231F20;}

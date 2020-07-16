@@ -94,6 +94,7 @@ const store = new Vuex.Store({
           tock: true,
           tockButton: true,
           insideHeader: true,
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque",
           items: [
             {
               title: 'Monday, June 29',
@@ -183,14 +184,14 @@ const store = new Vuex.Store({
           items: [
             {
               name: "mamnoon",
-              image: './assets/cav/1.jpg',
+              // image: './assets/cav/1.jpg',
               price: 5.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
             },
             {
               name: "mamnoon street",
-              image: './assets/cav/2.jpg',
+              // image: './assets/cav/2.jpg',
               price: 10.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
@@ -242,35 +243,35 @@ const store = new Vuex.Store({
             quote: "WEll, the food was superb! The lamb the best ever! And, in the midst of these hard times, I really appreciated the warmth and good positive energy of the staff. Thanks! So glad you're here.",
             author: "Lyn",
             authorLast: 'K',
-            imageTestimonial: './assets/img/5.jpg'
+            imageTestimonial: './assets/img/2.jpg'
           },
       
           {
             quote: "Love love love!! The food at Mamnoon, never had anything we didn’t thoroughly enjoy!!",
             author: "Lori",
             authorLast: 'S',
-            imageTestimonial: './assets/img/6.jpg'
+            imageTestimonial: './assets/img/1.jpg'
           },
       
           {
             quote: "Your food was AMAZING! WE loved it and will be back. Thank you for creating such delicious dishes!",
             author: "Diane",
             authorLast: 'S',
-            imageTestimonial: './assets/img/7.jpg'
+            imageTestimonial: './assets/img/1.jpg'
           },
       
           {
             quote: "The food was AMAZING! Thank you! <3",
             author: "Christina",
             authorLast: 'B',
-            imageTestimonial: './assets/img/6.jpg'
+            imageTestimonial: './assets/img/1.jpg'
           },
       
           {
             quote: "Love your take out meals. Thanks for giving me something to look forward to every week.",
             author: "Erik",
             authorLast: 'F',
-            imageTestimonial: './assets/img/5.jpg'
+            imageTestimonial: './assets/img/2.jpg'
           },
       
           {
@@ -326,35 +327,35 @@ const store = new Vuex.Store({
             quote: "The whole meal was amazing.... and such generous portions. We're adding this meal to our regular rotation :)",
             author: "Stephanie",
             authorLast: 'G',
-            imageTestimonial: './assets/img/5.jpg'
+            imageTestimonial: './assets/img/2.jpg'
           },
       
           {
             quote: "Continues to be my favorite restaurant in Seattle.",
             author: "Ben",
             authorLast: 'B',
-            imageTestimonial: './assets/img/6.jpg'
+            imageTestimonial: './assets/img/1.jpg'
           },
       
           {
             quote: "Wow, what a delicious dinner. Also the labneh and hummous were super authentic to what I used to eat in the Middle East.",
             author: "Sarah",
             authorLast: 'S',
-            imageTestimonial: './assets/img/7.jpg'
+            imageTestimonial: './assets/img/1.jpg'
           },
       
           {
             quote: "We are absolutely obsessed with your restaurant! You are doing a phenomenal job and we are so happy to support you!",
             author: "Marisa",
             authorLast: 'G',
-            imageTestimonial: './assets/img/6.jpg'
+            imageTestimonial: './assets/img/1.jpg'
           },
       
           {
             quote: "The team was enthusiastic and super friendly. The food of course was excellent!",
             author: "Lyn",
             authorLast: 'K',
-            imageTestimonial: './assets/img/5.jpg'
+            imageTestimonial: './assets/img/2.jpg'
           },
       
           {
@@ -485,7 +486,7 @@ const store = new Vuex.Store({
         title: 'mama shop',
         category: 'mama-shop',
         responsive: true,
-        caviarButton: true,
+        caviarButton: false,
         snipcart: true,
         items: inventoryAdd,
         slideNo: 6,

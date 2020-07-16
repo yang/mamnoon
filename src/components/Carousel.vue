@@ -1,6 +1,10 @@
 <template>
   <main>
     <section id="familymeal" class="coverflowsection">
+
+
+
+    
       <CoverFlow :products="products" />
 
     </section>
@@ -48,8 +52,11 @@
             <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
 
             <img v-else v-bind:src="item.image" />
+
+
+
             {{item.description}}
-            <template v-if="item.caviarLink">
+            <!-- <template v-if="item.caviarLink">
               <div class="order-bottom">
                 {{item.name}}
                 <div class="order-panel">
@@ -58,7 +65,7 @@
                   </a>
                 </div>
               </div>
-            </template>
+            </template> -->
             <template v-if="item.statistics">
               <div class="order-bottom">
                 {{item.name}}
@@ -220,8 +227,20 @@
             <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
 
             <img v-else v-bind:src="item.image" />
+            
+
+
+
+
+   
+
+
+
+
+
+
             {{item.description}}
-            <template v-if="item.caviarLink">
+            <!-- <template v-if="item.caviarLink">
               <div class="order-bottom">
                 {{item.name}}
                 <div class="order-panel">
@@ -230,7 +249,7 @@
                   </a>
                 </div>
               </div>
-            </template>
+            </template> -->
             <template v-if="item.statistics">
               <div class="order-bottom">
                 {{item.name}}
@@ -278,9 +297,22 @@
           </div>
         </div>
         <div class="width-container" v-if="offering.reservationBlock">
-          <Mbar :linkOut="offering.mbarTrigger" />
+
+      <Mbar :linkOut="offering.mbarTrigger" />
           <Mamnoon :linkOut2="offering.mamnoonTrigger" />
+    
         </div>
+        <div class="width-container" v-else-if="offering.caviarButton">
+      
+                <Mamnoon :caviarLink="true" :linkOut2="offering.mamnoonTrigger" />
+              <MamnoonStreet :caviarLink="true" :linkOut="offering.mbarTrigger" />
+
+
+  
+        </div>
+
+
+
       </div>
     </section>
 
@@ -298,6 +330,11 @@ import Prev from "@/components/svgIcons/Prev";
 
 import Mamnoon from "@/components/svgIcons/Mamnoon";
 import Mbar from "@/components/svgIcons/Mbar";
+import MamnoonStreet from "@/components/svgIcons/MamnoonStreet";
+import MamnoonSVG from "@/components/svgIcons/MamnoonSVG";
+
+
+
 
 import Newsletter from "@/components/Newsletter";
 import CoverFlow from "@/components/CoverFlow";
@@ -311,7 +348,9 @@ export default {
     Newsletter,
     CoverFlow,
     Mbar,
-    Mamnoon
+    Mamnoon,
+    MamnoonStreet,
+    MamnoonSVG
   },
   computed: {
     count() {
@@ -626,6 +665,7 @@ button.snipcart-add-item {
   // height: 510px;
   // height: 600px;
   height: 600px;
+  height: 630px;
   margin-bottom: 80px;
   background-color: #f05d5b;
   overflow: hidden;
@@ -641,9 +681,18 @@ button.snipcart-add-item {
   }
 }
 
+@media only screen and (max-width: 960px) {
+  .coverflowsection {
+    // height: 660px;
+        height: 710px
+  }
+}
+
+
 @media only screen and (max-width: 640px) {
   .coverflowsection {
-    height: 660px;
+    // height: 660px;
+        height: 800px
   }
 }
 

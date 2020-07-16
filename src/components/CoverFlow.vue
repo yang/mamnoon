@@ -16,7 +16,18 @@
 
 
 <h4 class="noselect">family meal calendar</h4>
+
+
+<p style="text-align:left;margin-top: 20px;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque.       
+</p>
+
 	</div>
+
+	<div id="container"></div>
+
+
+<div class="full-width-block">
 <div v-if="title" class="title noselect">
 <a :href="link" target="_blank">	
 	{{title | truncate(60, '...')}}
@@ -24,11 +35,14 @@
 
 </div>
 <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div>
-	<div id="container"></div>
 
-    <div style="width:480px;">
 
-	</div>
+</div>
+
+
+    <!-- <div style="width:480px;">
+
+	</div> -->
 
         <div class="bottom-button">
 	<a class="left-button" onclick="coverflow().prev();"><Prev /></a>
@@ -315,7 +329,8 @@ width: 80%;
 #container.coverflow:active{
 	outline: none;
 	overflow: hidden;
-    margin-top: 40px;
+    // margin-top: 40px;
+	    margin-top: 20px;
 	.coverflow-wrap{
 		transform: scale(1.75);
 	}
@@ -357,16 +372,15 @@ width: 80%;
 	top: 0;
     position: absolute;
     top: 0;
+	z-index: 90;
 }
 
 
 
 .toggleVegContainer{
-		position: absolute;
+	position: absolute;
 	right: 10px;
-	top: 0;
-
-    top: 31px;
+	bottom: 156px;
 }
 
 .switch {
@@ -446,7 +460,7 @@ input:checked + .slider:before {
 	border-radius: 15px;
 
 	border: 2px solid transparent;
-		border: 1px solid white;
+		border: 1px solid #F05D5B;
 	&.redBackground{
 			background-color: #F05D5B;
 	}
@@ -477,8 +491,34 @@ input:checked + .slider:before {
 }
 
 
+.bottom-button{
+	border: 1px solid #F05D5B;
+}
+
 .bottom-button a.full-width{
 	width: 100%;
 }
+
+.full-width-block{
+	width: 100%;
+    background: white;
+  min-height: 170px;
+border: 1px solid #F05D5B;
+margin-top: 30px;
+
+
+.description,
+.title,
+.title a,
+a.link{
+color: #F05D5B;
+}
+
+}
+
+
+
+
+
 
 </style>
