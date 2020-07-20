@@ -48,6 +48,7 @@ export default {
       let response = await this.$http.get('/user/email/' + email['Au']) 
 
       let currentUserInfo = response.data
+      console.log(currentUserInfo)
       this.$store.commit('updateCurrentUser', { currentUserInfo })
   },
     handleClickSignIn() {
@@ -76,11 +77,11 @@ export default {
         .signOut()
         .then(() => {
           //on success do something
-          // this.isSignIn = this.$gAuth.isAuthorized;
+          this.isSignIn = this.$gAuth.isAuthorized;
 
 
-          this.isSignIn = false
-          location.reload()
+          // this.isSignIn = false
+          // location.reload()
         })
         .catch(error => {
           //on fail do something

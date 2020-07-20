@@ -7,26 +7,15 @@
         <!-- {{ $store.state.userInfo.user.products }} -->
         </h1>
         </div>
-
         <GiftCardModule />
-       
-        <!-- <TestimonialForm :emailAddress="$store.state.userInfo.user.email" /> -->
-       
+        <TestimonialForm :emailAddress="$store.state.userInfo.user.email" />
         <ToggleVegetarian />
-
-
-    <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
-
-
-
-
-
-
+        <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
      
     </div>
 </template>
 
-<script>
+<script type="text/javascript">
 
 
 // import addproduct from "@/components/auth/addproduct";
@@ -48,6 +37,9 @@ methods: {
     hideUserModal () {
     this.$store.commit('hideUserModal')
     }
+},
+mounted(){
+    console.log(this.$store.state)
 }
 }
 </script>
