@@ -1,5 +1,6 @@
 <template>
-<div class="container section-pad">
+ <div class="container nav-acc-header pad-white-background">
+
 <div class="row">
 
 <div class="col-6 col-lg-3">
@@ -68,7 +69,7 @@
 <div class="col-6 col-lg-9 testimonials-list">
 testimonials: 
 <br>
-<ul>
+<!-- <ul>
 
 <li v-for="test in testimonials.slice().reverse()" :key="test.title">
     <b>{{test.title}}</b><br>
@@ -78,7 +79,7 @@ testimonials:
 
 </li>
 
-</ul>
+</ul> -->
 
 </div>
 </div>
@@ -92,7 +93,7 @@ testimonials:
 export default {
 name: 'testimonialform',
 data () {
-return{
+return {
     errors: [],
     testimonials: null,
     messageBody: {
@@ -146,10 +147,10 @@ mounted () {
   console.log('mounted')
   this.getTestimonials()
 },
-updated () {
- console.log('updated')
-   this.getTestimonials()
-},
+// updated () {
+//  console.log('updated')
+//    this.getTestimonials()
+// },
 created() {
       window.addEventListener('beforeunload', this.handler)
     },

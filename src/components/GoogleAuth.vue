@@ -76,7 +76,11 @@ export default {
         .signOut()
         .then(() => {
           //on success do something
-          this.isSignIn = this.$gAuth.isAuthorized;
+          // this.isSignIn = this.$gAuth.isAuthorized;
+
+
+          this.isSignIn = false
+          location.reload()
         })
         .catch(error => {
           //on fail do something
