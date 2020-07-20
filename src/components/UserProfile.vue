@@ -2,13 +2,17 @@
     <div class="fixed-profile">
         <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button>
         <div class="container nav-acc-header pad-white-background">
-        <h1 v-if="$store.state.userInfo.user.email">
-        welcome back, {{ $store.state.userInfo.user.email | generateUsername() }}
+        <!-- <h1 v-if="$store.state.userInfo.user.email"> -->
+        <!-- welcome back, {{ $store.state.userInfo.user.email | generateUsername() }} -->
         <!-- {{ $store.state.userInfo.user.products }} -->
+        <!-- </h1> -->
+        
+        <h1>
+            welcome back
         </h1>
         </div>
         <GiftCardModule />
-        <TestimonialForm :emailAddress="$store.state.userInfo.user.email" />
+        <!-- <TestimonialForm :emailAddress="$store.state.userInfo.user.email" /> -->
         <ToggleVegetarian />
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
      
@@ -33,13 +37,9 @@ name: 'UserProfile',
     ToggleVegetarian 
   },
 methods: {
-
     hideUserModal () {
     this.$store.commit('hideUserModal')
     }
-},
-mounted(){
-    console.log(this.$store.state)
 }
 }
 </script>
