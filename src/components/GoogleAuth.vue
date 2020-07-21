@@ -44,9 +44,11 @@ export default {
         });
     },
     async showUserInfo(email){
-      console.log(email['Au'])
-      let response = await this.$http.get('/user/email/' + email['Au']) 
+console.log('showing user info')
+      let response = await this.$http.get('/user/email/' + email.yu) 
 
+
+console.log(response)
       let currentUserInfo = response.data
       console.log(currentUserInfo)
       this.$store.commit('updateCurrentUser', { currentUserInfo })
@@ -55,6 +57,7 @@ export default {
       this.$gAuth
         .signIn()
         .then(GoogleUser => {
+
 
           var profile = GoogleUser.getBasicProfile();
 
