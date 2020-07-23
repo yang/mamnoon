@@ -2,17 +2,18 @@
     <div class="fixed-profile">
         <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button>
         <div class="container nav-acc-header pad-white-background">
-        <!-- <h1 v-if="$store.state.userInfo.user.email"> -->
-        <!-- welcome back, {{ $store.state.userInfo.user.email | generateUsername() }} -->
-        <!-- {{ $store.state.userInfo.user.products }} -->
-        <!-- </h1> -->
-        
-        <h1>
-            welcome back
+
+{{$store.state.currentUserEmail}}
+
+        <h1 v-if="$store.state.currentUserEmail === ''">
+            welcome back, {{ $store.state.userInfo.user.email | generateUsername() }}
+                <br/>
+            {{ $store.state.userInfo.user.email }}
         </h1>
+        <!-- <h1>welcome back</h1>  -->
         </div>
         <GiftCardModule />
-        <!-- <TestimonialForm :emailAddress="$store.state.userInfo.user.email" /> -->
+        <TestimonialForm :emailAddress="$store.state.userInfo.user.email" />
         <ToggleVegetarian />
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
      
@@ -29,7 +30,7 @@ import GiftCardModule from "@/components/GiftCardModule";
 import ToggleVegetarian from "@/components/ToggleVegetarian";
 
 
-export default{
+export default {
 name: 'UserProfile',
   components: {
     TestimonialForm,

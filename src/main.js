@@ -11,13 +11,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
+import StoryblokVue from 'storyblok-vue'
 
-// Vue.component('CoverFlow', CoverFlow)
-// Vue.component('CoverFlowSlide', CoverFlowSlide)
+
+Vue.use(StoryblokVue)
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
-baseURL: 'https://young-hamlet-03679.herokuapp.com'
+  baseURL: "http://localhost:4000"
+// baseURL: 'https://young-hamlet-03679.herokuapp.com'
 });
 
 
@@ -79,6 +80,7 @@ const store = new Vuex.Store({
     shoppingCartItems: [],
     cart: 0,
     userName: 'joe',
+    currentUserEmail: '',
     userInfo: {},
     vegetarian: false,
     inventory: {
@@ -422,6 +424,7 @@ const store = new Vuex.Store({
     },
     logOut (state) {
       state.loggedIn = false
+      state.currentUserEmail = ''
     },
     logIn (state) {
       state.loggedIn = true
@@ -533,6 +536,13 @@ const store = new Vuex.Store({
     updateCurrentUser(state, { currentUserInfo }){
       state.userInfo = currentUserInfo
     },
+    setCurrentUserEmail(state, { currentUserEmail }){
+      state.currentUserEmail = currentUserEmail
+    },
+    clearCurrentUser (state) {
+      state.userInfo = null
+      state.currentUserEmail = null
+    },
     toggleVegetarian (state) {
       state.vegetarian = !state.vegetarian
     },
@@ -543,14 +553,9 @@ const store = new Vuex.Store({
       state.userProfileModalVisible = true
     }
     // async importTestimonials (state, { testimonialAdd }) {
-    
-
-
-  
     //     state.inventory.offerings = state.inventory.offerings.filter(function( obj ) {
     //       return obj.snipcart !== true;
     //     });
-  
     //     state.inventory.offerings.push({
     //       visible: true,
     //       title: 'mama shop',
@@ -560,16 +565,11 @@ const store = new Vuex.Store({
     //       snipcart: true,
     //       items: inventoryAdd
     //     })
-  
-
     // }    
   }
 })
 
-
-
 // endvuexstoremethods
-
 
 new Vue({
   router,

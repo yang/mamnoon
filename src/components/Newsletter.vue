@@ -2,11 +2,11 @@
     <section id="newsletter" class="section hero is-primary is-fullheight">
       <div class="newsletter-section">
         <div class="pad-cont">
-        <h4 class="noselect">
-            sign up for newsletter
-        </h4>
-            <p class="thick-white noselect">
-                Lorem ipsum dolor sit amet, consectetur eiusmod tempor incididunt ut labore tempor incididunt
+            <h4 class="noselect">
+                {{ title }}
+            </h4>
+            <p v-if="description" class="thick-white noselect">
+                {{ description }}
             </p> 
         </div>
       </div>
@@ -27,8 +27,7 @@ import CampaignMonitor from '@/components/CampaignMonitor.vue'
 import Send from '@/components/Send.vue'
 
 export default {
-
-
+props: ['title', 'description'],
 components: {
     Send,
     CampaignMonitor

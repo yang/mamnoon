@@ -6,14 +6,18 @@
         @click="handleClickSignIn"
         v-if="!isSignIn"
         :disabled="!isInit"
-      >sign in with google</a>
+      >
+      sign in with google
+
+      </a>
       <a
         type="primary"
         icon="fas fa-edit"
         @click="handleClickSignOut"
         v-if="isSignIn"
         :disabled="!isInit"
-      >sign out</a>
+      >sign out
+      </a>
   </div>
 </template>
 
@@ -43,28 +47,44 @@ export default {
           console.error(error);
         });
     },
-    async showUserInfo(email){
-console.log('showing user info')
-      let response = await this.$http.get('/user/email/' + email.yu) 
+    showUserInfo(email){
+ 
+let self = this
+      this.$http
+        .get('/user/email/' + email)
+        .then(function(response) {
+     console.log(response)
 
 
-console.log(response)
       let currentUserInfo = response.data
       console.log(currentUserInfo)
-      this.$store.commit('updateCurrentUser', { currentUserInfo })
+      self.$store.commit('updateCurrentUser', { currentUserInfo })
+
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
   },
     handleClickSignIn() {
       this.$gAuth
         .signIn()
         .then(GoogleUser => {
 
+        var profile = GoogleUser.getBasicProfile();
 
-          var profile = GoogleUser.getBasicProfile();
+        console.log("Email: " + profile.getEmail());
 
-          this.showUserInfo(GoogleUser.getBasicProfile())
-          this.isSignIn = this.$gAuth.isAuthorized;
+        console.log(this.$gAuth.isAuthorized)
+        // console.log(profile)
+        this.showUserInfo(profile.getEmail())
+        this.isSignIn = this.$gAuth.isAuthorized;
 
-          this.$store.commit('logIn')
+        this.$store.commit('logIn')
+
+        let currentUserEmail = profile.getEmail()
+
+        this.$store.commit('setCurrentUserEmail', { currentUserEmail })
 
         })
         .catch(error => {
@@ -84,7 +104,16 @@ console.log(response)
 
 
           // this.isSignIn = false
-          // location.reload()
+          location.reload()
+
+
+// clear user current email and clear user info
+
+  this.$store.commit('clearCurrentUser')
+
+
+
+
         })
         .catch(error => {
           //on fail do something

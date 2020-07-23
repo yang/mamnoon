@@ -1,19 +1,11 @@
 <template>
  <div class="container nav-acc-header pad-white-background">
-
 <div class="row">
-
 <div class="col-6 col-lg-3">
-
 <h4>
-  add a testimonial
+  add a testimonial for {{emailAddress}}
 </h4>
-
-<form
-  id="app"
-@submit.prevent="checkForm"
->
-
+<form id="app" @submit.prevent="checkForm">
 
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
@@ -21,8 +13,6 @@
       <li :key="error" v-for="error in errors">{{ error }}</li>
     </ul>
   </p>
-
-
   <p>
     <label for="name">Title</label>
     <br>
@@ -69,9 +59,16 @@
 <div class="col-6 col-lg-9 testimonials-list">
 testimonials: 
 <br>
-<!-- <ul>
+<ul v-if="testimonials">
 
-<li v-for="test in testimonials.slice().reverse()" :key="test.title">
+<li v-for="test in testimonials.slice().reverse()" :key="test._id">
+
+
+
+<button @click="removeTestimonial(test._id,emailAddress)">remove</button>
+
+{{test._id}}
+
     <b>{{test.title}}</b><br>
     <p>
        {{test.body}} 
@@ -79,7 +76,7 @@ testimonials:
 
 </li>
 
-</ul> -->
+</ul>
 
 </div>
 </div>
@@ -110,7 +107,7 @@ methods: {
       try {
         let response = await this.$http.post("/user/submittestimonial", this.messageBody);
         // console.log(response.data.user.testimonials);
-        console.log(response.data.usertestimonials)
+        console.log(response.data)
         this.testimonials = response.data.user.testimonials
 
         this.messageBody = {
@@ -125,11 +122,39 @@ methods: {
     },
     async getTestimonials() {
 
+console.log('get testimonials')
+console.log(this.emailAddress)
       try {
         let response = await this.$http.get("/user/gettestimonials/" + this.emailAddress);
 
+
+       console.log(response.data)
+
         this.testimonials = response.data.usertestimonials
+
+
+ 
          } catch (err) {
+        console.log(err.response);
+      }
+
+    },
+    async removeTestimonial(testimonialId,userEmail){
+
+      console.log(testimonialId)
+
+
+    try {
+      let response = await this.$http.post('/user/deletetestimonial/', {
+      testimonialId,
+      userEmail
+      }) 
+     
+      console.log(response)
+
+    this.getTestimonials();
+    } catch (err) {
+               swal("Error", "Something Went Wrong", "error");
         console.log(err.response);
       }
 
@@ -147,15 +172,36 @@ mounted () {
   console.log('mounted')
   this.getTestimonials()
 },
-// updated () {
-//  console.log('updated')
-//    this.getTestimonials()
-// },
 created() {
       window.addEventListener('beforeunload', this.handler)
     },
     beforeDestroy(){
       console.log('before destory')
+    },
+    computed: {
+    testimonialList () {
+      return this.$store.state.userInfo
+	}
+    },
+    watch: {
+          testimonialList (newTestimonial, oldTestimonial) {
+
+
+console.log('oldTestimonial: ')
+console.log(oldTestimonial)
+
+
+console.log('newTestimonial: ')
+
+
+
+console.log(newTestimonial)
+
+
+
+
+	}
+
     }
 }
 </script>

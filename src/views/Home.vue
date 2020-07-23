@@ -3,12 +3,10 @@
 <Nav />
   <transition name="fade">
     <template v-if="this.$store.state.userProfileModalVisible">
-<UserProfile v-if="this.$store.state.loggedIn" />
+    <UserProfile v-if="this.$store.state.loggedIn" />
     </template>
-
-
 </transition>
-      <!-- <div class="container mt-5 nav-acc-header" :class="{ morePadding: this.$store.state.loggedIn }"> -->
+ <!-- <div class="container mt-5 nav-acc-header" :class="{ morePadding: this.$store.state.loggedIn }"> -->
       <div class="container mt-5 nav-acc-header">
         <div class="row">
           <div class="col-md-12">
@@ -21,11 +19,7 @@
     {{ item }}
   </li>
   </ul>
-
-
-
 <SlideShow />
-
 <!-- <Products /> -->
           </div>
         </div>
@@ -34,14 +28,10 @@
   </div>
 </template>
 <script>
+
 import VueJwtDecode from "vue-jwt-decode";
-
-
 import SlideShow from "@/components/SlideShow";
-
-
 import UserProfile from "@/components/UserProfile";
-
 import Products from "@/components/Products";
 import Nav from "@/components/Nav";
 

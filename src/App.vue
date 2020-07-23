@@ -1,11 +1,20 @@
 <template>
   <div id="app">
     <router-view />
-
   </div>
 </template>
 
+<script type="text/javascript">
 
+
+export default {
+  mounted () {
+    if(this.$router.currentRoute.fullPath === '/'){
+      this.$router.push('home');
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 

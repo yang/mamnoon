@@ -70,7 +70,7 @@ export default {
         let token = response.data.token;
         localStorage.setItem("jwt", token);
         if (token) {
-          swal("Success", "Login Successful", "Error");
+          // swal("Success", "Login Successful", "Error");
           this.$router.push("/");
 // this.$store.commit('logIn', { timeslot })
 this.$store.commit('logIn')
@@ -78,7 +78,7 @@ console.log(this.$store.state.loggedIn)
 
         }
       } catch (err) {
-        swal("Error", "Something Went Wrong", "error");
+        // swal("Error", "Something Went Wrong", "error");
         console.log(err.response);
       }
     }

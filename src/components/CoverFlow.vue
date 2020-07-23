@@ -1,5 +1,29 @@
 <template>
+
+
 <div>
+<div class="tock-panel" v-if="tockPanelVisible">
+
+<h1>current tock meals</h1>
+<div v-for="tockMeal in this.$store.state.inventory.tockMeals">
+link: {{tockMeal.createdLink}}&nbsp;&nbsp;<br>
+title: {{tockMeal.title}}&nbsp;&nbsp;<br>
+description: {{tockMeal.description}}&nbsp;&nbsp;<br>
+<div v-if="tockMeal.veg === true">vegetarian</div>
+<div else>meat</div>
+<div v-if="tockMeal.delivery === true">delivery</div>
+<div else>pickup</div>
+<br><br>
+</div>
+
+
+</div>
+<div>
+
+
+
+
+
 	<div class="toggleVegContainer">
 <button class="toggleVeg" :class='{redBackground: $store.state.vegetarian}' @click="toggleVegetarian">
 	<div class="lrbutton" :class='{lrExpanded: $store.state.vegetarian}'>
@@ -15,11 +39,11 @@
 
 
 
-<h4 class="noselect">family meal calendar</h4>
+<h4 class="noselect">{{titleFromCMS}}</h4>
 
 
 <p style="text-align:left;margin-top: 20px;">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque.       
+{{descriptionFromCMS}}
 </p>
 
 	</div>
@@ -67,7 +91,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 		  </div>
 
-  </div>
+  
+  </div></div>
 </template>
 
 
@@ -99,6 +124,7 @@ export default {
 			description: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].description : 'loading...',
 			link: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].createdLink : 'loading...',
 			delivery: this.$store.state.inventory.tockMeals.length > 0 ? this.$store.state.inventory.tockMeals[0].delivery : 'loading...',
+			tockPanelVisible: false
 		}
 		},
   mounted(){
@@ -127,7 +153,7 @@ export default {
 		}
 
 	},
-	  props: ['products'],
+	  props: ['products','titleFromCMS','descriptionFromCMS'],
 	   computed: {
     count () {
       return this.$store.state.inventory.tockMeals
@@ -178,6 +204,12 @@ export default {
   },
 created() {
   window.addEventListener("resize", this.myEventHandler);
+		if(window.location.search === '?showTock'){
+			// console.log(this.$store.state.inventory.tockMeals
+				this.tockPanelVisible = true
+			}else{
+		this.tockPanelVisible = false
+			}
 },
 destroyed() {
   window.removeEventListener("resize", this.myEventHandler);
@@ -518,7 +550,16 @@ color: #F05D5B;
 
 
 
-
+.tock-panel{
+	border: 1px solid blue;
+    padding: 10px;
+    position: fixed;
+    z-index: 100;
+    top: 3%;
+    background: #ffffffc7;
+    left: 5%;
+    width: 90%;
+}
 
 
 </style>

@@ -93,21 +93,7 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-
-
-
-    },
-    // async useBalance() {
-
-    // let giftcardLookup = await this.$http.post("/user/usegiftcard", {
-    //   cardNumber: this.cardNumberInput,
-    //   useAmount: this.amountUse
-    // });
-    // let giftcardResponse = giftcardLookup.data;
-    // // console.log(giftcardResponse)
-    // console.log(giftcardResponse.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
-    // this.currentBalance = giftcardResponse.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
-    // }
+    }
   },
   mounted() {}
 };
