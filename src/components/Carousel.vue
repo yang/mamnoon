@@ -3,11 +3,6 @@
     <section id="familymeal" class="coverflowsection">
       <CoverFlow :titleFromCMS="blok.content.body[0].familyMealHeader" :descriptionFromCMS="blok.content.body[0].familyMealDescription" :products="products" />
     </section>
-
-
-
-
-
     <section
       :id="offering.category"
       v-for="(offering,index) in inventory.offerings"
@@ -128,6 +123,7 @@
                     v-bind:data-item-name="mamaItem.body[1].value"
                     v-bind:data-item-description="mamaItem.body[4].value"
                     v-bind:data-item-weight="mamaItem.body[5].value"
+                    data-item-url="/home"
                   >
                     <Order />
                   </button>

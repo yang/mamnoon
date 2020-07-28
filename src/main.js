@@ -12,6 +12,8 @@ import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
 import StoryblokVue from 'storyblok-vue'
+// import { updateTockOfferings } from "../../../server/api/tock/controller/tockController";
+// import { update } from "../../../server/api/product/model/Product";
 
 
 Vue.use(StoryblokVue)
@@ -20,6 +22,7 @@ const base = axios.create({
   baseURL: "http://localhost:4000"
 // baseURL: 'https://young-hamlet-03679.herokuapp.com'
 });
+
 
 
 Vue.prototype.$http = base;
@@ -70,6 +73,9 @@ const vuexLocalStorage = new VuexPersist({
 // var today = new Date();
 // var dd = String(today.getDate()).padStart(2, '0');
 
+
+
+
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
@@ -96,86 +102,7 @@ const store = new Vuex.Store({
           tock: true,
           tockButton: true,
           insideHeader: true,
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque",
-          items: [
-            {
-              title: 'Monday, June 29',
-              image: './assets/img/1.jpg',
-              month: "june",
-              days: 31,
-              price: 40.00,
-              today: true,
-              description: '4th of July Grill Kit - pick up on the 3rd, 3pm - 9pm',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
-            },
-            {
-              title: 'Tuesday, June 30',
-              image: './assets/img/2.jpg',
-              month: "july",
-              days: 31,
-              price: 40.00,
-              today: false,
-              // description: 'Meat or Vegetarian- Pick Up',
-              description: 'Shish Taouk',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
-            },
-            {
-              title: 'Wednesday, July 1',
-              image: './assets/img/3.jpg',
-              month: "august",
-              days: 31,
-              price: 40.00,
-              today: false,
-              // description: 'Meat or Vegetarian- Pick Up',
-              description: 'Mamnoon Fried Chicken',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
-            },
-            {
-              title: 'Thursday, July 2',
-              image: './assets/img/4.jpg',
-              month: "september",
-              days: 31,
-              price: 40.00,
-              today: false,
-              // description: 'Meat or Vegetarian- Pick Up',
-              description: 'Potato Kibbeh-Pick Up',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
-            },
-            {
-              title: 'Friday, July 3',
-              image: './assets/img/5.jpg',
-              month: "september",
-              days: 31,
-              price: 40.00,
-              today: false,
-              description: 'Meat or Vegetarian- Pick Up',
-              // description: ''
-              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
-            },
-            {
-              title: 'Saturday, July 4',
-              image: './assets/img/5.jpg',
-              month: "september",
-              days: 31,
-              price: 40.00,
-              today: false,
-              description: 'Mamnoon Beef and Lamb Kefta',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
-              // description: ''
-            },
-            {
-              title: 'Sunday, July 5',
-              image: './assets/img/1.jpg',
-              month: "september",
-              days: 31,
-              price: 40.00,
-              today: false,
-              // description: 'Meat or Vegetarian- Pick Up',
-              description: 'Potato Kibbeh-Pick Up',
-              link: 'https://www.exploretock.com/mamnoonrestaurant/experience/156714/'
-              // description: ''
-            },
-          ]
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque"
         },
         {
           visible: true,
@@ -186,14 +113,12 @@ const store = new Vuex.Store({
           items: [
             {
               name: "mamnoon",
-              // image: './assets/cav/1.jpg',
               price: 5.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
             },
             {
               name: "mamnoon street",
-              // image: './assets/cav/2.jpg',
               price: 10.00,
               description: '',
               caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
@@ -530,6 +455,43 @@ const store = new Vuex.Store({
       })
 
     },
+   async updateTockItem(state, { updateTockItem }){
+
+      let tockItem = state.inventory.tockMeals[updateTockItem.index]
+      let tock = updateTockItem
+
+      if(tock.item === 'title'){
+        tockItem.title = tock.text
+      }else if(tock.item === 'description'){
+        tockItem.description = tock.text
+      }else if(tock.item === 'image'){
+        tockItem.image = tock.text
+      }
+
+          // base.post(`/tock/removealltocks`)
+          // .then(function(res){
+          // })
+          // .catch(function(err){
+          //   console.log(err)
+          // })
+
+          base.post(`/tock/updatetockofferings`, { update: state.inventory.tockMeals})
+          .then(function(res){
+          console.log(res.data.data.tockMeals)
+
+
+
+          state.inventory.tockMeals = res.data.data.tockMeals
+
+          })
+          .catch(function(err){
+          console.log(err)
+
+          })
+
+
+
+    },
     showMessage () {
       console.log('this is th emesae')
     },
@@ -552,24 +514,10 @@ const store = new Vuex.Store({
     showUserModal (state) {
       state.userProfileModalVisible = true
     }
-    // async importTestimonials (state, { testimonialAdd }) {
-    //     state.inventory.offerings = state.inventory.offerings.filter(function( obj ) {
-    //       return obj.snipcart !== true;
-    //     });
-    //     state.inventory.offerings.push({
-    //       visible: true,
-    //       title: 'mama shop',
-    //       category: 'mama-shop',
-    //       responsive: true,
-    //       caviarButton: true,
-    //       snipcart: true,
-    //       items: inventoryAdd
-    //     })
-    // }    
+   
   }
 })
 
-// endvuexstoremethods
 
 new Vue({
   router,
@@ -577,24 +525,37 @@ new Vue({
   render: h => h(App),
   async mounted () {
 
+    // base.post(`/tock/removealltocks`)
+    // .then(function(res){
+      
+    // })
+    // .catch(function(err){
+    //   console.log(err)
+    // })
 
+
+
+
+    // get tock meals from the database
+        
+// let mongoTock = await this.$http.get(`/tock/mongotock`)
+// let tockResponse = mongoTock
+// console.log(tockResponse)
+
+
+let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
+let inventoryTockAdd = responseTock.data.tockMeals
+this.$store.commit('updateTockMeals', { inventoryTockAdd })
+
+let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
+let inventoryTockAddStreet = responseTockStreet.data.tockMeals
+this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
+
+
+    
     let response = await this.$http.get('/product/snipcartproducts') 
     let inventoryAdd = response.data.body.items
     this.$store.commit('updateInventory', { inventoryAdd })
-
-
-    let responseTock = await this.$http.get('/product/tockmeals')
-    let inventoryTockAdd = responseTock.data.tockMeals
-    this.$store.commit('updateTockMeals', { inventoryTockAdd })
-
-
-    let responseTockStreet = await this.$http.get('/product/tockstreetmeals')
-    let inventoryTockAddStreet = responseTockStreet.data.tockMeals
-    this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
-
-
-
-
 
 
 

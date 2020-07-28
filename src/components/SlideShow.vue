@@ -65,9 +65,6 @@ methods: {
         version: version
       })
       .then((response) => {
-
-console.log(response.data.story)
-
         this.story = response.data.story
       })
       .catch((error) => {
