@@ -123,7 +123,7 @@
                     v-bind:data-item-name="mamaItem.body[1].value"
                     v-bind:data-item-description="mamaItem.body[4].value"
                     v-bind:data-item-weight="mamaItem.body[5].value"
-                    data-item-url="/"
+                    data-item-url="https://www.nadimama.com/sanitizer.json"
                   >
                     <Order />
                   </button>
