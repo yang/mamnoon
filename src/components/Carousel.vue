@@ -124,7 +124,7 @@
                     v-bind:data-item-description="mamaItem.body[4].value"
                     v-bind:data-item-weight="mamaItem.body[5].value"
                     data-item-url="https://www.nadimama.com/sanitizer.json"
-                  >{{mamaItem.body[2].value}}
+                  >
                     <Order />
                   </button>
                 </div>

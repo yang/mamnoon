@@ -8,11 +8,7 @@
 
 
 export default {
-  mounted () {
-    if(this.$router.currentRoute.fullPath === '/'){
-      this.$router.push('home');
-    }
-  }
+
 }
 </script>
 
