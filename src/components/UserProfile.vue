@@ -50,9 +50,10 @@ methods: {
     position: fixed;
     top: 142px;
     width: 100%;
-    background: #FFF367;
+    background: #f05d5b85;
     padding: 30px 0;
     z-index: 99;
+    height: 100vh;
 }
 
 
@@ -62,10 +63,15 @@ methods: {
 }
 
 .pad-white-background{
-    background: rgb(255,255,255);
+    background: #ffffffeb;
+    border: 1px solid black;
     padding: 20px 30px;
     margin-bottom: 20px;
+    border-radius: 10px;
 }
+
+
+
 
 @media only screen and (max-width: 1080px) {
   .fixed-profile{
