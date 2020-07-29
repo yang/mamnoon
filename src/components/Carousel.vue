@@ -3,6 +3,12 @@
     <section id="familymeal" class="coverflowsection">
       <CoverFlow :titleFromCMS="blok.content.body[0].familyMealHeader" :descriptionFromCMS="blok.content.body[0].familyMealDescription" :products="products" />
     </section>
+
+
+
+<!-- {{blok.content.body[0]}} -->
+<!-- {{blok.content.body[0].testimonials.tbody}} -->
+
     <section
       :id="offering.category"
       v-for="(offering,index) in inventory.offerings"
@@ -10,6 +16,7 @@
       class="section hero is-primary is-fullheight"
       v-bind:class="{familymeal : index === 0}"
     >
+    <!-- {{offering}} -->
       <div
         v-if="offering.visible"
         v-bind:class="{ carousel: !offering.reservationBlock, shortcarousel: offering.reservationBlock }"
@@ -104,6 +111,9 @@
               <Prev />
             </span>
           </template>
+
+
+
 
     <div v-for="mamaItem in blok.content.body[0].testimonials.tbody" :key="mamaItem._uid">
 
@@ -259,15 +269,6 @@
 
             <img v-else v-bind:src="item.image" />
             
-
-
-
-
-   
-
-
-
-
 
 
             {{item.description}}
@@ -438,8 +439,10 @@ export default {
       console.log("changed");
     },
     async showProducts() {
-      // let response = await this.$http.get('/product/snipcartproducts')
-      let response = this.$store.state.inventory.offerings[0];
+      let response = await this.$http.get('/product/snipcartproducts')
+      // let response = this.$store.state.inventory.offerings[0];
+      console.log('response: ')
+            console.log(response)
       this.products = response;
     }
   },
@@ -447,7 +450,7 @@ export default {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
     this.currentDay = dd;
-    // this.showProducts();
+    this.showProducts();
 
   }
 
