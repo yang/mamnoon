@@ -437,20 +437,13 @@ export default {
     },
     changedAlert() {
       console.log("changed");
-    },
-    async showProducts() {
-      let response = await this.$http.get('/product/snipcartproducts')
-      // let response = this.$store.state.inventory.offerings[0];
-      console.log('response: ')
-            console.log(response)
-      this.products = response;
     }
   },
   created() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
     this.currentDay = dd;
-    this.showProducts();
+
 
   }
 
