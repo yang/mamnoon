@@ -1,13 +1,11 @@
 <template>
-  <main v-editable="blok">
+  <main v-editable="blok" v-if="blok.content.body[0]">
     <section id="familymeal" class="coverflowsection">
+
       <CoverFlow :titleFromCMS="blok.content.body[0].familyMealHeader" :descriptionFromCMS="blok.content.body[0].familyMealDescription" :products="products" />
     </section>
 
 
-
-<!-- {{blok.content.body[0]}} -->
-<!-- {{blok.content.body[0].testimonials.tbody}} -->
 
     <section
       :id="offering.category"
@@ -132,8 +130,7 @@
                     v-bind:data-item-image="mamaItem.body[3].value"
                     v-bind:data-item-name="mamaItem.body[1].value"
                     v-bind:data-item-description="mamaItem.body[4].value"
-                    v-bind:data-item-weight="mamaItem.body[5].value"
-                    data-item-url="https://www.nadimama.com/sanitizer.json"
+                    data-item-url="https://www.nadimama.com/products.json" 
                   >
                     <Order />
                   </button>

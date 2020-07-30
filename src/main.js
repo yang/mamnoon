@@ -564,9 +564,9 @@ this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
 
 
     
-    let response = await this.$http.get('/product/snipcartproducts') 
-    let inventoryAdd = response.data.body.items
-    this.$store.commit('updateInventory', { inventoryAdd })
+    // let response = await this.$http.get('/product/snipcartproducts') 
+    // let inventoryAdd = response.data.body.items
+    // this.$store.commit('updateInventory', { inventoryAdd })
 
 
 

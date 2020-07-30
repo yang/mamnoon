@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="tock-panel" v-if="tockPanelVisible">
-
-
-<button @click="freshTockPull()">wipe and refresh tock</button>
+      <button @click="freshTockPull()">wipe and refresh tock</button>
 
       <div class="tock-inner">
         <h1>current tock meals</h1>
-        <div :key="tockMeal.title" v-for="(tockMeal, index) in this.$store.state.inventory.tockMeals">
+        <div
+          :key="tockMeal.title"
+          v-for="(tockMeal, index) in this.$store.state.inventory.tockMeals"
+        >
           link:
           <br />
           {{tockMeal.createdLink}}
@@ -18,7 +19,9 @@
           <br />description:
           <br />
           <textarea class="tockEditField" type="text" v-model="tockMeal.description" />&nbsp;&nbsp;
-          <button @click="updateTockItem(tockMeal.description, 'description', index)">update</button>
+          <button
+            @click="updateTockItem(tockMeal.description, 'description', index)"
+          >update</button>
           <br />image:
           <br />
           <img class="tockEditImage" :src="tockMeal.image" />
@@ -49,7 +52,6 @@
       </div>
       <div class="position-relative">
         <h4 class="noselect">{{titleFromCMS}}</h4>
-
         <p style="text-align:left;margin-top: 20px;">{{descriptionFromCMS}}</p>
       </div>
 
@@ -62,7 +64,7 @@
         <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div>
       </div>
 
-     <div class="bottom-button">
+      <div class="bottom-button">
         <a class="left-button" onclick="coverflow().prev();">
           <Prev />
         </a>
@@ -76,9 +78,9 @@
               <template v-if="delivery">
                 <DeliveryStar />
               </template>
-			  <template v-else>
-				<PickupStar />
-			  </template> 
+              <template v-else>
+                <PickupStar />
+              </template>
             </transition>
           </div>
         </a>
@@ -140,14 +142,22 @@ export default {
 
       this.reset(map1);
     } else {
-      this.productsList = this.$store.state.inventory.tockMeals;
 
+
+    if (this.$store.state.inventory.tockMeals[0]) {
+      this.productsList = this.$store.state.inventory.tockMeals;
       this.title = this.$store.state.inventory.tockMeals[0].title;
       this.description = this.$store.state.inventory.tockMeals[0].description;
       this.link = this.$store.state.inventory.tockMeals[0].createdLink;
       this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
 
+    }
+
       this.reset(this.productsList);
+
+
+
+
     }
   },
   props: ["products", "titleFromCMS", "descriptionFromCMS"],
@@ -193,31 +203,30 @@ export default {
   created() {
     window.addEventListener("resize", this.myEventHandler);
     if (window.location.search === "?showTock") {
-           this.tockPanelVisible = true;
+      this.tockPanelVisible = true;
     } else {
-       this.tockPanelVisible = false;
+      this.tockPanelVisible = false;
     }
   },
   destroyed() {
     window.removeEventListener("resize", this.myEventHandler);
   },
   methods: {
-    async freshTockPull(){
-    let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
-    let inventoryTockAdd = responseTock.data.tockMeals
-    this.$store.commit('updateTockMeals', { inventoryTockAdd })
+    async freshTockPull() {
+      let responseTock = await this.$http.get(`/tock/tockmeals/${false}`);
+      let inventoryTockAdd = responseTock.data.tockMeals;
+      this.$store.commit("updateTockMeals", { inventoryTockAdd });
 
-    let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
-    let inventoryTockAddStreet = responseTockStreet.data.tockMeals
-    this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
+      let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`);
+      let inventoryTockAddStreet = responseTockStreet.data.tockMeals;
+      this.$store.commit("updateTockMealsStreet", { inventoryTockAddStreet });
     },
-   updateTockItem(text, item, index) {
-
-    let updateTockItem = {
+    updateTockItem(text, item, index) {
+      let updateTockItem = {
         text,
         item,
-        index
-    }
+        index,
+      };
       this.$store.commit("updateTockItem", { updateTockItem });
 
       if (this.$store.state.vegetarian === true) {
@@ -240,7 +249,7 @@ export default {
         this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
         this.reset(this.productsList);
       }
-    // big thing
+      // big thing
     },
     toggleVegetarian() {
       this.$store.commit("toggleVegetarian");
