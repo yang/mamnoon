@@ -15,19 +15,19 @@
           <br />title:
           <br />
           <input class="tockEditField" type="text" v-model="tockMeal.title" />&nbsp;&nbsp;
-          <button @click="updateTockItem(tockMeal.title, 'title', index)">update title</button>
+          <button @click="updateTockItem(tockMeal.title, 'title', index, tockMeal._id)">update title</button>
           <br />description:
           <br />
           <textarea class="tockEditField" type="text" v-model="tockMeal.description" />&nbsp;&nbsp;
           <button
-            @click="updateTockItem(tockMeal.description, 'description', index)"
+            @click="updateTockItem(tockMeal.description, 'description', index, tockMeal._id)"
           >update</button>
           <br />image:
           <br />
           <img class="tockEditImage" :src="tockMeal.image" />
           <br />
           <input class="tockEditField" type="text" v-model="tockMeal.image" />
-          <button @click="updateTockItem(tockMeal.image, 'image', index)">update</button>
+          <button @click="updateTockItem(tockMeal.image, 'image', index, tockMeal._id)">update</button>
           <div v-if="tockMeal.veg === true">vegetarian</div>
           <div else>meat</div>
           <div v-if="tockMeal.delivery === true">delivery</div>
@@ -221,11 +221,12 @@ export default {
       let inventoryTockAddStreet = responseTockStreet.data.tockMeals;
       this.$store.commit("updateTockMealsStreet", { inventoryTockAddStreet });
     },
-    updateTockItem(text, item, index) {
+    updateTockItem(text, item, index, _id) {
       let updateTockItem = {
         text,
         item,
         index,
+        _id
       };
       this.$store.commit("updateTockItem", { updateTockItem });
 

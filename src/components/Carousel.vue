@@ -130,14 +130,12 @@
                     v-bind:data-item-image="mamaItem.body[3].value"
                     v-bind:data-item-name="mamaItem.body[1].value"
                     v-bind:data-item-description="mamaItem.body[4].value"
-                    data-item-url="https://www.nadimama.com/products.json" 
+                    data-item-url="https://www.nadimama.com/products.json"
                   >
                     <Order />
                   </button>
                 </div>
               </div>
-
-
 
 
 

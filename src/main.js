@@ -19,8 +19,8 @@ import StoryblokVue from 'storyblok-vue'
 Vue.use(StoryblokVue)
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
-baseURL: 'https://young-hamlet-03679.herokuapp.com'
+  baseURL: "http://localhost:4000"
+// baseURL: 'https://young-hamlet-03679.herokuapp.com'
 });
 
 
@@ -448,6 +448,14 @@ const store = new Vuex.Store({
       }
     })
 
+    base.post('/tock/tocktomongo',{ inventoryTockAdd })
+    .then(function(res){
+      console.log(res)
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+
     },
     updateTockMealsStreet(state, { inventoryTockAddStreet }){
 
@@ -463,6 +471,14 @@ const store = new Vuex.Store({
         if( !lookup( e.createdLink ) ) {
           state.inventory.tockMeals.push(e);
         }
+      })
+
+      base.post('/tock/tocktomongo',{ inventoryTockAddStreet })
+      .then(function(res){
+        console.log(res)
+      })
+      .catch(function(err){
+        console.log(err)
       })
 
     },
@@ -486,7 +502,7 @@ const store = new Vuex.Store({
           //   console.log(err)
           // })
 
-          base.post(`/tock/updatetockofferings`, { update: state.inventory.tockMeals})
+          base.post(`/tock/updatetockofferings`, { updateTockItem })
           .then(function(res){
           console.log(res.data.data.tockMeals)
 
@@ -536,39 +552,21 @@ new Vue({
   render: h => h(App),
   async mounted () {
 
-    // base.post(`/tock/removealltocks`)
-    // .then(function(res){
-      
-    // })
-    // .catch(function(err){
-    //   console.log(err)
-    // })
+
+// let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
+// let inventoryTockAdd = responseTock.data.tockMeals
+// this.$store.commit('updateTockMeals', { inventoryTockAdd })
+
+// let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
+// let inventoryTockAddStreet = responseTockStreet.data.tockMeals
+// this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
+
+// hit the database and return all of them
+let tockFromMongo = await this.$http.get('/tock/tockfrommongo')
+let inventoryTockAdd = tockFromMongo.data.tocks
+
+this.$store.commit("updateTockMeals", { inventoryTockAdd });
 
 
-
-
-    // get tock meals from the database
-        
-// let mongoTock = await this.$http.get(`/tock/mongotock`)
-// let tockResponse = mongoTock
-// console.log(tockResponse)
-
-
-let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
-let inventoryTockAdd = responseTock.data.tockMeals
-this.$store.commit('updateTockMeals', { inventoryTockAdd })
-
-let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
-let inventoryTockAddStreet = responseTockStreet.data.tockMeals
-this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
-
-
-    
-    // let response = await this.$http.get('/product/snipcartproducts') 
-    // let inventoryAdd = response.data.body.items
-    // this.$store.commit('updateInventory', { inventoryAdd })
-
-
-
-  }
+}
 }).$mount("#app");
