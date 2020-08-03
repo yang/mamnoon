@@ -19,8 +19,8 @@ import StoryblokVue from 'storyblok-vue'
 Vue.use(StoryblokVue)
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
-baseURL: 'https://cors-anywhere.herokuapp.com/https://young-hamlet-03679.herokuapp.com'
+  baseURL: "http://localhost:4000"
+// baseURL: 'https://cors-anywhere.herokuapp.com/https://young-hamlet-03679.herokuapp.com'
 });
 
 
@@ -553,19 +553,19 @@ new Vue({
   async mounted () {
 
 
-// let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
-// let inventoryTockAdd = responseTock.data.tockMeals
-// this.$store.commit('updateTockMeals', { inventoryTockAdd })
+let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
+let inventoryTockAdd = responseTock.data.tockMeals
+this.$store.commit('updateTockMeals', { inventoryTockAdd })
 
-// let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
-// let inventoryTockAddStreet = responseTockStreet.data.tockMeals
-// this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
+let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
+let inventoryTockAddStreet = responseTockStreet.data.tockMeals
+this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
 
 // hit the database and return all of them
-let tockFromMongo = await this.$http.get('/tock/tockfrommongo')
-let inventoryTockAdd = tockFromMongo.data.tocks
+// let tockFromMongo = await this.$http.get('/tock/tockfrommongo')
+// let inventoryTockAdd = tockFromMongo.data.tocks
 
-this.$store.commit("updateTockMeals", { inventoryTockAdd });
+// this.$store.commit("updateTockMeals", { inventoryTockAdd });
 
 
 }
