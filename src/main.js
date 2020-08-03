@@ -20,7 +20,7 @@ Vue.use(StoryblokVue)
 
 const base = axios.create({
   // baseURL: "http://localhost:4000"
-baseURL: 'https://young-hamlet-03679.herokuapp.com'
+baseURL: 'https://cors-anywhere.herokuapp.com/https://young-hamlet-03679.herokuapp.com'
 });
 
 
