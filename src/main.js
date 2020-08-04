@@ -557,11 +557,11 @@ new Vue({
 
 
 
-let responseTock = await this.$http.get(`/tock/tockmeals/${false}`, {'headers' : {'Access-Control-Allow-Origin': '*'}})
+let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
 let inventoryTockAdd = responseTock.data.tockMeals
 this.$store.commit('updateTockMeals', { inventoryTockAdd })
 
-let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`, {'headers' : {'Access-Control-Allow-Origin': '*'}})
+let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
 let inventoryTockAddStreet = responseTockStreet.data.tockMeals
 this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
 
