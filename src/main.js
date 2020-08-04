@@ -554,11 +554,14 @@ new Vue({
   async mounted () {
 
 
-let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
+
+
+
+let responseTock = await this.$http.get(`/tock/tockmeals/${false}`, {'Access-Control-Allow-Origin': '*'})
 let inventoryTockAdd = responseTock.data.tockMeals
 this.$store.commit('updateTockMeals', { inventoryTockAdd })
 
-let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
+let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`, {'Access-Control-Allow-Origin': '*'})
 let inventoryTockAddStreet = responseTockStreet.data.tockMeals
 this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
 
