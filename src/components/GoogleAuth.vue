@@ -51,13 +51,9 @@ export default {
  
 let self = this
       this.$http
-        .get('/user/email/' + email, {
- headers: {
-   'Access-Control-Allow-Origin': '*'
- }
-})
+        .get('/user/email/' + email)
         .then(function(response) {
-     console.log(response)
+     console.log(response) 
 
 
 
