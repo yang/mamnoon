@@ -109,19 +109,10 @@ let self = this
         .then(() => {
           //on success do something
           this.isSignIn = this.$gAuth.isAuthorized;
-
-
           // this.isSignIn = false
           location.reload()
-
-
-// clear user current email and clear user info
-
-  this.$store.commit('clearCurrentUser')
-
-
-
-
+          // clear user current email and clear user info
+          this.$store.commit('clearCurrentUser')
         })
         .catch(error => {
           //on fail do something

@@ -1,14 +1,12 @@
 <template>
 <div>
 <div class="container pad-yellow-background module-header">
-  submit a testimonial
+  submit an email
   </div>
  <div class="container nav-acc-header pad-yellow-background">
 <div class="row">
 <div class="col-6 col-lg-3">
-<h4>
-  add a testimonial for {{emailAddress}}
-</h4>
+
 <form id="app" @submit.prevent="checkForm">
 
   <p v-if="errors.length">
@@ -27,18 +25,6 @@
       name="title"
     >
   </p>
-
-
-    <p>
-    <label for="name">Body</label>
-    <br>
-    <textarea
-      id="body"
-      v-model="messageBody.body"
-      type="text"
-      name="body"
-    ></textarea>
-  </p>
   <p>
     <label for="name">Name</label>
     <br>
@@ -49,6 +35,17 @@
       name="name"
     >
   </p>
+    <p>
+    <label for="name">Body</label>
+    <br>
+    <textarea
+      id="body"
+      v-model="messageBody.body"
+      type="text"
+      name="body"
+    ></textarea>
+  </p>
+
 
   <p>
     <!-- <input
@@ -61,29 +58,6 @@
   </p>
 
 </form>
-
-</div>
-<div class="col-6 col-lg-9 testimonials-list">
-testimonials: 
-<br>
-<ul v-if="testimonials">
-
-<li v-for="test in testimonials.slice().reverse()" :key="test._id">
-
-
-
-<button @click="removeTestimonial(test._id,emailAddress)">remove</button>
-
-{{test._id}}
-
-    <b>{{test.title}}</b><br>
-    <p>
-       {{test.body}} 
-    </p>
-
-</li>
-
-</ul>
 
 </div>
 </div>
@@ -104,7 +78,7 @@ export default {
   components:{
     Submit
   },
-name: 'testimonialform',
+name: 'emailform',
 data () {
 return {
     errors: [],

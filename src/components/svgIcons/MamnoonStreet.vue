@@ -122,7 +122,8 @@ export default {
   name: "mamnoonstreet",
   data() {
     return {
-      link: "https://www.trycaviar.com/m/mamnoon-street-6597"
+	//   link: "https://www.trycaviar.com/m/mamnoon-street-6597"
+	  link: "https://app.upserve.com/s/mamnoon-street-seattle"
     };
   },
   props: ["linkOut","caviarLink"],
@@ -134,7 +135,7 @@ export default {
     },
     openSevenRooms(e){
 		if(this.caviarLink){
-      window.open("https://www.trycaviar.com/m/mamnoon-street-6597", "_blank");
+      window.open("https://app.upserve.com/s/mamnoon-street-seattle", "_blank");
 		}else{
       document.getElementById(e).click();
 		}

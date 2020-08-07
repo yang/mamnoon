@@ -94,7 +94,7 @@ console.log(this.$store.state.loggedIn)
 
 .nav-acc-header{
   // padding-top: 160px;
-  padding-top: 130px;
+  // padding-top: 130px;
 }
 
 

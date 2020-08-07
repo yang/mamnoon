@@ -38,7 +38,7 @@
       </div>
     </div>
     <div>
-      <div class="toggleVegContainer">
+      <!-- <div class="toggleVegContainer">
         <button
           class="toggleVeg"
           :class="{redBackground: $store.state.vegetarian}"
@@ -49,7 +49,7 @@
             <div v-else>V</div>
           </div>
         </button>
-      </div>
+      </div> -->
       <div class="position-relative">
         <h4 class="noselect">{{titleFromCMS}}</h4>
         <p style="text-align:left;margin-top: 20px;">{{descriptionFromCMS}}</p>
@@ -316,7 +316,7 @@ export default {
 .left-button {
   cursor: pointer;
   position: absolute;
-  left: 5%;
+  left: 25%;
   width: auto;
   top: 30px;
 }
@@ -324,9 +324,9 @@ export default {
 .right-button {
   cursor: pointer;
   position: absolute;
-  right: 5%;
   width: auto;
   top: 30px;
+  right: 25%;
 }
 
 @media only screen and (max-width: 768px) {

@@ -46,7 +46,8 @@ export default {
         name: 'mamnoon',
         data (){
             return{
-            link: 'https://merchant-api.trycaviar.com/m/mamnoon-628'
+            // link: 'https://merchant-api.trycaviar.com/m/mamnoon-628'
+            link: 'https://app.upserve.com/s/mamnoon-llc-seattle'
             }
         },
         props: ['linkOut2', 'caviarLink'],
@@ -60,7 +61,7 @@ export default {
 
 
         if(this.caviarLink){
- window.open('https://merchant-api.trycaviar.com/m/mamnoon-628', "_blank");   
+ window.open('https://app.upserve.com/s/mamnoon-llc-seattle', "_blank");   
         }else{
         document.getElementById(e).click();
         }           

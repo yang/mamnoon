@@ -123,6 +123,7 @@
               <div class="order-bottom" style="text-align: center;">
               {{mamaItem.body[1].value}}
                 <div class="order-panel">
+             
                   <button
                     class="snipcart-add-item"
                     v-bind:data-item-id="mamaItem.body[0].value"
@@ -135,8 +136,9 @@
                     <Order />
                   </button>
                 </div>
+          
               </div>
-
+ 
 
 
 </div>
@@ -334,24 +336,19 @@
                 <Mamnoon :caviarLink="true" :linkOut2="offering.mamnoonTrigger" />
               <MamnoonStreet :caviarLink="true" :linkOut="offering.mbarTrigger" />
 
-
-  
         </div>
-
-
-
       </div>
+      <div class="text-center" v-if="offering.title === 'mama shop'" style="margin-bottom: 80px;height:90px;">
+        <router-link to="/shop">
+       <ShowAll />
+        </router-link>
+        </div>
     </section>
-
-
     <Newsletter :title="blok.content.body[0].newsLetterFooterHeader" :description="blok.content.body[0].newsLetterFooterDescription" />
   </main>
 </template>
 
-
-
 <script type="text/javascript">
-
 
 import carousel from "vue-owl-carousel";
 import Order from "@/components/svgIcons/Order";
@@ -359,6 +356,7 @@ import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
 import Mamnoon from "@/components/svgIcons/Mamnoon";
 import Mbar from "@/components/svgIcons/Mbar";
+import ShowAll from "@/components/svgIcons/ShowAll";
 import MamnoonStreet from "@/components/svgIcons/MamnoonStreet";
 import MamnoonSVG from "@/components/svgIcons/MamnoonSVG";
 import Newsletter from "@/components/Newsletter";
@@ -374,7 +372,8 @@ export default {
     Mbar,
     Mamnoon,
     MamnoonStreet,
-    MamnoonSVG
+    MamnoonSVG,
+    ShowAll
   },
   computed: {
     count() {
@@ -631,7 +630,8 @@ button.snipcart-add-item {
   overflow-x: hidden;
   z-index: 110 !important;
   background-color: #f0f5f6;
-  top: 140px !important;
+  // top: 140px !important;
+  top: 90px !important;
 }
 .top-widget {
   width: 100%;
@@ -755,5 +755,11 @@ section {
   text-align:center;
   margin-top: 0px;
   width: 100%;
+}
+
+
+
+#mama-shop .carousel{
+    margin-bottom: 20px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
+  <div class="shop">
     <Nav />
-    <login />
+    <shop />
 
 
 
@@ -29,3 +29,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.shop{
+    padding-top: 120px;
+}
+</style>

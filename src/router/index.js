@@ -48,6 +48,16 @@ const routes = [
     }
   },
   {
+    path: "/shop",
+    name: "shop",
+    component: () => import("../views/shop.vue")
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () => import("../views/profile.vue")
+  },
+  {
     path: "/login",
     name: "login",
     component: () => import("../views/login.vue")
@@ -65,8 +75,8 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  // mode: "history",
-  mode: "hash",
+  mode: "history",
+  // mode: "hash",
   base: process.env.BASE_URL,
   routes
 });

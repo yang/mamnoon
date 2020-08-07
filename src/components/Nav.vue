@@ -17,16 +17,30 @@
 
 
 
+<div class="hello logButton googleInHeader" style="right:100px">
+        <router-link v-if="this.$store.state.loggedIn" to="/profile">
+       
+       profile
+        </router-link>
+</div>
+
+
+<div class="hello logButton googleInHeader" style="right:200px">
+        <router-link to="/shop">
+       
+      shop
+        </router-link>
+</div>
 
 
 
-    <template v-if="!this.$store.state.userProfileModalVisible">
+    <!-- <template v-if="!this.$store.state.userProfileModalVisible">
 
 <button v-if="this.$store.state.loggedIn" class="logButton2" @click="showUserModal">U</button>
 
 
 
-    </template>
+    </template> -->
 
 
 <GoogleAuth class="logButton googleInHeader" />
@@ -37,7 +51,11 @@
         <Burger />
     </a>
     </template>
-    <Logo />
+            <router-link to="/">
+       
+     <Logo />
+        </router-link>
+
   </div>
 </div>
 
@@ -357,6 +375,20 @@ right: 120px;
 
 .cursor-pointer{
     cursor: pointer;
+}
+
+
+
+
+.googleInHeader a{
+    color: white;
+}
+
+
+.logButton a:hover{
+    text-decoration: none;
+    color: #fff367;
+
 }
 
 </style>

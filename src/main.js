@@ -17,11 +17,10 @@ import StoryblokVue from 'storyblok-vue'
 
 
 Vue.use(StoryblokVue)
-// Vue.http.headers.common['Access-Control-Allow-Origin'] = '*'
-// Vue.prototype.$http.headers.common['Access-Control-Allow-Origin'] = '*'
+
 const base = axios.create({
-  // baseURL: "http://localhost:8080"
-baseURL: 'https://young-hamlet-03679.herokuapp.com'
+  baseURL: "http://localhost:4000"
+// baseURL: 'https://young-hamlet-03679.herokuapp.com'
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -449,6 +448,7 @@ const store = new Vuex.Store({
       }
     })
 
+
     base.post('/tock/tocktomongo',{ inventoryTockAdd })
     .then(function(res){
       console.log(res)
@@ -456,6 +456,7 @@ const store = new Vuex.Store({
     .catch(function(err){
       console.log(err)
     })
+
 
     },
     updateTockMealsStreet(state, { inventoryTockAddStreet }){
@@ -474,13 +475,13 @@ const store = new Vuex.Store({
         }
       })
 
-      base.post('/tock/tocktomongo',{ inventoryTockAddStreet })
-      .then(function(res){
-        console.log(res)
-      })
-      .catch(function(err){
-        console.log(err)
-      })
+    base.post('/tock/tocktomongo',{ inventoryTockAddStreet })
+    .then(function(res){
+      console.log(res)
+    })
+    .catch(function(err){
+      console.log(err)
+    })
 
     },
    async updateTockItem(state, { updateTockItem }){
@@ -574,3 +575,26 @@ this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
 
 }
 }).$mount("#app");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

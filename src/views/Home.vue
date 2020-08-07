@@ -122,7 +122,7 @@ transition: padding .5s ease;
 
 
 .nav-acc-header{
-  padding-top: 80px;
+  // padding-top: 80px;
 }
 
 }
