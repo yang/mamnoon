@@ -58,10 +58,45 @@
       <div id="container"></div>
 
       <div class="full-width-block">
-        <div v-if="title" class="title noselect">
-          <a :href="link" target="_blank">{{title | truncate(60, '...')}}</a>
+
+
+ <ul class="dots">
+  <li v-for="index in dotsLength" :key="index" @click="coverFlowTo(index)">
+    <div class="whitedot" v-if="index - 1 < coverFlowIndex">
+      {{index}}
+    </div>
+    <div  class="yellowdot" v-else-if="index - 1 === coverFlowIndex">
+      {{index}}
+    </div>
+      <div class="blackdot" v-else-if="index - 1 > coverFlowIndex">
+      {{index}}
+    </div> 
+
+  </li>
+</ul>
+
+
+        <a class="left-button" onclick="coverflow().prev();">
+          <Prev />
+        </a>
+        <a class="right-button" onclick="coverflow().next();">
+          <Next />
+        </a>
+
+
+      <div v-if="title" class="title noselect">
+          <!-- <a :href="link" target="_blank">{{title | truncate(60, '...')}}</a> -->
+
+    {{coverFlowIndex}}
+
         </div>
-        <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div>
+        <!-- <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div> -->
+      
+
+      <!-- <div :class="'index'+coverFlowIndex">
+              {{coverFlowIndex}}
+              
+      </div> -->
       </div>
 
       <div class="bottom-button">
@@ -109,6 +144,8 @@ export default {
   },
   data() {
     return {
+      coverFlowIndex: 0,
+      dotsLength: 0,
       productsList: this.$store.state.inventory.tockMeals,
       title:
         this.$store.state.inventory.tockMeals.length > 0
@@ -139,25 +176,16 @@ export default {
       this.description = map1[0].description;
       this.link = map1[0].createdLink;
       this.delivery = map1[0].delivery;
-
       this.reset(map1);
     } else {
-
-
     if (this.$store.state.inventory.tockMeals[0]) {
       this.productsList = this.$store.state.inventory.tockMeals;
       this.title = this.$store.state.inventory.tockMeals[0].title;
       this.description = this.$store.state.inventory.tockMeals[0].description;
       this.link = this.$store.state.inventory.tockMeals[0].createdLink;
       this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
-
     }
-
       this.reset(this.productsList);
-
-
-
-
     }
   },
   props: ["products", "titleFromCMS", "descriptionFromCMS"],
@@ -212,6 +240,11 @@ export default {
     window.removeEventListener("resize", this.myEventHandler);
   },
   methods: {
+coverFlowTo(index){
+    console.log(index)
+     coverflow().to(index-1);
+   
+    },
     async freshTockPull() {
       let responseTock = await this.$http.get(`/tock/tockmeals/${false}`);
       let inventoryTockAdd = responseTock.data.tockMeals;
@@ -275,7 +308,13 @@ export default {
       }
     },
     reset(x) {
+
+
+      console.log(x.length)
       let that = this;
+
+
+      this.dotsLength = x.length
 
       // coverflow('container').fadeOut()
       // setTimeout(function(){
@@ -290,22 +329,68 @@ export default {
           backgroundcolor: "#F05D5B",
           reflectionopacity: 0,
           playlist: x,
-          coverwidth: 240,
-          coverheight: 200,
+          coverwidth: 400,
+          coverheight: 400,
           fixedsize: false,
           textoffset: 50,
-          coverangle: 50,
+          coverangle: 10,
+          coverdepth: 100,
+          opacitydecrease: .9
         })
         .on("ready", function () {
-          this.on("focus", function (index) {
+
+
+  var slides = document.getElementsByClassName("coverflow-cell");
+  slides[0].innerHTML += "<div class='dialog' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'>mamnoon</div>"
+  slides[0].innerHTML += "<img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].image+" />"
+  slides[0].innerHTML += "<div style='font-size:10px;font-weight:200;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'>"+x[0].title+"</div>"
+
+  let dialog = document.getElementsByClassName("dialog");
+
+  console.log(dialog)
+
+  this.on("focus", function (index) {
             that.returnProducts(index);
-          });
+
+  var slides = document.getElementsByClassName("coverflow-cell");
+  slides[index].innerHTML += "<div class='dialog' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'>mamnoon</div>"
+  slides[index].innerHTML += "<img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" />"
+  slides[index].innerHTML += "<div style='font-size:10px;font-weight:200;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'>"+x[index].title+"</div>"
+  
+  // slides.style.opacity=1; 
+
+  // slides[index].style.opacity=0; 
+
+that.coverFlowIndex = index
+
+      });
           this.on("click", function (index, link) {
             if (link) {
               window.open(link, "_blank");
             }
           });
         });
+
+
+
+// console.log(x)
+// var slides = document.getElementsByClassName("coverflow-cell");
+// for (var i = 0; i < slides.length; i++) {
+//   //  slides[i].prepend("<div>Headline:"+i+"</div>")
+
+
+//    slides[i].innerHTML += "<div style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;'>mamnoon</div>"
+
+
+// slides[i].innerHTML += "<img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[i].image+" />"
+
+
+
+//   //  slides[i].innerHTML += "<div style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'>"+x[i].title+"</div>"
+
+
+// }
+
     },
   },
 };
@@ -318,14 +403,14 @@ export default {
   position: absolute;
   left: 25%;
   width: auto;
-  top: 30px;
+  bottom: 110px;
 }
 
 .right-button {
   cursor: pointer;
   position: absolute;
   width: auto;
-  top: 30px;
+  bottom: 110px;
   right: 25%;
 }
 
@@ -391,7 +476,7 @@ export default {
   // margin-top: 40px;
   margin-top: 20px;
   .coverflow-wrap {
-    transform: scale(1.75);
+    // transform: scale(1.75);
   }
 }
 
@@ -533,10 +618,10 @@ input:checked + .slider:before {
 
 .full-width-block {
   width: 100%;
-  background: white;
+  // background: white;
   min-height: 170px;
   border: 1px solid #f05d5b;
-  margin-top: 30px;
+  margin-top: 15px;
 
   .description,
   .title,
@@ -573,4 +658,47 @@ input:checked + .slider:before {
   width: 300px;
   margin-bottom: 20px;
 }
+
+
+
+ul.dots{
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+ul.dots li{
+    display: inline-block;
+cursor: pointer;
+    list-style-type: none;
+}
+
+
+
+ul.dots li div{
+  border-radius: 10px;
+  background: black;
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+  color: transparent;
+}
+
+
+.whitedot{
+  background: white !important;
+}
+.yellowdot{
+  background: yellow !important;
+  pointer-events: none;
+}
+
+
+
+.description,
+.title,
+.title a{
+color: #fff !important;
+}
+
 </style>
