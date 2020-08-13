@@ -31,7 +31,7 @@ export default{
 
 
 #nextprev{
-width: 32px;
-height: 32px;
+width: 40px;
+height: 40px;
 }
 </style>

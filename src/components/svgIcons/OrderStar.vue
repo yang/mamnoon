@@ -25,7 +25,11 @@ export default{
     text-align: center;
 }
 .cls-1{fill:#f05d5b;}.cls-2{fill:#fff;}
-svg#order{width:70px;
+svg#order{
+
+  width: 100px;
+  height: 100px;
+
 margin: 0 auto;
 }
 </style>

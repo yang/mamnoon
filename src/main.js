@@ -572,6 +572,11 @@ this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
 
 // this.$store.commit("updateTockMeals", { inventoryTockAdd });
 
+let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+let AcfBlock = responseAcf
+
+console.log(AcfBlock)
+
 
 }
 }).$mount("#app");

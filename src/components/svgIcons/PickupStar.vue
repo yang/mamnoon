@@ -67,7 +67,12 @@ export default{
 
 .cls-1delve{fill:#f05d5b;}.cls-2white{fill:#fff;}
 
-svg#order{width:70px;
+svg#order{
+
+
+
+  width: 100px;
+  height: 100px;
 margin: 0 auto;
 }
 </style>

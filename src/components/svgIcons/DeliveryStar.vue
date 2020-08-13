@@ -85,7 +85,8 @@ export default {};
   fill: #fff;
 }
 svg#order {
-  width: 70px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto;
 }
 </style>

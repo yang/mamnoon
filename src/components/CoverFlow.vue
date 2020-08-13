@@ -50,7 +50,7 @@
           </div>
         </button>
       </div> -->
-      <div class="position-relative">
+      <div class="position-relative red-header">
         <h4 class="noselect">{{titleFromCMS}}</h4>
         <p style="text-align:left;margin-top: 20px;">{{descriptionFromCMS}}</p>
       </div>
@@ -62,13 +62,13 @@
 
  <ul class="dots">
   <li v-for="index in dotsLength" :key="index" @click="coverFlowTo(index)">
-    <div class="whitedot" v-if="index - 1 < coverFlowIndex">
+    <div class="whitedot noselect" v-if="index - 1 < coverFlowIndex">
       {{index}}
     </div>
-    <div  class="yellowdot" v-else-if="index - 1 === coverFlowIndex">
+    <div  class="yellowdot noselect" v-else-if="index - 1 === coverFlowIndex">
       {{index}}
     </div>
-      <div class="blackdot" v-else-if="index - 1 > coverFlowIndex">
+      <div class="blackdot noselect" v-else-if="index - 1 > coverFlowIndex">
       {{index}}
     </div> 
 
@@ -87,8 +87,9 @@
       <div v-if="title" class="title noselect">
           <!-- <a :href="link" target="_blank">{{title | truncate(60, '...')}}</a> -->
 
-    {{coverFlowIndex}}
-
+    <!-- {{coverFlowIndex}} -->
+<!-- {{description | truncate(80, '...')}} -->
+{{date}}
         </div>
         <!-- <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div> -->
       
@@ -100,12 +101,12 @@
       </div>
 
       <div class="bottom-button">
-        <a class="left-button" onclick="coverflow().prev();">
+        <!-- <a class="left-button" onclick="coverflow().prev();">
           <Prev />
         </a>
         <a class="right-button" onclick="coverflow().next();">
           <Next />
-        </a>
+        </a> -->
 
         <a class="full-width" :href="link" target="_blank">
           <div class="outer">
@@ -147,6 +148,10 @@ export default {
       coverFlowIndex: 0,
       dotsLength: 0,
       productsList: this.$store.state.inventory.tockMeals,
+      date:
+              this.$store.state.inventory.tockMeals.length > 0
+          ? this.$store.state.inventory.tockMeals[0].date
+          : "loading...",
       title:
         this.$store.state.inventory.tockMeals.length > 0
           ? this.$store.state.inventory.tockMeals[0].title
@@ -202,6 +207,7 @@ export default {
       this.productsList = newCount;
       this.title = newCount[0].title;
       this.description = newCount[0].description;
+      this.date = newCount[0].date;
       this.link = newCount[0].createdLink;
       this.delivery = newCount[0].delivery;
       this.reset(newCount);
@@ -215,6 +221,7 @@ export default {
 
         this.title = map1[0].title;
         this.description = map1[0].description;
+         this.date = map1[0].date;
         this.link = map1[0].createdLink;
         this.delivery = map1[0].delivery;
         this.reset(map1);
@@ -222,6 +229,7 @@ export default {
         this.productsList = this.$store.state.inventory.tockMeals;
         this.title = this.$store.state.inventory.tockMeals[0].title;
         this.description = this.$store.state.inventory.tockMeals[0].description;
+        this.date = this.$store.state.inventory.tockMeals[0].date;
         this.link = this.$store.state.inventory.tockMeals[0].createdLink;
         this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
         this.reset(this.productsList);
@@ -270,6 +278,7 @@ coverFlowTo(index){
         this.productsList = map1;
         this.title = map1[0].title;
         this.description = map1[0].description;
+        this.date = map1[0].date;
         this.link = map1[0].createdLink;
         this.delivery = map1[0].delivery;
 
@@ -279,6 +288,7 @@ coverFlowTo(index){
 
         this.title = this.$store.state.inventory.tockMeals[0].title;
         this.description = this.$store.state.inventory.tockMeals[0].description;
+        this.date = this.$store.state.inventory.tockMeals[0].date;
         this.link = this.$store.state.inventory.tockMeals[0].createdLink;
         this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
         this.reset(this.productsList);
@@ -296,10 +306,12 @@ coverFlowTo(index){
         this.productsList = map1;
         this.title = map1[index].title;
         this.description = map1[index].description;
+        this.date = map1[index].date;
         this.link = map1[index].createdLink;
         this.delivery = map1[index].delivery;
       } else {
         this.title = this.$store.state.inventory.tockMeals[index].title;
+        this.date = this.$store.state.inventory.tockMeals[index].date;
         this.description = this.$store.state.inventory.tockMeals[
           index
         ].description;
@@ -326,24 +338,26 @@ coverFlowTo(index){
           width: "100%",
           item: 0,
           rotatedelay: 0,
-          backgroundcolor: "#F05D5B",
+          backgroundcolor: "#F58E58",
           reflectionopacity: 0,
           playlist: x,
           coverwidth: 400,
           coverheight: 400,
           fixedsize: false,
           textoffset: 50,
-          coverangle: 10,
+          coverangle: 5,
           coverdepth: 100,
-          opacitydecrease: .9
+          opacitydecrease: .9,
+          focallength: 300,
+          tweentime: 1
         })
         .on("ready", function () {
 
 
   var slides = document.getElementsByClassName("coverflow-cell");
-  slides[0].innerHTML += "<div class='dialog' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'>mamnoon</div>"
-  slides[0].innerHTML += "<img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].image+" />"
-  slides[0].innerHTML += "<div style='font-size:10px;font-weight:200;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'>"+x[0].title+"</div>"
+  slides[0].innerHTML += "<div class='dialog cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'><a href="+x[0].createdLink+" target='_blank'>mamnoon</a></div>"
+  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].image+" /></a>"
+  slides[0].innerHTML += "<div class='cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'><a href="+x[0].createdLink+" target='_blank'>"+x[0].title+"</a></div>"
 
   let dialog = document.getElementsByClassName("dialog");
 
@@ -353,9 +367,9 @@ coverFlowTo(index){
             that.returnProducts(index);
 
   var slides = document.getElementsByClassName("coverflow-cell");
-  slides[index].innerHTML += "<div class='dialog' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'>mamnoon</div>"
-  slides[index].innerHTML += "<img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" />"
-  slides[index].innerHTML += "<div style='font-size:10px;font-weight:200;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'>"+x[index].title+"</div>"
+  slides[index].innerHTML += "<div class='dialog cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'><a href="+x[index].createdLink+" target='_blank'>mamnoon</a></div>"
+  slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
+  slides[index].innerHTML += "<div class='cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'><a href="+x[index].createdLink+" target='_blank'>"+x[index].title+"</a></div>"
   
   // slides.style.opacity=1; 
 
@@ -401,18 +415,20 @@ that.coverFlowIndex = index
 .left-button {
   cursor: pointer;
   position: absolute;
-  left: 25%;
+  left: 35%;
   width: auto;
-  bottom: 110px;
+      bottom: 130px;
 }
 
 .right-button {
   cursor: pointer;
   position: absolute;
   width: auto;
-  bottom: 110px;
-  right: 25%;
+
+  right: 35%;
+      bottom: 130px;
 }
+
 
 @media only screen and (max-width: 768px) {
   .left-button {
@@ -609,7 +625,7 @@ input:checked + .slider:before {
 }
 
 .bottom-button {
-  border: 1px solid #f05d5b;
+  // border: 1px solid #f05d5b;
 }
 
 .bottom-button a.full-width {
@@ -620,9 +636,9 @@ input:checked + .slider:before {
   width: 100%;
   // background: white;
   min-height: 170px;
-  border: 1px solid #f05d5b;
-  margin-top: 15px;
-
+  // border: 1px solid #f05d5b;
+  margin-top: 0;
+  position: relative;
   .description,
   .title,
   .title a,
@@ -665,6 +681,12 @@ ul.dots{
     margin: 0 auto;
     text-align: center;
     width: 100%;
+    margin-top: -24px;
+        margin-top: -50px;
+        z-index: 60;
+    position: absolute;
+    margin-bottom: 0;
+    padding-left: 0;
 }
 
 ul.dots li{
@@ -677,11 +699,13 @@ cursor: pointer;
 
 ul.dots li div{
   border-radius: 10px;
-  background: black;
+  background: white;
+    // background: transparent;
   width: 20px;
   height: 20px;
   margin: 10px;
   color: transparent;
+  // border: 2px solid yellow;
 }
 
 
@@ -698,7 +722,45 @@ ul.dots li div{
 .description,
 .title,
 .title a{
-color: #fff !important;
+// color: #fff !important;
+    color: #fff367 !important;
+    font-weight: 500 !important;
+    font-size: 24px;
+}
+
+
+
+.red-header{
+  background-color: #F05D5B;
+  padding: 20px 0 15px;
+}
+
+
+#container.coverflow, #container.coverflow:focus, #container.coverflow:active{
+  margin-top: 0 !important;
+  background-color: transparent !important;
+}
+
+
+a.left-button svg,
+a.right-button svg {
+    width: 40px;
+    height: 40px;
+}
+
+
+.cursor-pointer{
+  cursor: pointer;
+
+  a{
+    text-decoration: none;
+    color: #f05d5b;
+    &:hover{
+          text-decoration: none;
+    color: #f05d5b;
+    cursor: pointer;
+    }
+  }
 }
 
 </style>

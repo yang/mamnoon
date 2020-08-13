@@ -37,7 +37,7 @@
 </h4>
 <p class="description-para noselect" v-if="offering.title === 'order now'">{{ blok.content.body[0].orderNowDescription }}</p>
 <p v-else-if="offering.title === 'reservations'" class="description-para noselect">{{ blok.content.body[0].reservationsDescription }}</p>
-<p v-else-if="offering.title === 'testimonials'" class="description-para noselect">{{ blok.content.body[0].testimonialsDescription }}</p>
+<!-- <p v-else-if="offering.title === 'testimonials'" class="description-para noselect">{{ blok.content.body[0].testimonialsDescription }}</p> -->
 <p v-else-if="offering.title === 'mama shop'" class="description-para noselect">{{ blok.content.body[0].mamaShopDescription }}</p>
 
 
@@ -64,7 +64,7 @@
 
 
 
-  <div class="testimonialItem" v-for="testimonial in blok.content.body[0].list.tbody" :key="testimonial._uid">
+  <div v-for="testimonial in blok.content.body[0].list.tbody" :key="testimonial._uid">
 
 
 
@@ -72,16 +72,16 @@
             <div class="height-100">
               <div class="l-col">
                 <div class="quote-container">
-                  <div class="xs" v-if="testimonial.body[0].value.length > 60">{{testimonial.body[0].value}}</div>
-                  <div class="sm" v-else-if="testimonial.body[0].value.length > 40">{{testimonial.body[0].value}}</div>
-                  <div class="md" v-else-if="testimonial.body[0].value.length > 20">{{testimonial.body[0].value}}</div>
-                  <div class="md" v-else>{{testimonial.body[0].value}}</div>
-                  <div class="quote-author">- {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
+                  <div class="xs" v-if="testimonial.body[0].value.length > 60">{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
+                  <div class="sm" v-else-if="testimonial.body[0].value.length > 40">{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
+                  <div class="md" v-else-if="testimonial.body[0].value.length > 20">{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
+                  <div class="md" v-else>{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
+                  <!-- <div class="quote-author">- {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div> -->
                 </div>
               </div>
-              <div class="r-col">
+              <!-- <div class="r-col">
                 <img v-bind:src="testimonial.body[3].value" />
-              </div>
+              </div> -->
             </div>
 
   </div>
@@ -557,12 +557,12 @@ h4 {
   padding: 30px;
   text-align: left;
   padding-top: 15px;
-  width: 50%;
+  width: 100%;
   float: left;
 }
 #testimonials .owl-item .r-col {
   padding: 0px;
-  width: 50%;
+  // width: 50%;
   float: left;
   img {
     width: 100%;
@@ -572,14 +572,20 @@ h4 {
   text-align: left;
 }
 .xs {
-  font-size: 16px;
+  // font-size: 16px;
+  font-size: 18px;
 }
 .sm {
-  font-size: 22px;
+  // font-size: 22px;
+  font-size: 18px;
 }
 .md {
   // font-size: 18px;
-  font-size: 38px;
+  // font-size: 38px;
+
+
+font-size: 18px;
+
 }
 .lg {
   font-size: 64px;
@@ -639,14 +645,15 @@ button.snipcart-add-item {
   background: green;
 }
 .coverflowsection {
-  padding: 20px 0 0 0;
+  padding: 0 0 0 0;
   // height: 600px;
   // height: 510px;
   // height: 600px;
   height: 600px;
-  height: 630px;
+  height: 830px;
   margin-bottom: 80px;
-  background-color: #f05d5b;
+  // background-color: #f05d5b;
+  background-color: #F58E58;
   overflow: hidden;
   position: relative;
   h4 {
@@ -655,7 +662,7 @@ button.snipcart-add-item {
   p {
     color: white;
     width: 80%;
-    margin: 10px auto 20px;
+    margin: 10px auto 10px;
     text-align: center;
   }
 }
@@ -687,7 +694,7 @@ button.snipcart-add-item {
   background: #fff367;
   width: 100%;
   padding: 10px 0;
-  height: 90px;
+  height: 120px;
   a {
     position: absolute;
     // width: 100%;
@@ -705,12 +712,12 @@ section {
 }
 .description-para {
   color: white;
-  margin: 10px auto 20px;
+  margin: 10px auto 10px;
   width: 80%;
 }
 .height-100 {
-  height: 100%;
-  width: 100%;
+  // height: 100%;
+  // width: 100%;
 }
 .quote-container {
   position: relative;
@@ -754,7 +761,8 @@ section {
 .tesstimonialItem{
   text-align:center;
   margin-top: 0px;
-  width: 100%;
+  width: 100% !important;
+  
 }
 
 

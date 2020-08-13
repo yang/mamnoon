@@ -53,7 +53,7 @@ position: absolute;
     background: #FFF367;
     width: 100%;
     padding: 10px 0;
-    height: 90px;
+    height: 120px;
 
 }
 
