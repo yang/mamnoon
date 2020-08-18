@@ -5,23 +5,7 @@
       <CoverFlow :titleFromCMS="blok.content.body[0].familyMealHeader" :descriptionFromCMS="blok.content.body[0].familyMealDescription" :products="products" />
     </section>
 
-<!-- <section>
-  <ul class="upserve-cats">
-    <li v-for="item in upserveCategories" :key="item">
-    <button @click="filterByCat(item)">
-    {{item}}
-    </button>
-    </li>
-  </ul>
-
-  <div class="container">
-    <div class="filtree"  v-for="item in currentlyFiltered" v-bind:key="item.name">
-    {{item}}
-    <br>  
-    </div>
-  </div>
-</section> -->
-
+<!-- <UpserveFiltering :data="apiData" /> -->
     <section
       :id="offering.category"
       v-for="(offering,index) in inventory.offerings"
@@ -346,6 +330,8 @@ import MamnoonStreet from "@/components/svgIcons/MamnoonStreet";
 import MamnoonSVG from "@/components/svgIcons/MamnoonSVG";
 import Newsletter from "@/components/Newsletter";
 import CoverFlow from "@/components/CoverFlow";
+import UpserveFiltering  from "@/components/UpserveFiltering";
+
 export default {
   components: {
     carousel,
@@ -358,7 +344,8 @@ export default {
     Mamnoon,
     MamnoonStreet,
     MamnoonSVG,
-    ShowAll
+    ShowAll,
+    UpserveFiltering 
   },
   computed: {
     count() {
