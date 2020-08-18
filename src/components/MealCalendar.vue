@@ -123,7 +123,7 @@ export default {
       this.link = this.data.meal_calendar[0].createdLink;
       this.delivery = this.data.meal_calendar[0].delivery;
     }
-    console.log(this.productsList)
+    // console.log(this.productsList)
     this.reset(this.productsList);
     }
 

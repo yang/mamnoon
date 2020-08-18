@@ -197,7 +197,7 @@ export default {
       this.link = this.$store.state.inventory.tockMeals[0].createdLink;
       this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
     }
-    console.log(this.productsList)
+    // console.log(this.productsList)
       this.reset(this.productsList);
     }
 
@@ -266,7 +266,9 @@ this.dumpAcf()
   methods: {
 async dumpAcf(){
 
-let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+// let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+let responseAcf = await this.$http.get(`http://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
+
 let AcfBlock = responseAcf.data[0].acf.family_meal_calendar
 
 // console.log(AcfBlock)

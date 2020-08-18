@@ -573,11 +573,15 @@ new Vue({
 // let inventoryTockAddStreet = responseTockStreet.data.tockMeals
 // this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
 
-let responseTockStreet2 = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+// let responseTockStreet2 = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+let responseTockStreet2 = await this.$http.get(`http://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
+
+
+
 let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
 
 
-console.log(inventoryTockAdd)
+// console.log(inventoryTockAdd)
 
 // console.log('from acf:')
 // console.log(inventoryTockAddStreet2)
