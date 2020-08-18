@@ -5,39 +5,22 @@
       <CoverFlow :titleFromCMS="blok.content.body[0].familyMealHeader" :descriptionFromCMS="blok.content.body[0].familyMealDescription" :products="products" />
     </section>
 
+<!-- <section>
+  <ul class="upserve-cats">
+    <li v-for="item in upserveCategories" :key="item">
+    <button @click="filterByCat(item)">
+    {{item}}
+    </button>
+    </li>
+  </ul>
 
-
-<section>
-
-
-
-
-
-<!-- {{upserveCategories}} -->
-
-<!-- upserve categories: -->
-<ul class="upserve-cats">
-<li v-for="item in upserveCategories" :key="item">
-
-  <button @click="filterByCat(item)">
-{{item}}
-</button>
-</li>
-</ul>
-
-<div class="container">
-<div class="filtree"  v-for="item in currentlyFiltered" v-bind:key="item.name">
-{{item}}
-<br>  
-</div>
-</div>
-
-<!-- upserve:
-<div v-for="item in upserve" :key="item.item_id">
-{{item.name}} / {{item.price}} / {{item.category}}
-</div> -->
-  </section>
-
+  <div class="container">
+    <div class="filtree"  v-for="item in currentlyFiltered" v-bind:key="item.name">
+    {{item}}
+    <br>  
+    </div>
+  </div>
+</section> -->
 
     <section
       :id="offering.category"
@@ -73,10 +56,6 @@
   <!-- {{ blok.content.body[0].testimonialsDescription }} -->
 </p>
 <p v-else-if="offering.title === 'mama shop'" class="description-para noselect">{{ blok.content.body[0].mamaShopDescription }}</p>
-
-
-
-
         <carousel
           v-if="offering.title === 'testimonials'"
           :responsive=" {0:{items:1},768:{items:1},1080:{items:1}}"
@@ -85,24 +64,13 @@
           :dots="false"
           :nav="false"
         >
- 
-
-
-
-        
-          <template class="subprev" slot="prev">
+        <template class="subprev" slot="prev">
             <span class="prev">
               <Prev />
             </span>
           </template>
 
-
-
   <div v-for="testimonial in blok.content.body[0].list.tbody" :key="testimonial._uid">
-
-
-
-
             <div class="height-100">
               <div class="l-col">
                 <div class="quote-container">
@@ -110,18 +78,10 @@
                   <div class="sm" v-else-if="testimonial.body[0].value.length > 40">{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
                   <div class="md" v-else-if="testimonial.body[0].value.length > 20">{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
                   <div class="md" v-else>{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
-                  <!-- <div class="quote-author">- {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div> -->
                 </div>
               </div>
-              <!-- <div class="r-col">
-                <img v-bind:src="testimonial.body[3].value" />
-              </div> -->
             </div>
-
   </div>
-
-
-
 
           <template v-if="index === 0 || index === 1" slot="next"></template>
           <template v-else class="subnext" slot="next">
