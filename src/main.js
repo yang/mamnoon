@@ -574,7 +574,7 @@ new Vue({
 // this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
 
 // let responseTockStreet2 = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
-let responseTockStreet2 = await this.$http.get(`http://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
+let responseTockStreet2 = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
 
 
 

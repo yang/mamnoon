@@ -267,7 +267,7 @@ this.dumpAcf()
 async dumpAcf(){
 
 // let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
-let responseAcf = await this.$http.get(`http://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
+let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
 
 let AcfBlock = responseAcf.data[0].acf.family_meal_calendar
 
