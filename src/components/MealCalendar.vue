@@ -1,71 +1,13 @@
 <template>
+    <section id="familymeal" class="coverflowsection individual">
   <div>
-    <div class="tock-panel" v-if="tockPanelVisible">
-      <button @click="freshTockPull()">wipe and refresh tock</button>
-
-      <div class="tock-inner">
-        <h1>current tock meals</h1>
-        <div
-          :key="tockMeal.title"
-          v-for="(tockMeal, index) in this.$store.state.inventory.tockMeals"
-        >
-          link:
-          <br />
-          {{tockMeal.createdLink}}
-          <br />title:
-          <br />
-          <input class="tockEditField" type="text" v-model="tockMeal.title" />&nbsp;&nbsp;
-          <button @click="updateTockItem(tockMeal.title, 'title', index, tockMeal._id)">update title</button>
-          <br />description:
-          <br />
-          <textarea class="tockEditField" type="text" v-model="tockMeal.description" />&nbsp;&nbsp;
-          <button
-            @click="updateTockItem(tockMeal.description, 'description', index, tockMeal._id)"
-          >update</button>
-          <br />image:
-          <br />
-          <img class="tockEditImage" :src="tockMeal.image" />
-          <br />
-          <input class="tockEditField" type="text" v-model="tockMeal.image" />
-          <button @click="updateTockItem(tockMeal.image, 'image', index, tockMeal._id)">update</button>
-          <div v-if="tockMeal.veg === true">vegetarian</div>
-          <div else>meat</div>
-          <div v-if="tockMeal.delivery === true">delivery</div>
-          <div else>pickup</div>
-          <br />
-          <br />
-        </div>
-      </div>
-    </div>
     <div>
-      <!-- <div class="toggleVegContainer">
-        <button
-          class="toggleVeg"
-          :class="{redBackground: $store.state.vegetarian}"
-          @click="toggleVegetarian"
-        >
-          <div class="lrbutton" :class="{lrExpanded: $store.state.vegetarian}">
-            <div v-if="$store.state.vegetarian === true">M</div>
-            <div v-else>V</div>
-          </div>
-        </button>
-      </div> -->
       <div class="position-relative red-header">
-        <h4 class="noselect">{{titleFromCMS}}</h4>
-        <p style="text-align:left;margin-top: 20px;">{{descriptionFromCMS}}</p>
-      
-      
-      
-      <!-- {{familyMeals}} -->
-      
-      
+        <h4 class="noselect">{{data.meal_calendar_header.header}}</h4>
+        <p style="text-align:left;margin-top: 20px;">{{data.meal_calendar_header.description}}</p>
       </div>
-
       <div id="container"></div>
-
       <div class="full-width-block">
-
-
  <ul class="dots">
   <li v-for="index in dotsLength" :key="index" @click="coverFlowTo(index)">
     <div class="whitedot noselect" v-if="index - 1 < coverFlowIndex">
@@ -77,7 +19,6 @@
       <div class="blackdot noselect" v-else-if="index - 1 > coverFlowIndex">
       {{index}}
     </div> 
-
   </li>
 </ul>
 
@@ -91,28 +32,12 @@
 
 
       <div v-if="title" class="title noselect">
-          <!-- <a :href="link" target="_blank">{{title | truncate(60, '...')}}</a> -->
-
-    <!-- {{coverFlowIndex}} -->
-<!-- {{description | truncate(80, '...')}} -->
 {{date}}
         </div>
-        <!-- <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div> -->
-      
 
-      <!-- <div :class="'index'+coverFlowIndex">
-              {{coverFlowIndex}}
-              
-      </div> -->
       </div>
 
       <div class="bottom-button">
-        <!-- <a class="left-button" onclick="coverflow().prev();">
-          <Prev />
-        </a>
-        <a class="right-button" onclick="coverflow().next();">
-          <Next />
-        </a> -->
 
         <a class="full-width" :href="link" target="_blank">
           <div class="outer">
@@ -129,6 +54,7 @@
       </div>
     </div>
   </div>
+  </section>
 </template>
 
 
@@ -147,40 +73,40 @@ export default {
     PickupStar,
     DeliveryStar,
     Prev,
-    Next,
+    Next
   },
   data() {
     return {
       familyMeals: null,
       coverFlowIndex: 0,
       dotsLength: 0,
-      productsList: this.$store.state.inventory.tockMeals,
+      productsList: this.data.meal_calendar,
       date:
-              this.$store.state.inventory.tockMeals.length > 0
-          ? this.$store.state.inventory.tockMeals[0].date
+              this.data.meal_calendar.length > 0
+          ? this.data.meal_calendar[0].date
           : "loading...",
       title:
-        this.$store.state.inventory.tockMeals.length > 0
-          ? this.$store.state.inventory.tockMeals[0].title
+        this.data.meal_calendar.length > 0
+          ? this.data.meal_calendar[0].title
           : "loading...",
       description:
-        this.$store.state.inventory.tockMeals.length > 0
-          ? this.$store.state.inventory.tockMeals[0].description
+        this.data.meal_calendar.length > 0
+          ? this.data.meal_calendar[0].description
           : "loading...",
       link:
-        this.$store.state.inventory.tockMeals.length > 0
-          ? this.$store.state.inventory.tockMeals[0].createdLink
+        this.data.meal_calendar.length > 0
+          ? this.data.meal_calendar[0].createdLink
           : "loading...",
       delivery:
-        this.$store.state.inventory.tockMeals.length > 0
-          ? this.$store.state.inventory.tockMeals[0].delivery
+        this.data.meal_calendar.length > 0
+          ? this.data.meal_calendar[0].delivery
           : "loading...",
       tockPanelVisible: false,
     };
   },
   mounted() {
     if (this.$store.state.vegetarian === true) {
-      const map1 = this.$store.state.inventory.tockMeals.filter(function (x) {
+      const map1 = this.data.meal_calendar.filter(function (x) {
         if (x.veg === true) return x;
       });
       this.productsList = map1;
@@ -190,29 +116,34 @@ export default {
       this.delivery = map1[0].delivery;
       this.reset(map1);
     } else {
-    if (this.$store.state.inventory.tockMeals[0]) {
-      this.productsList = this.$store.state.inventory.tockMeals;
-      this.title = this.$store.state.inventory.tockMeals[0].title;
-      this.description = this.$store.state.inventory.tockMeals[0].description;
-      this.link = this.$store.state.inventory.tockMeals[0].createdLink;
-      this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
+    if (this.data.meal_calendar[0]) {
+      this.productsList = this.data.meal_calendar;
+      this.title = this.data.meal_calendar[0].title;
+      this.description = this.data.meal_calendar[0].description;
+      this.link = this.data.meal_calendar[0].createdLink;
+      this.delivery = this.data.meal_calendar[0].delivery;
     }
     console.log(this.productsList)
-      this.reset(this.productsList);
+    this.reset(this.productsList);
     }
 
 
+console.log('from store:')
+// console.log(this.data.meal_calendar)
 
 
+for(let i = 0;i<this.data.meal_calendar.length;i++){
+console.log(this.data.meal_calendar[i])
+}
 
-this.dumpAcf()
 
+    this.dumpAcf()
 
   },
-  props: ["products", "titleFromCMS", "descriptionFromCMS"],
+  props: ["data"],
   computed: {
     count() {
-      return this.$store.state.inventory.tockMeals;
+      return this.data.meal_calendar;
     },
     vegetarian() {
       return this.$store.state.vegetarian;
@@ -230,7 +161,7 @@ this.dumpAcf()
     },
     vegetarian() {
       if (this.$store.state.vegetarian === true) {
-        const map1 = this.$store.state.inventory.tockMeals.filter(function (x) {
+        const map1 = this.data.meal_calendar.filter(function (x) {
           if (x.veg === true) return x;
         });
         this.productsList = map1;
@@ -242,12 +173,12 @@ this.dumpAcf()
         this.delivery = map1[0].delivery;
         this.reset(map1);
       } else {
-        this.productsList = this.$store.state.inventory.tockMeals;
-        this.title = this.$store.state.inventory.tockMeals[0].title;
-        this.description = this.$store.state.inventory.tockMeals[0].description;
-        this.date = this.$store.state.inventory.tockMeals[0].date;
-        this.link = this.$store.state.inventory.tockMeals[0].createdLink;
-        this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
+        this.productsList = this.data.meal_calendar;
+        this.title = this.data.meal_calendar[0].title;
+        this.description = this.data.meal_calendar[0].description;
+        this.date = this.data.meal_calendar[0].date;
+        this.link = this.data.meal_calendar[0].createdLink;
+        this.delivery = this.data.meal_calendar[0].delivery;
         this.reset(this.productsList);
       }
     },
@@ -266,11 +197,16 @@ this.dumpAcf()
   methods: {
 async dumpAcf(){
 
-let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
-let AcfBlock = responseAcf.data[0].acf.family_meal_calendar
+// let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+// let AcfBlock = responseAcf.data[0].acf.family_meal_calendar
 
-// console.log(AcfBlock)
-this.familyMeals = AcfBlock
+// // console.log(AcfBlock)
+// this.familyMeals = AcfBlock
+console.log('acf data:')
+
+for(let i = 0;i<this.data.meal_calendar.length;i++){
+console.log(this.data.meal_calendar[i].meal)
+}
 
 },
 coverFlowTo(index){
@@ -278,54 +214,9 @@ coverFlowTo(index){
      coverflow().to(index-1);
    
     },
-    async freshTockPull() {
-      let responseTock = await this.$http.get(`/tock/tockmeals/${false}`);
-      let inventoryTockAdd = responseTock.data.tockMeals;
-      this.$store.commit("updateTockMeals", { inventoryTockAdd });
-
-      let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`);
-      let inventoryTockAddStreet = responseTockStreet.data.tockMeals;
-      this.$store.commit("updateTockMealsStreet", { inventoryTockAddStreet });
-    },
-    updateTockItem(text, item, index, _id) {
-      let updateTockItem = {
-        text,
-        item,
-        index,
-        _id
-      };
-      this.$store.commit("updateTockItem", { updateTockItem });
-
-      if (this.$store.state.vegetarian === true) {
-        const map1 = this.$store.state.inventory.tockMeals.filter(function (x) {
-          if (x.veg === true) return x;
-        });
-        this.productsList = map1;
-        this.title = map1[0].title;
-        this.description = map1[0].description;
-        this.date = map1[0].date;
-        this.link = map1[0].createdLink;
-        this.delivery = map1[0].delivery;
-
-        this.reset(map1);
-      } else {
-        this.productsList = this.$store.state.inventory.tockMeals;
-
-        this.title = this.$store.state.inventory.tockMeals[0].title;
-        this.description = this.$store.state.inventory.tockMeals[0].description;
-        this.date = this.$store.state.inventory.tockMeals[0].date;
-        this.link = this.$store.state.inventory.tockMeals[0].createdLink;
-        this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
-        this.reset(this.productsList);
-      }
-      // big thing
-    },
-    toggleVegetarian() {
-      this.$store.commit("toggleVegetarian");
-    },
     returnProducts(index) {
       if (this.$store.state.vegetarian === true) {
-        const map1 = this.$store.state.inventory.tockMeals.filter(function (x) {
+        const map1 = this.data.meal_calendar.filter(function (x) {
           if (x.veg === true) return x;
         });
         this.productsList = map1;
@@ -335,28 +226,21 @@ coverFlowTo(index){
         this.link = map1[index].createdLink;
         this.delivery = map1[index].delivery;
       } else {
-        this.title = this.$store.state.inventory.tockMeals[index].title;
-        this.date = this.$store.state.inventory.tockMeals[index].date;
-        this.description = this.$store.state.inventory.tockMeals[
+        this.title = this.data.meal_calendar[index].title;
+        this.date = this.data.meal_calendar[index].date;
+        this.description = this.data.meal_calendar[
           index
         ].description;
-        this.link = this.$store.state.inventory.tockMeals[index].createdLink;
-        this.delivery = this.$store.state.inventory.tockMeals[index].delivery;
+        this.link = this.data.meal_calendar[index].createdLink;
+        this.delivery = this.data.meal_calendar[index].delivery;
       }
     },
     reset(x) {
-
-
       console.log(x.length)
       let that = this;
-
-
       this.dotsLength = x.length
 
-      // coverflow('container').fadeOut()
-      // setTimeout(function(){
       coverflow("container").remove();
-      // }, 1000);
 
       coverflow("container")
         .setup({
@@ -381,32 +265,24 @@ coverFlowTo(index){
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
-
-
-
-  slides[0].innerHTML += "<div class='dialog cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'><a href="+x[0].createdLink+" target='_blank'>mamnoon</a></div>"
-  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].image+" /></a>"
-  slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[0].createdLink+" target='_blank'>"+x[0].title+"</a></div></div>"
+  slides[0].innerHTML += "<div class='dialog cursor-pointer'><a href="+x[0].meal.createdLink+" target='_blank'>mamnoon</a></div>"
+  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].meal.image+" /></a>"
+  slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[0].meal.createdLink+" target='_blank'>"+x[0].meal.title+"</a></div></div>"
 
   let dialog = document.getElementsByClassName("dialog");
 
   console.log(dialog)
 
   this.on("focus", function (index) {
-            that.returnProducts(index);
+  that.returnProducts(index);
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
+  slides[index].innerHTML += "<div class='dialog cursor-pointer'><a href="+x[index].meal.createdLink+" target='_blank'>mamnoon</a></div>"
+  slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].meal.image+" /></a>"
+  slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].meal.createdLink+" target='_blank'>"+x[index].meal.title+"</a></div></div>"
 
-slides[index].innerHTML += "<div class='dialog cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'><a href="+x[index].createdLink+" target='_blank'>mamnoon</a></div>"
-  slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
-  slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].createdLink+" target='_blank'>"+x[index].title+"</a></div></div>"
-  
-  // slides.style.opacity=1; 
-
-  // slides[index].style.opacity=0; 
-
-that.coverFlowIndex = index
+  that.coverFlowIndex = index
 
       });
           this.on("click", function (index, link) {
@@ -416,17 +292,6 @@ that.coverFlowIndex = index
           });
         });
 
-
-
-// console.log(x)
-// var slides = document.getElementsByClassName("coverflow-cell");
-// for (var i = 0; i < slides.length; i++) {
-//   //  slides[i].prepend("<div>Headline:"+i+"</div>")
-
-//    slides[i].innerHTML += "<div style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;'>mamnoon</div>"
-// slides[i].innerHTML += "<img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[i].image+" />"
-//   //  slides[i].innerHTML += "<div style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'>"+x[i].title+"</div>"
-// }
 
     },
   },
@@ -794,7 +659,8 @@ a.right-button svg {
   z-index: 100;
   position: absolute;
   left: 0;bottom: 0;
-  width: 100%;
+  // width: 100%;
+  width: 400px;
   background: #fff367;
 }
 
@@ -805,6 +671,22 @@ a.right-button svg {
   margin: 0 auto;
   padding: 10px;
   width: 90%;
+}
+
+
+
+.dialog{
+  font-size:24px;
+  font-weight:500;
+  color: #f05d5b;
+  text-align:center;
+  z-index: 100;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 400px;
+  background: #fff367;
+  padding-bottom:5px;
 }
 
 </style>

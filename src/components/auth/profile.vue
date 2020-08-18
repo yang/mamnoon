@@ -5,24 +5,12 @@
             </div>
     <div class="row">
 <!-- shop -->
-
 <!-- {{ story}} -->
-
-
-
-
-
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-
-// 1. Require the Storyblok client
-
-
-
-
 export default {
     name: 'profile',
   data() {
@@ -36,7 +24,7 @@ export default {
     },
   mounted () {
     console.log('loggin?')
-      console.log(this.$store.state.loggedIn)
+    console.log(this.$store.state.loggedIn)
 // this.$store.state.loggedIn
 
   },

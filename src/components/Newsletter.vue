@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="newsletter-section">
-        <div class="pad-cont">
+        <div class="pad-cont" style="padding-top: 25px;">
             <CampaignMonitor />
         </div>
       </div>
@@ -43,20 +43,20 @@ components: {
 #newsletter{
     margin-bottom: 100px;
     padding: 0;
+    display: inline-block;
+    width: 100%;
 }
 
 
 
 .newsletter-section{
     width: 50%;
-    display: inline-block;
-    text-align: left;
-    padding-bottom: 30px;
+    float: left;
     h4{
         text-align: left;
     }
     .pad-cont{
-        padding: 30px;
+           padding: 20px 30px;
     }
 }
 
@@ -70,7 +70,7 @@ components: {
         text-align: left;
     }
     .pad-cont{
-        padding: 30px;
+        padding: 20px 30px;
     }
 
 
@@ -82,6 +82,13 @@ components: {
             }
         }
     }
+
+&:nth-child(2){
+       .pad-cont{
+        padding-bottom: 15px;
+       }
+}
+
 }
 
 
@@ -92,6 +99,7 @@ components: {
 .thick-white{
     color: white;
     font-weight: 600;
+    margin-bottom: 0;
 }
 
 

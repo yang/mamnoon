@@ -51,10 +51,6 @@
   </p>
 
   <p>
-    <!-- <input
-      type="submit"
-      value="Submit"
-    > -->
     <button class="buttonStyle" type="submit" value="Submit">
         <Submit />
       </button>
@@ -176,13 +172,8 @@ console.log(this.emailAddress)
 
     },
     handler(){
-
-        //  event.returnValue = 'Write something'
      console.log('page refresh')
-     
-     
-     
-    }
+          }
 },
 mounted () {
   console.log('mounted')
@@ -234,13 +225,9 @@ font-size: 10px;
 
 
 .testimonials-list{
-  // max-height: 400px;
-
-  // overflow: scroll;
 ul{
-    max-height: 400px;
-  // border: 1px solid black;
-    border: 1px solid black;
+  max-height: 400px;
+  border: 1px solid black;
   overflow: scroll;
   width: 90%;
   margin-top: 20px;
@@ -266,7 +253,6 @@ font-weight:500;
 
 
 .buttonStyle{
-      // width: 100%;
     border: 0;
     background: transparent;
     outline: none;

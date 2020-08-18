@@ -6,37 +6,6 @@ import AxiosPlugin from 'vue-axios-cors';
 Vue.use(AxiosPlugin)
 Vue.use(VueRouter);
 
-// const routes = [
-//   {
-//     path: "/home",
-//     name: "home",
-//     component: Home,
-//     meta: {
-//       requiresAuth: true
-//     }
-//   },
-//   {
-//     path: "/login",
-//     name: "login",
-//     component: () => import("../views/login.vue")
-//   },
-//   {
-//     path: "/",
-//     name: "home",
-//     component: () => import("../views/Home.vue")
-//   },
-//   {
-//     path: "/register",
-//     name: "register",
-//     component: () => import("../views/register.vue")
-//   },
-//   {
-//     path: "/addproduct",
-//     name: "addproduct",
-//     component: () => import("../views/addproduct.vue")
-//   },
-
-// ];
 
 const routes = [
   {
@@ -71,8 +40,14 @@ const routes = [
     path: "/addproduct",
     name: "addproduct",
     component: () => import("../views/addproduct.vue")
+  },
+  {
+    path: '/restaurant/:id',
+    name: "restaurant",
+    component: () => import("../views/restaurant.vue")
   }
 ];
+
 
 const router = new VueRouter({
   mode: "history",

@@ -3,44 +3,22 @@
 </template>
 
 
-
 <script>
 export default {
 props: ['yellowText']
     
 }
-
-
-
 </script>
 
-
-
-// <path :class="[yellowText ? 'cls-2-yellow' : 'cls-2-white']" d
-
-
-// <path :class="[yellowText ? 'cls-2-yellow' : 'cls-2-white']" d
-
-// <path :class="cls-2"
-
-
 <style>
-/* .cls-1show-all{fill:#f58e58;}.cls-2show-all{fill:#fff;} */
-
-
 .cls-2-yellow{
     fill:yellow;
 }
-
 .cls-2-white{
     fill:#ffffff;
 }
-
-
-
 svg#show-all{
     width:172px;
     margin: 10px auto;
 }
-
 </style>

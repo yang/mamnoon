@@ -7,6 +7,38 @@
 
 
 
+<section>
+
+
+
+
+
+<!-- {{upserveCategories}} -->
+
+<!-- upserve categories: -->
+<ul class="upserve-cats">
+<li v-for="item in upserveCategories" :key="item">
+
+  <button @click="filterByCat(item)">
+{{item}}
+</button>
+</li>
+</ul>
+
+<div class="container">
+<div class="filtree"  v-for="item in currentlyFiltered" v-bind:key="item.name">
+{{item}}
+<br>  
+</div>
+</div>
+
+<!-- upserve:
+<div v-for="item in upserve" :key="item.item_id">
+{{item.name}} / {{item.price}} / {{item.category}}
+</div> -->
+  </section>
+
+
     <section
       :id="offering.category"
       v-for="(offering,index) in inventory.offerings"
@@ -37,7 +69,9 @@
 </h4>
 <p class="description-para noselect" v-if="offering.title === 'order now'">{{ blok.content.body[0].orderNowDescription }}</p>
 <p v-else-if="offering.title === 'reservations'" class="description-para noselect">{{ blok.content.body[0].reservationsDescription }}</p>
-<!-- <p v-else-if="offering.title === 'testimonials'" class="description-para noselect">{{ blok.content.body[0].testimonialsDescription }}</p> -->
+<p v-else-if="offering.title === 'testimonials'" class="description-para noselect">
+  <!-- {{ blok.content.body[0].testimonialsDescription }} -->
+</p>
 <p v-else-if="offering.title === 'mama shop'" class="description-para noselect">{{ blok.content.body[0].mamaShopDescription }}</p>
 
 
@@ -232,7 +266,6 @@
               </div>
             </div>
           </div>
-
           <template v-if="index === 0 || index === 1" slot="next"></template>
           <template v-else class="subnext" slot="next">
             <span class="next">
@@ -240,7 +273,6 @@
             </span>
           </template>
         </carousel>
-
         <carousel
           v-else-if="!offering.reservationBlock"
           :items="offering.slideNo ? offering.slideNo : 3"
@@ -253,6 +285,7 @@
               <Prev />
             </span>
           </template>
+ 
           <div
             v-for="item in offering.items"
             v-bind:key="item.name"
@@ -269,16 +302,7 @@
 
 
             {{item.description}}
-            <!-- <template v-if="item.caviarLink">
-              <div class="order-bottom">
-                {{item.name}}
-                <div class="order-panel">
-                  <a :href="item.caviarLink" target="_blank">
-                    <Order />
-                  </a>
-                </div>
-              </div>
-            </template> -->
+
             <template v-if="item.statistics">
               <div class="order-bottom">
                 {{item.name}}
@@ -325,6 +349,7 @@
             </div>
           </div>
         </div>
+        
         <div class="width-container" v-if="offering.reservationBlock">
 
       <Mbar :linkOut="offering.mbarTrigger" />
@@ -390,11 +415,22 @@ export default {
     return {
       inventory: this.$store.state.inventory,
       products: this.$store.state.inventory.offerings[0].items,
-      blockedBody: this.apiData
+      blockedBody: this.apiData,
+      upserve: null,
+      upserveCategories: [],
+      currentlyFiltered: []
     };
   },
   props: ['apiData', 'blok'],
   methods: {
+    filterByCat(cat){
+      this.currentlyFiltered = []
+      for(let i = 0;i<this.upserve.length;i++){
+        if(this.upserve[i].category === cat){
+        this.currentlyFiltered.push(this.upserve[i])
+        }
+      }
+    },
     dayChange(e) {
       this.currentDay = e + 1;
     },
@@ -431,12 +467,40 @@ export default {
     },
     changedAlert() {
       console.log("changed");
+    },
+    async upserves(){
+
+
+  let responseUpserve = await this.$http.get("/product/upserve");
+  let upserveProducts = responseUpserve.data.body.objects
+  
+console.log(upserveProducts)
+
+
+this.upserve = upserveProducts
+
+
+for(let i = 0;i<upserveProducts.length;i++){
+  if(!this.upserveCategories.includes(upserveProducts[i].category)){
+    this.upserveCategories.push(upserveProducts[i].category)
+  }
+}
+
+
+
     }
   },
   created() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
     this.currentDay = dd;
+
+
+  },
+  mounted(){
+    this.upserves()
+
+
 
 
   }
@@ -554,7 +618,7 @@ h4 {
   height: auto !important;
 }
 #testimonials .owl-item .l-col {
-  padding: 30px;
+  padding: 20px;
   text-align: left;
   padding-top: 15px;
   width: 100%;
@@ -712,18 +776,22 @@ section {
 }
 .description-para {
   color: white;
-  margin: 10px auto 10px;
+  margin: 20px auto;
   width: 80%;
 }
-.height-100 {
+
+.quote-container {
+  // position: relative;
   // height: 100%;
   // width: 100%;
-}
-.quote-container {
+  // padding-bottom: 80px;
   position: relative;
   height: 100%;
-  width: 100%;
-  padding-bottom: 80px;
+  width: 70%;
+  margin: 0 auto;
+  // padding-bottom: 80px;
+  text-align: center;
+
 }
 .quote-author {
   position: absolute;
@@ -769,5 +837,52 @@ section {
 
 #mama-shop .carousel{
     margin-bottom: 20px;
+}
+
+
+
+.owl-item > div{
+  width: 100%
+}
+
+
+#testimonials{
+  .owl-carousel {
+    margin-top: -10px;
+  }
+}
+
+
+#testimonials{
+  .quote-container {
+    // height: 200px;
+        min-height: 60px;
+    position: relative;
+
+    .md, .xs{
+      position: absolute;
+      top: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      left: 50%;
+      width: 100%;
+      font-size: 20px;
+    }
+}
+
+}
+
+ul.upserve-cats li{
+  display: inline;
+}
+
+
+.filtree{
+  width: 50%;
+  float: left;
+  height: 300px;
+background: #ddd;
+margin: 5px;
+padding: 5px;
 }
 </style>

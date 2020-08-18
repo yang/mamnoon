@@ -4,14 +4,9 @@
     <button class="no-button-style" @click="submitForm">
         <Send :sendText="subscribeText" />
     </button>
-
-
-
-
   </div>
 </template>
 <script>
-
 
 import Send from '@/components/Send.vue'
 export default {

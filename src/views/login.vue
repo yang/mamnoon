@@ -2,18 +2,9 @@
   <div class="login">
     <Nav />
     <login />
-
-
-
-
-    
-
-
   </div>
 </template>
 <script>
-
-
 import SlideShow from "@/components/SlideShow";
 import login from "@/components/auth/login";
 import shop from "@/components/auth/shop";

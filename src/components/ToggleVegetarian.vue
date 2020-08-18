@@ -3,11 +3,9 @@
 
     <button @click="toggleVegetarian" class="toggleVegButton">
         <span v-if="$store.state.vegetarian === true">
-            <!-- show meat and veg options -->
         <ShowVeg class="half-width" :yellowText="false" />        <ShowAllFood class="half-width" :yellowText="true" />
             </span>
         <span v-else>
-            <!-- only show vegetarian -->
         <ShowVeg class="half-width" :yellowText="true" />        <ShowAllFood class="half-width" :yellowText="false" />
             </span>       
 </button>
@@ -51,15 +49,12 @@ width: 100%;
     outline: none;
 }
 
-
 .half-width{
     width: 25%;
     display: inline-block;
     margin-left: 10px;
     margin-right: 10px;
-    /* float: left; */
 }
-
 
 .bottom-margin{
     margin-bottom: 100px;

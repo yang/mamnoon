@@ -17,15 +17,15 @@
 
 
 
-<div class="hello logButton googleInHeader" style="right:100px">
-        <router-link v-if="this.$store.state.loggedIn" to="/profile">
+<div v-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right:190px">
+        <router-link to="/profile">
        
        profile
         </router-link>
 </div>
 
 
-<div class="hello logButton googleInHeader" style="right:200px">
+<div class="hello logButton googleInHeader" style="right:100px">
         <router-link to="/shop">
        
       shop

@@ -1,7 +1,8 @@
 <template>
   <div class="outer">
-    <svg
-      id="order"
+    <!-- <svg
+      id="order" -->
+      <svg id="orderstar"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -86,7 +87,7 @@ export default {};
 }
 svg#order {
   width: 100px;
-  height: 100px;
+  height: 40px;
   margin: 0 auto;
 }
 </style>

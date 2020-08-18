@@ -1,12 +1,6 @@
 <template>
   <div>
 <Nav />
-  <transition name="fade">
-    <template v-if="this.$store.state.userProfileModalVisible">
-    <UserProfile v-if="this.$store.state.loggedIn" />
-    </template>
-</transition>
- <!-- <div class="container mt-5 nav-acc-header" :class="{ morePadding: this.$store.state.loggedIn }"> -->
       <div class="container mt-5 nav-acc-header">
         <div class="row">
           <div class="col-md-12">
@@ -20,7 +14,6 @@
   </li>
   </ul>
 <SlideShow />
-<!-- <Products /> -->
           </div>
         </div>
       </div>
@@ -57,29 +50,13 @@ export default {
     async getUserProducts(){
 
       let response = await this.$http.get('/user/' + this.user._id) 
-      // console.log(response.data.user.products)
       this.products = response.data.user.products
     },
-    // logUserOut() {
-    //   localStorage.removeItem("jwt");
-    //   this.$router.push("/");
-    // },
     },
-  mounted() {
-      // this.getUserDetails();
-      // this.getUserProducts();
-
-
-
-
-  }
-
 };
 </script>
 
 <style scoped lang="scss">
-
-
 .fix-top-nav{
     position: fixed;
     width: 100%;
@@ -87,29 +64,19 @@ export default {
     z-index: 100;
 }
 
-
 .section.hero{
   width: 100%;
   height: 100vh;
 }
-
-
-
-
 .nav-acc-header{
-  // padding-top: 160px;
   padding-top: 130px;
-
 transition: padding .5s ease;
 &.morePadding{
     padding-top: 300px;
 }
-
 }
 
-
 @media only screen and (max-width: 1080px) {
-
 .nav-acc-header{
   padding-top: 160px;
 
@@ -118,11 +85,6 @@ transition: padding .5s ease;
     padding-top: 250px;
 }
 
-}
-
-
-.nav-acc-header{
-  // padding-top: 80px;
 }
 
 }

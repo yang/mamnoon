@@ -1,7 +1,7 @@
 <template>
     <div class="outer">
 <!-- Generator: Adobe Illustrator 24.2.1, SVG Export Plug-In  -->
-<svg id="order" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="69.5px"
+<svg id="orderstar" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="69.5px"
 	 height="69.5px" viewBox="0 0 69.5 69.5" style="overflow:visible;enable-background:new 0 0 69.5 69.5;" xml:space="preserve">
 <defs>
 </defs>
@@ -72,7 +72,17 @@ svg#order{
 
 
   width: 100px;
-  height: 100px;
+  /* height: 100px; */
+  height: 40px;
 margin: 0 auto;
 }
+
+
+svg#orderstar{
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+
 </style>

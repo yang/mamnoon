@@ -3,13 +3,6 @@
     <Nav />
        <UserProfile />
  
-
-
-
-
-    
-
-
   </div>
 </template>
 <script>
@@ -24,18 +17,12 @@ export default {
 
   },
     mounted () {
-    // console.log('loggin?')
-    //   console.log(this.$store.state.loggedIn)
-// this.$store.state.loggedIn
 if(!this.$store.state.loggedIn){
       this.$router.push("/");
 }
-
-
   },
 };
 </script>
-
 
 <style>
 .profile{

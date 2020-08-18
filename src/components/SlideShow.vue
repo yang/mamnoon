@@ -8,8 +8,6 @@
 // 1. Require the Storyblok client
 import StoryblokClient from 'storyblok-js-client'
 
-
-
 import Carousel from '@/components/Carousel'
 // 2. Set your token - you will be able to create a new space later.
 const token = 'H8MYzXMCYp9QQ30fkKtixwtt';
@@ -19,7 +17,6 @@ const token = 'H8MYzXMCYp9QQ30fkKtixwtt';
 let storyapi = new StoryblokClient({
   accessToken: token
 })  
-
 
 export default {
 name: 'SlideShow',

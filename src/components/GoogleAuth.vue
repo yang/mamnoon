@@ -7,7 +7,7 @@
         v-if="!isSignIn"
         :disabled="!isInit"
       >
-      sign in with google
+      sign in
 
       </a>
       <a

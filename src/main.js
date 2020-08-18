@@ -434,6 +434,9 @@ const store = new Vuex.Store({
   },
     updateTockMeals(state, { inventoryTockAdd }){
 
+
+
+
       function lookup( name ) {
         for(var i = 0, len = state.inventory.tockMeals.length; i < len; i++) {
             if( state.inventory.tockMeals[ i ].createdLink === name )
@@ -442,10 +445,13 @@ const store = new Vuex.Store({
         return false;
     }
 
+
+    state.inventory.tockMeals = []
+
     inventoryTockAdd.forEach(function(e){
-      if( !lookup( e.createdLink ) ) {
+      // if( !lookup( e.createdLink ) ) {
         state.inventory.tockMeals.push(e);
-      }
+      // }
     })
 
 
@@ -556,26 +562,36 @@ new Vue({
 
 
 
+// let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
+// let inventoryTockAdd = responseTock.data.tockMeals
+// this.$store.commit('updateTockMeals', { inventoryTockAdd })
+
+// console.log('from api:')
+// console.log(inventoryTockAdd)
+
+// let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
+// let inventoryTockAddStreet = responseTockStreet.data.tockMeals
+// this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
+
+let responseTockStreet2 = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
 
 
-let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
-let inventoryTockAdd = responseTock.data.tockMeals
+console.log(inventoryTockAdd)
+
+// console.log('from acf:')
+// console.log(inventoryTockAddStreet2)
+
 this.$store.commit('updateTockMeals', { inventoryTockAdd })
 
-let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
-let inventoryTockAddStreet = responseTockStreet.data.tockMeals
-this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
-
+// this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet2 })
 // hit the database and return all of them
 // let tockFromMongo = await this.$http.get('/tock/tockfrommongo')
 // let inventoryTockAdd = tockFromMongo.data.tocks
-
 // this.$store.commit("updateTockMeals", { inventoryTockAdd });
 
-let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
-let AcfBlock = responseAcf
 
-console.log(AcfBlock)
+
 
 
 }

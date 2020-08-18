@@ -12,33 +12,30 @@ export default {
 name: 'submit'
     
 }
-
-
-
 </script>
 
 <style>
-
-
-
-.cls-1show-all{fill:#f58e58;}.cls-2show-all{fill:#fff;}
-
-
+.cls-1show-all{
+    fill:#f58e58;
+}
+.cls-2show-all{
+    fill:#fff;
+    }
 .cls-2-yellow{
     fill:yellow;
 }
-
 .cls-2-white{
     fill:#ffffff;
 }
-
 svg#submit{
     width:172px;
     margin: 10px auto;
 }
-
-
-
-.cls-1{fill:#f58e58;}.cls-2{fill:#fff;}
+.cls-1{
+    fill:#f58e58;
+}
+.cls-2{
+    fill:#fff;
+    }
 
 </style>

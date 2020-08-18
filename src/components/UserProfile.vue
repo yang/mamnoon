@@ -5,39 +5,24 @@
         {{$store.state.currentUserEmail}}
         <!-- <h1 v-if="$store.state.currentUserEmail === ''"> -->
         <!-- welcome back, {{ $store.state.userInfo.user.email | generateUsername() }} -->
-        <!-- <br/> -->
         <!-- {{ $store.state.userInfo.user.email }} -->
         <!-- </h1> -->
-        <!-- <h1>welcome back</h1>  -->
         </div>
         <GiftCardModule />
         <!-- <TestimonialForm :emailAddress="$store.state.userInfo.user.email" /> -->
-                <EmailForm :emailAddress="$store.state.userInfo.user.email" />
+        <EmailForm :emailAddress="$store.state.userInfo.user.email" />
         <!-- <ContactUs /> -->
         <ToggleVegetarian />
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
-     
-
-
-
-    </div>
+        </div>
 </template>
 
 <script type="text/javascript">
-
-
-// import addproduct from "@/components/auth/addproduct";
 import EmailForm from "@/components/EmailForm";
 import TestimonialForm from "@/components/TestimonialForm";
 import GiftCardModule from "@/components/GiftCardModule";
 import ToggleVegetarian from "@/components/ToggleVegetarian";
 import ContactUs from "@/components/ContactUs";
-
-
-
-
-// svgs
-
 
 
 export default {
@@ -76,10 +61,8 @@ methods: {
 
 .pad-yellow-background{
     background: #fff367;
-    // border: 1px solid black;
     padding: 20px 30px;
     margin-bottom: 20px;
-    // border-radius: 10px;
 }
 
 

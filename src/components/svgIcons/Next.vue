@@ -1,7 +1,7 @@
 <template>
 <div>
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="31.2px"
+<svg id="nextprev" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="31.2px"
 	 height="31.2px" viewBox="0 0 31.2 31.2" style="overflow:visible;enable-background:new 0 0 31.2 31.2;" xml:space="preserve">
 
 <defs>
