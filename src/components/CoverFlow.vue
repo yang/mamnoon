@@ -134,7 +134,7 @@ async dumpAcf(){
 
 // let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
 let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
-let AcfBlock = responseAcf.data[1].acf.family_meal_calendar
+let AcfBlock = responseAcf.data[0].acf.family_meal_calendar
 
 this.familyMeals = AcfBlock
 
@@ -218,7 +218,7 @@ console.log(x)
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
-slides[index].innerHTML += "<div class='dialog cursor-pointer'><a href="+x[index].createdLink+" target='_blank'>mamnoon</a></div>"
+slides[index].innerHTML += "<div class='dialog cursor-pointer'Regence˜><a href="+x[index].createdLink+" target='_blank'>mamnoon</a></div>"
 slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
 slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].createdLink+" target='_blank'>"+x[index].title+"</a></div></div>"
 
