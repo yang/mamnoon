@@ -201,7 +201,7 @@ console.log(x)
   var slides = document.getElementsByClassName("coverflow-cell");
 
   slides[0].innerHTML += "<div class='dialog cursor-pointer' style=''><a href="+x[0].createdLink+" target='_blank'>mamnoon</a></div>"
-  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].image+" /></a>"
+  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].createdLink+" target='_blank'><img src="+x[0].image+" /></a>"
   slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[0].createdLink+" target='_blank'>"+x[0].title+"</a></div></div>"
 
   let dialog = document.getElementsByClassName("dialog");
@@ -214,7 +214,7 @@ console.log(x)
   var slides = document.getElementsByClassName("coverflow-cell");
 
 slides[index].innerHTML += "<div class='dialog cursor-pointer'Regence˜><a href="+x[index].createdLink+" target='_blank'>mamnoon</a></div>"
-slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
+slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].createdLink+" target='_blank'><img src="+x[index].image+" /></a>"
 slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].createdLink+" target='_blank'>"+x[index].title+"</a></div></div>"
 
 that.coverFlowIndex = index
@@ -303,6 +303,12 @@ that.coverFlowIndex = index
   margin-top: 22px;
   // font-size: 24px;
   font-size: 20px;
+}
+
+
+
+#container{
+  height: 480px;
 }
 
 #container.coverflow,
@@ -621,5 +627,15 @@ background: #fff367;
 padding-bottom:5px;
 }
 
+
+.coverflow-cell img{
+  width: 400px;
+  height: 400px;
+
+  width:100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 
 </style>

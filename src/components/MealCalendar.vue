@@ -266,7 +266,7 @@ coverFlowTo(index){
   var slides = document.getElementsByClassName("coverflow-cell");
 
   slides[0].innerHTML += "<div class='dialog cursor-pointer'><a href="+x[0].meal.createdLink+" target='_blank'>mamnoon</a></div>"
-  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].meal.image+" /></a>"
+  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].meal.createdLink+" target='_blank'><img src="+x[0].meal.image+" /></a>"
   slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[0].meal.createdLink+" target='_blank'>"+x[0].meal.title+"</a></div></div>"
 
   let dialog = document.getElementsByClassName("dialog");
@@ -279,7 +279,7 @@ coverFlowTo(index){
   var slides = document.getElementsByClassName("coverflow-cell");
 
   slides[index].innerHTML += "<div class='dialog cursor-pointer'><a href="+x[index].meal.createdLink+" target='_blank'>mamnoon</a></div>"
-  slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].meal.image+" /></a>"
+  slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].meal.createdLink+" target='_blank'><img src="+x[index].meal.image+" /></a>"
   slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].meal.createdLink+" target='_blank'>"+x[index].meal.title+"</a></div></div>"
 
   that.coverFlowIndex = index
@@ -683,4 +683,13 @@ a.right-button svg {
   padding-bottom:5px;
 }
 
+.coverflow-cell img{
+  width: 400px;
+  height: 400px;
+
+  width:100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 </style>
