@@ -6,7 +6,9 @@
         <h4 class="noselect">{{data.meal_calendar_header.header}}</h4>
         <p style="text-align:left;margin-top: 20px;">{{data.meal_calendar_header.description}}</p>
       </div>
+      <div v-if="familyMeals !== null">
       <div id="container"></div>
+      </div>
       <div class="full-width-block">
  <ul class="dots">
   <li v-for="index in dotsLength" :key="index" @click="coverFlowTo(index)">
