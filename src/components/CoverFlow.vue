@@ -6,8 +6,8 @@
         <p style="text-align:left;margin-top: 20px;">{{descriptionFromCMS}}</p>
       
       
-family meals:
-      {{familyMeals}}
+<!-- family meals:
+      {{familyMeals}} -->
       
       
       </div>
@@ -101,12 +101,12 @@ export default {
   watch: {
     count(newCount, oldCount) {
 
-      this.productsList = newCount;
-      this.title = newCount[0].title;
-      this.description = newCount[0].description;
-      this.date = newCount[0].date;
-      this.link = newCount[0].createdLink;
-      this.delivery = newCount[0].delivery;
+      // this.productsList = newCount;
+      // this.title = newCount[0].title;
+      // this.description = newCount[0].description;
+      // this.date = newCount[0].date;
+      // this.link = newCount[0].createdLink;
+      // this.delivery = newCount[0].delivery;
       this.reset(newCount);
     }
   },
@@ -170,7 +170,7 @@ coverFlowTo(index){
     },
     reset(x) {
 
-
+console.log('resets')
 console.log(x)
 
      let that = this;
@@ -205,9 +205,9 @@ console.log(x)
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
-  slides[0].innerHTML += "<div class='dialog cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'><a href="+x[0].meal.createdLink+" target='_blank'>mamnoon</a></div>"
-  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].image+" /></a>"
-  slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[0].meal.createdLink+" target='_blank'>"+x[0].title+"</a></div></div>"
+  slides[0].innerHTML += "<div class='dialog cursor-pointer' style=''><a href="+x[0].createdLink+" target='_blank'>mamnoon</a></div>"
+  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].image+" /></a>"
+  slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[0].createdLink+" target='_blank'>"+x[0].title+"</a></div></div>"
 
   let dialog = document.getElementsByClassName("dialog");
 
@@ -218,9 +218,9 @@ console.log(x)
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
-slides[index].innerHTML += "<div class='dialog cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'><a href="+x[index].meal.createdLink+" target='_blank'>mamnoon</a></div>"
-slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
-slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].meal.createdLink+" target='_blank'>"+x[index].title+"</a></div></div>"
+slides[index].innerHTML += "<div class='dialog cursor-pointer'><a href="+x[index].createdLink+" target='_blank'>mamnoon</a></div>"
+slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
+slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].createdLink+" target='_blank'>"+x[index].title+"</a></div></div>"
 
 that.coverFlowIndex = index
 
@@ -610,5 +610,21 @@ a.right-button svg {
   padding: 10px;
   width: 90%;
 }
+
+
+.dialog{
+font-size:24px;
+font-weight:500;
+color: #f05d5b;
+text-align:center;
+z-index: 100;
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+background: #fff367;
+padding-bottom:5px;
+}
+
 
 </style>
