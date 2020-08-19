@@ -6,7 +6,7 @@
         <p style="text-align:left;margin-top: 20px;">{{descriptionFromCMS}}</p>
       
       
-      
+family meals:
       {{familyMeals}}
       
       
@@ -42,29 +42,13 @@
 
 
       <div v-if="title" class="title noselect">
-          <!-- <a :href="link" target="_blank">{{title | truncate(60, '...')}}</a> -->
 
-    <!-- {{coverFlowIndex}} -->
-<!-- {{description | truncate(80, '...')}} -->
 {{date}}
         </div>
-        <!-- <div v-if="description" class="description noselect">{{description | truncate(80, '...')}}</div> -->
-      
 
-      <!-- <div :class="'index'+coverFlowIndex">
-              {{coverFlowIndex}}
-              
-      </div> -->
       </div>
 
       <div class="bottom-button">
-        <!-- <a class="left-button" onclick="coverflow().prev();">
-          <Prev />
-        </a>
-        <a class="right-button" onclick="coverflow().next();">
-          <Next />
-        </a> -->
-
         <a class="full-width" :href="link" target="_blank">
           <div class="outer">
             <transition name="fade">
@@ -106,26 +90,7 @@ export default {
       coverFlowIndex: 0,
       dotsLength: 0,
       productsList: this.familyMeals,
-      date: this.familyMeals.length > 0
-          ? this.familyMeals[0].date
-          : "loading...",
-      title:
-        this.familyMeals.length > 0
-          ? this.familyMeals[0].title
-          : "loading...",
-      description:
-        this.familyMeals.length > 0
-          ? this.familyMeals[0].description
-          : "loading...",
-      link:
-        this.familyMeals.length > 0
-          ? this.familyMeals[0].createdLink
-          : "loading...",
-      delivery:
-        this.familyMeals.length > 0
-          ? this.familyMeals[0].delivery
-          : "loading...",
-      tockPanelVisible: false,
+      tockPanelVisible: false
     };
   },
   computed: {
@@ -136,7 +101,6 @@ export default {
   watch: {
     count(newCount, oldCount) {
 
-      console.log(newCount)
       this.productsList = newCount;
       this.title = newCount[0].title;
       this.description = newCount[0].description;
@@ -171,8 +135,7 @@ async dumpAcf(){
 // let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
 let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
 let AcfBlock = responseAcf.data[1].acf.family_meal_calendar
-console.log('AcfBlock')
-console.log(AcfBlock)
+
 this.familyMeals = AcfBlock
 
 },
@@ -208,9 +171,9 @@ coverFlowTo(index){
     reset(x) {
 
 
-      console.log(x.length)
-      let that = this;
+console.log(x)
 
+     let that = this;
 
       this.dotsLength = x.length
 
@@ -242,16 +205,9 @@ coverFlowTo(index){
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
-
-
-
   slides[0].innerHTML += "<div class='dialog cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'><a href="+x[0].meal.createdLink+" target='_blank'>mamnoon</a></div>"
   slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[0].image+" /></a>"
   slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[0].meal.createdLink+" target='_blank'>"+x[0].title+"</a></div></div>"
-
-
-console.log('2345')
-console.log(x[0])
 
   let dialog = document.getElementsByClassName("dialog");
 
@@ -262,12 +218,9 @@ console.log(x[0])
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
-
 slides[index].innerHTML += "<div class='dialog cursor-pointer' style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;padding-bottom:5px;'><a href="+x[index].meal.createdLink+" target='_blank'>mamnoon</a></div>"
-  slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
-  slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].meal.createdLink+" target='_blank'>"+x[index].title+"</a></div></div>"
-  
-
+slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
+slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].meal.createdLink+" target='_blank'>"+x[index].title+"</a></div></div>"
 
 that.coverFlowIndex = index
 
@@ -278,10 +231,6 @@ that.coverFlowIndex = index
             }
           });
         });
-
-
-
-
 
     },
   },
