@@ -212,7 +212,7 @@ console.log(this.data.meal_calendar[i].meal)
 
 },
 coverFlowTo(index){
-    console.log(index)
+    // console.log(index)
      coverflow().to(index-1);
    
     },
@@ -273,7 +273,6 @@ coverFlowTo(index){
 
   let dialog = document.getElementsByClassName("dialog");
 
-  console.log(dialog)
 
   this.on("focus", function (index) {
   that.returnProducts(index);

@@ -146,7 +146,7 @@ this.date = AcfBlock[0].date
 
 },
 coverFlowTo(index){
-    console.log(index)
+    // console.log(index)
      coverflow().to(index-1);
    
     },
@@ -165,8 +165,7 @@ coverFlowTo(index){
     },
     reset(x) {
 
-console.log('resets')
-console.log(x)
+
 
      let that = this;
 
@@ -206,7 +205,7 @@ console.log(x)
 
   let dialog = document.getElementsByClassName("dialog");
 
-  console.log(dialog)
+  // console.log(dialog)
 
   this.on("focus", function (index) {
             that.returnProducts(index);

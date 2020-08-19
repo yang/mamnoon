@@ -455,13 +455,13 @@ const store = new Vuex.Store({
     })
 
 
-    base.post('/tock/tocktomongo',{ inventoryTockAdd })
-    .then(function(res){
-      console.log(res)
-    })
-    .catch(function(err){
-      console.log(err)
-    })
+    // base.post('/tock/tocktomongo',{ inventoryTockAdd })
+    // .then(function(res){
+    //   console.log(res)
+    // })
+    // .catch(function(err){
+    //   console.log(err)
+    // })
 
 
     },
@@ -481,13 +481,13 @@ const store = new Vuex.Store({
         }
       })
 
-    base.post('/tock/tocktomongo',{ inventoryTockAddStreet })
-    .then(function(res){
-      console.log(res)
-    })
-    .catch(function(err){
-      console.log(err)
-    })
+    // base.post('/tock/tocktomongo',{ inventoryTockAddStreet })
+    // .then(function(res){
+    //   console.log(res)
+    // })
+    // .catch(function(err){
+    //   console.log(err)
+    // })
 
     },
    async updateTockItem(state, { updateTockItem }){

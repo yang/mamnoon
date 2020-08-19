@@ -399,7 +399,7 @@ console.log(x[0])
 
   let dialog = document.getElementsByClassName("dialog");
 
-  console.log(dialog)
+
 
   this.on("focus", function (index) {
             that.returnProducts(index);
