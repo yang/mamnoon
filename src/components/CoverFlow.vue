@@ -2,7 +2,8 @@
   <div>
    <div>
       <div class="position-relative red-header">
-        <h4 class="noselect">{{titleFromCMS}}</h4>
+        <h4 class="noselect">{{titleFromCMS}}
+        </h4>
         <p style="text-align:left;margin-top: 20px;">{{descriptionFromCMS}}</p>
       
       
@@ -41,7 +42,7 @@
         </a>
 
 
-      <div v-if="title" class="title noselect">
+      <div class="title noselect">
 
 {{date}}
         </div>
@@ -90,6 +91,8 @@ export default {
       coverFlowIndex: 0,
       dotsLength: 0,
       productsList: this.familyMeals,
+      date: null,
+      link: null,
       tockPanelVisible: false
     };
   },
@@ -104,7 +107,7 @@ export default {
       // this.productsList = newCount;
       // this.title = newCount[0].title;
       // this.description = newCount[0].description;
-      // this.date = newCount[0].date;
+      this.date = newCount[0].date;
       // this.link = newCount[0].createdLink;
       // this.delivery = newCount[0].delivery;
       this.reset(newCount);
@@ -137,6 +140,9 @@ let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.co
 let AcfBlock = responseAcf.data[0].acf.family_meal_calendar
 
 this.familyMeals = AcfBlock
+this.date = AcfBlock[0].date
+
+
 
 },
 coverFlowTo(index){
@@ -148,25 +154,14 @@ coverFlowTo(index){
       this.$store.commit("toggleVegetarian");
     },
     returnProducts(index) {
-      if (this.$store.state.vegetarian === true) {
-        const map1 = this.familyMeals.filter(function (x) {
-          if (x.veg === true) return x;
-        });
-        this.productsList = map1;
-        this.title = map1[index].title;
-        this.description = map1[index].description;
-        this.date = map1[index].date;
-        this.link = map1[index].createdLink;
-        this.delivery = map1[index].delivery;
-      } else {
         this.title = this.familyMeals[index].title;
         this.date = this.familyMeals[index].date;
         this.description = this.familyMeals[
           index
         ].description;
-        this.link = this.familyMeals[index].createdLink;
+        // this.link = this.familyMeals[index].createdLink;
         this.delivery = this.familyMeals[index].delivery;
-      }
+   
     },
     reset(x) {
 
