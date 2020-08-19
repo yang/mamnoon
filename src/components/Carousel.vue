@@ -421,7 +421,7 @@ export default {
   let responseUpserve = await this.$http.get("/product/upserve");
   let upserveProducts = responseUpserve.data.body.objects
   
-console.log(upserveProducts)
+// console.log(upserveProducts)
 
 
 this.upserve = upserveProducts

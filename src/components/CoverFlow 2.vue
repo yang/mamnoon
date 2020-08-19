@@ -1,6 +1,55 @@
 <template>
   <div>
-   <div>
+    <div class="tock-panel" v-if="tockPanelVisible">
+      <button @click="freshTockPull()">wipe and refresh tock</button>
+
+      <div class="tock-inner">
+        <h1>current tock meals</h1>
+        <div
+          :key="tockMeal.title"
+          v-for="(tockMeal, index) in this.$store.state.inventory.tockMeals"
+        >
+          link:
+          <br />
+          {{tockMeal.createdLink}}
+          <br />title:
+          <br />
+          <input class="tockEditField" type="text" v-model="tockMeal.title" />&nbsp;&nbsp;
+          <button @click="updateTockItem(tockMeal.title, 'title', index, tockMeal._id)">update title</button>
+          <br />description:
+          <br />
+          <textarea class="tockEditField" type="text" v-model="tockMeal.description" />&nbsp;&nbsp;
+          <button
+            @click="updateTockItem(tockMeal.description, 'description', index, tockMeal._id)"
+          >update</button>
+          <br />image:
+          <br />
+          <img class="tockEditImage" :src="tockMeal.image" />
+          <br />
+          <input class="tockEditField" type="text" v-model="tockMeal.image" />
+          <button @click="updateTockItem(tockMeal.image, 'image', index, tockMeal._id)">update</button>
+          <div v-if="tockMeal.veg === true">vegetarian</div>
+          <div else>meat</div>
+          <div v-if="tockMeal.delivery === true">delivery</div>
+          <div else>pickup</div>
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- <div class="toggleVegContainer">
+        <button
+          class="toggleVeg"
+          :class="{redBackground: $store.state.vegetarian}"
+          @click="toggleVegetarian"
+        >
+          <div class="lrbutton" :class="{lrExpanded: $store.state.vegetarian}">
+            <div v-if="$store.state.vegetarian === true">M</div>
+            <div v-else>V</div>
+          </div>
+        </button>
+      </div> -->
       <div class="position-relative red-header">
         <h4 class="noselect">{{titleFromCMS}}</h4>
         <p style="text-align:left;margin-top: 20px;">{{descriptionFromCMS}}</p>
@@ -98,62 +147,114 @@ export default {
     PickupStar,
     DeliveryStar,
     Prev,
-    Next
+    Next,
   },
   data() {
     return {
       familyMeals: null,
       coverFlowIndex: 0,
       dotsLength: 0,
-      productsList: this.familyMeals,
-      date: this.familyMeals.length > 0
-          ? this.familyMeals[0].date
+      productsList: this.$store.state.inventory.tockMeals,
+      date:
+              this.$store.state.inventory.tockMeals.length > 0
+          ? this.$store.state.inventory.tockMeals[0].date
           : "loading...",
       title:
-        this.familyMeals.length > 0
-          ? this.familyMeals[0].title
+        this.$store.state.inventory.tockMeals.length > 0
+          ? this.$store.state.inventory.tockMeals[0].title
           : "loading...",
       description:
-        this.familyMeals.length > 0
-          ? this.familyMeals[0].description
+        this.$store.state.inventory.tockMeals.length > 0
+          ? this.$store.state.inventory.tockMeals[0].description
           : "loading...",
       link:
-        this.familyMeals.length > 0
-          ? this.familyMeals[0].createdLink
+        this.$store.state.inventory.tockMeals.length > 0
+          ? this.$store.state.inventory.tockMeals[0].createdLink
           : "loading...",
       delivery:
-        this.familyMeals.length > 0
-          ? this.familyMeals[0].delivery
+        this.$store.state.inventory.tockMeals.length > 0
+          ? this.$store.state.inventory.tockMeals[0].delivery
           : "loading...",
       tockPanelVisible: false,
     };
   },
-  computed: {
-    count() {
-      return this.familyMeals;
-    },
-  },
-  watch: {
-    count(newCount, oldCount) {
-
-      console.log(newCount)
-      this.productsList = newCount;
-      this.title = newCount[0].title;
-      this.description = newCount[0].description;
-      this.date = newCount[0].date;
-      this.link = newCount[0].createdLink;
-      this.delivery = newCount[0].delivery;
-      this.reset(newCount);
-    }
-  },
   mounted() {
-this.dumpAcf()
-console.log(1234)
 
+    // if (this.$store.state.vegetarian === true) {
+    //   const map1 = this.$store.state.inventory.tockMeals.filter(function (x) {
+    //     if (x.veg === true) return x;
+    //   });
+    //   this.productsList = map1;
+    //   this.title = map1[0].title;
+    //   this.description = map1[0].description;
+    //   this.link = map1[0].createdLink;
+    //   this.delivery = map1[0].delivery;
+    //   this.reset(map1);
+    // } else {
+    // if (this.$store.state.inventory.tockMeals[0]) {
+    //   this.productsList = this.$store.state.inventory.tockMeals;
+    //   this.title = this.$store.state.inventory.tockMeals[0].title;
+    //   this.description = this.$store.state.inventory.tockMeals[0].description;
+    //   this.link = this.$store.state.inventory.tockMeals[0].createdLink;
+    //   this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
+    // }
+    // // console.log(this.productsList)
+    //   this.reset(this.productsList);
+    // }
+
+
+
+
+console.log(1234)
+this.dumpAcf()
 
 
   },
   props: ["products", "titleFromCMS", "descriptionFromCMS"],
+  // computed: {
+  //   count() {
+  //     return this.$store.state.inventory.tockMeals;
+  //   },
+  //   vegetarian() {
+  //     return this.$store.state.vegetarian;
+  //   },
+  // },
+//   watch: {
+//     count(newCount, oldCount) {
+// console.log('newCount')
+//       console.log(newCount)
+//       this.productsList = newCount;
+//       this.title = newCount[0].title;
+//       this.description = newCount[0].description;
+//       this.date = newCount[0].date;
+//       this.link = newCount[0].createdLink;
+//       this.delivery = newCount[0].delivery;
+//       this.reset(newCount);
+//     },
+//     vegetarian() {
+//       if (this.$store.state.vegetarian === true) {
+//         const map1 = this.$store.state.inventory.tockMeals.filter(function (x) {
+//           if (x.veg === true) return x;
+//         });
+//         this.productsList = map1;
+
+//         this.title = map1[0].title;
+//         this.description = map1[0].description;
+//          this.date = map1[0].date;
+//         this.link = map1[0].createdLink;
+//         this.delivery = map1[0].delivery;
+//         this.reset(map1);
+//       } else {
+//         this.productsList = this.$store.state.inventory.tockMeals;
+//         this.title = this.$store.state.inventory.tockMeals[0].title;
+//         this.description = this.$store.state.inventory.tockMeals[0].description;
+//         this.date = this.$store.state.inventory.tockMeals[0].date;
+//         this.link = this.$store.state.inventory.tockMeals[0].createdLink;
+//         this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
+//         this.reset(this.productsList);
+//       }
+//     },
+//   },
   created() {
     window.addEventListener("resize", this.myEventHandler);
     if (window.location.search === "?showTock") {
@@ -168,11 +269,12 @@ console.log(1234)
   methods: {
 async dumpAcf(){
 
-// let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
-let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
-let AcfBlock = responseAcf.data[1].acf.family_meal_calendar
-console.log('AcfBlock')
+let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+// let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
+
+let AcfBlock = responseAcf.data[0].acf.family_meal_calendar
 console.log(AcfBlock)
+// console.log(AcfBlock)
 this.familyMeals = AcfBlock
 
 },
@@ -181,12 +283,54 @@ coverFlowTo(index){
      coverflow().to(index-1);
    
     },
+    async freshTockPull() {
+      let responseTock = await this.$http.get(`/tock/tockmeals/${false}`);
+      let inventoryTockAdd = responseTock.data.tockMeals;
+      this.$store.commit("updateTockMeals", { inventoryTockAdd });
+
+      let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`);
+      let inventoryTockAddStreet = responseTockStreet.data.tockMeals;
+      this.$store.commit("updateTockMealsStreet", { inventoryTockAddStreet });
+    },
+    updateTockItem(text, item, index, _id) {
+      let updateTockItem = {
+        text,
+        item,
+        index,
+        _id
+      };
+      this.$store.commit("updateTockItem", { updateTockItem });
+
+      if (this.$store.state.vegetarian === true) {
+        const map1 = this.$store.state.inventory.tockMeals.filter(function (x) {
+          if (x.veg === true) return x;
+        });
+        this.productsList = map1;
+        this.title = map1[0].title;
+        this.description = map1[0].description;
+        this.date = map1[0].date;
+        this.link = map1[0].createdLink;
+        this.delivery = map1[0].delivery;
+
+        this.reset(map1);
+      } else {
+        this.productsList = this.$store.state.inventory.tockMeals;
+
+        this.title = this.$store.state.inventory.tockMeals[0].title;
+        this.description = this.$store.state.inventory.tockMeals[0].description;
+        this.date = this.$store.state.inventory.tockMeals[0].date;
+        this.link = this.$store.state.inventory.tockMeals[0].createdLink;
+        this.delivery = this.$store.state.inventory.tockMeals[0].delivery;
+        this.reset(this.productsList);
+      }
+      // big thing
+    },
     toggleVegetarian() {
       this.$store.commit("toggleVegetarian");
     },
     returnProducts(index) {
       if (this.$store.state.vegetarian === true) {
-        const map1 = this.familyMeals.filter(function (x) {
+        const map1 = this.$store.state.inventory.tockMeals.filter(function (x) {
           if (x.veg === true) return x;
         });
         this.productsList = map1;
@@ -196,13 +340,13 @@ coverFlowTo(index){
         this.link = map1[index].createdLink;
         this.delivery = map1[index].delivery;
       } else {
-        this.title = this.familyMeals[index].title;
-        this.date = this.familyMeals[index].date;
-        this.description = this.familyMeals[
+        this.title = this.$store.state.inventory.tockMeals[index].title;
+        this.date = this.$store.state.inventory.tockMeals[index].date;
+        this.description = this.$store.state.inventory.tockMeals[
           index
         ].description;
-        this.link = this.familyMeals[index].createdLink;
-        this.delivery = this.familyMeals[index].delivery;
+        this.link = this.$store.state.inventory.tockMeals[index].createdLink;
+        this.delivery = this.$store.state.inventory.tockMeals[index].delivery;
       }
     },
     reset(x) {
@@ -267,7 +411,9 @@ slides[index].innerHTML += "<div class='dialog cursor-pointer' style='font-size:
   slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].meal.createdLink+" target='_blank'><img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[index].image+" /></a>"
   slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].meal.createdLink+" target='_blank'>"+x[index].title+"</a></div></div>"
   
+  // slides.style.opacity=1; 
 
+  // slides[index].style.opacity=0; 
 
 that.coverFlowIndex = index
 
@@ -281,7 +427,15 @@ that.coverFlowIndex = index
 
 
 
+// console.log(x)
+// var slides = document.getElementsByClassName("coverflow-cell");
+// for (var i = 0; i < slides.length; i++) {
+//   //  slides[i].prepend("<div>Headline:"+i+"</div>")
 
+//    slides[i].innerHTML += "<div style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;top: 0;width: 100%;background: #fff367;'>mamnoon</div>"
+// slides[i].innerHTML += "<img style='width:100%;position: absolute;left: 0;top: 0;' src="+x[i].image+" />"
+//   //  slides[i].innerHTML += "<div style='font-size:24px;font-weight:500;color: #f05d5b;text-align:center;z-index: 100;position: absolute;left: 0;bottom: 0;width: 100%;background: #fff367;'>"+x[i].title+"</div>"
+// }
 
     },
   },

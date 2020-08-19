@@ -604,8 +604,6 @@ ul.dots li div{
   pointer-events: none;
 }
 
-
-
 .description,
 .title,
 .title a{
@@ -615,19 +613,15 @@ ul.dots li div{
     font-size: 24px;
 }
 
-
-
 .red-header{
   background-color: #F05D5B;
   padding: 20px 0 15px;
 }
 
-
 #container.coverflow, #container.coverflow:focus, #container.coverflow:active{
   margin-top: 0 !important;
   background-color: transparent !important;
 }
-
 
 a.left-button svg,
 a.right-button svg {
