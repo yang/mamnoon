@@ -448,11 +448,11 @@ const store = new Vuex.Store({
 
     state.inventory.tockMeals = []
 
-    inventoryTockAdd.forEach(function(e){
-      // if( !lookup( e.createdLink ) ) {
-        state.inventory.tockMeals.push(e);
-      // }
-    })
+    // inventoryTockAdd.forEach(function(e){
+    //   // if( !lookup( e.createdLink ) ) {
+    //     state.inventory.tockMeals.push(e);
+    //   // }
+    // })
 
 
     // base.post('/tock/tocktomongo',{ inventoryTockAdd })
