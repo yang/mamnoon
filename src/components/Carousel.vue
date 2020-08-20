@@ -5,6 +5,9 @@
       <CoverFlow :titleFromCMS="blok.content.body[0].familyMealHeader" :descriptionFromCMS="blok.content.body[0].familyMealDescription" :products="products" />
     </section>
 
+
+<TestimonialsMain :data="testimonials" />
+
 <!-- <UpserveFiltering :data="apiData" /> -->
     <section
       :id="offering.category"
@@ -331,6 +334,7 @@ import MamnoonSVG from "@/components/svgIcons/MamnoonSVG";
 import Newsletter from "@/components/Newsletter";
 import CoverFlow from "@/components/CoverFlow";
 import UpserveFiltering  from "@/components/UpserveFiltering";
+import TestimonialsMain from "@/components/TestimonialsMain";
 
 export default {
   components: {
@@ -345,7 +349,8 @@ export default {
     MamnoonStreet,
     MamnoonSVG,
     ShowAll,
-    UpserveFiltering 
+    UpserveFiltering,
+    TestimonialsMain 
   },
   computed: {
     count() {
@@ -360,6 +365,7 @@ export default {
   },
   data() {
     return {
+      testimonials: null,
       inventory: this.$store.state.inventory,
       products: this.$store.state.inventory.offerings[0].items,
       blockedBody: this.apiData,
@@ -370,6 +376,20 @@ export default {
   },
   props: ['apiData', 'blok'],
   methods: {
+async dumpAcf(){
+
+// let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
+let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
+let AcfBlock = responseAcf.data[0].acf.testimonials
+
+this.testimonials = AcfBlock
+
+
+
+
+},
+
+
     filterByCat(cat){
       this.currentlyFiltered = []
       for(let i = 0;i<this.upserve.length;i++){
@@ -445,10 +465,9 @@ for(let i = 0;i<upserveProducts.length;i++){
 
   },
   mounted(){
-    this.upserves()
+    // this.upserves()
 
-
-
+    this.dumpAcf()
 
   }
 

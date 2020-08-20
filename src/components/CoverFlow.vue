@@ -115,7 +115,7 @@ export default {
   },
   mounted() {
 this.dumpAcf()
-console.log(1234)
+
 
 
 

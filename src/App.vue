@@ -71,4 +71,12 @@ h4.error{
 .mb-80{
   margin-bottom: 80px;
 }
+
+
+.snipcart-layout.snipcart-modal,
+.snipcart-modal__container{
+  // background: pink !important;
+  
+}
+
 </style>
