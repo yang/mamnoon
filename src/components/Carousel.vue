@@ -5,9 +5,6 @@
       <CoverFlow :titleFromCMS="blok.content.body[0].familyMealHeader" :descriptionFromCMS="blok.content.body[0].familyMealDescription" :products="products" />
     </section>
 
-
-<!-- <TestimonialsMain :data="testimonials" /> -->
-
 <!-- <UpserveFiltering :data="apiData" /> -->
     <section
       :id="offering.category"
