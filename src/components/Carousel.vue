@@ -6,7 +6,7 @@
     </section>
 
 
-<TestimonialsMain :data="testimonials" />
+<!-- <TestimonialsMain :data="testimonials" /> -->
 
 <!-- <UpserveFiltering :data="apiData" /> -->
     <section

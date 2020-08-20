@@ -53,12 +53,12 @@
         <a class="full-width" :href="link" target="_blank">
           <div class="outer">
             <transition name="fade">
-              <template v-if="delivery">
+              <!-- <template v-if="delivery"> -->
                 <DeliveryStar />
-              </template>
-              <template v-else>
-                <PickupStar />
-              </template>
+              <!-- </template> -->
+              <!-- <template v-else> -->
+                <!-- <PickupStar /> -->
+              <!-- </template> -->
             </transition>
           </div>
         </a>
