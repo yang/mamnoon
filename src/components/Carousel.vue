@@ -1,11 +1,34 @@
 <template>
   <main v-editable="blok" v-if="blok.content.body[0]">
-    <section id="familymeal" class="coverflowsection">
 
-      <CoverFlow :titleFromCMS="blok.content.body[0].familyMealHeader" :descriptionFromCMS="blok.content.body[0].familyMealDescription" :products="products" />
-    </section>
 
-<!-- <UpserveFiltering :data="apiData" /> -->
+      
+
+<!-- {{pageData}} -->
+<section v-for="item in pageData" :key="item.acf_fc_layout">
+<div v-if="item.acf_fc_layout === 'testimonials'">
+<TestimonialsMain :data="item.testimonials" />
+</div>
+<div v-else-if="item.acf_fc_layout === 'global_information'">
+<h1>global info</h1>
+      {{item.global_information}}
+  <br>
+</div>
+<div v-else-if="item.acf_fc_layout === 'meal_calendar'">
+<CoverFlow :data="item.meal_calendar" />
+</div>
+<div v-else-if="item.acf_fc_layout === 'reservations'">
+  reservations:
+
+  <Reservations :data="item.reservations" />
+  <br>
+</div>
+<div v-else-if="item.acf_fc_layout === 'online_shop'">
+<h1>online shop</h1>
+  {{item.online_shop}}
+  <br>
+</div>
+  </section>
     <section
       :id="offering.category"
       v-for="(offering,index) in inventory.offerings"
@@ -13,7 +36,6 @@
       class="section hero is-primary is-fullheight"
       v-bind:class="{familymeal : index === 0}"
     >
-    <!-- {{offering}} -->
       <div
         v-if="offering.visible"
         v-bind:class="{ carousel: !offering.reservationBlock, shortcarousel: offering.reservationBlock }"
@@ -26,9 +48,6 @@
 <div v-else-if="offering.title === 'reservations'">
   {{ blok.content.body[0].reservationsHeader }}
 </div>
-<div v-else-if="offering.title === 'testimonials'">
-    {{ blok.content.body[0].testimonialsHeader }}
-</div>
 <div v-else-if="offering.title === 'mama shop'">
     {{ blok.content.body[0].mamaShopHeader }}
 </div>
@@ -36,44 +55,8 @@
 </h4>
 <p class="description-para noselect" v-if="offering.title === 'order now'">{{ blok.content.body[0].orderNowDescription }}</p>
 <p v-else-if="offering.title === 'reservations'" class="description-para noselect">{{ blok.content.body[0].reservationsDescription }}</p>
-<p v-else-if="offering.title === 'testimonials'" class="description-para noselect">
-  <!-- {{ blok.content.body[0].testimonialsDescription }} -->
-</p>
 <p v-else-if="offering.title === 'mama shop'" class="description-para noselect">{{ blok.content.body[0].mamaShopDescription }}</p>
-        <carousel
-          v-if="offering.title === 'testimonials'"
-          :responsive=" {0:{items:1},768:{items:1},1080:{items:1}}"
-          :items="offering.slideNo ? offering.slideNo : 3"
-          :loop="false"
-          :dots="false"
-          :nav="false"
-        >
-        <template class="subprev" slot="prev">
-            <span class="prev">
-              <Prev />
-            </span>
-          </template>
 
-  <div v-for="testimonial in blok.content.body[0].list.tbody" :key="testimonial._uid">
-            <div class="height-100">
-              <div class="l-col">
-                <div class="quote-container">
-                  <div class="xs" v-if="testimonial.body[0].value.length > 60">{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
-                  <div class="sm" v-else-if="testimonial.body[0].value.length > 40">{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
-                  <div class="md" v-else-if="testimonial.body[0].value.length > 20">{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
-                  <div class="md" v-else>{{testimonial.body[0].value}} - {{testimonial.body[1].value}} {{testimonial.body[2].value}}.</div>
-                </div>
-              </div>
-            </div>
-  </div>
-
-          <template v-if="index === 0 || index === 1" slot="next"></template>
-          <template v-else class="subnext" slot="next">
-            <span class="next">
-              <Next />
-            </span>
-          </template>
-        </carousel>
 
 
 <carousel v-else-if="offering.title === 'mama shop'"
@@ -87,40 +70,6 @@
               <Prev />
             </span>
           </template>
-
-
-
-
-    <div v-for="mamaItem in blok.content.body[0].testimonials.tbody" :key="mamaItem._uid">
-
-
-  <img v-bind:src="mamaItem.body[3].value" />
-
-
-
-              <div class="order-bottom" style="text-align: center;">
-              {{mamaItem.body[1].value}}
-                <div class="order-panel">
-             
-                  <button
-                    class="snipcart-add-item"
-                    v-bind:data-item-id="mamaItem.body[0].value"
-                    v-bind:data-item-price="mamaItem.body[2].value"
-                    v-bind:data-item-image="mamaItem.body[3].value"
-                    v-bind:data-item-name="mamaItem.body[1].value"
-                    v-bind:data-item-description="mamaItem.body[4].value"
-                    data-item-url="https://www.nadimama.com/products.json"
-                  >
-                    <Order />
-                  </button>
-                </div>
-          
-              </div>
- 
-
-
-</div>
-
         <template v-if="index === 0 || index === 1" slot="next"></template>
           <template v-else class="subnext" slot="next">
             <span class="next">
@@ -332,6 +281,7 @@ import Newsletter from "@/components/Newsletter";
 import CoverFlow from "@/components/CoverFlow";
 import UpserveFiltering  from "@/components/UpserveFiltering";
 import TestimonialsMain from "@/components/TestimonialsMain";
+import Reservations from "@/components/Reservations";
 
 export default {
   components: {
@@ -347,7 +297,8 @@ export default {
     MamnoonSVG,
     ShowAll,
     UpserveFiltering,
-    TestimonialsMain 
+    TestimonialsMain,
+    Reservations
   },
   computed: {
     count() {
@@ -362,6 +313,7 @@ export default {
   },
   data() {
     return {
+      pageData: null,
       testimonials: null,
       inventory: this.$store.state.inventory,
       products: this.$store.state.inventory.offerings[0].items,
@@ -373,20 +325,13 @@ export default {
   },
   props: ['apiData', 'blok'],
   methods: {
-async dumpAcf(){
+  async individualRestaurant(){
 
-// let responseAcf = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
-let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
-let AcfBlock = responseAcf.data[0].acf.testimonials
-
-this.testimonials = AcfBlock
-
-
-
+    let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
+    let AcfBlock = responseAcf
+    this.pageData = AcfBlock.data.acf.content_fields
 
 },
-
-
     filterByCat(cat){
       this.currentlyFiltered = []
       for(let i = 0;i<this.upserve.length;i++){
@@ -434,23 +379,16 @@ this.testimonials = AcfBlock
     },
     async upserves(){
 
-
-  let responseUpserve = await this.$http.get("/product/upserve");
-  let upserveProducts = responseUpserve.data.body.objects
+      let responseUpserve = await this.$http.get("/product/upserve");
+      let upserveProducts = responseUpserve.data.body.objects
   
-// console.log(upserveProducts)
+      this.upserve = upserveProducts
 
-
-this.upserve = upserveProducts
-
-
-for(let i = 0;i<upserveProducts.length;i++){
-  if(!this.upserveCategories.includes(upserveProducts[i].category)){
-    this.upserveCategories.push(upserveProducts[i].category)
-  }
-}
-
-
+      for(let i = 0;i<upserveProducts.length;i++){
+        if(!this.upserveCategories.includes(upserveProducts[i].category)){
+          this.upserveCategories.push(upserveProducts[i].category)
+        }
+      }
 
     }
   },
@@ -458,20 +396,11 @@ for(let i = 0;i<upserveProducts.length;i++){
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
     this.currentDay = dd;
-
-
   },
   mounted(){
-    // this.upserves()
-
-    this.dumpAcf()
-
+    this.individualRestaurant()
   }
-
 };
-
-
-
 
 </script>
 

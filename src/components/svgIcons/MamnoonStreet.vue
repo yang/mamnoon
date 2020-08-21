@@ -160,7 +160,7 @@ export default {
       cursor: pointer;
   svg {
     width: 40%;
-    margin: 40px auto 0;
+    margin: 50px auto 0;
     text-align: center;
   }
 }
@@ -177,7 +177,7 @@ export default {
       cursor: pointer;
   svg {
     width: 80%;
-    margin: 40px auto 0;
+    margin: 50px auto 0;
     text-align: center;
   }
 }
