@@ -1,27 +1,14 @@
 <template>
   <main v-editable="blok" v-if="blok.content.body[0]">
-
-
-      
-
-<!-- {{pageData}} -->
 <section v-for="item in pageData" :key="item.acf_fc_layout">
 <div v-if="item.acf_fc_layout === 'testimonials'">
 <TestimonialsMain :data="item.testimonials" />
-</div>
-<div v-else-if="item.acf_fc_layout === 'global_information'">
-<h1>global info</h1>
-      {{item.global_information}}
-  <br>
 </div>
 <div v-else-if="item.acf_fc_layout === 'meal_calendar'">
 <CoverFlow :data="item.meal_calendar" />
 </div>
 <div v-else-if="item.acf_fc_layout === 'reservations'">
-  reservations:
-
   <Reservations :data="item.reservations" />
-  <br>
 </div>
 <div v-else-if="item.acf_fc_layout === 'online_shop'">
 <h1>online shop</h1>

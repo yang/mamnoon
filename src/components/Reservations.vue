@@ -1,11 +1,8 @@
 <template>
   <section id="reservations" class="section hero is-primary is-fullheight position-relative mb-80">
         <h4>reservations</h4>
-
-
-<!-- {{data}} -->
-     
-
+<p class="description-para noselect">order now Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque.</p>
+<div class="width-container">
 <div v-for="item in data" :key="item.restaurant_title">
   <Mbar v-if="item.restaurant_title === 'mbar'" />
   <Mamnoon v-else-if="item.restaurant_title === 'mamnoon'" />
@@ -13,7 +10,7 @@
 
 
   
-
+</div>
 </section>
 </template>
 
