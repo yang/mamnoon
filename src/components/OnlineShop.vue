@@ -1,9 +1,10 @@
 <template>
     <section class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4>Online Shop</h4>
+        <h4>{{header.header}}</h4>
+         <p class="description-para noselect">{{header.description}}</p>
         <!--carousel-->
         <carousel
-          :responsive=" {0:{items:1},768:{items:1},1080:{items:1}}"
+          :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}"
           :items="1"
           :loop="false"
           :dots="false"
@@ -16,6 +17,9 @@
           </template>
 <div v-for="item in data" :key="item">
 {{ item.shop_item }}
+
+
+
 </div>
           <template v-if="index === 0 || index === 1" slot="next"></template>
           <template v-else class="subnext" slot="next">
@@ -41,6 +45,6 @@ export default {
         Prev
     },
     name: 'onlineshop',
-    props: ['data']
+    props: ['data','header']
 }
 </script>

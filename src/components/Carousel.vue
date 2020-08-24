@@ -1,20 +1,11 @@
 <template>
   <main v-editable="blok" v-if="blok.content.body[0]">
 <section v-for="item in pageData" :key="item.acf_fc_layout">
-<div v-if="item.acf_fc_layout === 'testimonials'">
-<TestimonialsMain :data="item.testimonials" />
-</div>
-<div v-else-if="item.acf_fc_layout === 'meal_calendar'">
-<CoverFlow :data="item.meal_calendar" />
-</div>
-<div v-else-if="item.acf_fc_layout === 'reservations'">
-  <Reservations :data="item.reservations" />
-</div>
-<div v-else-if="item.acf_fc_layout === 'online_shop'">
-<h1>online shop</h1>
-  {{item.online_shop}}
-  <br>
-</div>
+  <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.testimonials_header" :data="item.testimonials" />
+  <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.meal_calendar_header" :data="item.meal_calendar" />
+  <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.reservations_header" :data="item.reservations" />
+  <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.online_shop_header" :data="item.online_shop" />
+<ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.a_la_carte_header" :data="item.service" />
   </section>
     <section
       :id="offering.category"
@@ -32,17 +23,12 @@
 <div v-if="offering.title === 'order now'">
 {{ blok.content.body[0].orderNowHeader }}
 </div>
-<div v-else-if="offering.title === 'reservations'">
-  {{ blok.content.body[0].reservationsHeader }}
-</div>
 <div v-else-if="offering.title === 'mama shop'">
     {{ blok.content.body[0].mamaShopHeader }}
 </div>
 <span v-if="offering.tock">{{currentDay}}</span>
 </h4>
-<p class="description-para noselect" v-if="offering.title === 'order now'">{{ blok.content.body[0].orderNowDescription }}</p>
-<p v-else-if="offering.title === 'reservations'" class="description-para noselect">{{ blok.content.body[0].reservationsDescription }}</p>
-<p v-else-if="offering.title === 'mama shop'" class="description-para noselect">{{ blok.content.body[0].mamaShopDescription }}</p>
+<p v-if="offering.title === 'mama shop'" class="description-para noselect">{{ blok.content.body[0].mamaShopDescription }}</p>
 
 
 
@@ -269,9 +255,12 @@ import CoverFlow from "@/components/CoverFlow";
 import UpserveFiltering  from "@/components/UpserveFiltering";
 import TestimonialsMain from "@/components/TestimonialsMain";
 import Reservations from "@/components/Reservations";
+import ALaCarte from "@/components/ALaCarte";
+import OnlineShop from "@/components/OnlineShop";
 
 export default {
   components: {
+    ALaCarte,
     carousel,
     Order,
     Next,
@@ -285,7 +274,8 @@ export default {
     ShowAll,
     UpserveFiltering,
     TestimonialsMain,
-    Reservations
+    Reservations,
+    OnlineShop
   },
   computed: {
     count() {

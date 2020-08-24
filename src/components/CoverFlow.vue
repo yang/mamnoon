@@ -3,9 +3,9 @@
   <div>
    <div>
       <div class="position-relative red-header">
-        <h4 class="noselect">family meal calendar
+        <h4 class="noselect">{{header.header}}
         </h4>
-        <p style="text-align:left;margin-top: 20px;">Family meaL Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque.</p>
+        <p style="text-align:left;margin-top: 20px;">{{header.description}}</p>
       
       
 <!-- family meals:
@@ -123,7 +123,7 @@ this.dumpAcf()
 
 
   },
-  props: ["data"],
+  props: ["data","header"],
   created() {
     window.addEventListener("resize", this.myEventHandler);
     if (window.location.search === "?showTock") {

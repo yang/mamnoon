@@ -106,27 +106,6 @@ const store = new Vuex.Store({
         },
         {
           visible: true,
-          title: 'order now',
-          category: 'alacarte',
-          caviarButton: true,
-          slideNo: 2,
-          items: [
-            {
-              name: "mamnoon",
-              price: 5.00,
-              description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-628'
-            },
-            {
-              name: "mamnoon street",
-              price: 10.00,
-              description: '',
-              caviarLink: 'https://www.trycaviar.com/m/mamnoon-street-6597'
-            }
-          ]
-        },
-        {
-          visible: true,
           title: 'mama shop',
           category: 'mama-shop',
           responsive: true,

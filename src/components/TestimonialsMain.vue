@@ -1,6 +1,7 @@
 <template>
   <section id="testimonials" class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4>Testimonials</h4>
+        <h4>{{header.header}}</h4>
+        <p class="description-para noselect">{{header.description}}</p>
 
         <carousel :items="1" :loop="false" :dots="false" :nav="false">
             <template class="subprev" slot="prev">
@@ -43,7 +44,7 @@ export default {
         Prev
     },
     name: 'testimonials',
-    props: ['data']
+    props: ['data','header']
 }
 </script>
 
