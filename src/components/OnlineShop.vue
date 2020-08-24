@@ -15,9 +15,28 @@
               <Prev />
             </span>
           </template>
-<div v-for="item in data" :key="item">
-{{ item.shop_item }}
+<div class="text-center" v-for="item in data" :key="item">
+<img :src="item.shop_item.image" />
 
+
+            <!-- <template v-if="item.statistics"> -->
+              <div class="order-bottom">
+                {{item.shop_item.name}}
+                <div class="order-panel">
+                  <button
+                    class="snipcart-add-item"
+                    v-bind:data-item-id="item.shop_item.id"
+                    v-bind:data-item-price="item.shop_item.price"
+                    v-bind:data-item-image="item.shop_item.image"
+                    v-bind:data-item-name="item.shop_item.name"
+                    v-bind:data-item-description="item.shop_item.description"
+                    v-bind:data-item-weight="item.shop_item.weight"
+                  >
+                    <Order />
+                  </button>
+                </div>
+              </div>
+            <!-- </template> -->
 
 
 </div>
@@ -29,6 +48,14 @@
           </template>
         </carousel>
 <!--carousel-->
+
+      <div class="text-center mb-perfect">
+        <router-link to="/shop">
+       <ShowAll />
+        </router-link>
+        </div>
+
+
     </section>
 </template>
 <script>
@@ -36,15 +63,27 @@
 import carousel from "vue-owl-carousel";
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
+import ShowAll from "@/components/svgIcons/ShowAll";
+import Order from "@/components/svgIcons/Order";
 
 
 export default {
     components:{
         carousel,
         Next,
-        Prev
+        Prev,
+        ShowAll,
+        Order
     },
     name: 'onlineshop',
     props: ['data','header']
 }
 </script>
+
+
+<style>
+.mb-perfect{
+  margin-bottom: 80px;
+  height: 90px;
+}
+</style>

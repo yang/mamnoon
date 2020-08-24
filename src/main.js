@@ -93,29 +93,7 @@ const store = new Vuex.Store({
       snipCartItems: [],
       tockMeals: [],
       currentDay: String(new Date().getDate()).padStart(2, '0'),
-      offerings: [
-        {
-          visible: false,
-          title: 'plan ahead',
-          category: 'familymeal',
-          slideNo: 1,
-          tock: true,
-          tockButton: true,
-          insideHeader: true,
-          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque"
-        },
-        {
-          visible: true,
-          title: 'mama shop',
-          category: 'mama-shop',
-          responsive: true,
-          caviarButton: false,
-          snipcart: true,
-          // items: inventoryAdd,
-          slideNo: 6,
-          mamaShop: true
-        }
-      ]
+      offerings: []
     }
   },
   mutations: {

@@ -1,12 +1,12 @@
 <template>
   <main v-editable="blok" v-if="blok.content.body[0]">
-<section v-for="item in pageData" :key="item.acf_fc_layout">
+<div v-for="item in pageData" :key="item.acf_fc_layout">
   <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.testimonials_header" :data="item.testimonials" />
   <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.meal_calendar_header" :data="item.meal_calendar" />
   <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.reservations_header" :data="item.reservations" />
   <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.online_shop_header" :data="item.online_shop" />
 <ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.a_la_carte_header" :data="item.service" />
-  </section>
+  </div>
     <section
       :id="offering.category"
       v-for="(offering,index) in inventory.offerings"
@@ -23,33 +23,13 @@
 <div v-if="offering.title === 'order now'">
 {{ blok.content.body[0].orderNowHeader }}
 </div>
-<div v-else-if="offering.title === 'mama shop'">
-    {{ blok.content.body[0].mamaShopHeader }}
-</div>
 <span v-if="offering.tock">{{currentDay}}</span>
 </h4>
-<p v-if="offering.title === 'mama shop'" class="description-para noselect">{{ blok.content.body[0].mamaShopDescription }}</p>
 
 
 
-<carousel v-else-if="offering.title === 'mama shop'"
-        :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}"
-          :loop="false"
-          :dots="false"
-          :nav="false"
->
-       <template class="subprev" slot="prev">
-            <span class="prev">
-              <Prev />
-            </span>
-          </template>
-        <template v-if="index === 0 || index === 1" slot="next"></template>
-          <template v-else class="subnext" slot="next">
-            <span class="next">
-              <Next />
-            </span>
-          </template>
-  </carousel>
+
+
 
 
         <carousel
@@ -60,20 +40,13 @@
           :dots="false"
           :nav="false"
         >
-          <template class="subprev" slot="prev">
-            <span class="prev">
-              <Prev />
-            </span>
-          </template>
+
           <div
             v-for="item in offering.items"
             v-bind:key="item.name"
             style="text-align:center;margin-top: 10px;width: 100%;"
           >
-            <h4 v-if="offering.insideHeader" class="insideHeader noselect">
-              {{offering.title}} / {{item.month}} /
-              <span v-if="offering.tock">{{currentDay}}</span>
-            </h4>
+
 
 
 
@@ -165,8 +138,6 @@
 
             <img v-else v-bind:src="item.image" />
             
-
-
             {{item.description}}
 
             <template v-if="item.statistics">
@@ -216,24 +187,10 @@
           </div>
         </div>
         
-        <div class="width-container" v-if="offering.reservationBlock">
 
-      <Mbar :linkOut="offering.mbarTrigger" />
-          <Mamnoon :linkOut2="offering.mamnoonTrigger" />
-    
-        </div>
-        <div class="width-container" v-else-if="offering.caviarButton">
-      
-                <Mamnoon :caviarLink="true" :linkOut2="offering.mamnoonTrigger" />
-              <MamnoonStreet :caviarLink="true" :linkOut="offering.mbarTrigger" />
 
-        </div>
       </div>
-      <div class="text-center" v-if="offering.title === 'mama shop'" style="margin-bottom: 80px;height:90px;">
-        <router-link to="/shop">
-       <ShowAll />
-        </router-link>
-        </div>
+
     </section>
     <Newsletter :title="blok.content.body[0].newsLetterFooterHeader" :description="blok.content.body[0].newsLetterFooterDescription" />
   </main>

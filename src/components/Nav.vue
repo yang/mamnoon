@@ -68,12 +68,13 @@
             ref="scrollactive"
             >   
              <ul id="menu">
+                 <div class="inline-link" v-for="item in pageData" :key="item.tagname">
+<li v-if="item.tagname">
 
+        <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.tagname}}</a>
 
-
-                <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
-                    <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.title.toLowerCase().trim()}}</a>
-                    </li>
+</li>
+                   </div>   
             </ul></scrollactive
           >
         </div>
@@ -129,6 +130,7 @@ export default {
   },
   data () {
       return {
+          pageData: null,
           mobNavExpanded: false,
           logtext: '',
             user: {}
@@ -136,6 +138,13 @@ export default {
 
   },
   methods: {
+       async individualRestaurant(){
+
+    let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
+    let AcfBlock = responseAcf
+    this.pageData = AcfBlock.data.acf.content_fields
+
+},
     showUserModal () {
     this.$store.commit('showUserModal')
     },
@@ -163,7 +172,8 @@ export default {
 
   },
     mounted() {
-    //   this.getUserDetails();
+      this.individualRestaurant();
+
   }
   }
 
@@ -391,6 +401,8 @@ right: 120px;
 
 }
 
+
+.inline-link{display: inline}
 </style>
 
 
