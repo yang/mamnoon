@@ -65,7 +65,7 @@ export default {
       pageData: null,
       testimonials: null,
       inventory: this.$store.state.inventory,
-      products: this.$store.state.inventory.offerings[0].items,
+      // products: this.$store.state.inventory.offerings[0].items,
       blockedBody: this.apiData,
       upserve: null,
       upserveCategories: [],
