@@ -5,7 +5,7 @@
       <div class="position-relative red-header">
         <h4 class="noselect">{{header.header}}
         </h4>
-        <p style="text-align:left;margin-top: 20px;">{{header.description}}</p>
+        <p style="text-align:center;margin-top: 20px;">{{header.description}}</p>
       
       
 <!-- family meals:

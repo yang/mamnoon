@@ -3,10 +3,10 @@
       <div class="newsletter-section">
         <div class="pad-cont">
             <h4 class="noselect">
-                {{ title }}
+             {{header}}
             </h4>
-            <p v-if="description" class="thick-white noselect">
-                {{ description }}
+            <p class="thick-white noselect">
+          {{body}}
             </p> 
         </div>
       </div>
@@ -15,6 +15,9 @@
             <CampaignMonitor />
         </div>
       </div>
+
+
+
     </section>
 </template>
 
@@ -27,7 +30,7 @@ import CampaignMonitor from '@/components/CampaignMonitor.vue'
 import Send from '@/components/Send.vue'
 
 export default {
-props: ['title', 'description'],
+props: ['title', 'description','header','body'],
 components: {
     Send,
     CampaignMonitor

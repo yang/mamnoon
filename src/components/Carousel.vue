@@ -6,8 +6,8 @@
     <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.reservations_header" :data="item.reservations" />
     <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.online_shop_header" :data="item.online_shop" />
     <ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.a_la_carte_header" :data="item.service" />
+    <Newsletter v-else-if="item.acf_fc_layout === 'newsletter'" :header="item.newsletter_header" :body="item.newsletter_body" />
   </div>
-    <Newsletter :title="blok.content.body[0].newsLetterFooterHeader" :description="blok.content.body[0].newsLetterFooterDescription" />
   </main>
 </template>
 
@@ -184,7 +184,7 @@ h4 {
 }
 .is-fullheight [id^="carousel_prev_"] {
   position: absolute;
-  top: -2px;
+  top: 15px;
   left: 25%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
@@ -193,7 +193,7 @@ h4 {
 }
 .is-fullheight [id^="carousel_next_"] {
   position: absolute;
-  top: -2px;
+  top: 15px;
   right: 25%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
@@ -417,8 +417,9 @@ section {
 }
 .description-para {
   color: white;
-  margin: 20px auto;
+  margin: 12px auto 20px;
   width: 80%;
+  text-align: center;
 }
 
 .quote-container {
