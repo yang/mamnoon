@@ -1,12 +1,197 @@
 <template>
   <main v-editable="blok" v-if="blok.content.body[0]">
-  <div v-for="item in pageData" :key="item.acf_fc_layout">
-    <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.testimonials_header" :data="item.testimonials" />
-    <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.meal_calendar_header" :data="item.meal_calendar" />
-    <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.reservations_header" :data="item.reservations" />
-    <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.online_shop_header" :data="item.online_shop" />
-    <ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.a_la_carte_header" :data="item.service" />
+<div v-for="item in pageData" :key="item.acf_fc_layout">
+  <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.testimonials_header" :data="item.testimonials" />
+  <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.meal_calendar_header" :data="item.meal_calendar" />
+  <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.reservations_header" :data="item.reservations" />
+  <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.online_shop_header" :data="item.online_shop" />
+<ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.a_la_carte_header" :data="item.service" />
   </div>
+    <section
+      :id="offering.category"
+      v-for="(offering,index) in inventory.offerings"
+      v-bind:key="offering.title"
+      class="section hero is-primary is-fullheight"
+      v-bind:class="{familymeal : index === 0}"
+    >
+      <div
+        v-if="offering.visible"
+        v-bind:class="{ carousel: !offering.reservationBlock, shortcarousel: offering.reservationBlock }"
+      >
+        <h4 class="noselect" v-if="!offering.insideHeader">
+
+<div v-if="offering.title === 'order now'">
+{{ blok.content.body[0].orderNowHeader }}
+</div>
+<span v-if="offering.tock">{{currentDay}}</span>
+</h4>
+
+
+
+
+
+
+
+        <carousel
+          v-else-if="offering.responsive"
+          :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}"
+          :items="offering.slideNo ? offering.slideNo : 3"
+          :loop="false"
+          :dots="false"
+          :nav="false"
+        >
+
+          <div
+            v-for="item in offering.items"
+            v-bind:key="item.name"
+            style="text-align:center;margin-top: 10px;width: 100%;"
+          >
+
+
+
+
+<div v-if="offering.mamaShop" class="relative-pos">
+<img v-bind:src="item.image" />
+     
+
+            <div class="itemDescription">
+              <div class="text-box">
+              {{item.description}}
+              </div>
+              </div>
+
+</div>
+<div v-else>
+              <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
+
+            <img v-else v-bind:src="item.image" />
+  </div>
+
+
+            <template v-if="item.caviarLink">
+              <div class="order-bottom">
+                {{item.name}}
+                <div class="order-panel">
+                  <a :href="item.caviarLink" target="_blank">
+                    <Order />
+                  </a>
+                </div>
+              </div>
+            </template>
+            <template v-if="item.statistics">
+              <div class="order-bottom">
+                {{item.name}}
+                <div class="order-panel">
+                  <button
+                    class="snipcart-add-item"
+                    v-bind:data-item-id="item.name"
+                    v-bind:data-item-price="item.price"
+                    v-bind:data-item-image="item.image"
+                    v-bind:data-item-name="item.name"
+                    v-bind:data-item-description="item.description"
+                    v-bind:data-item-weight="item.weight"
+                  >
+                    <Order />
+                  </button>
+                </div>
+              </div>
+            </template>
+            <div v-if="offering.tockButton" class="order-bottom order-top">
+              <span class="month">{{item.month}}</span>
+              <div class="days">
+                <span v-for="(day,index) in item.days" v-bind:key="day">
+                  <span @click="dayChange(index)">{{index + 1}}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <template v-if="index === 0 || index === 1" slot="next"></template>
+          <template v-else class="subnext" slot="next">
+            <span class="next">
+              <Next />
+            </span>
+          </template>
+        </carousel>
+        <carousel
+          v-else-if="!offering.reservationBlock"
+          :items="offering.slideNo ? offering.slideNo : 3"
+          :loop="false"
+          :dots="false"
+          :nav="false"
+        >
+          <template class="subprev" slot="prev">
+            <span class="prev">
+              <Prev />
+            </span>
+          </template>
+ 
+          <div
+            v-for="item in offering.items"
+            v-bind:key="item.name"
+            style="text-align:center;margin-top: 15px;"
+          >
+            <h4 v-if="offering.insideHeader" class="insideHeader noselect">
+              {{offering.title}} / {{item.month}} /
+              <span v-if="offering.tock">{{currentDay}}</span>
+            </h4>
+            <img v-if="offering.tock" v-bind:src="'./assets/ala/' + currentDay + '.jpg'" />
+
+            <img v-else v-bind:src="item.image" />
+            
+            {{item.description}}
+
+            <template v-if="item.statistics">
+              <div class="order-bottom">
+                {{item.name}}
+                <div class="order-panel">
+                  <button
+                    class="snipcart-add-item"
+                    v-bind:data-item-id="item.name"
+                    v-bind:data-item-price="item.price"
+                    v-bind:data-item-image="item.image"
+                    v-bind:data-item-name="item.name"
+                  >
+                    <Order />
+                  </button>
+                </div>
+              </div>
+            </template>
+
+            <div v-if="offering.tockButton" class="order-bottom order-top">
+              <span class="month">{{item.month}}</span>
+              <div class="days">
+                <span v-for="(day,index) in item.days" v-bind:key="day">
+                  <span @click="dayChange(index)">{{index + 1}}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <template v-if="index === 0 || index === 1" slot="next"></template>
+          <template v-else class="subnext" slot="next">
+            <span class="next">
+              <Next />
+            </span>
+          </template>
+        </carousel>
+
+        <div v-if="offering.tockButton" class="order-bottom">
+          <div id="mama-dummy-button" class="TockButton-buttonContainer" style="cursor: pointer;">
+            <div data-tock-reserve="true" class="TockButton-link">
+              <div class="TockButton TockButton-blue">
+                <span class="TockWidget-B2" @click="loggit()">
+                  <OrderStar />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+
+      </div>
+
+    </section>
     <Newsletter :title="blok.content.body[0].newsLetterFooterHeader" :description="blok.content.body[0].newsLetterFooterDescription" />
   </main>
 </template>

@@ -73,10 +73,159 @@ h4.error{
 }
 
 
+
+
+
+
+// snipcart styles
+// snipcart styles
+// snipcart styles
+// snipcart styles
+
 .snipcart-layout.snipcart-modal,
 .snipcart-modal__container{
   // background: pink !important;
   
 }
+
+.snipcart-cart-summary__content,
+.snipcart-cart-summary,
+.snipcart-layout__col > div,
+.snipcart__box,
+.snipcart-item-line__container {
+
+    background: #FFF35B;
+}
+
+.snipcart__button--icon{
+  background: transparent;
+  border: 0;
+}
+
+
+.snipcart__font--secondary, .snipcart__font--subtitle {
+    color: #595959;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+}
+
+
+.snipcart-discount-box__button.snipcart__font--bold{
+  border-radius: 2px;
+  border: 2px solid #838484;
+  text-transform: lowercase;
+  padding: 12px 0;
+}
+
+.snipcart__font--secondary,
+.snipcart-layout__content,
+.snipcart-item-list,
+.snipcart-discount-box__button.snipcart__font--bold,
+.snipcart-cart__footer,
+.snipcart-cart-header,
+.snipcart-modal {
+    background-color: #ffffff;
+}
+
+
+.snipcart-cart-button.snipcart__font--bold.snipcart__font--secondary.snipcart-cart-button--secondary.snipcart-cart-button--fit,
+.snipcart-cart-button--highlight {
+    background-image: none;
+    background-color: #f05d5b;
+    color: white !important;
+    text-transform: lowercase;
+    font-weight: bold;
+}
+
+.snipcart-cart-button__icon,
+.snipcart-cart-button--highlight svg{
+  display: none;
+}
+// snipcart styles
+// snipcart styles
+// snipcart styles
+// snipcart styles
+
+
+
+
+.snipcart,
+.snipcart *{
+   font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
+}
+
+.snipcart-form{
+  box-shadow: none;
+}
+
+.snipcart__box--badge.snipcart__font--bold.snipcart__font--secondary,
+.snipcart__box--badge.snipcart__box--badge.snipcart__box--badge-highlight.snipcart__font--bold.snipcart__font--secondary{
+  background-color: #f05d5b !important;
+  background: none;
+  color: white;
+
+
+
+    }
+
+
+.snipcart__box--badge {
+    height: 36px;
+    width: 36px;
+    border: #f05d5b;
+    }
+
+
+
+.snipcart-cart-summary-fees__item.snipcart-cart-summary-fees__total.snipcart__font--bold{
+  background-color: transparent;
+}
+    
+.snipcart-cart-summary__separator{
+background: #ffffff;
+}
+
+
+
+.snipcart-cart-summary-fees__notice.snipcart__font--regular{
+  line-height: 18px;
+}
+
+.snipcart__font--subtitle{
+  text-transform: lowercase;
+}
+
+
+.snipcart__font--tiny,
+.snipcart__font--slim{
+  color: #838484;
+  font-weight: 600;
+}
+
+.snipcart-modal__close-title.snipcart__font--std,
+.snipcart__actions--link{
+  color: #f05d5b;
+  font-weight: 600;
+}
+
+
+
+
+.snipcart__icon--blue-dark path,
+.snipcart__icon--blue-light path{
+    fill: #f05d5b;
+}
+
+button.snipcart-cart-header__close-button.snipcart-modal__close:active,
+button.snipcart-cart-header__close-button.snipcart-modal__close:focus{
+  outline: none;
+}
+
+.snipcart-item-line {
+    box-shadow: none;
+}
+
+// .snipcart-item-line__container {
+//     margin: 0 0 0 0 !important;
+// }
 
 </style>
