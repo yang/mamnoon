@@ -1,7 +1,8 @@
 <template>
-  <section id="reservations" class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4>{{header.header}}</h4>
-        <p class="description-para noselect">{{header.description}}</p>
+  <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
+        <h4>{{header}}</h4>
+       
+        <p class="description-para noselect">{{description}}</p>
 <div class="width-container">
 <div v-for="item in data" :key="item.restaurant_title">
   <Mbar v-if="item.restaurant_title === 'mbar'" />
@@ -37,7 +38,7 @@ export default {
         Mamnoon
     },
     name: 'reservations',
-    props: ['data','header']
+    props: ['data','header','tag','description']
 }
 </script>
 

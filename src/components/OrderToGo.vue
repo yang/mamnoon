@@ -1,6 +1,7 @@
 <template>
   <section class="section hero is-primary is-fullheight position-relative mb-80">
         <h4>Order To Go</h4>
+        {{tag}}
 <!--carousel-->
         <carousel
           :responsive=" {0:{items:1},768:{items:1},1080:{items:1}}"
@@ -60,6 +61,6 @@ export default {
         Prev
     },
     name: 'ordertogo',
-    props: ['data']
+    props: ['data','tag']
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <section id="newsletter" class="section hero is-primary is-fullheight">
+    <section :id="tag" class="section hero is-primary is-fullheight mb-80">
       <div class="newsletter-section">
         <div class="pad-cont">
             <h4 class="noselect">
@@ -54,7 +54,8 @@ components: {
 
 .newsletter-section{
     width: 50%;
-    float: left;
+
+    display: inline-block;
     h4{
         text-align: left;
     }

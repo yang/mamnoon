@@ -1,11 +1,12 @@
 <template>
-    <section id="familymeal" class="coverflowsection">
+    <section :id="tag" class="coverflowsection">
   <div>
    <div>
       <div class="position-relative red-header">
-        <h4 class="noselect">{{header.header}}
+        <h4 class="noselect">{{header}}
         </h4>
-        <p style="text-align:center;margin-top: 20px;">{{header.description}}</p>
+   
+        <p style="text-align:center;margin-top: 20px;">{{description}}</p>
       
       
 <!-- family meals:
@@ -123,7 +124,7 @@ this.dumpAcf()
 
 
   },
-  props: ["data","header"],
+  props: ["data","header","tag","description"],
   created() {
     window.addEventListener("resize", this.myEventHandler);
     if (window.location.search === "?showTock") {

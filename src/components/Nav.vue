@@ -16,7 +16,6 @@
 
 
 
-
 <div v-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right:190px">
         <router-link to="/profile">
        
@@ -71,7 +70,7 @@
                  <div class="inline-link" v-for="item in pageData" :key="item.tagname">
 <li v-if="item.tagname">
 
-        <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.tagname}}</a>
+        <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
 
 </li>
                    </div>   
@@ -92,7 +91,7 @@
             ref="scrollactive"
             >    <ul id="menu" class="mobile-menu">
                 <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
-                    <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.title}}</a>
+                    <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.header}}</a>
                     </li>
                     <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />

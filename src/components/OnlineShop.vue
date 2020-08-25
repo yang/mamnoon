@@ -1,7 +1,8 @@
 <template>
-    <section class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4>{{header.header}}</h4>
-         <p class="description-para noselect">{{header.description}}</p>
+    <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
+        <h4>{{header}}</h4>
+       
+         <p class="description-para noselect">{{description}}</p>
         <!--carousel-->
         <carousel
           :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}"
@@ -76,7 +77,7 @@ export default {
         Order
     },
     name: 'onlineshop',
-    props: ['data','header']
+    props: ['data','header','tag','description']
 }
 </script>
 

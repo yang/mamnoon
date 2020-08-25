@@ -3,7 +3,7 @@
   <div>
     <div>
       <div class="position-relative red-header">
-        <h4 class="noselect">{{data.meal_calendar_header.header}}</h4>
+        <h4 class="noselect">{{data.header}}</h4>
         <p style="text-align:left;margin-top: 20px;">{{data.meal_calendar_header.description}}</p>
       </div>
       <div v-if="familyMeals !== null">

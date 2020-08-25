@@ -1,11 +1,11 @@
 <template>
   <main v-editable="blok" v-if="blok.content.body[0]">
 <div v-for="item in pageData" :key="item.acf_fc_layout">
-  <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.testimonials_header" :data="item.testimonials" />
-  <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.meal_calendar_header" :data="item.meal_calendar" />
-  <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.reservations_header" :data="item.reservations" />
-  <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.online_shop_header" :data="item.online_shop" />
-<ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.a_la_carte_header" :data="item.service" />
+  <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :data="item.testimonials" />
+  <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :data="item.meal_calendar" />
+  <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.header" :data="item.reservations" />
+  <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :data="item.online_shop" />
+<ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :data="item.service" />
   </div>
     <section
       :id="offering.category"

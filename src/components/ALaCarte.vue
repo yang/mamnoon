@@ -1,7 +1,7 @@
 <template>
-  <section id="testimonials" class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4>{{header.header}}</h4>
-        <p class="description-para noselect">{{header.description}}</p>
+  <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
+        <h4>{{header}}</h4>
+        <p class="description-para noselect">{{description}}</p>
         <div class="width-container">
             <Mamnoon :caviarLink="true" />
             <MamnoonStreet :caviarLink="true" />
@@ -19,7 +19,7 @@ export default {
         MamnoonStreet
     },
     name: 'alacarte',
-    props: ['data','header'],
+    props: ['data','header','tag','description'],
     data () {
         return {
 
