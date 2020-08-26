@@ -84,7 +84,7 @@ export default {
 
 <style>
 .mb-perfect{
-  margin-bottom: 80px;
+  margin-bottom: 0px;
   height: 90px;
 }
 </style>

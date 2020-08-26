@@ -572,8 +572,8 @@ h4 {
 }
 .is-fullheight [id^="carousel_prev_"] {
   position: absolute;
-  top: 15px;
-  left: 25%;
+  top: 14px;
+  left: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     left: 5%;
@@ -581,8 +581,8 @@ h4 {
 }
 .is-fullheight [id^="carousel_next_"] {
   position: absolute;
-  top: 15px;
-  right: 25%;
+  top: 14px;
+  right: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     right: 5%;
@@ -590,6 +590,7 @@ h4 {
 }
 .is-fullheight {
   padding: 20px 0 0 0;
+  overflow: hidden;
 }
 .familymeal {
   padding: 0 0 0 0;

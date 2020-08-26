@@ -224,10 +224,22 @@ background: #ffffff;
 
 
 
-.snipcart__icon--blue-dark path,
+
 .snipcart__icon--blue-light path{
     fill: #f05d5b;
 }
+
+
+.snipcart__icon--blue-dark path{
+    fill: #ffffff;
+}
+
+.snipcart-checkout-step__icon.snipcart-billing-completed__step-icon .snipcart__icon--blue-dark path{
+fill: #f05d5b;
+}
+
+
+
 
 button.snipcart-cart-header__close-button.snipcart-modal__close:active,
 button.snipcart-cart-header__close-button.snipcart-modal__close:focus{

@@ -1,17 +1,19 @@
 <template>
-    <section :id="tag" class="section hero is-primary is-fullheight mb-80">
+    <section :id="tag" class="section hero is-primary overflow-hidden is-fullheight mb-80">
       <div class="newsletter-section">
         <div class="pad-cont">
             <h4 class="noselect">
              {{header}}
             </h4>
-            <p class="thick-white noselect">
+            <p class="description-para-left noselect">
           {{body}}
+
+          
             </p> 
         </div>
       </div>
       <div class="newsletter-section">
-        <div class="pad-cont" style="padding-top: 25px;">
+        <div class="pad-cont" style="padding-top: 40px;">
             <CampaignMonitor />
         </div>
       </div>
@@ -55,7 +57,7 @@ components: {
 .newsletter-section{
     width: 50%;
 
-    display: inline-block;
+float: left;
     h4{
         text-align: left;
     }
@@ -100,12 +102,16 @@ components: {
 }
 
 
-.thick-white{
-    color: white;
-    font-weight: 600;
-    margin-bottom: 0;
+    .description-para-left {
+        color: white;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+
+.overflow-hidden{
+    overflow: hidden;
+    padding-top: 0 !important;
 }
-
-
 
 </style>
