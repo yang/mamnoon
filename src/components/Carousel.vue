@@ -77,9 +77,9 @@ export default {
   async individualRestaurant(){
 
     // let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
-        // let responseAcf = await this.$http.get(`http://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
+        let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
 
-let responseAcf = {
+let responseAcf2 = {
   acf: {
     content_fields: [
       {
@@ -465,8 +465,8 @@ let responseAcf = {
   }
 }
     let AcfBlock = responseAcf
-    // this.pageData = AcfBlock.data.acf.content_fields
-        this.pageData = AcfBlock.acf.content_fields
+    this.pageData = AcfBlock.data.acf.content_fields
+        // this.pageData = AcfBlock.acf.content_fields
 
 },
     filterByCat(cat){

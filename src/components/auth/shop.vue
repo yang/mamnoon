@@ -120,9 +120,9 @@ this.individualRestaurant()
   methods: {
       async individualRestaurant(){
 
+    let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
     // let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
-    // let responseAcf = await this.$http.get(`http://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
-let responseAcf = {
+let responseAcf2 = {
   acf: {
     content_fields: [
       {
@@ -509,7 +509,7 @@ let responseAcf = {
 }
 
     let AcfBlock = responseAcf
-    let pageData = AcfBlock.acf.content_fields
+    let pageData = AcfBlock.data.acf.content_fields
 
     for(let i = 0;i<pageData.length;i++){
     if(pageData[i].acf_fc_layout === 'online_shop'){

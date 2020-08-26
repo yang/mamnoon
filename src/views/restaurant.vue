@@ -65,14 +65,14 @@ export default {
   },
   methods: {
     async dumpAcf() {
-      // let responseAcf = await this.$http.get(
-      //   // `http://localhost:8888/wp-json/acf/v3/restaurant/${this.$route.params.id}`
-      //   // `https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/${this.$route.params.id}`
-      //  `http://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/${this.$route.params.id}`
-      // );
+      let responseAcf = await this.$http.get(
+        // `http://localhost:8888/wp-json/acf/v3/restaurant/${this.$route.params.id}`
+        // `https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/${this.$route.params.id}`
+       `https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/${this.$route.params.id}`
+      );
 
 
-let responseAcf = {
+let responseAcf2 = {
   acf: {
     content_fields: [
       {

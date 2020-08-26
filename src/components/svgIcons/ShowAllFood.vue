@@ -19,6 +19,6 @@ props: ['yellowText']
 }
 svg#show-all{
     width:172px;
-    margin: 10px auto;
+    margin: 20px auto 10px;
 }
 </style>
