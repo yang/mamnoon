@@ -79,7 +79,7 @@ transition: padding .5s ease;
 
 @media only screen and (max-width: 1080px) {
 .nav-acc-header{
-  padding-top: 160px;
+  padding-top: 90px;
 
 transition: padding .5s ease;
 &.morePadding{
