@@ -1,5 +1,5 @@
 <template>
-    <div class="halfwidth-yellow" @click="openSevenRooms('reservembarbutton')">
+    <div class="halfwidth-yellow1" @click="openSevenRooms('reservembarbutton')">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="282.6px"
 	 height="57.6px" viewBox="0 0 282.6 57.6" style="overflow:visible;enable-background:new 0 0 282.6 57.6;" xml:space="preserve">
 
@@ -150,12 +150,12 @@ export default {
   fill: #49494a;
 }
 
-.halfwidth-yellow {
+.halfwidth-yellow1 {
   height: 150px;
   width: 50%;
   display: inline-block;
   background: #fff367;
-  float: left;
+//   float: left;
   text-align: center;
       cursor: pointer;
   svg {
@@ -167,17 +167,17 @@ export default {
 
 
 @media only screen and (max-width: 768px) {
-.halfwidth-yellow {
+.halfwidth-yellow1 {
   height: 150px;
   width: 50%;
   display: inline-block;
   background: #fff367;
-  float: right;
+//   float: right;
   text-align: center;
       cursor: pointer;
   svg {
     width: 80%;
-    margin: 50px auto 0;
+    margin: 30px auto 0;
     text-align: center;
   }
 }

@@ -56,37 +56,23 @@
                     </li>
                 </div>   
             </ul>            
-              <!-- <ul id="menu" class="mobile-menu"> -->
-                <!-- <li v-for="offering in store.inventory.offerings" @click="toggleMenu()" v-bind:key="offering.title">
-                    <a :href="'#'+offering.category" class="scrollactive-item nav-item">{{offering.header}}</a>
-                    </li>
-                    <li class="cursor-pointer" @click="toggleMenu()">
-                        <GoogleAuth />
-                    </li> -->
-            <!-- </ul> -->
             </scrollactive>
         </div>
     </nav>
-
     <div>
         <div class="container">
-
-
         </div>
     </div>
-
     </template>
+</div>
 </div>
 </template>
 
-
 <script>
 import VueJwtDecode from "vue-jwt-decode";
-
 import Logo from "@/components/Logo";
 import Burger from "@/components/svgIcons/Burger";
 import GoogleAuth from "@/components/GoogleAuth";
-
 
 export default {
     components: {
@@ -190,26 +176,19 @@ display:block;
 list-style-type: none;
 }
 
-
 .nadi-sub-header.mobile-nav{
     height: auto;
     padding: 20px 0;
 }
 
-
-
-
 ul#menu li a{
 color: #ffffff;
 }
-
 
 ul#menu li a:hover{
 color: #FFF367;
 text-decoration: none;
 }
-
-
 
 ul#menu li a.is-active{
   color: #FFF367;
@@ -300,17 +279,12 @@ right: 0;
 
 
 
-
 @media only screen and (max-width: 576px) {
-  
-  
   
   .navbar .container {
         max-width: 98;
     }
 }
-
-
 
 .logButton{
     position: absolute;
@@ -328,10 +302,9 @@ right: 0;
     z-index: 100;
 }
 
-
 .logButton2{
     position: absolute;
-right: 120px;
+    right: 120px;
     height: 100%;
     border: 0;
     background: #F1765B;
@@ -345,27 +318,18 @@ right: 120px;
     z-index: 100;
 }
 
-
-
-
 .cursor-pointer{
     cursor: pointer;
 }
-
-
-
 
 .googleInHeader a{
     color: white;
 }
 
-
 .logButton a:hover{
     text-decoration: none;
     color: #fff367;
-
 }
-
 
 .inline-link{display: inline}
 </style>

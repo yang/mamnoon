@@ -19,8 +19,8 @@
               </div>
             </div>
   </div>
-          <template v-if="index === 0 || index === 1" slot="next"></template>
-          <template v-else class="subnext" slot="next">
+          <!-- <template v-if="index === 0 || index === 1" slot="next"></template> -->
+          <template class="subnext" slot="next">
             <span class="next">
               <Next />
             </span>

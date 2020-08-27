@@ -96,7 +96,7 @@ export default {
   width: 50%;
   display: inline-block;
   background: #fff367;
-  float: left;
+  // float: left;
   text-align: center;
       cursor: pointer;
   svg {
@@ -113,7 +113,7 @@ export default {
   width: 50%;
   display: inline-block;
   background: #fff367;
-  float: left;
+  // float: left;
   text-align: center;
       cursor: pointer;
   svg {

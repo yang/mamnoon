@@ -1,9 +1,7 @@
 <template>
     <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
         <h4>{{header}}</h4>
-       
-         <p class="description-para noselect">{{description}}</p>
-        <!--carousel-->
+                <p class="description-para noselect">{{description}}</p>
         <carousel
           :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}"
           :items="1"
@@ -16,11 +14,8 @@
               <Prev />
             </span>
           </template>
-<div class="text-center" v-for="item in data" :key="item">
+<div class="text-center" v-for="item in data" :key="item.shop_item.name">
 <img :src="item.shop_item.image" />
-
-
-            <!-- <template v-if="item.statistics"> -->
               <div class="order-bottom">
                 {{item.shop_item.name}}
                 <div class="order-panel">
@@ -37,19 +32,14 @@
                   </button>
                 </div>
               </div>
-            <!-- </template> -->
-
-
-</div>
-          <template v-if="index === 0 || index === 1" slot="next"></template>
-          <template v-else class="subnext" slot="next">
+        </div>
+          <!-- <template v-if="index === 0 || index === 1" slot="next"></template> -->
+          <template class="subnext" slot="next">
             <span class="next">
               <Next />
             </span>
           </template>
         </carousel>
-<!--carousel-->
-
       <div class="text-center mb-perfect">
         <router-link to="/shop">
        <ShowAll />

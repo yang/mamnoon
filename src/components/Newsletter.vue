@@ -1,5 +1,5 @@
 <template>
-    <section :id="tag" class="section hero is-primary overflow-hidden is-fullheight mb-80">
+    <section class="section hero is-primary overflow-hidden is-fullheight mb-80">
       <div class="newsletter-section">
         <div class="pad-cont">
             <h4 class="noselect">

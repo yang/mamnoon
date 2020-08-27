@@ -1,5 +1,5 @@
 <template>
-  <main v-editable="blok" v-if="blok.content.body[0]">
+  <main>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
     <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
     <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :description="item.description" :data="item.meal_calendar" :tag="item.tagname" />

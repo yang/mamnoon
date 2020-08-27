@@ -1,33 +1,23 @@
 <template>
   <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
         <h4>{{header}}</h4>
-       
-        <p class="description-para noselect">{{description}}</p>
+       <p class="description-para noselect">{{description}}</p>
 <div class="width-container">
 <div v-for="item in data" :key="item.restaurant_title">
   <Mbar v-if="item.restaurant_title === 'mbar'" />
   <Mamnoon v-else-if="item.restaurant_title === 'mamnoon'" />
 </div>
-
-
-  
 </div>
 </section>
 </template>
 
 <script>
 
-
-
 import carousel from "vue-owl-carousel";
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
-
-
-
 import Mbar from "@/components/svgIcons/Mbar";
 import Mamnoon from "@/components/svgIcons/Mamnoon";
-
 
 export default {
     components:{
@@ -62,17 +52,11 @@ export default {
 }
 
 .quote-container {
-  // position: relative;
-  // height: 100%;
-  // width: 100%;
-  // padding-bottom: 80px;
   position: relative;
   height: 100%;
   width: 70%;
   margin: 0 auto;
-  // padding-bottom: 80px;
   text-align: center;
-
 }
 
 
@@ -124,7 +108,6 @@ export default {
 }
 #reservations .owl-item .r-col {
   padding: 0px;
-  // width: 50%;
   float: left;
   img {
     width: 100%;
@@ -134,20 +117,13 @@ export default {
   text-align: left;
 }
 .xs {
-  // font-size: 16px;
   font-size: 18px;
 }
 .sm {
-  // font-size: 22px;
   font-size: 18px;
 }
 .md {
-  // font-size: 18px;
-  // font-size: 38px;
-
-
 font-size: 18px;
-
 }
 .lg {
   font-size: 64px;

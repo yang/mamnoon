@@ -140,8 +140,8 @@ this.dumpAcf()
 dumpAcf(){
 
 
-console.log(this.data)
-console.log(this.data[0].meal.date)
+// console.log(this.data)
+// console.log(this.data[0].meal.date)
 
 
 this.familyMeals = this.data
