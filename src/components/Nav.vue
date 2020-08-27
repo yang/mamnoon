@@ -55,7 +55,13 @@
                     <li v-if="item.tagname">
                         <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
                     </li>
+        
                 </div>   
+<div class="inline-link">
+           <li class="cursor-pointer" @click="toggleMenu()">
+                        <GoogleAuth />
+                    </li>
+                </div>
             </ul>            
             </scrollactive>
         </div>
@@ -271,7 +277,7 @@ right: 0;
 .nav-wrap{
     position: absolute;
     z-index: 100;
-    position: absolute;
+    position: fixed;
     z-index: 100;
     width: 100%;
     top: 92px;

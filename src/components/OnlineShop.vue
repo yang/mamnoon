@@ -19,6 +19,7 @@
               <div class="order-bottom">
                 {{item.shop_item.name}}
                 <div class="order-panel">
+               
                   <button
                     class="snipcart-add-item"
                     v-bind:data-item-id="item.shop_item.id"

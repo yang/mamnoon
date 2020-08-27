@@ -177,7 +177,8 @@ export default {
       cursor: pointer;
   svg {
     width: 80%;
-    margin: 30px auto 0;
+    // margin: 30px auto 0;
+	    margin: 50px auto 0;
     text-align: center;
   }
 }

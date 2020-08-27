@@ -10,7 +10,8 @@
         </div>
         <GiftCardModule />
         <!-- <TestimonialForm :emailAddress="$store.state.userInfo.user.email" /> -->
-        <EmailForm :emailAddress="$store.state.userInfo.user.email" />
+        {{$store.state}}
+        <!-- <EmailForm :emailAddress="$store.state.userInfo.user.email" /> -->
         <!-- <ContactUs /> -->
         <ToggleVegetarian />
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
