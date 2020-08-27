@@ -10,7 +10,7 @@
                     <Prev />
             </span>
           </template>
-<div v-for="item in data" :key="item.testimonial.quote">
+<div v-for="item in data" :key="item.testimonial.author">
             <div class="height-100">
               <div class="l-col">
                 <div class="quote-container">

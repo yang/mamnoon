@@ -120,7 +120,7 @@ this.individualRestaurant()
   methods: {
       async individualRestaurant(){
 
-    let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
+    let responseAcf = await this.$http.get(`/wp-json/acf/v3/restaurant/188`)
 
     let AcfBlock = responseAcf
     let pageData = AcfBlock.data.acf.content_fields

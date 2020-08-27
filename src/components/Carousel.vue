@@ -2,7 +2,7 @@
   <main>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
     <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
-    <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :description="item.description" :data="item.meal_calendar" :tag="item.tagname" />
+    <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
     <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
     <ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
@@ -74,7 +74,7 @@ export default {
   props: ['apiData', 'blok'],
   methods: {
   async individualRestaurant(){
-        let responseAcf = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/188`)
+        let responseAcf = await this.$http.get(`/wp-json/acf/v3/restaurant/188`)
 
 
     let AcfBlock = responseAcf

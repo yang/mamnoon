@@ -66,7 +66,7 @@ export default {
   methods: {
     async dumpAcf() {
       let responseAcf = await this.$http.get(
-       `https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/restaurant/${this.$route.params.id}`
+       `/wp-json/acf/v3/restaurant/${this.$route.params.id}`
       );
 
 

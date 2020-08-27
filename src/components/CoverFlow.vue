@@ -6,7 +6,7 @@
         <h4 class="noselect">{{header}}
         </h4>
    
-        <p style="text-align:center;margin-top: 20px;">{{description}}</p>
+        <p style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
       
       
 <!-- family meals:
@@ -124,7 +124,7 @@ this.dumpAcf()
 
 
   },
-  props: ["data","header","tag","description"],
+  props: ["data","header","tag","descriptionbody"],
   created() {
     window.addEventListener("resize", this.myEventHandler);
     if (window.location.search === "?showTock") {

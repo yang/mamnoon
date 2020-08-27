@@ -11,16 +11,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
-// import StoryblokVue from 'storyblok-vue'
-// import { updateTockOfferings } from "../../../server/api/tock/controller/tockController";
-// import { update } from "../../../server/api/product/model/Product";
 
 
-// Vue.use(StoryblokVue)
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
-baseURL: 'https://young-hamlet-03679.herokuapp.com'
+  baseURL: 'https://testsite.mamnoon.webfactional.com'
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -68,11 +63,6 @@ const vuexLocalStorage = new VuexPersist({
   key: 'vuex',
   storage: window.localStorage
 })
-
-
-// var today = new Date();
-// var dd = String(today.getDate()).padStart(2, '0');
-
 
 
 
@@ -316,7 +306,7 @@ new Vue({
   store: store,
   render: h => h(App),
   async mounted () {
-let responseTockStreet2 = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
+let responseTockStreet2 = await this.$http.get(`/wp-json/acf/v3/pages`)
 
 
 
