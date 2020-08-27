@@ -108,7 +108,9 @@ export default {
     font-weight: 500;
     letter-spacing: .25px;
     padding: 12px 35px 12px 10px;
-    width: 240px;
+    // width: 240px;
+        width: 70%;
+
     &:focus,
     &:active{
         outline: none;

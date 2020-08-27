@@ -110,9 +110,14 @@ let self = this
           //on success do something
           this.isSignIn = this.$gAuth.isAuthorized;
           // this.isSignIn = false
-          location.reload()
+          // location.reload()
           // clear user current email and clear user info
           this.$store.commit('clearCurrentUser')
+
+     this.$router.push("/");
+
+
+
         })
         .catch(error => {
           //on fail do something

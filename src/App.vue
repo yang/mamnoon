@@ -234,6 +234,11 @@ background: #ffffff;
     fill: #ffffff;
 }
 
+
+.snipcart-cart-header__option.snipcart-cart-header__count.snipcart__font--secondary.snipcart__font--bold .snipcart__icon--blue-dark path{
+    fill: #f05d5b;
+}
+
 .snipcart-checkout-step__icon.snipcart-billing-completed__step-icon .snipcart__icon--blue-dark path{
 fill: #f05d5b;
 }

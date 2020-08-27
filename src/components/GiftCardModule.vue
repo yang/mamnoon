@@ -31,7 +31,7 @@
     <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
     <br/>
     <br/>
-    <a href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">    <BuyNewCard /></a>
+    <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">    <BuyNewCard /></a>
 
 <br /> <br />
 
