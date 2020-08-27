@@ -274,6 +274,7 @@ right: 0;
     position: absolute;
     z-index: 100;
     width: 100%;
+    top: 92px;
 }
 .burger{
     position: absolute;
