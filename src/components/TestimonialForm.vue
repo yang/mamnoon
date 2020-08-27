@@ -134,8 +134,8 @@ methods: {
     },
     async getTestimonials() {
 
-console.log('get testimonials')
-console.log(this.emailAddress)
+// console.log('get testimonials')
+// console.log(this.emailAddress)
       try {
         let response = await this.$http.get("https://young-hamlet-03679.herokuapp.com/user/gettestimonials/" + this.emailAddress);
 
