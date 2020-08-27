@@ -271,6 +271,9 @@ right: 0;
 .nav-wrap{
     position: absolute;
     z-index: 100;
+    position: absolute;
+    z-index: 100;
+    width: 100%;
 }
 .burger{
     position: absolute;
