@@ -85,7 +85,7 @@ let self = this
 
         console.log(this.$gAuth.isAuthorized)
         // console.log(profile)
-        this.showUserInfo(profile.getEmail())
+        // this.showUserInfo(profile.getEmail())
         this.isSignIn = this.$gAuth.isAuthorized;
 
         this.$store.commit('logIn')
