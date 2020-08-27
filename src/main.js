@@ -11,16 +11,16 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
-import StoryblokVue from 'storyblok-vue'
+// import StoryblokVue from 'storyblok-vue'
 // import { updateTockOfferings } from "../../../server/api/tock/controller/tockController";
 // import { update } from "../../../server/api/product/model/Product";
 
 
-Vue.use(StoryblokVue)
+// Vue.use(StoryblokVue)
 
 const base = axios.create({
   // baseURL: "http://localhost:4000"
-baseURL: 'https://young-hamlet-03679.herokuapp.com'
+// baseURL: 'https://young-hamlet-03679.herokuapp.com'
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -316,40 +316,14 @@ new Vue({
   store: store,
   render: h => h(App),
   async mounted () {
-
-
-
-// let responseTock = await this.$http.get(`/tock/tockmeals/${false}`)
-// let inventoryTockAdd = responseTock.data.tockMeals
-// this.$store.commit('updateTockMeals', { inventoryTockAdd })
-
-// console.log('from api:')
-// console.log(inventoryTockAdd)
-
-// let responseTockStreet = await this.$http.get(`/tock/tockmeals/${true}`)
-// let inventoryTockAddStreet = responseTockStreet.data.tockMeals
-// this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet })
-
-// let responseTockStreet2 = await this.$http.get(`http://localhost:8888/wp-json/acf/v3/pages`)
 let responseTockStreet2 = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
 
 
 
 let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
 
-
-// console.log(inventoryTockAdd)
-
-// console.log('from acf:')
-// console.log(inventoryTockAddStreet2)
-
 this.$store.commit('updateTockMeals', { inventoryTockAdd })
 
-// this.$store.commit('updateTockMealsStreet', { inventoryTockAddStreet2 })
-// hit the database and return all of them
-// let tockFromMongo = await this.$http.get('/tock/tockfrommongo')
-// let inventoryTockAdd = tockFromMongo.data.tocks
-// this.$store.commit("updateTockMeals", { inventoryTockAdd });
 
 
 

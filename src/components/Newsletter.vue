@@ -7,9 +7,7 @@
             </h4>
             <p class="description-para-left noselect">
           {{body}}
-
-          
-            </p> 
+        </p> 
         </div>
       </div>
       <div class="newsletter-section">
