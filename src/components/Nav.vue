@@ -150,15 +150,10 @@ export default {
     height: 92px;
 }
 
-
-
 .nadi-sub-header{
 background-color: #F58E58;
 height: 50px;
 }
-
-
-
 
 ul#menu{
     margin: -4px auto 0;
@@ -172,7 +167,6 @@ font-weight: bold;
 font-size: 20px;
 text-align: center;
 padding: 0 20px;
-
 color: #ffffff;
 }
 

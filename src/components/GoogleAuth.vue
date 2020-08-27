@@ -16,7 +16,8 @@
         @click="handleClickSignOut"
         v-if="isSignIn"
         :disabled="!isInit"
-      >sign out
+      >
+      sign out
       </a>
   </div>
 </template>
@@ -50,8 +51,7 @@ export default {
     showUserInfo(email){
  
 let self = this
-      this.$http
-        .get('/user/email/' + email)
+      this.$http.get('https://young-hamlet-03679.herokuapp.com/user/email/' + email)
         .then(function(response) {
      console.log(response) 
 
@@ -91,7 +91,8 @@ let self = this
         this.$store.commit('logIn')
 
         let currentUserEmail = profile.getEmail()
-
+console.log(profile)
+console.log(currentUserEmail)
         this.$store.commit('setCurrentUserEmail', { currentUserEmail })
 
         })
@@ -114,7 +115,15 @@ let self = this
           // clear user current email and clear user info
           this.$store.commit('clearCurrentUser')
 
-     this.$router.push("/");
+  
+
+
+
+ if(this.$router.currentRoute.fullPath === '/'){
+
+ }else{
+   this.$router.push("/");
+ }
 
 
 

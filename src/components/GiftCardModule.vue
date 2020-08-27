@@ -32,9 +32,7 @@
     <br/>
     <br/>
     <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">    <BuyNewCard /></a>
-
 <br /> <br />
-
      <a href="https://ecommerce.custcon.com/Recharge_Login.aspx?c=364cfc03-d428-44bf-b814-1efbdcaed08d" target="_blank">    <UpdateBalance /></a>
       <br /><br />
   </div>

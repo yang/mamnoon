@@ -73,7 +73,7 @@
 		transition : {
 
 			/**
-			 * @see http://matthewlein.com/ceaser/
+			 * @see https://matthewlein.com/ceaser/
 			 *
 			 * easing not available as css timing functions:
 			 *

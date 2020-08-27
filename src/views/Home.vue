@@ -49,7 +49,7 @@ export default {
     },
     async getUserProducts(){
 
-      let response = await this.$http.get('/user/' + this.user._id) 
+      let response = await this.$http.get('https://testsite.mamnoon.webfactional.com/user/' + this.user._id) 
       this.products = response.data.user.products
     },
     },

@@ -56,7 +56,7 @@ export default {
         email: this.emailAddress,
         data: this.id
       }
-      return fetch('http://createsend.com/t/getsecuresubscribelink', {
+      return fetch('https://createsend.com/t/getsecuresubscribelink', {
         method: 'POST',
         body: new URLSearchParams(params),
         headers: new Headers({

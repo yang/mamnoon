@@ -9,9 +9,11 @@
         <!-- </h1> -->
         </div>
         <GiftCardModule />
-        <!-- <TestimonialForm :emailAddress="$store.state.userInfo.user.email" /> -->
+        <TestimonialForm :emailAddress="$store.state.currentUserEmail" />
         <!-- {{$store.state}} -->
-        <!-- <EmailForm :emailAddress="$store.state.userInfo.user.email" /> -->
+
+        
+        <EmailForm :emailAddress="$store.state.currentUserEmail" />
         <!-- <ContactUs /> -->
         <!-- <ToggleVegetarian /> -->
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
