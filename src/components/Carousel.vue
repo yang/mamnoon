@@ -127,21 +127,21 @@ export default {
     changedAlert() {
       console.log("changed");
     },
-    async upserves(){
+    // async upserves(){
 
-      let responseUpserve = await this.$http.get("http://localhost:4000/product/upserve");
-      console.log(responseUpserve)
-      let upserveProducts = responseUpserve.data.body.objects
+    //   let responseUpserve = await this.$http.get("http://localhost:4000/product/upserve");
+    //   console.log(responseUpserve)
+    //   let upserveProducts = responseUpserve.data.body.objects
   
-      this.upserve = upserveProducts
+    //   this.upserve = upserveProducts
 
-      for(let i = 0;i<upserveProducts.length;i++){
-        if(!this.upserveCategories.includes(upserveProducts[i].category)){
-          this.upserveCategories.push(upserveProducts[i].category)
-        }
-      }
+    //   for(let i = 0;i<upserveProducts.length;i++){
+    //     if(!this.upserveCategories.includes(upserveProducts[i].category)){
+    //       this.upserveCategories.push(upserveProducts[i].category)
+    //     }
+    //   }
 
-    }
+    // }
   },
   created() {
     var today = new Date();
@@ -150,7 +150,7 @@ export default {
   },
   mounted(){
     this.individualRestaurant()
-        this.upserves()
+        // this.upserves()
   }
 };
 
