@@ -1,6 +1,8 @@
 <template>
   <main>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
+   ddd
+   <UpserveFiltering />
     <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
     <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
@@ -128,7 +130,8 @@ export default {
     },
     async upserves(){
 
-      let responseUpserve = await this.$http.get("/product/upserve");
+      let responseUpserve = await this.$http.get("http://localhost:4000/product/upserve");
+      console.log(responseUpserve)
       let upserveProducts = responseUpserve.data.body.objects
   
       this.upserve = upserveProducts
@@ -148,6 +151,7 @@ export default {
   },
   mounted(){
     this.individualRestaurant()
+        this.upserves()
   }
 };
 

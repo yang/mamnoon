@@ -15,13 +15,13 @@ import "./sevenRooms2.js"
 // import { updateTockOfferings } from "../../../server/api/tock/controller/tockController";
 // import { update } from "../../../server/api/product/model/Product";
 
-// Vue.http.options.root = 'https://testsite.mamnoon.webfactional.com/';
+// Vue.http.options.root = 'https://mamnoontogo.net/';
 // Vue.use(StoryblokVue)
 
 
 const base = axios.create({
   // baseURL: "http://localhost:4000"
-  baseURL: 'https://testsite.mamnoon.webfactional.com'
+  baseURL: 'https://mamnoontogo.net'
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -317,7 +317,7 @@ new Vue({
   store: store,
   render: h => h(App),
   async mounted () {
-let responseTockStreet2 = await this.$http.get(`https://testsite.mamnoon.webfactional.com/wp-json/acf/v3/pages`)
+let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
 
 
 
