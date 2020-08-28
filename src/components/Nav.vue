@@ -62,6 +62,14 @@
                         <GoogleAuth />
                     </li>
                 </div>
+            <div v-if="this.$store.state.loggedIn" class="inline-link">
+                <li>
+                    <router-link to="/profile">
+                        profile
+                    </router-link>
+                </li>
+            </div>
+
             </ul>            
             </scrollactive>
         </div>
