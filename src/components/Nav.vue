@@ -19,6 +19,16 @@
     <a v-if="$route.name === 'home'" class="burger" @click="toggleMenu()">
         <Burger />
     </a>
+
+    <a v-if="$route.name === 'shop'" class="burger" @click="toggleMenu()">
+        <Burger />
+    </a>
+
+    <a v-if="$route.name === 'profile'" class="burger" @click="toggleMenu()">
+        <Burger />
+    </a>
+
+
     </template>
             <router-link to="/">
        
