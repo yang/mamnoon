@@ -13,11 +13,13 @@
 
 
 <h3>{{currentPopupItem.shop_item.name}}</h3>
-<h4 class="text-left">{{currentPopupItem.shop_item.price}}</h4>
-<p>{{currentPopupItem.shop_item.description}}</p>
 
-
+<h4 class="text-left red" style="margin-top: 20px;">{{currentPopupItem.shop_item.price}}</h4>
+<p class="thick-grey" style="margin-top: 20px;">{{currentPopupItem.shop_item.description}}</p>
+    <br /><br />
+<div style="width: 100%;text-align: center;">
                   <button
+                    style="margin:0 auto;"
                     class="snipcart-add-item"
                     v-bind:data-item-id="currentPopupItem.shop_item.id"
                     v-bind:data-item-price="currentPopupItem.shop_item.price"
@@ -26,9 +28,9 @@
                     v-bind:data-item-description="currentPopupItem.shop_item.description"
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
                   >
-                    <Order />
+                    <AddToCart />
                   </button>
-
+</div>
 
 
 
@@ -88,7 +90,9 @@
 <script type="text/javascript">
 
 
-import Order from "@/components/svgIcons/Order";
+
+import AddToCart from "@/components/svgIcons/AddToCart";
+
 import ShopNow from "@/components/svgIcons/ShopNow";
 import CloseModal from "@/components/svgIcons/CloseModal";
 
@@ -98,7 +102,7 @@ import Carousel from "@/components/Carousel";
 export default {
   name: "shop",
   components: {
-    Order,
+    AddToCart,
     ShopNow,
     CloseModal
   },
@@ -218,5 +222,19 @@ button:active{
 
 .pad30{
   padding: 30px;
+}
+
+
+h4.text-left.red{
+  color: #f05d5b;
+  font-weight: 600;
+}
+
+
+
+p.thick-grey{
+color:#595959;
+  font-weight: 600;
+
 }
 </style>
