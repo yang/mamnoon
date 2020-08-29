@@ -84,6 +84,59 @@
             </scrollactive>
         </div>
     </nav>
+
+
+
+
+        <nav v-if="$route.name === 'shop'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <div class="container">
+          <scrollactive :offset="100" ref="scrollactive">
+                          <ul id="menu" class="mobile-menu">
+         
+<div class="inline-link">
+           <li class="cursor-pointer" @click="toggleMenu()">
+                        <GoogleAuth />
+                    </li>
+                </div>
+            <div v-if="this.$store.state.loggedIn" class="inline-link">
+                <li>
+                    <router-link to="/profile">
+                        profile
+                    </router-link>
+                </li>
+            </div>
+
+            </ul>            
+            </scrollactive>
+        </div>
+    </nav>
+
+
+
+        <nav v-if="$route.name === 'profile'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <div class="container">
+          <scrollactive :offset="100" ref="scrollactive">
+                          <ul id="menu" class="mobile-menu">
+         
+<div class="inline-link">
+           <li class="cursor-pointer" @click="toggleMenu()">
+                        <GoogleAuth />
+                    </li>
+                </div>
+            <div v-if="this.$store.state.loggedIn" class="inline-link">
+                <li>
+                    <router-link to="/profile">
+                        profile
+                    </router-link>
+                </li>
+            </div>
+
+            </ul>            
+            </scrollactive>
+        </div>
+    </nav>
+
+
     <div>
         <div class="container">
         </div>
