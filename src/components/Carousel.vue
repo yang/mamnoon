@@ -425,6 +425,12 @@ section {
   margin: 12px auto 20px;
   width: 80%;
   text-align: center;
+
+@media only screen and (max-width: 992px) {
+  width: 90%;
+  font-size: 12px;
+}
+
 }
 
 .quote-container {
