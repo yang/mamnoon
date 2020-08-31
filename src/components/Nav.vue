@@ -322,7 +322,8 @@ right: 0;
 .nadi-sub-header.mobile-nav{
     position: fixed;
     width: 100%;
-    top: -154px;
+    /* top: -154px; */
+        top: -194px;
     transition: all .5s ease;
 }
 
