@@ -378,7 +378,7 @@ button.snipcart-add-item {
 @media only screen and (max-width: 960px) {
   .coverflowsection {
     // height: 660px;
-        height: 710px
+   height: 880px;
   }
 }
 @media only screen and (max-width: 640px) {
