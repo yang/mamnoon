@@ -98,13 +98,6 @@
                         <GoogleAuth />
                     </li>
                 </div>
-            <div class="inline-link">
-                <li>
-                    <router-link to="/shop">
-                    shop
-                    </router-link>
-                </li>
-            </div>
             <div v-if="this.$store.state.loggedIn" class="inline-link">
                 <li>
                     <router-link to="/profile">
@@ -137,14 +130,6 @@
                     </router-link>
                 </li>
             </div>
-            <div v-if="this.$store.state.loggedIn" class="inline-link">
-                <li>
-                    <router-link to="/profile">
-                      profile
-                    </router-link>
-                </li>
-            </div>
-
             </ul>            
             </scrollactive>
         </div>
