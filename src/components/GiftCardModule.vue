@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     async lookupBalance() {
-      let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
+      let giftcardLookup = await this.$http.post("https://young-hamlet-03679.herokuapp.com/user/lookupgiftcard", {
         cardNumber: this.cardNumberInput,
       });
       let giftcardResponse = giftcardLookup.data;
