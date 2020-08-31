@@ -41,7 +41,7 @@ export default {
         .getAuthCode()
         .then(authCode => {
           //on success
-          console.log("authCode", authCode);
+          // console.log("authCode", authCode);
         })
         .catch(error => {
           //on fail do something
@@ -53,7 +53,7 @@ export default {
 let self = this
       this.$http.get('https://young-hamlet-03679.herokuapp.com/user/email/' + email)
         .then(function(response) {
-     console.log(response) 
+    //  console.log(response) 
 
 
 
@@ -81,9 +81,9 @@ let self = this
 
         var profile = GoogleUser.getBasicProfile();
 
-        console.log("Email: " + profile.getEmail());
+        // console.log("Email: " + profile.getEmail());
 
-        console.log(this.$gAuth.isAuthorized)
+        // console.log(this.$gAuth.isAuthorized)
         // console.log(profile)
         // this.showUserInfo(profile.getEmail())
         this.isSignIn = this.$gAuth.isAuthorized;
@@ -91,8 +91,8 @@ let self = this
         this.$store.commit('logIn')
 
         let currentUserEmail = profile.getEmail()
-console.log(profile)
-console.log(currentUserEmail)
+        // console.log(profile)
+        // console.log(currentUserEmail)
         this.$store.commit('setCurrentUserEmail', { currentUserEmail })
 
         })
