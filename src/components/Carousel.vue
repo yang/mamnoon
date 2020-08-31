@@ -384,12 +384,13 @@ button.snipcart-add-item {
 @media only screen and (max-width: 640px) {
   .coverflowsection {
     // height: 660px;
-        height: 800px
+        // height: 800px
+   height: 880px;
   }
 }
 @media only screen and (max-width: 480px) {
   .coverflowsection {
-    height: 800px;
+height: 880px;
   }
 }
 .bottom-button {
