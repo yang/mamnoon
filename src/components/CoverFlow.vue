@@ -6,7 +6,7 @@
         <h4 class="noselect">{{header}}
         </h4>
    
-        <p style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
+        <p class="description-para" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
       
       
 <!-- family meals:
@@ -647,4 +647,19 @@ padding-bottom:5px;
     top: -200px;
     left: -200px;
 }
+
+
+.description-para {
+  color: white;
+  margin: 12px auto 20px;
+  width: 80%;
+  text-align: center;
+
+@media only screen and (max-width: 992px) {
+  width: 90%;
+  font-size: 12px;
+}
+
+}
+
 </style>
