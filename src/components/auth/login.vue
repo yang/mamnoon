@@ -88,22 +88,3 @@ console.log(this.$store.state.loggedIn)
 
 </script>
 
-
-<style lang="scss">
-
-
-.nav-acc-header{
-  // padding-top: 160px;
-  // padding-top: 130px;
-}
-
-
-@media only screen and (max-width: 1080px) {
-
-.nav-acc-header{
-//  padding-top: 80px;
-}
-
-}
-
-</style>
