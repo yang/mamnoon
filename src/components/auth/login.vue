@@ -101,7 +101,7 @@ console.log(this.$store.state.loggedIn)
 @media only screen and (max-width: 1080px) {
 
 .nav-acc-header{
- padding-top: 80px;
+//  padding-top: 80px;
 }
 
 }
