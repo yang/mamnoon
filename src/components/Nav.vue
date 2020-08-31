@@ -113,7 +113,7 @@
 
 
 
-        <nav v-if="$route.name === 'profile '" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <nav v-if="$route.name === 'profile'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
