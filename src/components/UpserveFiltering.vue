@@ -1,6 +1,7 @@
 <template>
     <div>
 <section>
+  hello
   <ul class="upserve-cats">
     <li v-for="item in upserveCategories" :key="item">
     <button @click="filterByCat(item)">
@@ -41,26 +42,26 @@ export default {
         }
       }
     },
-//     async upserves(){
-//           // let responseUpserve = await this.$http.get("http://localhost:4000/product/upserve");
-// let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserve");
-// console.log(responseUpserve)
-//         let upserveProducts = responseUpserve.data.body.objects
+    async upserves(){
+          // let responseUpserve = await this.$http.get("http://localhost:4000/product/upserve");
+let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserve");
+console.log(responseUpserve)
+        let upserveProducts = responseUpserve.data.body.objects
   
-//         console.log(upserveProducts)
-//         this.upserve = upserveProducts
+        console.log(upserveProducts)
+        this.upserve = upserveProducts
 
-//         for(let i = 0;i<upserveProducts.length;i++){
-//             if(!this.upserveCategories.includes(upserveProducts[i].category)){
-//                 this.upserveCategories.push(upserveProducts[i].category)
-//             }
-// }
+        for(let i = 0;i<upserveProducts.length;i++){
+            if(!this.upserveCategories.includes(upserveProducts[i].category)){
+                this.upserveCategories.push(upserveProducts[i].category)
+            }
+}
 
 
-//     }
+    }
   },
     mounted(){
-    // this.upserves()
+    this.upserves()
   }
 
 }

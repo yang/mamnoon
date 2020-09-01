@@ -1,7 +1,8 @@
 <template>
   <main>
+       <UpserveFiltering />
   <div v-for="item in pageData" :key="item.acf_fc_layout">
-   <UpserveFiltering />
+
     <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
     <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
