@@ -3,8 +3,15 @@
         <h4>{{header}}</h4>
         <p class="description-para noselect">{{description}}</p>
         <div class="width-container">
-            <Mamnoon :caviarLink="true" />
-            <MamnoonStreet :caviarLink="true" />
+
+                         <router-link to="/mamnoon">
+                         <!-- mamnoon -->
+               <Mamnoon :caviarLink="false" />
+            </router-link>
+
+    
+  
+            <!-- <MamnoonStreet :caviarLink="false" /> -->
         </div>
     </section>
 </template>

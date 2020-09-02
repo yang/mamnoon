@@ -57,8 +57,15 @@ var genUserName = function(text){
 
 
 
+
+
+
+
+
 Vue.filter('truncate', filter);
 Vue.filter('generateUsername', genUserName)
+
+
 
 // vuexstoremethods
 Vue.use(VueScrollactive);

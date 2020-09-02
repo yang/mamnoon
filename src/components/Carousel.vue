@@ -1,8 +1,6 @@
 <template>
   <main>
-       <UpserveFiltering />
   <div v-for="item in pageData" :key="item.acf_fc_layout">
-
     <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
     <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
@@ -530,13 +528,58 @@ ul.upserve-cats li{
   display: inline;
 }
 
+.filtree-half{
 
+    width: 50%;
+    float: left;
+    // height: 300px;
+    height: 220px;
+    background: transparent;
+    // margin: 5px;
+    padding: 5px;
+    overflow: hidden;
+
+@media only screen and (max-width: 768px) {
+  width: 100%
+}
+
+
+.grey-bg{
+     padding: 5px;
+      background: #fff367;
+}
+}
 .filtree{
-  width: 50%;
-  float: left;
-  height: 300px;
-background: #ddd;
-margin: 5px;
-padding: 5px;
+//   width: 50%;
+//   float: left;
+//   height: 300px;
+// background: #ddd;
+// margin: 5px;
+// padding: 5px;
+
+
+width: 30%;
+    float: left;
+    height: 300px;
+    background: #ddd;
+    margin: 5px;
+    padding: 5px;
+    overflow: hidden;
+
+
+
+@media only screen and (max-width: 1080px) {
+width: 50%
+}
+
+
+@media only screen and (max-width: 768px) {
+
+width: 100%
+
+}
+
+
+
 }
 </style>
