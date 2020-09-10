@@ -1,443 +1,738 @@
 <template>
-    <div>
-<section>
-  
-  
-  
-  <div v-if="modalOpen" class="order-modal">
+  <div>
+    <section>
+      <!-- {{$data}} -->
+      <div v-if="orderConfirmationModal" class="order-confirmation-modal">
+     
 
+     <div class="container modal-body">
+          <div @click="closeConfirmationModal()" class="close closeModal">
+            <CloseModal />
+          </div>
+<div>
+     <h4>order confirmation</h4>
+</div>
 
-  <div class="container modal-body">
-    <div @click="closeModal()" class="close closeModal">
-      <CloseModal />
+          <div>
+          <pre>
+            {{orderConfirmationModalResponse}}
+          </pre>
     </div>
-    <h4>
-    {{currentItem.name}}
-    </h4>
-     <div v-if="currentItem.images.online_ordering_menu">
-    <img style="width:300px" :src="currentItem.images.online_ordering_menu.main" /><br />
-    </div>
-    <hr>
-    {{currentItem.description}}<br />
-    price: {{currentItem.price}}
+     </div>
+        </div>
+      <div v-if="modalOpen" class="order-modal">
+        <div class="container modal-body">
+          <div @click="closeModal()" class="close closeModal">
+            <CloseModal />
+          </div>
+          <h4>{{currentItem.name}}</h4>
+          <div v-if="currentItem.images.online_ordering_menu">
+            <img style="width:200px" :src="currentItem.images.online_ordering_menu.main" />
+            <br />
+          </div>
+          <hr />
+          {{currentItem.description}}
+          <br />
 
-<br /><br />
+          price: {{currentItem.price_cents}}
+          <!-- {{currentItem.modifier_group_ids.length >= 1}} -->
 
-<button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
-<button v-else disabled>-</button>
-&nbsp;&nbsp;<span id="value">{{currentItemQuanity}}</span>&nbsp;&nbsp;
-<button @click="incrementCurrentItem()">+</button>
+          <div v-if="currentItem.modifier_group_ids.length >= 1">
+            <h4>addons</h4>
+            <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
+              <div v-for="modifier in modifierGroups" :key="modifier.name">
+                <div v-if="modifieritem === modifier.id">
+                  {{modifier.name}}
+                  <div v-for="mod in modifierItems" :key="mod.id">
+                    <div v-for="m in modifier.modifier_ids" :key="m">
+                      <div v-if="m === mod.id">
+                        <!-- {{m}}
 
-<br /><br />
-special instructions:
-<br />
-<textarea v-model="textdescription" />
+                        {{mod}}-->
 
-<br /><br />
+                        <!-- loop through and get image -->
 
+                        <!-- {{upserveProducts}} -->
 
+                        <div v-if="modifier.name === 'Promotions'">
+                          <div v-for="piece in upserve" :key="piece.name">
+                            <div v-if="piece.name === mod.name">
+                              <img :src="piece.images.online_ordering_menu.main" />
+                            </div>
+                          </div>
+                        </div>
+                        <!-- loop through and get image -->
 
-item total: {{currentItem.price * currentItemQuanity }}
-<br /><br />
+                        <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">add</button>
+                        <button
+                          @click="removeAddOn(mod,modifieritem)"
+                          :id="'remove-' + mod.id"
+                          disabled
+                        >remove</button>
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<button @click="addToOrder(currentItem)">add to order</button>
-<br /><br />
-<!-- {{currentItem}} -->
+          <br />
+          <br />
 
-</div>
-</div>
-  
-  
-  
-  
-  <div class="container">
-    <div class="row">
-    <div class="col-sm-8">
+          <button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
+          <button v-else disabled>-</button>
+          &nbsp;&nbsp;
+          <span id="value">{{currentItemQuanity}}</span>&nbsp;&nbsp;
+          <button @click="incrementCurrentItem()">+</button>
 
+          <br />
+          <br />special instructions:
+          <br />
+          <textarea v-model="textdescription" />
 
+          <br />
+          <br />
+          item total: {{currentItem.price_cents * currentItemQuanity }}
+          <br />
+          <br />
 
-
-
-
-  <div class="container">
-      <div class="row">
-<h1>mamnoon menu</h1>
-<!-- {{upserveSections}} -->
-</div>
-</div>
-
-<div v-for="item in upserveSections" :key="item.name" class="container">
-
-<div :id="'drawertop-'+ item.id" @click="expandChild(item.id)" class="row display-block">
-   <h2 >{{item.name}}</h2></div>
-<div :data="'drawer' + item.id" class="hidden-drawer row"> 
-<div class="filtree-half" v-for="piece in item.item_ids" :key="piece">
-  <div class="grey-bg">
- <div v-for="serve in upserve" :key="serve.id">
-  <div v-if="serve.id === piece">
-    {{serve.name}}
-    {{serve.price}}
-
-    <div v-if="serve.images">
-  <div v-if="serve.images.online_ordering_menu" v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }">
-      </div>
-  <div v-else v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }">
-      </div>
-
-
-  </div>
-<!-- <button @click="addToOrder(serve)">add to order</button> -->
-<button @click="openModal(serve)">view</button>
-
-
-</div>
-
-
-
-
-</div>
-</div>
-</div>
-
-
-</div>
-
-
-  </div>
-
-
-  </div>
-
-
-    <div class="col-sm-4">
-
-
-<div v-if="currentOrder" class="container">
-current order
-
-
-<ul class="order-sidebar">
-<li v-for="order in currentOrder.charges.items" :key="order.cartId">
-<br>
-{{order.name}} x {{order.quantity}} {{order.price * order.quantity}}
-
-<button @click="removeFromOrder(order)">x</button>
-
-
-<div v-if="order.instructions !== ''" class="order-instructions">
-  <br>
-<i>{{order.instructions}}</i>
-  <br> <br>
-</div>
-<div v-else>
-  <br>
-  <br>
-</div>
-  </li>
-</ul>
-
-
-<hr>
-<!-- decimalsGen -->
-order total: {{currentOrder.charges.total}}
-
-<br><br><br>
-<button v-if="currentOrder.charges.items.length === 0" disabled>no items in cart</button>
-<button @click="doAnOrder(currentOrder)" v-else> do an order</button>
-<br><br><br>
-</div>
-
+          <button @click="addToOrder(currentItem)">add to order</button>
+          <br />
+          <br />
+          <!-- {{currentItem}} -->
+        </div>
       </div>
 
-    </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="container">
+              <div class="row">
+                <h1>mamnoon menu</h1>
+                <!-- {{upserveSections}} -->
+              </div>
+            </div>
 
-<pre>
+            <div v-for="item in upserveSections" :key="item.name" class="container menu-line">
+              <div
+                :id="'drawertop-'+ item.id"
+                @click="expandChild(item.id)"
+                class="row display-block"
+              >
+                <h2 class="menu-header">{{item.name}}</h2>
+              </div>
+              <div :data="'drawer' + item.id" class="hidden-drawer row">
+                <div class="filtree-half" v-for="piece in item.item_ids" :key="piece">
+                  <div class="grey-bg">
+                    <div v-for="serve in upserve" :key="serve.id">
+                      <div v-if="serve.id === piece" class="inline-block">
+                        <div class="yellow-bg">
+                       <div class="half-width2">
+                        {{serve.name}}
+                        {{serve.price}}
+<br>  
+                                          <button @click="openModal(serve)">view</button>
+
+  </div>
+                        <div class="half-width2">
+                        <template v-if="serve.images">
+
+
+<img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="width: 100%;">
+
+                          <!-- <div
+                            v-if="serve.images.online_ordering_menu"
+                            class="backgroundImage"
+                            v-bind:style="{ float: 'right', backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                          ></div>
+                          <div
+                            v-else
+                            class="backgroundImage"
+                            v-bind:style="{ float: 'right', height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                          ></div> -->
+                        </template>
+
+                        </div>
+                        <!-- <button @click="addToOrder(serve)">add to order</button> -->
+      
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            google area
+            <GoogleValidate />
+
+            <div v-if="currentOrder" class="container">
+              <button
+                class="delivery-option"
+                :class="{selected : currentOrder.fulfillment_info.type === 'delivery'}"
+                @click="deliveryOption('delivery')"
+              >delivery</button>&nbsp;&nbsp;
+              <button
+                class="delivery-option"
+                :class="{selected : currentOrder.fulfillment_info.type === 'pickup'}"
+                @click="deliveryOption('pickup')"
+              >pickup</button>
+
+              <form>
+                <br />
+                <h4>customer info</h4>
+
+                <label for="fname">First name:</label>
+                <br />
+                <input
+                  type="text"
+                  id="fname"
+                  name="fname"
+                  placeholder="first"
+                  v-model="currentOrder.fulfillment_info.customer.first_name"
+                />
+                <br />
+
+                <label for="lname">Last name:</label>
+                <br />
+                <input
+                  type="text"
+                  id="lname"
+                  name="lname"
+                  placeholder="last"
+                  v-model="currentOrder.fulfillment_info.customer.last_name"
+                />
+                <br />
+
+                <label for="email">email:</label>
+                <br />
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="email"
+                  v-model="currentOrder.fulfillment_info.customer.email"
+                />
+                <br />
+
+                <label for="phone">phone:</label>
+                <br />
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  placeholder="xxx-xxx-xxxx"
+                  v-model="currentOrder.fulfillment_info.customer.phone"
+                />
+                <br />
+                <br />
+                <h4>address</h4>
+
+                <label for="address_l1">address line 1</label>
+                <br />
+                <input
+                  type="text"
+                  id="address_l1"
+                  name="address_l1"
+                  placeholder="address line 1"
+                  v-model="currentOrder.fulfillment_info.delivery_info.address.address_line1"
+                />
+                <br />
+                <label for="address_l2">address line 2</label>
+                <br />
+                <input
+                  type="text"
+                  id="address_l2"
+                  name="address_l2"
+                  placeholder="address line 2"
+                  v-model="currentOrder.fulfillment_info.delivery_info.address.address_line2"
+                />
+                <br />
+
+                <label for="city">city:</label>
+                <br />
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  placeholder="city"
+                  v-model="currentOrder.fulfillment_info.delivery_info.address.city"
+                />
+                <br />
+
+                <label for="state">state:</label>
+                <br />
+                <input
+                  type="text"
+                  id="state"
+                  name="state"
+                  placeholder="state"
+                  v-model="currentOrder.fulfillment_info.delivery_info.address.state"
+                />
+                <br />
+
+                <label for="zip">zip:</label>
+                <br />
+                <input
+                  type="text"
+                  id="zip"
+                  name="zip"
+                  placeholder="10001"
+                  v-model="currentOrder.fulfillment_info.delivery_info.address.zip_code"
+                />
+                <br />
+              </form>
+
+              <ul class="order-sidebar">
+                <li v-for="order in currentOrder.charges.items" :key="order.cartId">
+                  <br />
+                  {{order.name}} x {{order.quantity}},
+                  <b>{{order.price_cents * order.quantity}}</b>
+
+                  <button @click="removeFromOrder(order)">x</button>
+
+                  <div v-if="order.instructions !== ''" class="order-instructions">
+                    <br />
+                    <i>{{order.instructions}}</i>
+                    <br />
+                    <br />
+                  </div>
+                  <div v-else>
+                    <br />
+                    <br />
+                  </div>
+                </li>
+              </ul>
+
+              <hr />
+              pretotal: {{currentOrder.charges.pretotal}}
+              <br />
+              total: {{total}}
+              <br />
+              tax: {{taxes}}
+              <hr />
+              <b>order total: {{total + taxes}}</b>
+
+              <br />
+              <br />
+              <br />
+              <!-- <button v-if="currentOrder.charges.items.length === 0" disabled>no items in cart</button> -->
+              <!-- <button v-if="currentOrder.charges.total > 0" @click="doAnOrder(currentOrder)"> do an order</button> -->
+
+              <button
+                v-if="currentOrder.charges.total > 0"
+                id="cip-pay-btn"
+                @click="cippaybutton"
+              >Pay</button>
+              <button v-else disabled>cart empty</button>
+              <!-- store: -->
+
+              <br />
+              <br />
+              <br />
+            </div>
+          </div>
+        </div>
+
+        <!-- <pre>
 {{currentOrder}}
-  </pre>
+        </pre>-->
 
+        <pre>
+{{this.$store.state.storeCurrentOrder}}
+</pre>
+      </div>
+    </section>
   </div>
-
-
-  
-</section>
-
-    </div>
 </template>
 
 <script>
+import GoogleValidate from "@/components/GoogleValidate";
 import CloseModal from "@/components/svgIcons/CloseModal";
 export default {
-    name: 'upservefiltering',
-    props: ['data'],
-    components: {
-CloseModal
+  name: "upservefiltering",
+  props: ["data"],
+  components: {
+    CloseModal,
+    GoogleValidate,
+  },
+  watch: {
+    // whenever question changes, this function will run
+    total: function (newTotal, oldTotal) {
+      //good
+      let taxAmt = Number(this.total) * Number(this.upserveTaxRate);
+      this.taxes = Math.round(taxAmt);
+
+        this.currentOrder.charges.taxes =  this.taxes
+
+      //good
+      let totalWithTax = Number(this.total) + taxAmt;
+      this.totalWithTax = Math.round(totalWithTax);
+      this.currentOrder.charges.total = this.totalWithTax;
+this.currentOrder.payments.payments[0].amount = this.totalWithTax;
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
-        data() {
-            return {
-              modalOpen: false,
-              currentItem: null,
-              currentItemQuanity: 1,
-              cartTotal: 0,
-              textdescription: '',
-                blockedBody: this.data,
-                upserve: null,
-                upserveSections: null,
-                upserveCategories: [],
-                currentlyFiltered: [],
-                currentOrder: {
-                  id: Math.random().toString(36).substr(2, 29) + '_' + Math.random().toString(36).substr(2, 29) + '_' + Math.random().toString(36).substr(2, 29),
-                  // items: [],
-                  time_placed: null,
-                  confirmation_code: "mamnoon-" + Math.random().toString(36).substr(2, 29),
-                  charges: {
-                    total: null,
-                    fees: 0,
-                    taxes: 0,
-                    tip: {
-                      amount: 0,
-                      payment_type: "Generic Online Ordering Integrated"
-                    },
-                    items: []
-                  },
-                  fulfillment_info: {
-                    type: "delivery",
-                    estimated_fulfillment_time: null,
-                    customer: {
-                      email: "joe.waine@gmail.com",
-                      phone: "425-442-9308",
-                      last_name: "Waine",
-                      first_name: "Joseph"
-                    },
-                    instructions: "Leave order with building security",
-                    no_tableware: true,
-                    delivery_info: {
-                        is_managed_delivery: false,
-                        address: {
-                          city: "Seattle",
-                          state: "WA",
-                          zip_code: "98122",
-                          address_line1: "1508 Melrose Ave",
-                          address_line2: ""
-                        }
-                  }
-                },
-                payments: {
-                  payments: [
-                    {
-payment_type: "Generic Online Ordering Integrated",
-amount: null
-}
-                  ]
-                }
-            }
-        }},
+  },
+  data() {
+    return {
+      orderConfirmationModal: false,
+      orderConfirmationModalResponse: '',
+      total: 0,
+      totalWithTax: 0,
+      taxes: 0,
+      modifiers: [],
+      currentItemModifierArray: [],
+      modifierItems: [],
+      modifierGroups: [],
+      upserveTaxRate: "0.101",
+      modalOpen: false,
+      currentItem: null,
+      currentItemQuanity: 1,
+      cartTotal: 0,
+      textdescription: "",
+      blockedBody: this.data,
+      upserve: null,
+      upserveSections: null,
+      upserveCategories: [],
+      currentlyFiltered: [],
+      currentOrder: {
+        id:
+          Math.random().toString(36).substr(2, 29) +
+          "_" +
+          Math.random().toString(36).substr(2, 29) +
+          "_" +
+          Math.random().toString(36).substr(2, 29),
+        // items: [],
+        time_placed: null,
+        confirmation_code:
+          "mamnoon-" + Math.random().toString(36).substr(2, 29),
+        charges: {
+          total: 0,
+          preTotal: 0,
+          fees: 0,
+          taxes: 0,
+          tip: {
+            amount: 0,
+            payment_type: "Generic Online Ordering Integrated",
+          },
+          items: [],
+        },
+        fulfillment_info: {
+          type: "pickup",
+          estimated_fulfillment_time: null,
+          customer: {
+            email: "joe.waine@gmail.com",
+            phone: "425-442-9308",
+            last_name: "Waine",
+            first_name: "Joseph",
+          },
+          instructions: "Leave order with building security",
+          no_tableware: true,
+          delivery_info: {
+            is_managed_delivery: false,
+            address: {
+              city: "Seattle",
+              state: "WA",
+              zip_code: "98122",
+              address_line1: "1508 Melrose Ave",
+              address_line2: "",
+            },
+          },
+        },
+        payments: {
+          payments: [
+            {
+              payment_type: "Generic Online Ordering Integrated",
+              amount: null,
+            },
+          ],
+        },
+      },
+    };
+  },
   methods: {
-    removeFromOrder(removal){
+    cippaybutton() {
+      let self = this;
+
+      this.getToken().then(function (transactionToken) {
+        // Set up and open the payment modal
+        emergepay.open({
+          // (required) Used to set up the modal
+          transactionToken: transactionToken,
+          // (optional) Callback function that gets called after a successful transaction
+          onTransactionSuccess: function (approvalData) {
+            // console.log("Approval Data", approvalData);
+            emergepay.close();
+            // location = "https://www.chargeitpro.com";
+            //do the post here
+            self.doAnOrder(self.$store.state.storeCurrentOrder);
+          },
+          // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
+          onTransactionFailure: function (failureData) {
+            console.log("Failure Data", failureData);
+          },
+          // (optional) Callback function that gets called after a user clicks the close button on the modal
+          onTransactionCancel: function () {
+            console.log("transaction cancelled!");
+          },
+        });
+      });
+    },
+    getToken() {
+      let self = this;
+
+      return new Promise(function (resolve, reject) {
+        $.ajax({
+          url: "http://localhost:4000/start-transaction",
+          type: "POST",
+          dataType: "json",
+          contentType: "application/json",
+          data: JSON.stringify(self.$store.state.storeCurrentOrder),
+        })
+          .done(function (data) {
+            if (data.transactionToken) resolve(data.transactionToken);
+            else reject("Error getting transaction token");
+          })
+          .fail(function (err) {
+            reject(err);
+          });
+      });
+    },
+    deliveryOption(choice) {
+      if (choice === "delivery") {
+        this.currentOrder.fulfillment_info.type = "delivery";
+      } else {
+        this.currentOrder.fulfillment_info.type = "pickup";
+      }
+
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+    },
+    addAddOn(mod, modifieritem) {
+      let modAddition = {
+        id: mod.id,
+        modifier_group_id: modifieritem,
+        price: mod.price_cents,
+      };
+
+      this.currentItemModifierArray.push(modAddition);
+
+      this.currentItem.price_cents =
+        Number(this.currentItem.price_cents) + Number(mod.price_cents);
+
+      document.getElementById("add-" + mod.id).disabled = true;
+      document.getElementById("remove-" + mod.id).disabled = false;
+    },
+    removeAddOn(mod, modifieritem) {
+      let updatedItems = this.currentItemModifierArray.filter(
+        (item) => item.id !== mod.id
+      );
+      this.currentItemModifierArray = updatedItems;
+      this.currentItem.price_cents =
+        Number(this.currentItem.price_cents) - Number(mod.price_cents);
+
+      document.getElementById("add-" + mod.id).disabled = false;
+      document.getElementById("remove-" + mod.id).disabled = true;
+    },
+    removeFromOrder(removal) {
+      let currentItems = this.currentOrder.charges.items;
+      let updatedItems = currentItems.filter(
+        (item) => item.cartId !== removal.cartId
+      );
+
+      this.currentOrder.charges.items = updatedItems;
+
+      let removeCost = removal.price * removal.quantity;
+
+      this.total = this.total - removeCost;
 
 
-let currentItems = this.currentOrder.charges.items
-let updatedItems = currentItems.filter(item => item.cartId !== removal.cartId)
-this.currentOrder.charges.items = updatedItems
 
-
-
-let removeCost = removal.price * removal.quantity
-
-this.currentOrder.charges.total = this.currentOrder.charges.total - removeCost
-this.currentOrder.payments.payments[0].amount = this.currentOrder.payments.payments[0].amount - removeCost
-
-
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
     },
-incrementCurrentItem(){
-this.currentItemQuanity++
-},
-decrementCurrentItem(){
-this.currentItemQuanity--
-},
-closeModal(){
-
-this.modalOpen = false
-this.currentItem = null 
-this.currentItemQuanity = 1
-this.textdescription = ''
-
-
-},
-    openModal(serve){
-this.modalOpen = true
-this.currentItem = serve 
-
-
-
+    incrementCurrentItem() {
+      this.currentItemQuanity++;
+    },
+    decrementCurrentItem() {
+      this.currentItemQuanity--;
+    },
+    closeModal() {
+      this.modalOpen = false;
+      this.currentItem = null;
+      this.currentItemQuanity = 1;
+      this.textdescription = "";
+    },
+    closeConfirmationModal(){
+      this.orderConfirmationModal = false;
+      this.orderConfirmationModalResponse = '';
 
     },
-    expandChild(drawer){
-
-        // console.log(drawer)
-        var nextElement = document.getElementById('drawertop-' + drawer).nextSibling
-        // console.log(nextElement.classList.value)
-
-
-if(nextElement.classList.contains('visible')){
-  nextElement.classList.remove('visible')
-}else{
-  nextElement.classList.add('visible')
-}
-        
-      
-        // console.log(nextElement.classList)
-
+    openModal(serve) {
+      this.modalOpen = true;
+      this.currentItem = serve;
     },
-    addToOrder(item){
-      // console.log(item)
-      // this.currentOrder = item
-      // this.currentOrder.items.push(item)
+    expandChild(drawer) {
+      let nextElement = document.getElementById("drawertop-" + drawer)
+        .nextSibling;
 
-let itemToAdd = {
-  name: item.name,
-  cartId: Math.random().toString(36).substr(2, 29) + '_' + Math.random().toString(36).substr(2, 29) + '_' + Math.random().toString(36).substr(2, 29),
-  item_id: item.id,
-  price: item.price_cents,
-  quantity: this.currentItemQuanity,
-  instructions: this.textdescription,
-  modifiers: [],
-  sides: []
-}
-
-
-
-
-this.currentOrder.charges.items.push(itemToAdd)
-
-
-
-this.currentOrder.charges.total = Number(this.currentOrder.charges.total) + Number(item.price_cents * this.currentItemQuanity)
-this.currentOrder.payments.payments[0].amount = Number(this.currentOrder.payments.payments[0].amount) + Number(item.price_cents * this.currentItemQuanity)
-let newDate = new Date()
-let twentyMinutesLater = newDate.setMinutes(newDate.getMinutes() + 20)
-this.currentOrder.time_placed = newDate
-this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate
-
-
-//then close the modal
-
-this.closeModal()
-
+      if (nextElement.classList.contains("visible")) {
+        nextElement.classList.remove("visible");
+      } else {
+        nextElement.classList.add("visible");
+      }
     },
-    filterByCat(cat){
-      this.currentlyFiltered = []
-      for(let i = 0;i<this.upserve.length;i++){
-        if(this.upserve[i].category === cat){
-        this.currentlyFiltered.push(this.upserve[i])
+    addToOrder(item) {
+      let modifierPriceTotal = 0;
+      for (let i = 0; i < this.currentItemModifierArray.length; i++) {
+        modifierPriceTotal =
+          modifierPriceTotal + this.currentItemModifierArray[i].price_cents;
+      }
+
+      let itemToAdd = {
+        name: item.name,
+        cartId:
+          Math.random().toString(36).substr(2, 29) +
+          "_" +
+          Math.random().toString(36).substr(2, 29) +
+          "_" +
+          Math.random().toString(36).substr(2, 29),
+        item_id: item.id,
+        price: item.price_cents,
+        price_cents: item.price_cents,
+        quantity: this.currentItemQuanity,
+        instructions: this.textdescription,
+        modifiers: this.currentItemModifierArray,
+        sides: [],
+      };
+
+      this.currentOrder.charges.items.push(itemToAdd);
+
+      this.total =
+        Number(this.total) +
+        Number(item.price_cents * this.currentItemQuanity);
+
+
+
+      let newDate = new Date();
+      this.currentOrder.time_placed = newDate;
+      this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+      //then close the modal
+      this.currentItemModifierArray = [];
+      this.closeModal();
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+ 
+    },
+    filterByCat(cat) {
+      this.currentlyFiltered = [];
+      for (let i = 0; i < this.upserve.length; i++) {
+        if (this.upserve[i].category === cat) {
+          this.currentlyFiltered.push(this.upserve[i]);
         }
       }
     },
-    async upserves(){
-     
-          let responseUpserve = await this.$http.get("http://localhost:4000/product/upserveolo");
-// let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserve");
-        let upserveProducts = responseUpserve.data.body.items
-  // console.log(upserveProducts)
-        this.upserve = upserveProducts
-
-        this.upserveSections = responseUpserve.data.body.sections
-
+    async upserves() {
+      let responseUpserve = await this.$http.get(
+        "http://localhost:4000/product/upserveolo"
+      );
+      let upserveProducts = responseUpserve.data.body.items;
+      this.upserve = upserveProducts;
+      this.upserveSections = responseUpserve.data.body.sections;
+      this.upserveTaxRate =
+        responseUpserve.data.body.tax_rates[0].percentage_rate;
+      this.modifierGroups = responseUpserve.data.body.modifier_groups;
+      this.modifiers = responseUpserve.data.body.modifiers;
+      this.modifierItems = responseUpserve.data.body.modifiers;
     },
-  doAnOrder(currentOrder){
-    console.log(currentOrder)
+    doAnOrder(currentOrder) {
 
-  this.$http.post('http://localhost:4000/product/oloorder', currentOrder, {
-    headers: {
-      // Overwrite Axios's automatically set Content-Type
-      'Content-Type': 'application/json'
-  }
-  }).then(response => {
-    console.log(response)
-  })
-    .catch(e => {
-      this.errors.push(e)
-    })
+      let self = this;
+      let curOr = JSON.stringify(currentOrder);
+      this.$http
+        .post("http://localhost:4000/oloorder", currentOrder)
+        .then((response) => {
+          console.log(response);
+          self.orderConfirmationModal = true
+          self.orderConfirmationModalResponse = response.data
 
-
-
-    // this.$http.post(`http://localhost:4000/product/oloorder`, {
-    //   body: currentOrder
-    // })
-    // .then(response => {})
-    // .catch(e => {
-    //   this.errors.push(e)
-    // })
-  }
+        })
+        .catch((e) => {
+            // this.errors.push(e);
+            console.log('errors')
+            console.log(e)
+        });
     },
-    mounted(){
-    this.upserves()
-  }
-
-}
-
-
+  },
+  mounted() {
+    this.upserves();
+    emergepay.init();
+    this.$store.state.storeCurrentOrder = {};
+  },
+};
 </script>
 
 
 <style scoped lang="scss">
-
-
-img.itemimage{
-width: 100%;
+img.itemimage {
+  width: 100%;
 }
 
-.container{
-  display: block
-}
-
-.order-modal{
-    position: fixed;
-    z-index: 100;
-    background: #ffffff99;
-    height: 100vh;
-    width: 100%;
-
+.container {
+  display: block;
 }
 
 
-
+.order-confirmation-modal,
+.order-modal {
+  position: fixed;
+  z-index: 100;
+  background: #ffffff99;
+  height: 100vh;
+  width: 100%;
+}
 
 li {
-border-bottom: 1px solid grey;
-    position: relative;
+  border-bottom: 1px solid grey;
+  position: relative;
 }
 
-li button{
- position: absolute;
- right: 0;
+li button {
+  position: absolute;
+  right: 0;
 }
 
-
-.modal-body{
+.modal-body {
   background: white;
   padding: 10px;
   border-radius: 20px;
   border: 1px solid grey;
 }
 
-
 button {
-  border: 1px solid #F05D5B;
-  background-color: #F05D5B;
+  border: 1px solid #f05d5b;
+  background-color: #f05d5b;
   color: #ffffff;
   padding: 5px 10px;
 }
 
 button:hover {
-  border: 1px solid #F05D5B;
-  background-color: #F05D5B;
+  border: 1px solid #f05d5b;
+  background-color: #f05d5b;
   color: #ffffff;
   padding: 5px 10px;
 }
 
 button:disabled,
-button[disabled]{
+button[disabled="true"] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
@@ -447,41 +742,87 @@ div {
   // padding: 5px 10px;
 }
 
-
-.closeModal{
-opacity: 1;
-cursor: pointer;
-
+.closeModal {
+  opacity: 1;
+  cursor: pointer;
 }
 
-
-.order-sidebar{
-
-li{
-  font-size: 16px;
-  list-style-type: none;
-}
-
-}
-
-
-.hidden-drawer.row{
-display: none;
-
-
-  &.visible{
-display:inline-block;
-width: 100%;
+.order-sidebar {
+  padding-left: 0;
+  li {
+    font-size: 16px;
+    list-style-type: none;
   }
 }
 
+.hidden-drawer.row {
+  display: none;
+  padding: 0 14px;
 
-.display-block{
+  &.visible {
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+.display-block {
   display: block;
 }
 
-
-h2{
+h2 {
   cursor: pointer;
 }
+
+.menu-line {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  margin: 10px 0;
+}
+
+h2.menu-header {
+  // font-size: 32px;
+  font-size: 24px;
+  padding: 0 14px;
+}
+
+button.delivery-option {
+  border: 1px solid white;
+  &.selected {
+    border: 1px solid black;
+  }
+}
+
+form input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.backgroundImage {
+  background-position: center center;
+  background-size: cover;
+  height: 140px;
+  width: 140px;
+  background-size: 152%;
+}
+
+
+.inline-block{
+display: inline-block;
+    width: 100%;
+}
+
+
+.yellow-bg{
+background: #fff367;
+    width: 100%;
+        display: inherit;
+}
+
+
+
+   .half-width2{
+    width: 50%;
+    display: inline-block;
+    }
 </style>

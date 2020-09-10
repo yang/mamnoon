@@ -74,7 +74,7 @@ export default {
   props: ['apiData', 'blok'],
   methods: {
   async individualRestaurant(){
-        let responseAcf = await this.$http.get(`/wp-json/acf/v3/restaurant/188`)
+        let responseAcf = await this.$http.get(`http://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
 
 
     let AcfBlock = responseAcf
@@ -533,10 +533,11 @@ ul.upserve-cats li{
     width: 50%;
     float: left;
     // height: 300px;
-    height: 220px;
+    // height: 220px;
+    height: 140px;
     background: transparent;
     // margin: 5px;
-    padding: 5px;
+    padding: 0px;
     overflow: hidden;
 
 @media only screen and (max-width: 768px) {
@@ -546,7 +547,10 @@ ul.upserve-cats li{
 
 .grey-bg{
      padding: 5px;
-      background: #fff367;
+      // background: #fff367;
+            background: #ffffff;
+            padding: 10px 5px;
+      
 }
 }
 .filtree{

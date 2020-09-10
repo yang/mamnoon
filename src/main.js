@@ -20,8 +20,8 @@ import "./sevenRooms2.js"
 
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
-  baseURL: 'https://mamnoontogo.net'
+  baseURL: "http://localhost:4000"
+  // baseURL: 'https://mamnoontogo.net'
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -87,6 +87,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    storeCurrentOrder: {},
     userProfileModalVisible: true,
     loggedIn: false,
     count: 0,
@@ -129,6 +130,9 @@ const store = new Vuex.Store({
     },
     logIn (state) {
       state.loggedIn = true
+    },
+    upserveOrderCurrentOrder(state, { storeCurrentOrder }){
+      state.storeCurrentOrder = storeCurrentOrder
     },
     reserveFamilyMeal (state, { timeslot }) {
       state.shoppingCartItems.push({timeslot: timeslot})
