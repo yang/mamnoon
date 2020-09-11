@@ -4,15 +4,13 @@
       <!-- {{$data}} -->
       <div v-if="orderConfirmationModal" class="order-confirmation-modal">
      
-
-     <div class="container modal-body">
+    <div class="container modal-body">
           <div @click="closeConfirmationModal()" class="close closeModal">
             <CloseModal />
           </div>
 <div>
      <h4>order confirmation</h4>
 </div>
-
           <div>
           <pre>
             {{orderConfirmationModalResponse}}
@@ -43,13 +41,13 @@
               <div v-for="modifier in modifierGroups" :key="modifier.name">
                 <div v-if="modifieritem === modifier.id">
                   {{modifier.name}}
+
                   <div v-for="mod in modifierItems" :key="mod.id">
                     <div v-for="m in modifier.modifier_ids" :key="m">
                       <div v-if="m === mod.id">
-                        <!-- {{m}}
 
-                        {{mod}}-->
-
+ {{mod.name}}
+  {{mod.price}}
                         <!-- loop through and get image -->
 
                         <!-- {{upserveProducts}} -->
@@ -120,46 +118,57 @@
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
-                class="row display-block"
+                class="display-block row"
               >
                 <h2 class="menu-header">{{item.name}}</h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row">
                 <div class="filtree-half" v-for="piece in item.item_ids" :key="piece">
                   <div class="grey-bg">
+                 
                     <div v-for="serve in upserve" :key="serve.id">
-                      <div v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg">
-                       <div class="half-width2">
-                        {{serve.name}}
-                        {{serve.price}}
-<br>  
-                                          <button @click="openModal(serve)">view</button>
+                      <template v-if="serve.id === piece" class="inline-block">
+                        <div class="yellow-bg" @click="openModal(serve)">
+                       <div class="half-width2left">
 
+  <div class="content-box">
+<div class="name">{{serve.name}}</div>
+<div v-if="serve.description" class="food-description">{{serve.description}}</div>
+<div class="food-price">{{serve.price}}</div>
+
+             
+                     
+<br>  
+                                          <!-- <button @click="openModal(serve)">view</button> -->
+
+  
+    </div>
+  
   </div>
-                        <div class="half-width2">
+                        <div class="half-width2right">
                         <template v-if="serve.images">
 
 
-<img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="width: 100%;">
+<!-- <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="width: 100%;height: 140px;">
+<div v-else style="width:100%;height: 140px;color:transparent;">_</div> -->
 
-                          <!-- <div
+                          <div
                             v-if="serve.images.online_ordering_menu"
                             class="backgroundImage"
-                            v-bind:style="{ float: 'right', backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                            v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                           ></div>
                           <div
                             v-else
                             class="backgroundImage"
-                            v-bind:style="{ float: 'right', height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                          ></div> -->
+                            v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                          ></div>
                         </template>
 
                         </div>
                         <!-- <button @click="addToOrder(serve)">add to order</button> -->
       
                         </div>
-                      </div>
+                      </template>
                     </div>
                   </div>
                 </div>
@@ -489,7 +498,8 @@ this.currentOrder.payments.payments[0].amount = this.totalWithTax;
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "http://localhost:4000/start-transaction",
+          // url: "http://localhost:4000/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -579,16 +589,41 @@ this.currentOrder.payments.payments[0].amount = this.totalWithTax;
       this.modalOpen = true;
       this.currentItem = serve;
     },
-    expandChild(drawer) {
-      let nextElement = document.getElementById("drawertop-" + drawer)
+expandChild(drawer){
+var container = document.getElementById("drawertop-" + drawer)
         .nextSibling;
+var button    = document.querySelector('button')
 
-      if (nextElement.classList.contains("visible")) {
-        nextElement.classList.remove("visible");
-      } else {
-        nextElement.classList.add("visible");
-      }
-    },
+	/** Slide down. */
+    if(!container.classList.contains('active')) {
+		/** Show the container. */
+    	container.classList.add('active')
+        container.style.height = "auto"
+        
+		/** Get the computed height of the container. */
+    	var height = container.clientHeight + "px"
+
+		/** Set the height of the content as 0px, */
+        /** so we can trigger the slide down animation. */
+        container.style.height = "0px"
+
+		/** Do this after the 0px has applied. */
+        /** It's like a delay or something. MAGIC! */
+        setTimeout(() => {
+            container.style.height = height
+        }, 0) 
+    
+	/** Slide up. */
+    } else {
+    	/** Set the height as 0px to trigger the slide up animation. */
+    	container.style.height = "0px"
+        
+        /** Remove the `active` class when the animation ends. */
+    	container.addEventListener('transitionend', () => {
+        	container.classList.remove('active')
+        }, {once: true})
+    }
+},
     addToOrder(item) {
       let modifierPriceTotal = 0;
       for (let i = 0; i < this.currentItemModifierArray.length; i++) {
@@ -642,7 +677,8 @@ this.currentOrder.payments.payments[0].amount = this.totalWithTax;
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        "http://localhost:4000/product/upserveolo"
+         //   // "http://localhost:4000/product/upserveolo"
+        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -658,7 +694,8 @@ this.currentOrder.payments.payments[0].amount = this.totalWithTax;
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("http://localhost:4000/oloorder", currentOrder)
+        //.post("http://localhost:4000/oloorder", currentOrder)
+        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true
@@ -755,13 +792,17 @@ div {
   }
 }
 
-.hidden-drawer.row {
-  display: none;
+.hidden-drawer {
+  // display: none;
   padding: 0 14px;
-
-  &.visible {
-    display: inline-block;
-    width: 100%;
+height: 0;
+    transition: all .5s ease;
+    overflow: hidden;
+  &.expanded-drawer {
+        transition: all .5s ease;
+    // display: inline-block;
+    // width: 100%;
+    height: 100%;
   }
 }
 
@@ -782,7 +823,7 @@ h2 {
 h2.menu-header {
   // font-size: 32px;
   font-size: 24px;
-  padding: 0 14px;
+  padding: 0 18px;
 }
 
 button.delivery-option {
@@ -801,9 +842,12 @@ form input {
 .backgroundImage {
   background-position: center center;
   background-size: cover;
-  height: 140px;
-  width: 140px;
-  background-size: 152%;
+
+
+height: 140px;
+// background-size: 129%;
+
+
 }
 
 
@@ -814,15 +858,77 @@ display: inline-block;
 
 
 .yellow-bg{
-background: #fff367;
+    background: #fff367;
     width: 100%;
-        display: inherit;
+    display: inherit;
+    height: 140px;
+    cursor: pointer;
 }
 
 
 
-   .half-width2{
-    width: 50%;
-    display: inline-block;
+   .half-width2left{
+    width: 65%;
+    display: inline;
+    float: left;
     }
+
+   .half-width2right{
+    width: 35%;
+    display: inline;
+    float: left;
+    }
+
+
+.grey-bg{
+background: pink;
+height: 140px;
+}
+
+.filtree-half{
+  width: calc(50% - 10px);
+  float: left;
+  height: 140px;
+  background: transparent;
+  padding: 5px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+
+@media only screen and (max-width: 768px) {
+.filtree-half{
+  width: calc(100% - 10px);
+  float: left;
+  height: 140px;
+  background: transparent;
+  padding: 5px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+
+}
+
+.content-box{
+  margin: 10px;
+
+
+  .name{
+
+  }
+
+
+.food-description{
+    font-size: .75rem;
+}
+
+
+}
+
+
 </style>
+
+
+
+

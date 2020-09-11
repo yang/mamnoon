@@ -443,7 +443,8 @@ self.doAnOrder(self.$store.state.storeCurrentOrder)
 
       return new Promise(function (resolve, reject) {
           $.ajax({
-              url: 'http://localhost:4000/start-transaction',
+              // url: 'http://localhost:4000/start-transaction',
+              url: 'https://young-hamlet-03679.herokuapp.com',
               type: 'POST',
               dataType: 'json',
               contentType: 'application/json',
@@ -461,7 +462,9 @@ self.doAnOrder(self.$store.state.storeCurrentOrder)
     },
     async getTransToken(){
       try {
-        let response = await this.$http.post("http://localhost:4000/start-transaction");
+        // let response = await this.$http.post("http://localhost:4000/start-transaction");
+      let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/start-transaction");
+      
             console.log(response)
       } catch (err) {
         let error = err.response;
