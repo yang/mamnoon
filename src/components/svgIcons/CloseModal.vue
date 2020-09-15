@@ -19,9 +19,9 @@ export default{
 
 <style>
 
-.cls-1closeModal{fill: #f05d5b;}
+.cls-1closeModal{fill: #ffffff;}
 
-.cls-1{fill:#f05d5b;}.cls-2{fill:#fff;}
+.cls-1{fill:#ffffff;}.cls-2{fill:#fff;}
 
 
 svg#closemodalred{

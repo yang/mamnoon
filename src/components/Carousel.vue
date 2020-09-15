@@ -74,7 +74,8 @@ export default {
   props: ['apiData', 'blok'],
   methods: {
   async individualRestaurant(){
-        let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+        // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+        let responseAcf = await this.$http.get(`http://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
 
 
     let AcfBlock = responseAcf
@@ -98,6 +99,9 @@ export default {
     toggle: function(event) {
       if (event.target.classList.contains("is-open")) {
         this.$store.commit("decrement");
+
+
+        
         event.target.classList.remove("is-open");
       } else {
         event.target.classList.add("is-open");
@@ -119,6 +123,7 @@ export default {
     confirmOrder(timeslot) {
       if (event.target.classList.contains("reserved")) {
         this.$store.commit("unreserveFamilyMeal", { timeslot });
+
       } else {
         this.$store.commit("reserveFamilyMeal", { timeslot });
       }

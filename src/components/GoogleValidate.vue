@@ -1,11 +1,18 @@
 <template>
-  <div id="elementContainer">
-    google maps
+  <div id="elementContainer" >
     <input id="pac-input" class="controls" type="text" placeholder="Enter a location" />
+   
+
+
+
+
+
+
+
     <div class="map-container">
       <div id="map"></div>
 
-      
+
     </div>
   </div>
 </template>    
@@ -13,8 +20,19 @@
 
 <script>
 export default {
+    data() {
+          return {
+            currentData: {}
+          }
+      },
   methods: {
+    reload() {
+      this.$forceUpdate();
+    },
     initMap() {
+
+let self = this
+
       let map;
       let geocoder;
 
@@ -49,9 +67,13 @@ export default {
 
       polygon.setMap(map);
 
-      var input = /** @type {!HTMLInputElement} */ (document.getElementById(
-        "pac-input"
-      ));
+    //   var input = /** @type {!HTMLInputElement} */ (document.getElementById(
+    //     "pac-input"
+    //   ));
+
+      var input = document.getElementById("pac-input");
+
+
       var types = document.getElementById("type-selector");
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
@@ -82,22 +104,25 @@ export default {
             polygon
           )
         ) {
-          // $('.userinfo').addClass('expanded');
-          // likeIncrement.address = input.value;
-          // showUserInfo();
-          alert("address in area");
+            console.log(place)
 
-          let elementContainer = document.getElementById("elementContainer");
-          let inputMap = document.createElement("input");
-          inputMap.setAttribute("type", "text");
-          inputMap.setAttribute("id", "pac-input");
-          inputMap.setAttribute("class", "controls");
-          inputMap.setAttribute("placeholder", "Enter a location");
 
-          elementContainer.prepend(inputMap);
-          // elementContainer.prepend('<input id="pac-input" class="controls" type="text" placeholder="Enter a location" />');
+
+
+
+
+        let googleAddress = place
+
+        self.$store.commit("googleAddress", { googleAddress });
+
+
+
+
+
+
         } else {
           alert("The address is outside of the area.");
+          initMap();
         }
       });
     },
@@ -109,3 +134,18 @@ export default {
 </script>
 
 
+
+
+<style lang="scss">  
+#pac-input{
+  width: 100%;
+  padding: 12px 12px;
+border-radius: 4px;
+  border: 1px solid #b7b7b7;
+  margin-bottom: 20px;
+
+
+
+}
+
+</style>

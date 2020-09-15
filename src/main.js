@@ -11,18 +11,12 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
-// import StoryblokVue from 'storyblok-vue'
-// import { updateTockOfferings } from "../../../server/api/tock/controller/tockController";
-// import { update } from "../../../server/api/product/model/Product";
 
-// Vue.http.options.root = 'https://mamnoontogo.net/';
-// Vue.use(StoryblokVue)
 
 
 const base = axios.create({
-  // baseURL: "http://localhost:4000"
-  baseURL: "https://young-hamlet-03679.herokuapp.com"
-  // baseURL: 'https://mamnoontogo.net'
+  baseURL: "http://localhost:4000"
+  // baseURL: "https://young-hamlet-03679.herokuapp.com"
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -65,6 +59,11 @@ var genUserName = function(text){
 
 Vue.filter('truncate', filter);
 Vue.filter('generateUsername', genUserName)
+Vue.filter('reverse', function (value) {
+  return value.split('').reverse().join('')
+})
+
+
 
 
 
@@ -88,6 +87,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    googleAddress: {},
     storeCurrentOrder: {},
     userProfileModalVisible: true,
     loggedIn: false,
@@ -115,6 +115,9 @@ const store = new Vuex.Store({
       } else {
         state[name] = 1
       }
+    },
+    googleAddress (state, { googleAddress }) {
+      state.googleAddress = googleAddress
     },
     addtocart (state) {
       state.cart = state.cart + 20
@@ -329,8 +332,8 @@ new Vue({
   store: store,
   render: h => h(App),
   async mounted () {
-let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
-
+// let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
+let responseTockStreet2 = await this.$http.get(`http://mamnoontogo.net/wp-json/acf/v3/pages`)
 
 
 let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar

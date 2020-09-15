@@ -17,6 +17,7 @@ export default {
 
 <style>
 .mamnoon{
-    padding-top: 120px;
+    /* padding-top: 120px; */
+    padding-top: 92px;
 }
 </style>

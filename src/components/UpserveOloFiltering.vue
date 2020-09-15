@@ -3,14 +3,14 @@
     <section>
       <!-- {{$data}} -->
       <div v-if="orderConfirmationModal" class="order-confirmation-modal">
-     
-    <div class="container modal-body">
-          <div @click="closeConfirmationModal()" class="close closeModal">
+             <div class="container online-menu order-modal-width">
+                  <div @click="closeConfirmationModal()" class="close closeModal">
             <CloseModal />
           </div>
-<div>
-     <h4>order confirmation</h4>
-</div>
+          <h4>order confirmation</h4>
+
+       </div>
+    <div class="container modal-body order-modal-width order-modal-body">
           <div>
           <pre>
             {{orderConfirmationModalResponse}}
@@ -19,39 +19,51 @@
      </div>
         </div>
       <div v-if="modalOpen" class="order-modal">
-        <div class="container modal-body">
-          <div @click="closeModal()" class="close closeModal">
+        <div class="container online-menu order-modal-width">
+                  <div @click="closeModal()" class="close closeModal">
             <CloseModal />
           </div>
           <h4>{{currentItem.name}}</h4>
-          <div v-if="currentItem.images.online_ordering_menu">
-            <img style="width:200px" :src="currentItem.images.online_ordering_menu.main" />
-            <br />
+
+       </div>
+        <div class="container modal-body order-modal-width order-modal-body">
+ 
+          <div class="item-image-container" v-if="currentItem.images.online_ordering_menu" :style="{'background-image': currentItem.images.online_ordering_menu.main}">
+            <img :src="currentItem.images.online_ordering_menu.main" />
           </div>
-          <hr />
+
+
+          <p class="item-description-p">
           {{currentItem.description}}
-          <br />
-
-          price: {{currentItem.price_cents}}
-          <!-- {{currentItem.modifier_group_ids.length >= 1}} -->
-
+          </p>
+          <b>price: {{currentItem.price_cents}}</b>
+   <hr />
           <div v-if="currentItem.modifier_group_ids.length >= 1">
-            <h4>addons</h4>
+            <h4 class="text-left">addons</h4>
             <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
               <div v-for="modifier in modifierGroups" :key="modifier.name">
-                <div v-if="modifieritem === modifier.id">
-                  {{modifier.name}}
+                <div v-if="modifieritem === modifier.id" style="width: 100%;display: inline-block;">
+                   <div v-if="modifier.minimum_required === 0">
+                     <div v-if="modifier.name !== 'Promotions'">
+                  (addons not required)
+                  </div>
+                    </div>
+                       <div v-else>
+                        minimum_required:  {{modifier.minimum_required}}
+                        maximum_required:  {{modifier.maximum_required}}
+                        </div>
 
+                    <div v-if="modifier.name === 'Promotions'">
+
+                
+                  {{modifier.name}}
+</div>
                   <div v-for="mod in modifierItems" :key="mod.id">
                     <div v-for="m in modifier.modifier_ids" :key="m">
-                      <div v-if="m === mod.id">
-
- {{mod.name}}
-  {{mod.price}}
-                        <!-- loop through and get image -->
-
-                        <!-- {{upserveProducts}} -->
-
+                      <div v-if="m === mod.id" class="box">
+                        <div class="box-inner">
+ {{mod.name}}<br>
+<b>{{mod.price}}</b>
                         <div v-if="modifier.name === 'Promotions'">
                           <div v-for="piece in upserve" :key="piece.name">
                             <div v-if="piece.name === mod.name">
@@ -61,14 +73,17 @@
                         </div>
                         <!-- loop through and get image -->
 
-                        <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">add</button>
+<div class="mt10">
+                        <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                         <button
                           @click="removeAddOn(mod,modifieritem)"
                           :id="'remove-' + mod.id"
                           disabled
-                        >remove</button>
-                        <br />
-                        <br />
+                        >-</button>
+                        </div>
+
+
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -76,9 +91,8 @@
               </div>
             </div>
           </div>
-
-          <br />
-          <br />
+<hr />
+     
 
           <button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
           <button v-else disabled>-</button>
@@ -91,38 +105,39 @@
           <br />
           <textarea v-model="textdescription" />
 
-          <br />
-          <br />
-          item total: {{currentItem.price_cents * currentItemQuanity }}
-          <br />
-          <br />
 
-          <button @click="addToOrder(currentItem)">add to order</button>
-          <br />
-          <br />
+<div class="add-to-order-footer">
+
+          item total: {{currentItem.price_cents * currentItemQuanity }}
+ 
+
+          <button class="float-right" @click="addToOrder(currentItem)">add to order</button>
+
+
+          </div>
+
           <!-- {{currentItem}} -->
         </div>
       </div>
 
-      <div class="container">
+      <div class="container pt50">
         <div class="row">
           <div class="col-sm-8">
-            <div class="container">
-              <div class="row">
-                <h1>mamnoon menu</h1>
-                <!-- {{upserveSections}} -->
-              </div>
+            <div class="container online-menu">
+           
+                <h4>mamnoon menu</h4>
+         <!-- {{googleAddressView.address_components}} -->
             </div>
 
             <div v-for="item in upserveSections" :key="item.name" class="container menu-line">
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
-                class="display-block row"
+                class="display-block row no-lr-margin"
               >
-                <h2 class="menu-header">{{item.name}}</h2>
+                <h2 class="menu-header"><span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span><span :id="'minus-'+ item.id" class="expand-contract minus">-</span> {{item.name}}</h2>
               </div>
-              <div :data="'drawer' + item.id" class="hidden-drawer row">
+              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
                 <div class="filtree-half" v-for="piece in item.item_ids" :key="piece">
                   <div class="grey-bg">
                  
@@ -132,7 +147,13 @@
                        <div class="half-width2left">
 
   <div class="content-box">
-<div class="name">{{serve.name}}</div>
+<div class="name">{{serve.name}}
+
+
+
+
+
+</div>
 <div v-if="serve.description" class="food-description">{{serve.description}}</div>
 <div class="food-price">{{serve.price}}</div>
 
@@ -177,8 +198,8 @@
           </div>
 
           <div class="col-sm-4">
-            google area
-            <GoogleValidate />
+            <!-- google area -->
+     
 
             <div v-if="currentOrder" class="container">
               <button
@@ -191,57 +212,56 @@
                 :class="{selected : currentOrder.fulfillment_info.type === 'pickup'}"
                 @click="deliveryOption('pickup')"
               >pickup</button>
+<br><br v-if="currentOrder.fulfillment_info.type === 'delivery'">
 
+              <!-- <div v-if="googVPresent === true"> -->
+
+                     <!-- </div> -->
+
+              
+
+
+<div v-if="currentOrder.fulfillment_info.type === 'delivery'" style="width:100%;position: relative;height: 50px;">
+<div style="width:100%;position: relative;height: 40px;position: absolute; top: 0; left: 0;background-color: #fff;padding:5px 0;">
+       <button v-if="this.currentOrder.fulfillment_info.type === 'delivery'" @click="refreshGoogle()">update address</button>
+
+</div>
+
+
+<div style="width:100%;position: relative;height: 50px;position: absolute; top: 0; left: 0;background-color: transparent;pointer-events:none">
+
+       <GoogleValidate style="pointer-events:all" :key="renderKey" v-if="this.currentOrder.fulfillment_info.type === 'delivery'" />
+  
+</div>
+
+
+
+</div>
+<br>
               <form>
-                <br />
-                <h4>customer info</h4>
 
-                <label for="fname">First name:</label>
-                <br />
+              <div v-if="this.currentOrder.fulfillment_info.type === 'delivery'">
+             
+              
+                 <h4 class="text-left">address</h4>
+            <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1">{{currentOrder.fulfillment_info.delivery_info.address.address_line1}}<br></span>
+           <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line2">{{currentOrder.fulfillment_info.delivery_info.address.address_line2}}<br></span>
+                       
                 <input
+                v-if="this.$store.state.googleAddress !== {}"
                   type="text"
-                  id="fname"
-                  name="fname"
-                  placeholder="first"
-                  v-model="currentOrder.fulfillment_info.customer.first_name"
+                  id="address_l2"
+                  name="address_l2"
+                  placeholder="apt/unit/floor"
+                  v-model="currentOrder.fulfillment_info.delivery_info.address.address_line2"
                 />
-                <br />
+<span v-if="currentOrder.fulfillment_info.delivery_info.address.city">{{currentOrder.fulfillment_info.delivery_info.address.city}}, </span>
+<!-- <span v-if="currentOrder.fulfillment_info.delivery_info.address.state">{{currentOrder.fulfillment_info.delivery_info.address.state}}<br></span> -->
+<span v-if="currentOrder.fulfillment_info.delivery_info.address.zip_code">{{currentOrder.fulfillment_info.delivery_info.address.zip_code}}<br></span>
 
-                <label for="lname">Last name:</label>
-                <br />
-                <input
-                  type="text"
-                  id="lname"
-                  name="lname"
-                  placeholder="last"
-                  v-model="currentOrder.fulfillment_info.customer.last_name"
-                />
-                <br />
 
-                <label for="email">email:</label>
-                <br />
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="email"
-                  v-model="currentOrder.fulfillment_info.customer.email"
-                />
-                <br />
 
-                <label for="phone">phone:</label>
-                <br />
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  placeholder="xxx-xxx-xxxx"
-                  v-model="currentOrder.fulfillment_info.customer.phone"
-                />
-                <br />
-                <br />
-                <h4>address</h4>
-
+                <div class="address-fields" style="display:none;">
                 <label for="address_l1">address line 1</label>
                 <br />
                 <input
@@ -294,7 +314,68 @@
                   placeholder="10001"
                   v-model="currentOrder.fulfillment_info.delivery_info.address.zip_code"
                 />
+                </div>
+                <!-- <br /> -->
+                <hr />
+                <label for="zip">special instructions:</label>
                 <br />
+                <textarea
+                  type="text"
+                  id="specialinstructions"
+                  name="specialinstructions"
+                  placeholder="eg, leave on doorstep"
+                  v-model="currentOrder.fulfillment_info.instructions"
+                />
+</div>
+
+                <!-- <br /> -->
+                <h4 class="text-left">customer info</h4>
+
+                <label for="fname">First name:</label>
+                <br />
+                <input
+                  type="text"
+                  id="fname"
+                  name="fname"
+                  placeholder="first"
+                  v-model="currentOrder.fulfillment_info.customer.first_name"
+                />
+                <br />
+
+                <label for="lname">Last name:</label>
+                <br />
+                <input
+                  type="text"
+                  id="lname"
+                  name="lname"
+                  placeholder="last"
+                  v-model="currentOrder.fulfillment_info.customer.last_name"
+                />
+                <br />
+
+                <label for="email">email:</label>
+                <br />
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="email"
+                  v-model="currentOrder.fulfillment_info.customer.email"
+                />
+                <br />
+
+                <label for="phone">phone:</label>
+                <br />
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  placeholder="(555) 555-5555"
+                  v-model="currentOrder.fulfillment_info.customer.phone"
+                />
+              
+
+
               </form>
 
               <ul class="order-sidebar">
@@ -319,13 +400,40 @@
               </ul>
 
               <hr />
-              pretotal: {{currentOrder.charges.pretotal}}
+
+
+              pretotal: {{ currentOrder.charges.pretotal}}
+
+<!-- decimals -->
+
               <br />
               total: {{total}}
               <br />
               tax: {{taxes}}
+              <br />
+
+              tip: {{ tip }} 
+<br>
+ <!-- tip mult: -->
+<!-- {{tipMultiplier}} -->
+
+         
+<div v-if="total > 0">
+                <button id="noTip" class="tipButton" @click="setTip(0, 'noTip')">no tip</button>&nbsp;
+                <button id="tipOption1" class="tipButton" @click="setTip(.18, 'tipOption1')">18% ({{tip1}})</button>&nbsp;
+                <button id="tipOption2" class="tipButton" @click="setTip(.22, 'tipOption2')">22% ({{tip2}})</button>&nbsp;
+                <button id="tipOption3" class="tipButton" @click="setTip(.25, 'tipOption3')">25% ({{tip3}})</button>&nbsp;
+                <button id="customTip" class="tipButton" @click="setTip(0, 'customTip')">custom</button>&nbsp;
+
+<!-- <input type="text" placeholder="custom tip" /> -->
+<input v-if="customTipVisible === true" type="number" min="1" step="any" placeholder="custom tip" v-model="customTip" />
+
+                </div>
               <hr />
-              <b>order total: {{total + taxes}}</b>
+              <b>order total: {{Number(total) + Number(taxes) + Number(tip) + Number(customTip)}}</b>
+
+<!-- order total: {{orderTotal}} -->
+
 
               <br />
               <br />
@@ -370,26 +478,126 @@ export default {
     CloseModal,
     GoogleValidate,
   },
+  computed: {
+    googleAddress() {
+      return this.$store.state.googleAddress
+    },
+    tip0(){
+      return Number(this.total) * 0
+    },
+    tip1(){
+    return Number(this.total) * 0.18
+    },
+    tip2(){
+    return Number(this.total) * 0.22
+    },
+    tip3(){
+    return Number(this.total) * 0.25
+    },    
+  },
   watch: {
-    // whenever question changes, this function will run
+      googleAddress(newAddress, oldAddress) {
+      this.googleAddressView = newAddress
+      let googleAddressObject = {
+        streetNumber: '',
+        route: '',
+        locality: '',
+        state: '',
+        zip: ''
+  
+      }
+
+googleAddressObject.route = newAddress.address_components.filter(obj => {
+  return obj.types[0] === 'route'
+})[0].long_name
+
+googleAddressObject.streetNumber = newAddress.address_components.filter(obj => {
+  return obj.types[0] === 'street_number'
+})[0].long_name
+
+
+googleAddressObject.locality = newAddress.address_components.filter(obj => {
+  return obj.types[0] === 'locality'
+})[0].long_name
+
+googleAddressObject.state = newAddress.address_components.filter(obj => {
+  return obj.types[0] === 'administrative_area_level_1'
+})[0].long_name
+
+googleAddressObject.zip = newAddress.address_components.filter(obj => {
+  return obj.types[0] === 'postal_code'
+})[0].long_name
+
+
+
+console.log(googleAddressObject)
+
+this.googleAddressObject = googleAddressObject
+
+
+
+
+this.currentOrder.fulfillment_info.delivery_info.address.city = googleAddressObject.locality
+this.currentOrder.fulfillment_info.delivery_info.address.state = googleAddressObject.state
+this.currentOrder.fulfillment_info.delivery_info.address.zip_code = googleAddressObject.zip
+this.currentOrder.fulfillment_info.delivery_info.address.address_line1 = googleAddressObject.streetNumber + ' ' + googleAddressObject.route
+
+
+
+
+
+
+      // this.date = newCount[0].meal.date;
+      // this.delivery = newCount[0].meal.delivery;
+      // this.reset(newCount);
+    },
+    // whenever total changes, this function will run
+    tip: function(newTip, oldTip){
+
+
+      console.log(this.tip)
+
+
+this.currentOrder.charges.tip.amount = this.tip
+
+    },
+    customTip: function(newCustomTip, oldCustomTip){
+
+
+
+
+
+this.currentOrder.charges.tip.amount = this.customTip
+
+    },
     total: function (newTotal, oldTotal) {
       //good
       let taxAmt = Number(this.total) * Number(this.upserveTaxRate);
       this.taxes = Math.round(taxAmt);
 
-        this.currentOrder.charges.taxes =  this.taxes
+        this.currentOrder.charges.taxes = this.taxes
+
+
+
 
       //good
       let totalWithTax = Number(this.total) + taxAmt;
       this.totalWithTax = Math.round(totalWithTax);
       this.currentOrder.charges.total = this.totalWithTax;
-this.currentOrder.payments.payments[0].amount = this.totalWithTax;
+      this.currentOrder.payments.payments[0].amount = this.totalWithTax;
       let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
   },
   data() {
     return {
+      customTip: 0,
+      customTipVisible: false,
+      tip: 0,
+      googleAddressObject: {},
+      googleAddressView: this.$store.state.googleAddress,
+      renderKey: 0,
+      googVPresent: true,
       orderConfirmationModal: false,
       orderConfirmationModalResponse: '',
       total: 0,
@@ -436,21 +644,31 @@ this.currentOrder.payments.payments[0].amount = this.totalWithTax;
           type: "pickup",
           estimated_fulfillment_time: null,
           customer: {
-            email: "joe.waine@gmail.com",
-            phone: "425-442-9308",
-            last_name: "Waine",
-            first_name: "Joseph",
+            // email: "joe.waine@gmail.com",
+            // phone: "425-442-9308",
+            // last_name: "Waine",
+            // first_name: "Joseph",
+            email: "",
+            phone: "",
+            last_name: "",
+            first_name: ""
           },
-          instructions: "Leave order with building security",
+          // instructions: "Leave order with building security",
+            instructions: "",
           no_tableware: true,
           delivery_info: {
             is_managed_delivery: false,
             address: {
-              city: "Seattle",
-              state: "WA",
-              zip_code: "98122",
-              address_line1: "1508 Melrose Ave",
-              address_line2: "",
+              // city: "Seattle",
+              // state: "WA",
+              // zip_code: "98122",
+              // address_line1: "1508 Melrose Ave",
+              // address_line2: "",
+              city: "",
+              state: "",
+              zip_code: "",
+              address_line1: "",
+              address_line2: "", 
             },
           },
         },
@@ -465,7 +683,122 @@ this.currentOrder.payments.payments[0].amount = this.totalWithTax;
       },
     };
   },
+  filters: {
+  capitalize: function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
+},
   methods: {
+    setTip(multiplier,tipButtonId){
+
+          // setTip to zero, and then recalculate:
+
+// tipOption1
+// tipOption2
+// tipOption3
+
+
+// this.currentOrder.charges.tip.amount = total * .1
+this.tipMultiplier = multiplier
+this.tip = multiplier * this.total
+
+
+// this.total = this.total - this.tip
+// this.tip = 0
+// this.tip = total * .1
+// this.total = this.total + this.tip
+
+
+if(tipButtonId === 'tipOption1'){
+    document.getElementById(tipButtonId).disabled = true;
+     document.getElementById('noTip').disabled = false;
+    document.getElementById('tipOption2').disabled = false;
+    document.getElementById('tipOption3').disabled = false;
+    document.getElementById('customTip').disabled = false;
+
+this.customTipVisible = false
+this.customTip = 0
+}else if(tipButtonId === 'tipOption2'){
+
+    document.getElementById(tipButtonId).disabled = true;
+     document.getElementById('noTip').disabled = false;
+    document.getElementById('tipOption1').disabled = false;
+    document.getElementById('tipOption3').disabled = false;
+    document.getElementById('customTip').disabled = false;
+this.customTipVisible = false
+this.customTip = 0
+
+}else if(tipButtonId === 'tipOption3'){
+  
+    document.getElementById(tipButtonId).disabled = true;
+    document.getElementById('noTip').disabled = false;
+    document.getElementById('tipOption1').disabled = false;
+    document.getElementById('tipOption2').disabled = false;
+    document.getElementById('customTip').disabled = false;
+
+
+this.customTipVisible = false
+this.customTip = 0
+
+}else if(tipButtonId === 'noTip'){
+  
+    document.getElementById(tipButtonId).disabled = true;
+    document.getElementById('tipOption1').disabled = false;
+    document.getElementById('tipOption2').disabled = false;
+    document.getElementById('tipOption3').disabled = false;
+    document.getElementById('customTip').disabled = false;
+
+
+this.customTipVisible = false
+
+this.customTip = 0
+
+}else if(tipButtonId === 'customTip'){
+  
+    document.getElementById(tipButtonId).disabled = true;
+    document.getElementById('tipOption1').disabled = false;
+    document.getElementById('tipOption2').disabled = false;
+    document.getElementById('tipOption3').disabled = false;
+    document.getElementById('noTip').disabled = false;
+
+
+this.customTipVisible = true
+
+
+}else{
+
+}
+
+
+
+
+    },
+    refreshGoogle() {
+    this.renderKey++;
+
+    this.googleAddressObject = {}
+    let googleAddress = {}
+
+
+
+  this.currentOrder.fulfillment_info.delivery_info.address ={
+              city: "",
+              state: "",
+              zip_code: "",
+              address_line1: "",
+              address_line2: "", 
+            }
+
+
+
+
+
+this.$store.commit("googleAddress", { googleAddress });
+
+
+    },
     cippaybutton() {
       let self = this;
 
@@ -498,8 +831,8 @@ this.currentOrder.payments.payments[0].amount = this.totalWithTax;
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "http://localhost:4000/start-transaction",
-          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          url: "http://localhost:4000/start-transaction",
+          // url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -517,6 +850,12 @@ this.currentOrder.payments.payments[0].amount = this.totalWithTax;
     deliveryOption(choice) {
       if (choice === "delivery") {
         this.currentOrder.fulfillment_info.type = "delivery";
+
+
+
+
+
+        this.refreshGoogle()
       } else {
         this.currentOrder.fulfillment_info.type = "pickup";
       }
@@ -596,6 +935,10 @@ var button    = document.querySelector('button')
 
 	/** Slide down. */
     if(!container.classList.contains('active')) {
+
+    document.getElementById("plus-" + drawer).classList.remove('visible')
+    document.getElementById("minus-" + drawer).classList.add('visible')
+
 		/** Show the container. */
     	container.classList.add('active')
         container.style.height = "auto"
@@ -622,6 +965,11 @@ var button    = document.querySelector('button')
     	container.addEventListener('transitionend', () => {
         	container.classList.remove('active')
         }, {once: true})
+
+
+    document.getElementById("plus-" + drawer).classList.add('visible')
+    document.getElementById("minus-" + drawer).classList.remove('visible')
+
     }
 },
     addToOrder(item) {
@@ -650,9 +998,7 @@ var button    = document.querySelector('button')
 
       this.currentOrder.charges.items.push(itemToAdd);
 
-      this.total =
-        Number(this.total) +
-        Number(item.price_cents * this.currentItemQuanity);
+      this.total = Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
 
 
 
@@ -694,8 +1040,8 @@ var button    = document.querySelector('button')
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        //.post("http://localhost:4000/oloorder", currentOrder)
-        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        .post("http://localhost:4000/oloorder", currentOrder)
+        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true
@@ -714,6 +1060,10 @@ var button    = document.querySelector('button')
     emergepay.init();
     this.$store.state.storeCurrentOrder = {};
   },
+
+
+
+  
 };
 </script>
 
@@ -749,8 +1099,8 @@ li button {
 
 .modal-body {
   background: white;
-  padding: 10px;
-  border-radius: 20px;
+  padding: 15px;
+  border-radius: 0px;
   border: 1px solid grey;
 }
 
@@ -794,15 +1144,15 @@ div {
 
 .hidden-drawer {
   // display: none;
-  padding: 0 14px;
-height: 0;
-    transition: all .5s ease;
-    overflow: hidden;
+  padding: 0;
+  height: 0;
+  transition: all .5s ease;
+  overflow: hidden;
   &.expanded-drawer {
-        transition: all .5s ease;
-    // display: inline-block;
-    // width: 100%;
-    height: 100%;
+  transition: all .5s ease;
+  // display: inline-block;
+  // width: 100%;
+  height: 100%;
   }
 }
 
@@ -816,14 +1166,14 @@ h2 {
 
 .menu-line {
   border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-  margin: 10px 0;
+  padding: 10px 0 6px;
+  margin: 6px 0;
 }
 
 h2.menu-header {
-  // font-size: 32px;
-  font-size: 24px;
-  padding: 0 18px;
+font-size: 20px;
+// padding: 0 18px;
+font-weight: 400;
 }
 
 button.delivery-option {
@@ -833,10 +1183,13 @@ button.delivery-option {
   }
 }
 
-form input {
+form input, form textarea {
   width: 100%;
-  padding: 5px;
-  border-radius: 2px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  border: 1px solid #b7b7b7;
+  margin-bottom: 10px;
+
 }
 
 .backgroundImage {
@@ -844,7 +1197,7 @@ form input {
   background-size: cover;
 
 
-height: 140px;
+height: 180px;
 // background-size: 129%;
 
 
@@ -861,34 +1214,47 @@ display: inline-block;
     background: #fff367;
     width: 100%;
     display: inherit;
-    height: 140px;
+    height: 180px;
     cursor: pointer;
+  transition: all .5s ease;
+    
+
+&:hover{
+  opacity: .7
+}
+
 }
 
 
 
+
+
    .half-width2left{
-    width: 65%;
-    display: inline;
-    float: left;
+        width: 65%;
+        float: left;
+        height: 180px;
+        overflow: hidden;
     }
 
    .half-width2right{
-    width: 35%;
-    display: inline;
-    float: left;
+      width: 35%;
+      float: left;
+      height: 180px;
+      overflow: hidden;
     }
 
 
 .grey-bg{
 background: pink;
-height: 140px;
+
+
+height: 180px;
 }
 
 .filtree-half{
-  width: calc(50% - 10px);
+  width: calc(50% - 0px);
   float: left;
-  height: 140px;
+  height: 180px;
   background: transparent;
   padding: 5px;
   overflow: hidden;
@@ -898,9 +1264,9 @@ height: 140px;
 
 @media only screen and (max-width: 768px) {
 .filtree-half{
-  width: calc(100% - 10px);
+  width: calc(100% - 0px);
   float: left;
-  height: 140px;
+  height: 180px;
   background: transparent;
   padding: 5px;
   overflow: hidden;
@@ -920,12 +1286,190 @@ height: 140px;
 
 
 .food-description{
-    font-size: .75rem;
+  font-size: 0.7rem;
+  margin-bottom: 5px;
 }
 
 
 }
 
+
+
+.text-left{
+  text-align: left;
+}
+
+
+
+
+.online-menu{
+
+  background-color: #F05D5B;
+  padding: 20px 0 15px;
+    text-align: center;
+    position: relative;
+  h4{
+      color: #fff367;
+        font-size: 1.5rem;
+        text-align: center;
+  }
+}
+
+.food-price{
+  font-size: .75rem;
+  font-weight: 400;
+}
+
+
+.no-lr-margin{
+margin-left: 0;
+margin-right: 0;
+}
+
+
+.expand-contract{
+  display: none;
+&.visible{
+  display: inline-block;
+}
+
+}
+
+
+.closeModal{
+
+    position: absolute;
+    top: 11px;
+    right: 15px;
+
+}
+
+.box{
+      width: 33.33%;
+    // background: pink;
+    // border: 1px solid red;
+    float: left;
+}
+
+
+.box-inner{
+margin: 10px 0;
+      // width: 25%;
+      padding: 0px;
+
+    border: 0px solid red;
+    float: left;
+}
+
+
+
+.order-modal-width{
+  width: 700px;
+
+  img{
+        width: 100% !important;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+.order-modal-width{
+    width: 100% !important;
+    max-width: 96% !important;
+
+}
+
+
+
+}
+
+
+
+.order-modal-body{
+  max-height: 60vh;
+  overflow-y: scroll;
+
+  textarea{
+      width: 100%;
+      margin: 10px 0;
+}
+
+}
+
+
+
+.container.online-menu.order-modal-width{
+margin-top: 24px;
+}
+
+
+.float-right{
+  float: right;
+}
+
+
+
+
+
+.item-image-container{
+
+  text-align: center;
+
+
+
+    background-position: 0;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 300px;
+    z-index: 1;
+
+    background: #f0ecec;
+
+  img{
+    width: auto !important;
+    height: 300px;
+  }
+}
+
+
+.add-to-order-footer{
+  padding: 10px 0 20px 0;
+  width: 100%;
+}
+
+
+#value{
+      margin: 10px;
+    font-weight: 600;
+}
+
+
+.pt50{
+  padding-top: 50px;
+}
+
+
+.mt10{
+  margin-top: 10px;
+}
+
+
+.item-description-p{
+  margin-top: 15px;
+}
+
+
+
+
+textarea{
+  width: 100%;
+  padding: 5px 9px;
+  border-radius: 4px;
+  border: 1px solid #b7b7b7;
+  margin-bottom: 10px;
+
+
+}
 
 </style>
 

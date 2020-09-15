@@ -742,7 +742,7 @@ li button{
 .modal-body{
   background: white;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 0px;
   border: 1px solid grey;
 }
 
@@ -819,7 +819,8 @@ h2{
 
 h2.menu-header{
   // font-size: 32px;
-  font-size: 24px;
+  // font-size: 24px;
+  font-size: 18px;
       padding: 0 14px;
 }
 
