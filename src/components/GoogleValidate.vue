@@ -142,7 +142,7 @@ let self = this
   padding: 12px 12px;
 border-radius: 4px;
   border: 1px solid #b7b7b7;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 
 
 

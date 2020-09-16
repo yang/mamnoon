@@ -443,7 +443,7 @@ self.doAnOrder(self.$store.state.storeCurrentOrder)
 
       return new Promise(function (resolve, reject) {
           $.ajax({
-              // url: 'http://localhost:4000/start-transaction',
+              // url: 'https://young-hamlet-03679.herokuapp.com/start-transaction',
               url: 'https://young-hamlet-03679.herokuapp.com',
               type: 'POST',
               dataType: 'json',
@@ -462,7 +462,7 @@ self.doAnOrder(self.$store.state.storeCurrentOrder)
     },
     async getTransToken(){
       try {
-        // let response = await this.$http.post("http://localhost:4000/start-transaction");
+        // let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/start-transaction");
       let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/start-transaction");
       
             console.log(response)
@@ -641,7 +641,7 @@ this.total = this.currentOrder.charges.total
       }
     },
     async upserves(){
-        let responseUpserve = await this.$http.get("http://localhost:4000/product/upserveolo");
+        let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserveolo");
 // let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserve");
         let upserveProducts = responseUpserve.data.body.items
   // console.log(upserveProducts)
@@ -654,7 +654,7 @@ this.total = this.currentOrder.charges.total
     },
   doAnOrder(currentOrder){
 
-  // this.$http.post('http://localhost:4000/product/oloorder', JSON.stringify(currentOrder), {
+  // this.$http.post('https://young-hamlet-03679.herokuapp.com/product/oloorder', JSON.stringify(currentOrder), {
   //   headers: {
   //     // Overwrite Axios's automatically set Content-Type
   //     'Content-Type': 'application/json'
@@ -670,7 +670,7 @@ this.total = this.currentOrder.charges.total
 
 let curOr = JSON.stringify(currentOrder)
 
-  this.$http.post('http://localhost:4000/oloorder',currentOrder).then(response => {
+  this.$http.post('https://young-hamlet-03679.herokuapp.com/oloorder',currentOrder).then(response => {
     console.log(response)
   })
     .catch(e => {
@@ -680,7 +680,7 @@ let curOr = JSON.stringify(currentOrder)
 
 
 
-    // this.$http.post(`http://localhost:4000/product/oloorder`, {
+    // this.$http.post(`https://young-hamlet-03679.herokuapp.com/product/oloorder`, {
     //   body: currentOrder
     // })
     // .then(response => {})

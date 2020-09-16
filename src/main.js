@@ -15,8 +15,8 @@ import "./sevenRooms2.js"
 
 
 const base = axios.create({
-  baseURL: "http://localhost:4000"
-  // baseURL: "https://young-hamlet-03679.herokuapp.com"
+  baseURL: "https://young-hamlet-03679.herokuapp.com"
+  // baseURL: "https://young-hamlet-03679.herokuapp.com
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -332,14 +332,18 @@ new Vue({
   store: store,
   render: h => h(App),
   async mounted () {
-// let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
-let responseTockStreet2 = await this.$http.get(`http://mamnoontogo.net/wp-json/acf/v3/pages`)
+
+
+  let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
+
+
+
+
 
 
 let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
 
 this.$store.commit('updateTockMeals', { inventoryTockAdd })
-
 
 
 
