@@ -1,6 +1,6 @@
 <template>
   <div id="elementContainer" >
-    <input id="pac-input" class="controls" type="text" placeholder="Enter a location" />
+    <input ref="email" id="pac-input" class="controls" type="text" placeholder="Enter a location" />
    
 
 
@@ -26,7 +26,7 @@ export default {
           }
       },
   methods: {
-    reload() {
+   reload() {
       this.$forceUpdate();
     },
     initMap() {
@@ -72,7 +72,8 @@ let self = this
     //   ));
 
       var input = document.getElementById("pac-input");
-
+      
+      input.focus();
 
       var types = document.getElementById("type-selector");
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -129,7 +130,8 @@ let self = this
   },
   mounted() {
     this.initMap();
-  },
+
+},
 };
 </script>
 

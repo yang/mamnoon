@@ -10,6 +10,7 @@
           <h4>order confirmation</h4>
         </div>
         <div class="container modal-body order-modal-width order-modal-body">
+          <h2>thank you for your order!</h2>
           <div>
             <pre>
             {{orderConfirmationModalResponse}}
@@ -23,13 +24,12 @@
     {{item.name}}
   </li>
   </ul>  
-
   <br />  
-<b>tip:{{orderConfirmationModalResponse.charges.tip.amount}}</b>
+<b>tip: ${{orderConfirmationModalResponse.charges.tip.amount.toFixed(2)/100}}</b>
   <br />  
-<b>taxes: {{orderConfirmationModalResponse.charges.taxes}}</b>
+<b>taxes: ${{orderConfirmationModalResponse.charges.taxes.toFixed(2)/100}}</b>
   <br />  
-<b>total: {{orderConfirmationModalResponse.charges.total}}</b>
+<b>total: ${{orderConfirmationModalResponse.charges.total.toFixed(2)/100}}</b>
 
 
           </div>
@@ -52,7 +52,10 @@
           </div>
 
           <p class="item-description-p">{{currentItem.description}}</p>
-          <b>price: {{currentItem.price_cents}}</b>
+        <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
+
+
+          
           <hr />
           <div v-if="currentItem.modifier_group_ids.length >= 1">
             <h4 class="text-left">addons</h4>
@@ -113,7 +116,9 @@
           <span id="value">{{currentItemQuanity}}</span>&nbsp;&nbsp;
           <button @click="incrementCurrentItem()">+</button>
           <div class="add-to-order-footer">
-            item total: {{currentItem.price_cents * currentItemQuanity }}
+            item total: <b>${{currentItem.price_cents.toFixed(2)/100 * currentItemQuanity }}</b>
+
+
             <button
               class="float-right"
               @click="addToOrder(currentItem)"
@@ -158,8 +163,7 @@
                                 v-if="serve.description"
                                 class="food-description"
                               >{{serve.description}}</div>
-                              <div class="food-price">{{serve.price}}</div>
-
+                              <div class="food-price">${{serve.price}}</div>
                               <br />
                               <!-- <button @click="openModal(serve)">view</button> -->
                             </div>
@@ -192,12 +196,18 @@
 
 
 
+
+<div class="container small-message" v-if="this.currentOrder.fulfillment_info.type === ''">
+delivery or pickup?
+  </div>
+
+
             <!-- google area -->
 <button @click="toggleDrawer()" class="toggle">
 <span v-if="toggledDrawer">hide order</span>
 <span v-else>cart order</span>
 </button>
-            <div v-if="currentOrder" class="container">
+            <div v-if="currentOrder" class="container  mt10">
               <button
                 class="delivery-option"
                 :class="{selected : currentOrder.fulfillment_info.type === 'delivery'}"
@@ -209,12 +219,15 @@
                 @click="deliveryOption('pickup')"
               >pickup</button>
              <br />
-              <br v-if="currentOrder.fulfillment_info.type === 'delivery'" />
+
 
               <!-- <div v-if="googVPresent === true"> -->
               <!-- </div> -->
-  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="text-left">address</h4>
-              <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box">
+  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="text-left mt10">address</h4>
+<div v-if="currentOrder.fulfillment_info.type === 'delivery'">
+<div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid delivery address</div>
+</div>
+              <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
                
                 <div class="updateAddress">
                   <button
@@ -255,7 +268,7 @@
 
 
 
-                  <span  :class="{attention: attention}" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">floor/unit?</span>&nbsp;
+                  <span  :class="{attention: attention}" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">floor/unit?</span>&nbsp;&nbsp;
                   <input
                     v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''"
                     type="text"
@@ -271,7 +284,7 @@
   
 
                   <div class="address-fields display-none">
-                    <label for="address_l1">address line 1</label>
+                    <label class="smblk" for="address_l1">address line 1</label>
                     <br />
                     <input
                       type="text"
@@ -281,7 +294,7 @@
                       v-model="currentOrder.fulfillment_info.delivery_info.address.address_line1"
                     />
                     <br />
-                    <label for="address_l2">address line 2</label>
+                    <label class="smblk" for="address_l2">address line 2</label>
                     <br />
                     <input
                       type="text"
@@ -292,7 +305,7 @@
                     />
                     <br />
 
-                    <label for="city">city:</label>
+                    <label class="smblk" for="city">city:</label>
                     <br />
                     <input
                       type="text"
@@ -303,7 +316,7 @@
                     />
                     <br />
 
-                    <label for="state">state:</label>
+                    <label class="smblk" for="state">state:</label>
                     <br />
                     <input
                       type="text"
@@ -314,7 +327,7 @@
                     />
                     <br />
 
-                    <label for="zip">zip:</label>
+                   <label class="smblk" for="zip">zip:</label>
                     <br />
                     <input
                       type="text"
@@ -326,7 +339,7 @@
                   </div>
                   <!-- <br /> -->
                   <hr />
-                  <label for="zip">special instructions:</label>
+                  <label class="smblk" for="zip">special instructions:</label>
                   <br />
                   <textarea
                     type="text"
@@ -336,10 +349,11 @@
                     v-model="currentOrder.fulfillment_info.instructions"
                   />
                 </div>
-                    <br />
-                <h4 class="text-left">customer info</h4>
-
-                <label for="fname">First name:</label>
+            
+                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="text-left mt10">customer info</h4>
+                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="text-left mt10">customer info</h4>
+                <h4 v-else class="text-left mt10">customer info</h4>
+                <label class="smblk" for="fname">first name:</label>
                 <br />
                 <input
                   type="text"
@@ -350,7 +364,7 @@
                 />
                 <br />
 
-                <label for="lname">Last name:</label>
+               <label class="smblk" for="lname">last name:</label>
                 <br />
                 <input
                   type="text"
@@ -361,7 +375,7 @@
                 />
                 <br />
 
-                <label for="email">email:</label>
+               <label class="smblk" for="email">email:</label>
                 <br />
                 <input
                   type="text"
@@ -372,7 +386,7 @@
                 />
                 <br />
 
-                <label for="phone">phone:</label>
+               <label class="smblk" for="phone">phone:</label>
                 <br />
                 <input
                   type="text"
@@ -386,22 +400,22 @@
               </form>
 
               <ul class="order-sidebar">
-                <li v-for="order in currentOrder.charges.items" :key="order.cartId">
-                  <br />
+                <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
+            
                   {{order.name}} x {{order.quantity}},
-                  <b>{{order.price_cents * order.quantity}}</b>
+                  <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
 
-                  <button @click="removeFromOrder(order)">x</button>
+                  <button class="removeClose" @click="removeFromOrder(order)">
+                        <CloseModalSm />
+                  </button>
 
                   <div v-if="order.instructions !== ''" class="order-instructions">
-                    <br />
+             
                     <i>{{order.instructions}}</i>
-                    <br />
-                    <br />
+            
                   </div>
                   <div v-else>
-                    <br />
-                    <br />
+          
                   </div>
                 </li>
               </ul>
@@ -413,58 +427,68 @@
                   id="tipOption1"
                   class="tipButton"
                   @click="setTip(1)"
-                ><b>18%</b><br>({{tip1}})</button>&nbsp;
+                ><b>18%</b><br>(${{tip1.toFixed(2)/100 }})</button>&nbsp;
                 <button
                   id="tipOption2"
                   class="tipButton"
                   @click="setTip(2)"
-                ><b>22%</b><br>({{tip2}})</button>&nbsp;
+                ><b>22%</b><br>(${{tip2.toFixed(2)/100 }})</button>&nbsp;
                 <button
                   id="tipOption3"
                   class="tipButton"
                   @click="setTip(3)"
-                ><b>25%</b><br>({{tip3}})</button>&nbsp;
+                ><b>25%</b><br>(${{tip3.toFixed(2)/100 }})</button>&nbsp;
                 <br>
                 <button
                   id="customTip"
-                  class="tipButton"
+                  class="tipButton customtip"
+                  :class="{activated: this.customTipVisible}"
                   @click="setTip(4)"
                 >custom</button>
                 &nbsp;
                 <!-- <input type="text" placeholder="custom tip" /> -->
-                <input
+                <!-- <input
                   v-if="customTipVisible === true"
                   type="number"
-                  min="1"
-                  step="any"
-                  placeholder="custom tip"
-                  v-model="currentAmountToAdd"
-                />
+                  min="0.00"
+                  placeholder="0.00"
+                  v-model="currentAmountToAddCustom"
+                /> -->
+                <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
+
               </div>
           
               <hr />  
+              total: ${{total.toFixed(2)/100 }}
               <br />
-              total: {{total}}
-              <br />
-              tax: {{taxes}}
-              <br />
-              tip: {{currentAmountToAdd}}
+              tax: ${{taxes.toFixed(2)/100 }}
+     
+<div v-if="custom === true">
+custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
+</div>
+<div v-else>
+             tip: ${{currentAmountToAdd.toFixed(2)/100 }}
+</div>
 
-              <br />
+             
+
               <hr />
-              <b>order total: {{orderTotal}}</b>
+
+              <b>order total: ${{orderTotal.toFixed(2)/100 }}</b>
               <br />
-              <br />
-              <br />
+    
               <!-- <button v-if="currentOrder.charges.items.length === 0" disabled>no items in cart</button> -->
               <!-- <button v-if="currentOrder.charges.total > 0" @click="doAnOrder(currentOrder)"> do an order</button> -->
 
-              <button
+
+
+
+              <button class="mt10 fw" 
                 v-if="currentOrder.charges.total > 0"
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Pay</button>
-              <button v-else disabled>cart empty</button>
+              <button class="mt10 fw" v-else disabled>cart empty</button>
               <!-- store: -->
 
               <br />
@@ -484,12 +508,14 @@
 <script>
 import GoogleValidate from "@/components/GoogleValidate";
 import CloseModal from "@/components/svgIcons/CloseModal";
+import CloseModalSm from "@/components/svgIcons/CloseModalSm";
 import swal from "sweetalert";
 export default {
   name: "upservefiltering",
   props: ["data"],
   components: {
     CloseModal,
+    CloseModalSm,
     GoogleValidate,
   },
   computed: {
@@ -510,6 +536,9 @@ export default {
     },
   },
   watch: {
+currentAmountToAddCustom(){
+this.currentAmountToAdd = this.currentAmountToAddCustom * 100
+},
     computedTotal(newComputedTotal,oldComputedTotal){
 this.computedTotal = Number(this.total) + Number(this.currentAmountToAdd)
     },
@@ -584,10 +613,14 @@ if(newAddress){
     // whenever total changes, this function will ru
    taxes: function(newTaxes,oldTaxes){
 this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
+
+
+this.currentOrder.charges.addedTotal = this.orderTotal
+
     },
     currentAmountToAdd: function(newCurrent,oldCurrent){
 this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-
+this.currentOrder.charges.addedTotal = this.orderTotal
 
 this.currentOrder.charges.tip.amount = this.currentAmountToAdd
 
@@ -595,6 +628,7 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
     tip: function (newTip, oldTip) {
       this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
       this.currentOrder.charges.tip.amount = this.tip;
+      this.currentOrder.charges.addedTotal = this.orderTotal
     },
     customTip: function (newCustomTip, oldCustomTip) {
       this.currentOrder.charges.tip.amount = this.customTip;
@@ -624,11 +658,15 @@ this.totalwith25 = this.total * .25
 this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
 
 
+this.currentOrder.charges.addedTotal = this.orderTotal
+
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     }
     },
   data() {
     return {
+      currentAmountToAddCustom: 0,
+      custom: false,
       errors: [],
       attention: true,
       orderTotal: 0,
@@ -680,6 +718,7 @@ this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + N
         charges: {
           total: 0,
           preTotal: 0,
+          addedTotal: 0,
           fees: 0,
           taxes: 0,
           tip: {
@@ -689,7 +728,7 @@ this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + N
           items: [],
         },
         fulfillment_info: {
-          type: "pickup",
+          type: "",
           estimated_fulfillment_time: null,
           customer: {
             // email: "joe.waine@gmail.com",
@@ -739,6 +778,16 @@ this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + N
     },
   },
   methods: {
+    showingCustom(e){
+
+
+      if(e === true){
+this.custom = true
+      }else{
+this.custom = false
+      }
+
+    },
     checkForm: function (e) {
       this.errors = [];
 
@@ -801,7 +850,7 @@ this.tipSelected = index
 
 this.computedTotal = 0;
 if(index === 0){
-
+this.showingCustom(false)
   document.getElementById("noTip").disabled = true;
   document.getElementById("tipOption1").disabled = false;
   document.getElementById("tipOption2").disabled = false;
@@ -815,7 +864,7 @@ this.currentAmountToAdd = 0
 this.customTipVisible = false
 }else if(index === 1){
       
-
+this.showingCustom(false)
   document.getElementById("noTip").disabled = false;
   document.getElementById("tipOption1").disabled = true;
   document.getElementById("tipOption2").disabled = false;
@@ -826,7 +875,7 @@ this.currentAmountToAdd = this.totalwith18
 this.customTipVisible = false
 }else if(index === 2){
 
-
+this.showingCustom(false)
   document.getElementById("noTip").disabled = false;
   document.getElementById("tipOption1").disabled = false;
   document.getElementById("tipOption2").disabled = true;
@@ -839,7 +888,7 @@ this.customTipVisible = false
 }else if(index === 3){
 
 
-
+this.showingCustom(false)
   document.getElementById("noTip").disabled = false;
   document.getElementById("tipOption1").disabled = false;
   document.getElementById("tipOption2").disabled = false;
@@ -849,14 +898,14 @@ this.customTipVisible = false
 this.currentAmountToAdd = this.totalwith25
 this.customTipVisible = false
 }else if(index === 4){
-
+this.showingCustom(true)
 
   document.getElementById("noTip").disabled = false;
   document.getElementById("tipOption1").disabled = false;
   document.getElementById("tipOption2").disabled = false;
   document.getElementById("tipOption3").disabled = false;
   document.getElementById("customTip").disabled = true;
-
+this.currentAmountToAddCustom = 0
 
 this.customTipVisible = true
 this.currentAmountToAdd = 0
@@ -942,6 +991,11 @@ this.checkForm()
         this.currentOrder.fulfillment_info.type = "delivery";
 
         this.refreshGoogle();
+
+
+
+
+
       } else {
         this.currentOrder.fulfillment_info.type = "pickup";
       }
@@ -1207,6 +1261,7 @@ img.itemimage {
   background: #ffffff99;
   height: 100vh;
   width: 100%;
+  top: 0;
 }
 
 li {
@@ -1231,6 +1286,7 @@ button {
   background-color: #f05d5b;
   color: #ffffff;
   padding: 5px 10px;
+  border-radius: 4px;
 }
 
 button:hover {
@@ -1259,8 +1315,12 @@ div {
 .order-sidebar {
   padding-left: 0;
   li {
-    font-size: 16px;
+ 
+   font-size: .9rem;
     list-style-type: none;
+    // padding: 10px 0;
+    padding: 20px 0;
+    
   }
 }
 
@@ -1299,10 +1359,18 @@ h2.menu-header {
 }
 
 button.delivery-option {
-      width: 48%;
-  border: 1px solid white;
+    width: 49%;
+
+    border-radius: 4px;
+    border: 2px solid #f05d5b;
+    background: #fff;
+    color: #f05d5b;
+    padding-top: 5px;
   &.selected {
-    border: 1px solid black;
+    background: #f05d5b;
+    color: #ffffff;
+  border: 2px solid #f05d5b;
+    padding-top: 5px;
   }
 }
 
@@ -1312,7 +1380,8 @@ form textarea {
   padding: 5px 9px;
   border-radius: 4px;
   border: 1px solid #b7b7b7;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
+      margin-bottom: 6px;
 }
 
 .backgroundImage {
@@ -1356,8 +1425,6 @@ form textarea {
 }
 
 .grey-bg {
-  background: pink;
-
   height: 180px;
 }
 
@@ -1436,7 +1503,6 @@ form textarea {
 
 .box {
   width: 33.33%;
-  // background: pink;
   // border: 1px solid red;
   float: left;
 }
@@ -1466,12 +1532,13 @@ form textarea {
 }
 
 .order-modal-body {
-  max-height: 60vh;
+  // max-height: 70vh;
+  max-height: 80vh;
   overflow-y: scroll;
 
   textarea {
     width: 100%;
-    margin: 10px 0;
+    margin: 0px 0;
   }
 }
 
@@ -1520,6 +1587,7 @@ form textarea {
 
 .item-description-p {
   margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 textarea {
@@ -1574,7 +1642,9 @@ textarea {
 
 
 .tipButton{
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+      margin-bottom: 5px;
+          width: calc(25% - 4px);
 }
 
 
@@ -1667,7 +1737,6 @@ textarea {
 }
 
 .grey-bg {
-  background: pink;
 
   height: 150px;
 }
@@ -1708,6 +1777,71 @@ span.attention{
 ul.no-left-pad{
   padding-left: 0;
 }
+
+
+.mt10{
+  margin-top: 10px;
+}
+
+
+.small-message{
+    color: #f05d5b;
+    font-size: .9rem;
+    font-style: italic;
+}
+
+
+.smblk{
+    color: #000;
+    font-size: .9rem;
+}
+
+
+
+.fw{
+      width: 100%;
+      margin-top: 20px;
+
+}
+
+
+
+
+.removeClose{
+    height: 30px;
+    border-radius: 15px;
+
+
+}
+
+
+.removeClose > div{
+margin-top: -3px;
+
+    
+}
+
+
+.custom-tip-button{
+  padding: 4px;
+  border-radius: 4px;
+    width: 68%;
+}
+
+
+.customtip{
+  width: 100%;
+
+
+&.activated{
+  width: 30%
+}
+
+}
+
+
+
+
 </style>
 
 

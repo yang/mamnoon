@@ -22,6 +22,7 @@
     "vue": "^2.6.10",
     "vue-axios-cors": "^1.0.1",
     "vue-coverflow": "^2.2.0",
+    "vue-currency-input": "^1.22.3",
     "vue-flipster": "^1.0.3",
     "vue-google-oauth2": "^1.5.4",
     "vue-jwt-decode": "^0.1.0",
