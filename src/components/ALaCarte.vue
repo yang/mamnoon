@@ -11,7 +11,7 @@
 
     
   
-            <!-- <MamnoonStreet :caviarLink="false" /> -->
+            <MamnoonStreet :caviarLink="false" />
         </div>
     </section>
 </template>

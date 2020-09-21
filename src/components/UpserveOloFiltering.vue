@@ -616,12 +616,12 @@ this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + N
 
 
 this.currentOrder.charges.addedTotal = this.orderTotal
-
+this.currentOrder.charges.total = this.orderTotal
     },
     currentAmountToAdd: function(newCurrent,oldCurrent){
 this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
 this.currentOrder.charges.addedTotal = this.orderTotal
-
+this.currentOrder.charges.total = this.orderTotal
 this.currentOrder.charges.tip.amount = this.currentAmountToAdd
 
     },
@@ -629,6 +629,7 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
       this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
       this.currentOrder.charges.tip.amount = this.tip;
       this.currentOrder.charges.addedTotal = this.orderTotal
+      this.currentOrder.charges.total = this.orderTotal
     },
     customTip: function (newCustomTip, oldCustomTip) {
       this.currentOrder.charges.tip.amount = this.customTip;
@@ -644,6 +645,7 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
       let totalWithTax = Number(this.total) + taxAmt;
       this.totalWithTax = Math.round(totalWithTax);
       this.currentOrder.charges.total = this.totalWithTax;
+      this.currentOrder.charges.preTotal = this.totalWithTax;
       this.currentOrder.payments.payments[0].amount = this.totalWithTax;
       let storeCurrentOrder = this.currentOrder;
 
@@ -659,6 +661,8 @@ this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + N
 
 
 this.currentOrder.charges.addedTotal = this.orderTotal
+this.currentOrder.charges.total = this.orderTotal
+
 
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     }

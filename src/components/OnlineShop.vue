@@ -51,14 +51,11 @@
     </section>
 </template>
 <script>
-
 import carousel from "vue-owl-carousel";
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
 import ShowAll from "@/components/svgIcons/ShowAll";
 import Order from "@/components/svgIcons/Order";
-
-
 export default {
     components:{
         carousel,

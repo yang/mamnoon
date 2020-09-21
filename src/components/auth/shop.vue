@@ -12,6 +12,7 @@
 <div class="columnblock text-left pad30">
 
 
+
 <h3>{{currentPopupItem.shop_item.name}}</h3>
 
 <h4 class="text-left red" style="margin-top: 20px;">{{currentPopupItem.shop_item.price}}</h4>
@@ -39,7 +40,7 @@
 
 
    <button class="modal-close" @click="modalClose()">
-     <CloseModal />
+     <CloseModalRed />
      </button>
     </div>  </div> 
   <div class="container nav-acc-header mb-80">
@@ -51,24 +52,33 @@
             class="description-para noselect"
           >order now Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque.</p>
         </div>
+
+
+<div class="category-filter">
+<ul class="inline-filters">
+  <li @click="filterItems('all')" :class="{underline: currentCategory === 'all'}" class="text-center">all</li>
+  <li @click="filterItems(name)" class="text-center" :class="{underline: currentCategory === name}" v-for="name in uniqueNames" :key="name">
+    {{name}}
+  </li>
+</ul>
+</div>
+
+
+
         <!---->
       </section>
     </div>
-
     <div class="row">
       <!-- shop -->
 
       <!-- {{ story}} -->
-
-      <div
-        class="shopthird"
-        v-for="item in shopItems"
-        :key="item.shop_item.id"
-      >
+<!-- <div v-if="item.shop_item.category === currentCategory"> -->
 
 
+
+ <div class="shopthird" v-if="currentCategory === 'all'" v-for="item in shopItems"
+        :key="item.shop_item.id">
    <img v-bind:src="item.shop_item.image" />
-
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}
           <div class="order-panel">
@@ -82,6 +92,25 @@
           </div>
         </div>
       </div>
+       <div class="shopthird" v-if="item.shop_item.category === currentCategory" v-for="item in shopItems"
+        :key="item.shop_item.id">
+   <img v-bind:src="item.shop_item.image" />
+        <div class="order-bottom" style="text-align: center;">
+          {{item.shop_item.name}}
+          <div class="order-panel">
+            <button
+              class="snipcart-add-item"
+              @click="modalPopup(item)"
+            >
+              <ShopNow />
+            </button>
+  
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
   </div>
   </div>
@@ -94,7 +123,7 @@
 import AddToCart from "@/components/svgIcons/AddToCart";
 
 import ShopNow from "@/components/svgIcons/ShopNow";
-import CloseModal from "@/components/svgIcons/CloseModal";
+import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 
 import Carousel from "@/components/Carousel";
 
@@ -104,13 +133,15 @@ export default {
   components: {
     AddToCart,
     ShopNow,
-    CloseModal
+    CloseModalRed
   },
   data() {
     return {
+
   modalOpen: false,
+  currentCategory: 'all',
   currentPopupItem: null,
-  shopItems: null,
+  shopItems: [],
       story: {
         content: {
           body: [],
@@ -118,11 +149,25 @@ export default {
       },
     };
   },
+            computed: {
+    uniqueNames: function() {
+      var filtered_array = [];
+      for(var i =0; i < this.shopItems.length; i++) {
+        if(filtered_array.indexOf(this.shopItems[i].shop_item.category) === -1) {
+          filtered_array.push(this.shopItems[i].shop_item.category)
+        }
+      }
+    return filtered_array;
+    }
+  },
   mounted () {
 this.individualRestaurant()
   },
   methods: {
-      async individualRestaurant(){
+filterItems (category) {
+  this.currentCategory = category
+},
+  async individualRestaurant(){
 
     let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
 
@@ -147,6 +192,7 @@ modalClose(){
 }
   },
 };
+
 </script>
 
 
@@ -262,4 +308,48 @@ color:#595959;
   font-weight: 600;
 
 }
+
+
+
+
+
+
+.category-filter{
+background-color: #F58E58;
+    min-height: 50px;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 10px;
+
+.inline-filters{
+
+padding-left: 0;
+margin: 0px auto 0;
+li{
+      display: inline;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    padding: 0 20px;
+    color: #fff;
+
+cursor: pointer;
+    &.underline{
+    color: #fff367;
+  }
+}
+}
+  
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+
 </style>

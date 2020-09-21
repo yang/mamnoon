@@ -444,7 +444,7 @@ self.doAnOrder(self.$store.state.storeCurrentOrder)
       return new Promise(function (resolve, reject) {
           $.ajax({
               // url: 'https://young-hamlet-03679.herokuapp.com/start-transaction',
-              url: 'http://localhost:4000',
+              url: 'https://young-hamlet-03679.herokuapp.com',
               type: 'POST',
               dataType: 'json',
               contentType: 'application/json',
