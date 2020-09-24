@@ -11,7 +11,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
-
 import VueCurrencyInput from 'vue-currency-input'
  
 Vue.use(VueCurrencyInput)

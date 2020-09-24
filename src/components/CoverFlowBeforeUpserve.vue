@@ -2,27 +2,7 @@
     <section :id="tag" class="coverflowsection">
 
 
-
-
-<!-- {{helpArray}} -->
-<!-- {{upserveSections}} -->
-
-            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday' || item.name === 'Feature - Wednesday' || item.name === 'Feature - Thursday' || item.name === 'Feature - Friday' || item.name === 'Feature - Saturday'">
-                <template v-for="piece in item.item_ids">
-                    <template v-for="serve in upserve">
-                      <template v-if="serve.id === piece" class="inline-block">
-                                    {{item.name}}
-                                    {{serve.name}}
-              </template>
-              </template>
-              </template>
-              </template> -->
-
-
-
-
-
-
+      <UpserveFeatured />
   <div>
    <div>
       <div class="position-relative red-header">
@@ -124,81 +104,32 @@ export default {
       date: null,
       link: null,
       tockPanelVisible: false,
-      delivery: true,
-            upserve: null,
-      upserveSections: [],
-      structureForCover: [],
-      helpArray: []
+      delivery: true
     };
   },
   computed: {
     count() {
       return this.familyMeals;
     },
-    upserveSectionsComputed(){
-            let helpArray = []
-              
-for(let i; i < this.upserveSections.length; i++){
-  if(this.upserveSections[i].name === 'Feature - Tuesday'|| this.upserveSections[i].name === 'Feature - Wednesday'|| this.upserveSections[i].name === 'Feature - Thursday'|| this.upserveSections[i].name === 'Feature - Friday'|| this.upserveSections[i].name === 'Feature - Saturday'){
-    for(let j;j<this.upserveSections[i].item_ids.length;j++){
-    for(let k;k<this.upserve.length;k++){
-//serv
-if(this.upserve[k].name === this.upserveSections[i].name){
-helpArray.push({
-  dayName: this.upserveSections[i].name,
-  mealItem: this.upserve[k]
-})
-}
-}
-}
-}
-}
-      return helpArray
-
-    }
   },
   watch: {
-       upserveSections(){
-for(let i = 0; i < this.upserveSections.length; i++){ 
-  if(this.upserveSections[i].name === 'Feature - Tuesday' || this.upserveSections[i].name === 'Feature - Wednesday' || this.upserveSections[i].name === 'Feature - Thursday' || this.upserveSections[i].name === 'Feature - Friday' || this.upserveSections[i].name === 'Feature - Saturday'){
-    for(let j = 0;j<this.upserveSections[i].item_ids.length;j++){
-    for(let k = 0;k<this.upserve.length;k++){
-  
-    if(this.upserve[k].id === this.upserveSections[i].item_ids[j]){
-
-      this.helpArray.push({
-        dayName: this.upserveSections[i].name,
-        mealItem: this.upserve[k]
-    })
-    }
-    }
-    }
-  }
-}
-console.log(this.helpArray)
-    },
     count(newCount, oldCount) {
 
-
-      // if(newCount){
-      console.log('newCount')
-  console.log(newCount)
-      // this.date = newCount[0].mealItem.name
-      //this.delivery = newCount[0].meal
+      // this.productsList = newCount;
+      // this.title = newCount[0].title;
+      // this.description = newCount[0].description;
+      this.date = newCount[0].meal.date;
+      // this.link = newCount[0].createdLink;
+      this.delivery = newCount[0].meal.delivery;
       this.reset(newCount);
-      // }
-
-
-
-
-
-
-
     }
   },
   mounted() {
-    this.dumpAcf()
-    this.upserves();
+this.dumpAcf()
+
+
+
+
   },
   props: ["data","header","tag","descriptionbody"],
   created() {
@@ -213,14 +144,6 @@ console.log(this.helpArray)
     window.removeEventListener("resize", this.myEventHandler);
   },
   methods: {
-        async upserves() {
-      let responseUpserve = await this.$http.get(
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
-      );
-      let upserveProducts = responseUpserve.data.body.items;
-      this.upserve = upserveProducts;
- this.upserveSections = responseUpserve.data.body.sections;
-    },
 dumpAcf(){
 
 
@@ -228,11 +151,7 @@ dumpAcf(){
 // console.log(this.data[0].meal.date)
 
 
-// this.familyMeals = this.data
-
-this.familyMeals = this.helpArray
-// helpArray
-
+this.familyMeals = this.data
 this.date = this.data[0].meal.date
 
 
@@ -244,23 +163,19 @@ coverFlowTo(index){
    
     },
     returnProducts(index) {
-        this.title = this.familyMeals[index].mealItem.name;
-        this.date = this.familyMeals[index].mealItem.name.replace('Feature - ', '');
-
-
-
-
+        this.title = this.familyMeals[index].meal.title;
+        this.date = this.familyMeals[index].meal.date;
         this.description = this.familyMeals[
           index
-        ].mealItem.description;
+        ].meal.description;
         // this.link = this.familyMeals[index].createdLink;
-        // this.delivery = this.familyMeals[index].meal.delivery;
+        this.delivery = this.familyMeals[index].meal.delivery;
    
     },
     reset(x) {
 
 
-console.log(x)
+
      let that = this;
 
       this.dotsLength = x.length
@@ -293,11 +208,9 @@ console.log(x)
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
-  slides[0].innerHTML += "<div class='dialog cursor-pointer' style=''><a href='/mamnoon' target='_blank'>"+x[0].dayName.replace('Feature - ', '')+"</a></div>"
-  if(x[0].mealItem.images.online_ordering_menu){
-  slides[0].innerHTML += "<a class='cursor-pointer' href='/mamnoon' target='_blank'><img src="+x[0].mealItem.images.online_ordering_menu.main+" /></a>"
-  }
-  slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href='/mamnoon' target='_blank'>"+x[0].mealItem.name+"</a></div></div>"
+  slides[0].innerHTML += "<div class='dialog cursor-pointer' style=''><a href="+x[0].meal.createdLink+" target='_blank'>mamnoon</a></div>"
+  slides[0].innerHTML += "<a class='cursor-pointer' href="+x[0].meal.createdLink+" target='_blank'><img src="+x[0].meal.image+" /></a>"
+  slides[0].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[0].meal.createdLink+" target='_blank'>"+x[0].meal.title+"</a></div></div>"
 
   let dialog = document.getElementsByClassName("dialog");
 
@@ -308,11 +221,9 @@ console.log(x)
 
   var slides = document.getElementsByClassName("coverflow-cell");
 
-slides[index].innerHTML += "<div class='dialog cursor-pointer'Regence˜><a href='/mamnoon' target='_blank'>"+x[index].dayName.replace('Feature - ', '')+"</a></div>"
-  if(x[index].mealItem.images.online_ordering_menu){
-  slides[index].innerHTML += "<a class='cursor-pointer' href='/mamnoon' target='_blank'><img src="+x[index].mealItem.images.online_ordering_menu.main+" /></a>"
-  }
-slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href='/mamnoon' target='_blank'>"+x[index].mealItem.name+"</a></div></div>"
+slides[index].innerHTML += "<div class='dialog cursor-pointer'Regence˜><a href="+x[index].meal.createdLink+" target='_blank'>mamnoon</a></div>"
+slides[index].innerHTML += "<a class='cursor-pointer' href="+x[index].meal.createdLink+" target='_blank'><img src="+x[index].meal.image+" /></a>"
+slides[index].innerHTML += "<div class='cursor-pointer bottom-rectangle'><div class='bottom-rectangle-text'><a href="+x[index].meal.createdLink+" target='_blank'>"+x[index].meal.title+"</a></div></div>"
 
 that.coverFlowIndex = index
 

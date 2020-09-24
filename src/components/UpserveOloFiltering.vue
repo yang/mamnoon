@@ -14,10 +14,6 @@
           <div>
             <pre>
             {{orderConfirmationModalResponse}}
-
-
-
-
           </pre>
 <ul class="no-left-pad" v-if="orderConfirmationModalResponse.charges.items">
   <li v-for="item in orderConfirmationModalResponse.charges.items" :key="item.name">
@@ -53,10 +49,7 @@
 
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
-
-
-          
-          <hr />
+                    <hr />
           <div v-if="currentItem.modifier_group_ids.length >= 1">
             <h4 class="text-left">addons</h4>
             <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
@@ -133,12 +126,90 @@
         <div class="row">
           <div class="col-md-8">
             <div class="container online-menu">
-              <h4>mamnoon menu</h4>
+              <h4>featured</h4>
 
 
             </div>
+            <!-- <div class="container featured">
+              <h4>featured</h4>
+            </div> -->
+<!-- 
+    <vue-aspect-ratio ar="16:9" width="640px">
+        <div>your content goes here</div>
+    </vue-aspect-ratio> -->
+<div class="is-fullheight no-top-pad">
+        <carousel :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
+                      <template class="subprev" slot="prev">
+                <span class="prev">
+                    <Prev />
+            </span>
+          </template>
+            <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'">
+  <VueAspectRatio ar="16:9" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
+                    <template v-for="serve in upserve">
+                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
+                        <div class="yellow-bg" @click="openModal(serve)">
+                            <template v-if="serve.images">
+                              <div
+                                v-if="serve.images.online_ordering_menu"
+                                class="backgroundImage"
+                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                              ></div>
+                              <div
+                                v-else
+                                class="backgroundImage"
+                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              ></div>
+                            </template>
+                     
 
-            <div v-for="item in upserveSections" :key="item.name" class="container menu-line">
+                        
+                            <div class="content-box-upper">
+                              <div class="name">{{item.name.replace('Feature - ', '')}}<br>{{serve.name}}</div>
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">${{serve.price}}</div>
+                            </div>
+                     
+
+
+
+
+
+                        </div>   </div>
+                    </template>
+         </VueAspectRatio>
+          </template>
+                    <template class="subnext" slot="next">
+            <span class="next">
+              <Next />
+            </span>
+          </template>
+            </carousel>
+</div>
+
+
+
+
+
+
+
+            <!-- <div class="container featured">
+              <h4>regular olo menu</h4>
+            </div> -->
+
+                        <div class="container online-menu">
+              <h4>full menu</h4>
+
+
+            </div>
+       
+            <template v-for="item in upserveSections">
+<div style="display:none;" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"></div>
+              <div v-else class="container menu-line">
+
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
@@ -151,9 +222,9 @@
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                <div class="filtree-half" v-for="piece in item.item_ids" :key="piece">
-                  <div class="grey-bg">
-                    <div v-for="serve in upserve" :key="serve.id">
+                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+              
+                    <template v-for="serve in upserve" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg" @click="openModal(serve)">
                           <div class="half-width2left">
@@ -182,14 +253,18 @@
                               ></div>
                             </template>
                           </div>
-                          <!-- <button @click="addToOrder(serve)">add to order</button> -->
                         </div>
                       </template>
-                    </div>
-                  </div>
+                    </template>
+               
                 </div>
               </div>
-            </div>
+              </div>
+            </template>
+
+
+
+
           </div>
 
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
@@ -506,9 +581,17 @@ custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
 </template>
 
 <script>
+
+
+import carousel from "vue-owl-carousel";
 import GoogleValidate from "@/components/GoogleValidate";
 import CloseModal from "@/components/svgIcons/CloseModal";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
+
+import VueAspectRatio from "vue-aspect-ratio";
+import Next from "@/components/svgIcons/Next";
+import Prev from "@/components/svgIcons/Prev";
+
 import swal from "sweetalert";
 export default {
   name: "upservefiltering",
@@ -517,6 +600,10 @@ export default {
     CloseModal,
     CloseModalSm,
     GoogleValidate,
+    carousel,
+    VueAspectRatio,
+    Next,
+    Prev
   },
   computed: {
     googleAddress() {
@@ -1392,8 +1479,10 @@ form textarea {
   background-position: center center;
   background-size: cover;
 
-  height: 180px;
+  // height: 180px;
   // background-size: 129%;
+
+  height: 100%;
 }
 
 .inline-block {
@@ -1412,6 +1501,8 @@ form textarea {
   &:hover {
     opacity: 0.7;
   }
+
+  position: relative;
 }
 
 .half-width2left {
@@ -1442,6 +1533,16 @@ form textarea {
   margin-bottom: 5px;
 }
 
+.filtree-full {
+  width: calc(100% - 0px);
+  float: left;
+  height: 180px;
+  background: transparent;
+  padding: 5px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
 @media only screen and (max-width: 768px) {
   .filtree-half {
     width: calc(100% - 0px);
@@ -1455,7 +1556,14 @@ form textarea {
 }
 
 .content-box {
-  margin: 10px;
+  // margin: 10px;
+
+
+      position: inherit;
+    bottom: 0;
+    background: #fff367;
+    padding: 10px;
+    // width: 100%;  
 
   .name {
   }
@@ -1465,6 +1573,27 @@ form textarea {
     margin-bottom: 5px;
   }
 }
+
+
+.content-box-upper {
+  // margin: 10px;
+
+
+      position: absolute;
+    bottom: 0;
+    background: #fff367;
+    padding: 10px;
+    width: 100%;  
+
+  .name {
+  }
+
+  .food-description {
+    font-size: 0.7rem;
+    margin-bottom: 5px;
+  }
+}
+
 
 .text-left {
   text-align: left;
@@ -1844,7 +1973,47 @@ margin-top: -3px;
 }
 
 
+.full-height-slide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
+.yellow-bg{
+      height: 100%;
+}
+
+
+.is-fullheight [id^="carousel_prev_"] {
+  position: absolute;
+  top: 14px;
+  left: 30%;
+  cursor: pointer;
+  @media only screen and (max-width: 768px) {
+    left: 5%;
+  }
+}
+.is-fullheight [id^="carousel_next_"] {
+  position: absolute;
+  top: 14px;
+  right: 30%;
+  cursor: pointer;
+  @media only screen and (max-width: 768px) {
+    right: 5%;
+  }
+}
+
+.is-fullheight{
+  padding: 20px 0 0 0;
+  overflow: hidden;
+
+
+  &.no-top-pad{
+    padding-top: 0;
+  }
+}
 
 </style>
 
