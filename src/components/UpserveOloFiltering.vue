@@ -62,7 +62,7 @@
                     minimum_required: {{modifier.minimum_required}}
                     maximum_required: {{modifier.maximum_required}}
                   </div>
-
+ddå
                   <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                   <div v-for="mod in modifierItems" :key="mod.id">
                     <div v-for="m in modifier.modifier_ids" :key="m">
@@ -144,8 +144,10 @@
                     <Prev />
             </span>
           </template>
-            <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'">
-  <VueAspectRatio ar="16:9" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
+
+            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
+            <template v-for="item in upserveSections">
+  <VueAspectRatio ar="4:3" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
                     <template v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
                         <div class="yellow-bg" @click="openModal(serve)">
@@ -190,16 +192,7 @@
             </carousel>
 </div>
 
-
-
-
-
-
-
-            <!-- <div class="container featured">
-              <h4>regular olo menu</h4>
-            </div> -->
-
+<br>
                         <div class="container online-menu">
               <h4>full menu</h4>
 
@@ -230,6 +223,9 @@
                           <div class="half-width2left">
                             <div class="content-box">
                               <div class="name">{{serve.name}}</div>
+                              <!-- <div class="item">
+                                {{serve}}
+                              </div> -->
                               <div
                                 v-if="serve.description"
                                 class="food-description"
@@ -298,7 +294,7 @@ delivery or pickup?
 
               <!-- <div v-if="googVPresent === true"> -->
               <!-- </div> -->
-  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="text-left mt10">address</h4>
+  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">address</h4>
 <div v-if="currentOrder.fulfillment_info.type === 'delivery'">
 <div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid delivery address</div>
 </div>
@@ -322,6 +318,12 @@ delivery or pickup?
               <!-- <br v-if="currentOrder.fulfillment_info.type === 'delivery'" /> -->
               <!-- {{errors}} -->
               <form @submit="checkForm">
+
+
+ 
+
+
+
                 <div v-if="this.currentOrder.fulfillment_info.type === 'delivery'" style="margin-top: 10px;">
                  
                   <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1">
@@ -425,31 +427,30 @@ delivery or pickup?
                   />
                 </div>
             
-                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="text-left mt10">customer info</h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="text-left mt10">customer info</h4>
+
+
+
+
+
+
+
+
+
+
+
+               <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info</h4>
+                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info</h4>
                 <h4 v-else class="text-left mt10">customer info</h4>
-                <label class="smblk" for="fname">first name:</label>
+                <label class="smblk" for="name">name:</label>
                 <br />
                 <input
                   type="text"
-                  id="fname"
-                  name="fname"
-                  placeholder="first"
-                  v-model="currentOrder.fulfillment_info.customer.first_name"
+                  id="name"
+                  name="name"
+                  placeholder="name"
+                  v-model="currentOrder.fulfillment_info.customer.name"
                 />
                 <br />
-
-               <label class="smblk" for="lname">last name:</label>
-                <br />
-                <input
-                  type="text"
-                  id="lname"
-                  name="lname"
-                  placeholder="last"
-                  v-model="currentOrder.fulfillment_info.customer.last_name"
-                />
-                <br />
-
                <label class="smblk" for="email">email:</label>
                 <br />
                 <input
@@ -471,7 +472,69 @@ delivery or pickup?
                   v-model="currentOrder.fulfillment_info.customer.phone"
                 />
 
+
+
+
+
+
+
+
+
+
+
+
                 
+
+<!-- billing info -->
+
+          <h4 class="customer-info text-left mt10">billing info</h4>
+          <div style="clear: both;width: 100%;margin-bottom: 10px;height: 20px;" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">
+            <div style="float: left;width: 15px;height: 20px;margin-right: 5px;padding-top: 2px;">
+          <input type="checkbox" id="checkbox" v-model="checked">
+          </div>
+
+            <div style="float: left; height: 20px;">
+<label class="smblk" for="checkbox">same as delivery address</label>
+</div>
+</div>
+       
+
+
+<!-- <div v-if="checked === false"> -->
+                <label class="smblk" for="name">name:</label>
+                <br />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="name"
+                  v-model="currentOrder.billing.billing_name"
+                />
+
+
+                <label class="smblk" for="address">billing address:</label>
+                <br />
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="address"
+                  v-model="currentOrder.billing.billing_address"
+                />
+
+                <label class="smblk" for="postal_code">billing postal code:</label>
+                <br />
+                <input
+                  type="text"
+                  id="postal_code"
+                  name="postal_code"
+                  placeholder="postal code"
+                  v-model="currentOrder.billing.billing_postal_code"
+                />
+
+<!-- </div> -->
+
+
               </form>
 
               <ul class="order-sidebar">
@@ -481,7 +544,8 @@ delivery or pickup?
                   <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
 
                   <button class="removeClose" @click="removeFromOrder(order)">
-                        <CloseModalSm />
+                        <CloseModalRedSm />
+                     
                   </button>
 
                   <div v-if="order.instructions !== ''" class="order-instructions">
@@ -559,11 +623,11 @@ custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
 
 
               <button class="mt10 fw" 
-                v-if="currentOrder.charges.total > 0"
+                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Pay</button>
-              <button class="mt10 fw" v-else disabled>cart empty</button>
+              <button class="mt10 fw" v-else disabled>Pay</button>
               <!-- store: -->
 
               <br />
@@ -586,7 +650,10 @@ custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
 import carousel from "vue-owl-carousel";
 import GoogleValidate from "@/components/GoogleValidate";
 import CloseModal from "@/components/svgIcons/CloseModal";
+import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
+
+import CloseModalRedSm from "@/components/svgIcons/CloseModalRedSm";
 
 import VueAspectRatio from "vue-aspect-ratio";
 import Next from "@/components/svgIcons/Next";
@@ -598,7 +665,9 @@ export default {
   props: ["data"],
   components: {
     CloseModal,
+    CloseModalRed,
     CloseModalSm,
+    CloseModalRedSm,
     GoogleValidate,
     carousel,
     VueAspectRatio,
@@ -623,6 +692,27 @@ export default {
     },
   },
   watch: {
+    checked(){
+
+      if(this.checked){
+
+      this.currentOrder.billing.billing_name = this.currentOrder.fulfillment_info.customer.name
+      
+      this.currentOrder.billing.billing_address = this.currentOrder.fulfillment_info.delivery_info.address.address_line1 + ' ' +  this.currentOrder.fulfillment_info.delivery_info.address.address_line2
+
+      this.currentOrder.billing.billing_postal_code = this.currentOrder.fulfillment_info.delivery_info.address.zip_code
+
+      }else{
+
+        this.currentOrder.billing.billing_name = ''
+        this.currentOrder.billing.billing_address = ''
+        this.currentOrder.billing.billing_postal_code = ''
+
+      }
+
+
+
+    },
 currentAmountToAddCustom(){
 this.currentAmountToAdd = this.currentAmountToAddCustom * 100
 },
@@ -756,6 +846,7 @@ this.currentOrder.charges.total = this.orderTotal
     },
   data() {
     return {
+      checked: false,
       currentAmountToAddCustom: 0,
       custom: false,
       errors: [],
@@ -796,6 +887,11 @@ this.currentOrder.charges.total = this.orderTotal
       upserveCategories: [],
       currentlyFiltered: [],
       currentOrder: {
+        billing:{
+          billing_name: '',
+          billing_address: '',
+          billing_postal_code: ''
+        },
         id:
           Math.random().toString(36).substr(2, 29) +
           "_" +
@@ -828,8 +924,7 @@ this.currentOrder.charges.total = this.orderTotal
             // first_name: "Joseph",
             email: "",
             phone: "",
-            last_name: "",
-            first_name: "",
+            name: "",
           },
           // instructions: "Leave order with building security",
           instructions: "",
@@ -881,40 +976,32 @@ this.custom = false
     },
     checkForm: function (e) {
       this.errors = [];
-
-
-
-
-      if (!this.currentOrder.fulfillment_info.customer.first_name) {
-        this.errors.push("First Name required.");
-
-                  swal("First Name required.");
+      if (!this.currentOrder.fulfillment_info.customer.name) {
+        this.errors.push("Name required.");
+                  swal("Name required.");
       }
 
-
-      if (!this.currentOrder.fulfillment_info.customer.last_name) {
-        this.errors.push("Last Name required.");
-
-              swal("Last Name required.");
-      }
       if (!this.currentOrder.fulfillment_info.customer.phone) {
         this.errors.push("Phone required.");
 
         swal("Phone required.");
       }
-
-
       
-
-
       if (!this.currentOrder.fulfillment_info.customer.email) {
         this.errors.push('Email required.');
           swal('Valid email required.');
       } else if (!this.validEmail(this.currentOrder.fulfillment_info.customer.email)) {
         this.errors.push('Valid email required.');
+        swal('Valid email required.');
+      }
 
+      if (!this.currentOrder.billing.billing_postal_code) {
+        this.errors.push('invalid postal code');
+        swal('invalid postal code');
 
-              swal('Valid email required.');
+      } else if (!this.validPostal(this.currentOrder.billing.billing_postal_code)) {
+         this.errors.push('invalid postal code');
+        swal('invalid postal code');
       }
 
       if (!this.errors.length) {
@@ -927,6 +1014,12 @@ this.custom = false
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
+
+   validPostal: function (postal_code) {
+      var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
+      return re.test(postal_code);
+    },
+
 
 removeAttention(){
 this.attention = false
@@ -1310,6 +1403,8 @@ if(this.tipSelected === 0){
       this.modifierItems = responseUpserve.data.body.modifiers;
     },
     doAnOrder(currentOrder) {
+
+
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
@@ -1444,8 +1539,8 @@ h2 {
 }
 
 h2.menu-header {
-  font-size: 20px;
   // padding: 0 18px;
+  font-size: 18px;
   font-weight: 400;
 }
 
@@ -1800,7 +1895,7 @@ textarea {
     transition: all .25s ease;
 
     // border-left: 50px solid #F05D5B;
-
+    z-index: 100;
 &.expanded{
       left: 0;
       // border-left: 0px solid #F05D5B;
@@ -2015,8 +2110,51 @@ margin-top: -3px;
   }
 }
 
+
+
+.removeClose{
+  background-color: transparent!important;
+  svg{
+    width: 9px;
+    margin: 7.5px auto 10px;
+  }
+}
+
+
+
+.removeClose:hover{
+    // background-color: #f05d5b;
+  svg{
+.cls-1closeModalRed {
+    fill: #ffffff !important;
+}
+  }
+}
+
+.customer-info,
+.address-info{
+font-size: 1.2rem
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+
+
+form hr{
+      margin-top: .75rem;
+    margin-bottom: .75rem;
+
+}
+
+.drawer-on-mobile.expanded{
+    height: 100%;
+    overflow: scroll;
+    padding-bottom: 160px;
+}
+
 </style>
-
-
 
 

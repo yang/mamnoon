@@ -160,7 +160,10 @@ helpArray.push({
   watch: {
        upserveSections(){
 for(let i = 0; i < this.upserveSections.length; i++){ 
-  if(this.upserveSections[i].name === 'Feature - Tuesday' || this.upserveSections[i].name === 'Feature - Wednesday' || this.upserveSections[i].name === 'Feature - Thursday' || this.upserveSections[i].name === 'Feature - Friday' || this.upserveSections[i].name === 'Feature - Saturday'){
+  // if(this.upserveSections[i].name === 'Feature - Tuesday' || this.upserveSections[i].name === 'Feature - Wednesday' || this.upserveSections[i].name === 'Feature - Thursday' || this.upserveSections[i].name === 'Feature - Friday' || this.upserveSections[i].name === 'Feature - Saturday'){
+
+ if(this.upserveSections[i].name === 'Mezze - To Go'){
+
     for(let j = 0;j<this.upserveSections[i].item_ids.length;j++){
     for(let k = 0;k<this.upserve.length;k++){
   
@@ -222,21 +225,7 @@ console.log(this.helpArray)
  this.upserveSections = responseUpserve.data.body.sections;
     },
 dumpAcf(){
-
-
-// console.log(this.data)
-// console.log(this.data[0].meal.date)
-
-
-// this.familyMeals = this.data
-
-this.familyMeals = this.helpArray
-// helpArray
-
-this.date = this.data[0].meal.date
-
-
-
+  this.familyMeals = this.helpArray
 },
 coverFlowTo(index){
     // console.log(index)
@@ -259,8 +248,10 @@ coverFlowTo(index){
     },
     reset(x) {
 
+    this.date = x[0].mealItem.name
 
-console.log(x)
+
+    // console.log(x)
      let that = this;
 
       this.dotsLength = x.length
