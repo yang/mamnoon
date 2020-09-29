@@ -62,7 +62,7 @@
                     minimum_required: {{modifier.minimum_required}}
                     maximum_required: {{modifier.maximum_required}}
                   </div>
-ddå
+
                   <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                   <div v-for="mod in modifierItems" :key="mod.id">
                     <div v-for="m in modifier.modifier_ids" :key="m">
@@ -101,7 +101,7 @@ ddå
             placeholder="special instructions"
             v-model="textdescription"
             />
-          <hr />
+          <!-- <hr /> -->
 
           <button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
           <button v-else disabled>-</button>
@@ -265,10 +265,27 @@ ddå
 
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
 
+      <div v-if="currentOrder" class="container  mt10">
+<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;background-color: #f05d5b;color: #fff;">your order</button>
+<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;">edit order</button>
+<!-- <button @click="panelShowChoose('customerInfo')" class="filehalf deactivated" disabled="disabled" v-if="this.currentOrder.charges.items.length === 0">customer info</button> -->
+<!-- <button @click="panelShowChoose('customerInfo')" class="filehalf" v-else>customer info</button> -->
+
+
+</div>
 
 
 
-<div class="container small-message" v-if="this.currentOrder.fulfillment_info.type === ''">
+
+
+
+
+<div v-if="panelShow === 'customerInfo'">
+  <div class="container">
+      <hr />
+  </div>
+<div class="container small-message mt10" v-if="this.currentOrder.fulfillment_info.type === ''">
+
 delivery or pickup?
   </div>
 
@@ -315,9 +332,17 @@ delivery or pickup?
                   />
                 </div>
               </div>
+
+
+
+
+
+
+
+              
               <!-- <br v-if="currentOrder.fulfillment_info.type === 'delivery'" /> -->
               <!-- {{errors}} -->
-              <form @submit="checkForm">
+              <form class="mb20" @submit="checkForm">
 
 
  
@@ -505,7 +530,7 @@ delivery or pickup?
                 <br />
                 <input
                   type="text"
-                  id="name"
+                  id="name-billing"
                   name="name"
                   placeholder="name"
                   v-model="currentOrder.billing.billing_name"
@@ -533,20 +558,30 @@ delivery or pickup?
                 />
 
 <!-- </div> -->
-
+  <br />
 
               </form>
 
-              <ul class="order-sidebar">
+</div>
+      </div>
+
+
+
+<div class="container mt10">
+              <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
             
-                  {{order.name}} x {{order.quantity}},
-                  <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
 
                   <button class="removeClose" @click="removeFromOrder(order)">
                         <CloseModalRedSm />
                      
                   </button>
+<div class="mt8">
+
+                  <b>{{order.quantity}}</b> {{order.name}}&nbsp;&nbsp;&nbsp;&nbsp;
+                  <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
+
+
 
                   <div v-if="order.instructions !== ''" class="order-instructions">
              
@@ -556,25 +591,27 @@ delivery or pickup?
                   <div v-else>
           
                   </div>
+                  </div>
                 </li>
               </ul>
 
-
-              <div v-if="total > 0">
-                <button id="noTip" class="tipButton" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
+<!-- <div v-if="panelShow === 'yourOrder'"> -->
+              <div class="mt10" v-if="total > 0">
+ 
+                <button id="noTip" class="tipButton quarter" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
                 <button
                   id="tipOption1"
-                  class="tipButton"
+                  class="tipButton quarter"
                   @click="setTip(1)"
                 ><b>18%</b><br>(${{tip1.toFixed(2)/100 }})</button>&nbsp;
                 <button
                   id="tipOption2"
-                  class="tipButton"
+                  class="tipButton quarter"
                   @click="setTip(2)"
                 ><b>22%</b><br>(${{tip2.toFixed(2)/100 }})</button>&nbsp;
                 <button
                   id="tipOption3"
-                  class="tipButton"
+                  class="tipButton quarter"
                   @click="setTip(3)"
                 ><b>25%</b><br>(${{tip3.toFixed(2)/100 }})</button>&nbsp;
                 <br>
@@ -619,21 +656,28 @@ custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
               <!-- <button v-if="currentOrder.charges.items.length === 0" disabled>no items in cart</button> -->
               <!-- <button v-if="currentOrder.charges.total > 0" @click="doAnOrder(currentOrder)"> do an order</button> -->
 
+<!-- </div> -->
+<template v-if="panelShow === 'yourOrder'">
+
+ <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
+ <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" style="width:100%;" v-else>edit customer info</button>
+</template>
 
 
-
+              <template v-if="panelShow === 'customerInfo'">
               <button class="mt10 fw" 
                 v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Pay</button>
               <button class="mt10 fw" v-else disabled>Pay</button>
+              </template>
               <!-- store: -->
 
               <br />
               <br />
               <br />
-            </div>
+      </div>
           </div>
         </div>
         <pre>
@@ -701,6 +745,12 @@ export default {
       this.currentOrder.billing.billing_address = this.currentOrder.fulfillment_info.delivery_info.address.address_line1 + ' ' +  this.currentOrder.fulfillment_info.delivery_info.address.address_line2
 
       this.currentOrder.billing.billing_postal_code = this.currentOrder.fulfillment_info.delivery_info.address.zip_code
+
+
+      var input = document.getElementById("name-billing");
+      
+      input.focus();
+
 
       }else{
 
@@ -846,6 +896,7 @@ this.currentOrder.charges.total = this.orderTotal
     },
   data() {
     return {
+      panelShow: 'yourOrder',
       checked: false,
       currentAmountToAddCustom: 0,
       custom: false,
@@ -964,6 +1015,18 @@ this.currentOrder.charges.total = this.orderTotal
     },
   },
   methods: {
+panelShowChoose(info){
+
+// alert(info)
+if(info === 'yourOrder'){
+this.panelShow = 'yourOrder'
+}else if(info === 'customerInfo'){
+this.panelShow = 'customerInfo'
+}else{
+
+}
+
+},
     showingCustom(e){
 
 
@@ -1154,8 +1217,8 @@ this.checkForm()
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
-          // url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          url: "https://http://young-hamlet-03679.herokuapp.com/start-transaction",
+          // url: "https://http://young-hamlet-03679.herokuapp.com/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1390,8 +1453,8 @@ if(this.tipSelected === 0){
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        //   // "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        //   // "https://http://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        "https://http://young-hamlet-03679.herokuapp.com/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1408,8 +1471,8 @@ if(this.tipSelected === 0){
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        .post("https://http://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        // .post("https://http://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;
@@ -1451,13 +1514,14 @@ img.itemimage {
 }
 
 li {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
 li button {
   position: absolute;
   right: 0;
+  top: 20px;
 }
 
 .modal-body {
@@ -1502,10 +1566,9 @@ div {
   padding-left: 0;
   li {
  
-   font-size: .9rem;
+    font-size: .9rem;
     list-style-type: none;
-    // padding: 10px 0;
-    padding: 20px 0;
+    padding: 18px 0 22px;
     
   }
 }
@@ -1560,6 +1623,32 @@ button.delivery-option {
   }
 }
 
+button.filehalf {
+    width: 49%;
+
+    border-radius: 4px;
+    border: 2px solid #f05d5b;
+    background: #fff;
+    color: #f05d5b;
+    padding-top: 5px;
+  &.selected {
+    background: #f05d5b;
+    color: #ffffff;
+  border: 2px solid #f05d5b;
+    padding-top: 5px;
+  }
+
+&.deactivated{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+
+}
+
+
+
+}
+
 form input,
 form textarea {
   width: 100%;
@@ -1598,6 +1687,7 @@ form textarea {
   }
 
   position: relative;
+  overflow: hidden;
 }
 
 .half-width2left {
@@ -1763,10 +1853,11 @@ form textarea {
   // max-height: 70vh;
   max-height: 80vh;
   overflow-y: scroll;
-
+border-top: 0;
   textarea {
     width: 100%;
     margin: 0px 0;
+    margin-bottom: 10px;
   }
 }
 
@@ -1796,7 +1887,7 @@ form textarea {
 }
 
 .add-to-order-footer {
-  padding: 10px 0 20px 0;
+  padding: 15px 0 20px 0;
   width: 100%;
 }
 
@@ -1872,7 +1963,27 @@ textarea {
 .tipButton{
   // margin-bottom: 20px;
       margin-bottom: 5px;
-          width: calc(25% - 4px);
+          width: calc(25% - 3.5px);
+
+
+    border: 2px solid #f05d5b;
+    background-color: #ffffff;
+    color: #f05d5b;
+    padding: 5px 10px;
+    border-radius: 4px;
+
+
+transition: background-color .1s ease;
+    &:hover{
+        border: 2px solid #f05d5b;
+    }
+
+    &:disabled{
+          &:hover{
+        border: 1px solid #999999;
+    }
+    }
+
 }
 
 
@@ -1928,7 +2039,7 @@ textarea {
   background-position: center center;
   background-size: cover;
 
-  height: 150px;
+  // height: 150px;
   // background-size: 129%;
 }
 
@@ -2153,6 +2264,35 @@ form hr{
     height: 100%;
     overflow: scroll;
     padding-bottom: 160px;
+}
+
+// @
+// padding: 5px 5px;
+
+.tipButton.customtip,
+.tipButton.quarter {
+
+    font-size: 12px;
+}
+
+
+@media only screen and (max-width: 1280px) {
+.tipButton.quarter {
+    margin-bottom: 5px;
+    width: calc(25% - 3.5px);
+    padding: 5px 5px !important;
+    font-size: 12px;
+}
+}
+
+
+.mt8{
+margin-top: 8px;
+}
+
+
+.mb20{
+  margin-bottom: 20px;
 }
 
 </style>

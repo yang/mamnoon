@@ -315,6 +315,7 @@ ul#menu li.active{
 .full-width-logo{
 
     text-align: left;
+    width: 60%;
 }
 }
 

@@ -49,7 +49,7 @@ export default {
     },
     async getUserProducts(){
 
-      let response = await this.$http.get('https://young-hamlet-03679.herokuapp.com/user/' + this.user._id) 
+      let response = await this.$http.get('https://http://young-hamlet-03679.herokuapp.com/user/' + this.user._id) 
       this.products = response.data.user.products
     },
     },
