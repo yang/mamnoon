@@ -335,7 +335,7 @@ new Vue({
   async mounted () {
 
 
-  let responseTockStreet2 = await this.$http.get(`http://mamnoontogo.net/wp-json/acf/v3/pages`)
+  let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
 
 
 
