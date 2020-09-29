@@ -175,7 +175,7 @@ export default {
   methods: {
        async individualRestaurant(){
         
-        let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+        let responseAcf = await this.$http.get(`http://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
 
 
 

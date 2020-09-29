@@ -45,7 +45,7 @@ export default {
     async addProduct() {
       try {
 console.log(this.product)
-        let response = await this.$http.post("https://http://young-hamlet-03679.herokuapp.com/user/addproduct", this.product);
+        let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/user/addproduct", this.product);
         console.log(response);
          } catch (err) {
         console.log(err.response);

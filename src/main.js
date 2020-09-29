@@ -16,8 +16,8 @@ import VueCurrencyInput from 'vue-currency-input'
 Vue.use(VueCurrencyInput)
 
 const base = axios.create({
-  baseURL: "https://http://young-hamlet-03679.herokuapp.com"
-  // baseURL: "https://http://young-hamlet-03679.herokuapp.com
+  baseURL: "https://young-hamlet-03679.herokuapp.com"
+  // baseURL: "https://young-hamlet-03679.herokuapp.com
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -335,7 +335,7 @@ new Vue({
   async mounted () {
 
 
-  let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
+  let responseTockStreet2 = await this.$http.get(`http://mamnoontogo.net/wp-json/acf/v3/pages`)
 
 
 
