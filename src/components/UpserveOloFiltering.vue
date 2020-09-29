@@ -264,7 +264,10 @@
           </div>
 
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
-
+<button @click="toggleDrawer()" class="toggle">
+<span v-if="toggledDrawer">hide order</span>
+<span v-else>cart order</span>
+</button>
       <div v-if="currentOrder" class="container  mt10">
 <button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;background-color: #f05d5b;color: #fff;">your order</button>
 <button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;">edit order</button>
@@ -291,10 +294,7 @@ delivery or pickup?
 
 
             <!-- google area -->
-<button @click="toggleDrawer()" class="toggle">
-<span v-if="toggledDrawer">hide order</span>
-<span v-else>cart order</span>
-</button>
+
             <div v-if="currentOrder" class="container  mt10">
               <button
                 class="delivery-option"
