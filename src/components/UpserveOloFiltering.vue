@@ -137,6 +137,14 @@
     <vue-aspect-ratio ar="16:9" width="640px">
         <div>your content goes here</div>
     </vue-aspect-ratio> -->
+
+   <template v-if="upserveSections.length === 0">
+     <div class="container text-center pt20">
+       Loading...
+     </div>
+     </template>
+         <template v-else>
+   
 <div class="is-fullheight no-top-pad">
         <carousel :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
                       <template class="subprev" slot="prev">
@@ -192,13 +200,21 @@
             </carousel>
 </div>
 
+</template>
+
 <br>
                         <div class="container online-menu">
               <h4>full menu</h4>
 
 
             </div>
-       
+     
+   <template v-if="upserveSections.length === 0">
+     <div class="container text-center pt20">
+       Loading...
+     </div>
+     </template>
+         <template v-else>
             <template v-for="item in upserveSections">
 <div style="display:none;" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"></div>
               <div v-else class="container menu-line">
@@ -258,7 +274,7 @@
               </div>
             </template>
 
-
+  </template>
 
 
           </div>
@@ -266,7 +282,7 @@
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
 <button @click="toggleDrawer()" class="toggle">
 <span v-if="toggledDrawer">hide order</span>
-<span v-else>cart order</span>
+<span v-else>view order</span>
 </button>
       <div v-if="currentOrder" class="container  mt10">
 <button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;background-color: #f05d5b;color: #fff;">your order</button>
@@ -2293,6 +2309,11 @@ margin-top: 8px;
 
 .mb20{
   margin-bottom: 20px;
+}
+
+
+.pt20{
+  padding: 20px 0;
 }
 
 </style>
