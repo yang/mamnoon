@@ -1,0 +1,665 @@
+<template>
+
+
+
+    <section :id="tag" class="coverflowsection">
+<div class="is-fullheight no-top-pad">
+       
+       
+
+   <template v-if="upserveSections.length === 0">
+     <div class="container text-center pt20">
+       Loading...
+     </div>
+     </template>
+         <template v-else>
+        <carousel :items="1" :loop="true" :dots="false" :nav="false" v-if="upserveSections">
+                                 <template class="subprev" slot="prev">
+                <span class="prev">
+                    <Prev />
+            </span>
+          </template>
+           
+           
+           
+            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
+            <template v-for="item in upserveSections">
+  <div v-for="piece in item.item_ids" :key="piece">  
+                    <template v-for="serve in upserve">
+                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
+                                      
+                   
+
+                            <template v-if="serve.images">
+                              <div
+                                v-if="serve.images.online_ordering_menu"
+                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                              ></div>
+                              <div
+                                v-else
+                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              ></div>
+                            </template>
+                             <div class="content-box-upper">
+                              <div class="name">{{item.name.replace('Feature - ', '')}}<br>{{serve.name}}</div>
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                            </div>
+                         
+                        
+                         </div>
+                    </template>
+         </div>
+          </template>
+                    <template class="subnext" slot="next">
+            <span class="next">
+              <Next />
+            </span>
+          </template>
+            </carousel>
+</template>
+
+
+
+
+</div>
+  <div>
+   <div>
+      <div class="bottom-button">
+        <a class="full-width" :href="link" target="_blank">
+          <div class="outer">
+                <OrderStar /> 
+         </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  </section>
+</template>
+
+
+<script>
+import OrderStar from "@/components/svgIcons/OrderStar";
+import PickupStar from "@/components/svgIcons/PickupStar";
+import DeliveryStar from "@/components/svgIcons/DeliveryStar";
+
+import UpserveFeatured from "@/components/UpserveFeatured";
+
+
+import carousel from "vue-owl-carousel";
+import Next from "@/components/svgIcons/Next";
+import Prev from "@/components/svgIcons/Prev";
+
+import VueAspectRatio from "vue-aspect-ratio";
+
+
+export default {
+  name: "coverflow",
+  components: {
+    OrderStar,
+    PickupStar,
+    DeliveryStar,
+    Prev,
+    Next,
+    UpserveFeatured,
+    VueAspectRatio,
+    carousel
+  },
+  data() {
+    return {
+      familyMeals: null,
+      coverFlowIndex: 0,
+      dotsLength: 0,
+      productsList: this.familyMeals,
+      date: null,
+      link: null,
+      tockPanelVisible: false,
+      delivery: true,
+            upserve: null,
+      upserveSections: [],
+      structureForCover: [],
+      helpArray: []
+    };
+  },
+  computed: {
+    count() {
+      return this.familyMeals;
+    },
+    upserveSectionsComputed(){
+            let helpArray = []
+              
+for(let i; i < this.upserveSections.length; i++){
+  if(this.upserveSections[i].name === 'Feature - Tuesday'|| this.upserveSections[i].name === 'Feature - Wednesday'|| this.upserveSections[i].name === 'Feature - Thursday'|| this.upserveSections[i].name === 'Feature - Friday'|| this.upserveSections[i].name === 'Feature - Saturday'){
+    for(let j;j<this.upserveSections[i].item_ids.length;j++){
+    for(let k;k<this.upserve.length;k++){
+//serv
+if(this.upserve[k].name === this.upserveSections[i].name){
+helpArray.push({
+  dayName: this.upserveSections[i].name,
+  mealItem: this.upserve[k]
+})
+}
+}
+}
+}
+}
+      return helpArray
+
+    }
+  },
+  watch: {
+       upserveSections(){
+for(let i = 0; i < this.upserveSections.length; i++){ 
+  // if(this.upserveSections[i].name === 'Feature - Tuesday' || this.upserveSections[i].name === 'Feature - Wednesday' || this.upserveSections[i].name === 'Feature - Thursday' || this.upserveSections[i].name === 'Feature - Friday' || this.upserveSections[i].name === 'Feature - Saturday'){
+
+ if(this.upserveSections[i].name === 'Mezze - To Go'){
+
+    for(let j = 0;j<this.upserveSections[i].item_ids.length;j++){
+    for(let k = 0;k<this.upserve.length;k++){
+  
+    if(this.upserve[k].id === this.upserveSections[i].item_ids[j]){
+
+      this.helpArray.push({
+        dayName: this.upserveSections[i].name,
+        mealItem: this.upserve[k]
+    })
+    }
+    }
+    }
+  }
+}
+console.log(this.helpArray)
+    },
+    count(newCount, oldCount) {
+
+
+      // if(newCount){
+      console.log('newCount')
+  console.log(newCount)
+      // this.date = newCount[0].mealItem.name
+      //this.delivery = newCount[0].meal
+      // this.reset(newCount);
+      // }
+
+
+
+
+
+
+
+    }
+  },
+  mounted() {
+    this.dumpAcf()
+    this.upserves();
+  },
+  props: ["data","header","tag","descriptionbody"],
+  methods: {
+        async upserves() {
+      let responseUpserve = await this.$http.get(
+        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+      );
+      let upserveProducts = responseUpserve.data.body.items;
+      this.upserve = upserveProducts;
+ this.upserveSections = responseUpserve.data.body.sections;
+    },
+dumpAcf(){
+  this.familyMeals = this.helpArray
+},
+    returnProducts(index) {
+        this.title = this.familyMeals[index].mealItem.name;
+        this.date = this.familyMeals[index].mealItem.name.replace('Feature - ', '');
+        this.description = this.familyMeals[
+          index
+        ].mealItem.description;
+   
+    },
+  
+  },
+};
+</script>
+
+
+<style lang="scss">
+.left-button {
+  cursor: pointer;
+  position: absolute;
+  left: 30%;
+  width: auto;
+      bottom: 130px;
+}
+
+.right-button {
+  cursor: pointer;
+  position: absolute;
+  width: auto;
+  right: 30%;
+      bottom: 130px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .left-button {
+    left: 5%;
+  }
+
+  .right-button {
+    right: 5%;
+  }
+}
+
+.position-relative {
+  position: relative;
+}
+
+.coverflow-text {
+  display: none;
+}
+
+.title,
+.description,
+.delivery,
+.link {
+  color: white;
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+
+  a {
+    color: white;
+
+    &:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  .title,
+  .description,
+  .delivery,
+  .link {
+    width: 80%;
+  }
+}
+
+.title {
+  margin-bottom: 6px;
+  // margin-top: 12px;
+  margin-top: 22px;
+  // font-size: 24px;
+  font-size: 20px;
+}
+
+
+
+#container{
+  height: 480px;
+}
+
+#container.coverflow,
+#container.coverflow:focus,
+#container.coverflow:active {
+  outline: none;
+  overflow: hidden;
+  // margin-top: 40px;
+  margin-top: 20px;
+  .coverflow-wrap {
+    // transform: scale(1.75);
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  #container.coverflow,
+  #container.coverflow:focus,
+  #container.coverflow:active {
+    .coverflow-wrap {
+      transform: scale(1.5);
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #container.coverflow,
+  #container.coverflow:focus,
+  #container.coverflow:active {
+    .coverflow-wrap {
+      transform: scale(1);
+    }
+  }
+}
+
+.toggleVeg {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  position: absolute;
+  top: 0;
+  z-index: 90;
+}
+
+.toggleVegContainer {
+  position: absolute;
+  right: 10px;
+  bottom: 156px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "V";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  content: "M";
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.toggleVeg {
+  width: 62px;
+  // text-align: left;
+  padding: 0;
+  border: 0;
+  background-color: #6bf7a3;
+  border-radius: 15px;
+
+  border: 2px solid transparent;
+  border: 1px solid #f05d5b;
+  &.redBackground {
+    background-color: #f05d5b;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  .lrbutton {
+    width: 30px;
+    background: #fff367;
+    border-radius: 15px;
+    transition: all 0.5s ease;
+    border: 2px solid transparent;
+
+    &.lrExpanded {
+      margin-left: 30px;
+    }
+  }
+}
+
+.bottom-button {
+  // border: 1px solid #f05d5b;
+}
+
+.bottom-button a.full-width {
+  width: 100%;
+}
+
+.full-width-block {
+  width: 100%;
+  // background: white;
+  min-height: 170px;
+  // border: 1px solid #f05d5b;
+  margin-top: 0;
+  position: relative;
+  .description,
+  .title,
+  .title a,
+  a.link {
+    color: #f05d5b;
+  }
+}
+
+.tock-panel {
+  border: 1px solid blue;
+  padding: 10px;
+  position: fixed;
+  z-index: 100;
+  top: 3%;
+  background: #ffffffc7;
+  left: 5%;
+  width: 90%;
+}
+
+.tock-inner {
+  overflow: scroll;
+  overflow-y: scroll;
+  position: relative;
+  height: 100vh;
+  padding-bottom: 200px;
+}
+
+.tockEditField {
+  width: 50%;
+}
+
+.tockEditImage {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+
+
+ul.dots{
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    margin-top: -24px;
+        margin-top: -50px;
+        z-index: 60;
+    position: absolute;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+ul.dots li{
+    display: inline-block;
+cursor: pointer;
+    list-style-type: none;
+}
+
+
+
+ul.dots li div{
+  border-radius: 10px;
+  background: white;
+    // background: transparent;
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+  color: transparent;
+  // border: 2px solid yellow;
+}
+
+
+.whitedot{
+  background: white !important;
+}
+.yellowdot{
+  background: yellow !important;
+  pointer-events: none;
+}
+
+
+
+.description,
+.title,
+.title a{
+// color: #fff !important;
+    color: #fff367 !important;
+    font-weight: 500 !important;
+    font-size: 24px;
+}
+
+
+
+.red-header{
+  background-color: #F05D5B;
+  padding: 20px 0 15px;
+}
+
+
+#container.coverflow, #container.coverflow:focus, #container.coverflow:active{
+  margin-top: 0 !important;
+  background-color: transparent !important;
+}
+
+
+a.left-button svg,
+a.right-button svg {
+    width: 40px;
+    height: 40px;
+}
+
+
+.cursor-pointer{
+  cursor: pointer;
+
+  a{
+    text-decoration: none;
+    color: #f05d5b;
+    &:hover{
+          text-decoration: none;
+    color: #f05d5b;
+    cursor: pointer;
+    }
+  }
+}
+
+
+.bottom-rectangle{
+  font-size:24px;
+  font-weight:500;
+  color: #f05d5b;
+  text-align:center;
+  z-index: 100;
+  position: absolute;
+  left: 0;bottom: 0;
+  width: 100%;
+  background: #fff367;
+}
+
+
+
+.bottom-rectangle-text{
+  font-size: 20px;
+  margin: 0 auto;
+  padding: 10px;
+  width: 90%;
+}
+
+
+.dialog{
+font-size:24px;
+font-weight:500;
+color: #f05d5b;
+text-align:center;
+z-index: 100;
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+background: #fff367;
+padding-bottom:5px;
+}
+
+
+.coverflow-cell img{
+  width: 400px;
+  height: 400px;
+
+  width:100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+
+
+.coverflow .coverflow-cell{
+      width: 400px;
+    height: 400px;
+    top: -200px;
+    left: -200px;
+}
+
+
+.description-para {
+  color: white;
+  margin: 12px auto 20px;
+  width: 80%;
+  text-align: center;
+
+@media only screen and (max-width: 992px) {
+  width: 90%;
+  font-size: 12px;
+}
+
+}
+
+
+.full-height-slide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+</style>

@@ -158,37 +158,28 @@
   <VueAspectRatio ar="4:3" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
                     <template v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
-                        <div class="yellow-bg" @click="openModal(serve)">
+                        <div @click="openModal(serve)">
                             <template v-if="serve.images">
                               <div
                                 v-if="serve.images.online_ordering_menu"
-                                class="backgroundImage"
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
                               <div
                                 v-else
-                                class="backgroundImage"
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
                               ></div>
                             </template>
-                     
-
-                        
-                            <div class="content-box-upper">
+                                                 <div class="content-box-upper">
                               <div class="name">{{item.name.replace('Feature - ', '')}}<br>{{serve.name}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
                               >{{serve.description}}</div>
-                              <div class="food-price">${{serve.price}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                            </div></div>
                             </div>
-                     
-
-
-
-
-
-                        </div>   </div>
                     </template>
          </VueAspectRatio>
           </template>
@@ -246,7 +237,9 @@
                                 v-if="serve.description"
                                 class="food-description"
                               >{{serve.description}}</div>
-                              <div class="food-price">${{serve.price}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
                               <br />
                               <!-- <button @click="openModal(serve)">view</button> -->
                             </div>
@@ -529,16 +522,20 @@ delivery or pickup?
 <!-- billing info -->
 
           <h4 class="customer-info text-left mt10">billing info</h4>
+         
+         
+         <template v-if="currentOrder.fulfillment_info.type === 'delivery'"> 
           <div style="clear: both;width: 100%;margin-bottom: 10px;height: 20px;" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">
-            <div style="float: left;width: 15px;height: 20px;margin-right: 5px;padding-top: 2px;">
-          <input type="checkbox" id="checkbox" v-model="checked">
-          </div>
 
-            <div style="float: left; height: 20px;">
-<label class="smblk" for="checkbox">same as delivery address</label>
+              <div style="float: left;width: 15px;height: 20px;margin-right: 5px;padding-top: 2px;">
+              <input type="checkbox" id="checkbox" v-model="checked" />
+              </div>
+
+              <div style="float: left; height: 20px;">
+              <label class="smblk" for="checkbox">same as delivery address</label>
+              </div>
 </div>
-</div>
-       
+       </template>
 
 
 <!-- <div v-if="checked === false"> -->
@@ -611,10 +608,13 @@ delivery or pickup?
                 </li>
               </ul>
 
-<!-- <div v-if="panelShow === 'yourOrder'"> -->
+<!-- start panel -->
+<!-- start panel -->
+<!-- start panel -->
+<template v-if="this.currentOrder.charges.items.length > 0">
               <div class="mt10" v-if="total > 0">
  
-                <button id="noTip" class="tipButton quarter" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
+                <button id="noTip" class="tipButton quarter" style="display:none;" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
                 <button
                   id="tipOption1"
                   class="tipButton quarter"
@@ -667,7 +667,24 @@ custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
               <hr />
 
               <b>order total: ${{orderTotal.toFixed(2)/100 }}</b>
-              <br />
+
+
+
+</template>
+<template v-else>
+<div class="text-center cart-empty-class">
+cart empty
+</div>
+</template>
+<!-- start panel -->
+<!-- start panel -->
+<!-- start panel -->
+
+
+
+
+
+
     
               <!-- <button v-if="currentOrder.charges.items.length === 0" disabled>no items in cart</button> -->
               <!-- <button v-if="currentOrder.charges.total > 0" @click="doAnOrder(currentOrder)"> do an order</button> -->
@@ -982,7 +999,8 @@ this.currentOrder.charges.total = this.orderTotal
           items: [],
         },
         fulfillment_info: {
-          type: "",
+          // type: "",
+          type: "delivery",
           estimated_fulfillment_time: null,
           customer: {
             // email: "joe.waine@gmail.com",
@@ -1211,11 +1229,11 @@ this.checkForm()
           transactionToken: transactionToken,
           // (optional) Callback function that gets called after a successful transaction
           onTransactionSuccess: function (approvalData) {
-            // console.log("Approval Data", approvalData);
+            console.log("Approval Data", approvalData);
             emergepay.close();
             // location = "https://www.chargeitpro.com";
             //do the post here
-            self.doAnOrder(self.$store.state.storeCurrentOrder);
+            // self.doAnOrder(self.$store.state.storeCurrentOrder);
           },
           // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
@@ -1770,7 +1788,7 @@ form textarea {
   }
 
   .food-description {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     margin-bottom: 5px;
   }
 }
@@ -1790,8 +1808,8 @@ form textarea {
   }
 
   .food-description {
-    font-size: 0.7rem;
-    margin-bottom: 5px;
+    font-size: 0.9rem;
+    margin-bottom: 0px;
   }
 }
 
@@ -1813,8 +1831,8 @@ form textarea {
 }
 
 .food-price {
-  font-size: 0.75rem;
-  font-weight: 400;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .no-lr-margin {
@@ -1978,10 +1996,8 @@ textarea {
 
 .tipButton{
   // margin-bottom: 20px;
-      margin-bottom: 5px;
-          width: calc(25% - 3.5px);
-
-
+    margin-bottom: 5px;
+    width: calc(33% - 1.8px);
     border: 2px solid #f05d5b;
     background-color: #ffffff;
     color: #f05d5b;
@@ -2314,6 +2330,15 @@ margin-top: 8px;
 
 .pt20{
   padding: 20px 0;
+}
+
+.cart-empty-class{
+  background-color: #f3f3f3;
+    padding: 20px 0;
+    color: #a6a4a4;
+    font-style: italic;
+    font-size: 14px;
+    border-radius: 5px;
 }
 
 </style>

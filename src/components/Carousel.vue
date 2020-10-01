@@ -2,7 +2,7 @@
   <main>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
     <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
-    <CoverFlow v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
+    <CoverFlowCarousel v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
     <OnlineShop v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
     <ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
@@ -23,7 +23,7 @@ import ShowAll from "@/components/svgIcons/ShowAll";
 import MamnoonStreet from "@/components/svgIcons/MamnoonStreet";
 import MamnoonSVG from "@/components/svgIcons/MamnoonSVG";
 import Newsletter from "@/components/Newsletter";
-import CoverFlow from "@/components/CoverFlow";
+import CoverFlowCarousel from "@/components/CoverFlowCarousel";
 import UpserveFiltering  from "@/components/UpserveFiltering";
 import TestimonialsMain from "@/components/TestimonialsMain";
 import Reservations from "@/components/Reservations";
@@ -38,7 +38,7 @@ export default {
     Next,
     Prev,
     Newsletter,
-    CoverFlow,
+    CoverFlowCarousel,
     Mbar,
     Mamnoon,
     MamnoonStreet,

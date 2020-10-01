@@ -28,10 +28,12 @@ export default{
 
 .cls-1orangeorder{fill:#f05d5b;}.cls-2{fill:#fff;}
 svg#order{
+    /* width: 100px;
+    height: 40px;
+    margin: 0 auto; */
+    width: 90px;
+    height: 90px;
+    margin-top: 5px;
 
-  width: 100px;
-  height: 40px;
-
-margin: 0 auto;
 }
 </style>
