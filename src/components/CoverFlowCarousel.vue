@@ -3,17 +3,16 @@
 
 
     <section :id="tag" class="coverflowsection">
-<div class="is-fullheight no-top-pad">
-       
-       
-
+<div class="is-fullheight no-top-pad" id="cover-carousel">
+<h4 class="noselect">{{header}}</h4>
+    <p class="description-para" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
    <template v-if="upserveSections.length === 0">
-     <div class="container text-center pt20">
+     <div class="container text-center pt20 white-text" style="height: 500px;margin-top: 16px;">
        Loading...
      </div>
      </template>
          <template v-else>
-        <carousel :items="1" :loop="true" :dots="false" :nav="false" v-if="upserveSections">
+        <carousel :items="1" :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 500px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />
@@ -26,21 +25,39 @@
             <template v-for="item in upserveSections">
   <div v-for="piece in item.item_ids" :key="piece">  
                     <template v-for="serve in upserve">
-                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
-                                      
-                   
+                      <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">
+                                       
+            <template v-if="serve.images">
+<div style="height: 512px;position: relative;width: 500px;margin: 0 auto;background: black;overflow:hidden;height: 482px;">
+<img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
+<div class="top-bar">
+  <!-- {{item.name.replace('Feature - ', '')}} -->
+  
+  {{serve.name}}
 
-                            <template v-if="serve.images">
+
+  </div>
+    
+  <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;">
+
+ <div
+                                v-if="serve.description"
+                                class="food-description bottom-bar">{{serve.description}}</div>
+
+</div>
+                </template>
+
+                            <!-- <template v-if="serve.images">
                               <div
                                 v-if="serve.images.online_ordering_menu"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                                v-bind:style="{ height: '360px',backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
                               <div
                                 v-else
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
                               ></div>
-                            </template>
-                             <div class="content-box-upper">
+                            </template> -->
+                             <!--<div class="content-box-upper">
                               <div class="name">{{item.name.replace('Feature - ', '')}}<br>{{serve.name}}</div>
                               <div
                                 v-if="serve.description"
@@ -49,7 +66,7 @@
                               <div class="food-price">
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
-                            </div>
+                            </div>-->
                          
                         
                          </div>
@@ -661,5 +678,73 @@ padding-bottom:5px;
     width: 100%;
     height: 100%;
 }
+
+
+#cover-carousel{
+
+
+.owl-carousel, .owl-item{
+  height: 500px;
+}
+
+.owl-item > div {
+    width: 100%;
+    height: 500px;
+}
+
+
+
+}
+
+
+#cover-carousel{
+  .owl-carousel .owl-item img {
+    display: block;
+    width: auto !important;
+}
+}
+
+
+
+
+.top-bar{
+
+ position: absolute;
+ top: 0;
+ width: 500px;
+ background: yellow;
+ color: #f05d5b;
+ margin: 0 auto;
+ padding: 10px;
+ text-align: center;
+}
+
+.bottom-bar{
+padding: 10px;
+position: absolute;
+bottom: 0;
+width: 500px;
+background: yellow;
+color: #f05d5b;
+font-size: 14px;
+}
+
+.white-text{
+  color: #ffffff;
+}
+@media only screen and (max-width: 640px) {
+
+
+.bottom-bar,
+.top-bar{
+
+
+ width: 100%
+
+}
+
+
+}
+
 
 </style>

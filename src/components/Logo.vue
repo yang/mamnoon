@@ -13,8 +13,9 @@ svg#header-logo{
 
 @media only screen and (max-width: 768px) {
 
-width: 70%;
+// width: 70%;
 
+width: 50%;
 }
 
 
