@@ -589,9 +589,21 @@ width: 50%
 
 width: 100%
 
+
+
+
+
 }
 
 
 
 }
+@media only screen and (max-width: 768px) {
+
+
+.mb-80{
+  margin-bottom: 40px;
+}
+}
+
 </style>
