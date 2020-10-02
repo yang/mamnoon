@@ -365,7 +365,9 @@ button.snipcart-add-item {
   // height: 600px;
   height: 600px;
   height: 830px;
-  height: 750px;
+  // height: 750px;
+  // height: 742px;
+  height: 784px;
   margin-bottom: 80px;
   // background-color: #f05d5b;
   background-color: #F58E58;
@@ -600,7 +602,7 @@ width: 100%
 }
 @media only screen and (max-width: 768px) {
 
-
+.coverflowsection,
 .mb-80{
   margin-bottom: 40px;
 }

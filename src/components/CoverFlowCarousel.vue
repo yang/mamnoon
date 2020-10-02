@@ -7,7 +7,7 @@
 <h4 class="noselect">{{header}}</h4>
     <p class="description-para" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
    <template v-if="upserveSections.length === 0">
-     <div class="container text-center pt20 white-text" style="height: 500px;margin-top: 16px;">
+     <div class="container text-center pt20 white-text" style="height: 500px;margin-top: 100px;">
        Loading...
      </div>
      </template>
@@ -28,6 +28,7 @@
                       <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">
                                        
             <template v-if="serve.images">
+             <router-link to="/mamnoon">          
 <div class="outside-slideshow">
 <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
 <div class="top-bar">
@@ -42,9 +43,18 @@
 
  <div
                                 v-if="serve.description"
-                                class="food-description bottom-bar">{{serve.description}}</div>
+                                class="food-description bottom-bar">
+                                <span class="desc-desk">
+                                {{serve.description}}
+                                </span>
+
+                                <span class="desc-mob">
+                                {{serve.description | truncate(90, '...')}}
+                                </span>
+                                </div>
 
 </div>
+     </router-link> 
                 </template>
 
                             <!-- <template v-if="serve.images">
@@ -90,7 +100,9 @@
       <div class="bottom-button">
         <a class="full-width" :href="link" target="_blank">
           <div class="outer">
+          <router-link to="/mamnoon">
                 <OrderStar /> 
+                </router-link>
          </div>
         </a>
       </div>
@@ -717,6 +729,7 @@ padding-bottom:5px;
  margin: 0 auto;
  padding: 10px;
  text-align: center;
+ font-weight: 500;
 }
 
 .bottom-bar{
@@ -727,6 +740,8 @@ width: 500px;
 background: #fff367;
 color: #f05d5b;
 font-size: 14px;
+height: 83px;
+text-align: center;
 }
 
 .white-text{
@@ -745,7 +760,25 @@ font-size: 14px;
  height: 482px;
 }
 
+
+  .desc-desk{
+            display: block;
+  }
+          .desc-mob{
+            display: none;
+          }
+
+
+
 @media only screen and (max-width: 640px) {
+
+
+    .desc-desk{
+            display: none;
+  }
+          .desc-mob{
+            display: block;
+          }
 
 .outside-slideshow,
 .bottom-bar,
