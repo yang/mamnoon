@@ -28,7 +28,7 @@
                       <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">
                                        
             <template v-if="serve.images">
-<div style="height: 512px;position: relative;width: 500px;margin: 0 auto;background: black;overflow:hidden;height: 482px;">
+<div class="outside-slideshow">
 <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
 <div class="top-bar">
   <!-- {{item.name.replace('Feature - ', '')}} -->
@@ -549,7 +549,7 @@ ul.dots li div{
   background: white !important;
 }
 .yellowdot{
-  background: yellow !important;
+  background: #fff367 !important;
   pointer-events: none;
 }
 
@@ -712,7 +712,7 @@ padding-bottom:5px;
  position: absolute;
  top: 0;
  width: 500px;
- background: yellow;
+ background: #fff367;
  color: #f05d5b;
  margin: 0 auto;
  padding: 10px;
@@ -724,7 +724,7 @@ padding: 10px;
 position: absolute;
 bottom: 0;
 width: 500px;
-background: yellow;
+background: #fff367;
 color: #f05d5b;
 font-size: 14px;
 }
@@ -732,9 +732,22 @@ font-size: 14px;
 .white-text{
   color: #ffffff;
 }
+
+
+
+.outside-slideshow{
+ height: 512px;
+ position: relative;
+ width: 500px;
+ margin: 0 auto;
+ background: black;
+ overflow:hidden;
+ height: 482px;
+}
+
 @media only screen and (max-width: 640px) {
 
-
+.outside-slideshow,
 .bottom-bar,
 .top-bar{
 
