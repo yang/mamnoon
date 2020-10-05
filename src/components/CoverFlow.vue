@@ -1,28 +1,5 @@
 <template>
     <section :id="tag" class="coverflowsection">
-
-
-
-
-<!-- {{helpArray}} -->
-<!-- {{upserveSections}} -->
-
-            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday' || item.name === 'Feature - Wednesday' || item.name === 'Feature - Thursday' || item.name === 'Feature - Friday' || item.name === 'Feature - Saturday'">
-                <template v-for="piece in item.item_ids">
-                    <template v-for="serve in upserve">
-                      <template v-if="serve.id === piece" class="inline-block">
-                                    {{item.name}}
-                                    {{serve.name}}
-              </template>
-              </template>
-              </template>
-              </template> -->
-
-
-
-
-
-
   <div>
    <div>
       <div class="position-relative red-header">
@@ -31,12 +8,8 @@
    
         <p class="description-para" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
       
-      
-<!-- family meals:
-      {{familyMeals}} -->
-      
-      
-      </div>
+          
+    </div>
 
       <div id="container"></div>
 

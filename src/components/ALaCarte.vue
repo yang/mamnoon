@@ -8,10 +8,11 @@
                          <!-- mamnoon -->
                <Mamnoon :caviarLink="false" />
             </router-link>
-
+              <router-link to="/mamnoonstreet">
     
   
             <MamnoonStreet :caviarLink="false" />
+                          </router-link>
         </div>
     </section>
 </template>

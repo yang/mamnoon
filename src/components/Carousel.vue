@@ -363,12 +363,14 @@ button.snipcart-add-item {
   // height: 600px;
   // height: 510px;
   // height: 600px;
-  height: 600px;
-  height: 830px;
-  // height: 750px;
-  // height: 742px;
+  // height: 600px;
+  // height: 830px;
+
+  // height: 820px;
   height: 784px;
+  height: 814px;
   margin-bottom: 80px;
+      height: 814px;
   // background-color: #f05d5b;
   background-color: #F58E58;
   overflow: hidden;

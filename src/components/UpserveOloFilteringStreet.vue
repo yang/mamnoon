@@ -123,10 +123,11 @@
       </div>
 
 
+
       <div class="container pt20 no-bot-pad">
         <div class="row">
           <div class="col-md-12">
-             <h1 class="text-center">mamnoon</h1>
+            <h1 class="text-center">mamnoon street</h1>
                </div>
         </div>
       </div>
@@ -204,7 +205,7 @@
 
 <br>
                         <div class="container online-menu">
-              <h4>full mamnoon menu</h4>
+              <h4>full mamnoon street menu</h4>
 
 
             </div>
@@ -1497,7 +1498,7 @@ if(this.tipSelected === 0){
     async upserves() {
       let responseUpserve = await this.$http.get(
         //   // "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        "https://young-hamlet-03679.herokuapp.com/product/upserveolostreet"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1514,7 +1515,7 @@ if(this.tipSelected === 0){
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        .post("https://young-hamlet-03679.herokuapp.com/oloorderstreet", currentOrder)
         // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
@@ -1943,11 +1944,10 @@ border-top: 0;
   padding-top: 50px;
 }
 
+
 .pt20 {
   padding-top: 20px;
 }
-
-
 
 .mt10 {
   margin-top: 10px;
@@ -2347,10 +2347,6 @@ margin-top: 8px;
   padding: 20px 0;
 }
 
-.no-bot-pad{
-  padding-bottom: 0;
-}
-
 .cart-empty-class{
   background-color: #f3f3f3;
     padding: 20px 0;
@@ -2359,6 +2355,12 @@ margin-top: 8px;
     font-size: 14px;
     border-radius: 5px;
 }
+
+
+.no-bot-pad{
+  padding-bottom: 0;
+}
+
 
 </style>
 

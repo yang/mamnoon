@@ -7,12 +7,12 @@
 <h4 class="noselect">{{header}}</h4>
     <p class="description-para" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
    <template v-if="upserveSections.length === 0">
-     <div class="container text-center pt20 white-text" style="height: 500px;margin-top: 100px;">
+     <div class="container text-center pt20 white-text" style="height: 550px;margin-top: 100px;">
        Loading...
      </div>
      </template>
          <template v-else>
-        <carousel :items="1" :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 500px;margin-top: 16px;">
+        <carousel :items="1" :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />
@@ -694,17 +694,67 @@ padding-bottom:5px;
 
 #cover-carousel{
 
+  // height: 710px;
 
+// height: 674px;
+height: 704px;
 .owl-carousel, .owl-item{
-  height: 500px;
+  // height: 500px;
+
+      height: 550px;
 }
 
 .owl-item > div {
     width: 100%;
-    height: 500px;
+    height: 550px;
+    
+}
+
+.owl-theme .owl-dots .owl-dot span{
+      width: 20px;
+    height: 20px;
+    margin: 5px 7px;
+    background: #ffffff;
+    display: block;
+    -webkit-backface-visibility: visible;
+    transition: opacity 200ms ease;
+    border-radius: 30px;
+}
+
+.owl-theme .owl-nav.disabled + .owl-dots {
+    margin-top: 0;
 }
 
 
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: orange;
+}
+
+
+// li:nth-child(-n+5) {
+//     color: green;   
+// }
+
+
+.owl-stage{
+    height: 500px;
+    height: 506px;
+        height: 516px;
+
+}
+
+
+.owl-dots .owl-dot {
+display: none;
+outline: none;
+}
+
+
+
+.owl-dots .owl-dot:nth-child(-n+7) {
+display: inline;
+}
 
 }
 
@@ -754,10 +804,11 @@ text-align: center;
  height: 512px;
  position: relative;
  width: 500px;
- margin: 0 auto;
+//  margin: 0 auto;
  background: black;
  overflow:hidden;
  height: 482px;
+     margin: 10px auto 0;
 }
 
 
