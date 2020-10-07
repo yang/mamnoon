@@ -95,7 +95,7 @@ props: ['emailAddress'],
 methods: {
     async checkForm() {
       try {
-        let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/user/submittestimonial", this.messageBody);
+        let response = await this.$http.post("http://localhost:4000/user/submittestimonial", this.messageBody);
         // console.log(response.data.user.testimonials);
         console.log(response.data)
         this.testimonials = response.data.user.testimonials
@@ -115,7 +115,7 @@ methods: {
 // console.log('get testimonials')
 // console.log(this.emailAddress)
       try {
-        let response = await this.$http.get("https://young-hamlet-03679.herokuapp.com/user/gettestimonials/" + this.emailAddress);
+        let response = await this.$http.get("http://localhost:4000/user/gettestimonials/" + this.emailAddress);
 
 
        console.log(response.data)
@@ -135,7 +135,7 @@ methods: {
 
 
     try {
-      let response = await this.$http.post('https://young-hamlet-03679.herokuapp.com/user/deletetestimonial/', {
+      let response = await this.$http.post('http://localhost:4000/user/deletetestimonial/', {
       testimonialId,
       userEmail
       }) 
