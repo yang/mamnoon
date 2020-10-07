@@ -1260,8 +1260,8 @@ this.checkForm()
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "http://localhost:4000/start-transaction",
-          // url: "http://localhost:4000/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          // url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1496,8 +1496,8 @@ if(this.tipSelected === 0){
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        //   // "http://localhost:4000/product/upserveolo"
-        "http://localhost:4000/product/upserveolo"
+        //   // "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1514,8 +1514,8 @@ if(this.tipSelected === 0){
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("http://localhost:4000/oloorder", currentOrder)
-        // .post("http://localhost:4000/oloorder", currentOrder)
+        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;

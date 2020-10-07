@@ -51,7 +51,7 @@ export default {
     showUserInfo(email){
  
 let self = this
-      this.$http.get('http://localhost:4000/user/email/' + email)
+      this.$http.get('https://young-hamlet-03679.herokuapp.com/user/email/' + email)
         .then(function(response) {
     //  console.log(response) 
 
