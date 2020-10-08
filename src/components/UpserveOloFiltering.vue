@@ -1557,7 +1557,7 @@ let infoForPay = {
  let infoForPayStringify = JSON.stringify(infoForPay)       
 console.log(infoForPayStringify)
      this.$http
-        .post("/order/addorder",infoForPayStringify, axiosConfig)
+        .post("https://cors-anywhere.herokuapp.com/https://young-hamlet-03679.herokuapp.com/order/addorder",infoForPayStringify, axiosConfig)
         .then((response) => {
           console.log(response);
  console.log('add to mongo emerge pay front end')
