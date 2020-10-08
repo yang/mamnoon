@@ -1268,8 +1268,8 @@ this.checkForm()
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
-          // url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          url: "/api/start-transaction",
+          // url: "/api/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1504,8 +1504,8 @@ if(this.tipSelected === 0){
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        //   // "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        //   // "/api/product/upserveolo"
+        "/api/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1522,8 +1522,8 @@ if(this.tipSelected === 0){
       // let self = this;
       // let curOr = JSON.stringify(currentOrder);
       // this.$http
-      //   .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-      //   // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+      //   .post("/api/oloorder", currentOrder)
+      //   // .post("/api/oloorder", currentOrder)
       //   .then((response) => {
       //     console.log(response);
       //     self.orderConfirmationModal = true;
@@ -1542,7 +1542,7 @@ console.log(currentOrder)
 console.log(approvalData)
 
      this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/order/addorder",{
+        .post("/api/order/addorder",{
           payInfo: currentOrder,
           orderInfo: approvalData
         })
@@ -1566,8 +1566,8 @@ console.log(approvalData)
       // let self = this;
       // let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/issue-return", 'd492296a-2ecd-4c64-8768-b186869257f7')
-        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        .post("/api/issue-return", 'd492296a-2ecd-4c64-8768-b186869257f7')
+        // .post("/api/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
 
