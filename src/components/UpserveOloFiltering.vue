@@ -725,6 +725,14 @@ cart empty
         <pre>
           {{this.$store.state.storeCurrentOrder}}
         </pre>
+
+        <div>
+
+<button @click="issueReturn()">issue return</button>
+</div>
+
+         
+
       </div>
     </section>
   </div>
@@ -1242,7 +1250,7 @@ this.checkForm()
             emergepay.close();
             // location = "https://www.chargeitpro.com";
             //do the post here
-            // self.doAnOrder(self.$store.state.storeCurrentOrder);
+            self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
           },
           // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
@@ -1260,8 +1268,8 @@ this.checkForm()
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
-          // url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          url: "http://localhost:4000/start-transaction",
+          // url: "http://localhost:4000/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1496,8 +1504,8 @@ if(this.tipSelected === 0){
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        //   // "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        //   // "http://localhost:4000/product/upserveolo"
+        "http://localhost:4000/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1508,25 +1516,68 @@ if(this.tipSelected === 0){
       this.modifiers = responseUpserve.data.body.modifiers;
       this.modifierItems = responseUpserve.data.body.modifiers;
     },
-    doAnOrder(currentOrder) {
+    doAnOrder(currentOrder,approvalData) {
 
 
-      let self = this;
-      let curOr = JSON.stringify(currentOrder);
-      this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+      // let self = this;
+      // let curOr = JSON.stringify(currentOrder);
+      // this.$http
+      //   .post("http://localhost:4000/oloorder", currentOrder)
+      //   // .post("http://localhost:4000/oloorder", currentOrder)
+      //   .then((response) => {
+      //     console.log(response);
+      //     self.orderConfirmationModal = true;
+      //     self.orderConfirmationModalResponse = response.data;
+      //   })
+      //   .catch((e) => {
+      //     // this.errors.push(e);
+      //     console.log("errors");
+      //     console.log(e);
+
+    
+      //   });
+
+
+console.log(currentOrder)
+console.log(approvalData)
+
+     this.$http
+        .post("http://localhost:4000/order/addorder",{
+          payInfo: currentOrder,
+          orderInfo: approvalData
+        })
         .then((response) => {
           console.log(response);
-          self.orderConfirmationModal = true;
-          self.orderConfirmationModalResponse = response.data;
+ console.log('add to mongo emerge pay front end')
         })
         .catch((e) => {
           // this.errors.push(e);
           console.log("errors");
           console.log(e);
         });
+
+
+
+
+
+        
     },
+    issueReturn() {
+      // let self = this;
+      // let curOr = JSON.stringify(currentOrder);
+      this.$http
+        .post("http://localhost:4000/issue-return", 'd492296a-2ecd-4c64-8768-b186869257f7')
+        // .post("http://localhost:4000/oloorder", currentOrder)
+        .then((response) => {
+          console.log(response);
+
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+    }
   },
   mounted() {
     this.upserves();

@@ -65,7 +65,7 @@ export default {
   methods: {
     async registerUser() {
       try {
-        let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/user/register", this.register);
+        let response = await this.$http.post("http://localhost:4000/user/register", this.register);
         let token = response.data.token;
         if (token) {
           localStorage.setItem("jwt", token);
