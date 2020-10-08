@@ -191,7 +191,7 @@ console.log(this.helpArray)
   methods: {
         async upserves() {
       let responseUpserve = await this.$http.get(
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        "https://nadimama.com/api/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;

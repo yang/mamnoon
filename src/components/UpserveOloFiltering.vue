@@ -1268,8 +1268,8 @@ this.checkForm()
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
-          // url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          url: "https://nadimama.com/api/start-transaction",
+          // url: "https://nadimama.com/api/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1504,8 +1504,8 @@ if(this.tipSelected === 0){
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        //   // "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        //   // "https://nadimama.com/api/product/upserveolo"
+        "https://nadimama.com/api/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1522,8 +1522,8 @@ if(this.tipSelected === 0){
       // let self = this;
       // let curOr = JSON.stringify(currentOrder);
       // this.$http
-      //   .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-      //   // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+      //   .post("https://nadimama.com/api/oloorder", currentOrder)
+      //   // .post("https://nadimama.com/api/oloorder", currentOrder)
       //   .then((response) => {
       //     console.log(response);
       //     self.orderConfirmationModal = true;
@@ -1557,7 +1557,7 @@ let infoForPay = {
  let infoForPayStringify = JSON.stringify(infoForPay)       
 console.log(infoForPayStringify)
      this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/order/addorder",infoForPayStringify, axiosConfig)
+        .post("https://nadimama.com/api/order/addorder",infoForPayStringify, axiosConfig)
         .then((response) => {
           console.log(response);
  console.log('add to mongo emerge pay front end')
@@ -1578,8 +1578,8 @@ console.log(infoForPayStringify)
       // let self = this;
       // let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/issue-return", 'd492296a-2ecd-4c64-8768-b186869257f7')
-        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        .post("https://nadimama.com/api/issue-return", 'd492296a-2ecd-4c64-8768-b186869257f7')
+        // .post("https://nadimama.com/api/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
 
