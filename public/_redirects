@@ -1,2 +1,2 @@
 /*    /index.html   200
-/api/*  https://frozen-shore-18427.herokuapp.com/:splat  200
+/api/*  https://frozen-shore-18427.herokuapp.com/api/:splat  200
