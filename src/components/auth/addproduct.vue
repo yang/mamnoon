@@ -45,7 +45,7 @@ export default {
     async addProduct() {
       try {
 console.log(this.product)
-        let response = await this.$http.post("/api/user/addproduct", this.product);
+        let response = await this.$http.post("https://nadimama.com/api/user/addproduct", this.product);
         console.log(response);
          } catch (err) {
         console.log(err.response);

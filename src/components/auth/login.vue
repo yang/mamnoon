@@ -65,7 +65,7 @@ export default {
       //  this.$router.push("/home");
       try {
  
-       let response = await this.$http.post("/api/user/login", this.login);
+       let response = await this.$http.post("https://nadimama.com/api/user/login", this.login);
        console.log(response)
         let token = response.data.token;
         localStorage.setItem("jwt", token);

@@ -117,7 +117,7 @@ props: ['emailAddress'],
 methods: {
     async checkForm() {
       try {
-        let response = await this.$http.post("/api/user/submittestimonial", this.messageBody);
+        let response = await this.$http.post("https://nadimama.com/api/user/submittestimonial", this.messageBody);
         // console.log(response.data.user.testimonials);
         console.log(response.data)
         this.testimonials = response.data.user.testimonials
@@ -137,7 +137,7 @@ methods: {
 // console.log('get testimonials')
 // console.log(this.emailAddress)
       try {
-        let response = await this.$http.get("/api/user/gettestimonials/" + this.emailAddress);
+        let response = await this.$http.get("https://nadimama.com/api/user/gettestimonials/" + this.emailAddress);
 
 
        console.log(response.data)

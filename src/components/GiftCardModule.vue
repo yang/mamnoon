@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     async lookupBalance() {
-      let giftcardLookup = await this.$http.post("/api/user/lookupgiftcard", {
+      let giftcardLookup = await this.$http.post("https://nadimama.com/api/user/lookupgiftcard", {
         cardNumber: this.cardNumberInput,
       });
       let giftcardResponse = giftcardLookup.data;
@@ -107,7 +107,7 @@ export default {
       // first check if the balance is available
 
       this.$http
-        .post("/api/user/lookupgiftcard", {
+        .post("https://nadimama.com/api/user/lookupgiftcard", {
           cardNumber: this.cardNumberInput,
         })
         .then(function (response) {
@@ -119,7 +119,7 @@ export default {
           ) {
             self.showInsufficientFunds = false;
             self.$http
-              .post("/api/user/usegiftcard", {
+              .post("https://nadimama.com/api/user/usegiftcard", {
                 cardNumber: self.cardNumberInput,
                 useAmount: self.amountUse,
               })

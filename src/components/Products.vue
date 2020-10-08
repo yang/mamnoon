@@ -80,7 +80,7 @@ name: 'Products',
 methods: {
     async addProduct() {
       try {
-        let response = await this.$http.post("/api/product/addproduct", this.product);
+        let response = await this.$http.post("https://nadimama.com/api/product/addproduct", this.product);
 
         // console.log(response)
 
@@ -94,7 +94,7 @@ methods: {
 
          console.log('all productgs listes')
       try {
-        let response = await this.$http.get("/api/product/allproducts");
+        let response = await this.$http.get("https://nadimama.com/api/product/allproducts");
           this.products = response.data.products
 
       } catch (err) {

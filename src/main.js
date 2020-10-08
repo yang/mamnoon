@@ -16,8 +16,8 @@ import VueCurrencyInput from 'vue-currency-input'
 Vue.use(VueCurrencyInput)
 
 const base = axios.create({
-  baseURL: "/api"
-  // baseURL: "/api
+  baseURL: "https://nadimama.com/api"
+  // baseURL: "https://nadimama.com/api
 });
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'

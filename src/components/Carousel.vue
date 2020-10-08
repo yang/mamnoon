@@ -134,7 +134,7 @@ export default {
     },
     // async upserves(){
 
-    //   let responseUpserve = await this.$http.get("/api/product/upserve");
+    //   let responseUpserve = await this.$http.get("https://nadimama.com/api/product/upserve");
     //   console.log(responseUpserve)
     //   let upserveProducts = responseUpserve.data.body.objects
   

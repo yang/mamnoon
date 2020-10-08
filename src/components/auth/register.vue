@@ -65,7 +65,7 @@ export default {
   methods: {
     async registerUser() {
       try {
-        let response = await this.$http.post("/api/user/register", this.register);
+        let response = await this.$http.post("https://nadimama.com/api/user/register", this.register);
         let token = response.data.token;
         if (token) {
           localStorage.setItem("jwt", token);
