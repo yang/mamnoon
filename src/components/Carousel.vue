@@ -134,7 +134,7 @@ export default {
     },
     // async upserves(){
 
-    //   let responseUpserve = await this.$http.get("http://young-hamlet-03679.herokuapp.com/product/upserve");
+    //   let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserve");
     //   console.log(responseUpserve)
     //   let upserveProducts = responseUpserve.data.body.objects
   

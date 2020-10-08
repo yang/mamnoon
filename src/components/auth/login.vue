@@ -65,7 +65,7 @@ export default {
       //  this.$router.push("/home");
       try {
  
-       let response = await this.$http.post("http://young-hamlet-03679.herokuapp.com/user/login", this.login);
+       let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/user/login", this.login);
        console.log(response)
         let token = response.data.token;
         localStorage.setItem("jwt", token);
