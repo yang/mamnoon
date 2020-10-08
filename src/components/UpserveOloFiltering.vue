@@ -1541,11 +1541,19 @@ if(this.tipSelected === 0){
 console.log(currentOrder)
 console.log(approvalData)
 
+let axiosConfig = {
+  headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      "Access-Control-Allow-Origin": "*",
+  }
+};
+
+
      this.$http
         .post("https://young-hamlet-03679.herokuapp.com/order/addorder",{
           payInfo: currentOrder,
           orderInfo: approvalData
-        })
+        }, axiosConfig)
         .then((response) => {
           console.log(response);
  console.log('add to mongo emerge pay front end')
