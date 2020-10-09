@@ -1268,8 +1268,8 @@ this.checkForm()
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
-          // url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          url: "http://localhost:4000/start-transaction",
+          // url: "http://localhost:4000/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1504,8 +1504,8 @@ if(this.tipSelected === 0){
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        //   // "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        //   // "http://localhost:4000/product/upserveolo"
+        "http://localhost:4000/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1519,33 +1519,31 @@ if(this.tipSelected === 0){
     doAnOrder(currentOrder,approvalData) {
 
 
-      let self = this;
-      let curOr = JSON.stringify(currentOrder);
-      this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-        .then((response) => {
-          console.log(response);
-          self.orderConfirmationModal = true;
-          self.orderConfirmationModalResponse = response.data;
-        })
-        .catch((e) => {
-          // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
+      // let self = this;
+      // let curOr = JSON.stringify(currentOrder);
+      // this.$http
+      //   .post("http://localhost:4000/oloorder", currentOrder)
+      //   // .post("http://localhost:4000/oloorder", currentOrder)
+      //   .then((response) => {
+      //     console.log(response);
+      //     self.orderConfirmationModal = true;
+      //     self.orderConfirmationModalResponse = response.data;
+      //   })
+      //   .catch((e) => {
+      //     // this.errors.push(e);
+      //     console.log("errors");
+      //     console.log(e);
 
     
-        });
+      //   });
 
 
-console.log(currentOrder)
-console.log(approvalData)
+
 
 let axiosConfig = {
   headers: {
-      'Content-Type': 'application/json;charset=UTF-8',
-    "peace": "love",
-    'Access-Control-Allow-Origin': 'https://www.nadimama.com'
+      'Content-Type': 'application/json', 
+      'Access-Control-Allow-Origin': '*'
   }
 };
 
@@ -1558,13 +1556,12 @@ let infoForPay = {
  let infoForPayStringify = JSON.stringify(infoForPay)       
 console.log(infoForPayStringify)
      this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/order/addorder",infoForPayStringify, axiosConfig)
+        .post("http://localhost:4000/order/addorder", infoForPayStringify, axiosConfig)
         .then((response) => {
           console.log(response);
- console.log('add to mongo emerge pay front end')
+          console.log('add to mongo emerge pay front end')
         })
         .catch((e) => {
-          // this.errors.push(e);
           console.log("errors");
           console.log(e);
         });
@@ -1579,8 +1576,8 @@ console.log(infoForPayStringify)
       // let self = this;
       // let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/issue-return", 'd492296a-2ecd-4c64-8768-b186869257f7')
-        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        .post("http://localhost:4000/issue-return", 'd492296a-2ecd-4c64-8768-b186869257f7')
+        // .post("http://localhost:4000/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
 
