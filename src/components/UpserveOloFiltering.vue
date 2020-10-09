@@ -1545,7 +1545,7 @@ let axiosConfig = {
   headers: {
       'Content-Type': 'application/json;charset=UTF-8',
     "peace": "love",
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': 'https://www.nadimama.com'
   }
 };
 
