@@ -462,8 +462,8 @@ self.doAnOrder(self.$store.state.storeCurrentOrder)
     },
     async getTransToken(){
       try {
-        // let response = await this.$http.post("http://young-hamlet-03679.herokuapp.com/start-transaction");
-      let response = await this.$http.post("http://young-hamlet-03679.herokuapp.com/start-transaction");
+        // let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/start-transaction");
+      let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/start-transaction");
       
             console.log(response)
       } catch (err) {
@@ -641,8 +641,8 @@ this.total = this.currentOrder.charges.total
       }
     },
     async upserves(){
-        let responseUpserve = await this.$http.get("http://young-hamlet-03679.herokuapp.com/product/upserveolo");
-// let responseUpserve = await this.$http.get("http://young-hamlet-03679.herokuapp.com/product/upserve");
+        let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserveolo");
+// let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserve");
         let upserveProducts = responseUpserve.data.body.items
   // console.log(upserveProducts)
         this.upserve = upserveProducts
