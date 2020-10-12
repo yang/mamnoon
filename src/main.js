@@ -16,8 +16,7 @@ import VueCurrencyInput from 'vue-currency-input'
 Vue.use(VueCurrencyInput)
 
 const base = axios.create({
-  baseURL: "https://young-hamlet-03679.herokuapp.com",
-    withCredentials: true
+  baseURL: "https://young-hamlet-03679.herokuapp.com"
   }); 
 // });
 
