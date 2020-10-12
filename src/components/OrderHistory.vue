@@ -36,7 +36,8 @@ retrieveOrders() {
     
     let self = this
 
-this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/${this.currentUser.currentUserEmail}`)
+// this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/${this.currentUser.currentUserEmail}`)
+this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/`)
     .then(function (response) {
         console.log(response);
 
