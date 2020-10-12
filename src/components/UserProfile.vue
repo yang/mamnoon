@@ -1,5 +1,6 @@
 <template>
-    <div>
+
+    <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <div class="container nav-acc-header pad-yellow-background">
         {{$store.state.currentUserEmail}}
@@ -17,6 +18,15 @@
         <!-- <ContactUs /> -->
         <!-- <ToggleVegetarian /> -->
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
+        
+        <OrderHistory :currentUser="$store.state" />
+          
+
+        </div>
+        <div>
+
+
+        </div>
         </div>
 </template>
 
@@ -25,7 +35,10 @@ import EmailForm from "@/components/EmailForm";
 import TestimonialForm from "@/components/TestimonialForm";
 import GiftCardModule from "@/components/GiftCardModule";
 import ToggleVegetarian from "@/components/ToggleVegetarian";
+
+import OrderHistory from "@/components/OrderHistory";
 import ContactUs from "@/components/ContactUs";
+
 
 
 export default {
@@ -35,7 +48,8 @@ name: 'UserProfile',
     EmailForm,
     GiftCardModule,
     ToggleVegetarian,
-    ContactUs
+    ContactUs,
+    OrderHistory
   },
 methods: {
     hideUserModal () {

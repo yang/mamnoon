@@ -25,6 +25,7 @@ export default{
 svg#order{
     width:70px;
 margin: 10px auto;
+/* height: 90px; */
 }
 
 </style>
