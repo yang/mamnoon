@@ -8,7 +8,7 @@ order history:
 
 
 
-<div v-for="order in orderhistory.user" :key="order._id">
+<!-- <div v-for="order in orderhistory.user" :key="order._id">
 <br>
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
@@ -16,7 +16,7 @@ order history:
 </li>
 </ul>
 <hr>
-</div>
+</div> -->
 
 </div>
 </template>
