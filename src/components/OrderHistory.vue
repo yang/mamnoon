@@ -62,7 +62,7 @@ self.response = response
     }
     },
     mounted(){
-        // this.retrieveOrders()
+        this.retrieveOrders()
         this.testServer()
     }
 
