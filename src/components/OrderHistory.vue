@@ -8,7 +8,7 @@ order history:
 
 
 
-<!--<div v-for="order in orderhistory.user" :key="order._id">
+<div v-for="order in orderhistory.user" :key="order._id">
 <br>
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
@@ -16,7 +16,7 @@ order history:
 </li>
 </ul>
 <hr>
-</div>-->
+</div>
 
 </div>
 </template>
@@ -36,10 +36,7 @@ export default {
 retrieveOrders() {
     
     let self = this
-
-this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/${this.currentUser.currentUserEmail}`)
-// this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/`)
-    .then(function (response) {
+this.$http.get(`https://desolate-falls-02289.herokuapp.com/order/${this.currentUser.currentUserEmail}`).then(function (response) {
         console.log(response);
 
         self.orderhistory = response.data
