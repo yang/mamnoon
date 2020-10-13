@@ -36,7 +36,7 @@ export default {
 retrieveOrders() {
     
     let self = this
-this.$http.get(`https://desolate-falls-02289.herokuapp.com/order/${this.currentUser.currentUserEmail}`).then(function (response) {
+this.$http.get(`https://desolate-falls-02289.herokuapp.com/order/email/`).then(function (response) {
         console.log(response);
 
         self.orderhistory = response.data
