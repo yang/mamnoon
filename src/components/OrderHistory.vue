@@ -36,17 +36,33 @@ retrieveOrders() {
     
     let self = this
 
-// this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/${this.currentUser.currentUserEmail}`)
-this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/`)
+this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/${this.currentUser.currentUserEmail}`)
+// this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/`)
     .then(function (response) {
         console.log(response);
 
         self.orderhistory = response.data
     })
+    },
+    testServer(){
+
+
+ 
+this.$http.post(`https://desolate-falls-02289.herokuapp.com/testserve/`,{name:'joseph'})
+// this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/`)
+    .then(function (response) {
+        console.log(response);
+
+        // self.orderhistory = response.data
+    })
+
+
+
     }
     },
     mounted(){
-        this.retrieveOrders()
+        // this.retrieveOrders()
+        this.testServer()
     }
 
 }
