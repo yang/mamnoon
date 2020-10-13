@@ -4,11 +4,11 @@
 <br>
 order history:
 <br>
+{{response}}
 
 
 
-
-<div v-for="order in orderhistory.user" :key="order._id">
+<!--<div v-for="order in orderhistory.user" :key="order._id">
 <br>
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
@@ -16,7 +16,7 @@ order history:
 </li>
 </ul>
 <hr>
-</div>
+</div>-->
 
 </div>
 </template>
@@ -26,7 +26,8 @@ order history:
 export default {
     data( ) {
     return {
-        orderhistory: null
+        orderhistory: null,
+        response: null
         }
     },
     name: 'OrderHistory',
@@ -47,13 +48,15 @@ this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/${this.currentUse
     testServer(){
 
 
- 
+ let self = this
 this.$http.post(`https://desolate-falls-02289.herokuapp.com/testserve/`,{name:'joseph'})
 // this.$http.post(`http://localhost:4000/testserve/`,{name:'joseph'})
 // this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/`)
     .then(function (response) {
         console.log(response);
 
+
+self.response = response
         // self.orderhistory = response.data
     })
 
