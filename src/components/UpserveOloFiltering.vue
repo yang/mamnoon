@@ -12,15 +12,25 @@
         <div class="container modal-body order-modal-width order-modal-body">
           <h2>thank you for your order!</h2>
           <div>
-            <pre>
+            <!-- <pre>
             {{orderConfirmationModalResponse}}
-          </pre>
+          </pre> -->
+
+
+<br />
+<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b>
+<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.city}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.state}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.zip_code}}</b>
+  <br>
+  <b>{{orderConfirmationModalResponse.fulfillment_info.customer.email}}</b>
+<b>{{orderConfirmationModalResponse.fulfillment_info.customer.phone}}</b>
+
+<p>{{orderConfirmationModalResponse.fulfillment_info.customer.instructions}}</p>
+<br />
 <ul class="no-left-pad" v-if="orderConfirmationModalResponse.charges.items">
-  <li v-for="item in orderConfirmationModalResponse.charges.items" :key="item.name">
+  <li class="modal-item" v-for="item in orderConfirmationModalResponse.charges.items" :key="item.name">
     {{item.name}}
   </li>
   </ul>  
-  <br />  
 <b>tip: ${{orderConfirmationModalResponse.charges.tip.amount.toFixed(2)/100}}</b>
   <br />  
 <b>taxes: ${{orderConfirmationModalResponse.charges.taxes.toFixed(2)/100}}</b>
@@ -2422,6 +2432,11 @@ margin-top: 8px;
     font-style: italic;
     font-size: 14px;
     border-radius: 5px;
+}
+
+li.modal-item{
+  list-style-type: none;
+  padding: 10px 0;
 }
 
 </style>
