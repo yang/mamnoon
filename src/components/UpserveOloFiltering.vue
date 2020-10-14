@@ -1519,23 +1519,23 @@ if(this.tipSelected === 0){
     doAnOrder(currentOrder,approvalData) {
 
 
-      // let self = this;
-      // let curOr = JSON.stringify(currentOrder);
-      // this.$http
-      //   .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-      //   // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-      //   .then((response) => {
-      //     console.log(response);
-      //     self.orderConfirmationModal = true;
-      //     self.orderConfirmationModalResponse = response.data;
-      //   })
-      //   .catch((e) => {
-      //     // this.errors.push(e);
-      //     console.log("errors");
-      //     console.log(e);
+      let self = this;
+      let curOr = JSON.stringify(currentOrder);
+      this.$http
+        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        .then((response) => {
+          console.log(response);
+          self.orderConfirmationModal = true;
+          self.orderConfirmationModalResponse = response.data;
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
 
     
-      //   });
+        });
 
 
 

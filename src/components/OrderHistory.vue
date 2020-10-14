@@ -42,28 +42,9 @@ this.$http.get(`/order/email/`).then(function (response) {
         self.orderhistory = response.data
     })
     },
-    testServer(){
-
-
- let self = this
-this.$http.post(`/testserve/`,{name:'joseph'})
-// this.$http.post(`http://localhost:4000/testserve/`,{name:'joseph'})
-// this.$http.get(`https://young-hamlet-03679.herokuapp.com/order/`)
-    .then(function (response) {
-        console.log(response);
-
-
-self.response = response
-        // self.orderhistory = response.data
-    })
-
-
-
-    }
     },
     mounted(){
         this.retrieveOrders()
-        this.testServer()
     }
 
 }
