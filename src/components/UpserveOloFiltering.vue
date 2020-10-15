@@ -18,10 +18,10 @@
 
 
 <br />
-<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b>
+<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b><br />  
 <b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.city}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.state}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.zip_code}}</b>
   <br>
-  <b>{{orderConfirmationModalResponse.fulfillment_info.customer.email}}</b>
+  <b>{{orderConfirmationModalResponse.fulfillment_info.customer.email}}</b>  <br />  
 <b>{{orderConfirmationModalResponse.fulfillment_info.customer.phone}}</b>
 
 <p>{{orderConfirmationModalResponse.fulfillment_info.customer.instructions}}</p>
@@ -1245,7 +1245,7 @@ this.attention = true
 
 
 
-this.checkForm()
+      this.checkForm()
 
       let self = this;
 
@@ -1279,7 +1279,6 @@ this.checkForm()
       return new Promise(function (resolve, reject) {
         $.ajax({
           url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
-          // url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1404,18 +1403,14 @@ if(this.tipSelected === 0){
       if (!container.classList.contains("active")) {
         document.getElementById("plus-" + drawer).classList.remove("visible");
         document.getElementById("minus-" + drawer).classList.add("visible");
-
         /** Show the container. */
         container.classList.add("active");
         container.style.height = "auto";
-
         /** Get the computed height of the container. */
         var height = container.clientHeight + "px";
-
         /** Set the height of the content as 0px, */
         /** so we can trigger the slide down animation. */
         container.style.height = "0px";
-
         /** Do this after the 0px has applied. */
         /** It's like a delay or something. MAGIC! */
         setTimeout(() => {
@@ -1464,43 +1459,35 @@ if(this.tipSelected === 0){
         sides: [],
       };
 
-      this.currentOrder.charges.items.push(itemToAdd);
+        this.currentOrder.charges.items.push(itemToAdd);
 
-      this.total =
-        Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
+          this.total =
+            Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
 
-      let newDate = new Date();
-      this.currentOrder.time_placed = newDate;
-      this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          let newDate = new Date();
+          this.currentOrder.time_placed = newDate;
+          this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
 
-      //then close the modal
-      this.currentItemModifierArray = [];
-      this.closeModal();
-      let storeCurrentOrder = this.currentOrder;
+          //then close the modal
+          this.currentItemModifierArray = [];
+          this.closeModal();
+          let storeCurrentOrder = this.currentOrder;
 
+          this.totalwith18 = this.total * .18
+          this.totalwith22 = this.total * .22
+          this.totalwith25 = this.total * .25
 
-this.totalwith18 = this.total * .18
-this.totalwith22 = this.total * .22
-this.totalwith25 = this.total * .25
+          if(this.tipSelected === 0){
+            this.currentAmountToAdd = 0
+          }else if(this.tipSelected === 1){
+            this.currentAmountToAdd = this.totalwith18
+          }else if(this.tipSelected === 2){
+            this.currentAmountToAdd = this.totalwith22
+          }else if(this.tipSelected === 3){
+            this.currentAmountToAdd = this.totalwith25
+          }else{
 
-
-
-
-if(this.tipSelected === 0){
-  this.currentAmountToAdd = 0
-}else if(this.tipSelected === 1){
-  this.currentAmountToAdd = this.totalwith18
-}else if(this.tipSelected === 2){
-  this.currentAmountToAdd = this.totalwith22
-}else if(this.tipSelected === 3){
-  this.currentAmountToAdd = this.totalwith25
-}else{
-
-}
-
-
-
-
+          }
 
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
@@ -1514,7 +1501,6 @@ if(this.tipSelected === 0){
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        //   // "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
         "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
@@ -1586,10 +1572,34 @@ console.log(infoForPayStringify)
       // let self = this;
       // let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/issue-return", 'd492296a-2ecd-4c64-8768-b186869257f7')
+        .post("/issue-return")
         // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
         .then((response) => {
-          console.log(response);
+        let prestring = JSON.stringify(response.data.transactionToken)
+        let token = prestring.replace(/['"]+/g, '')
+        emergepay.open({
+          // (required) Used to set up the modal
+          transactionToken: token,
+          // (optional) Callback function that gets called after a successful transaction
+          onTransactionSuccess: function (approvalData) {
+            console.log("Approval Data", approvalData);
+            emergepay.close();
+            // location = "https://www.chargeitpro.com";
+            //do the post here
+            // self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
+          },
+          // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
+          onTransactionFailure: function (failureData) {
+            console.log("Failure Data", failureData);
+          },
+          // (optional) Callback function that gets called after a user clicks the close button on the modal
+          onTransactionCancel: function () {
+            console.log("transaction cancelled!");
+          },
+        });
+
+
+
 
         })
         .catch((e) => {
@@ -2437,6 +2447,7 @@ margin-top: 8px;
 li.modal-item{
   list-style-type: none;
   padding: 10px 0;
+  font-size: 18px;
 }
 
 </style>

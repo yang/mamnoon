@@ -33,11 +33,9 @@ export default {
     name: 'OrderHistory',
     props: ['currentUser'],
     methods: {
-retrieveOrders() {
-    // console.log(this.currentUser.currentUserEmail)
+    retrieveOrders() {
     let self = this
         this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
-        // console.log(response);
         self.orderhistory = response.data
     })
     },
