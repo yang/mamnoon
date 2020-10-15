@@ -732,13 +732,13 @@ cart empty
       </div>
           </div>
         </div>
-        <pre>
+        <!-- <pre>
           {{this.$store.state.storeCurrentOrder}}
-        </pre>
+        </pre> -->
 
         <div>
 
-<button @click="issueReturn()">issue return</button>
+<!-- <button @click="issueReturn()">issue return</button> -->
 </div>
 
          
@@ -1569,8 +1569,6 @@ console.log(infoForPayStringify)
         
     },
     issueReturn() {
-      // let self = this;
-      // let curOr = JSON.stringify(currentOrder);
       this.$http
         .post("/issue-return")
         // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
