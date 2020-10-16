@@ -25,6 +25,8 @@ transaction id:
 
 </li>
 </ul>
+<br>
+<button @click="issueTokenizedReturn(order.orderInfo.uniqueTransId)">issue return</button>
 <hr>
 </div>
 
@@ -50,6 +52,22 @@ export default {
         self.orderhistory = response.data
     })
     },
+        issueTokenizedReturn(uniqueTransIdString) {
+      this.$http
+        .post("/issue-tokenized-return", {
+            uniqueTransId: uniqueTransIdString,
+            amount: "0.01"
+          }
+          )
+        .then((response) => {
+console.log(response)
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+    }
     },
     mounted(){
         this.retrieveOrders()

@@ -746,7 +746,7 @@ cart empty
 
         <div>
 
-<!-- <button @click="issueReturn()">issue return</button> -->
+<!-- <button @click="issueTokenizedReturn()">issue return</button> -->
 </div>
 
          
@@ -1615,8 +1615,9 @@ if(this.tipSelected === 0){
     issueTokenizedReturn() {
       this.$http
         .post("/issue-tokenized-return", {
-          uniqueTransId: "your_unique_trans_id",
-          amount: "0.01"}
+            uniqueTransId: "a7f6bf5453c14ab5afcc0e3eedf799fa-a109feb7f21d4ec7ac9af5febaff7531",
+            amount: "0.01"
+          }
           )
         .then((response) => {
 console.log(response)
