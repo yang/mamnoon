@@ -55,7 +55,13 @@ const routes = [
     path: '/restaurant/:id',
     name: "restaurant",
     component: () => import("../views/restaurant.vue")
-  }
+  },
+  {
+    path: '/transactions',
+    name: "transactions",
+    component: () => import("../views/transactions.vue")
+  },  
+
 ];
 
 
