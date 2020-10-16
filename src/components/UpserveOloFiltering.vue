@@ -194,7 +194,9 @@
                               </div>
                             </template>
                                                  <div class="content-box-upper">
-                              <div class="name">{{item.name.replace('Feature - ', '')}}<br>{{serve.name}}</div>
+                              <div class="name">
+                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
+                              {{serve.name}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
