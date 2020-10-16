@@ -131,22 +131,7 @@ export default {
     },
     changedAlert() {
       console.log("changed");
-    },
-    // async upserves(){
-
-    //   let responseUpserve = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/upserve");
-    //   console.log(responseUpserve)
-    //   let upserveProducts = responseUpserve.data.body.objects
-  
-    //   this.upserve = upserveProducts
-
-    //   for(let i = 0;i<upserveProducts.length;i++){
-    //     if(!this.upserveCategories.includes(upserveProducts[i].category)){
-    //       this.upserveCategories.push(upserveProducts[i].category)
-    //     }
-    //   }
-
-    // }
+    }
   },
   created() {
     var today = new Date();

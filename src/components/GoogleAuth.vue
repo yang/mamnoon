@@ -1,24 +1,23 @@
 <template>
   <div class="hello">
-      <a
-        type="primary"
-        icon="fas fa-edit"
-        @click="handleClickSignIn"
-        v-if="!isSignIn"
-        :disabled="!isInit"
-      >
+    <a
+      type="primary"
+      icon="fas fa-edit"
+      @click="handleClickSignIn"
+      v-if="!isSignIn"
+      :disabled="!isInit"
+    >
       sign in
-
-      </a>
-      <a
-        type="primary"
-        icon="fas fa-edit"
-        @click="handleClickSignOut"
-        v-if="isSignIn"
-        :disabled="!isInit"
-      >
+    </a>
+    <a
+      type="primary"
+      icon="fas fa-edit"
+      @click="handleClickSignOut"
+      v-if="isSignIn"
+      :disabled="!isInit"
+    >
       sign out
-      </a>
+    </a>
   </div>
 </template>
 
@@ -27,85 +26,76 @@
 export default {
   name: "GoogleAuth",
   props: {
-    msg: String
+    msg: String,
   },
   data() {
     return {
       isInit: false,
-      isSignIn: false
+      isSignIn: false,
     };
   },
   methods: {
     handleClickLogin() {
       this.$gAuth
         .getAuthCode()
-        .then(authCode => {
+        .then((authCode) => {
           //on success
           // console.log("authCode", authCode);
         })
-        .catch(error => {
+        .catch((error) => {
           //on fail do something
           console.error(error);
         });
     },
-    showUserInfo(email){
- 
-let self = this
-      this.$http.get('/api/user/email/' + email)
-        .then(function(response) {
-    //  console.log(response) 
+    showUserInfo(email) {
+      let self = this;
+      this.$http
+        .get("/api/user/email/" + email)
+        .then(function (response) {
+          //  console.log(response)
 
+          ////
 
+          ////
 
-
-////
-
-
-////
-
-
-      let currentUserInfo = response.data
-      console.log(currentUserInfo)
-      self.$store.commit('updateCurrentUser', { currentUserInfo })
-
+          let currentUserInfo = response.data;
+          console.log(currentUserInfo);
+          self.$store.commit("updateCurrentUser", { currentUserInfo });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
-
-  },
+    },
     handleClickSignIn() {
       this.$gAuth
         .signIn()
-        .then(GoogleUser => {
+        .then((GoogleUser) => {
+          var profile = GoogleUser.getBasicProfile();
 
-        var profile = GoogleUser.getBasicProfile();
+          // console.log("Email: " + profile.getEmail());
 
-        // console.log("Email: " + profile.getEmail());
+          // console.log(this.$gAuth.isAuthorized)
+          // console.log(profile)
+          // this.showUserInfo(profile.getEmail())
+          this.isSignIn = this.$gAuth.isAuthorized;
 
-        // console.log(this.$gAuth.isAuthorized)
-        // console.log(profile)
-        // this.showUserInfo(profile.getEmail())
-        this.isSignIn = this.$gAuth.isAuthorized;
+          this.$store.commit("logIn");
 
-        this.$store.commit('logIn')
-
-        let currentUserEmail = profile.getEmail()
-        // console.log(profile)
-        // console.log(currentUserEmail)
-        this.$store.commit('setCurrentUserEmail', { currentUserEmail })
-
+          let currentUserEmail = profile.getEmail();
+          // console.log(profile)
+          // console.log(currentUserEmail)
+          this.$store.commit("setCurrentUserEmail", { currentUserEmail });
         })
-        .catch(error => {
+        .catch((error) => {
           //on fail do something
           console.error(error);
         });
     },
 
     handleClickSignOut() {
-        localStorage.clear()
-        this.$store.commit('logOut')
-        this.$gAuth
+      localStorage.clear();
+      this.$store.commit("logOut");
+      this.$gAuth
         .signOut()
         .then(() => {
           //on success do something
@@ -113,41 +103,32 @@ let self = this
           // this.isSignIn = false
           // location.reload()
           // clear user current email and clear user info
-          this.$store.commit('clearCurrentUser')
+          this.$store.commit("clearCurrentUser");
 
-  
-
-
-
- if(this.$router.currentRoute.fullPath === '/'){
-
- }else{
-   this.$router.push("/");
- }
-
-
-
+          if (this.$router.currentRoute.fullPath === "/") {
+          } else {
+            this.$router.push("/");
+          }
         })
-        .catch(error => {
+        .catch((error) => {
           //on fail do something
           console.error(error);
         });
-
     },
 
     handleClickDisconnect() {
       window.location.href = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${window.location.href}`;
-    }
+    },
   },
 
   created() {
     let that = this;
-    let checkGauthLoad = setInterval(function() {
+    let checkGauthLoad = setInterval(function () {
       that.isInit = that.$gAuth.isInit;
       that.isSignIn = that.$gAuth.isAuthorized;
       if (that.isInit) clearInterval(checkGauthLoad);
     }, 1000);
-  }
+  },
 };
 </script>
 

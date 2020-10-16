@@ -12,4 +12,16 @@ svg#show-all{
     margin: 20px auto 10px;
 }
 
+
+
+@media only screen and (max-width: 768px) {
+
+svg#show-all{
+    margin: 10px auto 10px;
+}
+
+
+}
+
+
 </style>

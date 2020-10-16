@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="newsletter-section">
-        <div class="pad-cont" style="padding-top: 40px;">
+        <div class="pad-cont" >
             <CampaignMonitor />
         </div>
       </div>
@@ -62,6 +62,14 @@ float: left;
     .pad-cont{
            padding: 20px 30px;
     }
+
+&:nth-child(2){
+       .pad-cont{
+        padding-top: 40px;
+       }
+}
+
+
 }
 
 @media only screen and (max-width: 960px) {
@@ -90,6 +98,7 @@ float: left;
 &:nth-child(2){
        .pad-cont{
         padding-bottom: 15px;
+        padding-top: 15px;
        }
 }
 
@@ -111,5 +120,18 @@ float: left;
     overflow: hidden;
     padding-top: 0 !important;
 }
+
+
+@media only screen and (max-width: 992px){
+
+.description-para-left{
+    width: 90%;
+    font-size: 12px;
+}
+
+}
+
+
+
 
 </style>

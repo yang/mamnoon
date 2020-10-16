@@ -3,7 +3,7 @@
         <h4>{{header}}</h4>
                 <p class="description-para noselect">{{description}}</p>
         <carousel
-          :responsive=" {0:{items:1},768:{items:2},1080:{items:3}}"
+          :responsive=" {0:{items:1},480:{items:2},1080:{items:3}}"
           :items="1"
           :loop="false"
           :dots="false"

@@ -56,6 +56,9 @@
           >
             <img :src="currentItem.images.online_ordering_menu.main" />
           </div>
+          <div class="item-image-container" v-else>
+            <NadiIcon />
+            </div>
 
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
@@ -179,14 +182,16 @@
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
                         <div @click="openModal(serve)">
                             <template v-if="serve.images">
-                              <div
+                              <div class="slide-show-image-home"
                                 v-if="serve.images.online_ordering_menu"
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
                               <div
                                 v-else
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              ></div>
+                              >
+                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
+                              </div>
                             </template>
                                                  <div class="content-box-upper">
                               <div class="name">{{item.name.replace('Feature - ', '')}}<br>{{serve.name}}</div>
@@ -274,8 +279,9 @@
                                 v-else
                                 class="backgroundImage"
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              ></div>
+                              >     <NadiIconSm /></div>
                             </template>
+                    
                           </div>
                         </div>
                       </template>
@@ -763,6 +769,10 @@ import VueAspectRatio from "vue-aspect-ratio";
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
 
+import NadiIcon from "@/components/svgIcons/NadiIcon";
+import NadiIconSm from "@/components/svgIcons/NadiIconSm";
+
+
 import swal from "sweetalert";
 export default {
   name: "upservefiltering",
@@ -776,7 +786,9 @@ export default {
     carousel,
     VueAspectRatio,
     Next,
-    Prev
+    Prev,
+    NadiIcon,
+    NadiIconSm
   },
   computed: {
     googleAddress() {
@@ -1278,7 +1290,7 @@ this.attention = true
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          url: "http://localhost:4000/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1501,7 +1513,7 @@ if(this.tipSelected === 0){
     },
     async upserves() {
       let responseUpserve = await this.$http.get(
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        "/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1518,8 +1530,7 @@ if(this.tipSelected === 0){
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
-        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
+        .post("/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;
@@ -1533,26 +1544,20 @@ if(this.tipSelected === 0){
     
         });
 
+      let axiosConfig = {
+        headers: {
+          'Content-Type': 'application/json', 
+          'Access-Control-Allow-Origin': '*'
+        }
+      };
 
-
-
-let axiosConfig = {
-  headers: {
-      'Content-Type': 'application/json', 
-      'Access-Control-Allow-Origin': '*'
-  }
-};
-
-
-let infoForPay = {
+    let infoForPay = {
           payInfo: currentOrder,
           orderInfo: approvalData
         }
-
- let infoForPayStringify = JSON.stringify(infoForPay)       
-console.log(infoForPayStringify)
+    let infoForPayStringify = JSON.stringify(infoForPay)       
      this.$http
-        .post("https://young-hamlet-03679.herokuapp.com/order/addorder", infoForPayStringify, axiosConfig)
+        .post("/order/addorder", infoForPayStringify, axiosConfig)
         .then((response) => {
           console.log(response);
           console.log('add to mongo emerge pay front end')
@@ -1571,7 +1576,6 @@ console.log(infoForPayStringify)
     issueReturn() {
       this.$http
         .post("/issue-return")
-        // .post("https://young-hamlet-03679.herokuapp.com/oloorder", currentOrder)
         .then((response) => {
         let prestring = JSON.stringify(response.data.transactionToken)
         let token = prestring.replace(/['"]+/g, '')
@@ -1599,6 +1603,21 @@ console.log(infoForPayStringify)
 
 
 
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+    },
+    issueTokenizedReturn() {
+      this.$http
+        .post("/issue-tokenized-return", {
+          uniqueTransId: "your_unique_trans_id",
+          amount: "0.01"}
+          )
+        .then((response) => {
+console.log(response)
         })
         .catch((e) => {
           // this.errors.push(e);
@@ -1728,6 +1747,14 @@ h2.menu-header {
   font-size: 18px;
   font-weight: 400;
 }
+
+@media only screen and (max-width: 600px) {
+h2.menu-header {
+ padding-left: 10px;
+}
+
+}
+
 
 button.delivery-option {
     width: 49%;
@@ -2002,10 +2029,27 @@ border-top: 0;
 
   background: #f0ecec;
 
-  img {
+  img, svg {
     width: auto !important;
     height: 300px;
   }
+
+
+div{
+  svg{
+    height: 300px;
+  }
+}
+
+}
+
+
+
+
+
+.item-image-container > div > svg {
+    height: 300px;
+ 
 }
 
 .add-to-order-footer {
@@ -2446,6 +2490,13 @@ li.modal-item{
   list-style-type: none;
   padding: 10px 0;
   font-size: 18px;
+}
+
+
+.slide-show-image-home{
+  width: 100%;
+  height: 562px;
+  background-size: 100% 96%;
 }
 
 </style>

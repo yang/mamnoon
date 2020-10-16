@@ -16,11 +16,10 @@ import VueCurrencyInput from 'vue-currency-input'
 Vue.use(VueCurrencyInput)
 
 const base = axios.create({
-  baseURL: "https://young-hamlet-03679.herokuapp.com"
-  // baseURL: "https://desolate-falls-02289.herokuapp.com"
-  // baseURL: "http://localhost:4000"
-  }); 
-// });
+    baseURL: "https://young-hamlet-03679.herokuapp.com"
+    // baseURL: "http://localhost:4000"
+    }); 
+
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
@@ -53,24 +52,12 @@ var genUserName = function(text){
   return text.split('@')[0];
 };
 
-
-
-
-
-
-
-
 Vue.filter('truncate', filter);
 Vue.filter('generateUsername', genUserName)
 Vue.filter('reverse', function (value) {
   return value.split('').reverse().join('')
 })
 
-
-
-
-
-// vuexstoremethods
 Vue.use(VueScrollactive);
 
 Vue.use(Vuex)
@@ -79,13 +66,6 @@ const vuexLocalStorage = new VuexPersist({
   key: 'vuex',
   storage: window.localStorage
 })
-
-
-// var today = new Date();
-// var dd = String(today.getDate()).padStart(2, '0');
-
-
-
 
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
@@ -223,23 +203,6 @@ const store = new Vuex.Store({
 
 
     state.inventory.tockMeals = []
-
-    // inventoryTockAdd.forEach(function(e){
-    //   // if( !lookup( e.createdLink ) ) {
-    //     state.inventory.tockMeals.push(e);
-    //   // }
-    // })
-
-
-    // base.post('/tock/tocktomongo',{ inventoryTockAdd })
-    // .then(function(res){
-    //   console.log(res)
-    // })
-    // .catch(function(err){
-    //   console.log(err)
-    // })
-
-
     },
     updateTockMealsStreet(state, { inventoryTockAddStreet }){
 
@@ -257,14 +220,6 @@ const store = new Vuex.Store({
         }
       })
 
-    // base.post('/tock/tocktomongo',{ inventoryTockAddStreet })
-    // .then(function(res){
-    //   console.log(res)
-    // })
-    // .catch(function(err){
-    //   console.log(err)
-    // })
-
     },
    async updateTockItem(state, { updateTockItem }){
 
@@ -279,12 +234,6 @@ const store = new Vuex.Store({
         tockItem.image = tock.text
       }
 
-          // base.post(`/tock/removealltocks`)
-          // .then(function(res){
-          // })
-          // .catch(function(err){
-          //   console.log(err)
-          // })
 
           base.post(`/tock/updatetockofferings`, { updateTockItem })
           .then(function(res){
@@ -337,20 +286,9 @@ new Vue({
   async mounted () {
 
 
-  let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
-
-
-
-
-
-
+let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
 let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
-
 this.$store.commit('updateTockMeals', { inventoryTockAdd })
-
-
-
-
 
 }
 }).$mount("#app");

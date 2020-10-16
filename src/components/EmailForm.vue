@@ -45,13 +45,7 @@
       name="body"
     ></textarea>
   </p>
-
-
   <p>
-    <!-- <input
-      type="submit"
-      value="Submit"
-    > -->
     <button class="buttonStyle" type="submit" value="Submit">
         <Submit />
       </button>
@@ -95,8 +89,7 @@ props: ['emailAddress'],
 methods: {
     async checkForm() {
       try {
-        let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/user/submittestimonial", this.messageBody);
-        // console.log(response.data.user.testimonials);
+        let response = await this.$http.post("/user/submittestimonial", this.messageBody);
         console.log(response.data)
         this.testimonials = response.data.user.testimonials
 
@@ -112,10 +105,8 @@ methods: {
     },
     async getTestimonials() {
 
-// console.log('get testimonials')
-// console.log(this.emailAddress)
       try {
-        let response = await this.$http.get("https://young-hamlet-03679.herokuapp.com/user/gettestimonials/" + this.emailAddress);
+        let response = await this.$http.get("/user/gettestimonials/" + this.emailAddress);
 
 
        console.log(response.data)
@@ -150,11 +141,7 @@ methods: {
 
     },
     handler(){
-
-        //  event.returnValue = 'Write something'
-     console.log('page refresh')
-     
-     
+     console.log('page refresh')     
      
     }
 },

@@ -15,7 +15,6 @@
 
         
         <!-- <EmailForm :emailAddress="$store.state.currentUserEmail" /> -->
-        <!-- <ContactUs /> -->
         <!-- <ToggleVegetarian /> -->
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
         <!-- order he -->
@@ -37,7 +36,6 @@ import GiftCardModule from "@/components/GiftCardModule";
 import ToggleVegetarian from "@/components/ToggleVegetarian";
 
 import OrderHistory from "@/components/OrderHistory";
-import ContactUs from "@/components/ContactUs";
 
 
 
@@ -48,7 +46,6 @@ name: 'UserProfile',
     EmailForm,
     GiftCardModule,
     ToggleVegetarian,
-    ContactUs,
     OrderHistory
   },
 methods: {

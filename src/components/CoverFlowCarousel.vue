@@ -40,7 +40,7 @@
   </div>
     
   <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;">
-
+<NadiIcon style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -57%);"  v-else />
  <div
                                 v-if="serve.description"
                                 class="food-description bottom-bar">
@@ -120,6 +120,11 @@ import DeliveryStar from "@/components/svgIcons/DeliveryStar";
 import UpserveFeatured from "@/components/UpserveFeatured";
 
 
+
+
+
+import NadiIcon from "@/components/svgIcons/NadiIcon";
+
 import carousel from "vue-owl-carousel";
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
@@ -137,7 +142,8 @@ export default {
     Next,
     UpserveFeatured,
     VueAspectRatio,
-    carousel
+    carousel,
+    NadiIcon
   },
   data() {
     return {
@@ -207,19 +213,8 @@ console.log(this.helpArray)
     count(newCount, oldCount) {
 
 
-      // if(newCount){
-      console.log('newCount')
-  console.log(newCount)
-      // this.date = newCount[0].mealItem.name
-      //this.delivery = newCount[0].meal
-      // this.reset(newCount);
-      // }
-
-
-
-
-
-
+    // console.log('newCount')
+    // console.log(newCount)
 
     }
   },
@@ -231,7 +226,7 @@ console.log(this.helpArray)
   methods: {
         async upserves() {
       let responseUpserve = await this.$http.get(
-        "https://young-hamlet-03679.herokuapp.com/product/upserveolo"
+        "/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -805,7 +800,8 @@ text-align: center;
  position: relative;
  width: 500px;
 //  margin: 0 auto;
- background: black;
+//  background: black;
+background: #8c8c8c;
  overflow:hidden;
  height: 482px;
      margin: 10px auto 0;

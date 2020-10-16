@@ -108,6 +108,6 @@ export default {
 
 svg#show-all {
   width: 172px;
-  margin: 20px auto 10px;
+  margin: 10px auto 10px;
 }
 </style>

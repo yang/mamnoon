@@ -80,7 +80,7 @@ name: 'Products',
 methods: {
     async addProduct() {
       try {
-        let response = await this.$http.post("https://young-hamlet-03679.herokuapp.com/product/addproduct", this.product);
+        let response = await this.$http.post("/product/addproduct", this.product);
 
         // console.log(response)
 
@@ -94,7 +94,7 @@ methods: {
 
          console.log('all productgs listes')
       try {
-        let response = await this.$http.get("https://young-hamlet-03679.herokuapp.com/product/allproducts");
+        let response = await this.$http.get("/product/allproducts");
           this.products = response.data.products
 
       } catch (err) {
