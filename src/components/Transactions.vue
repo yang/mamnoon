@@ -3,7 +3,11 @@
     <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <div class="container nav-acc-header pad-yellow-background">
-
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" @click="logUserOut"> Logout</a>
+            </li>
+          </ul>
         <AllTransactions />
           
     </div>
@@ -15,7 +19,7 @@
 <script type="text/javascript">
 
 import AllTransactions from "@/components/AllTransactions";
-
+import VueJwtDecode from "vue-jwt-decode";
 
 
 export default {
@@ -23,6 +27,12 @@ name: 'UserProfile',
   components: {
 
    AllTransactions
+  },
+  methods:{
+        logUserOut() {
+      localStorage.removeItem("jwt");
+      this.$router.push("/");
+    }
   }
 }
 </script>

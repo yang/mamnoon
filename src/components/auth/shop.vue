@@ -50,7 +50,7 @@
           <h4 class="noselect">mama shop</h4>
           <p
             class="description-para noselect"
-          >order now Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id venenatis a condimentum vitae sapien pellentesque.</p>
+          >for merchandise and other special items, browse the brand new mama shop</p>
         </div>
 
 

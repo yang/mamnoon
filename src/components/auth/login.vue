@@ -1,5 +1,5 @@
 <template>
-  <div class="container nav-acc-header">
+  <div class="container nav-acc-header" style="padding-top: 100px;">
     <div class="row">
       <div class="col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
         <form
@@ -70,15 +70,11 @@ export default {
         let token = response.data.token;
         localStorage.setItem("jwt", token);
         if (token) {
-          // swal("Success", "Login Successful", "Error");
-          this.$router.push("/");
-// this.$store.commit('logIn', { timeslot })
-this.$store.commit('logIn')
-console.log(this.$store.state.loggedIn)
-
+          swal("Success", "Login Successful", "Error");
+          this.$router.push("/transactions");
         }
       } catch (err) {
-        // swal("Error", "Something Went Wrong", "error");
+        swal("Error", "Something Went Wrong", "error");
         console.log(err.response);
       }
     }

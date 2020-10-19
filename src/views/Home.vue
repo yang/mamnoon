@@ -52,7 +52,14 @@ export default {
       let response = await this.$http.get('/api/user/' + this.user._id) 
       this.products = response.data.user.products
     },
+    logUserOut() {
+      localStorage.removeItem("jwt");
+      this.$router.push("/");
+    }
     },
+  created() {
+    this.getUserDetails();
+  }
 };
 </script>
 
