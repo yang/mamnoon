@@ -7,18 +7,23 @@
 <h4 class="noselect">{{header}}</h4>
     <p class="description-para" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
    <template v-if="upserveSections.length === 0">
-     <div class="container text-center pt20 white-text" style="height: 550px;margin-top: 100px;">
+     <div class="container text-center pt20 white-text" style="height: 550px;margin-top: 100px;position: relative;">
+       <div class="loading-box">
        Loading...
+       </div>
      </div>
      </template>
          <template v-else>
-        <carousel :items="1" :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
+        <carousel :items="1" :loop="false" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />
             </span>
           </template>
            
+
+
+
            
            
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
@@ -839,5 +844,18 @@ background: #8c8c8c;
 
 }
 
+
+
+
+.loading-box{
+    width: 500px;
+    color: red;
+    height: 500px;
+    background: #fff;
+    padding-top: 240px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50px);
+}
 
 </style>

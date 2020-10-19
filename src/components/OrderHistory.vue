@@ -10,6 +10,12 @@ order history:
 
 <div v-for="order in orderhistory.user" :key="order._id">
 <br>
+<pre>
+{{order.payInfo}}
+</pre>
+
+<br>
+<button @click="reorder">re order</button>
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
 {{item.name}}

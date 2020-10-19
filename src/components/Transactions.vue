@@ -18,9 +18,10 @@ polling:
 <button @click="retrievePoll(externalTransactionId)">
   retrive
 </button>
-
-{{pollResults}}
-
+<br>
+<pre>
+  {{pollResults}}
+</pre>
 
           </div>
     </div>

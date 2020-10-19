@@ -1,15 +1,15 @@
 <template>
   <div>
-            <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday' || item.name === 'Feature - Wednesday' || item.name === 'Feature - Thursday' || item.name === 'Feature - Friday' || item.name === 'Feature - Saturday'">
-                <template v-for="piece in item.item_ids">
-                    <template v-for="serve in upserve">
-                      <template v-if="serve.id === piece" class="inline-block">
-                                    {{item.name}}
-                                    {{serve.name}}
-              </template>
-              </template>
-              </template>
-              </template>
+    <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday' || item.name === 'Feature - Wednesday' || item.name === 'Feature - Thursday' || item.name === 'Feature - Friday' || item.name === 'Feature - Saturday'">
+      <template v-for="piece in item.item_ids">
+        <template v-for="serve in upserve">
+          <template v-if="serve.id === piece" class="inline-block">
+            {{item.name}}
+            {{serve.name}}
+          </template>
+        </template>
+      </template>
+    </template>
   </div>
 </template>
 

@@ -167,13 +167,13 @@
      </template>
          <template v-else>
    
-<div class="is-fullheight no-top-pad">
-        <carousel :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
-                      <template class="subprev" slot="prev">
-                <span class="prev">
-                    <Prev />
-            </span>
-          </template>
+<div id="online-menu" class="is-fullheight no-top-pad">
+        <carousel :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
+              <template class="subprev" slot="prev">
+              <span class="prev">
+              <Prev />
+              </span>
+              </template>
 
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <template v-for="item in upserveSections">
@@ -186,6 +186,9 @@
                                 v-if="serve.images.online_ordering_menu"
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
+
+                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
+
                               <div
                                 v-else
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
@@ -216,15 +219,11 @@
           </template>
             </carousel>
 </div>
-
 </template>
-
 <br>
-                        <div class="container online-menu">
-              <h4>full mamnoon menu</h4>
-
-
-            </div>
+<div class="container online-menu">
+<h4>full mamnoon menu</h4>
+</div>
      
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
@@ -1554,8 +1553,8 @@ if(this.tipSelected === 0){
       };
 
     let infoForPay = {
-          payInfo: currentOrder,
-          orderInfo: approvalData
+          payInfo: approvalData,
+          orderInfo: currentOrder
         }
     let infoForPayStringify = JSON.stringify(infoForPay)       
      this.$http
@@ -2358,6 +2357,8 @@ margin-top: -3px;
     left: 0;
     width: 100%;
     height: 100%;
+        overflow: hidden;
+            background: #a5a5a5;
 }
 
 .yellow-bg{
@@ -2499,8 +2500,39 @@ li.modal-item{
 .slide-show-image-home{
   width: 100%;
   height: 562px;
-  background-size: 100% 96%;
+  background-size: 110% 100%;
+
+  filter: blur(4px);
+    // transform: scale(1.2);
+    overflow: hidden;
 }
+
+
+.slide-show-image{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    height: 440px;
+    width: auto !important;
+    transform: translate(-50%);
+    }
+
+
+#online-menu .owl-item{
+      background: #a5a5a5 !important;
+}
+
+.loading-box{
+    width: 500px;
+    color: red;
+    height: 500px;
+    background: #fff;
+    padding-top: 240px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50px);
+}
+
 
 </style>
 

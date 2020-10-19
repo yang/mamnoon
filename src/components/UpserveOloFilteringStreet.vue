@@ -12,15 +12,25 @@
         <div class="container modal-body order-modal-width order-modal-body">
           <h2>thank you for your order!</h2>
           <div>
-            <pre>
+            <!-- <pre>
             {{orderConfirmationModalResponse}}
-          </pre>
+          </pre> -->
+
+
+<br />
+<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b><br />  
+<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.city}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.state}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.zip_code}}</b>
+  <br>
+  <b>{{orderConfirmationModalResponse.fulfillment_info.customer.email}}</b>  <br />  
+<b>{{orderConfirmationModalResponse.fulfillment_info.customer.phone}}</b>
+
+<p>{{orderConfirmationModalResponse.fulfillment_info.customer.instructions}}</p>
+<br />
 <ul class="no-left-pad" v-if="orderConfirmationModalResponse.charges.items">
-  <li v-for="item in orderConfirmationModalResponse.charges.items" :key="item.name">
+  <li class="modal-item" v-for="item in orderConfirmationModalResponse.charges.items" :key="item.name">
     {{item.name}}
   </li>
   </ul>  
-  <br />  
 <b>tip: ${{orderConfirmationModalResponse.charges.tip.amount.toFixed(2)/100}}</b>
   <br />  
 <b>taxes: ${{orderConfirmationModalResponse.charges.taxes.toFixed(2)/100}}</b>
@@ -46,6 +56,9 @@
           >
             <img :src="currentItem.images.online_ordering_menu.main" />
           </div>
+          <div class="item-image-container" v-else>
+            <NadiIcon />
+            </div>
 
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
@@ -123,11 +136,10 @@
       </div>
 
 
-
       <div class="container pt20 no-bot-pad">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center">mamnoon street</h1>
+             <h1 class="text-center">mamnoon</h1>
                </div>
         </div>
       </div>
@@ -155,13 +167,13 @@
      </template>
          <template v-else>
    
-<div class="is-fullheight no-top-pad">
-        <carousel :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
-                      <template class="subprev" slot="prev">
-                <span class="prev">
-                    <Prev />
-            </span>
-          </template>
+<div id="online-menu" class="is-fullheight no-top-pad">
+        <carousel :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
+              <template class="subprev" slot="prev">
+              <span class="prev">
+              <Prev />
+              </span>
+              </template>
 
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <template v-for="item in upserveSections">
@@ -170,17 +182,24 @@
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
                         <div @click="openModal(serve)">
                             <template v-if="serve.images">
-                              <div
+                              <div class="slide-show-image-home"
                                 v-if="serve.images.online_ordering_menu"
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
+
+                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
+
                               <div
                                 v-else
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              ></div>
+                              >
+                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
+                              </div>
                             </template>
                                                  <div class="content-box-upper">
-                              <div class="name">{{item.name.replace('Feature - ', '')}}<br>{{serve.name}}</div>
+                              <div class="name">
+                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
+                              {{serve.name}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
@@ -265,8 +284,9 @@
                                 v-else
                                 class="backgroundImage"
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              ></div>
+                              >     <NadiIconSm /></div>
                             </template>
+                    
                           </div>
                         </div>
                       </template>
@@ -723,9 +743,17 @@ cart empty
       </div>
           </div>
         </div>
-        <pre>
+        <!-- <pre>
           {{this.$store.state.storeCurrentOrder}}
-        </pre>
+        </pre> -->
+
+        <div>
+
+<!-- <button @click="issueTokenizedReturn()">issue return</button> -->
+</div>
+
+         
+
       </div>
     </section>
   </div>
@@ -746,6 +774,10 @@ import VueAspectRatio from "vue-aspect-ratio";
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
 
+import NadiIcon from "@/components/svgIcons/NadiIcon";
+import NadiIconSm from "@/components/svgIcons/NadiIconSm";
+
+
 import swal from "sweetalert";
 export default {
   name: "upservefiltering",
@@ -759,7 +791,9 @@ export default {
     carousel,
     VueAspectRatio,
     Next,
-    Prev
+    Prev,
+    NadiIcon,
+    NadiIconSm
   },
   computed: {
     googleAddress() {
@@ -1228,7 +1262,7 @@ this.attention = true
 
 
 
-this.checkForm()
+      this.checkForm()
 
       let self = this;
 
@@ -1243,7 +1277,7 @@ this.checkForm()
             emergepay.close();
             // location = "https://www.chargeitpro.com";
             //do the post here
-            // self.doAnOrder(self.$store.state.storeCurrentOrder);
+            self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
           },
           // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
@@ -1261,7 +1295,7 @@ this.checkForm()
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "/start-transaction",
+          url: "http://localhost:4000/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1386,18 +1420,14 @@ if(this.tipSelected === 0){
       if (!container.classList.contains("active")) {
         document.getElementById("plus-" + drawer).classList.remove("visible");
         document.getElementById("minus-" + drawer).classList.add("visible");
-
         /** Show the container. */
         container.classList.add("active");
         container.style.height = "auto";
-
         /** Get the computed height of the container. */
         var height = container.clientHeight + "px";
-
         /** Set the height of the content as 0px, */
         /** so we can trigger the slide down animation. */
         container.style.height = "0px";
-
         /** Do this after the 0px has applied. */
         /** It's like a delay or something. MAGIC! */
         setTimeout(() => {
@@ -1446,43 +1476,35 @@ if(this.tipSelected === 0){
         sides: [],
       };
 
-      this.currentOrder.charges.items.push(itemToAdd);
+        this.currentOrder.charges.items.push(itemToAdd);
 
-      this.total =
-        Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
+          this.total =
+            Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
 
-      let newDate = new Date();
-      this.currentOrder.time_placed = newDate;
-      this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          let newDate = new Date();
+          this.currentOrder.time_placed = newDate;
+          this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
 
-      //then close the modal
-      this.currentItemModifierArray = [];
-      this.closeModal();
-      let storeCurrentOrder = this.currentOrder;
+          //then close the modal
+          this.currentItemModifierArray = [];
+          this.closeModal();
+          let storeCurrentOrder = this.currentOrder;
 
+          this.totalwith18 = this.total * .18
+          this.totalwith22 = this.total * .22
+          this.totalwith25 = this.total * .25
 
-this.totalwith18 = this.total * .18
-this.totalwith22 = this.total * .22
-this.totalwith25 = this.total * .25
+          if(this.tipSelected === 0){
+            this.currentAmountToAdd = 0
+          }else if(this.tipSelected === 1){
+            this.currentAmountToAdd = this.totalwith18
+          }else if(this.tipSelected === 2){
+            this.currentAmountToAdd = this.totalwith22
+          }else if(this.tipSelected === 3){
+            this.currentAmountToAdd = this.totalwith25
+          }else{
 
-
-
-
-if(this.tipSelected === 0){
-  this.currentAmountToAdd = 0
-}else if(this.tipSelected === 1){
-  this.currentAmountToAdd = this.totalwith18
-}else if(this.tipSelected === 2){
-  this.currentAmountToAdd = this.totalwith22
-}else if(this.tipSelected === 3){
-  this.currentAmountToAdd = this.totalwith25
-}else{
-
-}
-
-
-
-
+          }
 
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
@@ -1507,13 +1529,13 @@ if(this.tipSelected === 0){
       this.modifiers = responseUpserve.data.body.modifiers;
       this.modifierItems = responseUpserve.data.body.modifiers;
     },
-    doAnOrder(currentOrder) {
+    doAnOrder(currentOrder,approvalData) {
 
 
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("/oloorderstreet", currentOrder)
+        .post("/oloorder", currentOrder)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;
@@ -1523,8 +1545,92 @@ if(this.tipSelected === 0){
           // this.errors.push(e);
           console.log("errors");
           console.log(e);
+
+    
+        });
+
+      let axiosConfig = {
+        headers: {
+          'Content-Type': 'application/json', 
+          'Access-Control-Allow-Origin': '*'
+        }
+      };
+
+    let infoForPay = {
+          payInfo: approvalData,
+          orderInfo: currentOrder
+        }
+    let infoForPayStringify = JSON.stringify(infoForPay)       
+     this.$http
+        .post("/order/addorder", infoForPayStringify, axiosConfig)
+        .then((response) => {
+          console.log(response);
+          console.log('add to mongo emerge pay front end')
+        })
+        .catch((e) => {
+          console.log("errors");
+          console.log(e);
+        });
+
+
+
+
+
+        
+    },
+    issueReturn() {
+      this.$http
+        .post("/issue-return")
+        .then((response) => {
+        let prestring = JSON.stringify(response.data.transactionToken)
+        let token = prestring.replace(/['"]+/g, '')
+        emergepay.open({
+          // (required) Used to set up the modal
+          transactionToken: token,
+          // (optional) Callback function that gets called after a successful transaction
+          onTransactionSuccess: function (approvalData) {
+            console.log("Approval Data", approvalData);
+            emergepay.close();
+            // location = "https://www.chargeitpro.com";
+            //do the post here
+            // self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
+          },
+          // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
+          onTransactionFailure: function (failureData) {
+            console.log("Failure Data", failureData);
+          },
+          // (optional) Callback function that gets called after a user clicks the close button on the modal
+          onTransactionCancel: function () {
+            console.log("transaction cancelled!");
+          },
+        });
+
+
+
+
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
         });
     },
+    issueTokenizedReturn() {
+      this.$http
+        .post("/issue-tokenized-return", {
+            uniqueTransId: "a7f6bf5453c14ab5afcc0e3eedf799fa-a109feb7f21d4ec7ac9af5febaff7531",
+            amount: "0.01"
+          }
+          )
+        .then((response) => {
+console.log(response)
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+    }
   },
   mounted() {
     this.upserves();
@@ -1648,13 +1754,13 @@ h2.menu-header {
   font-weight: 400;
 }
 
-
 @media only screen and (max-width: 600px) {
 h2.menu-header {
  padding-left: 10px;
 }
 
 }
+
 
 button.delivery-option {
     width: 49%;
@@ -1929,10 +2035,27 @@ border-top: 0;
 
   background: #f0ecec;
 
-  img {
+  img, svg {
     width: auto !important;
     height: 300px;
   }
+
+
+div{
+  svg{
+    height: 300px;
+  }
+}
+
+}
+
+
+
+
+
+.item-image-container > div > svg {
+    height: 300px;
+ 
 }
 
 .add-to-order-footer {
@@ -1949,10 +2072,11 @@ border-top: 0;
   padding-top: 50px;
 }
 
-
 .pt20 {
   padding-top: 20px;
 }
+
+
 
 .mt10 {
   margin-top: 10px;
@@ -2237,6 +2361,8 @@ margin-top: -3px;
     left: 0;
     width: 100%;
     height: 100%;
+        overflow: hidden;
+            background: #a5a5a5;
 }
 
 .yellow-bg{
@@ -2332,6 +2458,8 @@ form hr{
 .tipButton.quarter {
     margin-bottom: 5px;
     // width: calc(25% - 3.5px);
+
+
     width: calc(33% - 2px);
     padding: 5px 5px !important;
     font-size: 12px;
@@ -2353,6 +2481,10 @@ margin-top: 8px;
   padding: 20px 0;
 }
 
+.no-bot-pad{
+  padding-bottom: 0;
+}
+
 .cart-empty-class{
   background-color: #f3f3f3;
     padding: 20px 0;
@@ -2362,9 +2494,47 @@ margin-top: 8px;
     border-radius: 5px;
 }
 
+li.modal-item{
+  list-style-type: none;
+  padding: 10px 0;
+  font-size: 18px;
+}
 
-.no-bot-pad{
-  padding-bottom: 0;
+
+.slide-show-image-home{
+  width: 100%;
+  height: 562px;
+  background-size: 110% 100%;
+
+  filter: blur(4px);
+    // transform: scale(1.2);
+    overflow: hidden;
+}
+
+
+.slide-show-image{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    height: 440px;
+    width: auto !important;
+    transform: translate(-50%);
+    }
+
+
+#online-menu .owl-item{
+      background: #a5a5a5 !important;
+}
+
+.loading-box{
+    width: 500px;
+    color: red;
+    height: 500px;
+    background: #fff;
+    padding-top: 240px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50px);
 }
 
 
