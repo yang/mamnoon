@@ -14,7 +14,7 @@ order history:
 <br>
 transaction id:
 <pre>
-{{order.orderInfo.uniqueTransId}}
+{{order.orderInfo.externalTransactionId}}
 </pre>
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">

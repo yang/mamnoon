@@ -9,7 +9,20 @@
             </li>
           </ul>
         <AllTransactions />
-          
+          <div>
+
+polling:
+
+<input type="text" v-model="externalTransactionId" />
+{{externalTransactionId}}
+<button @click="retrievePoll(externalTransactionId)">
+  retrive
+</button>
+
+{{pollResults}}
+
+
+          </div>
     </div>
         </div>
       
@@ -24,6 +37,12 @@ import VueJwtDecode from "vue-jwt-decode";
 
 export default {
 name: 'UserProfile',
+data () {
+return {
+externalTransactionId: '',
+pollResults: {}
+}
+},
   components: {
 
    AllTransactions
@@ -32,8 +51,31 @@ name: 'UserProfile',
         logUserOut() {
       localStorage.removeItem("jwt");
       this.$router.push("/");
+    },
+retrievePoll(suppliedId){
+console.log(suppliedId)
+// Optionally the request above could also be done as
+
+let self = this
+
+this.$http.get('/polling-request', {
+    params: {
+   externalTransactionId: suppliedId
     }
+  })
+  .then(function (response) {
+    console.log(response);
+    self.pollResults = response
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+
+
+}
+
   }
+
 }
 </script>
 
