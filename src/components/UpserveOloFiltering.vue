@@ -68,13 +68,13 @@
             <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
               <div v-for="modifier in modifierGroups" :key="modifier.name">
                 <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
-                  <div v-if="modifier.minimum_required === 0">
+                  <!-- <div v-if="modifier.minimum_required === 0">
                     <div v-if="modifier.name !== 'Promotions'">(addons not required)</div>
                   </div>
                   <div v-else>
                     minimum_required: {{modifier.minimum_required}}
                     maximum_required: {{modifier.maximum_required}}
-                  </div>
+                  </div> -->
 
                   <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                   <div v-for="mod in modifierItems" :key="mod.id">
