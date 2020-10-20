@@ -1277,7 +1277,8 @@ this.attention = true
             emergepay.close();
             // location = "https://www.chargeitpro.com";
             //do the post here
-            self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
+            console.log(self.$store.state.storeCurrentOrder)
+            // self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
           },
           // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
