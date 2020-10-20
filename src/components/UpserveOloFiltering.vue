@@ -1544,12 +1544,7 @@ if(this.tipSelected === 0){
     
         });
 
-      let axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json', 
-          'Access-Control-Allow-Origin': '*'
-        }
-      };
+
 
     let infoForPay = {
           payInfo: approvalData,
@@ -1557,7 +1552,7 @@ if(this.tipSelected === 0){
         }
     let infoForPayStringify = JSON.stringify(infoForPay)       
      this.$http
-        .post("/order/addorder", infoForPayStringify, axiosConfig)
+        .post("/order/addorder", infoForPayStringify)
         .then((response) => {
           console.log(response);
           console.log('add to mongo emerge pay front end')
