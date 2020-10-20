@@ -1295,7 +1295,7 @@ this.attention = true
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "http://localhost:4000/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
