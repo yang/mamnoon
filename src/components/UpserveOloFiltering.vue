@@ -1545,12 +1545,18 @@ if(this.tipSelected === 0){
         });
 
 
+      // let axiosConfig = {
+      //   headers: {
+      //     'Content-Type': 'application/json', 
+      //     'Access-Control-Allow-Origin': '*'
+      //   }
+      // };
 
     let infoForPay = {
-          payInfo: approvalData,
-          orderInfo: currentOrder
+          payInfo: currentOrder,
+          orderInfo: approvalData
         }
-    let infoForPayStringify = JSON.stringify(infoForPay)       
+    let infoForPayStringify = infoForPay      
      this.$http
         .post("/order/addorder", infoForPayStringify)
         .then((response) => {
