@@ -9,7 +9,7 @@
         <!-- {{ $store.state.userInfo.user.email }} -->
         <!-- </h1> -->
         </div>
-        <GiftCardModule />
+        <!-- <GiftCardModule /> -->
         <!-- <TestimonialForm :emailAddress="$store.state.currentUserEmail" /> -->
         <!-- {{$store.state}} -->
 
