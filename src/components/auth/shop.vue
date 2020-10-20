@@ -45,7 +45,7 @@
     </div>  </div> 
   <div class="container nav-acc-header mb-80">
     <div class="row">
-      <section id="alacarte" class="section hero is-primary is-fullheight">
+      <section id="alacarte" class="section hero is-primary is-fullheight fw">
         <div class>
           <h4 class="noselect">mama shop</h4>
           <p
@@ -351,5 +351,7 @@ cursor: pointer;
   opacity: 0;
 }
 
-
+.fw{
+  width: 100%;
+}
 </style>

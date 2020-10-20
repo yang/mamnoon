@@ -26,6 +26,9 @@ transaction id:
 </li>
 </ul>
 <br>
+<button @click="issueVoid(order.orderInfo.uniqueTransId)">void</button>
+<br>
+
 <button @click="issueTokenizedReturn(order.orderInfo.uniqueTransId)">issue return</button>
 <hr>
 </div>
@@ -54,7 +57,7 @@ export default {
     },
         issueTokenizedReturn(uniqueTransIdString) {
       this.$http
-        .post("/issue-tokenized-return", {
+        .post("/order/issue-tokenized-return", {
             uniqueTransId: uniqueTransIdString,
             amount: "0.01"
           }
@@ -67,7 +70,28 @@ console.log(response)
           console.log("errors");
           console.log(e);
         });
-    }
+    },
+    issueVoid(uniqueTransIdString) {
+
+
+    let self = this
+
+      console.log(uniqueTransIdString)
+      this.$http
+        .post("/order/issue-void", {
+            uniqueTransId: uniqueTransIdString,
+          }
+          )
+        .then((response) => {
+        console.log(response)
+
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+    },
     },
     mounted(){
         this.retrieveOrders()

@@ -140,8 +140,6 @@
             </scrollactive>
         </div>
     </nav>
-
-
     <div>
         <div class="container">
         </div>

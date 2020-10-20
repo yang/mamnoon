@@ -59,7 +59,7 @@ console.log(suppliedId)
 
 let self = this
 
-this.$http.get('/polling-request', {
+this.$http.get('/order/polling-request', {
     params: {
    externalTransactionId: suppliedId
     }

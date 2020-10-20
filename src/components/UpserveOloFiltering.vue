@@ -712,8 +712,7 @@ cart empty
 
 
     
-              <!-- <button v-if="currentOrder.charges.items.length === 0" disabled>no items in cart</button> -->
-              <!-- <button v-if="currentOrder.charges.total > 0" @click="doAnOrder(currentOrder)"> do an order</button> -->
+
 
 <!-- </div> -->
 <template v-if="panelShow === 'yourOrder'">
@@ -1291,7 +1290,7 @@ this.attention = true
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "http://localhost:4000/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",

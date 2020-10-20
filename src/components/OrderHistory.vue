@@ -15,7 +15,7 @@ order history:
 </pre>
 
 <br>
-<button @click="reorder">re order</button>
+<button @click="reorder()">re order</button>
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
 {{item.name}}
@@ -39,6 +39,9 @@ export default {
     name: 'OrderHistory',
     props: ['currentUser'],
     methods: {
+        reorder(){
+            console.log('reorder')
+        },
     retrieveOrders() {
     let self = this
         this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
