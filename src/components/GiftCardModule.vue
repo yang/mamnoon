@@ -3,16 +3,19 @@
     <div class="container pad-yellow-background module-header">your giftcard</div>
 
     <div class="container pad-yellow-background pd50">
-      <!-- <input -->
-      <!-- type="number" -->
-      <!-- min="0.00" -->
-      <!-- max="10000.00" -->
-      <!-- step="0.01" -->
-      <!-- v-model="amountUse" -->
-      <!-- placeholder="withdraw balance" -->
-      <!-- /> -->
-      <!-- <br /> -->
-      <!-- <button @click="useBalance(amountUse)">Use {{ amountUse }} Balance</button> -->
+      
+      
+      {{cardNumberInput}}
+      <input
+      type="number"
+      min="0.00"
+      max="10000.00"
+      step="0.01"
+      v-model="amountUse"
+      placeholder="withdraw balance"
+      />
+      <br />
+      <button @click="useBalance(amountUse)">Use {{ amountUse }} Balance</button>
 
   
       <div class="button-panel top">
@@ -78,7 +81,7 @@ export default {
   components: {
     UpdateBalance,
     BuyNewCard,
-    Check,
+    Check
   },
   data() {
     return {
@@ -90,6 +93,7 @@ export default {
   },
   methods: {
     async lookupBalance() {
+      console.log('lookup balance')
       let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
         cardNumber: this.cardNumberInput,
       });
@@ -105,7 +109,7 @@ export default {
       let self = this;
 
       // first check if the balance is available
-
+console.log('use balance')
       this.$http
         .post("/user/lookupgiftcard", {
           cardNumber: this.cardNumberInput,

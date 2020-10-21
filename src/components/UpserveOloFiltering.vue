@@ -727,11 +727,36 @@ cart empty
                 v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
-              >Pay</button>
-              <button class="mt10 fw" v-else disabled>Pay</button>
-              </template>
-              <!-- store: -->
+              >Card Payment</button>
+              <button class="mt10 fw" v-else disabled>Card Payment</button>
+       
 
+
+<br>
+<!-- 
+      <input
+        type="number"
+        v-model="cardNumberInput"
+        placeholder="enter your giftcard number"
+      /> -->
+<br>
+<input v-model="cardNumberInput" class="giftcardinput" placeholder="enter your giftcard number">
+
+<br>
+
+
+
+              <button class="mt10 fw" 
+                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                id="cip-pay-btn"
+                @click="useGiftCardBalance()"
+              >Use Giftcard ({{cardNumberInput}})</button>
+              <button class="mt10 fw" v-else disabled>Use Giftcard</button>
+
+
+   <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
+
+              </template>
               <br />
               <br />
               <br />
@@ -968,6 +993,9 @@ this.currentOrder.charges.total = this.orderTotal
     },
   data() {
     return {
+      showInsufficientFunds: false,
+      amountUse: "",
+      cardNumberInput: "",
       panelShow: 'yourOrder',
       checked: false,
       currentAmountToAddCustom: 0,
@@ -1088,6 +1116,80 @@ this.currentOrder.charges.total = this.orderTotal
     },
   },
   methods: {
+    async lookupBalance() {
+      console.log('lookup balance')
+      let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
+        cardNumber: this.cardNumberInput,
+      });
+      let giftcardResponse = giftcardLookup.data;
+      // console.log(giftcardResponse)
+
+
+
+      console.log(
+        giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0]
+      );
+      this.currentBalance =
+        giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
+    },
+    useGiftCardBalance() {
+      let self = this;
+      // first check if the balance is available
+      console.log('use balance')
+      this.$http
+        .post("/user/lookupgiftcard", {
+          cardNumber: self.cardNumberInput
+        })
+        .then(function (response) {
+          console.log(response)
+          if (
+            Number(
+              response.data.resSendData.Responses[0].SvInquiry[0]
+                .CurrentBalance[0]
+            ) >= Number(self.orderTotal.toFixed(2)/100)
+          ) {
+            self.showInsufficientFunds = false;
+            self.$http
+              .post("/user/usegiftcard", {
+                cardNumber: self.cardNumberInput,
+                useAmount: self.orderTotal.toFixed(2)/100
+              })
+              .then(function (response) {
+                     console.log(response)
+                self.currentBalance =
+                  response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
+
+let zeroOrder = self.$store.state.storeCurrentOrder
+
+zeroOrder.charges.addedTotal = 0
+zeroOrder.charges.fees = 0
+zeroOrder.charges.preTotal = 0
+zeroOrder.charges.taxes = 0
+zeroOrder.charges.tip.amount = 0
+zeroOrder.charges.total = 0
+zeroOrder.payments.payments[0].amount = 0
+
+                       console.log(self.$store.state.storeCurrentOrder)
+
+console.log(zeroOrder)
+self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData);
+
+
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          } else {
+            self.showInsufficientFunds = true;
+            setTimeout(function () {
+              self.showInsufficientFunds = false;
+            }, 3000);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
 panelShowChoose(info){
 
 // alert(info)
@@ -1307,7 +1409,7 @@ self.doAnOrder(zeroOrder,approvalData);
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "http://localhost:4000/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1815,7 +1917,8 @@ button.filehalf {
 }
 
 form input,
-form textarea {
+form textarea,
+.giftcardinput {
   width: 100%;
   padding: 5px 9px;
   border-radius: 4px;
