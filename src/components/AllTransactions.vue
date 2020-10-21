@@ -5,16 +5,18 @@
 order history:
 <br>
 <!-- {{response}} -->
-
-
 <!-- {{orderhistory}} -->
-
-
 <div v-for="order in orderhistory.user" :key="order._id">
+
+
+
+<h1 v-if="order.void">VOID</h1>
+
 <br>
 transaction id:
 <pre>
 {{order.orderInfo.externalTransactionId}}
+{{order.orderInfo.uniqueTransId}}
 </pre>
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
@@ -26,10 +28,10 @@ transaction id:
 </li>
 </ul>
 <br>
-<button @click="issueVoid(order.orderInfo.uniqueTransId)">void</button>
+<button v-if="!order.void" @click="issueVoid(order.orderInfo.uniqueTransId)">void</button>
 <br>
 
-<button @click="issueTokenizedReturn(order.orderInfo.uniqueTransId)">issue return</button>
+<button v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId)">issue return</button>
 <hr>
 </div>
 
@@ -73,9 +75,6 @@ console.log(response)
     },
     issueVoid(uniqueTransIdString) {
 
-
-    let self = this
-
       console.log(uniqueTransIdString)
       this.$http
         .post("/order/issue-void", {
@@ -85,6 +84,9 @@ console.log(response)
         .then((response) => {
         console.log(response)
 
+
+      this.voidByTransId(uniqueTransIdString)
+
         })
         .catch((e) => {
           // this.errors.push(e);
@@ -92,6 +94,31 @@ console.log(response)
           console.log(e);
         });
     },
+    voidByTransId(uniqueTransIdString){
+
+      console.log(uniqueTransIdString)
+      this.$http
+        .post("/order/void-transid", {
+            uniqueTransId: uniqueTransIdString,
+          }
+          )
+        .then((response) => {
+        console.log(response)
+
+
+// location.reload();
+this.retrieveOrders()
+
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+
+
+
+    }
     },
     mounted(){
         this.retrieveOrders()

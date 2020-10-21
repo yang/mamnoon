@@ -14,11 +14,14 @@
 polling:
 
 <input type="text" v-model="externalTransactionId" />
-{{externalTransactionId}}
 <button @click="retrievePoll(externalTransactionId)">
-  retrive
+retrieve
 </button>
 <br>
+{{pollResults}}<div v-if="pollResults === '{}'
+">
+
+</div>
 <pre>
   {{pollResults}}
 </pre>

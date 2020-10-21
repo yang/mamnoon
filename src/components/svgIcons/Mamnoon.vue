@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="halfwidth-orange" @click="openLink(linkOut2)" id="reservemamnoonbutton"> -->
-  <div class="halfwidth-orange" @click="openSevenRooms('reservemamnoonbutton')">
+  <div id="mamnoon-reserve" class="halfwidth-orange" @click="openSevenRooms('reservemamnoonbutton')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05">
       <defs>
       </defs>
@@ -57,13 +57,12 @@ export default {
             console.log(e)
           },
           openSevenRooms(e){
-            console.log(this.caviarLink)
-
-
-        if(this.caviarLink){
- window.open('https://app.upserve.com/s/mamnoon-llc-seattle', "_blank");   
+            if(this.caviarLink){
+              window.open('https://app.upserve.com/s/mamnoon-llc-seattle', "_blank");   
         }else{
-        document.getElementById(e).click();
+            console.log('open seven rooms')
+          document.getElementById(e).click();
+                console.log(e)
         }           
             
           }

@@ -1287,7 +1287,9 @@ zeroOrder.charges.total = 0
 zeroOrder.payments.payments[0].amount = 0
 
                        console.log(self.$store.state.storeCurrentOrder)
-            self.doAnOrder(zeroOrder,approvalData);
+
+console.log(zeroOrder)
+self.doAnOrder(zeroOrder,approvalData);
           },
           // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
@@ -1305,7 +1307,7 @@ zeroOrder.payments.payments[0].amount = 0
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1541,24 +1543,20 @@ if(this.tipSelected === 0){
     },
     doAnOrder(currentOrder,approvalData) {
 
-
-      let self = this;
-      let curOr = JSON.stringify(currentOrder);
-      this.$http
-        .post("/oloorder", currentOrder)
-        .then((response) => {
-          console.log(response);
-          self.orderConfirmationModal = true;
-          self.orderConfirmationModalResponse = response.data;
-        })
-        .catch((e) => {
-          // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
-
-    
-        });
-
+      // let self = this;
+      // let curOr = JSON.stringify(currentOrder);
+      // this.$http
+      //   .post("/oloorder", currentOrder)
+      //   .then((response) => {
+      //     console.log(response);
+      //     self.orderConfirmationModal = true;
+      //     self.orderConfirmationModalResponse = response.data;
+      //   })
+      //   .catch((e) => {
+      //     // this.errors.push(e);
+      //     console.log("errors");
+      //     console.log(e);
+      //   });
 
       // let axiosConfig = {
       //   headers: {
@@ -1571,6 +1569,7 @@ if(this.tipSelected === 0){
           payInfo: currentOrder,
           orderInfo: approvalData
         }
+
     let infoForPayStringify = infoForPay      
      this.$http
         .post("/order/addorder", infoForPayStringify)

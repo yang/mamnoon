@@ -280,6 +280,30 @@ NOTE: make sure you replace assets_url with the correct url for the environment 
 <!-- modal version -->
 
 
+<script src="./sevenRooms1.js"></script>
+<script src="./sevenRooms2.js"></script>
+<script>
+SevenroomsWidget.init({
+        venueId: 'mbarseattle',
+        triggerId: 'reservembarbutton',
+        type: 'reservations',
+        defaultPartySize: 2,
+        defaultTime: '7:00PM',
+        allVenues: ['mbarseattle'] 
+      });
+
+      SevenroomsWidget2.init({
+        venueId: 'mamnoon',
+        triggerId: 'reservemamnoonbutton',
+        type: 'reservations',
+        defaultPartySize: 2,
+        defaultTime: '7:00PM',
+        allVenues: ['mamnoon']
+      })
+      </script>
+
+
+
 
   </body>
 </html>

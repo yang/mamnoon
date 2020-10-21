@@ -1,5 +1,5 @@
 <template>
-    <div class="halfwidth-yellow1" @click="openSevenRooms('reservembarbutton')">
+   <div id="mamnoon-street-reserve" class="halfwidth-yellow1" @click="openSevenRooms('reservembarbutton')">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="282.6px"
 	 height="57.6px" viewBox="0 0 282.6 57.6" style="overflow:visible;enable-background:new 0 0 282.6 57.6;" xml:space="preserve">
 
@@ -117,6 +117,13 @@
 </template>
 
 
+
+
+
+
+
+
+
 <script>
 export default {
   name: "mamnoonstreet",
@@ -133,7 +140,7 @@ export default {
       window.open(e, "_blank");
       console.log(e);
     },
-    openSevenRooms(e){
+    open(e){
 		if(this.caviarLink){
       window.open("https://app.upserve.com/s/mamnoon-street-seattle", "_blank");
 		}else{

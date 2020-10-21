@@ -11,7 +11,7 @@ order history:
 <div v-for="order in orderhistory.user" :key="order._id">
 <br>
 <pre>
-{{order.payInfo}}
+{{order}}
 </pre>
 
 <br>
