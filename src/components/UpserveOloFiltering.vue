@@ -2,45 +2,10 @@
   <div>
     <section>
       <!-- {{$data}} -->
-      <div v-if="orderConfirmationModal" class="order-confirmation-modal">
-        <div class="container online-menu order-modal-width">
-          <div @click="closeConfirmationModal()" class="close closeModal">
-            <CloseModal />
-          </div>
-          <h4>order confirmation</h4>
-        </div>
-        <div class="container modal-body order-modal-width order-modal-body">
-          <h2>thank you for your order!</h2>
-          <div>
-            <!-- <pre>
-            {{orderConfirmationModalResponse}}
-          </pre> -->
 
+<!-- <pre>{{upserveList}}</pre> -->
+<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderConfirmationModalResponse="orderConfirmationModalResponse" />
 
-<br />
-<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b><br />  
-<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.city}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.state}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.zip_code}}</b>
-  <br>
-  <b>{{orderConfirmationModalResponse.fulfillment_info.customer.email}}</b>  <br />  
-<b>{{orderConfirmationModalResponse.fulfillment_info.customer.phone}}</b>
-
-<p>{{orderConfirmationModalResponse.fulfillment_info.customer.instructions}}</p>
-<br />
-<ul class="no-left-pad" v-if="orderConfirmationModalResponse.charges.items">
-  <li class="modal-item" v-for="item in orderConfirmationModalResponse.charges.items" :key="item.name">
-    {{item.name}}
-  </li>
-  </ul>  
-<b>tip: ${{orderConfirmationModalResponse.charges.tip.amount.toFixed(2)/100}}</b>
-  <br />  
-<b>taxes: ${{orderConfirmationModalResponse.charges.taxes.toFixed(2)/100}}</b>
-  <br />  
-<b>total: ${{orderConfirmationModalResponse.charges.total.toFixed(2)/100}}</b>
-
-
-          </div>
-        </div>
-      </div>
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
           <div @click="closeModal()" class="close closeModal">
@@ -63,8 +28,15 @@
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
+                    <pre>
+{{currentItem}}
+</pre>
           <div v-if="currentItem.modifier_group_ids.length >= 1">
             <h4 class="text-left">addons</h4>
+
+
+
+
             <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
               <div v-for="modifier in modifierGroups" :key="modifier.name">
                 <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
@@ -85,14 +57,16 @@
                           <br />
                           <b>{{mod.price}}</b>
                           <div v-if="modifier.name === 'Promotions'">
-                            <div v-for="piece in upserve" :key="piece.name">
+                            <div v-for="piece in upserveList" :key="piece.name">
                               <div v-if="piece.name === mod.name">
                                 <img :src="piece.images.online_ordering_menu.main" />
                               </div>
                             </div>
                           </div>
                           <!-- loop through and get image -->
-
+{{mod}}
+<br><br>
+{{modifieritem}}
                           <div class="mt10">
                             <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                             <button
@@ -149,77 +123,15 @@
           <div class="col-md-8">
             <div class="container online-menu">
               <h4>featured</h4>
-
-
             </div>
-            <!-- <div class="container featured">
-              <h4>featured</h4>
-            </div> -->
-<!-- 
-    <vue-aspect-ratio ar="16:9" width="640px">
-        <div>your content goes here</div>
-    </vue-aspect-ratio> -->
-
+ 
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
        Loading...
      </div>
      </template>
-         <template v-else>
-   
-<div id="online-menu" class="is-fullheight no-top-pad">
-        <carousel :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
-              <template class="subprev" slot="prev">
-              <span class="prev">
-              <Prev />
-              </span>
-              </template>
-
-            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <template v-for="item in upserveSections">
-  <VueAspectRatio ar="4:3" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
-                    <template v-for="serve in upserve">
-                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
-                        <div @click="openModal(serve)">
-                            <template v-if="serve.images">
-                              <div class="slide-show-image-home"
-                                v-if="serve.images.online_ordering_menu"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
-
-                              <div
-                                v-else
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >
-                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
-                              </div>
-                            </template>
-                                                 <div class="content-box-upper">
-                              <div class="name">
-                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
-                              {{serve.name}}</div>
-                              <div
-                                v-if="serve.description"
-                                class="food-description"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                            </div></div>
-                            </div>
-                    </template>
-         </VueAspectRatio>
-          </template>
-                    <template class="subnext" slot="next">
-            <span class="next">
-              <Next />
-            </span>
-          </template>
-            </carousel>
-</div>
-</template>
+    <template v-else>
+    </template>
 <br>
 <div class="container online-menu">
 <h4>full mamnoon menu</h4>
@@ -249,7 +161,7 @@
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
                 <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
               
-                    <template v-for="serve in upserve" class="grey-bg">
+                    <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg" @click="openModal(serve)">
                           <div class="half-width2left">
@@ -263,6 +175,11 @@
                                 class="food-description"
                               >{{serve.description}}</div>
                               <div class="food-price">
+
+
+<!-- {{serve}} -->
+                                ${{ serve.price }}
+
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
                               <br />
@@ -763,9 +680,10 @@ cart empty
       </div>
           </div>
         </div>
-        <!-- <pre>
+        <pre>
+
           {{this.$store.state.storeCurrentOrder}}
-        </pre> -->
+        </pre>
 
         <div>
 
@@ -788,6 +706,11 @@ import CloseModal from "@/components/svgIcons/CloseModal";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
 
+
+
+import OrderConfirmationModal from "@/components/OrderConfirmationModal"
+import OnlineMenuCarousel from "@/components/OnlineMenuCarousel";
+
 import CloseModalRedSm from "@/components/svgIcons/CloseModalRedSm";
 
 import VueAspectRatio from "vue-aspect-ratio";
@@ -803,6 +726,8 @@ export default {
   name: "upservefiltering",
   props: ["data"],
   components: {
+    OrderConfirmationModal,
+    OnlineMenuCarousel,
     CloseModal,
     CloseModalRed,
     CloseModalSm,
@@ -815,181 +740,143 @@ export default {
     NadiIcon,
     NadiIconSm
   },
-  computed: {
-    googleAddress() {
-      return this.$store.state.googleAddress;
-    },
-    tip0() {
-      return Number(this.total) * 0;
-    },
-    tip1() {
-      return Number(this.total) * 0.18;
-    },
-    tip2() {
-      return Number(this.total) * 0.22;
-    },
-    tip3() {
-      return Number(this.total) * 0.25;
-    },
-  },
-  watch: {
-    checked(){
+  computed: {	
+    googleAddress() {	
+      return this.$store.state.googleAddress;	
+    },	
+    tip0() {	
+      return Number(this.total) * 0;	
+    },	
+    tip1() {	
+      return Number(this.total) * 0.18;	
+    },	
+    tip2() {	
+      return Number(this.total) * 0.22;	
+    },	
+    tip3() {	
+      return Number(this.total) * 0.25;	
+    },	
+  },	
+  watch: {	
+    checked(){	
+      if(this.checked){	
+      this.currentOrder.billing.billing_name = this.currentOrder.fulfillment_info.customer.name	
+      	
+      this.currentOrder.billing.billing_address = this.currentOrder.fulfillment_info.delivery_info.address.address_line1 + ' ' +  this.currentOrder.fulfillment_info.delivery_info.address.address_line2	
+      this.currentOrder.billing.billing_postal_code = this.currentOrder.fulfillment_info.delivery_info.address.zip_code	
+      var input = document.getElementById("name-billing");	
+      	
+      input.focus();	
+      }else{	
+        this.currentOrder.billing.billing_name = ''	
+        this.currentOrder.billing.billing_address = ''	
+        this.currentOrder.billing.billing_postal_code = ''	
+      }	
+    },	
+currentAmountToAddCustom(){	
+this.currentAmountToAdd = this.currentAmountToAddCustom * 100	
+},	
+    computedTotal(newComputedTotal,oldComputedTotal){	
+this.computedTotal = Number(this.total) + Number(this.currentAmountToAdd)	
+    },	
+    googleAddress(newAddress, oldAddress) {	
+      this.googleAddressView = newAddress;	
+      let googleAddressObject = {	
+        streetNumber: "",	
+        route: "",	
+        locality: "",	
+        state: "",	
+        zip: "",	
+      };	
+if(newAddress){	
+      googleAddressObject.route = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "route";	
+        }	
+      )[0].long_name;	
+}	
+if(newAddress){	
+      googleAddressObject.streetNumber = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "street_number";	
+        }	
+      )[0].long_name;	
+}	
+if(newAddress){	
+      googleAddressObject.locality = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "locality";	
+        }	
+      )[0].long_name;	
+}	
+if(newAddress){	
+      googleAddressObject.state = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "administrative_area_level_1";	
+        }	
+      )[0].long_name;	
+}	
+if(newAddress){	
+      googleAddressObject.zip = newAddress.address_components.filter((obj) => {	
+        return obj.types[0] === "postal_code";	
+      })[0].long_name;	
+}	
 
-      if(this.checked){
-
-      this.currentOrder.billing.billing_name = this.currentOrder.fulfillment_info.customer.name
-      
-      this.currentOrder.billing.billing_address = this.currentOrder.fulfillment_info.delivery_info.address.address_line1 + ' ' +  this.currentOrder.fulfillment_info.delivery_info.address.address_line2
-
-      this.currentOrder.billing.billing_postal_code = this.currentOrder.fulfillment_info.delivery_info.address.zip_code
-
-
-      var input = document.getElementById("name-billing");
-      
-      input.focus();
-
-
-      }else{
-
-        this.currentOrder.billing.billing_name = ''
-        this.currentOrder.billing.billing_address = ''
-        this.currentOrder.billing.billing_postal_code = ''
-
-      }
-
-
-
-    },
-currentAmountToAddCustom(){
-this.currentAmountToAdd = this.currentAmountToAddCustom * 100
-},
-    computedTotal(newComputedTotal,oldComputedTotal){
-this.computedTotal = Number(this.total) + Number(this.currentAmountToAdd)
-    },
-    googleAddress(newAddress, oldAddress) {
-      this.googleAddressView = newAddress;
-      let googleAddressObject = {
-        streetNumber: "",
-        route: "",
-        locality: "",
-        state: "",
-        zip: "",
-      };
-
-
-if(newAddress){
-      googleAddressObject.route = newAddress.address_components.filter(
-        (obj) => {
-          return obj.types[0] === "route";
-        }
-      )[0].long_name;
-}
-
-if(newAddress){
-      googleAddressObject.streetNumber = newAddress.address_components.filter(
-        (obj) => {
-          return obj.types[0] === "street_number";
-        }
-      )[0].long_name;
-}
-
-
-if(newAddress){
-      googleAddressObject.locality = newAddress.address_components.filter(
-        (obj) => {
-          return obj.types[0] === "locality";
-        }
-      )[0].long_name;
-}
-
-
-if(newAddress){
-      googleAddressObject.state = newAddress.address_components.filter(
-        (obj) => {
-          return obj.types[0] === "administrative_area_level_1";
-        }
-      )[0].long_name;
-}
-
-
-if(newAddress){
-      googleAddressObject.zip = newAddress.address_components.filter((obj) => {
-        return obj.types[0] === "postal_code";
-      })[0].long_name;
-}
-      console.log(googleAddressObject);
-
-      this.googleAddressObject = googleAddressObject;
-
-      this.currentOrder.fulfillment_info.delivery_info.address.city =
-        googleAddressObject.locality;
-      this.currentOrder.fulfillment_info.delivery_info.address.state =
-        googleAddressObject.state;
-      this.currentOrder.fulfillment_info.delivery_info.address.zip_code =
-        googleAddressObject.zip;
-      this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =
-        googleAddressObject.streetNumber + " " + googleAddressObject.route;
-
-      // this.date = newCount[0].meal.date;
-      // this.delivery = newCount[0].meal.delivery;
-      // this.reset(newCount);
-    },
-    // whenever total changes, this function will ru
-   taxes: function(newTaxes,oldTaxes){
-this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-
-
-this.currentOrder.charges.addedTotal = this.orderTotal
-this.currentOrder.charges.total = this.orderTotal
-    },
-    currentAmountToAdd: function(newCurrent,oldCurrent){
-this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-this.currentOrder.charges.addedTotal = this.orderTotal
-this.currentOrder.charges.total = this.orderTotal
-this.currentOrder.charges.tip.amount = this.currentAmountToAdd
-
-    },
-    tip: function (newTip, oldTip) {
-      this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-      this.currentOrder.charges.tip.amount = this.tip;
-      this.currentOrder.charges.addedTotal = this.orderTotal
-      this.currentOrder.charges.total = this.orderTotal
-    },
-    customTip: function (newCustomTip, oldCustomTip) {
-      this.currentOrder.charges.tip.amount = this.customTip;
-    },
-    total: function (newTotal, oldTotal) {
-      //good
-      let taxAmt = Number(this.total) * Number(this.upserveTaxRate);
-      this.taxes = Math.round(taxAmt);
-
-      this.currentOrder.charges.taxes = this.taxes;
-
-      //good
-      let totalWithTax = Number(this.total) + taxAmt;
-      this.totalWithTax = Math.round(totalWithTax);
-      this.currentOrder.charges.total = this.totalWithTax;
-      this.currentOrder.charges.preTotal = this.totalWithTax;
-      this.currentOrder.payments.payments[0].amount = this.totalWithTax;
-      let storeCurrentOrder = this.currentOrder;
-
-
-this.computedTotal = this.total
-
-this.totalwith18 = this.total * .18
-this.totalwith22 = this.total * .22
-this.totalwith25 = this.total * .25
-
-
-this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-
-
-this.currentOrder.charges.addedTotal = this.orderTotal
-this.currentOrder.charges.total = this.orderTotal
-
-
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-    }
+      this.googleAddressObject = googleAddressObject;	
+      this.currentOrder.fulfillment_info.delivery_info.address.city =	
+        googleAddressObject.locality;	
+      this.currentOrder.fulfillment_info.delivery_info.address.state =	
+        googleAddressObject.state;	
+      this.currentOrder.fulfillment_info.delivery_info.address.zip_code =	
+        googleAddressObject.zip;	
+      this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =	
+        googleAddressObject.streetNumber + " " + googleAddressObject.route;	
+      // this.date = newCount[0].meal.date;	
+      // this.delivery = newCount[0].meal.delivery;	
+      // this.reset(newCount);	
+    },	
+    // whenever total changes, this function will ru	
+   taxes: function(newTaxes,oldTaxes){	
+this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+this.currentOrder.charges.addedTotal = this.orderTotal	
+this.currentOrder.charges.total = this.orderTotal	
+    },	
+    currentAmountToAdd: function(newCurrent,oldCurrent){	
+this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+this.currentOrder.charges.addedTotal = this.orderTotal	
+this.currentOrder.charges.total = this.orderTotal	
+this.currentOrder.charges.tip.amount = this.currentAmountToAdd	
+    },	
+    tip: function (newTip, oldTip) {	
+      this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+      this.currentOrder.charges.tip.amount = this.tip;	
+      this.currentOrder.charges.addedTotal = this.orderTotal	
+      this.currentOrder.charges.total = this.orderTotal	
+    },	
+    customTip: function (newCustomTip, oldCustomTip) {	
+      this.currentOrder.charges.tip.amount = this.customTip;	
+    },	
+    total: function (newTotal, oldTotal) {	
+      //good	
+      let taxAmt = Number(this.total) * Number(this.upserveTaxRate);	
+      this.taxes = Math.round(taxAmt);	
+      this.currentOrder.charges.taxes = this.taxes;	
+      //good	
+      let totalWithTax = Number(this.total) + taxAmt;	
+      this.totalWithTax = Math.round(totalWithTax);	
+      this.currentOrder.charges.total = this.totalWithTax;	
+      this.currentOrder.charges.preTotal = this.totalWithTax;	
+      this.currentOrder.payments.payments[0].amount = this.totalWithTax;	
+      let storeCurrentOrder = this.currentOrder;	
+      this.computedTotal = this.total	
+      this.totalwith18 = this.total * .18	
+      this.totalwith22 = this.total * .22	
+      this.totalwith25 = this.total * .25	
+      this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+      this.currentOrder.charges.addedTotal = this.orderTotal	
+      this.currentOrder.charges.total = this.orderTotal	
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+    }	
     },
   data() {
     return {
@@ -1034,6 +921,7 @@ this.currentOrder.charges.total = this.orderTotal
       textdescription: "",
       blockedBody: this.data,
       upserve: null,
+      upserveList: null,
       upserveSections: null,
       upserveCategories: [],
       currentlyFiltered: [],
@@ -1159,21 +1047,11 @@ this.currentOrder.charges.total = this.orderTotal
                 self.currentBalance =
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
 
-let zeroOrder = self.$store.state.storeCurrentOrder
-
-zeroOrder.charges.addedTotal = 0
-zeroOrder.charges.fees = 0
-zeroOrder.charges.preTotal = 0
-zeroOrder.charges.taxes = 0
-zeroOrder.charges.tip.amount = 0
-zeroOrder.charges.total = 0
-zeroOrder.payments.payments[0].amount = 0
-
                        console.log(self.$store.state.storeCurrentOrder)
 
-console.log(zeroOrder)
-self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData);
 
+// self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData);
+// self.doAnOrder(zeroOrder,response.data.resSendData);
 
               })
               .catch(function (error) {
@@ -1337,7 +1215,6 @@ this.currentAmountToAdd = this.customTip
 }else{
 
 } 
-
     },
     refreshGoogle() {
       this.renderKey++;
@@ -1374,24 +1251,12 @@ this.attention = true
             emergepay.close();
             // location = "https://www.chargeitpro.com";
             //do the post here
-            // self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
 
 
 
-let zeroOrder = self.$store.state.storeCurrentOrder
 
-zeroOrder.charges.addedTotal = 0
-zeroOrder.charges.fees = 0
-zeroOrder.charges.preTotal = 0
-zeroOrder.charges.taxes = 0
-zeroOrder.charges.tip.amount = 0
-zeroOrder.charges.total = 0
-zeroOrder.payments.payments[0].amount = 0
 
-                       console.log(self.$store.state.storeCurrentOrder)
-
-console.log(zeroOrder)
-self.doAnOrder(zeroOrder,approvalData);
+self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
           },
           // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
@@ -1439,6 +1304,7 @@ self.doAnOrder(zeroOrder,approvalData);
       }
 
       let storeCurrentOrder = this.currentOrder;
+  
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
     addAddOn(mod, modifieritem) {
@@ -1447,14 +1313,14 @@ self.doAnOrder(zeroOrder,approvalData);
         modifier_group_id: modifieritem,
         price: mod.price_cents,
       };
+      // this.currentItemModifierArray.push(modAddition);
 
-      this.currentItemModifierArray.push(modAddition);
-
-      this.currentItem.price_cents =
-        Number(this.currentItem.price_cents) + Number(mod.price_cents);
-
+      this.currentItem.price_cents = Number(this.currentItem.price_cents) + Number(mod.price_cents);
+      console.log(this.currentItem)
       document.getElementById("add-" + mod.id).disabled = true;
       document.getElementById("remove-" + mod.id).disabled = false;
+      console.log('reset upserves')
+
     },
     removeAddOn(mod, modifieritem) {
       let updatedItems = this.currentItemModifierArray.filter(
@@ -1463,7 +1329,6 @@ self.doAnOrder(zeroOrder,approvalData);
       this.currentItemModifierArray = updatedItems;
       this.currentItem.price_cents =
         Number(this.currentItem.price_cents) - Number(mod.price_cents);
-
       document.getElementById("add-" + mod.id).disabled = false;
       document.getElementById("remove-" + mod.id).disabled = true;
     },
@@ -1503,6 +1368,7 @@ if(this.tipSelected === 0){
 }
 
 
+
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
     incrementCurrentItem() {
@@ -1522,8 +1388,12 @@ if(this.tipSelected === 0){
       this.orderConfirmationModalResponse = "";
     },
     openModal(serve) {
+
+
+      let current = serve
+
       this.modalOpen = true;
-      this.currentItem = serve;
+      this.currentItem = current;
     },
     expandChild(drawer) {
       var container = document.getElementById("drawertop-" + drawer)
@@ -1620,7 +1490,12 @@ if(this.tipSelected === 0){
 
           }
 
+
+
+
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
     },
     filterByCat(cat) {
       this.currentlyFiltered = [];
@@ -1636,36 +1511,48 @@ if(this.tipSelected === 0){
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.body.sections;
       this.upserveTaxRate =
         responseUpserve.data.body.tax_rates[0].percentage_rate;
       this.modifierGroups = responseUpserve.data.body.modifier_groups;
       this.modifiers = responseUpserve.data.body.modifiers;
       this.modifierItems = responseUpserve.data.body.modifiers;
+
+
+
+
     },
     doAnOrder(currentOrder,approvalData) {
 
-      // let self = this;
-      // let curOr = JSON.stringify(currentOrder);
-      // this.$http
-      //   .post("/oloorder", currentOrder)
-      //   .then((response) => {
-      //     console.log(response);
-      //     self.orderConfirmationModal = true;
-      //     self.orderConfirmationModalResponse = response.data;
-      //   })
-      //   .catch((e) => {
-      //     // this.errors.push(e);
-      //     console.log("errors");
-      //     console.log(e);
-      //   });
+      let correctPretotal = currentOrder
+      // correctPretotal.charges.total = correctPretotal.charges.preTotal
+      // correctPretotal.payments.payments[0].amount = correctPretotal.charges.preTotal
+      let versionToPass = correctPretotal
 
-      // let axiosConfig = {
-      //   headers: {
-      //     'Content-Type': 'application/json', 
-      //     'Access-Control-Allow-Origin': '*'
-      //   }
-      // };
+      console.log(correctPretotal)
+      let self = this;
+      let curOr = JSON.stringify(currentOrder);
+      this.$http
+        .post("/oloorder", versionToPass)
+        .then((response) => {
+          console.log(response);
+          self.orderConfirmationModal = true;
+          self.orderConfirmationModalResponse = response.data;
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+
+      let axiosConfig = {
+        headers: {
+          'Content-Type': 'application/json', 
+          'Access-Control-Allow-Origin': '*'
+        }
+      };
+
 
     let infoForPay = {
           payInfo: currentOrder,
@@ -1720,22 +1607,6 @@ if(this.tipSelected === 0){
 
 
 
-        })
-        .catch((e) => {
-          // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
-        });
-    },
-    issueTokenizedReturn() {
-      this.$http
-        .post("/issue-tokenized-return", {
-            uniqueTransId: "a7f6bf5453c14ab5afcc0e3eedf799fa-a109feb7f21d4ec7ac9af5febaff7531",
-            amount: "0.01"
-          }
-          )
-        .then((response) => {
-console.log(response)
         })
         .catch((e) => {
           // this.errors.push(e);

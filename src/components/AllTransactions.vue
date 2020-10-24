@@ -6,17 +6,22 @@ order history:
 <br>
 <!-- {{response}} -->
 <!-- {{orderhistory}} -->
-<div v-for="order in orderhistory.user" :key="order._id">
+<div v-for="order in orderhistory.user" :key="order._id" class="position-relative">
 
 
+<!-- {{order.orderInfo.externalTransactionId}} -->
 
 <h1 v-if="order.void">VOID</h1>
+<button v-if="!order.void" @click="issueVoid(order.orderInfo.uniqueTransId)">void</button>
 
+<!-- &nbsp;&nbsp; -->
+<!-- <button v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId)">issue return</button> -->
 <br>
 transaction id:
 <pre>
+  <!-- {{order}} -->
 {{order.orderInfo.externalTransactionId}}
-{{order.orderInfo.uniqueTransId}}
+{{order.uniqueTransId}}
 </pre>
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
@@ -28,10 +33,7 @@ transaction id:
 </li>
 </ul>
 <br>
-<button v-if="!order.void" @click="issueVoid(order.orderInfo.uniqueTransId)">void</button>
-<br>
 
-<button v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId)">issue return</button>
 <hr>
 </div>
 
@@ -127,6 +129,29 @@ this.retrieveOrders()
 }
 
 </script>
+
+<style lang="scss">
+.position-relative{
+
+
+h1{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+button{
+    position: absolute;
+ right: 0;
+}
+
+
+
+
+}
+
+
+
+</style>
 
 
 

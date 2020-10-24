@@ -1531,12 +1531,18 @@ if(this.tipSelected === 0){
       this.modifierItems = responseUpserve.data.body.modifiers;
     },
     doAnOrder(currentOrder,approvalData) {
+    
+    let correctPretotal = currentOrder
+    correctPretotal.charges.total = correctPretotal.charges.preTotal
+    
+    console.log('total after reassignment')
 
-
+let versionToPass = correctPretotal
+console.log(versionToPass)
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("/oloorder", currentOrder)
+        .post("/oloorder", versionToPass)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;
