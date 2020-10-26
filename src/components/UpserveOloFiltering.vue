@@ -5,7 +5,6 @@
 
 <!-- <pre>{{upserveList}}</pre> -->
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderConfirmationModalResponse="orderConfirmationModalResponse" />
-
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
           <div @click="closeModal()" class="close closeModal">
@@ -28,15 +27,8 @@
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
-                    <pre>
-{{currentItem}}
-</pre>
           <div v-if="currentItem.modifier_group_ids.length >= 1">
             <h4 class="text-left">addons</h4>
-
-
-
-
             <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
               <div v-for="modifier in modifierGroups" :key="modifier.name">
                 <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
@@ -131,6 +123,9 @@
      </div>
      </template>
     <template v-else>
+
+
+      
     </template>
 <br>
 <div class="container online-menu">
@@ -178,7 +173,7 @@
 
 
 <!-- {{serve}} -->
-                                ${{ serve.price }}
+                                <!-- ${{ serve.price }} -->
 
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
@@ -778,6 +773,12 @@ this.currentAmountToAdd = this.currentAmountToAddCustom * 100
 },	
     computedTotal(newComputedTotal,oldComputedTotal){	
 this.computedTotal = Number(this.total) + Number(this.currentAmountToAdd)	
+
+
+
+this.currentOrder.payments.payments[0].amount = this.computedTotal + this.taxes
+
+
     },	
     googleAddress(newAddress, oldAddress) {	
       this.googleAddressView = newAddress;	
@@ -866,13 +867,14 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
       this.totalWithTax = Math.round(totalWithTax);	
       this.currentOrder.charges.total = this.totalWithTax;	
       this.currentOrder.charges.preTotal = this.totalWithTax;	
-      this.currentOrder.payments.payments[0].amount = this.totalWithTax;	
+      this.currentOrder.payments.payments[0].amount = this.currentOrder.charges.preTotal;
       let storeCurrentOrder = this.currentOrder;	
       this.computedTotal = this.total	
       this.totalwith18 = this.total * .18	
       this.totalwith22 = this.total * .22	
       this.totalwith25 = this.total * .25	
       this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+
       this.currentOrder.charges.addedTotal = this.orderTotal	
       this.currentOrder.charges.total = this.orderTotal	
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
@@ -925,7 +927,7 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
       upserveSections: null,
       upserveCategories: [],
       currentlyFiltered: [],
-      currentOrder: {
+      currentOrder: { 
         billing:{
           billing_name: '',
           billing_address: '',
@@ -1005,18 +1007,14 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
   },
   methods: {
     async lookupBalance() {
-      console.log('lookup balance')
+
       let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
         cardNumber: this.cardNumberInput,
       });
       let giftcardResponse = giftcardLookup.data;
-      // console.log(giftcardResponse)
 
 
 
-      console.log(
-        giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0]
-      );
       this.currentBalance =
         giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
     },
@@ -1390,7 +1388,10 @@ if(this.tipSelected === 0){
     openModal(serve) {
 
 
-      let current = serve
+      let current = Object.assign({}, serve);
+
+      // let current = serve
+      
 
       this.modalOpen = true;
       this.currentItem = current;
@@ -1538,7 +1539,18 @@ if(this.tipSelected === 0){
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;
+
+
           self.orderConfirmationModalResponse = response.data;
+          self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
+          self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
+
+          let newDate = new Date();
+          self.currentOrder.time_placed = newDate;
+          self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          let storeCurrentOrder = self.currentOrder
+          self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
         })
         .catch((e) => {
           // this.errors.push(e);
@@ -1619,7 +1631,8 @@ if(this.tipSelected === 0){
     this.upserves();
     emergepay.init();
     this.$store.state.storeCurrentOrder = {};
-  },
+    // this.currentOrder = this.$store.state.storeCurrentOrder
+  }
 };
 </script>
 

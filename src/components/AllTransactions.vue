@@ -14,8 +14,7 @@ order history:
 <h1 v-if="order.void">VOID</h1>
 <button v-if="!order.void" @click="issueVoid(order.orderInfo.uniqueTransId)">void</button>
 
-<!-- &nbsp;&nbsp; -->
-<!-- <button v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId)">issue return</button> -->
+
 <br>
 transaction id:
 <pre>
@@ -24,10 +23,10 @@ transaction id:
 {{order.uniqueTransId}}
 </pre>
 <ul>
-<li v-for="item in order.payInfo.charges.items" :key="item.cartId">
-{{item.name}}
+<li v-for="item in order.payInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
+{{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>
 
-
+<button v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId,item.price)">issue return</button>
 
 
 </li>
@@ -59,11 +58,15 @@ export default {
         self.orderhistory = response.data
     })
     },
-        issueTokenizedReturn(uniqueTransIdString) {
+        issueTokenizedReturn(uniqueTransIdString,amount) {
+
+let amountDiv100 = amount/100
+let amountToSend = amountDiv100.toFixed(2).toString()
+          console.log(amountDiv100.toFixed(2).toString())
       this.$http
         .post("/order/issue-tokenized-return", {
             uniqueTransId: uniqueTransIdString,
-            amount: "0.01"
+            amount: amountToSend
           }
           )
         .then((response) => {

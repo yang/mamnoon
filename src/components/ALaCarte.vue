@@ -6,12 +6,12 @@
 
                          <router-link to="/mamnoon">
                          <!-- mamnoon -->
-               <Mamnoon :caviarLink="false" />
+               <Mamnoon1 :caviarLink="false" />
             </router-link>
               <router-link to="/mamnoonstreet">
     
   
-            <MamnoonStreet :caviarLink="false" />
+            <MamnoonStreet1 :caviarLink="false" />
                           </router-link>
         </div>
     </section>
@@ -19,12 +19,12 @@
 
 <script>
 
-import Mamnoon from '@/components/svgIcons/Mamnoon.vue'
-import MamnoonStreet from '@/components/svgIcons/MamnoonStreet.vue'
+import Mamnoon1 from '@/components/svgIcons/Mamnoon1.vue'
+import MamnoonStreet1 from '@/components/svgIcons/MamnoonStreet1.vue'
 export default {
     components:{
-        Mamnoon,
-        MamnoonStreet
+        Mamnoon1,
+        MamnoonStreet1
     },
     name: 'alacarte',
     props: ['data','header','tag','description'],
