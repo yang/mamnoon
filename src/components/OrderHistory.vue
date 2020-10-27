@@ -5,15 +5,11 @@
 order history:
 <br>
 <!-- {{response}} -->
-
-
-
 <div v-for="order in orderhistory.user" :key="order._id">
 <br>
 <pre>
 {{order}}
 </pre>
-
 <br>
 <button @click="reorder()">re order</button>
 <ul>
@@ -23,7 +19,6 @@ order history:
 </ul>
 <hr>
 </div>
-
 </div>
 </template>
 

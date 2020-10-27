@@ -70,6 +70,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    orderConfirmation: {},
     googleAddress: {},
     storeCurrentOrder: {},
     userProfileModalVisible: true,
@@ -98,6 +99,9 @@ const store = new Vuex.Store({
       } else {
         state[name] = 1
       }
+    },
+    orderConfirmationModalResponse (state, { orderConfirmationModalResponse }) {
+      state.orderConfirmationModalResponse = orderConfirmationModalResponse
     },
     googleAddress (state, { googleAddress }) {
       state.googleAddress = googleAddress

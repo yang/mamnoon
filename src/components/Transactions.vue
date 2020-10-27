@@ -5,7 +5,7 @@
         <div class="container nav-acc-header pad-yellow-background">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" @click="logUserOut"> Logout</a>
+              <button class="nav-link" @click="logUserOut"> Logout</button>
             </li>
           </ul>
         <AllTransactions />

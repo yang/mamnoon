@@ -26,7 +26,17 @@ transaction id:
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
 {{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>
 
-<button v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId,item.price)">issue return</button>
+
+
+
+<div v-if="item.returned">
+  <span>(returned)</span>
+{{item.returned}}
+</div>
+<div v-else>
+<button v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId,item.price,item.cartId,order._id)">issue return</button>
+  </div>
+
 
 
 </li>
@@ -58,11 +68,22 @@ export default {
         self.orderhistory = response.data
     })
     },
-        issueTokenizedReturn(uniqueTransIdString,amount) {
+        issueTokenizedReturn(uniqueTransIdString,amount,cartId,orderId) {
 
-let amountDiv100 = amount/100
+
+
+
+let tax = amount * 0.101
+
+let amountToCalcWithTax = amount + tax
+
+let amountDiv100 = amountToCalcWithTax/100
 let amountToSend = amountDiv100.toFixed(2).toString()
-          console.log(amountDiv100.toFixed(2).toString())
+
+console.log(amountDiv100.toFixed(2).toString())
+
+console.log(amountToSend)
+
       this.$http
         .post("/order/issue-tokenized-return", {
             uniqueTransId: uniqueTransIdString,
@@ -70,7 +91,26 @@ let amountToSend = amountDiv100.toFixed(2).toString()
           }
           )
         .then((response) => {
-console.log(response)
+            console.log(response)
+
+                this.$http
+                  .post("/order/update-refunded-items", {
+                      cartId: cartId,
+                      orderId: orderId
+                    }
+                    )
+                  .then((response) => {
+                    console.log(response)
+
+                    this.retrieveOrders()
+
+                  })
+                  .catch((e) => {
+                    // this.errors.push(e);
+                    console.log("errors");
+                    console.log(e);
+                  });
+
         })
         .catch((e) => {
           // this.errors.push(e);

@@ -116,7 +116,7 @@
             <div class="container online-menu">
               <h4>featured</h4>
             </div>
- 
+<!--  
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
        Loading...
@@ -126,7 +126,72 @@
 
 
       
-    </template>
+    </template> -->
+
+
+   <template v-if="upserveSections.length === 0">
+     <div class="container text-center pt20">
+       Loading...
+     </div>
+     </template>
+         <template v-else>
+   
+<div id="online-menu" class="is-fullheight no-top-pad">
+        <carousel :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
+              <template class="subprev" slot="prev">
+              <span class="prev">
+              <Prev />
+              </span>
+              </template>
+
+            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
+            <template v-for="item in upserveSections">
+  <VueAspectRatio ar="4:3" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
+                    <template v-for="serve in upserve">
+                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
+                        <div @click="openModal(serve)">
+                            <template v-if="serve.images">
+                              <div class="slide-show-image-home"
+                                v-if="serve.images.online_ordering_menu"
+                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                              ></div>
+
+                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
+
+                              <div
+                                v-else
+                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              >
+                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
+                              </div>
+                            </template>
+                                                 <div class="content-box-upper">
+                              <div class="name">
+                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
+                              {{serve.name}}</div>
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                            </div></div>
+                            </div>
+                    </template>
+         </VueAspectRatio>
+          </template>
+                    <template class="subnext" slot="next">
+            <span class="next">
+              <Next />
+            </span>
+          </template>
+            </carousel>
+</div>
+
+</template>
+
+
 <br>
 <div class="container online-menu">
 <h4>full mamnoon menu</h4>
@@ -675,10 +740,10 @@ cart empty
       </div>
           </div>
         </div>
-        <pre>
+        <!-- <pre>
 
           {{this.$store.state.storeCurrentOrder}}
-        </pre>
+        </pre> -->
 
         <div>
 
@@ -1542,6 +1607,12 @@ if(this.tipSelected === 0){
 
 
           self.orderConfirmationModalResponse = response.data;
+
+          let orderConfirmationModalResponse = response.data;
+
+          self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
+          this.$router.push("/orderconfirmation");
+
           self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
           self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
 
@@ -1632,6 +1703,9 @@ if(this.tipSelected === 0){
     emergepay.init();
     this.$store.state.storeCurrentOrder = {};
     // this.currentOrder = this.$store.state.storeCurrentOrder
+    // self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
+    this.$store.state.orderConfirmationModalResponse = {};
+
   }
 };
 </script>
