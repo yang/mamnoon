@@ -1,8 +1,11 @@
 <template>
       <div v-if="orderConfirmationModal" class="order-confirmation-modal">
         <div class="container online-menu order-modal-width">
-          <div @click="closeConfirmationModal()" class="close closeModal">
+          <!-- <div @click="closeConfirmationModal()" class="close closeModal"> -->
+          <div class="close closeModal">
+                 <router-link to="/">  
             <CloseModal />
+                 </router-link>
           </div>
           <h4>order confirmation</h4>
         </div>
