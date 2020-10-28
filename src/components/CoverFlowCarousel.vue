@@ -849,7 +849,7 @@ background: #8c8c8c;
 
 .loading-box{
     width: 500px;
-    color: red;
+    color: #F58E58;
     height: 500px;
     background: #fff;
     padding-top: 240px;

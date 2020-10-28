@@ -10,6 +10,7 @@
         <!-- </h1> -->
         </div>
         <GiftCardModule />
+        <GiftCardForm :emailAddress="$store.state.currentUserEmail" />
         <!-- <TestimonialForm :emailAddress="$store.state.currentUserEmail" /> -->
         <!-- {{$store.state}} -->
 
@@ -32,6 +33,12 @@
 <script type="text/javascript">
 import EmailForm from "@/components/EmailForm";
 import TestimonialForm from "@/components/TestimonialForm";
+
+import GiftCardForm from "@/components/GiftCardForm";
+
+
+
+
 import GiftCardModule from "@/components/GiftCardModule";
 import ToggleVegetarian from "@/components/ToggleVegetarian";
 
@@ -43,6 +50,7 @@ export default {
 name: 'UserProfile',
   components: {
     TestimonialForm,
+    GiftCardForm,
     EmailForm,
     GiftCardModule,
     ToggleVegetarian,

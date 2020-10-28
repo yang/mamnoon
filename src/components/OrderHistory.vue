@@ -1,17 +1,14 @@
 <template>
 <div class="container pad-yellow-background pd50">
-{{currentUser.currentUserEmail}}
+<!-- {{currentUser.currentUserEmail}} -->
 <br>
-order history:
+food order history:
 <br>
 <!-- {{response}} -->
 <div v-for="order in orderhistory.user" :key="order._id">
+<button class="fl-right" @click="reorder()">re order</button>
 <br>
-<pre>
-{{order}}
-</pre>
-<br>
-<button @click="reorder()">re order</button>
+{{order.payInfo.time_placed}}
 <ul>
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
 {{item.name}}
@@ -52,5 +49,12 @@ export default {
 
 </script>
 
+
+
+<style lang="scss">
+.fl-right{
+    float: right;
+}
+</style>
 
 

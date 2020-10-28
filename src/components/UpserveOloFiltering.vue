@@ -215,7 +215,7 @@
                 <h2 class="menu-header">
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name}}
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
@@ -727,7 +727,7 @@ cart empty
                 v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="useGiftCardBalance()"
-              >Use Giftcard ({{cardNumberInput}})</button>
+              >Use Giftcard</button>
               <button class="mt10 fw" v-else disabled>Use Giftcard</button>
 
 
@@ -1109,12 +1109,9 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
                      console.log(response)
                 self.currentBalance =
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
+                  console.log(self.$store.state.storeCurrentOrder)
 
-                       console.log(self.$store.state.storeCurrentOrder)
-
-
-// self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData);
-// self.doAnOrder(zeroOrder,response.data.resSendData);
+                  self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData);
 
               })
               .catch(function (error) {
@@ -1219,10 +1216,6 @@ this.showingCustom(false)
   document.getElementById("tipOption2").disabled = false;
   document.getElementById("tipOption3").disabled = false;
   document.getElementById("customTip").disabled = false;
-
-
-
-
 this.currentAmountToAdd = 0
 this.customTipVisible = false
 }else if(index === 1){
@@ -1244,25 +1237,19 @@ this.showingCustom(false)
   document.getElementById("tipOption2").disabled = true;
   document.getElementById("tipOption3").disabled = false;
   document.getElementById("customTip").disabled = false;
-
-
 this.currentAmountToAdd = this.totalwith22
 this.customTipVisible = false
 }else if(index === 3){
-
-
 this.showingCustom(false)
   document.getElementById("noTip").disabled = false;
   document.getElementById("tipOption1").disabled = false;
   document.getElementById("tipOption2").disabled = false;
   document.getElementById("tipOption3").disabled = true;
   document.getElementById("customTip").disabled = false;
-
 this.currentAmountToAdd = this.totalwith25
 this.customTipVisible = false
 }else if(index === 4){
 this.showingCustom(true)
-
   document.getElementById("noTip").disabled = false;
   document.getElementById("tipOption1").disabled = false;
   document.getElementById("tipOption2").disabled = false;
@@ -1296,36 +1283,20 @@ this.attention = true
       this.$store.commit("googleAddress", { googleAddress });
     },
     cippaybutton() {
-
-
-
       this.checkForm()
-
       let self = this;
-
       this.getToken().then(function (transactionToken) {
-        // Set up and open the payment modal
         emergepay.open({
-          // (required) Used to set up the modal
           transactionToken: transactionToken,
-          // (optional) Callback function that gets called after a successful transaction
           onTransactionSuccess: function (approvalData) {
             console.log("Approval Data", approvalData);
             emergepay.close();
-            // location = "https://www.chargeitpro.com";
-            //do the post here
 
-
-
-
-
-self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
+            self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
           },
-          // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
             console.log("Failure Data", failureData);
           },
-          // (optional) Callback function that gets called after a user clicks the close button on the modal
           onTransactionCancel: function () {
             console.log("transaction cancelled!");
           },
@@ -1355,19 +1326,12 @@ self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
     deliveryOption(choice) {
       if (choice === "delivery") {
         this.currentOrder.fulfillment_info.type = "delivery";
-
         this.refreshGoogle();
-
-
-
-
-
       } else {
         this.currentOrder.fulfillment_info.type = "pickup";
       }
 
       let storeCurrentOrder = this.currentOrder;
-  
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
     addAddOn(mod, modifieritem) {
@@ -2119,10 +2083,6 @@ div{
 }
 
 }
-
-
-
-
 
 .item-image-container > div > svg {
     height: 300px;

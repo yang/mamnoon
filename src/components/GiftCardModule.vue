@@ -5,7 +5,7 @@
     <div class="container pad-yellow-background pd50">
       
       
-      {{cardNumberInput}}
+      <!-- {{cardNumberInput}}
       <input
       type="number"
       min="0.00"
@@ -15,7 +15,7 @@
       placeholder="withdraw balance"
       />
       <br />
-      <button @click="useBalance(amountUse)">Use {{ amountUse }} Balance</button>
+      <button @click="useBalance(amountUse)">Use {{ amountUse }} Balance</button> -->
 
   
       <div class="button-panel top">
@@ -92,6 +92,16 @@ export default {
     };
   },
   methods: {
+
+
+
+
+
+
+
+
+
+
     async lookupBalance() {
       console.log('lookup balance')
       let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
