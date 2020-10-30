@@ -1,7 +1,7 @@
 <template>
   <div class="mamnoon">
     <Nav />
-    <UpserveOloFiltering />
+    <UpserveOloFiltering :emailAddress="$store.state.currentUserEmail" />
   </div>
 </template>
 <script>

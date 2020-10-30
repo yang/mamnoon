@@ -17,6 +17,7 @@
     "jquery": "^3.5.1",
     "jquery-ui": "^1.12.1",
     "module": "^1.2.5",
+    "moment": "^2.29.1",
     "mongodb": "^3.5.9",
     "mongodb-client-encryption": "^1.1.0",
     "storyblok-js-client": "^2.5.2",

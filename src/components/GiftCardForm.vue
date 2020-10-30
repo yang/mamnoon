@@ -1,7 +1,7 @@
 <template>
 <div>
 <div class="container pad-yellow-background module-header">
-add a giftcard for {{emailAddress}}
+dont use add a giftcard for {{emailAddress}}
   </div>
  <div class="container nav-acc-header pad-yellow-background">
 <div class="row">
@@ -14,8 +14,6 @@ add a giftcard for {{emailAddress}}
       <li :key="error" v-for="error in errors">{{ error }}</li>
     </ul>
   </p>
-
-
   <p>
     <label for="name">Number</label>
     <br>
@@ -27,21 +25,6 @@ add a giftcard for {{emailAddress}}
       class="cardnumber"
     >
   </p>
-
-
-  <!-- <p>
-    <label for="name">Email</label>
-    <br>
-    <input
-      id="title"
-      type="text"
-      name="title"
-        v-model="messageBody.email"
-    >
-  </p> -->
-
-
-
   <p>
     <button class="buttonStyle" type="submit" value="Submit">
         <Submit />
@@ -55,34 +38,18 @@ add a giftcard for {{emailAddress}}
 giftcards: 
 <br>
 <ul v-if="giftcards">
-
 <li class="giftcard-item" v-for="giftcarditem in giftcards.slice().reverse()" :key="giftcarditem._id">
-
-
-
-
 <b>{{giftcarditem.number}}</b>&nbsp;&nbsp;&nbsp;&nbsp;
 <button @click="removeGiftCard(giftcarditem._id,number)">remove</button>
-
 </li>
-
 </ul>
-
 </div>
 </div>
 </div>
-
 </div>
 </template>
-
 <script type="text/javascript">
-
-
 import Submit from "@/components/svgIcons/Submit";
-
-  
-
-
 export default {
   components:{
     Submit
@@ -165,7 +132,7 @@ mounted () {
 
 <style lang="scss">
 li{
-font-size: 10px;
+// font-size: 10px;
 
  p{
   margin-bottom: 0;
@@ -210,7 +177,7 @@ font-weight:500;
 
 
 .giftcard-item{
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
 
 .cardnumber{

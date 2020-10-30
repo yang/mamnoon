@@ -10,13 +10,11 @@
           <h4>order confirmation</h4>
         </div>
         <div class="container modal-body order-modal-width order-modal-body">
+
+
+
           <h2>thank you for your order!</h2>
           <div>
-            <!-- <pre>
-            {{orderConfirmationModalResponse}}
-          </pre> -->
-
-
 <br />
 <b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b><br />  
 <b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.city}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.state}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.zip_code}}</b>
@@ -36,7 +34,15 @@
 <b>taxes: ${{orderConfirmationModalResponse.charges.taxes.toFixed(2)/100}}</b>
   <br />  
 <b>total: ${{orderConfirmationModalResponse.charges.total.toFixed(2)/100}}</b>
+<br />
+<hr />
 
+<span v-if="orderConfirmationModalResponse.giftcardbalance">current giftcard balance: {{orderConfirmationModalResponse.giftcardbalance}}</span>
+<span v-else>credit transaction</span>
+
+<!-- <div v-if="orderConfirmationModalResponse.giftcardBalance">
+current giftcard balance: ${{orderConfirmationModalResponse.giftcardBalance}}
+</div> -->
 
           </div>
         </div>

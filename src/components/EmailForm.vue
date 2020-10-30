@@ -185,7 +185,7 @@ console.log(newTestimonial)
 
 <style lang="scss">
 li{
-font-size: 10px;
+// font-size: 10px;
 
  p{
   margin-bottom: 0;

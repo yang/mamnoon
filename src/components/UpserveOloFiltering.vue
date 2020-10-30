@@ -105,7 +105,7 @@
       <div class="container pt20 no-bot-pad">
         <div class="row">
           <div class="col-md-12">
-             <h1 class="text-center">mamnoon</h1>
+             <h1 class="text-center">mamnoon {{emailAddress}}</h1>
                </div>
         </div>
       </div>
@@ -717,18 +717,28 @@ cart empty
         placeholder="enter your giftcard number"
       /> -->
 <br>
-<input v-model="cardNumberInput" class="giftcardinput" placeholder="enter your giftcard number">
-
+<template v-if="this.$store.state.loggedIn">
+  <input v-model="cardNumberInput" class="giftcardinput" placeholder="enter your giftcard number">
 <br>
-
-
-
               <button class="mt10 fw" 
                 v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="useGiftCardBalance()"
               >Use Giftcard</button>
               <button class="mt10 fw" v-else disabled>Use Giftcard</button>
+</template>
+  <template v-else>
+  <input v-model="cardNumberInput" class="giftcardinput" placeholder="enter your giftcard number">
+<br>
+                <button class="mt10 fw" 
+                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                id="cip-pay-btn"
+                @click="useGiftCardBalance()"
+              >Use Giftcard</button>
+              <button class="mt10 fw" v-else disabled>Use Giftcard</button>
+    </template>
+
+
 
 
    <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
@@ -784,7 +794,7 @@ import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 import swal from "sweetalert";
 export default {
   name: "upservefiltering",
-  props: ["data"],
+  props: ["data","emailAddress"],
   components: {
     OrderConfirmationModal,
     OnlineMenuCarousel,
@@ -947,6 +957,7 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
     },
   data() {
     return {
+      preferredGiftCard: '',
       showInsufficientFunds: false,
       amountUse: "",
       cardNumberInput: "",
@@ -1071,14 +1082,34 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
     },
   },
   methods: {
+            getUser() {
+
+            if(this.emailAddress){
+
+              let self = this
+              this.$http
+              .get("/user/email/" + this.emailAddress)
+              .then(function (response) {
+              let userInfo = response.data;
+              console.log(userInfo);
+              self.user = userInfo
+
+
+              self.cardNumberInput = userInfo.user.giftcard
+              self.preferredGiftCard = userInfo.user.giftcard
+              })
+              .catch(function (error) {
+              console.log(error);
+              });
+
+    }
+    },
     async lookupBalance() {
 
       let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
         cardNumber: this.cardNumberInput,
       });
       let giftcardResponse = giftcardLookup.data;
-
-
 
       this.currentBalance =
         giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
@@ -1111,7 +1142,7 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
                   console.log(self.$store.state.storeCurrentOrder)
 
-                  self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData);
+                  self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
 
               })
               .catch(function (error) {
@@ -1292,7 +1323,7 @@ this.attention = true
             console.log("Approval Data", approvalData);
             emergepay.close();
 
-            self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
+            self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
           },
           onTransactionFailure: function (failureData) {
             console.log("Failure Data", failureData);
@@ -1553,7 +1584,7 @@ if(this.tipSelected === 0){
 
 
     },
-    doAnOrder(currentOrder,approvalData) {
+    doAnOrder(currentOrder,approvalData,giftcardbalance) {
 
       let correctPretotal = currentOrder
       // correctPretotal.charges.total = correctPretotal.charges.preTotal
@@ -1570,9 +1601,12 @@ if(this.tipSelected === 0){
           self.orderConfirmationModal = true;
 
 
+          self.giftcardbalance = giftcardbalance
           self.orderConfirmationModalResponse = response.data;
 
           let orderConfirmationModalResponse = response.data;
+
+          orderConfirmationModalResponse.giftcardbalance = giftcardbalance
 
           self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
           this.$router.push("/orderconfirmation");
@@ -1637,9 +1671,6 @@ if(this.tipSelected === 0){
           onTransactionSuccess: function (approvalData) {
             console.log("Approval Data", approvalData);
             emergepay.close();
-            // location = "https://www.chargeitpro.com";
-            //do the post here
-            // self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
           },
           // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
@@ -1652,8 +1683,6 @@ if(this.tipSelected === 0){
         });
 
 
-
-
         })
         .catch((e) => {
           // this.errors.push(e);
@@ -1663,6 +1692,7 @@ if(this.tipSelected === 0){
     }
   },
   mounted() {
+    this.getUser();
     this.upserves();
     emergepay.init();
     this.$store.state.storeCurrentOrder = {};

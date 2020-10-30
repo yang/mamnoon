@@ -301,4 +301,15 @@ border: 1px solid #f05d5b !important;
 }
 
 
+
+.sm-button{
+padding: 2px 9px;
+margin: 0;
+border: 0;
+background-color: #f05d5b;
+color: white;
+border-radius: 4px;
+margin: 0 10px 0 0;
+}
+
 </style>

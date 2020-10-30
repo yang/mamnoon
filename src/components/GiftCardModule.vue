@@ -1,10 +1,7 @@
 <template>
   <div>
-    <div class="container pad-yellow-background module-header">your giftcard</div>
-
-    <div class="container pad-yellow-background pd50">
-      
-      
+    <div class="container pad-yellow-background module-header" style="display:none;">your giftcard</div>
+    <div class="container pad-yellow-background pd50" style="display:none;">
       <!-- {{cardNumberInput}}
       <input
       type="number"
@@ -14,15 +11,14 @@
       v-model="amountUse"
       placeholder="withdraw balance"
       />
+
       <br />
       <button @click="useBalance(amountUse)">Use {{ amountUse }} Balance</button> -->
-
-  
       <div class="button-panel top">
-
       <div class="button-box text-left">
 <div class="thick-grey">check your balance</div>
       <br />
+        <!-- v-model="cardNumberInput" -->
       <input
         type="number"
         v-model="cardNumberInput"
@@ -42,14 +38,11 @@
         :value="currentBalance"
       />
       </div>
-
       </div>
-  
   
       <div class="button-panel bottom">
 
       <div class="button-box">
-
     <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
 <br>
     <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">    <BuyNewCard /></a>
@@ -67,6 +60,73 @@
 
       </div>
     </div>
+
+
+
+
+
+
+
+<div>
+<div class="container pad-yellow-background module-header">
+add a giftcard for {{emailAddress}}
+  </div>
+ <div class="container nav-acc-header pad-yellow-background">
+<div class="row">
+<div class="col-12 col-lg-12">
+<form id="app" @submit.prevent="checkForm">
+  <p v-if="errors.length">
+    <b>Please correct the following error(s):</b>
+    <ul>
+      <li :key="error" v-for="error in errors">{{ error }}</li>
+    </ul>
+  </p>
+  <p>
+    <input
+      id="title"
+      v-model="messageBody.number"
+      type="number"
+      name="title"
+      placeholder="add giftcard"
+    >
+    &nbsp;&nbsp;&nbsp;
+    <button class="sm-button" type="submit" value="Submit">
+   submit
+      </button>
+
+  </p>
+</form>
+</div>
+</div>
+<div class="row">
+<div id="gift-card-table" class="col-12 col-lg-12 giftcards-list">
+
+<table class="w100" v-if="giftcards">
+
+
+<th class="w100"><td><div>number</div></td><td><div>balance</div></td><td><div>actions</div></td></th>
+    <tr class="giftcard-item w100" v-for="(giftcarditem, index) in giftcards" :key="giftcarditem._id">
+      <td :class="{primary: giftcarditem.number === cardNumberInput}"><div><b>{{giftcarditem.number}}</b></div></td>
+     <td :class="{primary: giftcarditem.number === cardNumberInput}"><div>
+        <button class="sm-button" v-if="!giftcarditem.balance" @click="lookupAddBalance(giftcarditem.number,index)">view balance</button>
+        <span v-else>{{giftcarditem.balance}}</span>
+      </div></td>
+ <td :class="{primary: giftcarditem.number === cardNumberInput}">
+<div>
+
+        <!-- {{giftcarditem}} -->
+        <button class="sm-button fl-right" v-if="giftcarditem.number !== preferredGiftCard" @click="primaryGiftCard(giftcarditem,index)">set primary</button>
+        <span v-else class="fl-right">(primary)</span>
+        &nbsp;&nbsp;&nbsp;
+        <button class="sm-button fl-right" @click="removeGiftCard(giftcarditem._id,number)">remove</button>
+
+      </div></td>
+    </tr>
+</table>
+</div>
+</div>
+</div>
+</div>
   </div>
 </template>
 
@@ -76,50 +136,179 @@ import UpdateBalance from "@/components/svgIcons/UpdateBalance";
 import Submit from "@/components/svgIcons/Submit";
 import BuyNewCard from "@/components/svgIcons/BuyNewCard";
 import Check from "@/components/svgIcons/Check";
-
+import swal from "sweetalert";
 export default {
   components: {
     UpdateBalance,
     BuyNewCard,
-    Check
+    Check,
+    Submit
   },
   data() {
     return {
+      user: null,
+      listBalance: "",
       currentBalance: "",
       amountUse: "",
       cardNumberInput: "",
       showInsufficientFunds: false,
-    };
+      errors: [],
+      giftcards: null,
+      messageBody: {
+        number: null,
+        email: this.emailAddress
+    },
+    preferredGiftCard: ""
+    }
+    },
+
+  computed: {
+    // a computed getter
+    giftcardArray: function () {
+      let result = this.giftcards.map(({ number }) => number)
+        return result
+      }
   },
+  watch: {	
+    giftcards(oldgiftcards, newgiftcards){
+      this.giftcards = oldgiftcards
+    },
+    cardNumberInput(oldcardNumberInput, newcardNumberInput){
+// console.log(oldNumberInput)
+console.log(newcardNumberInput)
+
+
+
+console.log(this.cardNumberInput)
+
+this.lookupBalance()
+
+    }
+  },
+props: ['emailAddress'],
   methods: {
+async primaryGiftCard(giftcarditem,index){
+  giftcarditem.email = this.emailAddress
+    try {
+
+        let response = await this.$http.post("/user/primarygiftcard", giftcarditem);
+        this.cardNumberInput = response.data.doc.giftcard
+        this.preferredGiftCard = response.data.doc.giftcard
+        this.lookupBalance()
+
+
+         } catch (err) {
+        console.log(err.response);
+      }
 
 
 
 
 
+},
+    async checkForm() {
+
+
+
+if(this.messageBody.number != null){
+
+let msgString = this.messageBody.number.toString();
+var n = this.giftcardArray.includes(msgString);
+
+console.log(n)
 
 
 
 
+if(!n){
+    var regex = /^\d{16}$/;
+    if(regex.test(this.messageBody.number) === false){
+      swal('must be 16 digits')
+    }else{
 
+
+      try {
+        let response = await this.$http.post("/user/submitgiftcard", this.messageBody);
+         this.giftcards = response.data.user.giftcards
+        this.messageBody = {
+          number: null
+        }
+         } catch (err) {
+        console.log(err.response);
+      }
+
+     
+    }
+    }else{
+      swal('you have already added this number your list')
+      this.messageBody.number = null
+    }
+}else{
+  console.log(null)
+}
+    
+    },
+    async getGiftCards() {
+      try {
+        let response = await this.$http.get("/user/getgiftcards/" + this.emailAddress);
+        console.log(response.data)
+        this.giftcards = response.data.usergiftcards
+ 
+         } catch (err) {
+        console.log(err.response);
+      }
+
+    },
+    async removeGiftCard(giftcardId,userEmail){
+
+    console.log(giftcardId)
+
+    try {
+      let response = await this.$http.post('/user/deletegiftcard/', {
+      giftcardId,
+      userEmail
+      }) 
+     
+      console.log(response)
+
+    this.getGiftCards();
+    } catch (err) {
+               swal("Error", "Something Went Wrong", "error");
+        console.log(err.response);
+      }
+      
+      this.cardNumberInput = ''
+    
+    },
+    handler(){
+     console.log('page refresh')
+          },
     async lookupBalance() {
-      console.log('lookup balance')
       let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
         cardNumber: this.cardNumberInput,
       });
       let giftcardResponse = giftcardLookup.data;
-      // console.log(giftcardResponse)
-      console.log(
-        giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0]
-      );
+
       this.currentBalance =
         giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
     },
+    async lookupAddBalance(number,index) {
+
+      // this.giftcards[index].balance = number
+
+      let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
+        cardNumber: number
+      });
+     let giftcardResponse = giftcardLookup.data;
+    this.$set(this.giftcards[index], 'balance', giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0])
+
+
+
+
+    },
     useBalance() {
       let self = this;
-
-      // first check if the balance is available
-console.log('use balance')
+      console.log('use balance')
       this.$http
         .post("/user/lookupgiftcard", {
           cardNumber: this.cardNumberInput,
@@ -155,8 +344,38 @@ console.log('use balance')
           console.log(error);
         });
     },
+        getUser() {
+
+let self = this
+      this.$http
+        .get("/user/email/" + this.emailAddress)
+        .then(function (response) {
+          let userInfo = response.data;
+          console.log(userInfo);
+          self.user = userInfo
+
+
+self.cardNumberInput = userInfo.user.giftcard
+self.preferredGiftCard = userInfo.user.giftcard
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
+
+    }
+
+
+
+
   },
-  mounted() {},
+  mounted() {
+    this.lookupBalance()
+    this.getGiftCards()
+    this.getUser()
+
+  },
 };
 </script>
 
@@ -173,7 +392,6 @@ console.log('use balance')
   font-weight: 500;
   margin-bottom: 0;
 }
-
 .buttonStyle {
   border: 0;
   background: transparent;
@@ -181,13 +399,11 @@ console.log('use balance')
   padding-left: 0;
   padding-right: 0;
 }
-
 .buttonStyle:active,
 .buttonStyle:visited,
 .buttonStyle:focus {
   outline: none;
 }
-
 .placeholder {
   padding: 10px 10px 14px 10px;
   border: 0;
@@ -196,13 +412,11 @@ console.log('use balance')
   // width: 250px;
       width: 300px;
 }
-
 .currBalance {
   padding: 20px;
   background: white;
   font-weight: bold;
 }
-
 .placeholder-balance {
     pointer-events: none;
     border: 0;
@@ -211,52 +425,40 @@ console.log('use balance')
     font-size: 30px;
     font-weight: bold;
     color: black;
-
 }
-
 .button-panel {
   width: 100%;
 &.bottom{
   width: 50%;
   margin: 0 auto;
 }
-
 &.top{
   width: 80%;
   margin: 0 auto;
 }
-
-
-  .button-box {
-
-
+.button-box {
     width: 50%;
     display: inline-block;
     text-align: center;
-
     &.text-left{
       text-align: left;
     }
-
   }
 }
-
-
 .placeholder::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
- color: #f58e58;
-opacity: 1; /* Firefox */
+  color: #f58e58;
+  opacity: 1; /* Firefox */
 }
+
 .placeholder:-ms-input-placeholder,
 .placeholder::-ms-input-placeholder { /* Microsoft Edge */
   color: #f58e58;
 }
 
-
-
 .thick-grey{
   color: #49494a;
-font-size: 18px;
-font-weight: 600;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .container.pad-yellow-background.pd50,
@@ -264,16 +466,11 @@ font-weight: 600;
   padding: 50px;
 }
 
-
 .pl50{
   padding-left: 50px;
 }
 
-
-
-
 @media only screen and (max-width: 1080px) {
-
 
 .button-panel {
   width: 100%;
@@ -287,9 +484,7 @@ font-weight: 600;
   margin: 0 auto;
 }
 
-
-  .button-box {
-
+.button-box {
 
     width: 100%;
     display: inline-block;
@@ -344,4 +539,117 @@ font-weight: 600;
 
 }
 }
+
+li{
+// font-size: 10px;
+
+ p{
+  margin-bottom: 0;
+}
+}
+
+
+
+.giftcards-list{
+ul{
+  max-height: 400px;
+  border: 1px solid black;
+  overflow: scroll;
+  width: 90%;
+  margin-top: 20px;
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+}
+
+.module-header{
+  width: 100%;
+  display: block;
+  background:#F05D5B;
+  text-align: center;
+  color: #fff367;
+  padding: 10px;
+  font-weight: bold;
+  margin-bottom: 0;
+
+
+  font-size:24px;
+font-weight:500;
+}
+
+
+.buttonStyle{
+    border: 0;
+    background: transparent;
+    outline: none;
+}
+
+
+.giftcard-item{
+  // margin-bottom: 10px;
+}
+
+.cardnumber{
+    padding: 10px 10px 14px 10px;
+    border: 0;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+
+
+#gift-card-table{
+
+table{
+    border-collapse:collapse;
+    padding:0;
+}
+table td{
+    // display:table-cell;
+    vertical-align:top;
+}
+
+table td div{
+    height:100%;
+}
+
+.w100{
+  width: 100%;
+      display: inline-table;
+}
+
+.w100{
+  td{
+    width: 33.33%;
+        // display: inline-block;
+  }
+}
+
+
+tr{
+    border-bottom: 1px solid black;
+}
+
+tr td{
+    padding: 18px 10px 15px 10px;
+    height: 56px;
+    margin-bottom: 0;
+
+
+        display:table-cell;
+    vertical-align:top;
+
+&.primary{
+    background: #bfebbf;
+
+}
+
+}
+}
+.fl-right{
+    float: right;
+}
+
 </style>
+
+
