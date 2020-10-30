@@ -75,4 +75,10 @@ export default {
   margin-bottom: 0px;
   height: 90px;
 }
+
+
+
+
+
+
 </style>

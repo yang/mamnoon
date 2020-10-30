@@ -65,7 +65,7 @@ float: left;
 
 &:nth-child(2){
        .pad-cont{
-        padding-top: 40px;
+        padding-top: 30px;
        }
 }
 

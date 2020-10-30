@@ -47,7 +47,11 @@
                         <div class="box-inner">
                           {{mod.name}}
                           <br />
-                          <b>{{mod.price}}</b>
+                          <b v-if="mod.price==='0.0'">{{mod.price}}</b>
+                          <i class="small" v-else>no extra charge</i>
+
+
+
                           <div v-if="modifier.name === 'Promotions'">
                             <div v-for="piece in upserveList" :key="piece.name">
                               <div v-if="piece.name === mod.name">
@@ -56,9 +60,8 @@
                             </div>
                           </div>
                           <!-- loop through and get image -->
-{{mod}}
-<br><br>
-{{modifieritem}}
+
+
                           <div class="mt10">
                             <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                             <button
@@ -105,7 +108,7 @@
       <div class="container pt20 no-bot-pad">
         <div class="row">
           <div class="col-md-12">
-             <h1 class="text-center">mamnoon {{emailAddress}}</h1>
+             <h1 class="text-center">mamnoon</h1>
                </div>
         </div>
       </div>
@@ -2598,6 +2601,11 @@ li.modal-item{
     transform: translate(-50%,-50px);
 }
 
+
+
+   i.small{
+     font-size: 12px;
+   }
 
 </style>
 

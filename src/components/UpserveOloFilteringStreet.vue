@@ -2,45 +2,9 @@
   <div>
     <section>
       <!-- {{$data}} -->
-      <div v-if="orderConfirmationModal" class="order-confirmation-modal">
-        <div class="container online-menu order-modal-width">
-          <div @click="closeConfirmationModal()" class="close closeModal">
-            <CloseModal />
-          </div>
-          <h4>order confirmation</h4>
-        </div>
-        <div class="container modal-body order-modal-width order-modal-body">
-          <h2>thank you for your order!</h2>
-          <div>
-            <!-- <pre>
-            {{orderConfirmationModalResponse}}
-          </pre> -->
 
-
-<br />
-<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b><br />  
-<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.city}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.state}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.zip_code}}</b>
-  <br>
-  <b>{{orderConfirmationModalResponse.fulfillment_info.customer.email}}</b>  <br />  
-<b>{{orderConfirmationModalResponse.fulfillment_info.customer.phone}}</b>
-
-<p>{{orderConfirmationModalResponse.fulfillment_info.customer.instructions}}</p>
-<br />
-<ul class="no-left-pad" v-if="orderConfirmationModalResponse.charges.items">
-  <li class="modal-item" v-for="item in orderConfirmationModalResponse.charges.items" :key="item.name">
-    {{item.name}}
-  </li>
-  </ul>  
-<b>tip: ${{orderConfirmationModalResponse.charges.tip.amount.toFixed(2)/100}}</b>
-  <br />  
-<b>taxes: ${{orderConfirmationModalResponse.charges.taxes.toFixed(2)/100}}</b>
-  <br />  
-<b>total: ${{orderConfirmationModalResponse.charges.total.toFixed(2)/100}}</b>
-
-
-          </div>
-        </div>
-      </div>
+<!-- <pre>{{upserveList}}</pre> -->
+<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderConfirmationModalResponse="orderConfirmationModalResponse" />
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
           <div @click="closeModal()" class="close closeModal">
@@ -83,9 +47,12 @@
                         <div class="box-inner">
                           {{mod.name}}
                           <br />
-                          <b>{{mod.price}}</b>
+                          <!-- <b>{{mod.price}}</b> -->
+                          <b v-if="mod.price===0.0">{{mod.price}}</b>
+                          <i class="small" v-else>no extra charge</i>
+
                           <div v-if="modifier.name === 'Promotions'">
-                            <div v-for="piece in upserve" :key="piece.name">
+                            <div v-for="piece in upserveList" :key="piece.name">
                               <div v-if="piece.name === mod.name">
                                 <img :src="piece.images.online_ordering_menu.main" />
                               </div>
@@ -149,16 +116,19 @@
           <div class="col-md-8">
             <div class="container online-menu">
               <h4>featured</h4>
-
-
             </div>
-            <!-- <div class="container featured">
-              <h4>featured</h4>
-            </div> -->
-<!-- 
-    <vue-aspect-ratio ar="16:9" width="640px">
-        <div>your content goes here</div>
-    </vue-aspect-ratio> -->
+<!--  
+   <template v-if="upserveSections.length === 0">
+     <div class="container text-center pt20">
+       Loading...
+     </div>
+     </template>
+    <template v-else>
+
+
+      
+    </template> -->
+
 
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
@@ -222,12 +192,11 @@
 
 </template>
 
+
 <br>
-                        <div class="container online-menu">
-              <h4>full mamnoon street menu</h4>
-
-
-            </div>
+<div class="container online-menu">
+<h4>full mamnoon menu</h4>
+</div>
      
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
@@ -247,13 +216,13 @@
                 <h2 class="menu-header">
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name}}
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
                 <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
               
-                    <template v-for="serve in upserve" class="grey-bg">
+                    <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg" @click="openModal(serve)">
                           <div class="half-width2left">
@@ -267,6 +236,11 @@
                                 class="food-description"
                               >{{serve.description}}</div>
                               <div class="food-price">
+
+
+<!-- {{serve}} -->
+                                <!-- ${{ serve.price }} -->
+
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
                               <br />
@@ -716,8 +690,7 @@ cart empty
 
 
     
-              <!-- <button v-if="currentOrder.charges.items.length === 0" disabled>no items in cart</button> -->
-              <!-- <button v-if="currentOrder.charges.total > 0" @click="doAnOrder(currentOrder)"> do an order</button> -->
+
 
 <!-- </div> -->
 <template v-if="panelShow === 'yourOrder'">
@@ -732,11 +705,46 @@ cart empty
                 v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
-              >Pay</button>
-              <button class="mt10 fw" v-else disabled>Pay</button>
-              </template>
-              <!-- store: -->
+              >Card Payment</button>
+              <button class="mt10 fw" v-else disabled>Card Payment</button>
+       
 
+
+<br>
+<!-- 
+      <input
+        type="number"
+        v-model="cardNumberInput"
+        placeholder="enter your giftcard number"
+      /> -->
+<br>
+<template v-if="this.$store.state.loggedIn">
+  <input v-model="cardNumberInput" class="giftcardinput" placeholder="enter your giftcard number">
+<br>
+              <button class="mt10 fw" 
+                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                id="cip-pay-btn"
+                @click="useGiftCardBalance()"
+              >Use Giftcard</button>
+              <button class="mt10 fw" v-else disabled>Use Giftcard</button>
+</template>
+  <template v-else>
+  <input v-model="cardNumberInput" class="giftcardinput" placeholder="enter your giftcard number">
+<br>
+                <button class="mt10 fw" 
+                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                id="cip-pay-btn"
+                @click="useGiftCardBalance()"
+              >Use Giftcard</button>
+              <button class="mt10 fw" v-else disabled>Use Giftcard</button>
+    </template>
+
+
+
+
+   <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
+
+              </template>
               <br />
               <br />
               <br />
@@ -744,6 +752,7 @@ cart empty
           </div>
         </div>
         <!-- <pre>
+
           {{this.$store.state.storeCurrentOrder}}
         </pre> -->
 
@@ -768,6 +777,11 @@ import CloseModal from "@/components/svgIcons/CloseModal";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
 
+
+
+import OrderConfirmationModal from "@/components/OrderConfirmationModal"
+import OnlineMenuCarousel from "@/components/OnlineMenuCarousel";
+
 import CloseModalRedSm from "@/components/svgIcons/CloseModalRedSm";
 
 import VueAspectRatio from "vue-aspect-ratio";
@@ -781,8 +795,10 @@ import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 import swal from "sweetalert";
 export default {
   name: "upservefiltering",
-  props: ["data"],
+  props: ["data","emailAddress"],
   components: {
+    OrderConfirmationModal,
+    OnlineMenuCarousel,
     CloseModal,
     CloseModalRed,
     CloseModalSm,
@@ -795,184 +811,157 @@ export default {
     NadiIcon,
     NadiIconSm
   },
-  computed: {
-    googleAddress() {
-      return this.$store.state.googleAddress;
-    },
-    tip0() {
-      return Number(this.total) * 0;
-    },
-    tip1() {
-      return Number(this.total) * 0.18;
-    },
-    tip2() {
-      return Number(this.total) * 0.22;
-    },
-    tip3() {
-      return Number(this.total) * 0.25;
-    },
-  },
-  watch: {
-    checked(){
-
-      if(this.checked){
-
-      this.currentOrder.billing.billing_name = this.currentOrder.fulfillment_info.customer.name
-      
-      this.currentOrder.billing.billing_address = this.currentOrder.fulfillment_info.delivery_info.address.address_line1 + ' ' +  this.currentOrder.fulfillment_info.delivery_info.address.address_line2
-
-      this.currentOrder.billing.billing_postal_code = this.currentOrder.fulfillment_info.delivery_info.address.zip_code
-
-
-      var input = document.getElementById("name-billing");
-      
-      input.focus();
-
-
-      }else{
-
-        this.currentOrder.billing.billing_name = ''
-        this.currentOrder.billing.billing_address = ''
-        this.currentOrder.billing.billing_postal_code = ''
-
-      }
+  computed: {	
+    googleAddress() {	
+      return this.$store.state.googleAddress;	
+    },	
+    tip0() {	
+      return Number(this.total) * 0;	
+    },	
+    tip1() {	
+      return Number(this.total) * 0.18;	
+    },	
+    tip2() {	
+      return Number(this.total) * 0.22;	
+    },	
+    tip3() {	
+      return Number(this.total) * 0.25;	
+    },	
+  },	
+  watch: {	
+    checked(){	
+      if(this.checked){	
+      this.currentOrder.billing.billing_name = this.currentOrder.fulfillment_info.customer.name	
+      	
+      this.currentOrder.billing.billing_address = this.currentOrder.fulfillment_info.delivery_info.address.address_line1 + ' ' +  this.currentOrder.fulfillment_info.delivery_info.address.address_line2	
+      this.currentOrder.billing.billing_postal_code = this.currentOrder.fulfillment_info.delivery_info.address.zip_code	
+      var input = document.getElementById("name-billing");	
+      	
+      input.focus();	
+      }else{	
+        this.currentOrder.billing.billing_name = ''	
+        this.currentOrder.billing.billing_address = ''	
+        this.currentOrder.billing.billing_postal_code = ''	
+      }	
+    },	
+currentAmountToAddCustom(){	
+this.currentAmountToAdd = this.currentAmountToAddCustom * 100	
+},	
+    computedTotal(newComputedTotal,oldComputedTotal){	
+this.computedTotal = Number(this.total) + Number(this.currentAmountToAdd)	
 
 
 
-    },
-currentAmountToAddCustom(){
-this.currentAmountToAdd = this.currentAmountToAddCustom * 100
-},
-    computedTotal(newComputedTotal,oldComputedTotal){
-this.computedTotal = Number(this.total) + Number(this.currentAmountToAdd)
-    },
-    googleAddress(newAddress, oldAddress) {
-      this.googleAddressView = newAddress;
-      let googleAddressObject = {
-        streetNumber: "",
-        route: "",
-        locality: "",
-        state: "",
-        zip: "",
-      };
+this.currentOrder.payments.payments[0].amount = this.computedTotal + this.taxes
 
 
-if(newAddress){
-      googleAddressObject.route = newAddress.address_components.filter(
-        (obj) => {
-          return obj.types[0] === "route";
-        }
-      )[0].long_name;
-}
+    },	
+    googleAddress(newAddress, oldAddress) {	
+      this.googleAddressView = newAddress;	
+      let googleAddressObject = {	
+        streetNumber: "",	
+        route: "",	
+        locality: "",	
+        state: "",	
+        zip: "",	
+      };	
+if(newAddress){	
+      googleAddressObject.route = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "route";	
+        }	
+      )[0].long_name;	
+}	
+if(newAddress){	
+      googleAddressObject.streetNumber = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "street_number";	
+        }	
+      )[0].long_name;	
+}	
+if(newAddress){	
+      googleAddressObject.locality = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "locality";	
+        }	
+      )[0].long_name;	
+}	
+if(newAddress){	
+      googleAddressObject.state = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "administrative_area_level_1";	
+        }	
+      )[0].long_name;	
+}	
+if(newAddress){	
+      googleAddressObject.zip = newAddress.address_components.filter((obj) => {	
+        return obj.types[0] === "postal_code";	
+      })[0].long_name;	
+}	
 
-if(newAddress){
-      googleAddressObject.streetNumber = newAddress.address_components.filter(
-        (obj) => {
-          return obj.types[0] === "street_number";
-        }
-      )[0].long_name;
-}
+      this.googleAddressObject = googleAddressObject;	
+      this.currentOrder.fulfillment_info.delivery_info.address.city =	
+        googleAddressObject.locality;	
+      this.currentOrder.fulfillment_info.delivery_info.address.state =	
+        googleAddressObject.state;	
+      this.currentOrder.fulfillment_info.delivery_info.address.zip_code =	
+        googleAddressObject.zip;	
+      this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =	
+        googleAddressObject.streetNumber + " " + googleAddressObject.route;	
+      // this.date = newCount[0].meal.date;	
+      // this.delivery = newCount[0].meal.delivery;	
+      // this.reset(newCount);	
+    },	
+    // whenever total changes, this function will ru	
+   taxes: function(newTaxes,oldTaxes){	
+this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+this.currentOrder.charges.addedTotal = this.orderTotal	
+this.currentOrder.charges.total = this.orderTotal	
+    },	
+    currentAmountToAdd: function(newCurrent,oldCurrent){	
+this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+this.currentOrder.charges.addedTotal = this.orderTotal	
+this.currentOrder.charges.total = this.orderTotal	
+this.currentOrder.charges.tip.amount = this.currentAmountToAdd	
+    },	
+    tip: function (newTip, oldTip) {	
+      this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+      this.currentOrder.charges.tip.amount = this.tip;	
+      this.currentOrder.charges.addedTotal = this.orderTotal	
+      this.currentOrder.charges.total = this.orderTotal	
+    },	
+    customTip: function (newCustomTip, oldCustomTip) {	
+      this.currentOrder.charges.tip.amount = this.customTip;	
+    },	
+    total: function (newTotal, oldTotal) {	
+      //good	
+      let taxAmt = Number(this.total) * Number(this.upserveTaxRate);	
+      this.taxes = Math.round(taxAmt);	
+      this.currentOrder.charges.taxes = this.taxes;	
+      //good	
+      let totalWithTax = Number(this.total) + taxAmt;	
+      this.totalWithTax = Math.round(totalWithTax);	
+      this.currentOrder.charges.total = this.totalWithTax;	
+      this.currentOrder.charges.preTotal = this.totalWithTax;	
+      this.currentOrder.payments.payments[0].amount = this.currentOrder.charges.preTotal;
+      let storeCurrentOrder = this.currentOrder;	
+      this.computedTotal = this.total	
+      this.totalwith18 = this.total * .18	
+      this.totalwith22 = this.total * .22	
+      this.totalwith25 = this.total * .25	
+      this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
 
-
-if(newAddress){
-      googleAddressObject.locality = newAddress.address_components.filter(
-        (obj) => {
-          return obj.types[0] === "locality";
-        }
-      )[0].long_name;
-}
-
-
-if(newAddress){
-      googleAddressObject.state = newAddress.address_components.filter(
-        (obj) => {
-          return obj.types[0] === "administrative_area_level_1";
-        }
-      )[0].long_name;
-}
-
-
-if(newAddress){
-      googleAddressObject.zip = newAddress.address_components.filter((obj) => {
-        return obj.types[0] === "postal_code";
-      })[0].long_name;
-}
-      console.log(googleAddressObject);
-
-      this.googleAddressObject = googleAddressObject;
-
-      this.currentOrder.fulfillment_info.delivery_info.address.city =
-        googleAddressObject.locality;
-      this.currentOrder.fulfillment_info.delivery_info.address.state =
-        googleAddressObject.state;
-      this.currentOrder.fulfillment_info.delivery_info.address.zip_code =
-        googleAddressObject.zip;
-      this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =
-        googleAddressObject.streetNumber + " " + googleAddressObject.route;
-
-      // this.date = newCount[0].meal.date;
-      // this.delivery = newCount[0].meal.delivery;
-      // this.reset(newCount);
-    },
-    // whenever total changes, this function will ru
-   taxes: function(newTaxes,oldTaxes){
-this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-
-
-this.currentOrder.charges.addedTotal = this.orderTotal
-this.currentOrder.charges.total = this.orderTotal
-    },
-    currentAmountToAdd: function(newCurrent,oldCurrent){
-this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-this.currentOrder.charges.addedTotal = this.orderTotal
-this.currentOrder.charges.total = this.orderTotal
-this.currentOrder.charges.tip.amount = this.currentAmountToAdd
-
-    },
-    tip: function (newTip, oldTip) {
-      this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-      this.currentOrder.charges.tip.amount = this.tip;
-      this.currentOrder.charges.addedTotal = this.orderTotal
-      this.currentOrder.charges.total = this.orderTotal
-    },
-    customTip: function (newCustomTip, oldCustomTip) {
-      this.currentOrder.charges.tip.amount = this.customTip;
-    },
-    total: function (newTotal, oldTotal) {
-      //good
-      let taxAmt = Number(this.total) * Number(this.upserveTaxRate);
-      this.taxes = Math.round(taxAmt);
-
-      this.currentOrder.charges.taxes = this.taxes;
-
-      //good
-      let totalWithTax = Number(this.total) + taxAmt;
-      this.totalWithTax = Math.round(totalWithTax);
-      this.currentOrder.charges.total = this.totalWithTax;
-      this.currentOrder.charges.preTotal = this.totalWithTax;
-      this.currentOrder.payments.payments[0].amount = this.totalWithTax;
-      let storeCurrentOrder = this.currentOrder;
-
-
-this.computedTotal = this.total
-
-this.totalwith18 = this.total * .18
-this.totalwith22 = this.total * .22
-this.totalwith25 = this.total * .25
-
-
-this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)
-
-
-this.currentOrder.charges.addedTotal = this.orderTotal
-this.currentOrder.charges.total = this.orderTotal
-
-
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-    }
+      this.currentOrder.charges.addedTotal = this.orderTotal	
+      this.currentOrder.charges.total = this.orderTotal	
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+    }	
     },
   data() {
     return {
+      preferredGiftCard: '',
+      showInsufficientFunds: false,
+      amountUse: "",
+      cardNumberInput: "",
       panelShow: 'yourOrder',
       checked: false,
       currentAmountToAddCustom: 0,
@@ -1011,10 +1000,11 @@ this.currentOrder.charges.total = this.orderTotal
       textdescription: "",
       blockedBody: this.data,
       upserve: null,
+      upserveList: null,
       upserveSections: null,
       upserveCategories: [],
       currentlyFiltered: [],
-      currentOrder: {
+      currentOrder: { 
         billing:{
           billing_name: '',
           billing_address: '',
@@ -1093,6 +1083,83 @@ this.currentOrder.charges.total = this.orderTotal
     },
   },
   methods: {
+            getUser() {
+
+            if(this.emailAddress){
+
+              let self = this
+              this.$http
+              .get("/user/email/" + this.emailAddress)
+              .then(function (response) {
+              let userInfo = response.data;
+              console.log(userInfo);
+              self.user = userInfo
+
+
+              self.cardNumberInput = userInfo.user.giftcard
+              self.preferredGiftCard = userInfo.user.giftcard
+              })
+              .catch(function (error) {
+              console.log(error);
+              });
+
+    }
+    },
+    async lookupBalance() {
+
+      let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
+        cardNumber: this.cardNumberInput,
+      });
+      let giftcardResponse = giftcardLookup.data;
+
+      this.currentBalance =
+        giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
+    },
+    useGiftCardBalance() {
+      let self = this;
+      // first check if the balance is available
+      console.log('use balance')
+      this.$http
+        .post("/user/lookupgiftcard", {
+          cardNumber: self.cardNumberInput
+        })
+        .then(function (response) {
+          console.log(response)
+          if (
+            Number(
+              response.data.resSendData.Responses[0].SvInquiry[0]
+                .CurrentBalance[0]
+            ) >= Number(self.orderTotal.toFixed(2)/100)
+          ) {
+            self.showInsufficientFunds = false;
+            self.$http
+              .post("/user/usegiftcard", {
+                cardNumber: self.cardNumberInput,
+                useAmount: self.orderTotal.toFixed(2)/100
+              })
+              .then(function (response) {
+                     console.log(response)
+                self.currentBalance =
+                  response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
+                  console.log(self.$store.state.storeCurrentOrder)
+
+                  self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          } else {
+            self.showInsufficientFunds = true;
+            setTimeout(function () {
+              self.showInsufficientFunds = false;
+            }, 3000);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
 panelShowChoose(info){
 
 // alert(info)
@@ -1181,10 +1248,6 @@ this.showingCustom(false)
   document.getElementById("tipOption2").disabled = false;
   document.getElementById("tipOption3").disabled = false;
   document.getElementById("customTip").disabled = false;
-
-
-
-
 this.currentAmountToAdd = 0
 this.customTipVisible = false
 }else if(index === 1){
@@ -1206,25 +1269,19 @@ this.showingCustom(false)
   document.getElementById("tipOption2").disabled = true;
   document.getElementById("tipOption3").disabled = false;
   document.getElementById("customTip").disabled = false;
-
-
 this.currentAmountToAdd = this.totalwith22
 this.customTipVisible = false
 }else if(index === 3){
-
-
 this.showingCustom(false)
   document.getElementById("noTip").disabled = false;
   document.getElementById("tipOption1").disabled = false;
   document.getElementById("tipOption2").disabled = false;
   document.getElementById("tipOption3").disabled = true;
   document.getElementById("customTip").disabled = false;
-
 this.currentAmountToAdd = this.totalwith25
 this.customTipVisible = false
 }else if(index === 4){
 this.showingCustom(true)
-
   document.getElementById("noTip").disabled = false;
   document.getElementById("tipOption1").disabled = false;
   document.getElementById("tipOption2").disabled = false;
@@ -1240,7 +1297,6 @@ this.currentAmountToAdd = this.customTip
 }else{
 
 } 
-
     },
     refreshGoogle() {
       this.renderKey++;
@@ -1259,32 +1315,20 @@ this.attention = true
       this.$store.commit("googleAddress", { googleAddress });
     },
     cippaybutton() {
-
-
-
       this.checkForm()
-
       let self = this;
-
       this.getToken().then(function (transactionToken) {
-        // Set up and open the payment modal
         emergepay.open({
-          // (required) Used to set up the modal
           transactionToken: transactionToken,
-          // (optional) Callback function that gets called after a successful transaction
           onTransactionSuccess: function (approvalData) {
             console.log("Approval Data", approvalData);
             emergepay.close();
-            // location = "https://www.chargeitpro.com";
-            //do the post here
-            console.log(self.$store.state.storeCurrentOrder)
-            // self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
+
+            self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
           },
-          // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
             console.log("Failure Data", failureData);
           },
-          // (optional) Callback function that gets called after a user clicks the close button on the modal
           onTransactionCancel: function () {
             console.log("transaction cancelled!");
           },
@@ -1296,7 +1340,7 @@ this.attention = true
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1314,13 +1358,7 @@ this.attention = true
     deliveryOption(choice) {
       if (choice === "delivery") {
         this.currentOrder.fulfillment_info.type = "delivery";
-
         this.refreshGoogle();
-
-
-
-
-
       } else {
         this.currentOrder.fulfillment_info.type = "pickup";
       }
@@ -1334,14 +1372,14 @@ this.attention = true
         modifier_group_id: modifieritem,
         price: mod.price_cents,
       };
+      // this.currentItemModifierArray.push(modAddition);
 
-      this.currentItemModifierArray.push(modAddition);
-
-      this.currentItem.price_cents =
-        Number(this.currentItem.price_cents) + Number(mod.price_cents);
-
+      this.currentItem.price_cents = Number(this.currentItem.price_cents) + Number(mod.price_cents);
+      console.log(this.currentItem)
       document.getElementById("add-" + mod.id).disabled = true;
       document.getElementById("remove-" + mod.id).disabled = false;
+      console.log('reset upserves')
+
     },
     removeAddOn(mod, modifieritem) {
       let updatedItems = this.currentItemModifierArray.filter(
@@ -1350,7 +1388,6 @@ this.attention = true
       this.currentItemModifierArray = updatedItems;
       this.currentItem.price_cents =
         Number(this.currentItem.price_cents) - Number(mod.price_cents);
-
       document.getElementById("add-" + mod.id).disabled = false;
       document.getElementById("remove-" + mod.id).disabled = true;
     },
@@ -1390,6 +1427,7 @@ if(this.tipSelected === 0){
 }
 
 
+
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
     incrementCurrentItem() {
@@ -1409,8 +1447,15 @@ if(this.tipSelected === 0){
       this.orderConfirmationModalResponse = "";
     },
     openModal(serve) {
+
+
+      let current = Object.assign({}, serve);
+
+      // let current = serve
+      
+
       this.modalOpen = true;
-      this.currentItem = serve;
+      this.currentItem = current;
     },
     expandChild(drawer) {
       var container = document.getElementById("drawertop-" + drawer)
@@ -1507,7 +1552,12 @@ if(this.tipSelected === 0){
 
           }
 
+
+
+
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
     },
     filterByCat(cat) {
       this.currentlyFiltered = [];
@@ -1523,37 +1573,59 @@ if(this.tipSelected === 0){
       );
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.body.sections;
       this.upserveTaxRate =
         responseUpserve.data.body.tax_rates[0].percentage_rate;
       this.modifierGroups = responseUpserve.data.body.modifier_groups;
       this.modifiers = responseUpserve.data.body.modifiers;
       this.modifierItems = responseUpserve.data.body.modifiers;
-    },
-    doAnOrder(currentOrder,approvalData) {
-    
-    let correctPretotal = currentOrder
-    correctPretotal.charges.total = correctPretotal.charges.preTotal
-    
-    console.log('total after reassignment')
 
-let versionToPass = correctPretotal
-console.log(versionToPass)
+
+
+
+    },
+    doAnOrder(currentOrder,approvalData,giftcardbalance) {
+
+      let correctPretotal = currentOrder
+      // correctPretotal.charges.total = correctPretotal.charges.preTotal
+      // correctPretotal.payments.payments[0].amount = correctPretotal.charges.preTotal
+      let versionToPass = correctPretotal
+
+      console.log(correctPretotal)
       let self = this;
       let curOr = JSON.stringify(currentOrder);
       this.$http
-        .post("/oloorder", versionToPass)
+        .post("/oloorderstreet", versionToPass)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;
+
+
+          self.giftcardbalance = giftcardbalance
           self.orderConfirmationModalResponse = response.data;
+
+          let orderConfirmationModalResponse = response.data;
+
+          orderConfirmationModalResponse.giftcardbalance = giftcardbalance
+
+          self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
+          this.$router.push("/orderconfirmation");
+
+          self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
+          self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
+
+          let newDate = new Date();
+          self.currentOrder.time_placed = newDate;
+          self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          let storeCurrentOrder = self.currentOrder
+          self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
         })
         .catch((e) => {
           // this.errors.push(e);
           console.log("errors");
           console.log(e);
-
-    
         });
 
       let axiosConfig = {
@@ -1563,13 +1635,15 @@ console.log(versionToPass)
         }
       };
 
+
     let infoForPay = {
-          payInfo: approvalData,
-          orderInfo: currentOrder
+          payInfo: currentOrder,
+          orderInfo: approvalData
         }
-    let infoForPayStringify = JSON.stringify(infoForPay)       
+
+    let infoForPayStringify = infoForPay      
      this.$http
-        .post("/order/addorder", infoForPayStringify, axiosConfig)
+        .post("/order/addorder", infoForPayStringify)
         .then((response) => {
           console.log(response);
           console.log('add to mongo emerge pay front end')
@@ -1598,9 +1672,6 @@ console.log(versionToPass)
           onTransactionSuccess: function (approvalData) {
             console.log("Approval Data", approvalData);
             emergepay.close();
-            // location = "https://www.chargeitpro.com";
-            //do the post here
-            // self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData);
           },
           // (optional) Callback function that gets called after a failure occurs during the transaction (such as a declined card)
           onTransactionFailure: function (failureData) {
@@ -1613,24 +1684,6 @@ console.log(versionToPass)
         });
 
 
-
-
-        })
-        .catch((e) => {
-          // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
-        });
-    },
-    issueTokenizedReturn() {
-      this.$http
-        .post("/issue-tokenized-return", {
-            uniqueTransId: "a7f6bf5453c14ab5afcc0e3eedf799fa-a109feb7f21d4ec7ac9af5febaff7531",
-            amount: "0.01"
-          }
-          )
-        .then((response) => {
-console.log(response)
         })
         .catch((e) => {
           // this.errors.push(e);
@@ -1640,10 +1693,15 @@ console.log(response)
     }
   },
   mounted() {
+    this.getUser();
     this.upserves();
     emergepay.init();
     this.$store.state.storeCurrentOrder = {};
-  },
+    // this.currentOrder = this.$store.state.storeCurrentOrder
+    // self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
+    this.$store.state.orderConfirmationModalResponse = {};
+
+  }
 };
 </script>
 
@@ -1812,7 +1870,8 @@ button.filehalf {
 }
 
 form input,
-form textarea {
+form textarea,
+.giftcardinput {
   width: 100%;
   padding: 5px 9px;
   border-radius: 4px;
@@ -2055,10 +2114,6 @@ div{
 }
 
 }
-
-
-
-
 
 .item-image-container > div > svg {
     height: 300px;
@@ -2544,6 +2599,11 @@ li.modal-item{
     transform: translate(-50%,-50px);
 }
 
+
+
+   i.small{
+     font-size: 12px;
+   }
 
 </style>
 
