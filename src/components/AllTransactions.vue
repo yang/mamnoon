@@ -3,39 +3,36 @@
 <!-- {{currentUser.currentUserEmail}} -->
 <br>
 order history:
+<hr>
 <br>
 <!-- {{response}} -->
-<!-- {{orderhistory}} -->
-<div v-for="order in orderhistory.user" :key="order._id" class="position-relative">
 
+<div v-for="order in orderhistory.user.slice().reverse()" :key="order._id" class="position-relative">
+  {{order.payInfo.confirmation_code}}
 
 <!-- {{order.orderInfo.externalTransactionId}} -->
 
 <h1 v-if="order.void">VOID</h1>
-<button v-if="!order.void" @click="issueVoid(order.orderInfo.uniqueTransId)">void</button>
-
-
+<button class="fl-right" v-if="!order.void" @click="issueVoid(order.orderInfo.uniqueTransId)">void</button>
 <br>
-transaction id:
-<pre>
-  <!-- {{order}} -->
-{{order.orderInfo.externalTransactionId}}
-{{order.uniqueTransId}}
-</pre>
-<ul>
+<b>{{order.email}}</b>
+<br>
+<template v-if="order.orderInfo.externalTransactionId">
+debit/credit purchase (id: {{order.orderInfo.externalTransactionId}})
+</template>
+<template v-else>
+giftcard purchase
+</template>
+<br>  
+<ul class="no-left-pad">
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
-{{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>
-
-
-
-
-<div v-if="item.returned">
+{{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>&nbsp;&nbsp;&nbsp;
+  <template v-if="item.returned">
   <span>(returned)</span>
-{{item.returned}}
-</div>
-<div v-else>
-<button v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId,item.price,item.cartId,order._id)">issue return</button>
-  </div>
+  </template>
+  <template v-else>
+<span class="line-link" v-if="!order.void" @click="issueTokenizedReturn(order.orderInfo.uniqueTransId,item.price,item.cartId,order._id)"><u>issue return</u></span>
+  </template>
 
 
 
@@ -182,17 +179,14 @@ h1{
     right: 0;
     top: 0;
 }
-button{
-    position: absolute;
- right: 0;
-}
-
-
-
 
 }
 
 
+
+.no-left-pad{
+  padding-left: 0;
+}
 
 </style>
 

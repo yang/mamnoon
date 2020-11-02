@@ -108,7 +108,7 @@
       <div class="container pt20 no-bot-pad">
         <div class="row">
           <div class="col-md-12">
-             <h1 class="text-center">mamnoon</h1>
+             <h1 class="text-center">{{title}}</h1>
                </div>
         </div>
       </div>
@@ -197,7 +197,7 @@
 
 <br>
 <div class="container online-menu">
-<h4>full mamnoon menu</h4>
+<h4>full {{title}} menu</h4>
 </div>
      
    <template v-if="upserveSections.length === 0">
@@ -456,7 +456,7 @@ delivery or pickup?
                   </div>
                   <!-- <br /> -->
                   <hr />
-                  <label class="smblk" for="zip">special instructions:</label>
+                  <label class="smblk">special instructions:</label>
                   <br />
                   <textarea
                     type="text"
@@ -465,6 +465,11 @@ delivery or pickup?
                     placeholder="eg, leave on doorstep"
                     v-model="currentOrder.fulfillment_info.instructions"
                   />
+
+                  
+            <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
+  <label class="smblk" for="cutlery">include disposable cutlery </label>
+                  <br />
                 </div>
             
 
@@ -493,14 +498,16 @@ delivery or pickup?
                 <br />
                <label class="smblk" for="email">email:</label>
                 <br />
+                <div v-if="emailAddress" style="margin-bottom: 10px;">{{emailAddress}}</div>
                 <input
+                v-else
                   type="text"
                   id="email"
                   name="email"
                   placeholder="email"
                   v-model="email"
                 />
-                <br />
+                <!-- <br /> -->
 
                <label class="smblk" for="phone">phone:</label>
                 <br />
@@ -811,8 +818,8 @@ import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 
 import swal from "sweetalert";
 export default {
-  name: "upservefiltering",
-  props: ["data","emailAddress"],
+  name: "UpserveOlo",
+  props: ["data","emailAddress","oloEndpoint","menuEndpoint","title"],
   components: {
     OrderConfirmationModal,
     OnlineMenuCarousel,
@@ -1063,13 +1070,13 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
             // phone: "425-442-9308",
             // last_name: "Waine",
             // first_name: "Joseph",
-            email: "",
+            email: this.emailAddress,
             phone: "",
             name: "",
           },
           // instructions: "Leave order with building security",
           instructions: "",
-          no_tableware: true,
+          no_tableware: false,
           delivery_info: {
             is_managed_delivery: false,
             address: {
@@ -1596,9 +1603,7 @@ if(this.tipSelected === 0){
       }
     },
     async upserves() {
-      let responseUpserve = await this.$http.get(
-        "/product/upserveolo"
-      );
+      let responseUpserve = await this.$http.get(this.menuEndpoint);
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
@@ -1618,9 +1623,12 @@ if(this.tipSelected === 0){
       let correctPretotal = currentOrder
       let versionToPass = correctPretotal
 
+
+
+
 let self = this;
       this.$http
-        .post("/oloorder", versionToPass)
+        .post(this.oloEndpoint, versionToPass)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;

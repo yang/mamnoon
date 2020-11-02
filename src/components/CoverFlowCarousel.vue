@@ -31,10 +31,9 @@
   <div v-for="piece in item.item_ids" :key="piece">  
                     <template v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">
-                                       
+                
             <template v-if="serve.images">
-             <router-link to="/mamnoon">          
-<div class="outside-slideshow">
+     <div class="outside-slideshow">
 <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
 <div class="top-bar">
   <!-- {{item.name.replace('Feature - ', '')}} -->
@@ -57,11 +56,8 @@
                                 {{serve.description | truncate(90, '...')}}
                                 </span>
                                 </div>
-
-</div>
-     </router-link> 
+                    </div>
                 </template>
-
                             <!-- <template v-if="serve.images">
                               <div
                                 v-if="serve.images.online_ordering_menu"

@@ -1,16 +1,16 @@
 <template>
   <div class="mamnoon-street">
     <Nav />
-    <UpserveOloFilteringStreet :emailAddress="$store.state.currentUserEmail" />
+    <UpserveOlo :title="'mamnoon street'" :oloEndpoint="'/oloorderstreet'" :menuEndpoint="'/product/upserveolostreet'" :emailAddress="$store.state.currentUserEmail" />
   </div>
 </template>
 <script>
-import UpserveOloFilteringStreet from "@/components/UpserveOloFilteringStreet";
+import UpserveOlo from "@/components/UpserveOlo";
 import Nav from "@/components/Nav";
 export default {
   components: {
     Nav,
-    UpserveOloFilteringStreet
+    UpserveOlo
   }
 };
 </script>

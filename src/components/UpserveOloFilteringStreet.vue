@@ -1594,7 +1594,7 @@ if(this.tipSelected === 0){
 
       console.log(correctPretotal)
       let self = this;
-      let curOr = JSON.stringify(currentOrder);
+      // let curOr = JSON.stringify(currentOrder);
       this.$http
         .post("/oloorderstreet", versionToPass)
         .then((response) => {
@@ -2309,7 +2309,7 @@ transition: background-color .1s ease;
 .half-width2right {
   width: 35%;
   float: left;
-  height: 150px;
+height: 180px;
   overflow: hidden;
 }
 
