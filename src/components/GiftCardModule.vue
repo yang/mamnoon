@@ -115,7 +115,7 @@ add a giftcard for {{emailAddress}}
 <div>
 
         <!-- {{giftcarditem}} -->
-        <button class="sm-button fl-right" v-if="giftcarditem.number !== preferredGiftCard" @click="primaryGiftCard(giftcarditem,index)">set primary</button>
+        <button class="sm-button fl-right mr-0" v-if="giftcarditem.number !== preferredGiftCard" @click="primaryGiftCard(giftcarditem,index)">set primary</button>
         <span v-else class="fl-right">(primary)</span>
         &nbsp;&nbsp;&nbsp;
         <button class="sm-button fl-right" @click="removeGiftCard(giftcarditem._id,number)">remove</button>
@@ -607,6 +607,16 @@ table{
 table td{
     // display:table-cell;
     vertical-align:top;
+
+&:last-child{
+padding-right: 0;
+
+
+
+}
+
+
+
 }
 
 table td div{

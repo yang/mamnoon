@@ -8,20 +8,58 @@
 
 <div id="order-history">
 <table class="w100">
-    <th class="w100"><td><div>date</div></td><td><div>items</div></td><td><div>actions</div></td></th>
+    <th class="w100">
+        <td class="sm-cell"><div>date</div></td>
+        <td class="lg-cell"><div>items</div></td>
+        <td><div>price</div></td>
+
+        <td><div>pay method</div></td>
+        <td><div>delivery/pickup</div></td>
+        <td><div>actions</div></td></th>
+
+
+
 <tr class="w100" v-for="order in orderhistory.user.slice().reverse()" :key="order._id">
-<td><div>
+  <td class="sm-cell"><div>
+    <span class="smblk">
 {{order.payInfo.time_placed | formatDate}}
+</span>
 </div></td>
-<td><div>
-<ul>
+ <td class="lg-cell"><div>
+<ul class="order-items">
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
-{{item.name}}
+{{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
 </li>
 </ul>
+
+
+
+
 </div></td>
+<td><div>
+        <span class="smblk">
+    ${{ order.payInfo.charges.total.toFixed(2)/100}}
+    </span>
+    </div></td>
+<td>
+    
+    <div v-if="order.orderInfo.TransmissionID">
+<!-- {{order.orderInfo}} -->
+gift card
+   </div>
+       <div v-else>
+debit/credit
+   </div>
+   </td> 
+
+<td><div>
+{{order.payInfo.fulfillment_info.type}}
+   </div></td> 
+
+
+
     <td><div>
-<button class="fl-right" @click="reorder()">re order</button>
+<button class="fl-right sm-button mr-0" @click="reorder(order.payInfo)">re order</button>
 </div></td>
 </tr>
 </table>
@@ -33,6 +71,7 @@
 <script>  
 
 import moment from 'moment'
+import tz from 'moment-timezone'
 
 export default {
     data( ) {
@@ -44,8 +83,17 @@ export default {
     name: 'OrderHistory',
     props: ['currentUser'],
     methods: {
-        reorder(){
-            console.log('reorder')
+        reorder(order){
+
+            let storeCurrentOrder = order
+
+this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+            console.log(order)
+          this.$router.push("/mamnoon");
+
+
+
         },
     retrieveOrders() {
     let self = this
@@ -57,7 +105,8 @@ export default {
             filters: {
     formatDate(value) {
   if (value) {
- return moment(String(value)).format('MM/DD/YYYY hh:mm')
+        let order = moment(String(value));
+        return order.tz('America/Los_Angeles').format('MM/DD/YYYY');
   }
 },
 reverseArray(value) {
@@ -113,8 +162,20 @@ table td div{
 }
 
 .w100{
+
+  td.sm-cell{
+    width: 5%;
+        // display: inline-block;
+  }
+
+  td.lg-cell{
+    width: 25%;
+        // display: inline-block;
+  }
+
+
   td{
-    width: 33.33%;
+    width: 17.5%;
         // display: inline-block;
   }
 }
@@ -124,7 +185,8 @@ tr{
 }
 
 tr td{
-    padding: 18px 10px 15px 10px;
+    
+    padding: 18px 10px 10px 0px;
     // height: 56px;
     margin-bottom: 0;
     display:table-cell;
@@ -134,8 +196,30 @@ tr td{
     background: #bfebbf;
 
 }
+&:last-child{
+padding-right: 0;
+
+
 
 }
+
+}
+}
+
+.smblk{
+    color: #000;
+    font-size: .9rem;
+}
+
+
+ul.order-items{
+    // padding-left: 0;
+    color: #000;
+    font-size: .9rem;
+}
+
+.mr-0{
+    margin-right: 0;
 }
 
 </style>

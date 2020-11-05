@@ -356,6 +356,7 @@ button.snipcart-add-item {
   height: 814px;
   margin-bottom: 80px;
       height: 814px;
+          height: 794px;
   // background-color: #f05d5b;
   background-color: #F58E58;
   overflow: hidden;
@@ -386,6 +387,7 @@ button.snipcart-add-item {
 @media only screen and (max-width: 480px) {
   .coverflowsection {
 // height: 880px;
+    height: 804px;
   }
 }
 .bottom-button {
@@ -587,12 +589,34 @@ width: 100%
 
 
 }
+
+
+
+
+@media only screen and (max-width: 1200px) {
+
+.coverflowsection{
+
+    height: 814px;
+}
+}
+
 @media only screen and (max-width: 768px) {
+
+
+
+
 
 .coverflowsection,
 .mb-80{
   margin-bottom: 40px;
 }
 }
+
+.coverflowsection{
+      height: 800px;
+
+}
+
 
 </style>

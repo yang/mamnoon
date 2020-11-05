@@ -2,20 +2,10 @@
 
     <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
-        <div class="container nav-acc-header pad-yellow-background">
-        {{$store.state.currentUserEmail}}
-        <!-- <h1 v-if="$store.state.currentUserEmail === ''"> -->
-        <!-- welcome back, {{ $store.state.userInfo.user.email | generateUsername() }} -->
-        <!-- {{ $store.state.userInfo.user.email }} -->
-        <!-- </h1> -->
-        </div>
         <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
-
         <!-- <TestimonialForm :emailAddress="$store.state.currentUserEmail" /> -->
         <!-- {{$store.state}} -->
-
-        
-        <!-- <EmailForm :emailAddress="$store.state.currentUserEmail" /> -->
+            <!-- <EmailForm :emailAddress="$store.state.currentUserEmail" /> -->
         <!-- <ToggleVegetarian /> -->
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
         <!-- order he -->

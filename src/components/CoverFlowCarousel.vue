@@ -1,7 +1,4 @@
 <template>
-
-
-
     <section :id="tag" class="coverflowsection">
 <div class="is-fullheight no-top-pad" id="cover-carousel">
 <h4 class="noselect">{{header}}</h4>
@@ -20,29 +17,18 @@
                     <Prev />
             </span>
           </template>
-           
-
-
-
-           
-           
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <template v-for="item in upserveSections">
-  <div v-for="piece in item.item_ids" :key="piece">  
+            <div v-for="piece in item.item_ids" :key="piece">  
                     <template v-for="serve in upserve">
-                      <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">
-                
+                      <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">  
             <template v-if="serve.images">
      <div class="outside-slideshow">
 <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
 <div class="top-bar">
   <!-- {{item.name.replace('Feature - ', '')}} -->
-  
-  {{serve.name}}
-
-
+    {{serve.name}}
   </div>
-    
   <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;">
 <NadiIcon style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -57%);"  v-else />
  <div
@@ -845,9 +831,9 @@ background: #8c8c8c;
 
 .loading-box{
     width: 500px;
-    color: #F58E58;
+    color: #FFFFFF;
     height: 500px;
-    background: #fff;
+    background: #F05D5B;
     padding-top: 240px;
     left: 50%;
     position: absolute;

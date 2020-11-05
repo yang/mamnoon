@@ -2,8 +2,7 @@
   <div class="mamnoon">
     <Nav />
 
-
-<UpserveOlo :title="'mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :emailAddress="$store.state.currentUserEmail" />
+<UpserveOlo :title="'Mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :emailAddress="$store.state.currentUserEmail" />
   </div>
 </template>
 <script>
