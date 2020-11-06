@@ -15,6 +15,7 @@
 
         <td><div>pay method</div></td>
         <td><div>delivery/pickup</div></td>
+        <td><div>status</div></td>
         <td><div>actions</div></td></th>
 
 
@@ -28,6 +29,7 @@
  <td class="lg-cell"><div>
 <ul class="order-items">
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
+    {{item.quantity}} x
 {{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
 </li>
 </ul>
@@ -56,7 +58,9 @@ debit/credit
 {{order.payInfo.fulfillment_info.type}}
    </div></td> 
 
-
+<td><div>
+{{order.status}}
+   </div></td> 
 
     <td><div>
 <button class="fl-right sm-button mr-0" @click="reorder(order.payInfo)">re order</button>
@@ -87,7 +91,9 @@ export default {
 
             let storeCurrentOrder = order
 
-this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+// this.$store.commit("orderFromTransactionHistory", { orderFromTransactionHistory });
+   this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+
 
             console.log(order)
           this.$router.push("/mamnoon");
@@ -175,7 +181,7 @@ table td div{
 
 
   td{
-    width: 17.5%;
+    width: 15%;
         // display: inline-block;
   }
 }
@@ -216,6 +222,7 @@ ul.order-items{
     // padding-left: 0;
     color: #000;
     font-size: .9rem;
+    list-style: none;
 }
 
 .mr-0{

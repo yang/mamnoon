@@ -111,14 +111,6 @@
         <div class="row">
           <div class="col-md-12">
              <h1 class="text-center">{{title}}</h1>
-
-
-
-
-
-
-
-
                </div>
         </div>
       </div>
@@ -371,18 +363,18 @@ delivery or pickup?
             <!-- google area -->
 
             <div v-if="currentOrder" class="container  mt10">
-              <!-- <button
+              <button
               style="display:none;"
                 class="delivery-option"
                 :class="{selected : currentOrder.fulfillment_info.type === 'delivery'}"
                 @click="deliveryOption('delivery')"
-              >delivery</button>&nbsp;&nbsp; -->
-              <!-- <button
+              >delivery</button>&nbsp;&nbsp;
+              <button
                style="display:none;"
                 class="delivery-option"
                 :class="{selected : currentOrder.fulfillment_info.type === 'pickup'}"
                 @click="deliveryOption('pickup')"
-              >pickup</button> -->
+              >pickup</button>
              <!-- <br /> -->
 
 
@@ -713,6 +705,14 @@ delivery or pickup?
                   @click="setTip(4)"
                 >custom</button>
                 &nbsp;
+                <!-- <input type="text" placeholder="custom tip" /> -->
+                <!-- <input
+                  v-if="customTipVisible === true"
+                  type="number"
+                  min="0.00"
+                  placeholder="0.00"
+                  v-model="currentAmountToAddCustom"
+                /> -->
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
 
               </div>
@@ -720,11 +720,8 @@ delivery or pickup?
               <hr />  
               total: ${{total.toFixed(2)/100 }}
               <br />
-              tax: ${{currentTax.toFixed(2)/100 }}
+              tax: ${{taxes.toFixed(2)/100 }}
      
-
-
-
 <div v-if="custom === true">
 custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
 </div>
@@ -891,9 +888,6 @@ export default {
     NadiIconSm
   },
   computed: {	
-    orderTotal(){
-      return Number(this.total) + Number(this.currentTax) + Number(this.tip) + Number(this.currentAmountToAdd)
-    },  
     googleAddress() {	
       return this.$store.state.googleAddress;	
     },	
@@ -909,12 +903,6 @@ export default {
     tip3() {	
       return Number(this.total) * 0.25;	
     },	
-    currentTax(){
-
-        let currentTax = Number(this.total) * Number(this.upserveTaxRate);
-
-      return Math.round(currentTax)
-    }
   },	
   watch: {	
 
@@ -941,6 +929,11 @@ export default {
 currentAmountToAddCustom(){	
 this.currentAmountToAdd = this.currentAmountToAddCustom * 100	
 },	
+    computedTotal(newComputedTotal,oldComputedTotal){	
+this.computedTotal = Number(this.total) + Number(this.currentAmountToAdd)	
+this.currentOrder.payments.payments[0].amount = this.computedTotal + this.taxes
+
+    },	
     googleAddress(newAddress, oldAddress) {	
       this.googleAddressView = newAddress;	
       let googleAddressObject = {	
@@ -992,27 +985,47 @@ if(newAddress){
         googleAddressObject.zip;	
       this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =	
         googleAddressObject.streetNumber + " " + googleAddressObject.route;	
-
+        // this.date = newCount[0].meal.date;	
+        // this.delivery = newCount[0].meal.delivery;	
+        // this.reset(newCount);	
     },	
     currentAmountToAdd: function(newCurrent,oldCurrent){	
-      this.currentOrder.charges.total = this.orderTotal	
-      this.currentOrder.payments.payments[0].amount = this.orderTotal
-      this.currentOrder.charges.tip.amount = this.currentAmountToAdd	
+this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
+this.currentOrder.charges.addedTotal = this.orderTotal	
+this.currentOrder.charges.total = this.orderTotal	
+this.currentOrder.charges.tip.amount = this.currentAmountToAdd	
     },	
     tip: function (newTip, oldTip) {	
+      this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
       this.currentOrder.charges.tip.amount = this.tip;	
+      this.currentOrder.charges.addedTotal = this.orderTotal	
       this.currentOrder.charges.total = this.orderTotal	
-      this.currentOrder.payments.payments[0].amount = this.orderTotal
-
+    },	
+    customTip: function (newCustomTip, oldCustomTip) {	
+      this.currentOrder.charges.tip.amount = this.customTip;	
     },	
     total: function (newTotal, oldTotal) {	
-      this.currentOrder.charges.taxes = this.currentTax;	
-      this.currentOrder.charges.total = this.orderTotal
-      this.currentOrder.payments.payments[0].amount = this.orderTotal
+      //good	
+      let taxAmt = Number(this.total) * Number(this.upserveTaxRate);	
+      this.taxes = Math.round(taxAmt);	
+      this.currentOrder.charges.taxes = this.taxes;	
+      //good	
+      let totalWithTax = Number(this.total) + taxAmt;	
+      this.totalWithTax = Math.round(totalWithTax);	
+      this.currentOrder.charges.total = this.totalWithTax;	
+      this.currentOrder.charges.preTotal = this.totalWithTax;	
+      this.currentOrder.payments.payments[0].amount = this.currentOrder.charges.preTotal;
+      // let storeCurrentOrder = this.currentOrder;	
+      this.computedTotal = this.total	
+      this.totalwith18 = this.total * .18	
+      this.totalwith22 = this.total * .22	
+      this.totalwith25 = this.total * .25	
+      this.orderTotal = Number(this.total) + Number(this.taxes) + Number(this.tip) + Number(this.currentAmountToAdd)	
 
+      this.currentOrder.charges.addedTotal = this.orderTotal	
+      this.currentOrder.charges.total = this.orderTotal	
       let storeCurrentOrder = this.currentOrder;	
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-
     }	
     },
   data() {
@@ -1029,9 +1042,15 @@ if(newAddress){
       custom: false,
       errors: [],
       attention: true,
+      orderTotal: 0,
       tipSelected: 0,
+      totalwith18: 0,
+      totalwith22: 0,
+      totalwith25: 0,
       toggledDrawer: false,
+      computedTotal: 0,
       currentAmountToAdd: 0,
+      customTip: 0,
       customTipVisible: false,
       tip: 0,
       googleAddressObject: {},
@@ -1041,6 +1060,8 @@ if(newAddress){
       orderConfirmationModal: false,
       orderConfirmationModalResponse: "",
       total: 0,
+      totalWithTax: 0,
+      taxes: 0,
       modifiers: [],
       currentItemModifierArray: [],
       modifierItems: [],
@@ -1076,7 +1097,8 @@ if(newAddress){
           "mamnoon-" + Math.random().toString(36).substr(2, 29),
         charges: {
           total: 0,
-          // preTotal: 0,
+          preTotal: 0,
+          addedTotal: 0,
           fees: 0,
           taxes: 0,
           tip: {
@@ -1296,10 +1318,10 @@ this.toggledDrawer = !this.toggledDrawer
     },
     setTip(index) {
 
-// this.currentAmountToAddCustom = 0
+
 this.tipSelected = index
 
-
+this.computedTotal = 0;
 if(index === 0){
 this.showingCustom(false)
   document.getElementById("noTip").disabled = true;
@@ -1318,7 +1340,7 @@ this.showingCustom(false)
   document.getElementById("tipOption3").disabled = false;
   document.getElementById("customTip").disabled = false;
 
-this.currentAmountToAdd = this.tip1
+this.currentAmountToAdd = this.totalwith18
 this.customTipVisible = false
 }else if(index === 2){
 
@@ -1328,7 +1350,7 @@ this.showingCustom(false)
   document.getElementById("tipOption2").disabled = true;
   document.getElementById("tipOption3").disabled = false;
   document.getElementById("customTip").disabled = false;
-this.currentAmountToAdd = this.tip2
+this.currentAmountToAdd = this.totalwith22
 this.customTipVisible = false
 }else if(index === 3){
 this.showingCustom(false)
@@ -1337,7 +1359,7 @@ this.showingCustom(false)
   document.getElementById("tipOption2").disabled = false;
   document.getElementById("tipOption3").disabled = true;
   document.getElementById("customTip").disabled = false;
-this.currentAmountToAdd = this.tip3
+this.currentAmountToAdd = this.totalwith25
 this.customTipVisible = false
 }else if(index === 4){
 this.showingCustom(true)
@@ -1346,10 +1368,12 @@ this.showingCustom(true)
   document.getElementById("tipOption2").disabled = false;
   document.getElementById("tipOption3").disabled = false;
   document.getElementById("customTip").disabled = true;
+this.currentAmountToAddCustom = 0
 
 this.customTipVisible = true
 this.currentAmountToAdd = 0
-this.currentAmountToAdd = this.currentAmountToAddCustom * 100
+this.currentAmountToAdd = this.customTip
+
 
 }else{
 
@@ -1412,17 +1436,17 @@ this.attention = true
           });
       });
     },
-    // deliveryOption(choice) {
-    //   if (choice === "delivery") {
-    //     this.currentOrder.fulfillment_info.type = "delivery";
-    //     this.refreshGoogle();
-    //   } else {
-    //     this.currentOrder.fulfillment_info.type = "pickup";
-    //   }
+    deliveryOption(choice) {
+      if (choice === "delivery") {
+        this.currentOrder.fulfillment_info.type = "delivery";
+        this.refreshGoogle();
+      } else {
+        this.currentOrder.fulfillment_info.type = "pickup";
+      }
 
-    //   let storeCurrentOrder = this.currentOrder;
-    //   this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-    // },
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+    },
     addAddOn(mod, modifieritem) {
       let modAddition = {
         id: mod.id,
@@ -1464,15 +1488,21 @@ this.attention = true
 
 
 
+this.totalwith18 = this.total * .18
+this.totalwith22 = this.total * .22
+this.totalwith25 = this.total * .25
+
+
+
 
 if(this.tipSelected === 0){
   this.currentAmountToAdd = 0
 }else if(this.tipSelected === 1){
-  this.currentAmountToAdd = this.tip1
+  this.currentAmountToAdd = this.totalwith18
 }else if(this.tipSelected === 2){
-  this.currentAmountToAdd = this.tip2
+  this.currentAmountToAdd = this.totalwith22
 }else if(this.tipSelected === 3){
-  this.currentAmountToAdd = this.tip3
+  this.currentAmountToAdd = this.totalwith25
 }else{
 
 }
@@ -1589,16 +1619,18 @@ if(this.tipSelected === 0){
           this.closeModal();
           let storeCurrentOrder = this.currentOrder;
 
-  
+          this.totalwith18 = this.total * .18
+          this.totalwith22 = this.total * .22
+          this.totalwith25 = this.total * .25
 
           if(this.tipSelected === 0){
             this.currentAmountToAdd = 0
           }else if(this.tipSelected === 1){
-            this.currentAmountToAdd = this.tip1
+            this.currentAmountToAdd = this.totalwith18
           }else if(this.tipSelected === 2){
-            this.currentAmountToAdd = this.tip2
+            this.currentAmountToAdd = this.totalwith22
           }else if(this.tipSelected === 3){
-            this.currentAmountToAdd = this.tip3
+            this.currentAmountToAdd = this.totalwith25
           }else{
 
           }
@@ -1636,9 +1668,15 @@ if(this.tipSelected === 0){
     },
     doAnOrder(currentOrder,approvalData,giftcardbalance) {
 
+      let correctPretotal = currentOrder
+      let versionToPass = correctPretotal
+
+
+
+
 let self = this;
       this.$http
-        .post(this.oloEndpoint, currentOrder)
+        .post(this.oloEndpoint, versionToPass)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;
@@ -1724,16 +1762,21 @@ let self = this;
     this.getUser();
     this.upserves();
     emergepay.init();
-    this.$store.state.storeCurrentOrder = {};
-    // this.currentOrder = this.$store.state.storeCurrentOrder
-    // this.currentOrder.fulfillment_info.type = 'pickup'
+    // this.$store.state.storeCurrentOrder = {};
+    this.currentOrder = this.$store.state.storeCurrentOrder
 
+this.currentOrder.fulfillment_info.type = 'pickup'
+
+    // self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
     this.$store.state.orderConfirmationModalResponse = {};
-    // this.total = this.$store.state.storeCurrentOrder.charges.total
+
+
+
+this.total = null
+this.total = this.$store.state.storeCurrentOrder.charges.total
 
 
   }
 };
 </script>
-
 
