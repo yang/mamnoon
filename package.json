@@ -13,6 +13,7 @@
     "core-js": "^3.4.3",
     "cors-anywhere": "^0.4.3",
     "dns": "^0.2.2",
+    "dotenv": "^8.2.0",
     "express-cors-anywhere": "0.0.1-alpha.3",
     "jquery": "^3.5.1",
     "jquery-ui": "^1.12.1",

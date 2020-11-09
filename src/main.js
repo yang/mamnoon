@@ -12,13 +12,18 @@ import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
 import VueCurrencyInput from 'vue-currency-input'
- 
+require('dotenv').config()
+
 Vue.use(VueCurrencyInput)
 
 const base = axios.create({
-    baseURL: "https://young-hamlet-03679.herokuapp.com"
+  baseURL: process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://young-hamlet-03679.herokuapp.com"
+  // baseURL: "https://young-hamlet-03679.herokuapp.com"
     // baseURL: "http://localhost:4000"
     }); 
+
+
+
 
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'

@@ -195,6 +195,7 @@
                     shop
                     </router-link>
                 </li>
+           
             </div>  
 <div class="inline-link">
            <li class="cursor-pointer" @click="toggleMenu()">
@@ -275,6 +276,8 @@ export default {
   },
     mounted() {
       this.individualRestaurant();
+
+         console.log(process.env)
 
   }
   }
