@@ -276,9 +276,6 @@ export default {
   },
     mounted() {
       this.individualRestaurant();
-
-         console.log(process.env)
-
   }
   }
 

@@ -1091,7 +1091,7 @@ if(newAddress){
           estimated_fulfillment_time: null,
           customer: {
             // email: "joe.waine@gmail.com",
-            // phone: "425-442-9308",
+            // phone: "425-442-9308", 
             // last_name: "Waine",
             // first_name: "Joseph",
             email: this.emailAddress,
@@ -1725,13 +1725,7 @@ let self = this;
     this.upserves();
     emergepay.init();
     this.$store.state.storeCurrentOrder = {};
-    // this.currentOrder = this.$store.state.storeCurrentOrder
-    // this.currentOrder.fulfillment_info.type = 'pickup'
-
     this.$store.state.orderConfirmationModalResponse = {};
-    // this.total = this.$store.state.storeCurrentOrder.charges.total
-
-
   }
 };
 </script>

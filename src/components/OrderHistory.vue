@@ -9,24 +9,24 @@
 <div id="order-history">
 <table class="w100">
     <th class="w100">
-        <td class="sm-cell"><div>date</div></td>
-        <td class="lg-cell"><div>items</div></td>
+        <td><div>date</div></td>
+        <td><div>items</div></td>
         <td><div>price</div></td>
 
         <td><div>pay method</div></td>
         <td><div>delivery/pickup</div></td>
         <td><div>status</div></td>
-        <td><div>actions</div></td></th>
-
+        <!-- <td><div>actions</div></td> -->
+</th>   
 
 
 <tr class="w100" v-for="order in orderhistory.user.slice().reverse()" :key="order._id">
-  <td class="sm-cell"><div>
+  <td><div>
     <span class="smblk">
 {{order.payInfo.time_placed | formatDate}}
 </span>
 </div></td>
- <td class="lg-cell"><div>
+ <td><div>
 <ul class="order-items">
 <li v-for="item in order.payInfo.charges.items" :key="item.cartId">
     {{item.quantity}} x
@@ -62,9 +62,9 @@ debit/credit
 {{order.status}}
    </div></td> 
 
-    <td><div>
+    <!-- <td><div>
 <button class="fl-right sm-button mr-0" @click="reorder(order.payInfo)">re order</button>
-</div></td>
+</div></td> -->
 </tr>
 </table>
 </div>
@@ -219,7 +219,7 @@ padding-right: 0;
 
 
 ul.order-items{
-    // padding-left: 0;
+    padding-left: 0;
     color: #000;
     font-size: .9rem;
     list-style: none;
