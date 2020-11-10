@@ -588,7 +588,8 @@ delivery or pickup?
 
 
 
-
+            <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
+  <label class="smblk" for="sms">enable SMS order updates </label>
 
 
 
@@ -1058,6 +1059,7 @@ if(newAddress){
       upserveCategories: [],
       currentlyFiltered: [],
       currentOrder: { 
+        sms: true,
         restaurant: this.title,
         billing:{
           billing_name: '',

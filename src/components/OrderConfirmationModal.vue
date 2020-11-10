@@ -16,9 +16,9 @@
           <h2>thank you for your order!</h2>
           <div>
 <br />
-<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b><br />  
+<!--<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b><br />  
 <b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.city}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.state}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.zip_code}}</b>
-  <br>
+  <br>-->
   <b>{{orderConfirmationModalResponse.fulfillment_info.customer.email}}</b>  <br />  
 <b>{{orderConfirmationModalResponse.fulfillment_info.customer.phone}}</b>
 
