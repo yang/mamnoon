@@ -23,12 +23,12 @@
 <tr class="w100" v-for="order in orderhistory.user.slice().reverse()" :key="order._id">
   <td><div>
     <span class="smblk">
-{{order.payInfo.time_placed | formatDate}}
+{{order.orderInfo.time_placed | formatDate}}
 </span>
 </div></td>
  <td><div>
 <ul class="order-items">
-<li v-for="item in order.payInfo.charges.items" :key="item.cartId">
+<li v-for="item in order.orderInfo.charges.items" :key="item.cartId">
     {{item.quantity}} x
 {{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
 </li>
@@ -40,13 +40,13 @@
 </div></td>
 <td><div>
         <span class="smblk">
-    ${{ order.payInfo.charges.total.toFixed(2)/100}}
+    ${{ order.orderInfo.charges.total.toFixed(2)/100}}
     </span>
     </div></td>
 <td>
     
-    <div v-if="order.orderInfo.TransmissionID">
-<!-- {{order.orderInfo}} -->
+    <div v-if="order.payInfo.TransmissionID">
+<!-- {{order.payInfo}} -->
 gift card
    </div>
        <div v-else>
@@ -55,7 +55,7 @@ debit/credit
    </td> 
 
 <td><div>
-{{order.payInfo.fulfillment_info.type}}
+{{order.orderInfo.fulfillment_info.type}}
    </div></td> 
 
 <td><div>
@@ -63,7 +63,7 @@ debit/credit
    </div></td> 
 
     <!-- <td><div>
-<button class="fl-right sm-button mr-0" @click="reorder(order.payInfo)">re order</button>
+<button class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">re order</button>
 </div></td> -->
 </tr>
 </table>

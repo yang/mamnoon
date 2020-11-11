@@ -6,7 +6,7 @@
       <!-- {{$data}} -->
 
 <!-- <pre>{{upserveList}}</pre> -->
-<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderConfirmationModalResponse="orderConfirmationModalResponse" />
+<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
           <div @click="closeModal()" class="close closeModal">
@@ -113,12 +113,8 @@
              <h1 class="text-center">{{title}}</h1>
 
 
-
-
-
-
-
-
+{{$store.state.storeCurrentOrder.preorder}}
+<!-- {{selectedTime}} -->
                </div>
         </div>
       </div>
@@ -343,11 +339,36 @@
 <span v-if="toggledDrawer">hide order</span>
 <span v-else>view order</span>
 </button>
-      <div v-if="currentOrder" class="container  mt10">
+<div v-if="currentOrder" class="container  mt10">
+
+
+
+
 <button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;background-color: #f05d5b;color: #fff;">your order</button>
 <button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;">edit order</button>
 <!-- <button @click="panelShowChoose('customerInfo')" class="filehalf deactivated" disabled="disabled" v-if="this.currentOrder.charges.items.length === 0">customer info</button> -->
 <!-- <button @click="panelShowChoose('customerInfo')" class="filehalf" v-else>customer info</button> -->
+
+
+
+<template v-if="this.currentOrder.charges.items.length > 0">
+  <br><br>
+  <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="preorder" name="preorder" value="preorder" v-model="currentOrder.preorder">
+  <label class="smblk" for="preorder">preorder</label>
+</template>
+
+<template v-if="currentOrder.preorder">
+<v-select :options="dropDownDays" label="dayLabel" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+<!-- <br>   -->
+
+
+<div style="margin-top:15px;" v-if="selectedDate !== null">
+<v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+<!-- <br/>  -->
+</div>
+
+</template>
+
 
 
 </div>
@@ -762,7 +783,7 @@ cart empty
 <!-- </div> -->
 <template v-if="panelShow === 'yourOrder'">
 
- <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
+ <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
 
@@ -850,7 +871,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 <script>
 
-
+import vSelect from "vue-select";
 import carousel from "vue-owl-carousel";
 import GoogleValidate from "@/components/GoogleValidate";
 import CloseModal from "@/components/svgIcons/CloseModal";
@@ -918,9 +939,9 @@ export default {
     }
   },	
   watch: {	
-
-
-
+    selectedTime(){
+this.currentOrder.scheduled_time = this.selectedTime.time
+    },
     email(){
         this.currentOrder.fulfillment_info.customer.email = this.email.toLowerCase();
     },
@@ -1018,6 +1039,47 @@ if(newAddress){
     },
   data() {
     return {
+      selectedDate: null,
+      selectedTime: null,
+      dropDownDays: [],
+      dropDownTimes: [
+{formattedTime:'5:30 PM, PST',
+timeStamp: 'T17:30:00'
+},
+{formattedTime:'5:45 PM, PST',
+timeStamp: 'T17:45:00'
+},
+{formattedTime:'6:00 PM, PST',
+timeStamp: 'T18:00:00'
+},
+{formattedTime:'6:15 PM, PST',
+timeStamp: 'T18:15:00'
+},
+  {formattedTime:'6:30 PM, PST',
+timeStamp: 'T18:30:00'
+},
+{formattedTime:'6:45 PM, PST',
+timeStamp: 'T18:45:00'
+},
+{formattedTime:'7:00 PM, PST',
+timeStamp: 'T19:00:00'
+},
+{formattedTime:'7:15 PM, PST',
+timeStamp: 'T19:15:00'
+},
+  {formattedTime:'7:30 PM, PST',
+timeStamp: 'T19:30:00'
+},
+{formattedTime:'7:45 PM, PST',
+timeStamp: 'T19:45:00'
+},
+{formattedTime:'8:00 PM, PST',
+timeStamp: 'T20:00:00'
+},
+{formattedTime:'8:15 PM, PST',
+timeStamp: 'T20:15:00'
+}
+  ],
       email: '',
       giftCardPanel: false,
       preferredGiftCard: '',
@@ -1040,7 +1102,7 @@ if(newAddress){
       renderKey: 0,
       googVPresent: true,
       orderConfirmationModal: false,
-      orderConfirmationModalResponse: "",
+      orderCMR: "",
       total: 0,
       modifiers: [],
       currentItemModifierArray: [],
@@ -1073,6 +1135,8 @@ if(newAddress){
           "_" +
           Math.random().toString(36).substr(2, 29),
         // items: [],
+        preorder: false,
+        scheduled_time: null,
         time_placed: null,
         confirmation_code:
           "mamnoon-" + Math.random().toString(36).substr(2, 29),
@@ -1202,10 +1266,16 @@ showGiftcard(){
                      console.log(response)
                 self.currentBalance =
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
-                  console.log(self.$store.state.storeCurrentOrder)
-
+                  
+                if(self.$store.state.storeCurrentOrder.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+                }
+                
+                
+               if(self.$store.state.storeCurrentOrder.preorder === false){
                   self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
-
+                }
+        
               })
               .catch(function (error) {
                 console.log(error);
@@ -1383,7 +1453,14 @@ this.attention = true
             console.log("Approval Data", approvalData);
             emergepay.close();
 
-            self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
+              if(self.$store.state.storeCurrentOrder.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
+              }
+              
+              if(self.$store.state.storeCurrentOrder.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
+              }
+          
           },
           onTransactionFailure: function (failureData) {
             console.log("Failure Data", failureData);
@@ -1400,6 +1477,7 @@ this.attention = true
       return new Promise(function (resolve, reject) {
         $.ajax({
           url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          // url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1497,7 +1575,7 @@ if(this.tipSelected === 0){
     },
     closeConfirmationModal() {
       this.orderConfirmationModal = false;
-      this.orderConfirmationModalResponse = "";
+      this.orderCMR = "";
     },
     openModal(serve) {
 
@@ -1636,46 +1714,109 @@ if(this.tipSelected === 0){
 
 
     },
-    doAnOrder(currentOrder,approvalData,giftcardbalance) {
+    scheduleAnOrder(currentOrder,approvalData,giftcardbalance) {
 
-let self = this;
+
+      let self = this;
+      // this.$http
+      //   .post(this.oloEndpoint, currentOrder)
+      //   .then((response) => {
+      //     console.log(response);
+      //     self.orderConfirmationModal = true;
+      //     self.giftcardbalance = giftcardbalance
+      //     self.orderCMR = response.data;
+      //     let orderCMR = response.data;
+      //     orderCMR.giftcardbalance = giftcardbalance
+      //     self.$store.commit("orderCMR", { orderCMR });
+      //     this.$router.push("/orderconfirmation");
+      //     self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
+      //     self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
+      //     let newDate = new Date();
+      //     self.currentOrder.time_placed = newDate;
+      //     self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+      //     let storeCurrentOrder = self.currentOrder
+      //     self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+      //   })
+      //   .catch((e) => {
+      //     // this.errors.push(e);
+      //     console.log("errors");
+      //     console.log(e);
+      //   });
+  
+      this.$http.post("/confirmationemail",currentOrder)
+      .then((response) => {
+          console.log('confirmation email sent')
+      }).catch((e) => {
+          console.log("errors");
+          console.log(e);
+        });
+
+
+    let infoForPay = {
+          payInfo: approvalData,
+          orderInfo: currentOrder
+        }
+    let infoForPayStringify = infoForPay      
+     this.$http
+        .post("/order/addorder", infoForPayStringify)
+        .then((response) => {
+          console.log('add to mongo emerge pay front end')
+
+// console.log(currentOrder);
+console.log(currentOrder)
+          self.orderConfirmationModal = true;
+          self.giftcardbalance = giftcardbalance
+          self.orderCMR = currentOrder;
+          let orderCMR = currentOrder;
+          orderCMR.giftcardbalance = giftcardbalance
+          self.$store.commit("orderCMR", { orderCMR });
+          this.$router.push("/orderconfirmation");
+
+
+
+
+
+
+
+
+        })
+        .catch((e) => {
+          console.log("errors");
+          console.log(e);
+        });
+      },
+doAnOrder(currentOrder,approvalData,giftcardbalance) {
+      let self = this;
       this.$http
         .post(this.oloEndpoint, currentOrder)
         .then((response) => {
           console.log(response);
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
-          self.orderConfirmationModalResponse = response.data;
-
-          let orderConfirmationModalResponse = response.data;
-
-          orderConfirmationModalResponse.giftcardbalance = giftcardbalance
-
-          self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
+          self.orderCMR = response.data;
+          let orderCMR = response.data;
+          console.log(response.data)
+          orderCMR.giftcardbalance = giftcardbalance
+          self.$store.commit("orderCMR", { orderCMR });
           this.$router.push("/orderconfirmation");
-
           self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
           self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
-
           let newDate = new Date();
           self.currentOrder.time_placed = newDate;
           self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
           let storeCurrentOrder = self.currentOrder
           self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
         })
         .catch((e) => {
           // this.errors.push(e);
           console.log("errors");
           console.log(e);
         });
-
   
     let infoForPay = {
-          payInfo: currentOrder,
-          orderInfo: approvalData
+          payInfo: approvalData,
+          orderInfo: currentOrder
         }
-
     let infoForPayStringify = infoForPay      
      this.$http
         .post("/order/addorder", infoForPayStringify)
@@ -1687,8 +1828,7 @@ let self = this;
           console.log("errors");
           console.log(e);
         });
-        
-    },
+      },
     issueReturn() {
       this.$http
         .post("/issue-return")
@@ -1720,6 +1860,93 @@ let self = this;
           console.log("errors");
           console.log(e);
         });
+    },
+   dropDown(){
+
+        let today = new Date()
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        for(let i = 0;i<7;i++){
+          let tomorrow = new Date(today)
+          tomorrow.setDate(tomorrow.getDate() + i)
+              if(tomorrow.getDay() === 0 || tomorrow.getDay() === 1){
+
+                let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
+                let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
+                let Option3 = new Date(tomorrow.setHours(18, 0, 0, 0))
+                let Option4 = new Date(tomorrow.setHours(18, 15, 0, 0))
+                let Option5 = new Date(tomorrow.setHours(18, 30, 0, 0))
+                let Option6 = new Date(tomorrow.setHours(18, 45, 0, 0))
+                let Option7 = new Date(tomorrow.setHours(19, 0, 0, 0))
+                let Option8 = new Date(tomorrow.setHours(19, 15, 0, 0))
+                let Option9 = new Date(tomorrow.setHours(19, 30, 0, 0))
+                let Option10 = new Date(tomorrow.setHours(19, 45, 0, 0))
+                let Option11 = new Date(tomorrow.setHours(20, 0, 0, 0))
+                let Option12 = new Date(tomorrow.setHours(20, 15, 0, 0))
+
+                this.dropDownDays.push({
+                dayLabel: days[tomorrow.getDay()] + ' (closed)',
+                dayName: days[tomorrow.getDay()],
+                closed: true,
+                dateData: tomorrow,
+                dateFormatted: tomorrow.toISOString().slice(0,10),
+                timeslots: [
+                  {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
+                  {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
+                  {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
+                  {time:Option4, timelabel: Option4.toLocaleTimeString().replace(":00","")},
+                  {time:Option5, timelabel: Option5.toLocaleTimeString().replace(":00","")},
+                  {time:Option6, timelabel: Option6.toLocaleTimeString().replace(":00","")},
+                  {time:Option7, timelabel: Option7.toLocaleTimeString().replace(":00","")},
+                  {time:Option8, timelabel: Option8.toLocaleTimeString().replace(":00","")},
+                  {time:Option9, timelabel: Option9.toLocaleTimeString().replace(":00","")},
+                  {time:Option10, timelabel: Option10.toLocaleTimeString().replace(":00","")},
+                  {time:Option11, timelabel: Option11.toLocaleTimeString().replace(":00","")},
+                  {time:Option12, timelabel: Option12.toLocaleTimeString().replace(":00","")},
+                  ]
+                })
+
+
+}else{
+
+let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
+let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
+let Option3 = new Date(tomorrow.setHours(18, 0, 0, 0))
+let Option4 = new Date(tomorrow.setHours(18, 15, 0, 0))
+let Option5 = new Date(tomorrow.setHours(18, 30, 0, 0))
+let Option6 = new Date(tomorrow.setHours(18, 45, 0, 0))
+let Option7 = new Date(tomorrow.setHours(19, 0, 0, 0))
+let Option8 = new Date(tomorrow.setHours(19, 15, 0, 0))
+let Option9 = new Date(tomorrow.setHours(19, 30, 0, 0))
+let Option10 = new Date(tomorrow.setHours(19, 45, 0, 0))
+let Option11 = new Date(tomorrow.setHours(20, 0, 0, 0))
+let Option12 = new Date(tomorrow.setHours(20, 15, 0, 0))
+
+
+                this.dropDownDays.push({
+                dayLabel: days[tomorrow.getDay()],
+                dayName: days[tomorrow.getDay()],
+                closed: false,
+                dateData: tomorrow,
+                dateFormatted: tomorrow.toISOString().slice(0,10),
+                timeslots: [
+                  {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
+                  {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
+                  {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
+                  {time:Option4, timelabel: Option4.toLocaleTimeString().replace(":00","")},
+                  {time:Option5, timelabel: Option5.toLocaleTimeString().replace(":00","")},
+                  {time:Option6, timelabel: Option6.toLocaleTimeString().replace(":00","")},
+                  {time:Option7, timelabel: Option7.toLocaleTimeString().replace(":00","")},
+                  {time:Option8, timelabel: Option8.toLocaleTimeString().replace(":00","")},
+                  {time:Option9, timelabel: Option9.toLocaleTimeString().replace(":00","")},
+                  {time:Option10, timelabel: Option10.toLocaleTimeString().replace(":00","")},
+                  {time:Option11, timelabel: Option11.toLocaleTimeString().replace(":00","")},
+                  {time:Option12, timelabel: Option12.toLocaleTimeString().replace(":00","")},
+                  ]
+                })
+              }
+        }
+
     }
   },
   mounted() {
@@ -1727,7 +1954,11 @@ let self = this;
     this.upserves();
     emergepay.init();
     this.$store.state.storeCurrentOrder = {};
-    this.$store.state.orderConfirmationModalResponse = {};
+    this.$store.state.orderCMR = {};
+
+
+    this.dropDown();
+
   }
 };
 </script>

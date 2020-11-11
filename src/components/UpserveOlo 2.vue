@@ -6,7 +6,7 @@
       <!-- {{$data}} -->
 
 <!-- <pre>{{upserveList}}</pre> -->
-<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderConfirmationModalResponse="orderConfirmationModalResponse" />
+<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
           <div @click="closeModal()" class="close closeModal">
@@ -1058,7 +1058,7 @@ this.currentOrder.charges.tip.amount = this.currentAmountToAdd
       renderKey: 0,
       googVPresent: true,
       orderConfirmationModal: false,
-      orderConfirmationModalResponse: "",
+      orderCMR: "",
       total: 0,
       totalWithTax: 0,
       taxes: 0,
@@ -1525,7 +1525,7 @@ if(this.tipSelected === 0){
     },
     closeConfirmationModal() {
       this.orderConfirmationModal = false;
-      this.orderConfirmationModalResponse = "";
+      this.orderCMR = "";
     },
     openModal(serve) {
 
@@ -1681,13 +1681,13 @@ let self = this;
           console.log(response);
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
-          self.orderConfirmationModalResponse = response.data;
+          self.orderCMR = response.data;
 
-          let orderConfirmationModalResponse = response.data;
+          let orderCMR = response.data;
 
-          orderConfirmationModalResponse.giftcardbalance = giftcardbalance
+          orderCMR.giftcardbalance = giftcardbalance
 
-          self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
+          self.$store.commit("orderCMR", { orderCMR });
           this.$router.push("/orderconfirmation");
 
           self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
@@ -1767,8 +1767,8 @@ let self = this;
 
 this.currentOrder.fulfillment_info.type = 'pickup'
 
-    // self.$store.commit("orderConfirmationModalResponse", { orderConfirmationModalResponse });
-    this.$store.state.orderConfirmationModalResponse = {};
+    // self.$store.commit("orderCMR", { orderCMR });
+    this.$store.state.orderCMR = {};
 
 
 

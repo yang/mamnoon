@@ -1,10 +1,10 @@
 <template>
   <div class="login">
     <Nav />
-<!-- {{this.$store.state.orderConfirmationModalResponse}} -->
+<!-- {{this.$store.state.orderCMR}} -->
 
 
-<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderConfirmationModalResponse="this.$store.state.orderConfirmationModalResponse" />
+<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="this.$store.state.orderCMR" />
 
 
 
@@ -26,9 +26,9 @@ export default {
     OrderConfirmationModal
   },
   mounted () {
-//  this.$store.state.orderConfirmationModalResponse = {};
-// console.log(this.$store.state.orderConfirmationModalResponse)
-        if(Object.entries(this.$store.state.orderConfirmationModalResponse).length === 0){
+//  this.$store.state.orderCMR = {};
+// console.log(this.$store.state.orderCMR)
+        if(Object.entries(this.$store.state.orderCMR).length === 0){
             this.$router.push("/mamnoon");
         }
     

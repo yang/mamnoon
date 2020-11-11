@@ -7,19 +7,27 @@ import GAuth from 'vue-google-oauth2';
 import router from "./router";
 import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
+import VueCurrencyInput from 'vue-currency-input'
+import vSelect from "vue-select";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
-import VueCurrencyInput from 'vue-currency-input'
+import "vue-select/src/scss/vue-select.scss";
+
 require('dotenv').config()
+
 
 Vue.use(VueCurrencyInput)
 
+
+Vue.component('v-select', vSelect)
+
 const base = axios.create({
   // baseURL: process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://young-hamlet-03679.herokuapp.com"
-  // baseURL: "http://localhost:4000" 
-  baseURL: "https://young-hamlet-03679.herokuapp.com"
+  baseURL: "https://young-hamlet-03679.herokuapp.com" 
+  // baseURL: "https://young-hamlet-03679.herokuapp.com"
 }); 
 
 
@@ -105,8 +113,8 @@ const store = new Vuex.Store({
         state[name] = 1
       }
     },
-    orderConfirmationModalResponse (state, { orderConfirmationModalResponse }) {
-      state.orderConfirmationModalResponse = orderConfirmationModalResponse
+    orderCMR (state, { orderCMR }) {
+      state.orderCMR = orderCMR
     },
     googleAddress (state, { googleAddress }) {
       state.googleAddress = googleAddress

@@ -10,38 +10,30 @@
           <h4>order confirmation</h4>
         </div>
         <div class="container modal-body order-modal-width order-modal-body">
-
-
-
-          <h2>thank you for your order!</h2>
+          <h2 v-if="orderCMR.preorder">your order has been scheduled.</h2>
+          <div class="mb-15" v-if="orderCMR.preorder">it will be ready on <b>{{orderCMR.scheduled_time | formatDate}}</b><br></div>
+          <h2 v-else>thank you for your order.</h2>
           <div>
-<br />
-<!--<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line1}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.address_line2}}</b><br />  
-<b>{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.city}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.state}}&nbsp;{{orderConfirmationModalResponse.fulfillment_info.delivery_info.address.zip_code}}</b>
-  <br>-->
-  <b>{{orderConfirmationModalResponse.fulfillment_info.customer.email}}</b>  <br />  
-<b>{{orderConfirmationModalResponse.fulfillment_info.customer.phone}}</b>
-
-<p>{{orderConfirmationModalResponse.fulfillment_info.customer.instructions}}</p>
-<br />
-<ul class="no-left-pad" v-if="orderConfirmationModalResponse.charges.items">
-  <li class="modal-item" v-for="item in orderConfirmationModalResponse.charges.items" :key="item.name">
+  <b>{{orderCMR.fulfillment_info.customer.email}}</b>  <br />  
+<b>{{orderCMR.fulfillment_info.customer.phone}}</b>
+<ul class="no-left-pad" v-if="orderCMR.charges.items">
+  <li class="modal-item" v-for="item in orderCMR.charges.items" :key="item.name">
     {{item.name}}
   </li>
   </ul>  
-<b>tip: ${{orderConfirmationModalResponse.charges.tip.amount.toFixed(2)/100}}</b>
+<b>tip: ${{orderCMR.charges.tip.amount.toFixed(2)/100}}</b>
   <br />  
-<b>taxes: ${{orderConfirmationModalResponse.charges.taxes.toFixed(2)/100}}</b>
+<b>taxes: ${{orderCMR.charges.taxes.toFixed(2)/100}}</b>
   <br />  
-<b>total: ${{orderConfirmationModalResponse.charges.total.toFixed(2)/100}}</b>
+<b>total: ${{orderCMR.charges.total.toFixed(2)/100}}</b>
 <br />
 <hr />
 
-<span v-if="orderConfirmationModalResponse.giftcardbalance">current giftcard balance: {{orderConfirmationModalResponse.giftcardbalance}}</span>
+<span v-if="orderCMR.giftcardbalance">current giftcard balance: {{orderCMR.giftcardbalance}}</span>
 <span v-else>credit transaction</span>
 
-<!-- <div v-if="orderConfirmationModalResponse.giftcardBalance">
-current giftcard balance: ${{orderConfirmationModalResponse.giftcardBalance}}
+<!-- <div v-if="orderCMR.giftcardBalance">
+current giftcard balance: ${{orderCMR.giftcardBalance}}
 </div> -->
 
           </div>
@@ -56,10 +48,11 @@ current giftcard balance: ${{orderConfirmationModalResponse.giftcardBalance}}
 <script>
 
 import CloseModal from "@/components/svgIcons/CloseModal";
-
+import moment from 'moment'
+import tz from 'moment-timezone'
 export default {
     name: 'OrderConfirmationModal',
-props: ['orderConfirmationModal','orderConfirmationModalResponse'],
+props: ['orderConfirmationModal','orderCMR'],
 components: {
 
     CloseModal
@@ -67,11 +60,18 @@ components: {
 methods:{
         closeConfirmationModal() {
       this.orderConfirmationModal = false;
-      this.orderConfirmationModalResponse = "";
-    },
+      this.orderCMR = "";
+    }
+},
+filters: {
+    formatDate(value) {
+  if (value) {
+        let order = moment(String(value));
+        return order.tz('America/Los_Angeles').format('LLLL').replace(', 2020', ', at');
+  }
 }
 }
-
+}
 </script>
 
 <style scoped lang="scss">
@@ -969,6 +969,10 @@ li.modal-item{
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50px);
+}
+
+.mb-15{
+  margin-bottom: 15px;
 }
 
 
