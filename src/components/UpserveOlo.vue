@@ -113,8 +113,7 @@
              <h1 class="text-center">{{title}}</h1>
 
 
-{{$store.state.storeCurrentOrder.preorder}}
-<!-- {{selectedTime}} -->
+
                </div>
         </div>
       </div>
@@ -860,10 +859,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
     </section>
 
 
-      <pre>
 
-          {{this.$store.state.storeCurrentOrder}}
-        </pre>
 
 
   </div>
