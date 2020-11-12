@@ -1269,4 +1269,11 @@ svg#nadiIconSm{
 }
 
 
+.vs__dropdown-menu {
+    padding: 5px 0 0;
+}
+.vs__dropdown-option {
+    padding: 7px 10px !important;
+}
+
 </style>

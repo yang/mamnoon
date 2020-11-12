@@ -357,7 +357,7 @@
 </template>
 
 <template v-if="currentOrder.preorder">
-<v-select :options="dropDownDays" label="dayLabel" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+<v-select :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 <!-- <br>   -->
 
 
@@ -891,6 +891,9 @@ import Prev from "@/components/svgIcons/Prev";
 import NadiIcon from "@/components/svgIcons/NadiIcon";
 import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 
+
+import moment from 'moment'
+import tz from 'moment-timezone'
 
 import swal from "sweetalert";
 export default {
@@ -1883,11 +1886,13 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
                 let Option11 = new Date(tomorrow.setHours(20, 0, 0, 0))
                 let Option12 = new Date(tomorrow.setHours(20, 15, 0, 0))
 
+
+
                 this.dropDownDays.push({
                 dayLabel: days[tomorrow.getDay()] + ' (closed)',
                 dayName: days[tomorrow.getDay()],
                 closed: true,
-                dateData: tomorrow,
+                dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
                 dateFormatted: tomorrow.toISOString().slice(0,10),
                 timeslots: [
                   {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
@@ -1926,7 +1931,7 @@ let Option12 = new Date(tomorrow.setHours(20, 15, 0, 0))
                 dayLabel: days[tomorrow.getDay()],
                 dayName: days[tomorrow.getDay()],
                 closed: false,
-                dateData: tomorrow,
+                dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
                 dateFormatted: tomorrow.toISOString().slice(0,10),
                 timeslots: [
                   {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
