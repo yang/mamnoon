@@ -845,6 +845,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
+
    <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
 
               </template>
@@ -859,7 +860,9 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
     </section>
 
 
-
+<pre>
+{{$store.state.storeCurrentOrder}}
+</pre>
 
 
   </div>
