@@ -1287,12 +1287,12 @@ svg#nadiIconSm{
 #upserveolo .half-width2left{
     width: 100% !important;
     float: left;
-    height: 140px;
+    height: 140px !important;
     overflow: hidden;
 }
 
 #upserveolo .filtree-full{
-       height: 140px;
+       height: 140px !important;
 }
 
 #upserveolo .content-box {
