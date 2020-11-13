@@ -861,7 +861,9 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
-
+<pre>
+{{$store.state.storeCurrentOrder}}
+</pre>
 
   </div>
 </template>
@@ -1042,44 +1044,6 @@ if(newAddress){
       selectedDate: null,
       selectedTime: null,
       dropDownDays: [],
-      dropDownTimes: [
-{formattedTime:'5:30 PM, PST',
-timeStamp: 'T17:30:00'
-},
-{formattedTime:'5:45 PM, PST',
-timeStamp: 'T17:45:00'
-},
-{formattedTime:'6:00 PM, PST',
-timeStamp: 'T18:00:00'
-},
-{formattedTime:'6:15 PM, PST',
-timeStamp: 'T18:15:00'
-},
-  {formattedTime:'6:30 PM, PST',
-timeStamp: 'T18:30:00'
-},
-{formattedTime:'6:45 PM, PST',
-timeStamp: 'T18:45:00'
-},
-{formattedTime:'7:00 PM, PST',
-timeStamp: 'T19:00:00'
-},
-{formattedTime:'7:15 PM, PST',
-timeStamp: 'T19:15:00'
-},
-  {formattedTime:'7:30 PM, PST',
-timeStamp: 'T19:30:00'
-},
-{formattedTime:'7:45 PM, PST',
-timeStamp: 'T19:45:00'
-},
-{formattedTime:'8:00 PM, PST',
-timeStamp: 'T20:00:00'
-},
-{formattedTime:'8:15 PM, PST',
-timeStamp: 'T20:15:00'
-}
-  ],
       email: '',
       giftCardPanel: false,
       preferredGiftCard: '',
@@ -1863,91 +1827,289 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
     },
    dropDown(){
 
-        let today = new Date()
-        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+     let today = new Date()
+     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+
+if(this.oloEndpoint === '/oloorder'){
 
         for(let i = 0;i<7;i++){
           let tomorrow = new Date(today)
           tomorrow.setDate(tomorrow.getDate() + i)
-              if(tomorrow.getDay() === 0 || tomorrow.getDay() === 1){
+                                if(tomorrow.getDay() === 0 || tomorrow.getDay() === 1){
 
-                let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
-                let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
-                let Option3 = new Date(tomorrow.setHours(18, 0, 0, 0))
-                let Option4 = new Date(tomorrow.setHours(18, 15, 0, 0))
-                let Option5 = new Date(tomorrow.setHours(18, 30, 0, 0))
-                let Option6 = new Date(tomorrow.setHours(18, 45, 0, 0))
-                let Option7 = new Date(tomorrow.setHours(19, 0, 0, 0))
-                let Option8 = new Date(tomorrow.setHours(19, 15, 0, 0))
-                let Option9 = new Date(tomorrow.setHours(19, 30, 0, 0))
-                let Option10 = new Date(tomorrow.setHours(19, 45, 0, 0))
-                let Option11 = new Date(tomorrow.setHours(20, 0, 0, 0))
-                let Option12 = new Date(tomorrow.setHours(20, 15, 0, 0))
-
-
-
-                this.dropDownDays.push({
-                dayLabel: days[tomorrow.getDay()] + ' (closed)',
-                dayName: days[tomorrow.getDay()],
-                closed: true,
-                dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
-                dateFormatted: tomorrow.toISOString().slice(0,10),
-                timeslots: [
-                  {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
-                  {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
-                  {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
-                  {time:Option4, timelabel: Option4.toLocaleTimeString().replace(":00","")},
-                  {time:Option5, timelabel: Option5.toLocaleTimeString().replace(":00","")},
-                  {time:Option6, timelabel: Option6.toLocaleTimeString().replace(":00","")},
-                  {time:Option7, timelabel: Option7.toLocaleTimeString().replace(":00","")},
-                  {time:Option8, timelabel: Option8.toLocaleTimeString().replace(":00","")},
-                  {time:Option9, timelabel: Option9.toLocaleTimeString().replace(":00","")},
-                  {time:Option10, timelabel: Option10.toLocaleTimeString().replace(":00","")},
-                  {time:Option11, timelabel: Option11.toLocaleTimeString().replace(":00","")},
-                  {time:Option12, timelabel: Option12.toLocaleTimeString().replace(":00","")},
-                  ]
-                })
+                                let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
+                                let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
+                                let Option3 = new Date(tomorrow.setHours(18, 0, 0, 0))
+                                let Option4 = new Date(tomorrow.setHours(18, 15, 0, 0))
+                                let Option5 = new Date(tomorrow.setHours(18, 30, 0, 0))
+                                let Option6 = new Date(tomorrow.setHours(18, 45, 0, 0))
+                                let Option7 = new Date(tomorrow.setHours(19, 0, 0, 0))
+                                let Option8 = new Date(tomorrow.setHours(19, 15, 0, 0))
+                                let Option9 = new Date(tomorrow.setHours(19, 30, 0, 0))
+                                let Option10 = new Date(tomorrow.setHours(19, 45, 0, 0))
+                                let Option11 = new Date(tomorrow.setHours(20, 0, 0, 0))
+                                let Option12 = new Date(tomorrow.setHours(20, 15, 0, 0))
 
 
-}else{
 
-let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
-let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
-let Option3 = new Date(tomorrow.setHours(18, 0, 0, 0))
-let Option4 = new Date(tomorrow.setHours(18, 15, 0, 0))
-let Option5 = new Date(tomorrow.setHours(18, 30, 0, 0))
-let Option6 = new Date(tomorrow.setHours(18, 45, 0, 0))
-let Option7 = new Date(tomorrow.setHours(19, 0, 0, 0))
-let Option8 = new Date(tomorrow.setHours(19, 15, 0, 0))
-let Option9 = new Date(tomorrow.setHours(19, 30, 0, 0))
-let Option10 = new Date(tomorrow.setHours(19, 45, 0, 0))
-let Option11 = new Date(tomorrow.setHours(20, 0, 0, 0))
-let Option12 = new Date(tomorrow.setHours(20, 15, 0, 0))
+                                this.dropDownDays.push({
+                                dayLabel: days[tomorrow.getDay()] + ' (closed)',
+                                dayName: days[tomorrow.getDay()],
+                                closed: true,
+                                dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
+                                dateFormatted: tomorrow.toISOString().slice(0,10),
+                                timeslots: [
+                                {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
+                                {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
+                                {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
+                                {time:Option4, timelabel: Option4.toLocaleTimeString().replace(":00","")},
+                                {time:Option5, timelabel: Option5.toLocaleTimeString().replace(":00","")},
+                                {time:Option6, timelabel: Option6.toLocaleTimeString().replace(":00","")},
+                                {time:Option7, timelabel: Option7.toLocaleTimeString().replace(":00","")},
+                                {time:Option8, timelabel: Option8.toLocaleTimeString().replace(":00","")},
+                                {time:Option9, timelabel: Option9.toLocaleTimeString().replace(":00","")},
+                                {time:Option10, timelabel: Option10.toLocaleTimeString().replace(":00","")},
+                                {time:Option11, timelabel: Option11.toLocaleTimeString().replace(":00","")},
+                                {time:Option12, timelabel: Option12.toLocaleTimeString().replace(":00","")},
+                                ]
+                                })
 
 
-                this.dropDownDays.push({
-                dayLabel: days[tomorrow.getDay()],
-                dayName: days[tomorrow.getDay()],
-                closed: false,
-                dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
-                dateFormatted: tomorrow.toISOString().slice(0,10),
-                timeslots: [
-                  {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
-                  {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
-                  {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
-                  {time:Option4, timelabel: Option4.toLocaleTimeString().replace(":00","")},
-                  {time:Option5, timelabel: Option5.toLocaleTimeString().replace(":00","")},
-                  {time:Option6, timelabel: Option6.toLocaleTimeString().replace(":00","")},
-                  {time:Option7, timelabel: Option7.toLocaleTimeString().replace(":00","")},
-                  {time:Option8, timelabel: Option8.toLocaleTimeString().replace(":00","")},
-                  {time:Option9, timelabel: Option9.toLocaleTimeString().replace(":00","")},
-                  {time:Option10, timelabel: Option10.toLocaleTimeString().replace(":00","")},
-                  {time:Option11, timelabel: Option11.toLocaleTimeString().replace(":00","")},
-                  {time:Option12, timelabel: Option12.toLocaleTimeString().replace(":00","")},
-                  ]
-                })
-              }
+                                }else{
+
+                                let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
+                                let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
+                                let Option3 = new Date(tomorrow.setHours(18, 0, 0, 0))
+                                let Option4 = new Date(tomorrow.setHours(18, 15, 0, 0))
+                                let Option5 = new Date(tomorrow.setHours(18, 30, 0, 0))
+                                let Option6 = new Date(tomorrow.setHours(18, 45, 0, 0))
+                                let Option7 = new Date(tomorrow.setHours(19, 0, 0, 0))
+                                let Option8 = new Date(tomorrow.setHours(19, 15, 0, 0))
+                                let Option9 = new Date(tomorrow.setHours(19, 30, 0, 0))
+                                let Option10 = new Date(tomorrow.setHours(19, 45, 0, 0))
+                                let Option11 = new Date(tomorrow.setHours(20, 0, 0, 0))
+                                let Option12 = new Date(tomorrow.setHours(20, 15, 0, 0))
+
+
+                                this.dropDownDays.push({
+                                dayLabel: days[tomorrow.getDay()],
+                                dayName: days[tomorrow.getDay()],
+                                closed: false,
+                                dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
+                                dateFormatted: tomorrow.toISOString().slice(0,10),
+                                timeslots: [
+                                {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
+                                {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
+                                {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
+                                {time:Option4, timelabel: Option4.toLocaleTimeString().replace(":00","")},
+                                {time:Option5, timelabel: Option5.toLocaleTimeString().replace(":00","")},
+                                {time:Option6, timelabel: Option6.toLocaleTimeString().replace(":00","")},
+                                {time:Option7, timelabel: Option7.toLocaleTimeString().replace(":00","")},
+                                {time:Option8, timelabel: Option8.toLocaleTimeString().replace(":00","")},
+                                {time:Option9, timelabel: Option9.toLocaleTimeString().replace(":00","")},
+                                {time:Option10, timelabel: Option10.toLocaleTimeString().replace(":00","")},
+                                {time:Option11, timelabel: Option11.toLocaleTimeString().replace(":00","")},
+                                {time:Option12, timelabel: Option12.toLocaleTimeString().replace(":00","")},
+                                ]
+                                })
+                                }
         }
+
+
+
+   }else{
+
+
+                  for(let i = 0;i<7;i++){
+                            let tomorrow = new Date(today)
+                            tomorrow.setDate(tomorrow.getDate() + i)
+                                if(tomorrow.getDay() === 0){
+
+                                  let Option1 = new Date(tomorrow.setHours(11, 30, 0, 0))
+                                  let Option2 = new Date(tomorrow.setHours(11, 45, 0, 0))
+                                  let Option3 = new Date(tomorrow.setHours(12, 0, 0, 0))
+                                  let Option4 = new Date(tomorrow.setHours(12, 15, 0, 0))
+                                  let Option5 = new Date(tomorrow.setHours(12, 30, 0, 0))
+                                  let Option6 = new Date(tomorrow.setHours(12, 45, 0, 0))
+                                  let Option7 = new Date(tomorrow.setHours(13, 0, 0, 0))
+                                  let Option8 = new Date(tomorrow.setHours(13, 15, 0, 0))
+                                  let Option9 = new Date(tomorrow.setHours(13, 30, 0, 0))
+                                  let Option10 = new Date(tomorrow.setHours(13, 45, 0, 0))
+                                  let Option11 = new Date(tomorrow.setHours(14, 0, 0, 0))
+                                  let Option12 = new Date(tomorrow.setHours(14, 15, 0, 0))
+                                  let Option13 = new Date(tomorrow.setHours(14, 30, 0, 0))
+                                  let Option14 = new Date(tomorrow.setHours(14, 45, 0, 0))
+                                  let Option15 = new Date(tomorrow.setHours(15, 0, 0, 0))
+                                  let Option16 = new Date(tomorrow.setHours(15, 15, 0, 0))
+                                  let Option17 = new Date(tomorrow.setHours(15, 30, 0, 0))
+                                  let Option18 = new Date(tomorrow.setHours(15, 45, 0, 0))
+                                  let Option19 = new Date(tomorrow.setHours(16, 0, 0, 0))
+                                  let Option20 = new Date(tomorrow.setHours(16, 15, 0, 0))
+                                  let Option21 = new Date(tomorrow.setHours(16, 30, 0, 0))
+                                  let Option22 = new Date(tomorrow.setHours(16, 45, 0, 0))
+                                  let Option23 = new Date(tomorrow.setHours(17, 0, 0, 0))
+                                  let Option24 = new Date(tomorrow.setHours(17, 15, 0, 0))
+                                  let Option25 = new Date(tomorrow.setHours(17, 30, 0, 0))
+                                  let Option26 = new Date(tomorrow.setHours(17, 45, 0, 0))
+                                  let Option27 = new Date(tomorrow.setHours(18, 0, 0, 0))
+                                  let Option28 = new Date(tomorrow.setHours(18, 15, 0, 0))
+                                  let Option29 = new Date(tomorrow.setHours(18, 30, 0, 0))
+                                  let Option30 = new Date(tomorrow.setHours(18, 45, 0, 0))
+                                  let Option31 = new Date(tomorrow.setHours(19, 0, 0, 0))
+                                  let Option32 = new Date(tomorrow.setHours(19, 15, 0, 0))
+                                  let Option33 = new Date(tomorrow.setHours(19, 30, 0, 0))
+                                  let Option34 = new Date(tomorrow.setHours(19, 45, 0, 0))
+                                  let Option35 = new Date(tomorrow.setHours(20, 0, 0, 0))  
+                                  let Option36 = new Date(tomorrow.setHours(20, 15, 0, 0)) 
+
+
+
+                                  this.dropDownDays.push({
+                                  dayLabel: days[tomorrow.getDay()] + ' (closed)',
+                                  dayName: days[tomorrow.getDay()],
+                                  closed: true,
+                                  dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
+                                  dateFormatted: tomorrow.toISOString().slice(0,10),
+                                  timeslots: [
+                                    {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
+                                    {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
+                                    {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
+                                    {time:Option4, timelabel: Option4.toLocaleTimeString().replace(":00","")},
+                                    {time:Option5, timelabel: Option5.toLocaleTimeString().replace(":00","")},
+                                    {time:Option6, timelabel: Option6.toLocaleTimeString().replace(":00","")},
+                                    {time:Option7, timelabel: Option7.toLocaleTimeString().replace(":00","")},
+                                    {time:Option8, timelabel: Option8.toLocaleTimeString().replace(":00","")},
+                                    {time:Option9, timelabel: Option9.toLocaleTimeString().replace(":00","")},
+                                    {time:Option10, timelabel: Option10.toLocaleTimeString().replace(":00","")},
+                                    {time:Option11, timelabel: Option11.toLocaleTimeString().replace(":00","")},
+                                    {time:Option12, timelabel: Option12.toLocaleTimeString().replace(":00","")},
+                                    {time:Option13, timelabel: Option13.toLocaleTimeString().replace(":00","")},
+                                    {time:Option14, timelabel: Option14.toLocaleTimeString().replace(":00","")},
+                                    {time:Option15, timelabel: Option15.toLocaleTimeString().replace(":00","")},
+                                    {time:Option16, timelabel: Option16.toLocaleTimeString().replace(":00","")},
+                                    {time:Option17, timelabel: Option17.toLocaleTimeString().replace(":00","")},
+                                    {time:Option18, timelabel: Option18.toLocaleTimeString().replace(":00","")},
+                                    {time:Option19, timelabel: Option19.toLocaleTimeString().replace(":00","")},
+                                    {time:Option20, timelabel: Option20.toLocaleTimeString().replace(":00","")},
+                                    {time:Option21, timelabel: Option21.toLocaleTimeString().replace(":00","")},
+                                    {time:Option22, timelabel: Option22.toLocaleTimeString().replace(":00","")},
+                                    {time:Option23, timelabel: Option23.toLocaleTimeString().replace(":00","")},
+                                    {time:Option24, timelabel: Option24.toLocaleTimeString().replace(":00","")},
+                                    {time:Option25, timelabel: Option25.toLocaleTimeString().replace(":00","")},
+                                    {time:Option26, timelabel: Option26.toLocaleTimeString().replace(":00","")},
+                                    {time:Option27, timelabel: Option27.toLocaleTimeString().replace(":00","")},
+                                    {time:Option28, timelabel: Option28.toLocaleTimeString().replace(":00","")},
+                                    {time:Option29, timelabel: Option29.toLocaleTimeString().replace(":00","")},
+                                    {time:Option30, timelabel: Option30.toLocaleTimeString().replace(":00","")},
+                                    {time:Option31, timelabel: Option31.toLocaleTimeString().replace(":00","")},
+                                    {time:Option32, timelabel: Option32.toLocaleTimeString().replace(":00","")},
+                                    {time:Option33, timelabel: Option33.toLocaleTimeString().replace(":00","")},
+                                    {time:Option34, timelabel: Option34.toLocaleTimeString().replace(":00","")},
+                                    {time:Option35, timelabel: Option35.toLocaleTimeString().replace(":00","")},
+                                    {time:Option36, timelabel: Option36.toLocaleTimeString().replace(":00","")},
+                                    ]
+                                  })
+
+
+                  }else{
+
+                                let Option1 = new Date(tomorrow.setHours(11, 30, 0, 0))
+                                  let Option2 = new Date(tomorrow.setHours(11, 45, 0, 0))
+                                  let Option3 = new Date(tomorrow.setHours(12, 0, 0, 0))
+                                  let Option4 = new Date(tomorrow.setHours(12, 15, 0, 0))
+                                  let Option5 = new Date(tomorrow.setHours(12, 30, 0, 0))
+                                  let Option6 = new Date(tomorrow.setHours(12, 45, 0, 0))
+                                  let Option7 = new Date(tomorrow.setHours(13, 0, 0, 0))
+                                  let Option8 = new Date(tomorrow.setHours(13, 15, 0, 0))
+                                  let Option9 = new Date(tomorrow.setHours(13, 30, 0, 0))
+                                  let Option10 = new Date(tomorrow.setHours(13, 45, 0, 0))
+                                  let Option11 = new Date(tomorrow.setHours(14, 0, 0, 0))
+                                  let Option12 = new Date(tomorrow.setHours(14, 15, 0, 0))
+                                  let Option13 = new Date(tomorrow.setHours(14, 30, 0, 0))
+                                  let Option14 = new Date(tomorrow.setHours(14, 45, 0, 0))
+                                  let Option15 = new Date(tomorrow.setHours(15, 0, 0, 0))
+                                  let Option16 = new Date(tomorrow.setHours(15, 15, 0, 0))
+                                  let Option17 = new Date(tomorrow.setHours(15, 30, 0, 0))
+                                  let Option18 = new Date(tomorrow.setHours(15, 45, 0, 0))
+                                  let Option19 = new Date(tomorrow.setHours(16, 0, 0, 0))
+                                  let Option20 = new Date(tomorrow.setHours(16, 15, 0, 0))
+                                  let Option21 = new Date(tomorrow.setHours(16, 30, 0, 0))
+                                  let Option22 = new Date(tomorrow.setHours(16, 45, 0, 0))
+                                  let Option23 = new Date(tomorrow.setHours(17, 0, 0, 0))
+                                  let Option24 = new Date(tomorrow.setHours(17, 15, 0, 0))
+                                  let Option25 = new Date(tomorrow.setHours(17, 30, 0, 0))
+                                  let Option26 = new Date(tomorrow.setHours(17, 45, 0, 0))
+                                  let Option27 = new Date(tomorrow.setHours(18, 0, 0, 0))
+                                  let Option28 = new Date(tomorrow.setHours(18, 15, 0, 0))
+                                  let Option29 = new Date(tomorrow.setHours(18, 30, 0, 0))
+                                  let Option30 = new Date(tomorrow.setHours(18, 45, 0, 0))
+                                  let Option31 = new Date(tomorrow.setHours(19, 0, 0, 0))
+                                  let Option32 = new Date(tomorrow.setHours(19, 15, 0, 0))
+                                  let Option33 = new Date(tomorrow.setHours(19, 30, 0, 0))
+                                  let Option34 = new Date(tomorrow.setHours(19, 45, 0, 0))
+                                  let Option35 = new Date(tomorrow.setHours(20, 0, 0, 0))  
+                                  let Option36 = new Date(tomorrow.setHours(20, 15, 0, 0)) 
+
+
+                                  this.dropDownDays.push({
+                                  dayLabel: days[tomorrow.getDay()],
+                                  dayName: days[tomorrow.getDay()],
+                                  closed: false,
+                                  dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
+                                  dateFormatted: tomorrow.toISOString().slice(0,10),
+                                  timeslots: [
+                                    {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
+                                    {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
+                                    {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
+                                    {time:Option4, timelabel: Option4.toLocaleTimeString().replace(":00","")},
+                                    {time:Option5, timelabel: Option5.toLocaleTimeString().replace(":00","")},
+                                    {time:Option6, timelabel: Option6.toLocaleTimeString().replace(":00","")},
+                                    {time:Option7, timelabel: Option7.toLocaleTimeString().replace(":00","")},
+                                    {time:Option8, timelabel: Option8.toLocaleTimeString().replace(":00","")},
+                                    {time:Option9, timelabel: Option9.toLocaleTimeString().replace(":00","")},
+                                    {time:Option10, timelabel: Option10.toLocaleTimeString().replace(":00","")},
+                                    {time:Option11, timelabel: Option11.toLocaleTimeString().replace(":00","")},
+                                    {time:Option12, timelabel: Option12.toLocaleTimeString().replace(":00","")},
+                                    {time:Option13, timelabel: Option13.toLocaleTimeString().replace(":00","")},
+                                    {time:Option14, timelabel: Option14.toLocaleTimeString().replace(":00","")},
+                                    {time:Option15, timelabel: Option15.toLocaleTimeString().replace(":00","")},
+                                    {time:Option16, timelabel: Option16.toLocaleTimeString().replace(":00","")},
+                                    {time:Option17, timelabel: Option17.toLocaleTimeString().replace(":00","")},
+                                    {time:Option18, timelabel: Option18.toLocaleTimeString().replace(":00","")},
+                                    {time:Option19, timelabel: Option19.toLocaleTimeString().replace(":00","")},
+                                    {time:Option20, timelabel: Option20.toLocaleTimeString().replace(":00","")},
+                                    {time:Option21, timelabel: Option21.toLocaleTimeString().replace(":00","")},
+                                    {time:Option22, timelabel: Option22.toLocaleTimeString().replace(":00","")},
+                                    {time:Option23, timelabel: Option23.toLocaleTimeString().replace(":00","")},
+                                    {time:Option24, timelabel: Option24.toLocaleTimeString().replace(":00","")},
+                                    {time:Option25, timelabel: Option25.toLocaleTimeString().replace(":00","")},
+                                    {time:Option26, timelabel: Option26.toLocaleTimeString().replace(":00","")},
+                                    {time:Option27, timelabel: Option27.toLocaleTimeString().replace(":00","")},
+                                    {time:Option28, timelabel: Option28.toLocaleTimeString().replace(":00","")},
+                                    {time:Option29, timelabel: Option29.toLocaleTimeString().replace(":00","")},
+                                    {time:Option30, timelabel: Option30.toLocaleTimeString().replace(":00","")},
+                                    {time:Option31, timelabel: Option31.toLocaleTimeString().replace(":00","")},
+                                    {time:Option32, timelabel: Option32.toLocaleTimeString().replace(":00","")},
+                                    {time:Option33, timelabel: Option33.toLocaleTimeString().replace(":00","")},
+                                    {time:Option34, timelabel: Option34.toLocaleTimeString().replace(":00","")},
+                                    {time:Option35, timelabel: Option35.toLocaleTimeString().replace(":00","")},
+                                    {time:Option36, timelabel: Option36.toLocaleTimeString().replace(":00","")},
+                                    ]
+                                  })
+                                }
+                  }
+
+
+
+   }
+
+
+
+
+
+
 
     }
   },
