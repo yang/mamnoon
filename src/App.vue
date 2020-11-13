@@ -1276,4 +1276,30 @@ svg#nadiIconSm{
     padding: 7px 10px !important;
 }
 
+
+
+@media only screen and (max-width: 992px) {
+
+
+.half-width2right{
+  display: none;
+}
+#upserveolo .half-width2left{
+    width: 100% !important;
+    float: left;
+    height: 140px;
+    overflow: hidden;
+}
+
+#upserveolo .filtree-full{
+       height: 140px;
+}
+
+#upserveolo .content-box {
+    padding: 5px 9px;
+}
+
+}
+
+
 </style>
