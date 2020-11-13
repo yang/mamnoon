@@ -1291,6 +1291,11 @@ svg#nadiIconSm{
     overflow: hidden;
 }
 
+
+.half-width2left .food-description{
+  display: none !important;
+}
+
 #upserveolo .filtree-full{
        height: 140px !important;
 }
