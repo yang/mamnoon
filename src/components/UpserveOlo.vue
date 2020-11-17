@@ -362,8 +362,10 @@
 
 
 <div style="margin-top:15px;" v-if="selectedDate !== null">
-<v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+<!-- <v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select> -->
 <!-- <br/>  -->
+
+<v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  v-model="selectedTime"></v-select>
 </div>
 
 </template>
@@ -1838,7 +1840,7 @@ if(this.oloEndpoint === '/oloorder'){
           let tomorrow = new Date(today)
           tomorrow.setDate(tomorrow.getDate() + i)
                                 if(tomorrow.getDay() === 0 || tomorrow.getDay() === 1){
-
+                                  let Option0 = new Date(tomorrow.setHours(11, 0, 0, 0))
                                 let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
                                 let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
                                 let Option3 = new Date(tomorrow.setHours(18, 0, 0, 0))
@@ -1861,6 +1863,7 @@ if(this.oloEndpoint === '/oloorder'){
                                 dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
                                 dateFormatted: tomorrow.toISOString().slice(0,10),
                                 timeslots: [
+                                  {time:Option0, timelabel: Option0.toLocaleTimeString().replace(":00","")},
                                 {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
                                 {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
                                 {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
@@ -1879,6 +1882,8 @@ if(this.oloEndpoint === '/oloorder'){
 
                                 }else{
 
+
+                                let Option0 = new Date(tomorrow.setHours(11, 0, 0, 0))
                                 let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
                                 let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
                                 let Option3 = new Date(tomorrow.setHours(18, 0, 0, 0))
@@ -1900,6 +1905,7 @@ if(this.oloEndpoint === '/oloorder'){
                                 dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
                                 dateFormatted: tomorrow.toISOString().slice(0,10),
                                 timeslots: [
+                                {time:Option0, timelabel: Option0.toLocaleTimeString().replace(":00","")},
                                 {time:Option1, timelabel: Option1.toLocaleTimeString().replace(":00","")},
                                 {time:Option2, timelabel: Option2.toLocaleTimeString().replace(":00","")},
                                 {time:Option3, timelabel: Option3.toLocaleTimeString().replace(":00","")},
