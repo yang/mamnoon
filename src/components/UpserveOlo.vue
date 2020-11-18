@@ -362,10 +362,10 @@
 
 
 <div style="margin-top:15px;" v-if="selectedDate !== null">
-<!-- <v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select> -->
+<v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
 <!-- <br/>  -->
 
-<v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  v-model="selectedTime"></v-select>
+<!-- <v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  v-model="selectedTime"></v-select> -->
 </div>
 
 </template>
