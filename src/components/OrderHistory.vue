@@ -14,7 +14,7 @@
         <td><div>price</div></td>
 
         <td><div>pay method</div></td>
-        <td><div>delivery/pickup</div></td>
+        <!-- <td><div>delivery/pickup</div></td> -->
         <td><div>status</div></td>
         <!-- <td><div>actions</div></td> -->
 </th>   
@@ -54,9 +54,9 @@ debit/credit
    </div>
    </td> 
 
-<td><div>
+<!-- <td><div>
 {{order.orderInfo.fulfillment_info.type}}
-   </div></td> 
+   </div></td>  -->
 
 <td><div>
 {{order.status}}
@@ -66,6 +66,8 @@ debit/credit
 <button class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">re order</button>
 </div></td> -->
 </tr>
+
+
 </table>
 </div>
 </div>

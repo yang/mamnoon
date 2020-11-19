@@ -813,7 +813,9 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 <template v-if="giftCardPanel ===  true">
 <template v-if="this.$store.state.loggedIn">
- <br>
+   <br>
+    <h4 v-if="showInsufficientFunds === true" class="error" style="text-align:left">insufficient funds</h4>
+
   <input v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
 <br>
               <button class="mt10 fw" style="margin-bottom: 20px;margin-top:10px;"
@@ -848,7 +850,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
-   <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
+
 
               </template>
               <br />
@@ -863,9 +865,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
-<pre>
-{{$store.state.storeCurrentOrder}}
-</pre>
+
 
   </div>
 </template>
