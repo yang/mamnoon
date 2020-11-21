@@ -44,14 +44,15 @@
 
                   <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                   <div v-for="mod in modifierItems" :key="mod.id">
+
                     <div v-for="m in modifier.modifier_ids" :key="m">
                       <div v-if="m === mod.id" class="box">
                         <div class="box-inner">
                           {{mod.name}}
                           <br />
-                          <b v-if="mod.price==='0.0'">{{mod.price}}</b>
-                          <i class="small" v-else>no extra charge</i>
-
+                          
+                          <i class="small" v-if="mod.price==='0.0'">no extra charge</i>
+                          <b v-else>{{mod.price}}</b>
 
 
                           <div v-if="modifier.name === 'Promotions'">
@@ -64,7 +65,19 @@
                           <!-- loop through and get image -->
 
 
-                          <div class="mt10">
+                          <div class="mt10" v-if="modifier.name === 'Promotions'">
+
+              
+                           
+                            <button @click="addToOrderDontCloseModal(mod)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
+                            <button @click="removeFromOrderDontCloseModal(mod)" :id="'remove-' + mod.id"
+                              disabled>-</button>
+                          </div>
+
+                          <div v-else class="mt10">
+
+                           
+
                             <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                             <button
                               @click="removeAddOn(mod,modifieritem)"
@@ -72,9 +85,13 @@
                               disabled
                             >-</button>
                           </div>
+
+
+
                         </div>
                       </div>
                     </div>
+                  
                   </div>
                 </div>
               </div>
@@ -100,6 +117,10 @@
               class="float-right"
               @click="addToOrder(currentItem)"
             >add to order</button>
+
+
+
+
           </div>
 
           <!-- {{currentItem}} -->
@@ -683,6 +704,8 @@ delivery or pickup?
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
             
 
+
+{{order}}
                   <button class="removeClose" @click="removeFromOrder(order)">
                         <CloseModalRedSm />
                      
@@ -1494,7 +1517,60 @@ this.attention = true
       document.getElementById("add-" + mod.id).disabled = false;
       document.getElementById("remove-" + mod.id).disabled = true;
     },
-    removeFromOrder(removal) {
+
+
+
+
+    removeFromOrderDontCloseModal(removal) {
+
+console.log(removal)
+
+      document.getElementById("add-" + removal.id).disabled = false;
+      document.getElementById("remove-" + removal.id).disabled = true;
+      console.log('reset upserves')
+
+
+
+      let currentItems = this.currentOrder.charges.items;
+      let updatedItems = currentItems.filter(
+        (item) => item.item_id !== removal.id
+      );
+
+      this.currentOrder.charges.items = updatedItems;
+
+      let removeCost = removal.price * removal.quantity;
+
+      this.total = this.total - removeCost;
+
+      let storeCurrentOrder = this.currentOrder;
+
+
+
+
+if(this.tipSelected === 0){
+  this.currentAmountToAdd = 0
+}else if(this.tipSelected === 1){
+  this.currentAmountToAdd = this.tip1
+}else if(this.tipSelected === 2){
+  this.currentAmountToAdd = this.tip2
+}else if(this.tipSelected === 3){
+  this.currentAmountToAdd = this.tip3
+}else{
+
+}
+
+
+
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+    },
+
+
+
+
+
+
+
+removeFromOrder(removal) {
       let currentItems = this.currentOrder.charges.items;
       let updatedItems = currentItems.filter(
         (item) => item.cartId !== removal.cartId
@@ -1656,6 +1732,80 @@ if(this.tipSelected === 0){
 
 
     },
+
+
+
+    addToOrderDontCloseModal(item) {
+
+
+      document.getElementById("add-" + item.id).disabled = true;
+      document.getElementById("remove-" + item.id).disabled = false;
+      console.log('reset upserves')
+
+
+
+      let modifierPriceTotal = 0;
+      for (let i = 0; i < this.currentItemModifierArray.length; i++) {
+        modifierPriceTotal =
+          modifierPriceTotal + this.currentItemModifierArray[i].price_cents;
+      }
+
+      let itemToAdd = {
+        name: item.name,
+        cartId:
+          Math.random().toString(36).substr(2, 29) +
+          "_" +
+          Math.random().toString(36).substr(2, 29) +
+          "_" +
+          Math.random().toString(36).substr(2, 29),
+        item_id: item.id,
+        price: item.price_cents,
+        price_cents: item.price_cents,
+        quantity: this.currentItemQuanity,
+        instructions: this.textdescription,
+        modifiers: this.currentItemModifierArray,
+        sides: [],
+      };
+
+        this.currentOrder.charges.items.push(itemToAdd);
+
+          this.total =
+            Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
+
+
+          // let newDate = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
+          let newDate = new Date();
+          this.currentOrder.time_placed = newDate;
+          this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+          //then close the modal
+          this.currentItemModifierArray = [];
+          // this.closeModal();
+          let storeCurrentOrder = this.currentOrder;
+
+  
+
+          if(this.tipSelected === 0){
+            this.currentAmountToAdd = 0
+          }else if(this.tipSelected === 1){
+            this.currentAmountToAdd = this.tip1
+          }else if(this.tipSelected === 2){
+            this.currentAmountToAdd = this.tip2
+          }else if(this.tipSelected === 3){
+            this.currentAmountToAdd = this.tip3
+          }else{
+
+          }
+
+
+
+
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
+    },
+
+
     filterByCat(cat) {
       this.currentlyFiltered = [];
       for (let i = 0; i < this.upserve.length; i++) {
@@ -2125,7 +2275,7 @@ if(this.oloEndpoint === '/oloorder'){
     emergepay.init();
     this.$store.state.storeCurrentOrder = {};
     this.$store.state.orderCMR = {};
-
+    this.$store.state.orderConfirmationModalResponse = {};
 
     this.dropDown();
 
