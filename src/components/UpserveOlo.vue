@@ -705,7 +705,6 @@ delivery or pickup?
             
 
 
-{{order}}
                   <button class="removeClose" @click="removeFromOrder(order)">
                         <CloseModalRedSm />
                      
@@ -1518,27 +1517,43 @@ this.attention = true
       document.getElementById("remove-" + mod.id).disabled = true;
     },
 
-
-
-
     removeFromOrderDontCloseModal(removal) {
 
-console.log(removal)
 
-      document.getElementById("add-" + removal.id).disabled = false;
+     document.getElementById("add-" + removal.id).disabled = false;
       document.getElementById("remove-" + removal.id).disabled = true;
       console.log('reset upserves')
 
 
+
+// console.log(removal)
 
       let currentItems = this.currentOrder.charges.items;
       let updatedItems = currentItems.filter(
         (item) => item.item_id !== removal.id
       );
 
-      this.currentOrder.charges.items = updatedItems;
 
-      let removeCost = removal.price * removal.quantity;
+      let removals = currentItems.filter(
+        (item) => item.item_id === removal.id
+      );
+
+  let newArray = removals.map(a => ({...a}));
+  newArray.shift()
+
+  let updatedNewItems = updatedItems.map(a => ({...a}));
+  updatedNewItems.concat(newArray);
+
+  let concatenated = updatedNewItems.concat(newArray);
+
+
+
+// console.log(removal)
+
+
+      this.currentOrder.charges.items = concatenated;
+
+      let removeCost = removal.price_cents;
 
       this.total = this.total - removeCost;
 
@@ -1562,6 +1577,7 @@ if(this.tipSelected === 0){
 
 
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
     },
 
 
