@@ -68,9 +68,9 @@ debit/credit
 
     <td><div>
 
-        <pre>
+        <!-- <pre>
             {{order.orderInfo}}
-        </pre>
+        </pre> -->
 <button class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">re order</button>
 </div></td>
 </tr>
