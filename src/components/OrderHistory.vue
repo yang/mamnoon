@@ -11,11 +11,11 @@
     <th class="w100">
         <td><div>date</div></td>
         <td><div>items</div></td>
-        <td><div>price</div></td>
+        <td><div class="text-right-mob"> price</div></td>
 
-        <td><div>pay method</div></td>
+        <td class="hide-mob"><div>pay method</div></td>
         <!-- <td><div>delivery/pickup</div></td> -->
-        <td><div>status</div></td>
+       <td class="hide-mob"><div>status</div></td>
         <!-- <td><div>actions</div></td> -->
 </th>   
 
@@ -38,14 +38,15 @@
 
 
 </div></td>
-<td><div>
+<td>
+    <div class="text-right-mob">
         <span class="smblk">
     ${{ order.orderInfo.charges.total.toFixed(2)/100}}
     </span>
     </div></td>
-<td>
+<td class="hide-mob">
     
-    <div v-if="order.payInfo.TransmissionID">
+    <div  v-if="order.payInfo.TransmissionID">
 <!-- {{order.payInfo}} -->
 gift card
    </div>
@@ -57,8 +58,7 @@ debit/credit
 <!-- <td><div>
 {{order.orderInfo.fulfillment_info.type}}
    </div></td>  -->
-
-<td><div>
+<td class="hide-mob"><div>
 {{order.status}}
    </div></td> 
 
@@ -189,7 +189,7 @@ table td div{
 }
 
 tr{
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid #cacaca;
 }
 
 tr td{
@@ -230,6 +230,56 @@ ul.order-items{
 .mr-0{
     margin-right: 0;
 }
+
+
+@media only screen and (max-width: 768px) {
+
+.hide-mob{
+display: none !important;
+
+}
+
+
+.text-right-mob{
+  text-align: right !important;
+}
+
+}
+
+
+.pad-yellow-background{
+    // background: #fff367;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+}
+
+.container.pad-yellow-background{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+
+@media only screen and (max-width: 768px) {
+
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+
+
+}
+
+}
+
+
+.giftcard-item.w100 td:first-child{
+    padding-left: 0;
+}
+
+
+
+#order-history tr:last-child {
+    border-bottom: 0;
+}
+
+
 
 </style>
 

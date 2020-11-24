@@ -68,7 +68,7 @@ methods: {
 }
 
 .pad-yellow-background{
-    background: #fff367;
+    // background: #fff367;
     padding: 20px 30px;
     margin-bottom: 20px;
 }

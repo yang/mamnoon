@@ -101,12 +101,15 @@ this.$http.get('/order/polling-request', {
 }
 
 .pad-yellow-background{
-    background: #fff367;
+    // background: #fff367;
     padding: 20px 30px;
     margin-bottom: 20px;
 }
 
-
+.container.pad-yellow-background{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
 
 @media only screen and (max-width: 1080px) {

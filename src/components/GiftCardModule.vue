@@ -88,9 +88,10 @@ add a giftcard for {{emailAddress}}
       type="number"
       name="title"
       placeholder="add giftcard"
+      class="add-giftcard-field"
     >
     &nbsp;&nbsp;&nbsp;
-    <button class="sm-button" type="submit" value="Submit">
+    <button class="sm-button add-giftcard-button" type="submit" value="Submit">
    submit
       </button>
 
@@ -104,7 +105,7 @@ add a giftcard for {{emailAddress}}
 <table class="w100" v-if="giftcards">
 
 
-<th class="w100"><td><div>number</div></td><td><div>balance</div></td><td><div>actions</div></td></th>
+<th class="w100"><td><div>number</div></td><td><div>balance</div></td><td><div class="text-right-mob" style="text-align: right;padding-right: 10px;">actions</div></td></th>
     <tr class="giftcard-item w100" v-for="(giftcarditem, index) in giftcards" :key="giftcarditem._id">
       <td :class="{primary: giftcarditem.number === cardNumberInput}"><div><b>{{giftcarditem.number}}</b></div></td>
      <td :class="{primary: giftcarditem.number === cardNumberInput}"><div>
@@ -115,10 +116,10 @@ add a giftcard for {{emailAddress}}
 <div>
 
         <!-- {{giftcarditem}} -->
-        <button class="sm-button fl-right mr-0" v-if="giftcarditem.number !== preferredGiftCard" @click="primaryGiftCard(giftcarditem,index)">set primary</button>
-        <span v-else class="fl-right">(primary)</span>
+        <button class="sm-button fl-right mr-10" v-if="giftcarditem.number !== preferredGiftCard" @click="primaryGiftCard(giftcarditem,index)">set primary</button>
+        <button v-else class="sm-button disabled-b fl-right" disabled>(primary)</button>
         &nbsp;&nbsp;&nbsp;
-        <button class="sm-button fl-right" @click="removeGiftCard(giftcarditem._id,number)">remove</button>
+        <button class="sm-button fl-right hide-mob" @click="removeGiftCard(giftcarditem._id,number)">remove</button>
 
       </div></td>
     </tr>
@@ -637,7 +638,7 @@ table td div{
 
 
 tr{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #cacaca;
 }
 
 tr td{
@@ -650,7 +651,8 @@ tr td{
     vertical-align:top;
 
 &.primary{
-    background: #bfebbf;
+    // background: #ddffdd;
+    
 
 }
 
@@ -658,6 +660,75 @@ tr td{
 }
 .fl-right{
     float: right;
+}
+
+
+
+.disabled-b{
+
+  background: #ffffff;
+  color: #f05d5b;
+  // border: 1px solid #f05d5b;
+
+
+  margin-right: 10px !important;
+}
+
+
+.mr10{
+   margin-right: 10px !important; 
+}
+
+@media only screen and (max-width: 768px) {
+
+.hide-mob{
+display: none !important;
+
+}
+
+
+.text-right-mob{
+  text-align: right !important;
+}
+
+}
+
+
+
+.add-giftcard-field{
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: 1px solid grey;
+}
+
+.add-giftcard-button{
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: 1px solid transparent;
+}
+
+
+
+.giftcard-item.w100 td:first-child{
+    padding-left: 0 !important;
+}
+
+
+th.w100{
+  border-bottom: 1px solid #cacaca;
+  padding-bottom: 20px;
+
+  td{
+    padding-bottom: 20px;  
+  }
+}
+
+
+
+#gift-card-table tr:last-child {
+    border-bottom: 0;
 }
 
 </style>
