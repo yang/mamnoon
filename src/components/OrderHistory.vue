@@ -67,10 +67,6 @@ debit/credit
    </div></td> 
 
     <td><div>
-
-        <!-- <pre>
-            {{order.orderInfo}}
-        </pre> -->
 <button class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">re order</button>
 </div></td>
 </tr>
@@ -98,6 +94,7 @@ export default {
     props: ['currentUser'],
     methods: {
         reorder(order){
+
 console.log(order)
 
 
@@ -207,7 +204,7 @@ tr{
 
 tr td{
     
-    padding: 18px 10px 10px 0px;
+    padding: 18px 5px 10px 0px;
     // height: 56px;
     margin-bottom: 0;
     display:table-cell;

@@ -887,7 +887,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
-
+<pre>{{$store.state.storeCurrentOrder}}</pre>
   </div>
 </template>
 
@@ -964,6 +964,15 @@ export default {
     }
   },	
   watch: {	
+tipSelected(){
+
+this.currentOrder.tipSelected = this.tipSelected
+
+
+let storeCurrentOrder = this.currentOrder;	
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+
+},
     selectedTime(){
 this.currentOrder.scheduled_time = this.selectedTime.time
     },
@@ -987,6 +996,14 @@ this.currentOrder.scheduled_time = this.selectedTime.time
     },	
 currentAmountToAddCustom(){	
 this.currentAmountToAdd = this.currentAmountToAddCustom * 100	
+
+
+      this.currentOrder.currentAmountToAddCustom = this.currentAmountToAdd
+
+let storeCurrentOrder = this.currentOrder;	
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+
+
 },	
     googleAddress(newAddress, oldAddress) {	
       this.googleAddressView = newAddress;	
@@ -1111,6 +1128,8 @@ if(newAddress){
       upserveCategories: [],
       currentlyFiltered: [],
       currentOrder: { 
+        tipSelected: 0,
+        currentAmountToAddCustom: 0,
         sms: true,
         restaurant: this.title,
         billing:{
@@ -2310,6 +2329,10 @@ if(this.oloEndpoint === '/oloorder'){
 
               console.log(this.$store.state.storeCurrentOrder)
 
+
+    // this.setTip(this.$store.state.storeCurrentOrder.tipSelected)
+//   console.log('set tip')
+// this.setTip(3)
 //reset
 //reset
 
@@ -2318,6 +2341,20 @@ if(this.oloEndpoint === '/oloorder'){
     this.dropDown();
 
   }
+//   updated() {
+//     // run something after dom has changed by vue
+//       console.log('set tip')
+// this.setTip(this.$store.state.storeCurrentOrder.tipSelected)
+
+
+// if(this.$store.state.storeCurrentOrder.tipSelected === 4){
+
+
+// this.currentAmountToAddCustom = this.$store.state.storeCurrentOrder.currentAmountToAddCustom
+
+// }
+
+// }
 };
 </script>
 

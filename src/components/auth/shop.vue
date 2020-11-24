@@ -9,16 +9,18 @@
 <div class="columnblock">
      <img :src="currentPopupItem.shop_item.image" />
 </div>
-<div class="columnblock text-left pad30">
+<div class="columnblock text-left pad10">
 
 
 
-<h3>{{currentPopupItem.shop_item.name}}</h3>
+<h3 class="merch-modal-header">{{currentPopupItem.shop_item.name}}</h3>
 
-<h4 class="text-left red" style="margin-top: 20px;">{{currentPopupItem.shop_item.price}}</h4>
-<p class="thick-grey" style="margin-top: 20px;">{{currentPopupItem.shop_item.description}}</p>
-    <br /><br />
+<h4 class="text-left red merch-modal-price">{{currentPopupItem.shop_item.price}}</h4>
+<p class="thick-grey merch-modal-description">{{currentPopupItem.shop_item.description}}</p>
 <div style="width: 100%;text-align: center;">
+
+    
+
                   <button
                     style="margin:0 auto;"
                     class="snipcart-add-item"
@@ -234,7 +236,8 @@ width: 100%
   height: 100%;
   background: rgba(255,255,255,.6);
   position: fixed;
-top: 92px;
+// top: 92px;
+    top: 72px;
     text-align: center;
     padding-top:20px;
 }
@@ -290,6 +293,10 @@ button:active{
   outline: none;
 }
 
+
+.pad10{
+  padding: 10px;
+}
 
 .pad30{
   padding: 30px;
@@ -354,4 +361,63 @@ cursor: pointer;
 .fw{
   width: 100%;
 }
+
+
+.snipcart__box--badge, .snipcart__font--subtitle, .snipcart__font--xlarge {
+    font-size: 15px !important;
+}
+
+
+
+
+
+
+.pad10{
+  padding: 30px;
+}
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+
+
+  .pad10{
+  padding: 10px;
+}
+
+.merch-modal-header{
+  font-size: 1rem;
+}
+
+.merch-modal-price{
+margin-top: 10px;font-size: 1rem;margin-bottom:.25rem;
+}
+
+
+
+
+.merch-modal-description{
+margin-top: 5px;font-size: .8rem;font-weight: 300;margin-bottom: 0.25rem;
+}
+
+
+.order-panel{
+ padding: 5px 0
+}
+
+
+svg#shopnow {
+    width: 120px;
+    margin: 5px auto;
+}
+
+}
+
+
+
+
+
+
 </style>
