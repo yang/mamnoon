@@ -116,10 +116,10 @@ add a giftcard for {{emailAddress}}
 <div>
 
         <!-- {{giftcarditem}} -->
+        <button class="sm-button fl-right hide-mob" @click="removeGiftCard(giftcarditem._id,number)">remove</button>
+        &nbsp;&nbsp;&nbsp;
         <button class="sm-button fl-right mr-10" v-if="giftcarditem.number !== preferredGiftCard" @click="primaryGiftCard(giftcarditem,index)">set primary</button>
         <button v-else class="sm-button disabled-b fl-right" disabled>(primary)</button>
-        &nbsp;&nbsp;&nbsp;
-        <button class="sm-button fl-right hide-mob" @click="removeGiftCard(giftcarditem._id,number)">remove</button>
 
       </div></td>
     </tr>

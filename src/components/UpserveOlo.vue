@@ -886,7 +886,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
     </section>
 
 
-
+<pre>{{$store.state.storeCurrentOrder}}</pre>
 
 
   </div>
@@ -1055,7 +1055,10 @@ if(newAddress){
     },	
     total: function (newTotal, oldTotal) {	
       this.currentOrder.charges.taxes = this.currentTax;	
-      this.currentOrder.charges.total = this.orderTotal
+      this.currentOrder.charges.total = this.orderTotal;
+
+
+      this.currentOrder.charges.preTotal = this.orderTotal - this.currentTax - this.tip;
       this.currentOrder.payments.payments[0].amount = this.orderTotal
 
       let storeCurrentOrder = this.currentOrder;	
@@ -1130,7 +1133,7 @@ if(newAddress){
           "mamnoon-" + Math.random().toString(36).substr(2, 29),
         charges: {
           total: 0,
-          // preTotal: 0,
+          preTotal: 0,
           fees: 0,
           taxes: 0,
           tip: {
@@ -1140,29 +1143,18 @@ if(newAddress){
           items: [],
         },
         fulfillment_info: {
-          // type: "",
           type: "pickup",
           estimated_fulfillment_time: null,
           customer: {
-            // email: "joe.waine@gmail.com",
-            // phone: "425-442-9308", 
-            // last_name: "Waine",
-            // first_name: "Joseph",
             email: this.emailAddress,
             phone: "",
             first_name: "",
           },
-          // instructions: "Leave order with building security",
           instructions: "",
           no_tableware: false,
           delivery_info: {
             is_managed_delivery: false,
             address: {
-              // city: "Seattle",
-              // state: "WA",
-              // zip_code: "98122",
-              // address_line1: "1508 Melrose Ave",
-              // address_line2: "",
               city: "",
               state: "",
               zip_code: "",
@@ -2289,9 +2281,40 @@ if(this.oloEndpoint === '/oloorder'){
     this.getUser();
     this.upserves();
     emergepay.init();
-    this.$store.state.storeCurrentOrder = {};
+
+
+
+    // this.$store.state.storeCurrentOrder = {};
     this.$store.state.orderCMR = {};
     this.$store.state.orderConfirmationModalResponse = {};
+
+
+//reset
+//reset
+                this.total = 0
+                this.currentAmountToAddCustom = 0
+                this.tipSelected = 0
+                this.currentAmountToAdd = 0
+                this.tip = 0
+                this.total = 0
+                this.cartTotal = 0
+
+                this.currentOrder.charges.total = 0
+                this.currentOrder.charges.fees = 0
+                this.currentOrder.charges.taxes = 0
+                this.currentOrder.charges.tip.amount = 0
+                this.currentOrder.payments.payments.amount = null;
+
+                this.total = this.$store.state.storeCurrentOrder.charges.preTotal;
+                this.currentOrder = this.$store.state.storeCurrentOrder;
+          
+
+              console.log(this.$store.state.storeCurrentOrder)
+
+//reset
+//reset
+
+
 
     this.dropDown();
 

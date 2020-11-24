@@ -9,18 +9,23 @@
 <div id="order-history">
 <table class="w100">
     <th class="w100">
+        <td><div class="text-right-mob">restaurant</div></td>
         <td><div>date</div></td>
         <td><div>items</div></td>
         <td><div class="text-right-mob"> price</div></td>
-
         <td class="hide-mob"><div>pay method</div></td>
         <!-- <td><div>delivery/pickup</div></td> -->
-       <td class="hide-mob"><div>status</div></td>
-        <!-- <td><div>actions</div></td> -->
+       <td class="hide-mob"><div style="text-align: right;">status</div></td>
+        <td><div style="text-align: right;">actions</div></td>
 </th>   
 
 
 <tr class="w100" v-for="order in orderhistory.user.slice().reverse()" :key="order._id">
+    <td>
+    <div>
+        {{order.orderInfo.restaurant}}
+    </div>
+</td>
   <td><div>
     <span class="smblk">
 {{order.orderInfo.time_placed | formatDate}}
@@ -33,11 +38,10 @@
 {{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
 </li>
 </ul>
-
-
-
-
 </div></td>
+
+
+
 <td>
     <div class="text-right-mob">
         <span class="smblk">
@@ -58,13 +62,17 @@ debit/credit
 <!-- <td><div>
 {{order.orderInfo.fulfillment_info.type}}
    </div></td>  -->
-<td class="hide-mob"><div>
+<td class="hide-mob"><div style="text-align: right;">
 {{order.status}}
    </div></td> 
 
-    <!-- <td><div>
+    <td><div>
+
+        <pre>
+            {{order.orderInfo}}
+        </pre>
 <button class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">re order</button>
-</div></td> -->
+</div></td>
 </tr>
 
 
@@ -90,16 +98,21 @@ export default {
     props: ['currentUser'],
     methods: {
         reorder(order){
+console.log(order)
+
+
 
             let storeCurrentOrder = order
+            // this.$store.commit("orderFromTransactionHistory", { orderFromTransactionHistory });
+            this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+            // console.log(order)
 
-// this.$store.commit("orderFromTransactionHistory", { orderFromTransactionHistory });
-   this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
-
-            console.log(order)
-          this.$router.push("/mamnoon");
-
+if(order.restaurant === 'Mamnoon'){
+     this.$router.push("/mamnoon");
+}else{
+     this.$router.push("/mamnoonstreet");
+}
 
 
         },
