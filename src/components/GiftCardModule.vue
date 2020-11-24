@@ -109,7 +109,7 @@ add a giftcard for {{emailAddress}}
     <tr class="giftcard-item w100" v-for="(giftcarditem, index) in giftcards" :key="giftcarditem._id">
       <td :class="{primary: giftcarditem.number === cardNumberInput}"><div><b>{{giftcarditem.number}}</b></div></td>
      <td :class="{primary: giftcarditem.number === cardNumberInput}"><div>
-        <button class="sm-button" v-if="!giftcarditem.balance" @click="lookupAddBalance(giftcarditem.number,index)">view balance</button>
+        <button class="sm-button" v-if="!giftcarditem.balance" @click="lookupAddBalance(giftcarditem.number,index)"><span class="hide-mob">view&nbsp;</span>balance</button>
         <span v-else>{{giftcarditem.balance}}</span>
       </div></td>
  <td :class="{primary: giftcarditem.number === cardNumberInput}">
