@@ -405,6 +405,7 @@ right: 0;
 
 .mobile-nav.expanded{
     top: 92px;
+    z-index: 100;
 }
 
 

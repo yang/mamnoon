@@ -856,7 +856,7 @@ transition: background-color .1s ease;
     transition: all .25s ease;
 
     // border-left: 50px solid #F05D5B;
-    z-index: 100;
+    z-index: 99;
 &.expanded{
       left: 0;
       // border-left: 0px solid #F05D5B;
