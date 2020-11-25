@@ -2,7 +2,7 @@
     <section :id="tag" class="coverflowsection">
 <div class="is-fullheight no-top-pad" id="cover-carousel">
 <h4 class="noselect">{{header}}</h4>
-    <p class="description-para" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
+    <p class="description-para hide-mobile" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20 white-text" style="height: 550px;margin-top: 100px;position: relative;">
        <div class="loading-box">
@@ -841,5 +841,15 @@ background: #8c8c8c;
     position: absolute;
     transform: translate(-50%,-50px);
 }
+
+
+
+
+@media only screen and (max-width: 992px) {
+.hide-mobile{
+  display: none;
+}
+}
+
 
 </style>

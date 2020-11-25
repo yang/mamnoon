@@ -240,6 +240,15 @@ width: 100%
     top: 72px;
     text-align: center;
     padding-top:20px;
+
+
+@media only screen and (max-width: 768px) {
+      padding-top: 0px;
+    z-index: 100;
+        top: 0;
+}
+
+    
 }
 
 .modalContainer{

@@ -613,10 +613,19 @@ width: 100%
 }
 }
 
-.coverflowsection{
-      height: 800px;
 
+
+
+@media only screen and (max-width: 768px) {
+
+
+.coverflowsection{
+
+    height: 745px;
 }
 
+
+
+}
 
 </style>
