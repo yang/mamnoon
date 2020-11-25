@@ -9,29 +9,29 @@
 <div id="order-history">
 <table class="w100">
     <th class="w100">
-        <td><div class="text-right-mob">restaurant</div></td>
-        <td><div>date</div></td>
-        <td><div>items</div></td>
+       <td class="hide-mob"><div>restaurant</div></td>
+        <td class="w-5"><div>date</div></td>
+        <td class="w-20"><div>items</div></td>
         <td><div class="text-right-mob"> price</div></td>
         <td class="hide-mob"><div>pay method</div></td>
         <!-- <td><div>delivery/pickup</div></td> -->
-       <td class="hide-mob"><div style="text-align: right;">status</div></td>
+       <td class="hide-mob w-5"><div style="text-align: right;">status</div></td>
         <td><div style="text-align: right;">actions</div></td>
 </th>   
 
 
 <tr class="w100" v-for="order in orderhistory.user.slice().reverse()" :key="order._id">
-    <td>
+ <td class="hide-mob">
     <div>
         {{order.orderInfo.restaurant}}
     </div>
 </td>
-  <td><div>
+ <td class="w-5"><div>
     <span class="smblk">
 {{order.orderInfo.time_placed | formatDate}}
 </span>
 </div></td>
- <td><div>
+ <td class="w-20"><div>
 <ul class="order-items">
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId">
     {{item.quantity}} x
@@ -62,7 +62,7 @@ debit/credit
 <!-- <td><div>
 {{order.orderInfo.fulfillment_info.type}}
    </div></td>  -->
-<td class="hide-mob"><div style="text-align: right;">
+<td class="hide-mob w-5"><div style="text-align: right;">
 {{order.status}}
    </div></td> 
 
@@ -124,7 +124,7 @@ if(order.restaurant === 'Mamnoon'){
     formatDate(value) {
   if (value) {
         let order = moment(String(value));
-        return order.tz('America/Los_Angeles').format('MM/DD/YYYY');
+        return order.tz('America/Los_Angeles').format('MM/DD');
   }
 },
 reverseArray(value) {
@@ -289,6 +289,20 @@ display: none !important;
     border-bottom: 0;
 }
 
+.w-20{
+    width: 20% !important;
+}
+
+.w-5{
+    width: 5% !important;
+}
+
+
+@media only screen and (max-width: 768px) {
+.w-20{
+    width: 30% !important;
+}
+}
 
 
 </style>

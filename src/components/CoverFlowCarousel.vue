@@ -11,6 +11,7 @@
      </div>
      </template>
          <template v-else>
+             <!-- <VueAspectRatio ar="6:7" width="100%" class="">   -->
         <carousel :items="1" :loop="false" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
@@ -76,6 +77,7 @@
             </span>
           </template>
             </carousel>
+              <!-- </VueAspectRatio>   -->
 </template>
 
 

@@ -377,18 +377,14 @@
   <label class="smblk" for="preorder">preorder</label>
 </template>
 
+<template v-if="this.currentOrder.charges.items.length > 0">
 <template v-if="currentOrder.preorder">
 <v-select :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-<!-- <br>   -->
-
-
 <div style="margin-top:15px;" v-if="selectedDate !== null">
 <v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-<!-- <br/>  -->
 
-<!-- <v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  v-model="selectedTime"></v-select> -->
 </div>
-
+</template>
 </template>
 
 
@@ -887,7 +883,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
-<pre>{{$store.state.storeCurrentOrder}}</pre>
+
   </div>
 </template>
 

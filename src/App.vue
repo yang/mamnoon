@@ -815,7 +815,7 @@ textarea {
 .tipButton{
   // margin-bottom: 20px;
     margin-bottom: 5px;
-    width: calc(33% - 1.8px);
+    width: calc(33% - 2px);
     border: 2px solid #f05d5b;
     background-color: #ffffff;
     color: #f05d5b;
@@ -1135,7 +1135,7 @@ form hr{
     // width: calc(25% - 3.5px);
 
 
-    width: calc(33% - 2px);
+    width: calc(33% - 2.5px);
     padding: 5px 5px !important;
     font-size: 12px;
 }
