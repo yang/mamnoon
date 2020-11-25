@@ -141,7 +141,7 @@
 
       <div class="container pt20">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12 col-lg-8">
             <div class="container online-menu">
               <h4>featured</h4>
             </div>
@@ -2323,7 +2323,7 @@ if(this.oloEndpoint === '/oloorder'){
                 this.currentOrder = this.$store.state.storeCurrentOrder;
           
 
-              console.log(this.$store.state.storeCurrentOrder)
+              // console.log(this.$store.state.storeCurrentOrder)
 
 
     // this.setTip(this.$store.state.storeCurrentOrder.tipSelected)
@@ -2333,24 +2333,23 @@ if(this.oloEndpoint === '/oloorder'){
 //reset
 
 
+if(this.$store.state.openDrawerOnLoad === true){
+
+
+
+  this.toggleDrawer()
+
+
+let drawerTrue = false
+this.$store.commit("drawerTrue", { drawerTrue });
+
+
+}
 
     this.dropDown();
 
   }
-//   updated() {
-//     // run something after dom has changed by vue
-//       console.log('set tip')
-// this.setTip(this.$store.state.storeCurrentOrder.tipSelected)
 
-
-// if(this.$store.state.storeCurrentOrder.tipSelected === 4){
-
-
-// this.currentAmountToAddCustom = this.$store.state.storeCurrentOrder.currentAmountToAddCustom
-
-// }
-
-// }
 };
 </script>
 

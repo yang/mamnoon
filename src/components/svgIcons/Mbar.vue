@@ -127,7 +127,7 @@ export default {
       cursor: pointer;
   svg {
     width: 80%;
-    margin: 40px auto 0;
+    margin: 35px auto 0;
     text-align: center;
   }
 }

@@ -74,8 +74,14 @@ svg#header-logo {
   width: 256px;
 
   @media only screen and (max-width: 768px) {
+    width: 30%;
+  }
+  @media only screen and (max-width: 640px) {
+
     width: 50%;
   }
+
+
 }
 .cls-1 {
   fill: #49494a;

@@ -105,6 +105,11 @@ console.log(order)
             // console.log(order)
 
 
+let drawerTrue = true
+
+this.$store.commit("drawerTrue", { drawerTrue });
+
+
 if(order.restaurant === 'Mamnoon'){
      this.$router.push("/mamnoon");
 }else{

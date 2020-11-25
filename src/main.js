@@ -82,6 +82,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    openDrawerOnLoad: false,
     orderConfirmation: {},
     googleAddress: {},
     storeCurrentOrder: {},
@@ -111,6 +112,9 @@ const store = new Vuex.Store({
       } else {
         state[name] = 1
       }
+    },
+    drawerTrue (state, { drawerTrue }) {
+      state.openDrawerOnLoad = drawerTrue
     },
     orderCMR (state, { orderCMR }) {
       state.orderCMR = orderCMR

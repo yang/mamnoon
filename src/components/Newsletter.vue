@@ -5,7 +5,7 @@
             <h4 class="noselect">
              {{header}}
             </h4>
-            <p class="description-para-left noselect">
+            <p class="hide-mobile description-para-left noselect">
           {{body}}
         </p> 
         </div>

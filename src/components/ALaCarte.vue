@@ -1,7 +1,7 @@
 <template>
   <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4>{{header}}</h4>
-        <p class="description-para noselect">{{description}}</p>
+        <h4 class="mob-bottom-margin">{{header}}</h4>
+        <p class="description-para noselect hide-mobile">{{description}}</p>
         <div class="width-container">
 
                          <router-link to="/mamnoon">

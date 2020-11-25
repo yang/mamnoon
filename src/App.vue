@@ -1232,12 +1232,15 @@ li.modal-item{
 
 
 #SixSeven{
-    display: none;
+    display: none;   
 }
+// #FourThree{
+//     display: block;
+// }
+
 #FourThree{
     display: block;
 }
-
 
 
 @media only screen and (max-width: 768px) {
@@ -1255,11 +1258,11 @@ svg#nadiIconSm{
 }
 
 #SixSeven{
-    display: block;
-}
-#FourThree{
     display: none;
 }
+// #FourThree{
+//     display: none;
+// }
 
 }
 
@@ -1306,5 +1309,37 @@ svg#nadiIconSm{
 
 }
 
+
+@media only screen and (max-width: 992px) {
+.hide-mobile{
+  display: none;
+}
+
+.mob-bottom-margin{
+      margin-bottom: 22px;
+}
+
+
+svg#show-all{
+    margin-top: 20px !important;
+}
+
+}
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+
+#SixSeven{
+    display: block !important;
+}
+#FourThree{
+    display: none !important;
+}
+
+
+}
 
 </style>

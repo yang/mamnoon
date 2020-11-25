@@ -243,9 +243,10 @@ width: 100%
 
 
 @media only screen and (max-width: 768px) {
-      padding-top: 0px;
+      // padding-top: 0px;
     z-index: 100;
         top: 0;
+            padding-top: 10px;
 }
 
     
