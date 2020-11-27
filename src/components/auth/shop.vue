@@ -32,7 +32,7 @@
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
                     v-bind:itemId="currentPopupItem.shop_item.id"
                     v-bind:data-itemId="currentPopupItem.shop_item.id"
-                    data-item-url="https://mamnoontogo.net/wp-json/acf/v3/restaurant/188"
+                    data-item-url="https://www.nadimama.com/products.json"
                   >
                     <AddToCart />
                   </button>
