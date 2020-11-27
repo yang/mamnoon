@@ -88,6 +88,7 @@
    <div>
       <div class="bottom-button">
         <a class="full-width" :href="link" target="_blank">
+          {{link}}
           <div class="outer">
           <router-link to="/mamnoon">
                 <OrderStar /> 

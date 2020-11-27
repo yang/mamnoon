@@ -19,7 +19,7 @@
 <p class="thick-grey merch-modal-description">{{currentPopupItem.shop_item.description}}</p>
 <div style="width: 100%;text-align: center;">
 
-    
+<span style="display:none;">{{currentPopupItem.shop_item}}</span>
 
                   <button
                     style="margin:0 auto;"
@@ -30,6 +30,7 @@
                     v-bind:data-item-name="currentPopupItem.shop_item.name"
                     v-bind:data-item-description="currentPopupItem.shop_item.description"
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
+                    data-item-url="/"
                   >
                     <AddToCart />
                   </button>
