@@ -19,7 +19,7 @@
 <p class="thick-grey merch-modal-description">{{currentPopupItem.shop_item.description}}</p>
 <div style="width: 100%;text-align: center;">
 
-<span style="display:none;">{{currentPopupItem.shop_item}}</span>
+<span style="">{{currentPopupItem.shop_item}}</span>
 
                   <button
                     style="margin:0 auto;"
