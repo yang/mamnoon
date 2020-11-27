@@ -32,7 +32,7 @@
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
                     v-bind:itemId="currentPopupItem.shop_item.id"
                     v-bind:data-itemId="currentPopupItem.shop_item.id"
-                    data-item-url="https://nadimama.com/shop"
+                    data-item-url="/products.json"
                   >
                     <AddToCart />
                   </button>
