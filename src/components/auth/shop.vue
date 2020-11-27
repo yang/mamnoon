@@ -30,7 +30,7 @@
                     v-bind:data-item-name="currentPopupItem.shop_item.name"
                     v-bind:data-item-description="currentPopupItem.shop_item.description"
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
-                    data-item-url="/"
+                    data-item-url="/shop"
                   >
                     <AddToCart />
                   </button>
