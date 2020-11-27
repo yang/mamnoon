@@ -87,6 +87,25 @@
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}
           <div class="order-panel">
+
+<!-- {{item}} -->
+                  <button
+                    style="margin:0 auto;display:none;"
+                    class="snipcart-add-item"
+                    v-bind:data-item-id="item.shop_item.id"
+                    v-bind:data-item-price="item.shop_item.price"
+                    v-bind:data-item-image="item.shop_item.image"
+                    v-bind:data-item-name="item.shop_item.name"
+                    v-bind:data-item-description="item.shop_item.description"
+                    v-bind:data-item-weight="item.shop_item.weight"
+                    v-bind:itemId="item.shop_item.id"
+                    v-bind:data-itemId="item.shop_item.id"
+                    data-item-url="https://nadimama.com"
+                  >
+                    <AddToCart />
+                  </button>
+
+
             <button style="background: transparent; border: 0;"
               @click="modalPopup(item)"
             >
