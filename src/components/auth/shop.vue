@@ -30,6 +30,8 @@
                     v-bind:data-item-name="currentPopupItem.shop_item.name"
                     v-bind:data-item-description="currentPopupItem.shop_item.description"
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
+                    v-bind:itemId="currentPopupItem.shop_item.id"
+                    v-bind:data-itemId="currentPopupItem.shop_item.id"
                     data-item-url="https://nadimama.com/shop"
                   >
                     <AddToCart />
