@@ -87,8 +87,7 @@
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}
           <div class="order-panel">
-            <button
-              class="snipcart-add-item"
+            <button style="background: transparent; border: 0;"
               @click="modalPopup(item)"
             >
               <ShopNow />
@@ -103,8 +102,7 @@
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}
           <div class="order-panel">
-            <button
-              class="snipcart-add-item"
+            <button style="background: transparent; border: 0;"
               @click="modalPopup(item)"
             >
               <ShopNow />
