@@ -31,7 +31,7 @@
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
                     v-bind:itemId="currentPopupItem.shop_item.id"
                     v-bind:data-itemId="currentPopupItem.shop_item.id"
-                    v-bind:data-item-url="'https://young-hamlet-03679.herokuapp.com/snipcartitems/' + currentPopupItem.index"
+                    data-item-url="'https://young-hamlet-03679.herokuapp.com/snipcartitems"
                   >
                     <AddToCart />
                   </button>
