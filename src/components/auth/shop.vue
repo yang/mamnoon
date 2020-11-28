@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="open-modal" v-if="modalOpen">
-      <div class="container nav-acc-header mb-80 modalContainer position-relative no-padding">
+      <div class="container nav-acc-header mb-80 modalContainer position-relative no-padding" style="padding:0;">
  <!-- {{currentPopupItem}} -->
 
 
@@ -19,7 +19,6 @@
 <p class="thick-grey merch-modal-description">{{currentPopupItem.shop_item.description}}</p>
 <div style="width: 100%;text-align: center;">
 
-<span style="">{{currentPopupItem.shop_item}}</span>
 
                   <button
                     style="margin:0 auto;"
@@ -32,7 +31,7 @@
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
                     v-bind:itemId="currentPopupItem.shop_item.id"
                     v-bind:data-itemId="currentPopupItem.shop_item.id"
-                    data-item-url="https://nadimama.com"
+                    v-bind:data-item-url="currentPopupItem.shop_item.url"
                   >
                     <AddToCart />
                   </button>
@@ -89,7 +88,7 @@
           <div class="order-panel">
 
 <!-- {{item}} -->
-                  <button
+                  <!-- <button
                     style="margin:0 auto;display:none;"
                     class="snipcart-add-item"
                     v-bind:data-item-id="item.shop_item.id"
@@ -103,10 +102,10 @@
                     data-item-url="https://nadimama.com"
                   >
                     <AddToCart />
-                  </button>
+                  </button> -->
 
 
-            <button style="background: transparent; border: 0;"
+            <button class="snipcart-add-item"
               @click="modalPopup(item)"
             >
               <ShopNow />
