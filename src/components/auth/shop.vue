@@ -19,7 +19,7 @@
 <p class="thick-grey merch-modal-description">{{currentPopupItem.shop_item.description}}</p>
 <div style="width: 100%;text-align: center;">
 
-
+<!-- {{currentPopupItem.index}} -->
                   <button
                     style="margin:0 auto;"
                     class="snipcart-add-item"
@@ -31,7 +31,7 @@
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
                     v-bind:itemId="currentPopupItem.shop_item.id"
                     v-bind:data-itemId="currentPopupItem.shop_item.id"
-                    data-item-url="https://young-hamlet-03679.herokuapp.com/snipcartitems"
+                    v-bind:data-item-url="'https://young-hamlet-03679.herokuapp.com/snipcartitems/' + currentPopupItem.index"
                   >
                     <AddToCart />
                   </button>
@@ -80,7 +80,7 @@
 
 
 
- <div class="shopthird" v-if="currentCategory === 'all'" v-for="item in shopItems"
+ <div class="shopthird" v-if="currentCategory === 'all'" v-for="(item, index) in shopItems"
         :key="item.shop_item.id">
    <img v-bind:src="item.shop_item.image" />
         <div class="order-bottom" style="text-align: center;">
@@ -103,10 +103,8 @@
                   >
                     <AddToCart />
                   </button> -->
-
-
             <button class="snipcart-add-item"
-              @click="modalPopup(item)"
+              @click="modalPopup(item,index)"
             >
               <ShopNow />
             </button>
@@ -202,10 +200,11 @@ filterItems (category) {
     }
 
 },
-modalPopup(item){
+modalPopup(item,index){
 
 this.modalOpen = true
 this.currentPopupItem = item
+this.currentPopupItem.index = index
 },
 modalClose(){
   this.modalOpen = false
