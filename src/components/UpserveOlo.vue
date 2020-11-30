@@ -881,7 +881,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 </div></div>
     </section>
 
-
+<pre>{{$store.state.storeCurrentOrder}}</pre>
 
 
   </div>
@@ -1911,12 +1911,6 @@ console.log(currentOrder)
           this.$router.push("/orderconfirmation");
 
 
-
-
-
-
-
-
         })
         .catch((e) => {
           console.log("errors");
@@ -1999,19 +1993,33 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
           console.log(e);
         });
     },
-   dropDown(){
 
-
+thanksgiving(m,dy) {
+  let d = new Date();
+  let n = d.getFullYear();
+  let  days = {sun:0,mon:1,tue:2,wed:3,thu:4,fri:5,sat:6}
+  ,dat = new Date(n+'/'+m+'/1')
+  ,currentmonth = m
+  ,firstday = false;
+  while (currentmonth === m){
+    firstday = dat.getDay() === days[dy] || firstday;
+    dat.setDate(dat.getDate()+(firstday ? 7 : 1));
+    currentmonth = dat.getMonth()+1 ;
+  }
+  dat.setDate(dat.getDate()-7);
+  return dat;
+},
+dropDown(){
      let today = new Date()
      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-
-if(this.oloEndpoint === '/oloorder'){
+     if(this.oloEndpoint === '/oloorder'){
 
         for(let i = 0;i<7;i++){
           let tomorrow = new Date(today)
           tomorrow.setDate(tomorrow.getDate() + i)
-                                if(tomorrow.getDay() === 0 || tomorrow.getDay() === 1){
+
+        if('January 1st' === moment(String(tomorrow)).format('MMMM Do') || 'December 25th' === moment(String(tomorrow)).format('MMMM Do') || tomorrow.getDay() === 0 || tomorrow.getDay() === 1 || moment(String(this.thanksgiving(11,'thu'))).format('MMMM Do YYYY') === moment(String(tomorrow)).format('MMMM Do YYYY')){
               
                                 let Option1 = new Date(tomorrow.setHours(17, 30, 0, 0))
                                 let Option2 = new Date(tomorrow.setHours(17, 45, 0, 0))
@@ -2278,17 +2286,7 @@ if(this.oloEndpoint === '/oloorder'){
                                   })
                                 }
                   }
-
-
-
    }
-
-
-
-
-
-
-
     }
   },
   mounted() {
@@ -2296,13 +2294,9 @@ if(this.oloEndpoint === '/oloorder'){
     this.upserves();
     emergepay.init();
 
-
-
     // this.$store.state.storeCurrentOrder = {};
     this.$store.state.orderCMR = {};
     this.$store.state.orderConfirmationModalResponse = {};
-
-
 //reset
 //reset
                 this.total = 0
@@ -2312,44 +2306,24 @@ if(this.oloEndpoint === '/oloorder'){
                 this.tip = 0
                 this.total = 0
                 this.cartTotal = 0
-
                 this.currentOrder.charges.total = 0
                 this.currentOrder.charges.fees = 0
                 this.currentOrder.charges.taxes = 0
                 this.currentOrder.charges.tip.amount = 0
                 this.currentOrder.payments.payments.amount = null;
-
                 this.total = this.$store.state.storeCurrentOrder.charges.preTotal;
                 this.currentOrder = this.$store.state.storeCurrentOrder;
-          
 
-              // console.log(this.$store.state.storeCurrentOrder)
-
-
-    // this.setTip(this.$store.state.storeCurrentOrder.tipSelected)
-//   console.log('set tip')
-// this.setTip(3)
 //reset
 //reset
-
 
 if(this.$store.state.openDrawerOnLoad === true){
-
-
-
   this.toggleDrawer()
-
-
-let drawerTrue = false
-this.$store.commit("drawerTrue", { drawerTrue });
-
-
+  let drawerTrue = false
+  this.$store.commit("drawerTrue", { drawerTrue });
 }
-
     this.dropDown();
-
   }
-
 };
 </script>
 
