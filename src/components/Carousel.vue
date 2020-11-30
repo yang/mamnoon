@@ -8,6 +8,13 @@
     <ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
     <Newsletter v-else-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
   </div>
+
+<div style="display:none;">
+
+  <Shop />
+</div>
+
+
   </main>
 </template>
 
@@ -29,9 +36,10 @@ import TestimonialsMain from "@/components/TestimonialsMain";
 import Reservations from "@/components/Reservations";
 import ALaCarte from "@/components/ALaCarte";
 import OnlineShop from "@/components/OnlineShop";
-
+import Shop from "@/components/auth/shop";
 export default {
   components: {
+    Shop,
     ALaCarte,
     carousel,
     Order,

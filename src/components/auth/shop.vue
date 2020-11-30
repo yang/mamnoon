@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="open-modal" v-if="modalOpen">
-      <div class="container nav-acc-header mb-80 modalContainer position-relative no-padding">
+      <div class="container nav-acc-header mb-80 modalContainer position-relative no-padding" style="padding:0;">
  <!-- {{currentPopupItem}} -->
 
 
@@ -19,8 +19,7 @@
 <p class="thick-grey merch-modal-description">{{currentPopupItem.shop_item.description}}</p>
 <div style="width: 100%;text-align: center;">
 
-    
-
+<!-- {{currentPopupItem.index}} -->
                   <button
                     style="margin:0 auto;"
                     class="snipcart-add-item"
@@ -30,6 +29,9 @@
                     v-bind:data-item-name="currentPopupItem.shop_item.name"
                     v-bind:data-item-description="currentPopupItem.shop_item.description"
                     v-bind:data-item-weight="currentPopupItem.shop_item.weight"
+                    v-bind:itemId="currentPopupItem.shop_item.id"
+                    v-bind:data-itemId="currentPopupItem.shop_item.id"
+                    v-bind:data-item-url="currentPopupItem.shop_item.url"
                   >
                     <AddToCart />
                   </button>
@@ -78,15 +80,31 @@
 
 
 
- <div class="shopthird" v-if="currentCategory === 'all'" v-for="item in shopItems"
+ <div class="shopthird" v-if="currentCategory === 'all'" v-for="(item, index) in shopItems"
         :key="item.shop_item.id">
    <img v-bind:src="item.shop_item.image" />
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}
           <div class="order-panel">
-            <button
-              class="snipcart-add-item"
-              @click="modalPopup(item)"
+
+<!-- {{item}} -->
+                  <!-- <button
+                    style="margin:0 auto;display:none;"
+                    class="snipcart-add-item"
+                    v-bind:data-item-id="item.shop_item.id"
+                    v-bind:data-item-price="item.shop_item.price"
+                    v-bind:data-item-image="item.shop_item.image"
+                    v-bind:data-item-name="item.shop_item.name"
+                    v-bind:data-item-description="item.shop_item.description"
+                    v-bind:data-item-weight="item.shop_item.weight"
+                    v-bind:itemId="item.shop_item.id"
+                    v-bind:data-itemId="item.shop_item.id"
+                    data-item-url="https://nadimama.com"
+                  >
+                    <AddToCart />
+                  </button> -->
+            <button class="snipcart-add-item"
+              @click="modalPopup(item,index)"
             >
               <ShopNow />
             </button>
@@ -100,8 +118,7 @@
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}
           <div class="order-panel">
-            <button
-              class="snipcart-add-item"
+            <button style="background: transparent; border: 0;"
               @click="modalPopup(item)"
             >
               <ShopNow />
@@ -183,10 +200,11 @@ filterItems (category) {
     }
 
 },
-modalPopup(item){
+modalPopup(item,index){
 
 this.modalOpen = true
 this.currentPopupItem = item
+this.currentPopupItem.index = index
 },
 modalClose(){
   this.modalOpen = false
