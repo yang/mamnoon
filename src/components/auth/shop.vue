@@ -82,7 +82,7 @@
 
  <div class="shopthird" v-if="currentCategory === 'all'" v-for="(item, index) in shopItems"
         :key="item.shop_item.id">
-   <img v-bind:src="item.shop_item.image" />
+   <img v-bind:src="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}, ${{parseFloat(item.shop_item.price)}}
           <div class="order-panel">
@@ -114,7 +114,7 @@
       </div>
        <div class="shopthird" v-if="item.shop_item.category === currentCategory" v-for="item in shopItems"
         :key="item.shop_item.id">
-   <img v-bind:src="item.shop_item.image" />
+   <img v-bind:src="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}
           <div class="order-panel">

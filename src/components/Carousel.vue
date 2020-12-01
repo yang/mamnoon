@@ -1,5 +1,9 @@
 <template>
   <main>
+    <div>
+      <h2 class="intro-paragraph-header">Welcome</h2>
+      <p class="intro-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi lacus, cursus sed finibus id, convallis id dui. Maecenas viverra gravida turpis a ultrices.</p>
+    </div>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
     <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
     <CoverFlowCarousel v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
@@ -635,6 +639,18 @@ width: 100%
 
 
 
+}
+
+.intro-paragraph-header{
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+  color: #f05d5b;
+}
+
+.intro-paragraph{
+      font-size: 14px;
+    color: #f05d5b;
 }
 
 </style>

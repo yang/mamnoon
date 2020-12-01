@@ -20,7 +20,7 @@
             </span>
           </template>
 <div class="text-center" v-for="item in data" :key="item.shop_item.name">
-<img :src="item.shop_item.image" />
+<img :src="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
               <div class="order-bottom">
                 {{item.shop_item.name}}
                 <div class="order-panel">
