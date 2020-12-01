@@ -205,6 +205,17 @@ export default {
   },
   mounted () {
 this.individualRestaurant()
+
+
+
+
+
+      let recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'https://cdn.snipcart.com/themes/v3.0.18/default/snipcart.js')
+      recaptchaScript.setAttribute('data-autopop', 'false')
+      document.head.appendChild(recaptchaScript)
+
+
   },
   methods: {
 filterItems (category) {
@@ -236,6 +247,12 @@ modalClose(){
 }
   },
 };
+
+
+
+
+
+
 
 </script>
 
