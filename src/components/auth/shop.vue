@@ -495,4 +495,16 @@ svg#shopnow {
 	.st4{fill:#FFFFFF;}
 }
 
+  .toggle.snipcart-checkout{
+display: none;
+  }
+
+
+@media only screen and (max-width: 768px) {
+
+  .toggle.snipcart-checkout{
+display: block
+  }
+}
+
 </style>

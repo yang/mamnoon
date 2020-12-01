@@ -1,6 +1,11 @@
 <template>
     <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4 class="mob-bottom-margin">{{header}}</h4>
+        <h4 class="mob-bottom-margin">
+          
+             <router-link to="/shop">
+                    {{header}}
+             </router-link>
+          </h4>
                 <p class="description-para noselect hide-mobile">{{description}}</p>
         <carousel
           :responsive=" {0:{items:1},480:{items:2},1080:{items:3}}"
@@ -70,14 +75,16 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
 .mb-perfect{
   margin-bottom: 0px;
   height: 90px;
 }
 
 
-
+.mob-bottom-margin a{
+color: #fff367;
+}
 
 
 

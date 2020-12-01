@@ -22,7 +22,7 @@
             <template v-for="item in upserveSections">
             <div v-for="piece in item.item_ids" :key="piece">  
                     <template v-for="serve in upserve">
-                      <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">  
+            <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">  
             <template v-if="serve.images">
      <div class="outside-slideshow">
 <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
@@ -45,26 +45,7 @@
                                 </div>
                     </div>
                 </template>
-                            <!-- <template v-if="serve.images">
-                              <div
-                                v-if="serve.images.online_ordering_menu"
-                                v-bind:style="{ height: '360px',backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-                              <div
-                                v-else
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              ></div>
-                            </template> -->
-                             <!--<div class="content-box-upper">
-                              <div class="name">{{item.name.replace('Feature - ', '')}}<br>{{serve.name}}</div>
-                              <div
-                                v-if="serve.description"
-                                class="food-description"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                            </div>-->
+        
                          
                         
                          </div>
@@ -86,15 +67,10 @@
 </div>
   <div>
    <div>
-      <div class="bottom-button">
-        <a class="full-width" :href="link" target="_blank">
-          {{link}}
-          <div class="outer">
-          <router-link to="/mamnoon">
+      <div class="bottom-button" style="text-align: center;">
+         <router-link to="/mamnoon">
                 <OrderStar /> 
                 </router-link>
-         </div>
-        </a>
       </div>
     </div>
   </div>
@@ -692,6 +668,7 @@ height: 704px;
 .owl-item > div {
     width: 100%;
     height: 550px;
+    pointer-events: none;
     
 }
 
