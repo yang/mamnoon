@@ -7,7 +7,7 @@
           :fill="starState"
           points="34.73 69.47 24.56 59.3 10.17 59.3 10.17 44.91 0 34.73 10.17 24.56 10.17 10.17 24.56 10.17 34.73 0 44.91 10.17 59.3 10.17 59.3 24.56 69.47 34.73 59.3 44.91 59.3 59.3 44.91 59.3 34.73 69.47"
         />
-        <text class="cls-sendTextStar" :fill="'green'" transform="translate(14.4 39.55)">{{sendText}}</text>
+        <text class="cls-sendTextStar" :fill="'green'" text-anchor="middle" x="50%" y="56%" >{{sendText}}</text>
       </g>
     </g>
   </svg>

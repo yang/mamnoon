@@ -732,6 +732,43 @@ div{
  
 }
 
+
+@media only screen and (max-width: 768px) {
+.item-image-container {
+  text-align: center;
+
+  background-position: 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 200px;
+  z-index: 1;
+
+  background: #f0ecec;
+
+  img, svg {
+    width: auto !important;
+    height: 200px;
+  }
+
+
+div{
+  svg{
+    height: 200px;
+  }
+}
+
+}
+
+
+
+
+
+.item-image-container > div > svg {
+    height: 200px;
+ 
+}
+}
+
 .add-to-order-footer {
   padding: 15px 0 20px 0;
   width: 100%;
@@ -1321,7 +1358,7 @@ svg#nadiIconSm{
 
 
 svg#show-all{
-    margin-top: 20px !important;
+    // margin-top: 20px !important;
 }
 
 }

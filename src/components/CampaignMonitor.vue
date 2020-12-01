@@ -34,8 +34,10 @@ export default {
         })
       })
         .then(response => {
-          this.subscribeText = 'thx!'
+          this.subscribeText = ' thx!'
           this.starState = '#f58e58'
+          this.emailAddress = ''
+
           setTimeout(() => {
             this.subscribeText = 'send'
             this.starState = '#f58e58'
@@ -78,7 +80,7 @@ export default {
         })
     },
     submitForm() {
-      this.subscribeText = 'wait...'
+      this.subscribeText = 'wait..'
       this.generateSecureSubscribeLink()
     }
   }
@@ -90,6 +92,7 @@ export default {
     background: transparent;
     border: 0;
     transform: translate(-35px,-2px);
+    width: 0;
     &:focus,
     &:active{
         outline: none;

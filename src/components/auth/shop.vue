@@ -15,7 +15,7 @@
 
 <h3 class="merch-modal-header">{{currentPopupItem.shop_item.name}}</h3>
 
-<h4 class="text-left red merch-modal-price">{{currentPopupItem.shop_item.price}}</h4>
+<h4 class="text-left red merch-modal-price">${{parseFloat(currentPopupItem.shop_item.price)}}</h4>
 <p class="thick-grey merch-modal-description">{{currentPopupItem.shop_item.description}}</p>
 <div style="width: 100%;text-align: center;">
 
@@ -84,7 +84,7 @@
         :key="item.shop_item.id">
    <img v-bind:src="item.shop_item.image" />
         <div class="order-bottom" style="text-align: center;">
-          {{item.shop_item.name}}
+          {{item.shop_item.name}}, ${{parseFloat(item.shop_item.price)}}
           <div class="order-panel">
 
 <!-- {{item}} -->

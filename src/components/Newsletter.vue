@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="newsletter-section">
-        <div class="pad-cont" >
+        <div class="pad-cont-bottom" >
             <CampaignMonitor />
         </div>
       </div>
@@ -63,10 +63,19 @@ float: left;
            padding: 20px 30px;
     }
 
+        .pad-cont-bottom{
+           padding: 20px 30px;
+    }
+
 &:nth-child(2){
        .pad-cont{
         padding-top: 30px;
        }
+
+       .pad-cont-bottom{
+        padding-top: 30px;
+       }
+
 }
 
 
@@ -93,6 +102,14 @@ float: left;
                 margin-bottom: 0;
             }
         }
+
+        .pad-cont-bottom{
+            padding-bottom:0;
+            p{
+                margin-bottom: 0;
+            }
+        }
+
     }
 
 &:nth-child(2){
@@ -100,6 +117,12 @@ float: left;
         padding-bottom: 15px;
         padding-top: 15px;
        }
+
+       .pad-cont-bottom{
+        padding-bottom: 15px;
+        padding-top: 15px;
+       }
+
 }
 
 }
@@ -129,9 +152,35 @@ float: left;
     font-size: 12px;
 }
 
+ .pad-cont{
+     padding: 10px 10px 0px 15px !important;
+}
+ 
+        .pad-cont-bottom{
+              padding: 10px 10px 10px 15px !important;
+    }
+
+
+
+
+
+
+
 }
 
 
 
+
+@media only screen and (max-width: 640px){
+    .lap-right-pad {
+    border: 0;
+    color: #000;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+    padding: 12px 35px 12px 10px;
+    width: 200px;
+}
+}
 
 </style>
