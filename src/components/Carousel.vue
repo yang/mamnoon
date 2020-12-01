@@ -345,6 +345,7 @@ button.snipcart-add-item {
   background-color: #f0f5f6;
   // top: 140px !important;
   top: 90px !important;
+    top: 0 !important;
 }
 .top-widget {
   width: 100%;

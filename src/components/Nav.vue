@@ -42,6 +42,7 @@
        
      <Logo />
         </router-link>
+       
 
   </div>
 </div>
@@ -209,6 +210,7 @@
     </nav>
     <div>
         <div class="container">
+
         </div>
     </div>
     </template>
@@ -282,7 +284,7 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
 
 
 .trans{
@@ -488,6 +490,18 @@ right: 0;
 }
 
 .inline-link{display: inline}
+
+
+
+.no-button-style{
+    background: transparent;
+    outline: none;
+    border: 0;
+}
+
+
+
+
 </style>
 
 

@@ -132,6 +132,30 @@
 
     </div>
   </div>
+
+<button class="toggle snipcart-checkout"><span>
+  
+  
+  <svg style="margin-top: -5px;margin-left: -5px;" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" alt="" title="" class="snipcart-cart-header__icon snipcart__icon--blue-dark snipcart__icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M51.714 20.47L55 60H9l3.286-39.53h9.857v-6.588C22.143 8.424 26.556 4 32 4c5.444 0 9.857 4.424 9.857 9.882v6.589h9.857zM25.43 13.883v16.47h-3.286v-6.587h-6.834l-2.737 32.94h38.856l-2.737-32.94h-6.834v6.588h-3.286v-16.47c0-3.634-2.947-6.589-6.571-6.589-3.624 0-6.571 2.955-6.571 6.588zm3.285 9.883V20.47h6.572v3.294h-6.572z" fill="#313749"></path></svg>
+  
+  
+  <!-- <svg class="shopping-bag" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 18 19" style="enable-background:new 0 0 18 19;" xml:space="preserve">
+<g>
+	<g>
+		<path class="st2" d="M13.88,17H4.12L2.87,7h12.27L13.88,17z M5.88,15h6.23l0.75-6H5.13L5.88,15z"/>
+	</g>
+</g>
+<g>
+	<path class="st2" d="M13,6h-2V5c0-1.1-0.9-2-2-2S7,3.9,7,5v1H5V5c0-2.21,1.79-4,4-4s4,1.79,4,4V6z"/>
+</g>
+</svg> -->
+
+     <span class="snipcart-items-count" style="font-size: 14px;margin-top: 20px;"></span></span></button>
+
+
+
+
   </div>
 </template>
 
@@ -264,7 +288,9 @@ width: 100%
       // padding-top: 0px;
     z-index: 100;
         top: 0;
-            padding-top: 10px;
+            // padding-top: 10px;
+
+                padding-top: 0;
 }
 
     
@@ -444,8 +470,29 @@ svg#shopnow {
 }
 
 
+    .toggle{
+        display: block;
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 100;
+            border: 1px solid #f05d5b;
+    background-color: #f05d5b;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    }
 
 
 
+.shopping-bag{
+
+        width: 20px;
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:#FFFFFF;}
+	.st3{fill:#FFFFFF;}
+	.st4{fill:#FFFFFF;}
+}
 
 </style>
