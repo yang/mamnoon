@@ -82,27 +82,11 @@
 
  <div class="shopthird" v-if="currentCategory === 'all'" v-for="(item, index) in shopItems"
         :key="item.shop_item.id">
-   <img v-bind:src="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
+   <img v-lazy="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}, ${{parseFloat(item.shop_item.price)}}
           <div class="order-panel">
 
-<!-- {{item}} -->
-                  <!-- <button
-                    style="margin:0 auto;display:none;"
-                    class="snipcart-add-item"
-                    v-bind:data-item-id="item.shop_item.id"
-                    v-bind:data-item-price="item.shop_item.price"
-                    v-bind:data-item-image="item.shop_item.image"
-                    v-bind:data-item-name="item.shop_item.name"
-                    v-bind:data-item-description="item.shop_item.description"
-                    v-bind:data-item-weight="item.shop_item.weight"
-                    v-bind:itemId="item.shop_item.id"
-                    v-bind:data-itemId="item.shop_item.id"
-                    data-item-url="https://nadimama.com"
-                  >
-                    <AddToCart />
-                  </button> -->
             <button class="snipcart-add-item"
               @click="modalPopup(item,index)"
             >
@@ -114,7 +98,7 @@
       </div>
        <div class="shopthird" v-if="item.shop_item.category === currentCategory" v-for="item in shopItems"
         :key="item.shop_item.id">
-   <img v-bind:src="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
+   <img v-lazy="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
         <div class="order-bottom" style="text-align: center;">
           {{item.shop_item.name}}
           <div class="order-panel">
@@ -139,17 +123,7 @@
   <svg style="margin-top: -5px;margin-left: -5px;" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" alt="" title="" class="snipcart-cart-header__icon snipcart__icon--blue-dark snipcart__icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M51.714 20.47L55 60H9l3.286-39.53h9.857v-6.588C22.143 8.424 26.556 4 32 4c5.444 0 9.857 4.424 9.857 9.882v6.589h9.857zM25.43 13.883v16.47h-3.286v-6.587h-6.834l-2.737 32.94h38.856l-2.737-32.94h-6.834v6.588h-3.286v-16.47c0-3.634-2.947-6.589-6.571-6.589-3.624 0-6.571 2.955-6.571 6.588zm3.285 9.883V20.47h6.572v3.294h-6.572z" fill="#313749"></path></svg>
   
   
-  <!-- <svg class="shopping-bag" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 18 19" style="enable-background:new 0 0 18 19;" xml:space="preserve">
-<g>
-	<g>
-		<path class="st2" d="M13.88,17H4.12L2.87,7h12.27L13.88,17z M5.88,15h6.23l0.75-6H5.13L5.88,15z"/>
-	</g>
-</g>
-<g>
-	<path class="st2" d="M13,6h-2V5c0-1.1-0.9-2-2-2S7,3.9,7,5v1H5V5c0-2.21,1.79-4,4-4s4,1.79,4,4V6z"/>
-</g>
-</svg> -->
+
 
      <span class="snipcart-items-count" style="font-size: 14px;margin-top: 20px;"></span></span></button>
 
@@ -161,13 +135,10 @@
 
 <script type="text/javascript">
 
-
-
+import VueLazyload from 'vue-lazyload';
 import AddToCart from "@/components/svgIcons/AddToCart";
-
 import ShopNow from "@/components/svgIcons/ShopNow";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
-
 import Carousel from "@/components/Carousel";
 
 
@@ -176,7 +147,8 @@ export default {
   components: {
     AddToCart,
     ShopNow,
-    CloseModalRed
+    CloseModalRed,
+    VueLazyload
   },
   data() {
     return {
@@ -213,6 +185,7 @@ this.individualRestaurant()
       let recaptchaScript = document.createElement('script')
       recaptchaScript.setAttribute('src', 'https://cdn.snipcart.com/themes/v3.0.18/default/snipcart.js')
       recaptchaScript.setAttribute('data-autopop', 'false')
+      recaptchaScript.setAttribute('data-api-key', 'MTAyNTVhZGQtMzU2Mi00ZWEwLWI1ZjctNWQwY2MwYjZiYjZkNjM3MjYyOTQ3OTQ3OTcxNTA1')
       document.head.appendChild(recaptchaScript)
 
 
