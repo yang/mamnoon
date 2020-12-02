@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <main>
     <div>
       <h2 class="intro-paragraph-header">Welcome</h2>

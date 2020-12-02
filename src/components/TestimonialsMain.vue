@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
         <h4 class="mob-bottom-margin">{{header}}</h4>
         
