@@ -1,10 +1,13 @@
-<template functional>
+<template>
   <main>
     <div>
       <h2 class="intro-paragraph-header">Welcome</h2>
       <p class="intro-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi lacus, cursus sed finibus id, convallis id dui. Maecenas viverra gravida turpis a ultrices.</p>
     </div>
+
+
   <div v-for="item in pageData" :key="item.acf_fc_layout">
+
     <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
     <CoverFlowCarousel v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
@@ -13,10 +16,7 @@
     <Newsletter v-else-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
   </div>
 
-<div style="display:none;">
 
-  <Shop />
-</div>
 
 
   </main>
@@ -40,10 +40,9 @@ import TestimonialsMain from "@/components/TestimonialsMain";
 import Reservations from "@/components/Reservations";
 import ALaCarte from "@/components/ALaCarte";
 import OnlineShop from "@/components/OnlineShop";
-import Shop from "@/components/auth/shop";
 export default {
   components: {
-    Shop,
+
     ALaCarte,
     carousel,
     Order,
@@ -92,6 +91,8 @@ export default {
   let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
 
     let AcfBlock = responseAcf
+
+    console.log(AcfBlock)
     this.pageData = AcfBlock.data.acf.content_fields
 
 },

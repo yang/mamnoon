@@ -1,4 +1,4 @@
-<template functional>
+<template>
     <section :id="tag" class="coverflowsection">
 <div class="is-fullheight no-top-pad" id="cover-carousel">
 <h4 class="noselect">{{header}}</h4>
