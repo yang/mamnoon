@@ -9,6 +9,8 @@ import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
 import VueCurrencyInput from 'vue-currency-input'
 import vSelect from "vue-select";
+import VueLazyload from 'vue-lazyload'
+
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./coverflow.js"
@@ -30,7 +32,8 @@ const base = axios.create({
 }); 
 
 
-
+ 
+Vue.use(VueLazyload)
 
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
