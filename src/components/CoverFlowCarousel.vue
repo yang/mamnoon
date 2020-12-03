@@ -11,6 +11,8 @@
      </div>
      </template>
          <template v-else>
+
+              <template v-if="upserveSectionsRendered">
              <!-- <VueAspectRatio ar="6:7" width="100%" class="">   -->
         <carousel :items="1" :loop="false" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
@@ -33,10 +35,18 @@
 /> -->
 
 
-<div class="top-bar">
+<div v-if="serve.restaurant === 'Mamnoon Street'" class="top-bar mamnoon-street-colors">
   <!-- {{item.name.replace('Feature - ', '')}} -->
-    {{serve.name}}
+{{serve.restaurant}}
   </div>
+  <div v-if="serve.restaurant === 'Mamnoon'" class="top-bar">
+  <!-- {{item.name.replace('Feature - ', '')}} -->
+{{serve.restaurant}}
+  </div>
+
+
+
+
   <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;">
 
 
@@ -48,17 +58,41 @@
 
 
 <NadiIcon style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -57%);"  v-else />
+
+
+
+
+<template v-if="serve.restaurant === 'Mamnoon Street'">
+ <div
+                                v-if="serve.description"
+                                class="food-description bottom-bar mamnoon-street-colors">
+                                <span class="desc-desk">
+                                 {{serve.name}}: {{serve.description}}
+                                </span>
+
+                                <span class="desc-mob">
+                                {{serve.name}}: {{serve.description | truncate(90, '...')}}
+                                </span>
+                                </div>
+</template>
+
+<template v-if="serve.restaurant === 'Mamnoon'">
  <div
                                 v-if="serve.description"
                                 class="food-description bottom-bar">
                                 <span class="desc-desk">
-                                {{serve.description}}
+                                 {{serve.name}}: {{serve.description}}
                                 </span>
 
                                 <span class="desc-mob">
-                                {{serve.description | truncate(90, '...')}}
+                                {{serve.name}}: {{serve.description | truncate(90, '...')}}
                                 </span>
                                 </div>
+</template>
+
+
+
+
                     </div>
                 </template>
         
@@ -75,6 +109,7 @@
           </template>
             </carousel>
               <!-- </VueAspectRatio>   -->
+              </template>
 </template>
 
 
@@ -140,7 +175,8 @@ export default {
             upserve: [],
       upserveSections: [],
       structureForCover: [],
-      helpArray: []
+      helpArray: [],
+      upserveSectionsRendered: false
     };
   },
   computed: {
@@ -191,6 +227,18 @@ for(let i = 0; i < this.upserveSections.length; i++){
   }
 }
 console.log(this.helpArray)
+
+console.log('upserveSections updated')
+
+this.upserveSectionsRendered = false
+      setTimeout(() => {
+this.upserveSectionsRendered = true
+      }, 1000)
+
+
+
+
+
     },
     count(newCount, oldCount) {
 
@@ -245,17 +293,30 @@ console.log(this.helpArray)
         "/product/upserveolo"
       );
       let upserveProducts = responseUpserve.data.body.items;
-      this.upserve = this.upserve.concat(upserveProducts);
-  this.upserveSections = responseUpserve.data.body.sections;
+upserveProducts.forEach(function (element) {
+  element.restaurant = 'Mamnoon';
+});
+
+  this.upserve = this.upserve.concat(upserveProducts);
+console.log(upserveProducts)
+  this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
+
+
     },
         async streetupserves() {
       let responseUpserve = await this.$http.get(
         "/product/upserveolostreet"
       );
       let upserveProducts = responseUpserve.data.body.items;
+
+upserveProducts.forEach(function (element) {
+  element.restaurant = 'Mamnoon Street';
+});
       this.upserve = this.upserve.concat(upserveProducts);
- this.upserveSections = responseUpserve.data.body.sections;
-    },
+console.log(upserveProducts)
+
+  this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
+},
 dumpAcf(){
   this.familyMeals = this.helpArray
 },
@@ -800,6 +861,12 @@ display: inline;
  padding: 10px;
  text-align: center;
  font-weight: 500;
+
+&.mamnoon-street-colors{
+   background: #ffffff;
+   color: #f05d5b;
+}
+
 }
 
 .bottom-bar{
@@ -812,6 +879,11 @@ color: #f05d5b;
 font-size: 14px;
 height: 83px;
 text-align: center;
+
+&.mamnoon-street-colors{
+   background: #ffffff;
+   color: #f05d5b;
+}
 }
 
 .white-text{

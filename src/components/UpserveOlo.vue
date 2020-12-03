@@ -2317,6 +2317,14 @@ dropDown(){
 //reset
 //reset
 
+
+this.currentOrder.restaurant = this.title
+
+let storeCurrentOrder = this.currentOrder.restaurant
+
+this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+
+
 if(this.$store.state.openDrawerOnLoad === true){
   this.toggleDrawer()
   let drawerTrue = false
