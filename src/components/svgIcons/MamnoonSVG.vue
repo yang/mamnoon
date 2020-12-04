@@ -57,6 +57,7 @@ export default {
   .halfwidth-orange{
     height: 150px;
     width: 50%;
+        width: 33.33%;
     display: inline-block;
     background: #F9A658;
     float: left;
@@ -78,6 +79,7 @@ svg{
  .halfwidth-orange{
     height: 150px;
     width: 50%;
+        width: 33.33%;
     display: inline-block;
     background: #F9A658;
     float: left;

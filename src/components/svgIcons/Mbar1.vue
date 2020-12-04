@@ -103,6 +103,7 @@ export default {
 .halfwidth-yellow {
   height: 150px;
   width: 50%;
+  width: 33.33%;
   display: inline-block;
   background: #fff367;
   // float: left;
@@ -120,6 +121,7 @@ export default {
 .halfwidth-yellow {
   height: 150px;
   width: 50%;
+  width: 33.33%;
   display: inline-block;
   background: #fff367;
   // float: left;

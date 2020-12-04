@@ -35,20 +35,6 @@
 
               <div class="order-bottom">
                 {{item.shop_item.name}}
-                <div class="order-panel">
-               
-                  <button
-                    class="snipcart-add-item"
-                    v-bind:data-item-id="item.shop_item.id"
-                    v-bind:data-item-price="item.shop_item.price"
-                    v-bind:data-item-image="item.shop_item.image"
-                    v-bind:data-item-name="item.shop_item.name"
-                    v-bind:data-item-description="item.shop_item.description"
-                    v-bind:data-item-weight="item.shop_item.weight"
-                  >
-                    <Order />
-                  </button>
-                </div>
               </div>
         </div>
           <!-- <template v-if="index === 0 || index === 1" slot="next"></template> -->
@@ -58,8 +44,8 @@
             </span>
           </template>
         </carousel>
-      <div class="text-center mb-perfect">
-        <router-link to="/shop">
+      <div class="text-center mb-perfect" @onclick="leadInScroll()">
+        <router-link to="/mamnoon">
        <ShowAll />
         </router-link>
         </div>
@@ -84,34 +70,9 @@ export default {
     name: 'onlineshop',
     props: ['data','header','tag','description'],
     methods: {
-  lazyLoad: function () {
-    let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-    let active = false;
-    if (active === false) {
-      active = true;
-      setTimeout(() => {
-        lazyImages.forEach(function (lazyImage) {
-          if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-            lazyImage.src = lazyImage.dataset.src;
-            lazyImage.classList.remove("lazy");
-            lazyImages = lazyImages.filter(function (image) {
-              return image !== lazyImage;
-            });
-
-            if (lazyImages.length === 0) {
-              window.removeEventListener("scroll", this.lazyLoad);
-            }
-          }
-        });
-        active = false;
-      }, 200)
-
-    }
-  }
-    },
-    mounted(){
-        window.scrollTo(0, 0);
-  window.addEventListener("scroll", this.lazyLoad);
+      leadInScroll: function(){
+console.log('send and expand to retail')
+      }
     }
 }
 </script>

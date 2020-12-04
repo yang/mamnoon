@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="halfwidth-orange" @click="openLink(linkOut2)" id="reservemamnoonbutton"> -->
-  <div id="mamnoon-reserve" class="halfwidth-orange" @click="openSevenRooms('reservemamnoonbutton')">
+  <div id="mamnoon-reserve" class="halfwidth-orange2" @click="openSevenRooms('reservemamnoonbutton')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05">
       <defs>
       </defs>
@@ -77,10 +77,10 @@ export default {
   }
 
 
-  .halfwidth-orange{
+  .halfwidth-orange2{
     height: 150px;
     width: 50%;
-
+    // width: 33.33%;
     background: #F9A658;
     float: left;
     text-align: center;
@@ -101,7 +101,7 @@ svg{
  .halfwidth-orange{
     height: 150px;
     width: 50%;
-
+    // width: 33.33%;
     background: #F9A658;
     float: left;
     text-align: center;

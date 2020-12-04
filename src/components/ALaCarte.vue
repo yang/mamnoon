@@ -18,8 +18,7 @@
 
               <router-link to="/mbar">
     
-  Mbae
-            <MamnoonStreet1 :caviarLink="false" />
+            <Mbar1 :caviarLink="false" />
                           </router-link>
 
         </div>

@@ -7,7 +7,6 @@
 <script>
 import SlideShow from "@/components/SlideShow";
 import login from "@/components/auth/login";
-import shop from "@/components/auth/shop";
 import Products from "@/components/Products";
 import Nav from "@/components/Nav";
 export default {
@@ -15,8 +14,7 @@ export default {
     login,
     Products,
     SlideShow,
-    Nav,
-    shop
+    Nav
   }
 };
 </script>
