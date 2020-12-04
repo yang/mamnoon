@@ -9,12 +9,8 @@ import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
 import VueCurrencyInput from 'vue-currency-input'
 import vSelect from "vue-select";
-
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "vue-select/src/scss/vue-select.scss";
-
-require('dotenv').config()
 
 
 Vue.use(VueCurrencyInput)
