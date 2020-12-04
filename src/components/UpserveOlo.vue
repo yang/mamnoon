@@ -20,7 +20,7 @@
             v-if="currentItem.images.online_ordering_menu"
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
-            <img :src="currentItem.images.online_ordering_menu.main" />
+            <img :src="currentItem.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')" />
           </div>
           <div class="item-image-container" v-else>
             <NadiIcon />
@@ -58,7 +58,7 @@
                           <div v-if="modifier.name === 'Promotions'">
                             <div v-for="piece in upserveList" :key="piece.name">
                               <div v-if="piece.name === mod.name">
-                                <img :src="piece.images.online_ordering_menu.main" />
+                                <img :src="piece.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')" />
                               </div>
                             </div>
                           </div>
@@ -187,7 +187,7 @@
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
 
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
+                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')">
 
                               <div
                                 v-else
@@ -239,7 +239,7 @@
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
 
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
+                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')">
 
                               <div
                                 v-else
