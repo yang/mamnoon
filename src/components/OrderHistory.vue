@@ -2,8 +2,7 @@
 <div>
 <div class="container pad-yellow-background module-header"> food order history</div>
 <div class="container pad-yellow-background">
-<!-- {{currentUser.currentUserEmail}} -->
-
+<!-- {{currentUsercurrentUserEmail}} -->
 <!-- {{response}} -->
 
 <div id="order-history">
