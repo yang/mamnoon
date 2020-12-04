@@ -198,34 +198,34 @@ this.individualRestaurant()
       recaptchaScript.setAttribute('data-api-key', 'MTAyNTVhZGQtMzU2Mi00ZWEwLWI1ZjctNWQwY2MwYjZiYjZkNjM3MjYyOTQ3OTQ3OTcxNTA1')
       document.head.appendChild(recaptchaScript)
 
-  window.scrollTo(0, 0);
-  window.addEventListener("scroll", this.lazyLoad);
+  // window.scrollTo(0, 0);
+  // window.addEventListener("scroll", this.lazyLoad);
   },
   methods: {
-  lazyLoad: function () {
-    let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-    let active = false;
-    if (active === false) {
-      active = true;
-      setTimeout(() => {
-        lazyImages.forEach(function (lazyImage) {
-          if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-            lazyImage.src = lazyImage.dataset.src;
-            lazyImage.classList.remove("lazy");
-            lazyImages = lazyImages.filter(function (image) {
-              return image !== lazyImage;
-            });
+  // lazyLoad: function () {
+  //   let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+  //   let active = false;
+  //   if (active === false) {
+  //     active = true;
+  //     setTimeout(() => {
+  //       lazyImages.forEach(function (lazyImage) {
+  //         if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+  //           lazyImage.src = lazyImage.dataset.src;
+  //           lazyImage.classList.remove("lazy");
+  //           lazyImages = lazyImages.filter(function (image) {
+  //             return image !== lazyImage;
+  //           });
 
-            if (lazyImages.length === 0) {
-              window.removeEventListener("scroll", this.lazyLoad);
-            }
-          }
-        });
-        active = false;
-      }, 200)
+  //           if (lazyImages.length === 0) {
+  //             window.removeEventListener("scroll", this.lazyLoad);
+  //           }
+  //         }
+  //       });
+  //       active = false;
+  //     }, 200)
 
-    }
-  },
+  //   }
+  // },
 filterItems (category) {
   this.currentCategory = category
 },
