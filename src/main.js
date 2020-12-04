@@ -9,10 +9,9 @@ import axios from "axios";
 import VueScrollactive from 'vue-scrollactive';
 import VueCurrencyInput from 'vue-currency-input'
 import vSelect from "vue-select";
-import VueLazyload from 'vue-lazyload'
 
 
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "vue-select/src/scss/vue-select.scss";
 
 require('dotenv').config()
@@ -26,10 +25,6 @@ Vue.component('v-select', vSelect)
 const base = axios.create({
   baseURL: "https://young-hamlet-03679.herokuapp.com"
 }); 
-
-
- 
-Vue.use(VueLazyload)
 
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
