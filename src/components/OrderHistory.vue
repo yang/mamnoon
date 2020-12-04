@@ -71,12 +71,12 @@ debit/credit
 
 
 
-<pre>
+<!-- <pre>
 
 
 {{order.orderInfo}}
 
-</pre>
+</pre> -->
 
 
 </div></td>
