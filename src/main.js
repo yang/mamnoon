@@ -13,7 +13,6 @@ import VueLazyload from 'vue-lazyload'
 
 
 import "bootstrap/dist/css/bootstrap.css";
-import "./coverflow.js"
 import "./sevenRooms1.js"
 import "./sevenRooms2.js"
 import "vue-select/src/scss/vue-select.scss";

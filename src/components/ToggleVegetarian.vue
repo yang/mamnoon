@@ -3,10 +3,10 @@
 
     <button @click="toggleVegetarian" class="toggleVegButton">
         <span v-if="$store.state.vegetarian === true">
-        <ShowVeg class="half-width" :yellowText="false" />        <ShowAllFood class="half-width" :yellowText="true" />
+        <!-- <ShowVeg class="half-width" :yellowText="false" />        <ShowAllFood class="half-width" :yellowText="true" /> -->
             </span>
         <span v-else>
-        <ShowVeg class="half-width" :yellowText="true" />        <ShowAllFood class="half-width" :yellowText="false" />
+        <!-- <ShowVeg class="half-width" :yellowText="true" />        <ShowAllFood class="half-width" :yellowText="false" /> -->
             </span>       
 </button>
 
@@ -18,12 +18,12 @@
 
 
 import ShowAllFood from "@/components/svgIcons/ShowAllFood.vue";
-import ShowVeg from "@/components/svgIcons/ShowVeg.vue";
+// import ShowVeg from "@/components/svgIcons/ShowVeg.vue";
 
 export default {
     components:{
         ShowAllFood,
-        ShowVeg
+        // ShowVeg
     },
     methods: {
     toggleVegetarian () {
