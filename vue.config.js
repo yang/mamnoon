@@ -4,9 +4,10 @@ module.exports = {
     plugins: [
       new VuetifyLoaderPlugin()
     ],
+    optimization: {
     splitChunks: {
       minSize: 10000,
       maxSize: 250000,
-  }
+  }}
   },
 }
