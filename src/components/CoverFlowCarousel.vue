@@ -45,7 +45,10 @@
   </div>
 
 
-
+  <div v-if="serve.restaurant === 'Mbar'" class="top-bar mbar-colors">
+  <!-- {{item.name.replace('Feature - ', '')}} -->
+{{serve.restaurant}}
+  </div>
 
   <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;">
 
@@ -89,7 +92,19 @@
                                 </span>
                                 </div>
 </template>
+<template v-if="serve.restaurant === 'Mbar'">
+ <div
+                                v-if="serve.description"
+                                class="food-description bottom-bar mbar-colors">
+                                <span class="desc-desk">
+                                 {{serve.name}}: {{serve.description}}
+                                </span>
 
+                                <span class="desc-mob">
+                                {{serve.name}}: {{serve.description | truncate(90, '...')}}
+                                </span>
+                                </div>
+</template>
 
 
 
@@ -254,7 +269,7 @@ this.upserveSectionsRendered = true
 
     this.streetupserves();
 
-
+this.mbarupserves();
   window.scrollTo(0, 0);
   window.addEventListener("scroll", this.lazyLoad);
 
@@ -298,12 +313,29 @@ upserveProducts.forEach(function (element) {
 });
 
   this.upserve = this.upserve.concat(upserveProducts);
-console.log(upserveProducts)
+[]
   this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
 
 
     },
-        async streetupserves() {
+
+        async mbarupserves() {
+      let responseUpserve = await this.$http.get(
+        "/product/upserveolombar"
+      );
+      let upserveProducts = responseUpserve.data.body.items;
+
+
+upserveProducts.forEach(function (element) {
+  element.restaurant = 'Mbar';
+});
+      this.upserve = this.upserve.concat(upserveProducts);
+
+
+  this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
+},
+
+async streetupserves() {
       let responseUpserve = await this.$http.get(
         "/product/upserveolostreet"
       );
@@ -313,7 +345,7 @@ upserveProducts.forEach(function (element) {
   element.restaurant = 'Mamnoon Street';
 });
       this.upserve = this.upserve.concat(upserveProducts);
-console.log(upserveProducts)
+
 
   this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
 },
@@ -867,6 +899,11 @@ display: inline;
    color: #f05d5b;
 }
 
+&.mbar-colors{
+color: #FFCC3E;
+  background: #324144;
+}
+
 }
 
 .bottom-bar{
@@ -884,6 +921,12 @@ text-align: center;
    background: #ffffff;
    color: #f05d5b;
 }
+
+&.mbar-colors{
+  background: #324144;
+color: #FFCC3E;
+}
+
 }
 
 .white-text{
