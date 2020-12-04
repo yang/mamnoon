@@ -45,7 +45,7 @@
       <div class="button-box">
     <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
 <br>
-    <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">    <BuyNewCard /></a>
+    <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">buy new card</a>
 
 
       </div>
@@ -53,8 +53,7 @@
         <a
           href="https://ecommerce.custcon.com/Recharge_Login.aspx?c=364cfc03-d428-44bf-b814-1efbdcaed08d"
           target="_blank"
-        >
-          <UpdateBalance />
+        >update balance
         </a>
       </div>
 
@@ -133,15 +132,11 @@ add a giftcard for {{emailAddress}}
 
 
 <script type="text/javascript">
-import UpdateBalance from "@/components/svgIcons/UpdateBalance";
 import Submit from "@/components/svgIcons/Submit";
-import BuyNewCard from "@/components/svgIcons/BuyNewCard";
 import Check from "@/components/svgIcons/Check";
 import swal from "sweetalert";
 export default {
   components: {
-    UpdateBalance,
-    BuyNewCard,
     Check,
     Submit
   },

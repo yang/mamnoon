@@ -31,7 +31,6 @@ import Prev from "@/components/svgIcons/Prev";
 import Mamnoon from "@/components/svgIcons/Mamnoon";
 import Mbar from "@/components/svgIcons/Mbar";
 import ShowAll from "@/components/svgIcons/ShowAll";
-import MamnoonStreet from "@/components/svgIcons/MamnoonStreet";
 import MamnoonSVG from "@/components/svgIcons/MamnoonSVG";
 import Newsletter from "@/components/Newsletter";
 import CoverFlowCarousel from "@/components/CoverFlowCarousel";
@@ -52,7 +51,6 @@ export default {
     CoverFlowCarousel,
     Mbar,
     Mamnoon,
-    MamnoonStreet,
     MamnoonSVG,
     ShowAll,
     UpserveFiltering,

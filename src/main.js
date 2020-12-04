@@ -13,8 +13,6 @@ import VueLazyload from 'vue-lazyload'
 
 
 import "bootstrap/dist/css/bootstrap.css";
-import "./sevenRooms1.js"
-import "./sevenRooms2.js"
 import "vue-select/src/scss/vue-select.scss";
 
 require('dotenv').config()
@@ -27,7 +25,6 @@ Vue.component('v-select', vSelect)
 
 const base = axios.create({
   baseURL: "https://young-hamlet-03679.herokuapp.com"
-  // baseURL: "http://localhost:4000"
 }); 
 
 
