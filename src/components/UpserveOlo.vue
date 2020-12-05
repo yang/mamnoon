@@ -20,7 +20,7 @@
             v-if="currentItem.images.online_ordering_menu"
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
-            <img :src="currentItem.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')" />
+            <img :src="currentItem.images.online_ordering_menu.main" />
           </div>
           <div class="item-image-container" v-else>
             <NadiIcon />
@@ -58,7 +58,7 @@
                           <div v-if="modifier.name === 'Promotions'">
                             <div v-for="piece in upserveList" :key="piece.name">
                               <div v-if="piece.name === mod.name">
-                                <img :src="piece.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')" />
+                                <img :src="piece.images.online_ordering_menu.main" />
                               </div>
                             </div>
                           </div>
@@ -175,8 +175,9 @@
               </span>
               </template>
 
+            <template v-for="item in upserveSections" v-if="item.name === 'Feature'">
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <template v-for="item in upserveSections">
+            <!-- <template v-for="item in upserveSections"> -->
   <VueAspectRatio ar="6:7" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
                     <template v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
@@ -2311,18 +2312,20 @@ dropDown(){
                 this.currentOrder.charges.taxes = 0
                 this.currentOrder.charges.tip.amount = 0
                 this.currentOrder.payments.payments.amount = null;
-                this.total = this.$store.state.storeCurrentOrder.charges.preTotal;
+                if(this.$store.state.storeCurrentOrder.charges){
+                  this.total = this.$store.state.storeCurrentOrder.charges.preTotal;
+                }
                 this.currentOrder = this.$store.state.storeCurrentOrder;
 
 //reset
 //reset
+console.log(this.title)
 
+// this.currentOrder.restaurant = this.title
 
-this.currentOrder.restaurant = this.title
+// let storeCurrentOrder = this.currentOrder.restaurant
 
-let storeCurrentOrder = this.currentOrder.restaurant
-
-this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+// this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
 
 if(this.$store.state.openDrawerOnLoad === true){
