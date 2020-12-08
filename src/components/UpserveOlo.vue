@@ -188,7 +188,7 @@
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
 
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')">
+                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
 
                               <div
                                 v-else
@@ -240,7 +240,7 @@
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
 
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')">
+                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
 
                               <div
                                 v-else
@@ -277,7 +277,22 @@
 <div class="container online-menu">
 <h4>full {{title}} menu</h4>
 </div>
+
+
+<br>
+<div>
+<v-select :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+<div style="margin-top:15px;" v-if="selectedDate !== null">
+<v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+
+</div>
+
+</div>
+
    <template v-if="upserveSections.length === 0">
+
+
+
      <div class="container text-center pt20">
        Loading...
      </div>
@@ -285,8 +300,13 @@
          <template v-else>
             <template v-for="item in upserveSections">
 <div style="display:none;" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"></div>
-              <div v-else class="container menu-line">
+              <template v-else>
+                <template v-if="item.timing_mask === null">
 
+
+
+
+              <div class="container menu-line">
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
@@ -348,6 +368,84 @@
                 </div>
               </div>
               </div>
+
+
+
+
+
+
+
+
+
+
+
+                </template>
+                <template v-else>
+              <div v-if="currentlyavailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
+              <div
+                :id="'drawertop-'+ item.id"
+                @click="expandChild(item.id)"
+                class="display-block row no-lr-margin"
+              >
+                <h2 class="menu-header">
+                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
+                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                </h2>
+              </div>
+              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+              
+                    <template v-for="serve in upserveList" class="grey-bg">
+                      <template v-if="serve.id === piece" class="inline-block">
+                        <div class="yellow-bg" @click="openModal(serve)">
+                          <div class="half-width2left">
+                            <div class="content-box">
+                              <div class="name">{{serve.name}}</div>
+                              <!-- <div class="item">
+                                {{serve}}
+                              </div> -->
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">
+
+
+<!-- {{serve}} -->
+                                <!-- ${{ serve.price }} -->
+
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                              <br />
+                              <!-- <button @click="openModal(serve)">view</button> -->
+                            </div>
+                          </div>
+                          <div class="half-width2right">
+                            <template v-if="serve.images">
+                              <div
+                                v-if="serve.images.online_ordering_menu"
+                                class="backgroundImage"
+                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                              ></div>
+                              <div
+                                v-else
+                                class="backgroundImage"
+                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              >     <NadiIconSm /></div>
+                            </template>
+                    
+                          </div>
+                        </div>
+                      </template>
+                    </template>
+               
+                </div>
+              </div>
+              </div>
+  </template>
+     </template>
+
             </template>
 
   </template>
@@ -375,11 +473,12 @@
 <template v-if="this.currentOrder.charges.items.length > 0">
   <br><br>
   <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="preorder" name="preorder" value="preorder" v-model="currentOrder.preorder">
-  <label class="smblk" for="preorder">preorder</label>
+  <label class="smblk preorder-bottom-pad" for="preorder">preorder</label>
 </template>
 
 <template v-if="this.currentOrder.charges.items.length > 0">
 <template v-if="currentOrder.preorder">
+
 <v-select :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 <div style="margin-top:15px;" v-if="selectedDate !== null">
 <v-select :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time"  :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
@@ -735,18 +834,31 @@ delivery or pickup?
                 <button
                   id="tipOption1"
                   class="tipButton quarter"
-                  @click="setTip(1)"
-                ><b>18%</b><br>(${{tip1.toFixed(2)/100 }})</button>&nbsp;
+                  @click="setTip(1)">
+                  <b>18%</b>
+                  <br>
+                  (${{tip1 | showToFixed }})  
+
+
+                  <!-- (${{tip1.toFixed(2)/100 }}) -->
+                  </button>&nbsp;
                 <button
                   id="tipOption2"
                   class="tipButton quarter"
-                  @click="setTip(2)"
-                ><b>22%</b><br>(${{tip2.toFixed(2)/100 }})</button>&nbsp;
+                  @click="setTip(2)">
+                  <b>22%</b>
+                  <br>
+                  (${{tip2 | showToFixed }})  
+                  <!-- (${{tip2.toFixed(2)/100 }}) -->
+                  </button>&nbsp;
                 <button
                   id="tipOption3"
                   class="tipButton quarter"
-                  @click="setTip(3)"
-                ><b>25%</b><br>(${{tip3.toFixed(2)/100 }})</button>&nbsp;
+                  @click="setTip(3)"><b>25%</b>
+                  <br>
+                  (${{tip3 | showToFixed }})  
+                  <!-- (${{tip3.toFixed(2)/100 }}) -->
+                  </button>&nbsp;
                 <br>
                 <button
                   id="customTip"
@@ -763,22 +875,18 @@ delivery or pickup?
               total: ${{total.toFixed(2)/100 }}
               <br />
               tax: ${{currentTax.toFixed(2)/100 }}
-     
-
-
-
-<div v-if="custom === true">
-custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
-</div>
-<div v-else>
-             tip: ${{currentAmountToAdd.toFixed(2)/100 }}
-</div>
+            <div v-if="custom === true">
+            custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
+            </div>
+            <div v-else>
+             tip: ${{currentAmountToAdd | showToFixed }}
+            </div>
 
              
 
               <hr />
 
-              <b>order total: ${{orderTotal.toFixed(2)/100 }}</b>
+              <b>order total: ${{orderTotal | showToFixed }}</b>
 
 
 <br />
@@ -961,6 +1069,9 @@ export default {
     }
   },	
   watch: {	
+      selectedDate(){
+          console.log(this.selectedDate.dayLabel.substring(0,3))
+      },
 tipSelected(){
 
 this.currentOrder.tipSelected = this.tipSelected
@@ -1077,10 +1188,13 @@ if(newAddress){
       let storeCurrentOrder = this.currentOrder;	
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
-    }	
+    },	
     },
   data() {
     return {
+      futureDay:null,
+      futureTime:null,
+      valid: false,
       selectedDate: null,
       selectedTime: null,
       dropDownDays: [],
@@ -1195,8 +1309,118 @@ if(newAddress){
       value = value.toString();
       return value.charAt(0).toUpperCase() + value.slice(1);
     },
+showToFixed: function (value) {
+    let decvalue = value/100
+
+    return decvalue.toFixed(2)
+}
   },
   methods: {
+currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
+
+    var weekday=new Array(7);
+    weekday[0]="mon";
+    weekday[1]="tue";
+    weekday[2]="wed";
+    weekday[3]="thu";
+    weekday[4]="fri";
+    weekday[5]="sat";
+    weekday[6]="sun";
+
+            if(!futureDay && !futureTime){
+
+                let currentDate = new Date();   
+
+                let startDate = new Date(currentDate.getTime());
+                console.log(startDate)
+                startDate.setHours(startTime.split(":")[0]);
+                startDate.setMinutes(startTime.split(":")[1]);
+
+                let endDate = new Date(currentDate.getTime());
+                endDate.setHours(endTime.split(":")[0]);
+                endDate.setMinutes(endTime.split(":")[1]);
+
+                if(rules.includes(weekday[currentDate.getDay()])){
+                    return startDate < currentDate && endDate > currentDate
+                }
+            }
+
+
+if(futureDay){
+if(!futureTime){
+    if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
+        return true
+    }
+}else{
+
+
+                let currentDate = Date.parse(futureTime.time) 
+
+                let startDate2 = new Date(currentDate);
+                let startDate3 = moment(startDate2)._i
+                console.log(startDate3)
+                startDate3.setHours(startTime.split(":")[0]);
+                startDate3.setMinutes(startTime.split(":")[1]);
+
+
+                let endDate2 = new Date(currentDate);
+                let endDate3 = moment(endDate2)._i
+
+                endDate3.setHours(endTime.split(":")[0]);
+                endDate3.setMinutes(endTime.split(":")[1]);
+   
+                return startDate3 < currentDate && endDate3 > currentDate
+
+}
+
+}
+
+
+
+
+            // if(futureDay){
+            
+            //         if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
+
+            //         if(futureTime){
+            //         let parsedTime = Date.parse(futureTime.time)
+            //         //   let currentDate = moment(parsedTime).format('HH:mm')  
+            //         let startDate = new Date(moment(parsedTime).format('HH:mm') );
+            //         startDate.setHours(startTime.split(":")[0]);
+            //         startDate.setMinutes(startTime.split(":")[1]);
+
+            //         let endDate = new Date(moment(parsedTime).format('HH:mm') );
+            //         endDate.setHours(endTime.split(":")[0]);
+            //         endDate.setMinutes(endTime.split(":")[1]);
+            //         }else{
+            //         return startDate < currentDate && endDate > currentDate
+            //         }
+
+
+
+            //         }
+            // }
+
+},
+          returnAvailableNow(){
+        let startTime = '10:00:00';
+let endTime = '13:00:00';
+
+let currentDate = new Date()   
+
+let startDate = new Date(currentDate.getTime());
+startDate.setHours(startTime.split(":")[0]);
+startDate.setMinutes(startTime.split(":")[1]);
+startDate.setSeconds(startTime.split(":")[2]);
+
+let endDate = new Date(currentDate.getTime());
+endDate.setHours(endTime.split(":")[0]);
+endDate.setMinutes(endTime.split(":")[1]);
+endDate.setSeconds(endTime.split(":")[2]);
+
+
+this.valid = startDate < currentDate && endDate > currentDate
+    },
 hideGiftcard(){
   this.giftCardPanel = false
 },
@@ -1244,7 +1468,7 @@ showGiftcard(){
           cardNumber: self.cardNumberInput
         })
         .then(function (response) {
-          console.log(response)
+        //   console.log(response)
           if (
             Number(
               response.data.resSendData.Responses[0].SvInquiry[0]
@@ -1258,7 +1482,7 @@ showGiftcard(){
                 useAmount: self.orderTotal.toFixed(2)/100
               })
               .then(function (response) {
-                     console.log(response)
+                    //  console.log(response)
                 self.currentBalance =
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
                   
@@ -1445,7 +1669,7 @@ this.attention = true
         emergepay.open({
           transactionToken: transactionToken,
           onTransactionSuccess: function (approvalData) {
-            console.log("Approval Data", approvalData);
+            // console.log("Approval Data", approvalData);
             emergepay.close();
 
               if(self.$store.state.storeCurrentOrder.preorder === true){
@@ -1458,7 +1682,7 @@ this.attention = true
           
           },
           onTransactionFailure: function (failureData) {
-            console.log("Failure Data", failureData);
+            // console.log("Failure Data", failureData);
           },
           onTransactionCancel: function () {
             console.log("transaction cancelled!");
@@ -1507,10 +1731,10 @@ this.attention = true
       // this.currentItemModifierArray.push(modAddition);
 
       this.currentItem.price_cents = Number(this.currentItem.price_cents) + Number(mod.price_cents);
-      console.log(this.currentItem)
+    //   console.log(this.currentItem)
       document.getElementById("add-" + mod.id).disabled = true;
       document.getElementById("remove-" + mod.id).disabled = false;
-      console.log('reset upserves')
+    //   console.log('reset upserves')
 
     },
     removeAddOn(mod, modifieritem) {
@@ -1529,7 +1753,7 @@ this.attention = true
 
      document.getElementById("add-" + removal.id).disabled = false;
       document.getElementById("remove-" + removal.id).disabled = true;
-      console.log('reset upserves')
+    //   console.log('reset upserves')
 
 
 
@@ -1763,7 +1987,7 @@ if(this.tipSelected === 0){
 
       document.getElementById("add-" + item.id).disabled = true;
       document.getElementById("remove-" + item.id).disabled = false;
-      console.log('reset upserves')
+    //   console.log('reset upserves')
 
 
 
@@ -1838,6 +2062,7 @@ if(this.tipSelected === 0){
       }
     },
     async upserves() {
+
       let responseUpserve = await this.$http.get(this.menuEndpoint);
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -1849,9 +2074,12 @@ if(this.tipSelected === 0){
       this.modifiers = responseUpserve.data.body.modifiers;
       this.modifierItems = responseUpserve.data.body.modifiers;
 
+// console.log(upserveProducts)
+// console.log(responseUpserve.data.body.sections)
+// console.log(responseUpserve.data.body.tax_rates[0].percentage_rate)
 
-
-
+// console.log(responseUpserve.data.body.modifier_groups)
+// console.log(responseUpserve.data.body.modifiers)
     },
     scheduleAnOrder(currentOrder,approvalData,giftcardbalance) {
 
@@ -1884,10 +2112,10 @@ if(this.tipSelected === 0){
   
       this.$http.post("/confirmationemail",currentOrder)
       .then((response) => {
-          console.log('confirmation email sent')
+        //   console.log('confirmation email sent')
       }).catch((e) => {
-          console.log("errors");
-          console.log(e);
+        //   console.log("errors");
+        //   console.log(e);
         });
 
 
@@ -1899,10 +2127,10 @@ if(this.tipSelected === 0){
      this.$http
         .post("/order/addorder", infoForPayStringify)
         .then((response) => {
-          console.log('add to mongo emerge pay front end')
+        //   console.log('add to mongo emerge pay front end')
 
 // console.log(currentOrder);
-console.log(currentOrder)
+// console.log(currentOrder)
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
           self.orderCMR = currentOrder;
@@ -1923,12 +2151,12 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
       this.$http
         .post(this.oloEndpoint, currentOrder)
         .then((response) => {
-          console.log(response);
+        //   console.log(response);
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
           self.orderCMR = response.data;
           let orderCMR = response.data;
-          console.log(response.data)
+        //   console.log(response.data)
           orderCMR.giftcardbalance = giftcardbalance
           self.$store.commit("orderCMR", { orderCMR });
           this.$router.push("/orderconfirmation");
@@ -2291,6 +2519,8 @@ dropDown(){
     }
   },
   mounted() {
+
+      this.returnAvailableNow();
     this.getUser();
     this.upserves();
     emergepay.init();
@@ -2300,32 +2530,33 @@ dropDown(){
     this.$store.state.orderConfirmationModalResponse = {};
 //reset
 //reset
-                this.total = 0
-                this.currentAmountToAddCustom = 0
-                this.tipSelected = 0
-                this.currentAmountToAdd = 0
-                this.tip = 0
-                this.total = 0
-                this.cartTotal = 0
-                this.currentOrder.charges.total = 0
-                this.currentOrder.charges.fees = 0
-                this.currentOrder.charges.taxes = 0
-                this.currentOrder.charges.tip.amount = 0
-                this.currentOrder.payments.payments.amount = null;
-                if(this.$store.state.storeCurrentOrder.charges){
-                  this.total = this.$store.state.storeCurrentOrder.charges.preTotal;
-                }
-                this.currentOrder = this.$store.state.storeCurrentOrder;
 
-//reset
-//reset
-console.log(this.title)
 
-// this.currentOrder.restaurant = this.title
 
-// let storeCurrentOrder = this.currentOrder.restaurant
+if(this.title === this.$store.state.storeCurrentOrder.restaurant){
+    this.total = 0
+    this.currentAmountToAddCustom = 0
+    this.tipSelected = 0
+    this.currentAmountToAdd = 0
+    this.tip = 0
+    this.total = 0
+    this.cartTotal = 0
+    this.currentOrder.charges.total = 0
+    this.currentOrder.charges.fees = 0
+    this.currentOrder.charges.taxes = 0
+    this.currentOrder.charges.tip.amount = 0
+    this.currentOrder.payments.payments.amount = null;
+    if(this.$store.state.storeCurrentOrder.charges){
+        this.total = this.$store.state.storeCurrentOrder.charges.preTotal;
+    }
+    this.currentOrder = this.$store.state.storeCurrentOrder;
+}else{
+    this.$store.state.storeCurrentOrder = {};
+}
 
-// this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+
+
+
 
 
 if(this.$store.state.openDrawerOnLoad === true){

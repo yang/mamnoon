@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="halfwidth-orange" @click="openLink(linkOut2)" id="reservemamnoonbutton"> -->
-  <div id="mamnoon-reserve" class="halfwidth-orange2" @click="openSevenRooms('reservemamnoonbutton')">
+  <div id="mamnoon-reserve" class="halfwidth-yellow1 wider" @click="openSevenRooms('reservemamnoonbutton')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05">
       <defs>
       </defs>
@@ -72,52 +72,31 @@ export default {
 </script>
 
         <style lang="scss">
+
+
+.halfwidth-yellow1.wider{
+    width: 50%;
+    float: left;
+}
+
+
+@media only screen and (max-width: 768px){
+
+.halfwidth-yellow1.wider{
+    width: 100%;
+    float: left;
+}
+
+
+
+}
+
   .cls-156 {
     fill: #49494a;
   }
 
 
-  .halfwidth-orange2{
-    height: 150px;
-    width: 50%;
-    // width: 33.33%;
-    background: #F9A658;
-    float: left;
-    text-align: center;
-    cursor: pointer;
 
-svg{
-    width: 40%;
-    margin: 62px auto 0;
-    text-align: center;
-}
-
-
-
-}
-
-
-@media only screen and (max-width: 768px) {
- .halfwidth-orange{
-    height: 150px;
-    width: 50%;
-    // width: 33.33%;
-    background: #F9A658;
-    float: left;
-    text-align: center;
-    cursor: pointer;
-
-svg{
-    width: 80%;
-    margin: 62px auto 0;
-    text-align: center;
-}
-
-
-
-}
-
-}
 
 
         </style>

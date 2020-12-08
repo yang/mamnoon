@@ -1155,4 +1155,65 @@ svg#show-all{
 
 }
 
+
+input.custom-tip-button{
+  border: 1px solid #b8b8b8;
+  }
+
+  #customTip{
+    padding: 7px !important;
+    margin-bottom: 0 !important;
+    transform: translate(0px, -2px);
+        margin-top: 2px;
+  }
+
+#upserveolo button.vs__clear{
+    background: transparent;
+    border-radius: 30px;
+    padding: 0 6px;
+
+    svg{
+      transform: translate(.5px,-2.0px);
+      width: 11px;
+      path{
+        fill: #f05d5b;
+      }
+    }
+
+  }
+
+
+
+.preorder-bottom-pad{
+      margin-bottom: 15px;
+}
+
+
+.halfwidth-yellow1.wider.mbar.mbar1{
+
+
+svg{
+  transform: translate(-50%,-56%);
+}
+
+}
+@media only screen and (max-width: 768px){
+
+
+.halfwidth-yellow1.wider.mbar.mbar1{
+
+
+svg{
+    transform: translate(-50%, -77%);
+}
+
+}
+
+}
+
+
+
+
+
+
 </style>

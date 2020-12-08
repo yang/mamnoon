@@ -14,27 +14,25 @@
 
               <template v-if="upserveSectionsRendered">
              <!-- <VueAspectRatio ar="6:7" width="100%" class="">   -->
-        <carousel :items="1" :loop="false" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
+        <carousel @changed="changed($event)" :items="1" :loop="false" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />
             </span>
           </template>
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <template v-for="item in upserveSections" v-if="item.name === 'Feature'">
-            <!-- <template v-for="item in upserveSections"> -->
+            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature'"> -->
+            <template v-for="item in upserveSections">
             <div v-for="piece in item.item_ids" :key="piece">  
                     <template v-for="serve in upserve">
-            <div v-if="serve.id === piece" class="inline-block full-height-slide" style="height:400px;">  
+            <div v-if="serve.id === piece" class="inline-block full-height-slide" :data="serve.restaurant" style="height:400px;">  
             <template v-if="serve.images">
      <div class="outside-slideshow">
 
        
 
-<template v-if="serve.restaurant === 'Mebar'">
-<img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
-</template>
-<template v-else>
+
+<template>
 <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
 </template>
 
@@ -152,9 +150,16 @@
   <div>
    <div>
       <div class="bottom-button" style="text-align: center;">
-         <router-link to="/mamnoon">
-                <OrderStar /> 
-                </router-link>
+        <router-link v-if="currentOrderButton === 'Mamnoon'" to="/mamnoon">
+          <OrderStar /> 
+        </router-link>
+        <router-link v-else-if="currentOrderButton === 'Mamnoon Street'" to="/mamnoonstreet">
+          <OrderStarMamnoonStreet /> 
+        </router-link>
+        <router-link v-else-if="currentOrderButton === 'Mbar'" to="/mbar">
+          <OrderStarMbar /> 
+        </router-link>
+
       </div>
     </div>
   </div>
@@ -164,6 +169,8 @@
 
 <script>
 import OrderStar from "@/components/svgIcons/OrderStar";
+import OrderStarMbar from "@/components/svgIcons/OrderStarMbar";
+import OrderStarMamnoonStreet from "@/components/svgIcons/OrderStarMamnoonStreet";
 import PickupStar from "@/components/svgIcons/PickupStar";
 import DeliveryStar from "@/components/svgIcons/DeliveryStar";
 
@@ -186,6 +193,8 @@ export default {
   name: "coverflow",
   components: {
     OrderStar,
+    OrderStarMamnoonStreet,
+    OrderStarMbar,
     PickupStar,
     DeliveryStar,
     Prev,
@@ -197,6 +206,7 @@ export default {
   },
   data() {
     return {
+      currentOrderButton: '',
       familyMeals: null,
       coverFlowIndex: 0,
       dotsLength: 0,
@@ -289,13 +299,16 @@ this.upserveSectionsRendered = true
 
 this.mbarupserves();
   window.scrollTo(0, 0);
-  window.addEventListener("scroll", this.lazyLoad);
+  // window.addEventListener("scroll", this.lazyLoad);
 
   },
   props: ["data","header","tag","descriptionbody"],
   methods: {
+    changed($event){
 
-
+// console.log(this.upserve[$event.page.index].restaurant)
+this.currentOrderButton = this.upserve[$event.page.index].restaurant
+    },
   lazyLoad: function () {
     let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
     let active = false;
@@ -335,6 +348,9 @@ upserveProducts.forEach(function (element) {
   this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
 
 
+
+this.currentOrderButton = this.upserve[0].restaurant
+
     },
 
         async mbarupserves() {
@@ -351,6 +367,7 @@ upserveProducts.forEach(function (element) {
 
 
   this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
+  this.currentOrderButton = this.upserve[0].restaurant
 },
 
 async streetupserves() {
@@ -359,6 +376,8 @@ async streetupserves() {
       );
       let upserveProducts = responseUpserve.data.body.items;
 
+
+
 upserveProducts.forEach(function (element) {
   element.restaurant = 'Mamnoon Street';
 });
@@ -366,6 +385,7 @@ upserveProducts.forEach(function (element) {
 
 
   this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
+  this.currentOrderButton = this.upserve[0].restaurant
 },
 dumpAcf(){
   this.familyMeals = this.helpArray

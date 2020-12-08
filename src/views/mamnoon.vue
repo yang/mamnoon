@@ -1,7 +1,6 @@
 <template>
   <div class="mamnoon">
     <Nav />
-
 <UpserveOlo :title="'Mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :emailAddress="$store.state.currentUserEmail" />
   </div>
 </template>

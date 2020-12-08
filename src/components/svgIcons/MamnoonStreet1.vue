@@ -166,9 +166,13 @@ export default {
 //   float: left;
   text-align: center;
       cursor: pointer;
+	  position: relative;
   svg {
+	  position: absolute;
+	  left: 50%;
+	  top: 50%;
+	  transform: translate(-50%,-50%);
     width: 40%;
-    margin: 50px auto 0;
     text-align: center;
   }
 }
@@ -176,22 +180,24 @@ export default {
 
 @media only screen and (max-width: 768px) {
 .halfwidth-yellow1 {
-  height: 150px;
+    height: 100px;
   width: 50%;
-    width: 33.33%;
+    width: 100%;
   display: inline-block;
   background: #fff367;
-//   float: right;
+//   float: left;
   text-align: center;
       cursor: pointer;
+	  position: relative;
   svg {
-    width: 80%;
-    // margin: 30px auto 0;
-	    margin: 50px auto 0;
+	  position: absolute;
+	  left: 50%;
+	  top: 50%;
+	  transform: translate(-50%,-50%);
+    width: 40%;
     text-align: center;
   }
 }
-
 
 }
 

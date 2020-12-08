@@ -2,7 +2,7 @@
   <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
         <h4 class="mob-bottom-margin">{{header}}</h4>
         <p class="description-para noselect hide-mobile">{{description}}</p>
-        <div class="width-container">
+        <div class="width-container alacarte-width-container">
 
                          <router-link to="/mamnoon">
                          <!-- mamnoon -->
@@ -17,8 +17,8 @@
 
 
               <router-link to="/mbar">
-    
-            <Mbar1 :caviarLink="false" />
+           <!-- <MamnoonStreet1 :caviarLink="false" /> -->
+            <Mbar2 :caviarLink="false" />
                           </router-link>
 
         </div>
@@ -29,12 +29,12 @@
 
 import Mamnoon1 from '@/components/svgIcons/Mamnoon1.vue'
 import MamnoonStreet1 from '@/components/svgIcons/MamnoonStreet1.vue'
-import Mbar1 from '@/components/svgIcons/Mbar1.vue'
+import Mbar2 from '@/components/svgIcons/Mbar2.vue'
 export default {
     components:{
         Mamnoon1,
         MamnoonStreet1,
-        Mbar1
+        Mbar2
     },
     name: 'alacarte',
     props: ['data','header','tag','description'],
@@ -46,3 +46,30 @@ export default {
 }
 
 </script>
+
+
+<style lang="scss" scoped>
+.alacarte-width-container{
+      height: 150px;
+a{
+   display: inline;
+}
+}
+
+@media only screen and (max-width: 768px) {
+.alacarte-width-container{
+  height: auto;
+a{
+display: flex;
+}
+}
+
+
+
+}
+ 
+
+
+</style>
+
+
