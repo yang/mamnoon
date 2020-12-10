@@ -455,7 +455,7 @@
 </div>
 </template>
 <template v-else>
-<div style="margin-bottom: 10px;"> 
+<div> 
 Now accepting pre orders for pick up.
 </div> 
 </template>
@@ -477,9 +477,9 @@ Now accepting pre orders for pick up.
 
 
 <template v-if="this.currentOrder.charges.items.length > 0">
-  <br><br>
-  <input v-if="valid" style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="preorder" name="preorder" value="preorder" v-model="currentOrder.preorder">
-  <label v-if="valid" class="smblk preorder-bottom-pad" for="preorder">preorder</label>
+  <br>
+  <!-- <input v-if="valid" style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="preorder" name="preorder" value="preorder" v-model="currentOrder.preorder"> -->
+  <!-- <label v-if="valid" class="smblk preorder-bottom-pad" for="preorder">preorder</label> -->
 </template>
 
 
@@ -1433,7 +1433,7 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 
             console.log(startTime)
             console.log(endTime)
-            // startTime = '13:40:00'
+            // startTime = '14:05:00'
               if(startTime && endTime){
 
               let currentDate = new Date()   
@@ -2434,7 +2434,6 @@ if(this.$store.state.openDrawerOnLoad === true){
 <style lang="scss">
 
 .toggleLr{
-margin-bottom: 10px;
   div{
     width: 49%;
     display: inline-block;
