@@ -496,7 +496,7 @@ Now accepting pre orders for pick up.
 </template>
   <template v-else>
 <template v-if="this.currentOrder.charges.items.length > 0">
-
+<br>  
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 <div style="margin-top:15px;" v-if="selectedDate !== null">
 <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
