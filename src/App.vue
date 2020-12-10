@@ -663,13 +663,13 @@ transition: background-color .1s ease;
     padding: 10px;
     width: 100%;
     max-width: 100%;
-    top: 90px;
+    top:0px;
     height: 100vh;
     border-left: 1px solid black;
     transition: all .25s ease;
 
     // border-left: 50px solid #F05D5B;
-    z-index: 99;
+    z-index: 100;
 &.expanded{
       left: 0;
       // border-left: 0px solid #F05D5B;
