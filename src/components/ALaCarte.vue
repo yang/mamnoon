@@ -51,6 +51,7 @@ export default {
 <style lang="scss" scoped>
 .alacarte-width-container{
       height: 150px;
+          background: #fff367;
 a{
    display: inline;
 }
