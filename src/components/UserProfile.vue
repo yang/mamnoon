@@ -10,12 +10,8 @@
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
         <!-- order he -->
         <OrderHistory :currentUser="$store.state" />
-          
-
         </div>
         <div>
-
-
         </div>
         </div>
 </template>

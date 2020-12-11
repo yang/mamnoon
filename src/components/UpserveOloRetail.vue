@@ -1,5 +1,5 @@
 <template>
-  <div id="upserveolo">
+  <div id="upserveolo" class="shopRetail">
     <section>
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
       <div v-if="modalOpen" class="order-modal">
@@ -29,14 +29,7 @@
             <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
               <div v-for="modifier in modifierGroups" :key="modifier.name">
                 <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
-                  <!-- <div v-if="modifier.minimum_required === 0">
-                    <div v-if="modifier.name !== 'Promotions'">(addons not required)</div>
-                  </div>
-                  <div v-else>
-                    minimum_required: {{modifier.minimum_required}}
-                    maximum_required: {{modifier.maximum_required}}
-                  </div> -->
-
+        
                   <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                   <div v-for="mod in modifierItems" :key="mod.id">
 
@@ -92,11 +85,7 @@
               </div>
             </div>
           </div>
-            <textarea
-            type="text"
-            placeholder="special instructions"
-            v-model="textdescription"
-            />
+        
           <!-- <hr /> -->
 
           <button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
@@ -107,11 +96,10 @@
           <div class="add-to-order-footer">
             item total: <b>${{currentItem.price_cents.toFixed(2)/100 * currentItemQuanity }}</b>
 
-
             <button
               class="float-right"
               @click="addToOrder(currentItem)"
-            >add to order</button>
+            >add to cart</button>
 
 
 
@@ -123,37 +111,14 @@
       </div>
 
 
-      <div class="container pt20 no-bot-pad">
-        <div class="row">
-          <div class="col-md-12">
-             <h1 class="text-center">{{title}}</h1>
-              <!-- {{openDays}}
-              {{openTimes}} -->
 
 
-
-          
-               </div>
-        </div>
-      </div>
+ 
 
       <div class="container pt20">
         <div class="row">
           <div class="col-md-12 col-lg-8">
-            <div class="container online-menu">
-              <h4>featured</h4>
-            </div>
-<!--  
-   <template v-if="upserveSections.length === 0">
-     <div class="container text-center pt20">
-       Loading...
-     </div>
-     </template>
-    <template v-else>
-
-
-      
-    </template> -->
+     
 
 
    <template v-if="upserveSections.length === 0">
@@ -163,119 +128,10 @@
      </template>
          <template v-else>
    
-<div id="online-menu" class="is-fullheight no-top-pad">
 
-
-       <carousel id="SixSeven" :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
-              <template class="subprev" slot="prev">
-              <span class="prev">
-              <Prev />
-              </span>
-              </template>
-
-            <template v-for="item in upserveSections" v-if="item.name === 'Feature'">
-            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <!-- <template v-for="item in upserveSections"> -->
-  <VueAspectRatio ar="6:7" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
-                    <template v-for="serve in upserve">
-                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
-                        <div @click="openModal(serve)">
-                            <template v-if="serve.images">
-                              <div class="slide-show-image-home"
-                                v-if="serve.images.online_ordering_menu"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
-
-                              <div
-                                v-else
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >
-                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
-                              </div>
-                            </template>
-                                                 <div class="content-box-upper">
-                              <div class="name">
-                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
-                              {{serve.name}}</div>
-                              <div
-                                v-if="serve.description"
-                                class="food-description"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                            </div></div>
-                            </div>
-                    </template>
-         </VueAspectRatio>
-          </template>
-                    <template class="subnext" slot="next">
-            <span class="next">
-              <Next />
-            </span>
-          </template>
-            </carousel>
-
-
-        <carousel id="FourThree" :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
-              <template class="subprev" slot="prev">
-              <span class="prev">
-              <Prev />
-              </span>
-              </template>
-
-            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <template v-for="item in upserveSections">
-  <VueAspectRatio ar="4:3" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
-                    <template v-for="serve in upserve">
-                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
-                        <div @click="openModal(serve)">
-                            <template v-if="serve.images">
-                              <div class="slide-show-image-home"
-                                v-if="serve.images.online_ordering_menu"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
-
-                              <div
-                                v-else
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >
-                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
-                              </div>
-                            </template>
-                                                 <div class="content-box-upper">
-                              <div class="name">
-                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
-                              {{serve.name}}</div>
-                              <div
-                                v-if="serve.description"
-                                class="food-description"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                            </div></div>
-                            </div>
-                    </template>
-         </VueAspectRatio>
-          </template>
-                    <template class="subnext" slot="next">
-            <span class="next">
-              <Next />
-            </span>
-          </template>
-            </carousel>
-</div>
 </template>
-<br>
 <div class="container online-menu">
-<h4>full {{title.toLowerCase()}} menu</h4>
-</div>
-<div>
+<h4>Online Shop</h4>
 </div>
 
    <template v-if="upserveSections.length === 0">
@@ -284,157 +140,90 @@
      </div>
      </template>
          <template v-else>
+
+
+<div style="background: #f58e58;text-align:center;padding: 10px; margin-bottom: 10px;">
+  <ul class="filters">
+      <li @click="currentFilter = 'All'">All</li>
             <template v-for="item in upserveSections">
-<div style="display:none;" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"></div>
-              <template v-else>
+              <li @click="currentFilter = item.name"  v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
+         
+                 {{item.name.replace('- To Go', '').replace('To Go', '')}}
+         
+     </li>
+            </template>
+            </ul>
+</div>
+
+
+<div class="container">
+
+<div class="row">
+            <template v-for="item in upserveSections">
+              <template v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
                 <template v-if="item.timing_mask === null">
-
-
-
-
-              <div class="container menu-line">
-              <div
-                :id="'drawertop-'+ item.id"
-                @click="expandChild(item.id)"
-                class="display-block row no-lr-margin"
-              >
-                <h2 class="menu-header">
-                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
-
-                      &nbsp;&nbsp;{{item.timing_mask}}
-                </h2>
-              </div>
-              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+ 
+                <template v-if="currentFilter === 'All' || currentFilter === item.name">
               
-                    <template v-for="serve in upserveList" class="grey-bg">
-                      <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg" @click="openModal(serve)">
-                          <div class="half-width2left">
-                            <div class="content-box">
-                              <div class="name">{{serve.name}}</div>
-                              <!-- <div class="item">
-                                {{serve}}
-                              </div> -->
-                              <div
-                                v-if="serve.description"
-                                class="food-description"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-                                <!-- {{serve}} -->
-                                <!-- ${{ serve.price }} -->
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                              <br />
-                              <!-- <button @click="openModal(serve)">view</button> -->
-                            </div>
-                          </div>
-                          <div class="half-width2right">
+                <div class="col-6 col-md-4 shop-item no-lr-pad" v-for="piece in item.item_ids" :key="piece">
+              
+                    <template v-for="serve in upserveList">
+                      <template v-if="serve.id === piece">
+                        <div class="itemContainer" @click="openModal(serve)">
                             <template v-if="serve.images">
                               <div
                                 v-if="serve.images.online_ordering_menu"
-                                class="backgroundImage"
+                                class="backgroundImageSquare"
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
                               <div
                                 v-else
-                                class="backgroundImage"
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >     <NadiIconSm /></div>
+                                class="backgroundImageSquare"
+                              >   
+                              <div class="content">
+
+                              
+                              
+                               <NadiIconSm />
+                              </div>
+                              
+                              
+                              </div>
                             </template>
                     
-                          </div>
+        
+                    <div class="description-panel">
+                              <div>{{serve.name}}</div>
+                         <!-- {{item.name}} -->
+                              <!-- <div
+                                v-if="serve.description"
+                              >{{serve.description}}</div> -->
+                              <div class="food-price">
+                            
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                              </div>
+                        
+                          
+                 
+
                         </div>
                       </template>
                     </template>
                
                 </div>
-              </div>
-              </div>
 
+         </template>
 
+   
+           
 
+ </template>
 
-
-
-
-
-
-
-
-                </template>
-                <template v-else>
-              <div v-if="currentlyavailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
-              <div
-                :id="'drawertop-'+ item.id"
-                @click="expandChild(item.id)"
-                class="display-block row no-lr-margin"
-              >
-                <h2 class="menu-header">
-                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
-
-                  &nbsp;&nbsp;{{item.timing_mask}}
-                </h2>
-              </div>
-              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
-              
-                    <template v-for="serve in upserveList" class="grey-bg">
-                      <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg" @click="openModal(serve)">
-                          <div class="half-width2left">
-                            <div class="content-box">
-                              <div class="name">{{serve.name}}</div>
-                              <!-- <div class="item">
-                                {{serve}}
-                              </div> -->
-                              <div
-                                v-if="serve.description"
-                                class="food-description"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-
-
-<!-- {{serve}} -->
-                                <!-- ${{ serve.price }} -->
-
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                              <br />
-                              <!-- <button @click="openModal(serve)">view</button> -->
-                            </div>
-                          </div>
-                          <div class="half-width2right">
-                            <template v-if="serve.images">
-                              <div
-                                v-if="serve.images.online_ordering_menu"
-                                class="backgroundImage"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-                              <div
-                                v-else
-                                class="backgroundImage"
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >     <NadiIconSm /></div>
-                            </template>
-                    
-                          </div>
-                        </div>
-                      </template>
-                    </template>
-               
-                </div>
-              </div>
-              </div>
-  </template>
      </template>
 
             </template>
-
+</div></div>
   </template>
 
 
@@ -457,7 +246,7 @@
 </template>
 <template v-else>
 <div> 
-Now accepting pre orders for pick up.
+Come and pick up your items during store hours or get them shipped to your door via usps!
 </div> 
 </template>
 
@@ -472,15 +261,11 @@ Now accepting pre orders for pick up.
   
   </button>
 <button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;">edit order</button>
-<!-- <button @click="panelShowChoose('customerInfo')" class="filehalf deactivated" disabled="disabled" v-if="this.currentOrder.charges.items.length === 0">customer info</button> -->
-<!-- <button @click="panelShowChoose('customerInfo')" class="filehalf" v-else>customer info</button> -->
-
 
 
 <template v-if="this.currentOrder.charges.items.length > 0">
   <br>
-  <!-- <input v-if="valid" style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="preorder" name="preorder" value="preorder" v-model="currentOrder.preorder"> -->
-  <!-- <label v-if="valid" class="smblk preorder-bottom-pad" for="preorder">preorder</label> -->
+
 </template>
 
 
@@ -511,32 +296,8 @@ Now accepting pre orders for pick up.
   <div class="container">
       <hr />
   </div>
-<!-- <div class="container small-message mt10" v-if="this.currentOrder.fulfillment_info.type === ''">
-
-delivery or pickup?
-  </div> -->
-
-
-            <!-- google area -->
-
             <div v-if="currentOrder" class="container  mt10">
-              <!-- <button
-              style="display:none;"
-                class="delivery-option"
-                :class="{selected : currentOrder.fulfillment_info.type === 'delivery'}"
-                @click="deliveryOption('delivery')"
-              >delivery</button>&nbsp;&nbsp; -->
-              <!-- <button
-               style="display:none;"
-                class="delivery-option"
-                :class="{selected : currentOrder.fulfillment_info.type === 'pickup'}"
-                @click="deliveryOption('pickup')"
-              >pickup</button> -->
-             <!-- <br /> -->
-
-
-              <!-- <div v-if="googVPresent === true"> -->
-              <!-- </div> -->
+          
   <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">address</h4>
 <div v-if="currentOrder.fulfillment_info.type === 'delivery'">
 <div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid delivery address</div>
@@ -561,19 +322,10 @@ delivery or pickup?
 
 
 
-
-
-
-
-              
-              <!-- <br v-if="currentOrder.fulfillment_info.type === 'delivery'" /> -->
-              <!-- {{errors}} -->
               <form class="mb20" @submit="checkForm">
 
 
  
-
-
 
                 <div v-if="this.currentOrder.fulfillment_info.type === 'delivery'" style="margin-top: 10px;">
                  
@@ -666,15 +418,7 @@ delivery or pickup?
                     />
                   </div>
                   <hr />
-                  <label class="smblk">special instructions:</label>
-                  <br />
-                  <textarea
-                    type="text"
-                    id="specialinstructions"
-                    name="specialinstructions"
-                    placeholder="eg, leave on doorstep"
-                    v-model="currentOrder.fulfillment_info.instructions"
-                  />
+           
 
                      </div>
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
@@ -827,42 +571,6 @@ delivery or pickup?
 <template v-if="this.currentOrder.charges.items.length > 0">
               <!-- <div class="mt10" v-if="total > 0"> -->
               <div class="mt10">
-                <button id="noTip" class="tipButton quarter" style="display:none;" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
-                <button
-                  id="tipOption1"
-                  class="tipButton quarter"
-                  @click="setTip(1)">
-                  <b>18%</b>
-                  <br>
-                  (${{tip1 | showToFixed }})  
-
-
-                  <!-- (${{tip1.toFixed(2)/100 }}) -->
-                  </button>&nbsp;
-                <button
-                  id="tipOption2"
-                  class="tipButton quarter"
-                  @click="setTip(2)">
-                  <b>22%</b>
-                  <br>
-                  (${{tip2 | showToFixed }})  
-                  <!-- (${{tip2.toFixed(2)/100 }}) -->
-                  </button>&nbsp;
-                <button
-                  id="tipOption3"
-                  class="tipButton quarter"
-                  @click="setTip(3)"><b>25%</b>
-                  <br>
-                  (${{tip3 | showToFixed }})  
-                  <!-- (${{tip3.toFixed(2)/100 }}) -->
-                  </button>&nbsp;
-                <br>
-                <button
-                  id="customTip"
-                  class="tipButton customtip"
-                  :class="{activated: this.customTipVisible}"
-                  @click="setTip(4)"
-                >custom</button>
                 &nbsp;
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
 
@@ -1014,7 +722,7 @@ import tz from 'moment-timezone'
 
 import swal from "sweetalert";
 export default {
-  name: "UpserveOlo",
+  name: "UpserveOloRetail",
   props: ["data","emailAddress","oloEndpoint","menuEndpoint","title"],
   components: {
     OrderConfirmationModal,
@@ -1195,6 +903,7 @@ if(newAddress){
     },
   data() {
     return {
+      currentFilter: 'All',
       preOrderToggle: false,
       currentRestaurantDays: [],
       rendered: false,
@@ -1607,67 +1316,6 @@ this.attention = false
 },
     toggleDrawer(){
 this.toggledDrawer = !this.toggledDrawer
-    },
-    setTip(index) {
-
-// this.currentAmountToAddCustom = 0
-this.tipSelected = index
-
-
-if(index === 0){
-this.showingCustom(false)
-  document.getElementById("noTip").disabled = true;
-  document.getElementById("tipOption1").disabled = false;
-  document.getElementById("tipOption2").disabled = false;
-  document.getElementById("tipOption3").disabled = false;
-  document.getElementById("customTip").disabled = false;
-this.currentAmountToAdd = 0
-this.customTipVisible = false
-}else if(index === 1){
-      
-this.showingCustom(false)
-  document.getElementById("noTip").disabled = false;
-  document.getElementById("tipOption1").disabled = true;
-  document.getElementById("tipOption2").disabled = false;
-  document.getElementById("tipOption3").disabled = false;
-  document.getElementById("customTip").disabled = false;
-
-this.currentAmountToAdd = this.tip1
-this.customTipVisible = false
-}else if(index === 2){
-
-this.showingCustom(false)
-  document.getElementById("noTip").disabled = false;
-  document.getElementById("tipOption1").disabled = false;
-  document.getElementById("tipOption2").disabled = true;
-  document.getElementById("tipOption3").disabled = false;
-  document.getElementById("customTip").disabled = false;
-this.currentAmountToAdd = this.tip2
-this.customTipVisible = false
-}else if(index === 3){
-this.showingCustom(false)
-  document.getElementById("noTip").disabled = false;
-  document.getElementById("tipOption1").disabled = false;
-  document.getElementById("tipOption2").disabled = false;
-  document.getElementById("tipOption3").disabled = true;
-  document.getElementById("customTip").disabled = false;
-this.currentAmountToAdd = this.tip3
-this.customTipVisible = false
-}else if(index === 4){
-this.showingCustom(true)
-  document.getElementById("noTip").disabled = false;
-  document.getElementById("tipOption1").disabled = false;
-  document.getElementById("tipOption2").disabled = false;
-  document.getElementById("tipOption3").disabled = false;
-  document.getElementById("customTip").disabled = true;
-
-this.customTipVisible = true
-this.currentAmountToAdd = 0
-this.currentAmountToAdd = this.currentAmountToAddCustom * 100
-
-}else{
-
-} 
     },
     refreshGoogle() {
       this.renderKey++;
@@ -2431,6 +2079,133 @@ button.selected{
     box-sizing: border-box;
     color: #f05d5d !important;
 
+}
+
+
+#upserveolo.shopRetail{
+  
+  ul.filters{
+  border-bottom: 0px solid rgba(0, 0, 0, 0.1);
+position: relative;
+display: inline;
+        margin-bottom: 0;
+      li{
+        border-bottom: 0px solid rgba(0, 0, 0, 0.1);
+        color: #fff367;
+        font-weight: 500;
+        margin: 0 5px;
+        text-transform: lowercase;
+            display: inline;
+      }  
+      }
+
+}
+
+
+.no-lr-pad{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.col-sm-4.shop-item{
+  margin-bottom: 10px;
+}
+
+.backgroundImageSquare{
+width: 100%;
+    background-size: 150%;
+    background-position: center;
+
+position: relative;
+.content {
+  background: #f05d5b;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+}
+
+  .backgroundImageSquare:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+
+.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n){
+.itemContainer{
+// background: green;
+padding-left: 8px;
+padding-right: 0;
+}
+}
+.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n+1){
+.itemContainer{
+// background: red;
+padding-left: 0;
+padding-right: 8px;
+}
+}
+
+.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n+2){
+.itemContainer{
+// background: pink;
+padding-left: 4px;
+padding-right: 4px;
+}
+}
+
+
+.description-panel{
+  background: #fff367;
+  padding: 10px;
+}
+
+
+.itemContainer{
+      margin-bottom: 12px;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+.col-6.col-md-4.shop-item.no-lr-pad:nth-child(odd){
+.itemContainer{
+// background: green;
+padding-left: 0px !important;
+padding-right: 4px !important;
+}
+}
+.col-6.col-md-4.shop-item.no-lr-pad:nth-child(even){
+.itemContainer{
+// background: red;
+padding-left: 4px !important;
+padding-right: 0px !important;
+}
+}
+
+
+.container.pt20{
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+
+
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.itemContainer,
+ul li{
+  cursor: pointer;
 }
 
 </style>

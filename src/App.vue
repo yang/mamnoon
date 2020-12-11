@@ -1067,7 +1067,7 @@ li.modal-item{
 
 svg#nadiIconSm{
     width: 100%;
-    height: 240px !important;
+    // height: 240px !important;
 }
 
 #SixSeven{

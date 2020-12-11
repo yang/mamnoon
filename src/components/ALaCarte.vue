@@ -52,6 +52,7 @@ export default {
 .alacarte-width-container{
       height: 150px;
           background: #fff367;
+          overflow: hidden;
 a{
    display: inline;
 }
@@ -59,6 +60,7 @@ a{
 
 @media only screen and (max-width: 768px) {
 .alacarte-width-container{
+        overflow: hidden;
   height: auto;
 a{
 display: flex;

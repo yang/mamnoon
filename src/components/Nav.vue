@@ -8,7 +8,7 @@
                     </router-link>
             </div>
             <div class="hello logButton googleInHeader" style="right:100px">
-                    <router-link to="/shop">
+                    <router-link to="/retail">
                 shop
                     </router-link>
             </div>
