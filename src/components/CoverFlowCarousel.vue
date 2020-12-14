@@ -293,11 +293,17 @@ this.upserveSectionsRendered = true
   },
   mounted() {
     this.dumpAcf()
-    this.upserves();
+    // this.upserves();
+    // this.streetupserves();
+    // this.mbarupserves();
 
-    this.streetupserves();
 
-this.mbarupserves();
+    this.upservesMongo();
+    this.streetupservesMongo();
+    this.mbarupservesMongo();
+
+
+
   window.scrollTo(0, 0);
   // window.addEventListener("scroll", this.lazyLoad);
 
@@ -333,8 +339,42 @@ this.currentOrderButton = this.upserve[$event.page.index].restaurant
 
     }
   },
+  async upservesMongo() {
 
-        async upserves() {
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
+      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+upserveProducts.forEach(function (element) {
+  element.restaurant = 'Mamnoon';
+});
+    this.upserve = this.upserve.concat(upserveProducts);
+    this.upserveSections = this.upserveSections.concat(responseUpserve.data.doc[0].menu.sections);
+    this.currentOrderButton = this.upserve[0].restaurant
+    },
+        async mbarupservesMongo() {
+
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/mbar`);
+      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+upserveProducts.forEach(function (element) {
+  element.restaurant = 'Mbar';
+});
+    this.upserve = this.upserve.concat(upserveProducts);
+    this.upserveSections = this.upserveSections.concat(responseUpserve.data.doc[0].menu.sections);
+    this.currentOrderButton = this.upserve[0].restaurant
+},
+async streetupservesMongo() {
+
+
+         let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoonstreet`);
+      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+
+upserveProducts.forEach(function (element) {
+  element.restaurant = 'Mamnoon Street';
+});
+    this.upserve = this.upserve.concat(upserveProducts);
+    this.upserveSections = this.upserveSections.concat(responseUpserve.data.doc[0].menu.sections);
+    this.currentOrderButton = this.upserve[0].restaurant
+},
+async upserves() {
       let responseUpserve = await this.$http.get(
         "/product/upserveolo"
       );
@@ -342,50 +382,34 @@ this.currentOrderButton = this.upserve[$event.page.index].restaurant
 upserveProducts.forEach(function (element) {
   element.restaurant = 'Mamnoon';
 });
-
-  this.upserve = this.upserve.concat(upserveProducts);
-[]
-  this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
-
-
-
-this.currentOrderButton = this.upserve[0].restaurant
-
+    this.upserve = this.upserve.concat(upserveProducts);
+    this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
+    this.currentOrderButton = this.upserve[0].restaurant
     },
-
         async mbarupserves() {
       let responseUpserve = await this.$http.get(
         "/product/upserveolombar"
       );
       let upserveProducts = responseUpserve.data.body.items;
-
-
 upserveProducts.forEach(function (element) {
   element.restaurant = 'Mbar';
 });
-      this.upserve = this.upserve.concat(upserveProducts);
-
-
-  this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
-  this.currentOrderButton = this.upserve[0].restaurant
+    this.upserve = this.upserve.concat(upserveProducts);
+    this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
+    this.currentOrderButton = this.upserve[0].restaurant
 },
-
 async streetupserves() {
       let responseUpserve = await this.$http.get(
         "/product/upserveolostreet"
       );
       let upserveProducts = responseUpserve.data.body.items;
 
-
-
 upserveProducts.forEach(function (element) {
   element.restaurant = 'Mamnoon Street';
 });
-      this.upserve = this.upserve.concat(upserveProducts);
-
-
-  this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
-  this.currentOrderButton = this.upserve[0].restaurant
+    this.upserve = this.upserve.concat(upserveProducts);
+    this.upserveSections = this.upserveSections.concat(responseUpserve.data.body.sections);
+    this.currentOrderButton = this.upserve[0].restaurant
 },
 dumpAcf(){
   this.familyMeals = this.helpArray
