@@ -1733,13 +1733,30 @@ if(this.tipSelected === 0){
       this.modifiers = responseUpserve.data.body.modifiers;
       this.modifierItems = responseUpserve.data.body.modifiers;
 
-// console.log(upserveProducts)
-// console.log(responseUpserve.data.body.sections)
-// console.log(responseUpserve.data.body.tax_rates[0].percentage_rate)
-
-// console.log(responseUpserve.data.body.modifier_groups)
-// console.log(responseUpserve.data.body.modifiers)
+      // let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
+      // let upserveProducts = responseUpserve.data.doc[0].menu.items;
     },
+    async upservesMongo() {
+
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
+      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+      this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
+      this.upserveSections = responseUpserve.data.doc[0].menu.sections;
+      this.upserveTaxRate =
+        responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
+      this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
+      this.modifiers = responseUpserve.data.doc[0].menu.modifiers;
+      this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
+
+      // let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
+      // let upserveProducts = responseUpserve.data.doc[0].menu.items;
+    },
+
+
+
+
+
     scheduleAnOrder(currentOrder,approvalData,giftcardbalance) {
 
 
@@ -1999,7 +2016,8 @@ dropDown(){
 
       // this.returnAvailableNow();
     this.getUser();
-    this.upserves();
+    // this.upserves();
+    this.upservesMongo();
     emergepay.init();
 
     this.$store.state.storeCurrentOrder = {};

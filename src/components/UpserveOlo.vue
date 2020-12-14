@@ -1326,6 +1326,37 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+    async upserves() {
+
+      let responseUpserve = await this.$http.get(this.menuEndpoint);
+      let upserveProducts = responseUpserve.data.body.items;
+      this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
+      this.upserveSections = responseUpserve.data.body.sections;
+      this.upserveTaxRate =
+        responseUpserve.data.body.tax_rates[0].percentage_rate;
+      this.modifierGroups = responseUpserve.data.body.modifier_groups;
+      this.modifiers = responseUpserve.data.body.modifiers;
+      this.modifierItems = responseUpserve.data.body.modifiers;
+
+
+    },
+async upserveMongo(){
+
+      let self = this
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/${self.title.toLowerCase().replace(' ','')}`);
+      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+      this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
+      this.upserveSections = responseUpserve.data.doc[0].menu.sections;
+      this.upserveTaxRate =
+       responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
+      this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
+      this.modifiers =responseUpserve.data.doc[0].menu.modifiers;
+      this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
+
+},
   async getHours(){
 
     let self = this
@@ -2072,26 +2103,6 @@ if(this.tipSelected === 0){
         }
       }
     },
-    async upserves() {
-
-      let responseUpserve = await this.$http.get(this.menuEndpoint);
-      let upserveProducts = responseUpserve.data.body.items;
-      this.upserve = upserveProducts;
-      this.upserveList = upserveProducts;
-      this.upserveSections = responseUpserve.data.body.sections;
-      this.upserveTaxRate =
-        responseUpserve.data.body.tax_rates[0].percentage_rate;
-      this.modifierGroups = responseUpserve.data.body.modifier_groups;
-      this.modifiers = responseUpserve.data.body.modifiers;
-      this.modifierItems = responseUpserve.data.body.modifiers;
-
-// console.log(upserveProducts)
-// console.log(responseUpserve.data.body.sections)
-// console.log(responseUpserve.data.body.tax_rates[0].percentage_rate)
-
-// console.log(responseUpserve.data.body.modifier_groups)
-// console.log(responseUpserve.data.body.modifiers)
-    },
     scheduleAnOrder(currentOrder,approvalData,giftcardbalance) {
 
 
@@ -2347,11 +2358,13 @@ dropDown(){
   },
   mounted() {
 
+
+this.upserveMongo();
     this.getHours();
 
       // this.returnAvailableNow();
     this.getUser();
-    this.upserves();
+    // this.upserves();
     emergepay.init();
 
     this.$store.state.storeCurrentOrder = {};

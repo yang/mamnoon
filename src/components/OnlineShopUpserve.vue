@@ -54,9 +54,9 @@
 
 
 
-<!-- {{item}} -->
 
-<div v-if="item.images.online_ordering_menu" class="squareAspect" :style="{backgroundImage: 'url(' + item.images.online_ordering_menu.main + ')'}">
+
+<div v-if="item.images" class="squareAspect" :style="{'backgroundImage': 'url('+item.images.online_ordering_menu.main+')'}">
 
 
 
@@ -119,8 +119,28 @@ export default {
       leadInScroll: function(){
 console.log('send and expand to retail')
       },
+       async upservesMongo() {
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
+      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+      this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
+      this.upserveSections = responseUpserve.data.doc[0].menu.sections;
 
-       async upserves() {
+
+
+let upserveSectionsRetail = this.upserveSections.filter(item => item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items').map(x => x.item_ids).flat();
+// console.log(upserveSectionsRetail)
+// console.log(this.upserveList)
+
+      this.retailItems = this.upserveList.filter(x=>upserveSectionsRetail.includes(x.id))
+    console.log(this.retailItems)
+    
+      this.refresh++;
+    },
+
+
+
+async upserves() {
 
 
 
@@ -146,9 +166,9 @@ let upserveSectionsRetail = this.upserveSections.filter(item => item.name === 'S
 
     },
     mounted(){
-this.upserves()
+// this.upserves()
 
-
+this.upservesMongo()
     }
 }
 </script>
