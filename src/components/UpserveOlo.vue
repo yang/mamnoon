@@ -402,7 +402,7 @@
 </template>
 <template v-else>
 <div class="mb10"> 
-Now accepting pre orders for pick up.
+Now accepting preorders for pick up starting {{ nextOpen }}
 </div> 
 </template>
 
@@ -416,7 +416,7 @@ Now accepting pre orders for pick up.
 
   
   </button>
-<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;">edit order</button>
+<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:10px;">edit order</button>
 <!-- <button @click="panelShowChoose('customerInfo')" class="filehalf deactivated" disabled="disabled" v-if="this.currentOrder.charges.items.length === 0">customer info</button> -->
 <!-- <button @click="panelShowChoose('customerInfo')" class="filehalf" v-else>customer info</button> -->
 
@@ -1141,6 +1141,7 @@ if(newAddress){
     },
   data() {
     return {
+      nextOpen: '',
       preOrderToggle: false,
       currentRestaurantDays: [],
       rendered: false,
