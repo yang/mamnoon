@@ -112,50 +112,25 @@
               class="float-right"
               @click="addToOrder(currentItem)"
             >add to order</button>
-
-
-
-
           </div>
-
-          <!-- {{currentItem}} -->
         </div>
       </div>
 
 
-      <div class="container pt20 no-bot-pad">
+      <!-- <div class="container pt20 no-bot-pad">
         <div class="row">
           <div class="col-md-12">
              <h1 class="text-center">{{title}}</h1>
-              <!-- {{openDays}}
-              {{openTimes}} -->
-
-
-
-          
-               </div>
+                         </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="container pt20">
+      <div class="container pt40">
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="container online-menu">
-              <h4>featured</h4>
+              <h4>{{title.toLowerCase()}} featured</h4>
             </div>
-<!--  
-   <template v-if="upserveSections.length === 0">
-     <div class="container text-center pt20">
-       Loading...
-     </div>
-     </template>
-    <template v-else>
-
-
-      
-    </template> -->
-
-
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
        Loading...
@@ -174,7 +149,6 @@
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <template v-for="item in upserveSections">
   <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids" :key="piece">  
-  <!-- <VueAspectRatio ar="4:3" width="100%" class="" v-for="piece in item.item_ids" :key="piece">   -->
                     <template v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
                         <div @click="openModal(serve)">
@@ -193,10 +167,7 @@
                               <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
                               </div>
                             </template>
-
-
-
-                                                 <div class="content-box-upper">
+                              <div class="content-box-upper">
                               <div class="name">
                                 <!-- {{item.name.replace('Feature - ', '')}}<br> -->
                               {{serve.name}}</div>
@@ -210,7 +181,6 @@
                             </div></div>
                             </div>
                     </template>
-         <!-- </VueAspectRatio> -->
          </div>
           </template>
                     <template class="subnext" slot="next">
@@ -300,17 +270,6 @@
                 </div>
               </div>
               </div>
-
-
-
-
-
-
-
-
-
-
-
                 </template>
                 <template v-else>
               <div v-if="currentlyavailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
@@ -334,23 +293,14 @@
                           <div class="half-width2left">
                             <div class="content-box">
                               <div class="name">{{serve.name}}</div>
-                              <!-- <div class="item">
-                                {{serve}}
-                              </div> -->
                               <div
                                 v-if="serve.description"
                                 class="food-description"
                               >{{serve.description}}</div>
                               <div class="food-price">
-
-
-<!-- {{serve}} -->
-                                <!-- ${{ serve.price }} -->
-
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
                               <br />
-                              <!-- <button @click="openModal(serve)">view</button> -->
                             </div>
                           </div>
                           <div class="half-width2right">
@@ -391,22 +341,22 @@
 <span v-else>view order</span>
 </button>
 <div v-if="currentOrder" class="container text-center">
-              <template v-if="valid">
+<template v-if="valid">
 <div class="toggleLr">
   <div>
-    <button @click="preOrderToggle = false" :class="{ selected: !preOrderToggle }">asap</button></div> 
+    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
   <div>
-    <button @click="preOrderToggle = true" :class="{ selected: preOrderToggle }">preorder</button> 
+    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
     </div> 
 </div>
 </template>
 <template v-else>
 <div class="mb10"> 
-Now accepting preorders for pick up starting {{ nextOpen }}
+Now accepting preorders for pick up.
 </div> 
 </template>
 
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;margin-top: 7px;background-color: #f05d5b;color: #fff;">
+<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events:none;width: 100%;margin-top: 7px;background-color: #f05d5b;color: #fff;">
       <template v-if="valid">
           your order
   </template>
@@ -431,7 +381,7 @@ Now accepting preorders for pick up starting {{ nextOpen }}
 
 
 <template v-if="valid">
-<template v-if="preOrderToggle">
+<template v-if="preOrderToggleState">
   <div style="margin-top:15px;">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
@@ -852,8 +802,11 @@ cart empty
 
               <template v-if="panelShow === 'customerInfo'">
             <template v-if="giftCardPanel ===  false">
+             
+     <button class="mt10 fw" style="margin-top:20px;"
+              v-if="currentOrder.preorder === true && selectedTime === null" disabled>Credit/Debit Pay</button>
               <button class="mt10 fw" style="margin-top:20px;"
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                v-else-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
@@ -862,8 +815,11 @@ cart empty
         </template>
 
 <template v-if="giftCardPanel ===  false">
+  
 <button 
-v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+v-if="currentOrder.preorder === true && selectedTime === null" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
+<button 
+v-else-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
 @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
 <button 
 v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
@@ -1019,7 +975,21 @@ openTimes(){
 
 },
 selectedDate(){
+
+
+  if(this.selectedDate){
           console.log(this.selectedDate.dayLabel.substring(0,3))
+  }
+
+this.currentOrder.scheduled_time = null
+
+
+let storeCurrentOrder = this.currentOrder;	
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
+     this.selectedTime = null
+
       },
 tipSelected(){
 
@@ -1032,6 +1002,11 @@ let storeCurrentOrder = this.currentOrder;
 },
     selectedTime(){
 this.currentOrder.scheduled_time = this.selectedTime.time
+
+
+let storeCurrentOrder = this.currentOrder;	
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
     },
     email(){
         this.currentOrder.fulfillment_info.customer.email = this.email.toLowerCase();
@@ -1142,7 +1117,7 @@ if(newAddress){
   data() {
     return {
       nextOpen: '',
-      preOrderToggle: false,
+      preOrderToggleState: false,
       currentRestaurantDays: [],
       rendered: false,
       timeslotsCreated: [],
@@ -1273,7 +1248,22 @@ showToFixed: function (value) {
 }
   },
   methods: {
+preOrderToggle(c){
 
+this.preOrderToggleState = c
+
+
+if(c === true){
+      this.currentOrder.preorder = true
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+}else{
+      this.currentOrder.preorder = false
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+}
+
+},
     async upserves() {
 
       let responseUpserve = await this.$http.get(this.menuEndpoint);
@@ -1325,7 +1315,12 @@ async upserveMongo(){
         this.valid = true
         break
         }else{
-      }
+  
+      this.currentOrder.preorder = true
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+  
+  }
 
     }
 

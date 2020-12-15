@@ -245,7 +245,7 @@ that.coverFlowIndex = index
 .left-button {
   cursor: pointer;
   position: absolute;
-  left: 30%;
+  left: 20%;
   width: auto;
       bottom: 130px;
 }
@@ -254,7 +254,7 @@ that.coverFlowIndex = index
   cursor: pointer;
   position: absolute;
   width: auto;
-  right: 30%;
+  right: 20%;
       bottom: 130px;
 }
 

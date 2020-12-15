@@ -812,7 +812,7 @@ margin-top: -3px;
 .is-fullheight [id^="carousel_prev_"] {
   position: absolute;
   top: 14px;
-  left: 30%;
+  left: 20%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     left: 5%;
@@ -821,7 +821,7 @@ margin-top: -3px;
 .is-fullheight [id^="carousel_next_"] {
   position: absolute;
   top: 14px;
-  right: 30%;
+  right: 20%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     right: 5%;
