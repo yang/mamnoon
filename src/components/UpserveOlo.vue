@@ -12,7 +12,7 @@
         <div class="container modal-body order-modal-width order-modal-body">
           <div
             class="item-image-container"
-            v-if="currentItem.images.online_ordering_menu"
+            v-if="currentItem.images"
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
             <img :src="currentItem.images.online_ordering_menu.main" />
@@ -164,61 +164,6 @@
          <template v-else>
    
 <div id="online-menu" class="is-fullheight no-top-pad">
-
-
-       <carousel id="SixSeven" :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
-              <template class="subprev" slot="prev">
-              <span class="prev">
-              <Prev />
-              </span>
-              </template>
-
-            <template v-for="item in upserveSections" v-if="item.name === 'Feature'">
-            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <!-- <template v-for="item in upserveSections"> -->
-  <VueAspectRatio ar="6:7" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
-                    <template v-for="serve in upserve">
-                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
-                        <div @click="openModal(serve)">
-                            <template v-if="serve.images">
-                              <div class="slide-show-image-home"
-                                v-if="serve.images.online_ordering_menu"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
-
-                              <div
-                                v-else
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >
-                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
-                              </div>
-                            </template>
-                                                 <div class="content-box-upper">
-                              <div class="name">
-                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
-                              {{serve.name}}</div>
-                              <div
-                                v-if="serve.description"
-                                class="food-description"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                            </div></div>
-                            </div>
-                    </template>
-         </VueAspectRatio>
-          </template>
-                    <template class="subnext" slot="next">
-            <span class="next">
-              <Next />
-            </span>
-          </template>
-            </carousel>
-
-
         <carousel id="FourThree" :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
               <template class="subprev" slot="prev">
               <span class="prev">
@@ -228,7 +173,8 @@
 
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <template v-for="item in upserveSections">
-  <VueAspectRatio ar="4:3" width="100%" class="" v-for="piece in item.item_ids" :key="piece">  
+  <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids" :key="piece">  
+  <!-- <VueAspectRatio ar="4:3" width="100%" class="" v-for="piece in item.item_ids" :key="piece">   -->
                     <template v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
                         <div @click="openModal(serve)">
@@ -240,13 +186,16 @@
 
                               <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
 
-                              <div
-                                v-else
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                            </template>
+                            <template v-else>
+                              <div v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
                               >
                               <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
                               </div>
                             </template>
+
+
+
                                                  <div class="content-box-upper">
                               <div class="name">
                                 <!-- {{item.name.replace('Feature - ', '')}}<br> -->
@@ -261,7 +210,8 @@
                             </div></div>
                             </div>
                     </template>
-         </VueAspectRatio>
+         <!-- </VueAspectRatio> -->
+         </div>
           </template>
                     <template class="subnext" slot="next">
             <span class="next">
@@ -302,8 +252,6 @@
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
-
-                      &nbsp;&nbsp;{{item.timing_mask}}
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
@@ -338,13 +286,12 @@
                                 class="backgroundImage"
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
-                              <div
-                                v-else
-                                class="backgroundImage"
+                           </template>
+                            <template v-else>
+                              <div class="backgroundImage"
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >     <NadiIconSm /></div>
+                              >     <NadiIconSmX style="height:140px;" /></div>
                             </template>
-                    
                           </div>
                         </div>
                       </template>
@@ -376,8 +323,6 @@
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
-
-                  &nbsp;&nbsp;{{item.timing_mask}}
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
@@ -456,7 +401,7 @@
 </div>
 </template>
 <template v-else>
-<div> 
+<div class="mb10"> 
 Now accepting pre orders for pick up.
 </div> 
 </template>
@@ -1007,7 +952,7 @@ import Prev from "@/components/svgIcons/Prev";
 
 import NadiIcon from "@/components/svgIcons/NadiIcon";
 import NadiIconSm from "@/components/svgIcons/NadiIconSm";
-
+import NadiIconSmX from "@/components/svgIcons/NadiIconSmX";
 
 import moment from 'moment'
 import tz from 'moment-timezone'
@@ -1029,7 +974,8 @@ export default {
     Next,
     Prev,
     NadiIcon,
-    NadiIconSm
+    NadiIconSm,
+    NadiIconSmX
   },
   computed: {	
 
@@ -1369,19 +1315,15 @@ async upserveMongo(){
     this.openDays = this.currentRestaurantHours.information.days_of_week
     let curRest = this.currentRestaurantHours.information.open_time_range
 
-
     for(let i = 0; i < curRest.length; i++){
           this.showTimeInterVals(curRest[i].time_slot.open.split(':')[0],curRest[i].time_slot.close.split(':')[0])
     }
 
-for(let i = 0; i < curRest.length; i++){
-    
+    for(let i = 0; i < curRest.length; i++){
       if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
-console.log('it returned true so break')
-this.valid = true
-break
-      }else{
-        console.log('it didn treturn true')
+        this.valid = true
+        break
+        }else{
       }
 
     }
@@ -2445,5 +2387,12 @@ button.selected{
     color: #f05d5d !important;
 
 }
+
+
+.mb10{
+  margin-bottom: 6px;
+}
+
+
 
 </style>

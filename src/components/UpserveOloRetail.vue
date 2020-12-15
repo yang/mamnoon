@@ -12,7 +12,7 @@
         <div class="container modal-body order-modal-width order-modal-body">
           <div
             class="item-image-container"
-            v-if="currentItem.images.online_ordering_menu"
+            v-if="currentItem.images"
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
             <img :src="currentItem.images.online_ordering_menu.main" />
@@ -46,7 +46,7 @@
                           <div v-if="modifier.name === 'Promotions'">
                             <div v-for="piece in upserveList" :key="piece.name">
                               <div v-if="piece.name === mod.name">
-                                <img :src="piece.images.online_ordering_menu.main" />
+                                <img v-if="piece.images" :src="piece.images.online_ordering_menu.main" />
                               </div>
                             </div>
                           </div>
@@ -172,25 +172,24 @@
                         <div class="itemContainer" @click="openModal(serve)">
                             <template v-if="serve.images">
                               <div
-                                v-if="serve.images.online_ordering_menu"
+                                v-if="serve.images"
                                 class="backgroundImageSquare"
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
-                              <div
-                                v-else
-                                class="backgroundImageSquare"
-                              >   
+                            </template>
+                            <template v-else>
+     <div class="backgroundImageSquare">   
                               <div class="content">
 
-                              
+                            
                               
                                <NadiIconSm />
                               </div>
                               
                               
                               </div>
+
                             </template>
-                    
         
                     <div class="description-panel">
                               <div>{{serve.name}}</div>
@@ -576,7 +575,7 @@ Come and pick up your items during store hours or get them shipped to your door 
 
               </div>
           
-              <hr />  
+              <!-- <hr />   -->
               total: ${{total.toFixed(2)/100 }}
               <br />
               tax: ${{currentTax.toFixed(2)/100 }}

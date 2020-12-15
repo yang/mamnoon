@@ -948,7 +948,7 @@ li.modal-item{
 
 .slide-show-image{
     position: absolute;
-    top: 10px;
+    top: 0px;
     left: 50%;
     height: 440px;
     width: auto !important;

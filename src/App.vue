@@ -337,6 +337,7 @@ form textarea,
 
 
 @media only screen and (max-width: 768px) {
+
   .filtree-half {
     width: calc(100% - 0px);
     float: left;
@@ -1012,7 +1013,7 @@ li.modal-item{
 
 .slide-show-image{
     position: absolute;
-    top: 10px;
+    top: 0px;
     left: 50%;
     height: 440px;
     width: auto !important;
@@ -1073,9 +1074,9 @@ svg#nadiIconSm{
 #SixSeven{
     display: none;
 }
-// #FourThree{
-//     display: none;
-// }
+#FourThree{
+    display: block !important;
+}
 
 }
 
@@ -1210,10 +1211,6 @@ svg{
 }
 
 }
-
-
-
-
 
 
 </style>
