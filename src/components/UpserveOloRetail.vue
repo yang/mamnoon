@@ -240,7 +240,7 @@
     <div>
     <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
   <div>
-    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">ship</button> 
     </div> 
 
 </div>
