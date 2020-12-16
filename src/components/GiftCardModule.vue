@@ -247,7 +247,7 @@ if(!n){
     async getGiftCards() {
       try {
         let response = await this.$http.get("/user/getgiftcards/" + this.emailAddress);
-        console.log(response.data)
+        // console.log(response.data)
         this.giftcards = response.data.usergiftcards
  
          } catch (err) {

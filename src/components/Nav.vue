@@ -20,7 +20,7 @@
         <Burger />
     </a>
 
-    <a v-if="$route.name === 'shop'" class="burger" @click="toggleMenu()">
+    <a v-if="$route.name === 'retail'" class="burger" @click="toggleMenu()">
         <Burger />
     </a>
 
@@ -31,6 +31,10 @@
     <a v-if="$route.name === 'mamnoonstreet'" class="burger" @click="toggleMenu()">
         <Burger />
     </a>
+    <a v-if="$route.name === 'mbar'" class="burger" @click="toggleMenu()">
+        <Burger />
+    </a>
+
 
     <a v-if="$route.name === 'profile'" class="burger" @click="toggleMenu()">
         <Burger />
@@ -100,7 +104,7 @@
 
 
 
-        <nav v-if="$route.name === 'shop'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <nav v-if="$route.name === 'retail'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
@@ -128,40 +132,15 @@
 
 
 
-        <nav v-if="$route.name === 'mamnoon'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <nav v-if="$route.name === 'mamnoon'||$route.name === 'mamnoonstreet'||$route.name === 'mbar'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
-
-
-                    <div v-if="this.$store.state.loggedIn" class="inline-link">
-                <li>
-                    <router-link to="/profile">
-                        profile
+     <li>
+                    <router-link to="/retail">
+                    shop
                     </router-link>
                 </li>
-            </div>
-
-<div class="inline-link">
-           <li class="cursor-pointer" @click="toggleMenu()">
-                        <GoogleAuth />
-                    </li>
-                </div>
-
-
-            </ul>            
-            </scrollactive>
-        </div>
-    </nav>
-
-
-
-
-        <nav v-if="$route.name === 'mamnoonstreet'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
-        <div class="container">
-          <scrollactive :offset="100" ref="scrollactive">
-                          <ul id="menu" class="mobile-menu">
-
 
                     <div v-if="this.$store.state.loggedIn" class="inline-link">
                 <li>
@@ -192,7 +171,7 @@
                           <ul id="menu" class="mobile-menu">
                                    <div class="inline-link">
                 <li>
-                    <router-link to="/shop">
+                    <router-link to="/retail">
                     shop
                     </router-link>
                 </li>

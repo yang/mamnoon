@@ -26,8 +26,8 @@
                     <hr />
           <div v-if="currentItem.modifier_group_ids.length >= 1">
             <h4 class="text-left">addons</h4>
-            <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
-              <div v-for="modifier in modifierGroups" :key="modifier.name">
+            <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
+              <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
                 <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
                   <!-- <div v-if="modifier.minimum_required === 0">
                     <div v-if="modifier.name !== 'Promotions'">(addons not required)</div>
@@ -38,9 +38,9 @@
                   </div> -->
 
                   <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
-                  <div v-for="mod in modifierItems" :key="mod.id">
+                  <div v-for="(mod,i) in modifierItems" :key="'C'+ i">
 
-                    <div v-for="m in modifier.modifier_ids" :key="m">
+                    <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i">
                       <div v-if="m === mod.id" class="box">
                         <div class="box-inner">
                           {{mod.name}}
@@ -51,7 +51,7 @@
 
 
                           <div v-if="modifier.name === 'Promotions'">
-                            <div v-for="piece in upserveList" :key="piece.name">
+                            <div v-for="(piece,i) in upserveList" :key="'E'+ i">
                               <div v-if="piece.name === mod.name">
                                 <img :src="piece.images.online_ordering_menu.main" />
                               </div>
@@ -117,19 +117,41 @@
       </div>
 
 
-      <!-- <div class="container pt20 no-bot-pad">
+      <div class="container pt20 no-bot-pad">
         <div class="row">
-          <div class="col-md-12">
-             <h1 class="text-center">{{title}}</h1>
-                         </div>
+          <div class="col-md-12 red-text text-center">
+             <!-- <h1 class="text-center">{{title}}</h1> -->
+             {{title}},
+         <span v-if="currentRestaurantHours !== ''">
+    {{openDays[0] | capitalizeFirstLetter }}-{{openDays[openDays.length-1] | capitalizeFirstLetter}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
         </div>
-      </div> -->
+      </div>
+      </div>
 
-      <div class="container pt40">
+      <div class="container pt20">
         <div class="row">
+        
+
+
+
+        
           <div class="col-md-12 col-lg-8">
+
+
+    <!-- <div class="container text-center pt20">
+
+<div style="margin-top:15px;">
+<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+</div>
+<div style="margin-top:15px;" v-if="selectedDate !== null">
+<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+</div>
+
+     </div> -->
+
+
             <div class="container online-menu">
-              <h4>{{title.toLowerCase()}} featured</h4>
+              <h4>featured</h4>
             </div>
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
@@ -148,7 +170,7 @@
 
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <template v-for="item in upserveSections">
-  <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids" :key="piece">  
+  <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids"> 
                     <template v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
                         <div @click="openModal(serve)">
@@ -193,11 +215,10 @@
 </template>
 <br>
 <div class="container online-menu">
-<h4>full {{title.toLowerCase()}} menu</h4>
+<h4>full menu</h4>
 </div>
 <div>
 </div>
-
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
        Loading...
@@ -205,13 +226,9 @@
      </template>
          <template v-else>
             <template v-for="item in upserveSections">
-<div style="display:none;" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"></div>
-              <template v-else>
-                <template v-if="item.timing_mask === null">
-
-
-
-
+            <div style="display:none;" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"></div>
+            <template v-else>
+              <template v-if="item.timing_mask === null">
               <div class="container menu-line">
               <div
                 :id="'drawertop-'+ item.id"
@@ -233,20 +250,14 @@
                           <div class="half-width2left">
                             <div class="content-box">
                               <div class="name">{{serve.name}}</div>
-                              <!-- <div class="item">
-                                {{serve}}
-                              </div> -->
                               <div
                                 v-if="serve.description"
                                 class="food-description"
                               >{{serve.description}}</div>
                               <div class="food-price">
-                                <!-- {{serve}} -->
-                                <!-- ${{ serve.price }} -->
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
                               <br />
-                              <!-- <button @click="openModal(serve)">view</button> -->
                             </div>
                           </div>
                           <div class="half-width2right">
@@ -286,7 +297,6 @@
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
                 <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
-              
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg" @click="openModal(serve)">
@@ -316,22 +326,17 @@
                                 v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
                               >     <NadiIconSm /></div>
                             </template>
-                    
                           </div>
                         </div>
                       </template>
                     </template>
-               
                 </div>
               </div>
               </div>
   </template>
-     </template>
-
-            </template>
-
   </template>
-
+  </template>
+  </template>
 
           </div>
 
@@ -391,15 +396,18 @@ Now accepting preorders for pick up.
 </template>
 </template>
   <template v-else>
-<template v-if="this.currentOrder.charges.items.length > 0">
-<br>  
-<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-<div style="margin-top:15px;" v-if="selectedDate !== null">
-<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-</div>
+      <template v-if="this.currentOrder.charges.items.length > 0">
+      <br>  
+      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+      <div style="margin-top:15px;" v-if="selectedDate !== null">
+      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+      </div>
 
 </template>
 </template>
+
+
+
 </div>
 
 <div v-if="panelShow === 'customerInfo'">
@@ -977,9 +985,9 @@ openTimes(){
 selectedDate(){
 
 
-  if(this.selectedDate){
-          console.log(this.selectedDate.dayLabel.substring(0,3))
-  }
+  // if(this.selectedDate){
+  //         console.log(this.selectedDate.dayLabel.substring(0,3))
+  // }
 
 this.currentOrder.scheduled_time = null
 
@@ -1116,6 +1124,7 @@ if(newAddress){
     },
   data() {
     return {
+      currentRestaurantHours: '',
       nextOpen: '',
       preOrderToggleState: false,
       currentRestaurantDays: [],
@@ -1236,6 +1245,23 @@ if(newAddress){
     };
   },
   filters: {
+capitalizeFirstLetter(string) {
+
+  if(string){
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+},
+formatAmPm(value) {
+  if (value) {
+return moment(value, 'HH:mm:ss').format('h:mm:ssa').replace(':00','');
+  }
+},
+formatAmPmFirst(value) {
+  if (value) {
+return moment(value, 'HH:mm:ss').format('h:mm:ss').replace(':00','');
+  }
+},
     capitalize: function (value) {
       if (!value) return "";
       value = value.toString();
@@ -1319,19 +1345,10 @@ async upserveMongo(){
       this.currentOrder.preorder = true
       let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-  
-  }
-
     }
-
-
-
-
+}
 },
-
-
 currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
-
     var weekday=new Array(7);
     weekday[0]="mon";
     weekday[1]="tue";
@@ -1342,11 +1359,9 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
     weekday[6]="sun";
 
             if(!futureDay && !futureTime){
-
                 let currentDate = new Date();   
-
                 let startDate = new Date(currentDate.getTime());
-                console.log(startDate)
+
                 startDate.setHours(startTime.split(":")[0]);
                 startDate.setMinutes(startTime.split(":")[1]);
 
@@ -1380,8 +1395,8 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 },
           returnAvailableNow(startTime,endTime){
 
-            console.log(startTime)
-            console.log(endTime)
+            // console.log(startTime)
+            // console.log(endTime)
             // startTime = '14:30:00'
               if(startTime && endTime){
 
@@ -1399,7 +1414,7 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 
               let tF = startDate < currentDate && endDate > currentDate
               // this.valid = startDate < currentDate && endDate > currentDate
-              console.log(tF)
+              // console.log(tF)
 return tF
 
 //               if(this.valid === true){
@@ -2389,6 +2404,8 @@ button.selected{
   margin-bottom: 6px;
 }
 
-
+.red-text{
+  color: #f05d5b;
+}
 
 </style>

@@ -44,7 +44,7 @@
 <td>
     <div class="text-right-mob">
         <span class="smblk">
-    ${{ order.orderInfo.charges.total.toFixed(2)/100}}
+    ${{ order.orderInfo.charges.total/100 | toFixed}}
     </span>
     </div></td>
 <td class="hide-mob">
@@ -137,6 +137,9 @@ if(order.restaurant === 'Mamnoon'){
     },
         },
             filters: {
+toFixed(value){
+    return value.toFixed(2)
+},
     formatDate(value) {
   if (value) {
         let order = moment(String(value));
