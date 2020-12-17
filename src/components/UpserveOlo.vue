@@ -106,8 +106,6 @@
           <button @click="incrementCurrentItem()">+</button>
           <div class="add-to-order-footer">
             item total: <b>${{currentItem.price_cents.toFixed(2)/100 * currentItemQuanity }}</b>
-
-
             <button
               class="float-right"
               @click="addToOrder(currentItem)"
@@ -121,9 +119,8 @@
         <div class="row">
           <div class="col-md-12 red-text text-center">
              <!-- <h1 class="text-center">{{title}}</h1> -->
-             {{title}},
-         <span v-if="currentRestaurantHours !== ''">
-    {{openDays[0] | capitalizeFirstLetter }}-{{openDays[openDays.length-1] | capitalizeFirstLetter}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
+             
+         <span v-if="currentRestaurantHours !== ''">{{title}}, {{openDays[0] | capitalizeFirstLetter }}-{{openDays[openDays.length-1] | capitalizeFirstLetter}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
         </div>
       </div>
       </div>
@@ -131,26 +128,48 @@
       <div class="container pt20">
         <div class="row">
         
+<div class="col-md-12 col-lg-8">
+
+          <div class="container no-lr-pad">
 
 
+<template v-if="valid">
+<div class="toggleLr">
+  <div>
+    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
+  <div>
+    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+    </div> 
+</div>
+</template>
+<template v-else>
+<div class="mb10"> 
+Now accepting preorders for pick up.
+</div> 
+</template>
 
-        
-          <div class="col-md-12 col-lg-8">
-
-
-    <!-- <div class="container text-center pt20">
-
-<div style="margin-top:15px;">
+<template v-if="valid">
+<template v-if="preOrderToggleState">
+  <div class="leftDropdown">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
-<div style="margin-top:15px;" v-if="selectedDate !== null">
+<div class="rightDropdown" v-if="selectedDate !== null">
 <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
 </div>
+</template>
+</template>
+  <template v-else>
+      <template>
+<div class="leftDropdown">
+      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
+ <div class="rightDropdown" v-if="selectedDate !== null">
+      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+      </div>
 
-     </div> -->
-
-
-            <div class="container online-menu">
+</template>
+</template>
+</div>
+<div class="container online-menu">
               <h4>featured</h4>
             </div>
    <template v-if="upserveSections.length === 0">
@@ -164,16 +183,16 @@
         <carousel id="FourThree" :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
               <template class="subprev" slot="prev">
               <span class="prev">
-              <Prev />
+              <!-- <Prev /> -->
               </span>
               </template>
 
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <template v-for="item in upserveSections">
-  <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids"> 
+            <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids"> 
                     <template v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
-                        <div @click="openModal(serve)">
+                        <div @click="openModal(serve,item.timing_mask)">
                             <template v-if="serve.images">
                               <div class="slide-show-image-home"
                                 v-if="serve.images.online_ordering_menu"
@@ -193,6 +212,7 @@
                               <div class="name">
                                 <!-- {{item.name.replace('Feature - ', '')}}<br> -->
                               {{serve.name}}</div>
+                              
                               <div
                                 v-if="serve.description"
                                 class="food-description"
@@ -205,20 +225,24 @@
                     </template>
          </div>
           </template>
-                    <template class="subnext" slot="next">
+                   <template class="subnext" slot="next">
             <span class="next">
-              <Next />
+              <!-- <Next /> -->
             </span>
           </template>
             </carousel>
 </div>
 </template>
-<br>
-<div class="container online-menu">
-<h4>full menu</h4>
-</div>
-<div>
-</div>
+      <br>
+      <div class="container online-menu">
+      <h4>full menu</h4>
+
+      </div>
+      <div>
+      </div>
+
+
+
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
        Loading...
@@ -228,8 +252,16 @@
             <template v-for="item in upserveSections">
             <div style="display:none;" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"></div>
             <template v-else>
-              <template v-if="item.timing_mask === null">
-              <div class="container menu-line">
+
+
+
+    <template v-if="noFiltering">
+
+
+
+
+              <template v-if="item.timing_mask === item.timing_mask">
+                <div class="container menu-line">
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
@@ -239,6 +271,7 @@
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                  <!-- {{item.timing_mask}} -->
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
@@ -246,7 +279,72 @@
               
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg" @click="openModal(serve)">
+                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                          <div class="half-width2left">
+                            <div class="content-box">
+                              <div class="name">{{serve.name}}</div>
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                              <br />
+                            </div>
+                          </div>
+                          <div class="half-width2right">
+                            <template v-if="serve.images">
+                              <div
+                                v-if="serve.images.online_ordering_menu"
+                                class="backgroundImage"
+                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                              ></div>
+                           </template>
+                            <template v-else>
+                              <div class="backgroundImage"
+                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              >     <NadiIconSmX style="height:140px;" /></div>
+                            </template>
+                          </div>
+                        </div>
+                      </template>
+                    </template>
+               
+                </div>
+              </div>
+              </div>
+                </template>
+
+
+
+
+
+      </template>
+      <template v-else>
+
+
+
+         <template v-if="item.timing_mask === null">
+                <div class="container menu-line">
+              <div
+                :id="'drawertop-'+ item.id"
+                @click="expandChild(item.id)"
+                class="display-block row no-lr-margin"
+              >
+                <h2 class="menu-header">
+                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
+                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                  <!-- {{item.timing_mask}} -->
+                </h2>
+              </div>
+              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+              
+                    <template v-for="serve in upserveList" class="grey-bg">
+                      <template v-if="serve.id === piece" class="inline-block">
+                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
                               <div class="name">{{serve.name}}</div>
@@ -283,7 +381,7 @@
               </div>
                 </template>
                 <template v-else>
-              <div v-if="currentlyavailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
+              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
@@ -299,7 +397,7 @@
                 <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg" @click="openModal(serve)">
+                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
                               <div class="name">{{serve.name}}</div>
@@ -335,6 +433,12 @@
               </div>
   </template>
   </template>
+
+
+
+
+
+  </template>
   </template>
   </template>
 
@@ -346,7 +450,7 @@
 <span v-else>view order</span>
 </button>
 <div v-if="currentOrder" class="container text-center">
-<template v-if="valid">
+<!--<template v-if="valid">
 <div class="toggleLr">
   <div>
     <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
@@ -359,9 +463,9 @@
 <div class="mb10"> 
 Now accepting preorders for pick up.
 </div> 
-</template>
+</template>-->
 
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events:none;width: 100%;margin-top: 7px;background-color: #f05d5b;color: #fff;">
+<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events:none;width: 100%;background-color: #f05d5b;color: #fff;">
       <template v-if="valid">
           your order
   </template>
@@ -384,7 +488,7 @@ Now accepting preorders for pick up.
 </template>
 
 
-
+<div style="display:none;">
 <template v-if="valid">
 <template v-if="preOrderToggleState">
   <div style="margin-top:15px;">
@@ -405,7 +509,7 @@ Now accepting preorders for pick up.
 
 </template>
 </template>
-
+</div>
 
 
 </div>
@@ -698,10 +802,7 @@ delivery or pickup?
 <div class="container mt10">
               <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
-            
-
-
-                  <button class="removeClose" @click="removeFromOrder(order)">
+                    <button class="removeClose" @click="removeFromOrder(order)">
                         <CloseModalRedSm />
                      
                   </button>
@@ -888,7 +989,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 </div></div>
     </section>
 
-<pre>{{$store.state.storeCurrentOrder}}</pre>
+<!--<pre>{{$store.state.storeCurrentOrder}}</pre>-->
 
 
   </div>
@@ -985,18 +1086,56 @@ openTimes(){
 selectedDate(){
 
 
-  // if(this.selectedDate){
-  //         console.log(this.selectedDate.dayLabel.substring(0,3))
-  // }
+
+if(this.selectedDate === null && this.selectedTime === null){
+this.noFiltering = true
+}else{
+  this.noFiltering = false
+}
+
+
+
+
+let itemsToRemove = []
+
+for (var value of this.currentOrder.charges.items) {
+// console.log(moment(this.selectedTime.time).format('HH:mm:ss'))
+
+if(value.timing_mask){
+  console.log(value.timing_mask.rules)
+  console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
+if(!value.timing_mask.rules.includes(this.selectedDate.dayLabel.substring(0,3).toLowerCase())){
+  this.removeFromOrder(value)
+  itemsToRemove.push(value)
+}
+}}
+
+let removalItems = []
+if(itemsToRemove.length > 1){
+removalItems = itemsToRemove.map(x => ' ' + x.name.slice(0, -1) )
+}else{
+removalItems = itemsToRemove.map(x => ' ' + x.name )
+}
+
+
+
+if(removalItems.length === 2){
+  removalItems[removalItems.length - 1] = " and" + removalItems[removalItems.length - 1]
+  removalItems = removalItems.toString().replace(',','');
+}else if(removalItems.length > 2){
+  removalItems[removalItems.length - 1] = " and" + removalItems[removalItems.length - 1]
+}
+
+if(itemsToRemove.length === 1){
+swal(removalItems + ' is not available at the new day you have selected and has been removed from your order.')
+}else if(itemsToRemove.length>1){
+swal(removalItems + ' are not available at the new day you have selected and have been removed from your order.')
+}
 
 this.currentOrder.scheduled_time = null
-
-
 let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
-     this.selectedTime = null
+this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+this.selectedTime = null
 
       },
 tipSelected(){
@@ -1008,14 +1147,61 @@ let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
 },
-    selectedTime(){
-this.currentOrder.scheduled_time = this.selectedTime.time
+selectedTime(){
 
 
-let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+  if(this.selectedDate === null && this.selectedTime === null){
+this.noFiltering = true
+}else{
+  this.noFiltering = false
+}
 
-    },
+let itemsToRemove = []
+
+for (var value of this.currentOrder.charges.items) {
+if(value.timing_mask){
+if(!this.isBetween(value.timing_mask.start_time,value.timing_mask.end_time,moment(this.selectedTime.time).format('HH:mm:ss'))){
+console.log(value + " not available")
+this.removeFromOrder(value)
+itemsToRemove.push(value)
+}}}
+
+
+
+
+let removalItems = []
+if(itemsToRemove.length > 1){
+removalItems = itemsToRemove.map(x => ' ' + x.name.slice(0, -1) )
+}else{
+removalItems = itemsToRemove.map(x => ' ' + x.name )
+}
+
+
+
+
+
+if(removalItems.length === 2){
+  removalItems[removalItems.length - 1] = " and" + removalItems[removalItems.length - 1]
+  removalItems = removalItems.toString().replace(',','');
+}else if(removalItems.length > 2){
+  removalItems[removalItems.length - 1] = " and" + removalItems[removalItems.length - 1]
+}
+
+if(itemsToRemove.length === 1){
+swal(removalItems + ' is not available at the new time you have selected and has been removed from your order.')
+}else if(itemsToRemove.length>1){
+swal(removalItems + ' are not available at the new time you have selected and have been removed from your order.')
+}
+
+  if(this.selectedTime){
+    this.currentOrder.scheduled_time = this.selectedTime.time
+  }else{
+    this.currentOrder.scheduled_time = null
+  }
+
+  let storeCurrentOrder = this.currentOrder;	
+  this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+},
     email(){
         this.currentOrder.fulfillment_info.customer.email = this.email.toLowerCase();
     },
@@ -1124,6 +1310,7 @@ if(newAddress){
     },
   data() {
     return {
+      noFiltering: true,
       currentRestaurantHours: '',
       nextOpen: '',
       preOrderToggleState: false,
@@ -1274,6 +1461,45 @@ showToFixed: function (value) {
 }
   },
   methods: {
+addTimes (startTime, endTime) {
+  var times = [ 0, 0, 0 ]
+  var max = times.length
+
+  var a = (startTime || '').split(':')
+  var b = (endTime || '').split(':')
+
+  // normalize time values
+  for (var i = 0; i < max; i++) {
+    a[i] = isNaN(parseInt(a[i])) ? 0 : parseInt(a[i])
+    b[i] = isNaN(parseInt(b[i])) ? 0 : parseInt(b[i])
+  }
+
+  // store time values
+  for (var i = 0; i < max; i++) {
+    times[i] = a[i] + b[i]
+  }
+
+  var hours = times[0]
+  var minutes = times[1]
+  var seconds = times[2]
+
+  if (seconds >= 60) {
+    var m = (seconds / 60) << 0
+    minutes += m
+    seconds -= 60 * m
+  }
+
+  if (minutes >= 60) {
+    var h = (minutes / 60) << 0
+    hours += h
+    minutes -= 60 * h
+  }
+
+  return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2)
+},
+
+
+
 preOrderToggle(c){
 
 this.preOrderToggleState = c
@@ -1348,15 +1574,9 @@ async upserveMongo(){
     }
 }
 },
-currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
-    var weekday=new Array(7);
-    weekday[0]="mon";
-    weekday[1]="tue";
-    weekday[2]="wed";
-    weekday[3]="thu";
-    weekday[4]="fri";
-    weekday[5]="sat";
-    weekday[6]="sun";
+currentlyAvailable(startTime,endTime,rules,futureDay,futureTime){
+
+    let weekday = ['mon','tue','wed','thu','fri','sat','sun']
 
             if(!futureDay && !futureTime){
                 let currentDate = new Date();   
@@ -1373,27 +1593,59 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
                     return startDate < currentDate && endDate > currentDate
                 }
             }
-          if(futureDay){
-          if(!futureTime){
-              if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
-                  return true
-              }
-          }else{
-              let currentDate = Date.parse(futureTime.time) 
-              let startDate2 = new Date(currentDate);
-              let startDate3 = moment(startDate2)._i
-              console.log(startDate3)
-              startDate3.setHours(startTime.split(":")[0]);
-              startDate3.setMinutes(startTime.split(":")[1]);
-              let endDate2 = new Date(currentDate);
-              let endDate3 = moment(endDate2)._i
-              endDate3.setHours(endTime.split(":")[0]);
-              endDate3.setMinutes(endTime.split(":")[1]);
-              return startDate3 < currentDate && endDate3 > currentDate
-          }
-          }
+
+    if(futureDay && !futureTime){
+      if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
+        return true
+      }
+    }
+    if(futureDay && futureTime){
+
+    let currentDate = Date.parse(futureTime.time) 
+    let startDate2 = new Date(currentDate);
+    let startDate3 = moment(startDate2)._i
+    startDate3.setHours(startTime.split(":")[0]);
+    startDate3.setMinutes(startTime.split(":")[1]);
+    let endDate2 = new Date(currentDate);
+    let endDate3 = moment(endDate2)._i
+    endDate3.setHours(endTime.split(":")[0]);
+    endDate3.setMinutes(endTime.split(":")[1]);
+    let validTime = startDate3 < currentDate && endDate3 > currentDate
+    let validDay = rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())
+
+    if(validTime && validDay){
+      return true
+    }else{
+      return false
+    }
+}
+
+
+
+
 },
-          returnAvailableNow(startTime,endTime){
+isBetween(startTime,endTime,proposedTime){
+
+
+var format = 'HH:mm'
+// var time = moment() gives you current time. no format required.
+var time = moment(proposedTime,format),
+  beforeTime = moment(startTime, format),
+  afterTime = moment(endTime, format);
+
+
+  console.log(time,beforeTime,afterTime)
+if (time.isBetween(beforeTime, afterTime)) {
+  console.log(true)
+  return true
+} else {
+   console.log(false)
+  return false
+}
+
+
+},
+returnAvailableNow(startTime,endTime){
 
             // console.log(startTime)
             // console.log(endTime)
@@ -1718,30 +1970,16 @@ this.attention = true
           });
       });
     },
-    // deliveryOption(choice) {
-    //   if (choice === "delivery") {
-    //     this.currentOrder.fulfillment_info.type = "delivery";
-    //     this.refreshGoogle();
-    //   } else {
-    //     this.currentOrder.fulfillment_info.type = "pickup";
-    //   }
-
-    //   let storeCurrentOrder = this.currentOrder;
-    //   this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-    // },
     addAddOn(mod, modifieritem) {
       let modAddition = {
         id: mod.id,
         modifier_group_id: modifieritem,
         price: mod.price_cents,
       };
-      // this.currentItemModifierArray.push(modAddition);
 
       this.currentItem.price_cents = Number(this.currentItem.price_cents) + Number(mod.price_cents);
-    //   console.log(this.currentItem)
       document.getElementById("add-" + mod.id).disabled = true;
       document.getElementById("remove-" + mod.id).disabled = false;
-    //   console.log('reset upserves')
 
     },
     removeAddOn(mod, modifieritem) {
@@ -1757,14 +1995,8 @@ this.attention = true
 
     removeFromOrderDontCloseModal(removal) {
 
-
-     document.getElementById("add-" + removal.id).disabled = false;
-      document.getElementById("remove-" + removal.id).disabled = true;
-    //   console.log('reset upserves')
-
-
-
-// console.log(removal)
+    document.getElementById("add-" + removal.id).disabled = false;
+    document.getElementById("remove-" + removal.id).disabled = true;
 
       let currentItems = this.currentOrder.charges.items;
       let updatedItems = currentItems.filter(
@@ -1784,11 +2016,6 @@ this.attention = true
 
   let concatenated = updatedNewItems.concat(newArray);
 
-
-
-// console.log(removal)
-
-
       this.currentOrder.charges.items = concatenated;
 
       let removeCost = removal.price_cents;
@@ -1796,9 +2023,6 @@ this.attention = true
       this.total = this.total - removeCost;
 
       let storeCurrentOrder = this.currentOrder;
-
-
-
 
 if(this.tipSelected === 0){
   this.currentAmountToAdd = 0
@@ -1812,13 +2036,9 @@ if(this.tipSelected === 0){
 
 }
 
-
-
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
     },
-
-
 removeFromOrder(removal) {
       let currentItems = this.currentOrder.charges.items;
       let updatedItems = currentItems.filter(
@@ -1861,13 +2081,10 @@ if(this.tipSelected === 0){
       this.orderConfirmationModal = false;
       this.orderCMR = "";
     },
-    openModal(serve) {
-
+    openModal(serve,timing_mask) {
 
       let current = Object.assign({}, serve);
-
-      // let current = serve
-      
+      current.timing_mask = timing_mask
 
       this.modalOpen = true;
       this.currentItem = current;
@@ -1935,6 +2152,7 @@ if(this.tipSelected === 0){
         instructions: this.textdescription,
         modifiers: this.currentItemModifierArray,
         sides: [],
+        timing_mask: item.timing_mask
       };
 
         this.currentOrder.charges.items.push(itemToAdd);
@@ -1967,24 +2185,15 @@ if(this.tipSelected === 0){
 
           }
 
-
-
-
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
     },
 
 
 
     addToOrderDontCloseModal(item) {
 
-
       document.getElementById("add-" + item.id).disabled = true;
       document.getElementById("remove-" + item.id).disabled = false;
-    //   console.log('reset upserves')
-
-
 
       let modifierPriceTotal = 0;
       for (let i = 0; i < this.currentItemModifierArray.length; i++) {
@@ -2007,6 +2216,7 @@ if(this.tipSelected === 0){
         instructions: this.textdescription,
         modifiers: this.currentItemModifierArray,
         sides: [],
+        timing_mask: item.timing_mask
       };
 
         this.currentOrder.charges.items.push(itemToAdd);
@@ -2311,46 +2521,14 @@ dropDown(){
   },
   mounted() {
 
-
-this.upserveMongo();
+    this.upserveMongo();
     this.getHours();
-
-      // this.returnAvailableNow();
     this.getUser();
-    // this.upserves();
     emergepay.init();
 
     this.$store.state.storeCurrentOrder = {};
     this.$store.state.orderCMR = {};
     this.$store.state.orderConfirmationModalResponse = {};
-//reset
-//reset
-
-
-
-// if(this.title === this.$store.state.storeCurrentOrder.restaurant){
-//     this.total = 0
-//     this.currentAmountToAddCustom = 0
-//     this.tipSelected = 0
-//     this.currentAmountToAdd = 0
-//     this.tip = 0
-//     this.total = 0
-//     this.cartTotal = 0
-//     this.currentOrder.charges.total = 0
-//     this.currentOrder.charges.fees = 0
-//     this.currentOrder.charges.taxes = 0
-//     this.currentOrder.charges.tip.amount = 0
-//     this.currentOrder.payments.payments.amount = null;
-//     if(this.$store.state.storeCurrentOrder.charges){
-//         this.total = this.$store.state.storeCurrentOrder.charges.preTotal;
-//     }
-//     this.currentOrder = this.$store.state.storeCurrentOrder;
-// }else{
-//     this.$store.state.storeCurrentOrder = {};
-// }
-
-
-
 
 
 
@@ -2359,7 +2537,6 @@ if(this.$store.state.openDrawerOnLoad === true){
   let drawerTrue = false
   this.$store.commit("drawerTrue", { drawerTrue });
 }
-    // this.dropDown();
   }
 };
 </script>
@@ -2373,11 +2550,9 @@ if(this.$store.state.openDrawerOnLoad === true){
     display: inline-block;
 
       &:first-child{
-      //  padding-right: 1%;
        float: left;
       }
             &:last-child{
-      //  padding-left: 1%;
        float: right;
       }
 
@@ -2387,6 +2562,10 @@ if(this.$store.state.openDrawerOnLoad === true){
 
     }
   }
+
+    margin-bottom: 10px;
+    display: flow-root;
+
 }
 
 
@@ -2406,6 +2585,54 @@ button.selected{
 
 .red-text{
   color: #f05d5b;
+}
+
+
+.no-lr-pad{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.leftDropdown{
+  width: 50%;
+  display:inline-block;
+  padding:0 5px 10px 0;
+}
+
+
+.rightDropdown{
+width: 50%;
+display:inline-block;
+padding:0 0 10px 5px;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+.leftDropdown{
+  width: 100%;
+  display:block;
+  padding:0;
+  margin-bottom: 10px;
+}
+
+
+.rightDropdown{
+width: 100%;
+display:block;
+  padding:0;
+    margin-bottom: 10px;
+}
+
+
+#upserveolo .online-menu,
+.no-lr-pad{
+   padding-left: 15px;
+   padding-right: 15px;
+ }
+
+
 }
 
 </style>

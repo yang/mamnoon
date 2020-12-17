@@ -251,7 +251,7 @@ Come and pick up your items during store hours or get them shipped to your door 
 </div> 
 </template>
 
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;margin-top: 7px;background-color: #f05d5b;color: #fff;">
+<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;background-color: #f05d5b;color: #fff;">
       <template v-if="valid">
           your order
   </template>
@@ -1091,14 +1091,7 @@ break
 
 currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 
-    var weekday=new Array(7);
-    weekday[0]="mon";
-    weekday[1]="tue";
-    weekday[2]="wed";
-    weekday[3]="thu";
-    weekday[4]="fri";
-    weekday[5]="sat";
-    weekday[6]="sun";
+    let weekday = ['mon','tue','wed','thu','fri','sat','sun']
 
             if(!futureDay && !futureTime){
 

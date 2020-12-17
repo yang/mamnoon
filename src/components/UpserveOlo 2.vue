@@ -1347,14 +1347,8 @@ async upserveMongo(){
 }
 },
 currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
-    var weekday=new Array(7);
-    weekday[0]="mon";
-    weekday[1]="tue";
-    weekday[2]="wed";
-    weekday[3]="thu";
-    weekday[4]="fri";
-    weekday[5]="sat";
-    weekday[6]="sun";
+
+          let weekday = ['mon','tue','wed','thu','fri','sat','sun']
 
             if(!futureDay && !futureTime){
                 let currentDate = new Date();   
@@ -1393,9 +1387,6 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 },
           returnAvailableNow(startTime,endTime){
 
-            // console.log(startTime)
-            // console.log(endTime)
-            // startTime = '14:30:00'
               if(startTime && endTime){
 
               let currentDate = new Date()   
@@ -1412,16 +1403,7 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 
               let tF = startDate < currentDate && endDate > currentDate
               // this.valid = startDate < currentDate && endDate > currentDate
-              // console.log(tF)
-return tF
-
-//               if(this.valid === true){
-// this.currentOrder.preorder = this.valid;
-// break;
-//               }
-
-              
-
+              return tF
 
               }
 
@@ -2308,14 +2290,10 @@ dropDown(){
     }
   },
   mounted() {
-
-
-this.upserveMongo();
+    this.upserveMongo();
     this.getHours();
-
-      // this.returnAvailableNow();
     this.getUser();
-    // this.upserves();
+
     emergepay.init();
 
     this.$store.state.storeCurrentOrder = {};
