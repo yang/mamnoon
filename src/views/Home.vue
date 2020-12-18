@@ -43,9 +43,12 @@ export default {
   },
   methods: {
     getUserDetails() {
+
+      if(localStorage.getItem("jwt")){
       let token = localStorage.getItem("jwt");
       let decoded = VueJwtDecode.decode(token);
       this.user = decoded;
+    }
     },
     async getUserProducts(){
 

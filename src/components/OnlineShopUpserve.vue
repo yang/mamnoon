@@ -133,7 +133,7 @@ let upserveSectionsRetail = this.upserveSections.filter(item => item.name === 'S
 // console.log(this.upserveList)
 
       this.retailItems = this.upserveList.filter(x=>upserveSectionsRetail.includes(x.id))
-    console.log(this.retailItems)
+    // console.log(this.retailItems)
     
       this.refresh++;
     },
@@ -158,7 +158,7 @@ let upserveSectionsRetail = this.upserveSections.filter(item => item.name === 'S
 // console.log(this.upserveList)
 
       this.retailItems = this.upserveList.filter(x=>upserveSectionsRetail.includes(x.id))
-    console.log(this.retailItems)
+    // console.log(this.retailItems)
     
       this.refresh++;
     },

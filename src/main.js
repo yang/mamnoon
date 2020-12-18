@@ -14,8 +14,6 @@ import "vue-select/src/scss/vue-select.scss";
 
 
 Vue.use(VueCurrencyInput)
-
-
 Vue.component('v-select', vSelect)
 
 const base = axios.create({
@@ -40,7 +38,6 @@ Vue.use(GAuth, {
   clientId: '190034127812-vjtpck9bt7btor25njinff491j2ab16m.apps.googleusercontent.com', scope: 'email', prompt: 'consent', fetch_basic_profile: false
 })
  
-
 var filter = function(text, length, clamp){
   clamp = clamp || '...';
   var node = document.createElement('div');
@@ -48,8 +45,6 @@ var filter = function(text, length, clamp){
   var content = node.textContent;
   return content.length > length ? content.slice(0, length) + clamp : content;
 };
-
-
 
 var genUserName = function(text){
   return text.split('@')[0];

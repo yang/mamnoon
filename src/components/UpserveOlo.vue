@@ -143,7 +143,7 @@
 </div>
 </template>
 <template v-else>
-<div class="mb10"> 
+<div class="mb16"> 
 Now accepting preorders for pick up.
 </div> 
 </template>
@@ -270,7 +270,7 @@ Now accepting preorders for pick up.
                 <h2 class="menu-header">
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}} no filtering true
                   <!-- {{item.timing_mask}} -->
                 </h2>
               </div>
@@ -335,7 +335,7 @@ Now accepting preorders for pick up.
                 <h2 class="menu-header">
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}  no filtering false, no timing mask
                   <!-- {{item.timing_mask}} -->
                 </h2>
               </div>
@@ -390,7 +390,7 @@ Now accepting preorders for pick up.
                 <h2 class="menu-header">
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}   filtering happening, currently available true
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
@@ -971,23 +971,16 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
   </span>
   </u>
 </template>
-
-
-
-
-
-
-
-              </template>
-              <br />
-              <br />
-              <br />
+</template>
+      <br />
+      <br />
+      <br />
       </div>
-          </div>
-        </div>
-        <div>
-</div></div>
-    </section>
+      </div>
+      </div>
+      <div>
+      </div></div>
+      </section>
 
 <!--<pre>{{$store.state.storeCurrentOrder}}</pre>-->
 
@@ -2583,6 +2576,10 @@ button.selected{
   margin-bottom: 6px;
 }
 
+.mb16{
+  margin-bottom: 16px;
+}
+
 .red-text{
   color: #f05d5b;
 }
@@ -2597,14 +2594,14 @@ button.selected{
 .leftDropdown{
   width: 50%;
   display:inline-block;
-  padding:0 5px 10px 0;
+  padding:0 5px 20px 0;
 }
 
 
 .rightDropdown{
 width: 50%;
 display:inline-block;
-padding:0 0 10px 5px;
+padding:0 0 20px 5px;
 }
 
 

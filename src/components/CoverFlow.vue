@@ -151,7 +151,7 @@ for(let i = 0; i < this.upserveSections.length; i++){
     }
   }
 }
-console.log(this.helpArray)
+// console.log(this.helpArray)
     },
     count(newCount, oldCount) {
 
