@@ -240,18 +240,25 @@
     <div>
     <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
   <div>
+    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">later</button> 
+    </div> 
+  <div>
     <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">ship</button> 
     </div> 
-
 </div>
 </template>
 <template v-else>
 <div> 
 Come and pick up your items during store hours or get them shipped to your door via usps!
 </div> 
+
+  <div>
+    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">ship</button> 
+    </div> 
+
 </template>
 
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;background-color: #f05d5b;color: #fff;">
+<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="margin-top: 10px;width: 100%;background-color: #f05d5b;color: #fff;">
       <template v-if="valid">
           your order
   </template>
@@ -298,11 +305,13 @@ Come and pick up your items during store hours or get them shipped to your door 
       <hr />
   </div>
             <div v-if="currentOrder" class="container  mt10">
-          
+        
   <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">address</h4>
 <div v-if="currentOrder.fulfillment_info.type === 'delivery'">
 <div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid delivery address</div>
 </div>
+            
+
               <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
                
                 <div class="updateAddress">
@@ -1047,10 +1056,20 @@ if(c === true){
       this.currentOrder.preorder = true
       let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
+this.panelShow = 'customerInfo'
+this.currentOrder.fulfillment_info.type = 'delivery'
+ 
+
 }else{
       this.currentOrder.preorder = false
       let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
+this.panelShow, this.currentOrder.fulfillment_info.type = ''
+
 }
 
 },
