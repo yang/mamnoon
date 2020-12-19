@@ -233,17 +233,30 @@
 <span v-if="toggledDrawer">hide order</span>
 <span v-else>view order</span>
 </button>
+
+
+<div v-if="shippingOption" class="container mb5"> 
+        <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
+</div>
+
+<div v-if="!shippingOption" class="container mb10"> 
+    <button v-if="!shippingOption" style="width: 100%;" @click="shipOption(true)">ship</button> 
+
+
+        <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
+</div>
+
+
 <div v-if="currentOrder" class="container text-center">
               <template v-if="valid">
-<div class="toggleLr">
-  
+<div v-if="shippingOption === false" class="toggleLr">
     <div>
     <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
   <div>
-    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">later</button> 
+    <button class="fl-right" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button> 
     </div> 
   <div>
-    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">ship</button> 
+
     </div> 
 </div>
 </template>
@@ -252,13 +265,9 @@
 Come and pick up your items during store hours or get them shipped to your door via usps!
 </div> 
 
-  <div>
-    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">ship</button> 
-    </div> 
-
 </template>
 
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="margin-top: 10px;width: 100%;background-color: #f05d5b;color: #fff;">
+<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="margin-top: 5px;width: 100%;background-color: #f05d5b;color: #fff;">
       <template v-if="valid">
           your order
   </template>
@@ -268,7 +277,7 @@ Come and pick up your items during store hours or get them shipped to your door 
 
   
   </button>
-<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:10px;">edit order</button>
+<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
 
 
 <template v-if="this.currentOrder.charges.items.length > 0">
@@ -280,12 +289,15 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 <template v-if="valid">
 <template v-if="preOrderToggleState">
+
+  <template v-if="!shippingOption">
   <div style="margin-top:15px;">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
 <div style="margin-top:15px;" v-if="selectedDate !== null">
 <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
 </div>
+</template>
 </template>
 </template>
   <template v-else>
@@ -306,9 +318,9 @@ Come and pick up your items during store hours or get them shipped to your door 
   </div>
             <div v-if="currentOrder" class="container  mt10">
         
-  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">address</h4>
+  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">shipping address</h4>
 <div v-if="currentOrder.fulfillment_info.type === 'delivery'">
-<div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid delivery address</div>
+<div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid shipping address</div>
 </div>
             
 
@@ -428,22 +440,10 @@ Come and pick up your items during store hours or get them shipped to your door 
                     />
                   </div>
                   <hr />
-           
+                  </div>
 
-                     </div>
-            <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
-  <label class="smblk" for="cutlery">include disposable cutlery </label>
-                  <br />
              
-            
-
-
-
-
-
-
-
-
+          
 
 
 
@@ -914,7 +914,8 @@ if(newAddress){
     },
   data() {
     return {
-     nextOpen: '',
+      shippingOption: false,
+      nextOpen: '',
       preOrderToggleState: false,
       currentFilter: 'All',
       currentRestaurantDays: [],
@@ -1047,22 +1048,45 @@ showToFixed: function (value) {
 }
   },
   methods: {
+shipOption(c){
+
+
+
+  this.shippingOption = c
+  c === true ? this.currentOrder.fulfillment_info.type = 'delivery' : this.currentOrder.fulfillment_info.type = 'pickup'
+
+let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+  },
+    makePickup(){
+
+
+      this.currentOrder.fulfillment_info.type === 'pickup'
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+    },
 preOrderToggle(c){
 
-this.preOrderToggleState = c
+// this.preOrderToggleState = c
 
 
 if(c === true){
+  this.preOrderToggleState = c
       this.currentOrder.preorder = true
       let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
 
 this.panelShow = 'customerInfo'
-this.currentOrder.fulfillment_info.type = 'delivery'
+
  
 
-}else{
+}
+
+if(c === false){
+  this.preOrderToggleState = c
       this.currentOrder.preorder = false
       let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
@@ -1070,6 +1094,13 @@ this.currentOrder.fulfillment_info.type = 'delivery'
 
 this.panelShow, this.currentOrder.fulfillment_info.type = ''
 
+}
+
+if(c === 'shipping'){
+
+  this.preOrderToggleState = 'shipping'
+  this.panelShow = 'customerInfo'
+this.currentOrder.fulfillment_info.type = 'delivery'
 }
 
 },
@@ -2097,7 +2128,7 @@ if(this.$store.state.openDrawerOnLoad === true){
 
 .toggleLr{
   div{
-    width: 49%;
+    width: 50%;
     display: inline-block;
 
       &:first-child{
@@ -2110,10 +2141,17 @@ if(this.$store.state.openDrawerOnLoad === true){
       }
 
     button{
-      width: 100%;
+      width: 98%;
       margin: 0 auto;
+float: left;
 
+&.fl-right{
+  float: right;
+}
     }
+
+
+
   }
 }
 
@@ -2254,4 +2292,16 @@ ul li{
   cursor: pointer;
 }
 
+
+.mb20{
+  margin-bottom: 20px;
+}
+
+.mb10{
+  margin-bottom: 10px;
+}
+
+.mb5{
+    margin-bottom: 5px;
+}
 </style>

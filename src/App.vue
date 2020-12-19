@@ -132,6 +132,11 @@ button {
   color: #ffffff;
   padding: 5px 10px;
   border-radius: 4px;
+      border: 2px solid #f05d5b !important;
+
+      &.deactivated{
+             border: 2px solid #999999 !important;
+      }
 }
 
 button:hover {
@@ -143,7 +148,7 @@ button:hover {
 
 button:disabled,
 button[disabled="true"] {
-  border: 1px solid #999999;
+  border: 1px solid #999999 !important;
   background-color: #cccccc;
   color: #666666;
 }
