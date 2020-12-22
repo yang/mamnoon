@@ -578,6 +578,13 @@ Come and pick up your items during store hours or get them shipped to your door 
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
+<!-- <div v-if="shippingOption"> 
+<button v-if="validPostal(currentOrder.billing.billing_postal_code)" @click="shippingPrice('98122', String(currentOrder.billing.billing_postal_code),String(totalWeight),'0')">
+calculate shipping
+</button>
+</div> -->
+
+{{totalWeight}}
 <template v-if="this.currentOrder.charges.items.length > 0">
               <!-- <div class="mt10" v-if="total > 0"> -->
               <div class="mt10">
@@ -585,11 +592,14 @@ Come and pick up your items during store hours or get them shipped to your door 
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
 
               </div>
-          
               <!-- <hr />   -->
               total: ${{total.toFixed(2)/100 }}
               <br />
               tax: ${{currentTax.toFixed(2)/100 }}
+             <div v-if="shippingOption && shippingAmount > 0">   
+              usps priority shipping: ${{shippingAmount}}
+               </div>  
+     
             <div v-if="custom === true">
             custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
             </div>
@@ -605,6 +615,9 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 
 <br />
+
+
+
 </template>
 <template v-else>
 <div class="text-center cart-empty-class">
@@ -614,6 +627,12 @@ cart empty
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
+
+
+
+
+    
+
 
 <!-- </div> -->
 <template v-if="panelShow === 'yourOrder'">
@@ -750,9 +769,18 @@ export default {
     NadiIconSm
   },
   computed: {	
+    totalWeight(){
+      let cost = 0
+      for(var item in this.currentOrder.charges.items){
+        cost = cost + this.currentOrder.charges.items[item].price
+      }
 
+      return cost
+    },
     orderTotal(){
-      return Number(this.total) + Number(this.currentTax) + Number(this.tip) + Number(this.currentAmountToAdd)
+
+      let shippingAmountToAdd = Number(this.shippingAmount) * 100
+      return Number(this.total) + Number(this.currentTax) + Number(this.tip) + Number(this.currentAmountToAdd) + shippingAmountToAdd
     },  
     googleAddress() {	
       return this.$store.state.googleAddress;	
@@ -777,6 +805,16 @@ export default {
     }
   },	
   watch: {	
+ currentOrder: {
+     handler(val){
+       console.log('currentorder change')
+      // do stuff
+      if(this.shippingOption === true && this.validPostal(this.currentOrder.billing.billing_postal_code)){
+          this.shippingPrice('98122', String(this.currentOrder.billing.billing_postal_code),String(this.totalWeight/100),'0')
+      }
+    },
+     deep: true
+  },
 openTimesUpdated(){
   this.dropDown();
 },
@@ -914,6 +952,8 @@ if(newAddress){
     },
   data() {
     return {
+      weight: 0,
+      shippingAmount: 0,
       shippingOption: false,
       nextOpen: '',
       preOrderToggleState: false,
@@ -1048,6 +1088,16 @@ showToFixed: function (value) {
 }
   },
   methods: {
+  async shippingPrice(orig,dest,lb,oz){
+console.log(orig,dest,lb,oz)
+
+    let responseAcf = await this.$http.get(`/shippingcalculation`, { params: { ZipOrigination: orig, ZipDestination: dest, Pounds: lb, Ounces: oz } })
+    console.log(responseAcf.data[0].Rate[0])
+
+
+    this.shippingAmount = responseAcf.data[0].Rate[0]
+
+},
 shipOption(c){
 
 
@@ -1132,13 +1182,7 @@ break
       }
 
     }
-
-
-
-
 },
-
-
 currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 
     let weekday = ['mon','tue','wed','thu','fri','sat','sun']

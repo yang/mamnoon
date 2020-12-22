@@ -50,7 +50,7 @@
           </template>
 
 
-<div class="text-center" style="" v-for="item in retailItems" :key="item.id">
+<div @click="goToRetail()" class="text-center" style="" v-for="item in retailItems" :key="item.id">
 
 
 
@@ -66,6 +66,7 @@
 
 <NadiIconSmInv />
 </div>
+
               <div class="order-bottom">
                 {{item.name}}
               </div>
@@ -116,6 +117,9 @@ export default {
     name: 'onlineshop',
     props: ['data','header','tag','description'],
     methods: {
+      goToRetail(){
+ this.$router.push("/retail");
+      },
       leadInScroll: function(){
 console.log('send and expand to retail')
       },

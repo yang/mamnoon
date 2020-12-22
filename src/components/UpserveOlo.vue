@@ -270,7 +270,7 @@ Now accepting preorders for pick up.
                 <h2 class="menu-header">
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}} no filtering true
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
                   <!-- {{item.timing_mask}} -->
                 </h2>
               </div>
@@ -335,7 +335,7 @@ Now accepting preorders for pick up.
                 <h2 class="menu-header">
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}}  no filtering false, no timing mask
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
                   <!-- {{item.timing_mask}} -->
                 </h2>
               </div>
@@ -390,7 +390,7 @@ Now accepting preorders for pick up.
                 <h2 class="menu-header">
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}}   filtering happening, currently available true
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
@@ -982,7 +982,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
       </div></div>
       </section>
 
-<!--<pre>{{$store.state.storeCurrentOrder}}</pre>-->
+<pre>{{$store.state.storeCurrentOrder}}</pre>
 
 
   </div>
