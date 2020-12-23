@@ -485,7 +485,7 @@ let payload = { id: servid, tf: e }
       }).catch((e) => {
           console.log('error')
         });
-location.reload()
+//location.reload()
     },
 async updateRetailItemLbs(servid,editNumber){
 
@@ -501,7 +501,7 @@ let payload = { id: servid, number: editNumber }
       });
 
 this.editLbs = null
-location.reload()
+//location.reload()
 },
 async updateRetailItemOz(servid,editNumber){
 
@@ -515,7 +515,7 @@ let payload = { id: servid, number: editNumber }
       });
 
 this.editOz = null
-location.reload()
+//location.reload()
  
 },
   async shippingPrice(orig,dest,lb,oz){
