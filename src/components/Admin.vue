@@ -1,119 +1,7 @@
 <template>
   <div id="upserveolo" class="shopRetail">
     <section>
-<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
-      <div v-if="modalOpen" class="order-modal">
-        <div class="container online-menu order-modal-width">
-          <div @click="closeModal()" class="close closeModal">
-            <CloseModal />
-          </div>
-          <h4>{{currentItem.name}}</h4>
-        </div>
-        <div class="container modal-body order-modal-width order-modal-body">
-          <div
-            class="item-image-container"
-            v-if="currentItem.images"
-            :style="{'background-image': currentItem.images.online_ordering_menu.main}"
-          >
-            <img :src="currentItem.images.online_ordering_menu.main" />
-          </div>
-          <div class="item-image-container" v-else>
-            <NadiIcon />
-            </div>
 
-          <p class="item-description-p">{{currentItem.description}}</p>
-        <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
-                    <hr />
-          <div v-if="currentItem.modifier_group_ids.length >= 1">
-            <h4 class="text-left">addons</h4>
-            <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
-              <div v-for="modifier in modifierGroups" :key="modifier.name">
-                <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
-        
-                  <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
-                  <div v-for="mod in modifierItems" :key="mod.id">
-
-                    <div v-for="m in modifier.modifier_ids" :key="m">
-                      <div v-if="m === mod.id" class="box">
-                        <div class="box-inner">
-                          {{mod.name}}
-                          <br />
-                          
-                          <i class="small" v-if="mod.price==='0.0'">no extra charge</i>
-                          <b v-else>{{mod.price}}</b>
-
-
-                          <div v-if="modifier.name === 'Promotions'">
-                            <div v-for="piece in upserveList" :key="piece.name">
-                              <div v-if="piece.name === mod.name">
-                                <img v-if="piece.images" :src="piece.images.online_ordering_menu.main" />
-                              </div>
-                            </div>
-                          </div>
-                          <!-- loop through and get image -->
-
-
-                          <div class="mt10" v-if="modifier.name === 'Promotions'">
-
-              
-                           
-                            <button @click="addToOrderDontCloseModal(mod)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
-                            <button @click="removeFromOrderDontCloseModal(mod)" :id="'remove-' + mod.id"
-                              disabled>-</button>
-                          </div>
-
-                          <div v-else class="mt10">
-
-                           
-
-                            <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
-                            <button
-                              @click="removeAddOn(mod,modifieritem)"
-                              :id="'remove-' + mod.id"
-                              disabled
-                            >-</button>
-                          </div>
-
-
-
-                        </div>
-                      </div>
-                    </div>
-                  
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <!-- <hr /> -->
-
-          <button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
-          <button v-else disabled>-</button>
-          &nbsp;&nbsp;
-          <span id="value">{{currentItemQuanity}}</span>&nbsp;&nbsp;
-          <button @click="incrementCurrentItem()">+</button>
-          <div class="add-to-order-footer">
-            item total: <b>${{currentItem.price_cents.toFixed(2)/100 * currentItemQuanity }}</b>
-
-            <button
-              class="float-right"
-              @click="addToOrder(currentItem)"
-            >add to cart</button>
-
-
-
-
-          </div>
-
-          <!-- {{currentItem}} -->
-        </div>
-      </div>
-
-
-
-
- 
 
       <div class="container pt20">
         <div class="row">
@@ -158,7 +46,7 @@
 
 <div class="container">
 
-<div class="row">
+<div class="row" v-if="renderComponent">
             <template v-for="item in upserveSections">
               <template v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
                 <template v-if="item.timing_mask === null">
@@ -166,10 +54,13 @@
                 <template v-if="currentFilter === 'All' || currentFilter === item.name">
               
                 <div class="col-6 col-md-4 shop-item no-lr-pad" v-for="piece in item.item_ids" :key="piece">
-              
+
+
+
+     
                     <template v-for="serve in upserveList">
                       <template v-if="serve.id === piece">
-                        <div class="itemContainer" @click="openModal(serve)">
+                        <div class="itemContainer">
                             <template v-if="serve.images">
                               <div
                                 v-if="serve.images"
@@ -199,9 +90,36 @@
                               >{{serve.description}}</div> -->
                               <div class="food-price">
                             
-                                ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only</span>
-                                <br><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
+                                ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
+
+<br>
+
+
+<label for="lbs">lbs</label>&nbsp;<span>{{serve.lbs}}</span>
+<input id="lbs" type="number" v-model="editNumberLbs" class="lbs-input" :class="{visible: editLbs === serve.id }">
+<button @click="updateRetailItemLbs(serve.id,editNumberLbs)" class="submit-lbs-input" :class="{visible: editLbs === serve.id }">submit {{editNumberLbs}}</button>
+<button @click="editLbs = serve.id" class="edit-lbs-input" :class="{invisible: editLbs === serve.id }">edit</button>
+
+<br>
+
+<label for="oz">oz</label>&nbsp;<span>{{serve.oz}}</span>
+<input id="oz" type="number" v-model="editNumberOz" class="oz-input" :class="{visible: editOz === serve.id }">
+<button @click="updateRetailItemOz(serve.id,editNumberOz)" class="submit-oz-input" :class="{visible: editOz === serve.id }">submit, {{editNumberOz}}</button>
+<button @click="editOz = serve.id" class="edit-oz-input" :class="{invisible: editOz === serve.id }">edit</button>
+
+
+<br>
+shippable? {{serve.shippable}}<br>
+<template v-if="serve.shippable">
+
+<button @click="shippableEdit(serve.id,false)">make not shippable</button>
+
+</template>
+<template v-else>
+
+<button @click="shippableEdit(serve.id,true)">make shippable</button>
+</template>
                               </div>
                         
                           
@@ -229,505 +147,20 @@
 
           </div>
 
-          <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
-<button @click="toggleDrawer()" class="toggle">
-<span v-if="toggledDrawer">hide order</span>
-<span v-else>view order</span>
-</button>
-
-
-<div v-if="shippingOption" class="container mb5"> 
-        <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
-</div>
-
-<div v-if="!shippingOption" class="container mb10"> 
-    <button v-if="!shippingOption" style="width: 100%;" @click="shipOption(true)">ship</button> 
-
-
-        <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
-</div>
-
-
-<div v-if="currentOrder" class="container text-center">
-              <template v-if="valid">
-<div v-if="shippingOption === false" class="toggleLr">
-    <div>
-    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
-  <div>
-    <button class="fl-right" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button> 
-    </div> 
-  <div>
-
-    </div> 
-</div>
-</template>
-<template v-else>
-<div> 
-Come and pick up your items during store hours or get them shipped to your door via usps!
-</div> 
-
-</template>
-
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="margin-top: 5px;width: 100%;background-color: #f05d5b;color: #fff;">
-      <template v-if="valid">
-          your order
-  </template>
-      <template v-else>
-          your pre order
-  </template>
-
-  
-  </button>
-<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
-
-
-<template v-if="this.currentOrder.charges.items.length > 0">
-  <br>
-
-</template>
-
-
-
-<template v-if="valid">
-<template v-if="preOrderToggleState">
-
-  <template v-if="!shippingOption">
-  <div style="margin-top:15px;">
-<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-</div>
-<div style="margin-top:15px;" v-if="selectedDate !== null">
-<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-</div>
-</template>
-</template>
-</template>
-  <template v-else>
-<template v-if="this.currentOrder.charges.items.length > 0">
-<br>  
-<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-<div style="margin-top:15px;" v-if="selectedDate !== null">
-<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-</div>
-
-</template>
-</template>
-</div>
-
-<div v-if="panelShow === 'customerInfo'">
-  <div class="container">
-      <hr />
-  </div>
-            <div v-if="currentOrder" class="container  mt10">
-        
-  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">shipping address</h4>
-<div v-if="currentOrder.fulfillment_info.type === 'delivery'">
-<div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid shipping address</div>
-</div>
-            
-
-              <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
-               
-                <div class="updateAddress">
-                  <button
-                    v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
-                    @click="refreshGoogle()"
-                  >update address</button>
-                </div>
-
-                <div class="googleValidate">
-                  <GoogleValidate
-                    class="pointer-all"
-                    :key="renderKey"
-                    v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
-                  />
-                </div>
-              </div>
-
-
-
-              <form class="mb20" @submit="checkForm">
-
-
- 
-
-                <div v-if="this.currentOrder.fulfillment_info.type === 'delivery'" style="margin-top: 10px;">
-                 
-                  <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1">
-                    {{currentOrder.fulfillment_info.delivery_info.address.address_line1}}</span>
-                    <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line2 !== ''">,</span>
-                  <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line2">
-                    {{currentOrder.fulfillment_info.delivery_info.address.address_line2}}
-                    <!-- <br /> -->
-                  </span>
-                            <br v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''" />
-          <span
-                    v-if="currentOrder.fulfillment_info.delivery_info.address.city"
-                  >{{currentOrder.fulfillment_info.delivery_info.address.city}},</span>
-                  <!-- <span v-if="currentOrder.fulfillment_info.delivery_info.address.state">{{currentOrder.fulfillment_info.delivery_info.address.state}}<br></span> -->
-                  <span v-if="currentOrder.fulfillment_info.delivery_info.address.zip_code">
-                    {{currentOrder.fulfillment_info.delivery_info.address.zip_code}}
-                    <br v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''" />
-                  </span>
-
-
-
-                  <span  :class="{attention: attention}" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">floor/unit?</span>&nbsp;&nbsp;
-                  <input
-                    v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''"
-                    type="text"
-                    id="address_l2"
-                    name="address_l2"
-                    placeholder="unit/floor"
-                    class="formatted"
-                    :class="{attention: attention}"
-                    autocomplete="no"
-                    @click="removeAttention()"
-                    v-model="currentOrder.fulfillment_info.delivery_info.address.address_line2"
-                  />
-  
-
-                  <div class="address-fields display-none">
-                    <label class="smblk" for="address_l1">address line 1</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="address_l1"
-                      name="address_l1"
-                      placeholder="address line 1"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.address_line1"
-                    />
-                    <br />
-                    <label class="smblk" for="address_l2">address line 2</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="address_l2"
-                      name="address_l2"
-                      placeholder="address line 2"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.address_line2"
-                    />
-                    <br />
-
-                    <label class="smblk" for="city">city:</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      placeholder="city"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.city"
-                    />
-                    <br />
-
-                    <label class="smblk" for="state">state:</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="state"
-                      name="state"
-                      placeholder="state"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.state"
-                    />
-                    <br />
-
-                   <label class="smblk" for="zip">zip:</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="zip"
-                      name="zip"
-                      placeholder="10001"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.zip_code"
-                    />
-                  </div>
-                  <hr />
-                  </div>
-
-             
-          
-
-
-
-               <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info</h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info</h4>
-                <h4 v-else class="text-left mt10">customer info</h4>
-                <label class="smblk" for="name">name:</label>
-                <br />
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="name"
-                  v-model="currentOrder.fulfillment_info.customer.first_name"
-                />
-                <br />
-               <label class="smblk" for="email">email:</label>
-                <br />
-                <div v-if="emailAddress" style="margin-bottom: 10px;">{{emailAddress}}</div>
-                <input
-                v-else
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="email"
-                  v-model="email"
-                />
-                <!-- <br /> -->
-
-               <label class="smblk" for="phone">phone:</label>
-                <br />
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  placeholder="(555) 555-5555"
-                  v-model="currentOrder.fulfillment_info.customer.phone"
-                />
-
-            <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
-  <label class="smblk" for="sms">enable SMS order updates </label>
-<!-- billing info -->
-
-          <h4 class="customer-info text-left mt10">billing info</h4>
-         
-         
-         <template v-if="currentOrder.fulfillment_info.type === 'delivery'"> 
-          <div style="clear: both;width: 100%;margin-bottom: 10px;height: 20px;" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">
-
-              <div style="float: left;width: 15px;height: 20px;margin-right: 5px;padding-top: 2px;">
-              <input type="checkbox" id="checkbox" v-model="checked" />
-              </div>
-
-              <div style="float: left; height: 20px;">
-              <label class="smblk" for="checkbox">same as delivery address</label>
-              </div>
-</div>
-       </template>
-
-
-<!-- <div v-if="checked === false"> -->
-                <label class="smblk" for="name">name:</label>
-                <br />
-                <input
-                  type="text"
-                  id="name-billing"
-                  name="name"
-                  placeholder="name"
-                  v-model="currentOrder.billing.billing_name"
-                />
-
-
-                <label class="smblk" for="address">billing address:</label>
-                <br />
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  placeholder="address"
-                  v-model="currentOrder.billing.billing_address"
-                />
-
-                <label class="smblk" for="postal_code">billing postal code:</label>
-                <br />
-                <input
-                  type="text"
-                  id="postal_code"
-                  name="postal_code"
-                  placeholder="postal code"
-                  v-model="currentOrder.billing.billing_postal_code"
-                />
-
-<!-- </div> -->
-  <br />
-
-              </form>
-
-</div>
-      </div>
-
-
-
-<div class="container mt10">
-              <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
-                <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
-            
-
-
-                  <button class="removeClose" @click="removeFromOrder(order)">
-                        <CloseModalRedSm />
-                     
-                  </button>
-<div class="mt8">
-
-                  <b>{{order.quantity}}</b> {{order.name}}&nbsp;&nbsp;&nbsp;&nbsp;
-                  <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
-
-
-
-                  <div v-if="order.instructions !== ''" class="order-instructions">
-             
-                    <i>{{order.instructions}}</i>
-            
-                  </div>
-                  <div v-else>
-          
-                  </div>
-                  </div>
-                </li>
-              </ul>
-
-<!-- start panel -->
-<!-- start panel -->
-<!-- start panel -->
-<!-- <div v-if="shippingOption"> 
-<button v-if="validPostal(currentOrder.billing.billing_postal_code)" @click="shippingPrice('98122', String(currentOrder.billing.billing_postal_code),String(totalWeight),'0')">
-calculate shipping
-</button>
-</div> -->
-
-{{totalWeight}}
-<template v-if="this.currentOrder.charges.items.length > 0">
-              <!-- <div class="mt10" v-if="total > 0"> -->
-              <div class="mt10">
-                &nbsp;
-                <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
-
-              </div>
-              <!-- <hr />   -->
-              total: ${{total.toFixed(2)/100 }}
-              <br />
-              tax: ${{currentTax.toFixed(2)/100 }}
-             <div v-if="shippingOption && shippingAmount > 0">   
-              usps priority shipping: ${{shippingAmount}}
-               </div>  
-     
-            <div v-if="custom === true">
-            custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
-            </div>
-            <div v-else>
-             tip: ${{currentAmountToAdd | showToFixed }}
-            </div>
-
-             
-
-              <hr />
-
-              <b>order total: ${{orderTotal | showToFixed }}</b>
-
-
-<br />
-
-
-
-</template>
-<template v-else>
-<div class="text-center cart-empty-class">
-cart empty
-</div>
-</template>
-<!-- start panel -->
-<!-- start panel -->
-<!-- start panel -->
-
-
-
-
-    
-
-
-<!-- </div> -->
-<template v-if="panelShow === 'yourOrder'">
-
- <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
- <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
-</template>
-
-
-              <template v-if="panelShow === 'customerInfo'">
-            <template v-if="giftCardPanel ===  false">
-              <button class="mt10 fw" style="margin-top:20px;"
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-                id="cip-pay-btn"
-                @click="cippaybutton"
-              >Credit/Debit Pay</button>
-              <button class="mt10 fw" style="margin-top:20px;"
-              v-else disabled>Credit/Debit Pay</button>
-        </template>
-
-<template v-if="giftCardPanel ===  false">
-<button 
-v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-@click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
-<button 
-v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
-</template>
-
-
-
-
-<template v-if="giftCardPanel ===  true">
-<template v-if="this.$store.state.loggedIn">
-   <br>
-    <h4 v-if="showInsufficientFunds === true" class="error" style="text-align:left">insufficient funds</h4>
-
-  <input v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
-<br>
-              <button class="mt10 fw" style="margin-bottom: 20px;margin-top:10px;"
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-                id="cip-pay-btn"
-                @click="useGiftCardBalance()"
-              >Pay With Giftcard</button>
-              <button class="mt10 fw" style="margin-bottom: 20px;margin-top:10px;" 
-               v-else disabled>Pay With Giftcard</button>
-</template>
-  <template v-else>
-  <input v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
-<br>
-                <button class="mt0 fw" style="margin-top:10px;margin-bottom: 20px;" 
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-                id="cip-pay-btn"
-                @click="useGiftCardBalance()"
-              >Pay With Giftcard</button>
-              <button class="mt0 fw" style="margin-bottom: 20px;margin-top:10px;" v-else disabled>Pay With Giftcard</button>
-    </template>
-</template>
-<template v-if="giftCardPanel ===  true">
-<br>
-<u style="cursor:pointer;color:#f05d5b;" @click="hideGiftcard()">
-  <span style="color:#f05d5b;">  
-  use debit/credit instead
-  </span>
-  </u>
-</template>
-
-
-
-
-
-
-
-              </template>
-              <br />
-              <br />
-              <br />
-      </div>
-          </div>
+       
         </div>
         <div>
 </div></div>
     </section>
-
-<pre>{{$store.state.storeCurrentOrder}}</pre>
-
 
   </div>
 </template>
 
 <script>
 
-import vSelect from "vue-select";
-import carousel from "vue-owl-carousel";
-import GoogleValidate from "@/components/GoogleValidate";
+
+
+
 import CloseModal from "@/components/svgIcons/CloseModal";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
@@ -761,8 +194,6 @@ export default {
     CloseModalRed,
     CloseModalSm,
     CloseModalRedSm,
-    GoogleValidate,
-    carousel,
     VueAspectRatio,
     Next,
     Prev,
@@ -874,59 +305,6 @@ let storeCurrentOrder = this.currentOrder;
 
 
 },	
-    googleAddress(newAddress, oldAddress) {	
-      this.googleAddressView = newAddress;	
-      let googleAddressObject = {	
-        streetNumber: "",	
-        route: "",	
-        locality: "",	
-        state: "",	
-        zip: "",	
-      };	
-if(newAddress){	
-      googleAddressObject.route = newAddress.address_components.filter(	
-        (obj) => {	
-          return obj.types[0] === "route";	
-        }	
-      )[0].long_name;	
-}	
-if(newAddress){	
-      googleAddressObject.streetNumber = newAddress.address_components.filter(	
-        (obj) => {	
-          return obj.types[0] === "street_number";	
-        }	
-      )[0].long_name;	
-}	
-if(newAddress){	
-      googleAddressObject.locality = newAddress.address_components.filter(	
-        (obj) => {	
-          return obj.types[0] === "locality";	
-        }	
-      )[0].long_name;	
-}	
-if(newAddress){	
-      googleAddressObject.state = newAddress.address_components.filter(	
-        (obj) => {	
-          return obj.types[0] === "administrative_area_level_1";	
-        }	
-      )[0].long_name;	
-}	
-if(newAddress){	
-      googleAddressObject.zip = newAddress.address_components.filter((obj) => {	
-        return obj.types[0] === "postal_code";	
-      })[0].long_name;	
-}	
-      this.googleAddressObject = googleAddressObject;	
-      this.currentOrder.fulfillment_info.delivery_info.address.city =	
-        googleAddressObject.locality;	
-      this.currentOrder.fulfillment_info.delivery_info.address.state =	
-        googleAddressObject.state;	
-      this.currentOrder.fulfillment_info.delivery_info.address.zip_code =	
-        googleAddressObject.zip;	
-      this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =	
-        googleAddressObject.streetNumber + " " + googleAddressObject.route;	
-
-    },	
     currentAmountToAdd: function(newCurrent,oldCurrent){	
       this.currentOrder.charges.total = this.orderTotal	
       this.currentOrder.payments.payments[0].amount = this.orderTotal
@@ -953,6 +331,12 @@ if(newAddress){
     },
   data() {
     return {
+      renderComponent: true,
+      renderKey: 0,
+      editNumberLbs: 0,
+      editNumberOz: 0,
+      editLbs: null, 
+      editOz: null, 
       weight: 0,
       shippingAmount: 0,
       shippingOption: false,
@@ -1089,6 +473,51 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+    async shippableEdit(servid,e){
+
+
+let payload = { id: servid, tf: e }
+
+ this.$http.post("/product/shippableedit", payload)
+      .then((response) => {
+          console.log('success')
+      }).catch((e) => {
+          console.log('error')
+        });
+location.reload()
+    },
+async updateRetailItemLbs(servid,editNumber){
+
+
+
+let payload = { id: servid, number: editNumber }
+
+ this.$http.post("/product/retaillbs", payload)
+      .then((response) => {
+          console.log('success')
+      }).catch((e) => {
+          console.log('error')
+      });
+
+this.editLbs = null
+location.reload()
+},
+async updateRetailItemOz(servid,editNumber){
+
+let payload = { id: servid, number: editNumber }
+
+ this.$http.post("/product/retailoz", payload)
+      .then((response) => {
+          console.log('success')
+      }).catch((e) => {
+          console.log('error')
+      });
+
+this.editOz = null
+location.reload()
+ 
+},
   async shippingPrice(orig,dest,lb,oz){
 console.log(orig,dest,lb,oz)
 
@@ -1628,17 +1057,6 @@ if(this.tipSelected === 0){
     closeConfirmationModal() {
       this.orderConfirmationModal = false;
       this.orderCMR = "";
-    },
-    openModal(serve) {
-
-
-      let current = Object.assign({}, serve);
-
-      // let current = serve
-      
-
-      this.modalOpen = true;
-      this.currentItem = current;
     },
     expandChild(drawer) {
       var container = document.getElementById("drawertop-" + drawer)
@@ -2350,10 +1768,41 @@ ul li{
     margin-bottom: 5px;
 }
 
-.weight,
-.pick-up-only{
-font-style: italic;
-font-size: .875em;
-font-weight: 300;
+
+.submit-oz-input,
+.oz-input{
+display: none;
+&.visible{
+display: block;
 }
+}
+
+
+.edit-oz-input{
+display: block;
+&.invisible{
+  display: none;
+}
+
+}
+
+
+.submit-lbs-input,
+.lbs-input{
+display: none;
+&.visible{
+display: block;
+}
+}
+
+
+.edit-lbs-input{
+display: block;
+&.invisible{
+  display: none;
+}
+
+}
+
+
 </style>
