@@ -1,5 +1,5 @@
-<template>
-  <div id="upserveolo" class="shopRetail">
+<template v-if="renderComponent">
+  <div id="upserveolo" class="shopRetail" :key="componentKey">
     <section>
 
 
@@ -46,7 +46,7 @@
 
 <div class="container">
 
-<div class="row" v-if="renderComponent">
+<div class="row">
             <template v-for="item in upserveSections">
               <template v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
                 <template v-if="item.timing_mask === null">
@@ -331,6 +331,7 @@ let storeCurrentOrder = this.currentOrder;
     },
   data() {
     return {
+      componentKey: 0,
       renderComponent: true,
       renderKey: 0,
       editNumberLbs: 0,
@@ -473,6 +474,14 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    forceRerender() {
+this.componentKey += 1
+    },
+      methodThatForcesUpdate() {
+ 
+      this.$forceUpdate();  // Notice we have to use a $ here
+    
+    },
 
     async shippableEdit(servid,e){
 
@@ -481,11 +490,14 @@ let payload = { id: servid, tf: e }
 
  this.$http.post("/product/shippableedit", payload)
       .then((response) => {
-          console.log('success')
+ console.log(response)
       }).catch((e) => {
           console.log('error')
         });
-//location.reload()
+          this.upservesMongo()
+          this.forceRerender()
+          // location.reload()
+      
     },
 async updateRetailItemLbs(servid,editNumber){
 
@@ -495,13 +507,18 @@ let payload = { id: servid, number: editNumber }
 
  this.$http.post("/product/retaillbs", payload)
       .then((response) => {
-          console.log('success')
+ console.log(response)
       }).catch((e) => {
           console.log('error')
       });
 
-this.editLbs = null
-//location.reload()
+
+          this.editNumberLbs = 0
+          this.editLbs = null
+          this.forceRerender()
+          this.upservesMongo()
+              // location.reload()
+
 },
 async updateRetailItemOz(servid,editNumber){
 
@@ -509,13 +526,19 @@ let payload = { id: servid, number: editNumber }
 
  this.$http.post("/product/retailoz", payload)
       .then((response) => {
-          console.log('success')
+ console.log(response)
+
+     this.editNumberOz = 0
+      this.editOz = null
+      this.forceRerender()
+      this.upservesMongo()
+
       }).catch((e) => {
           console.log('error')
       });
 
-this.editOz = null
-//location.reload()
+ 
+        // location.reload()
  
 },
   async shippingPrice(orig,dest,lb,oz){
