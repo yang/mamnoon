@@ -491,11 +491,12 @@ let payload = { id: servid, tf: e }
  this.$http.post("/product/shippableedit", payload)
       .then((response) => {
  console.log(response)
+     this.upservesMongo()
+          this.forceRerender()
       }).catch((e) => {
           console.log('error')
         });
-          this.upservesMongo()
-          this.forceRerender()
+      
           // location.reload()
       
     },
@@ -508,15 +509,16 @@ let payload = { id: servid, number: editNumber }
  this.$http.post("/product/retaillbs", payload)
       .then((response) => {
  console.log(response)
+           this.editNumberLbs = 0
+          this.editLbs = null
+          this.forceRerender()
+          this.upservesMongo()
       }).catch((e) => {
           console.log('error')
       });
 
 
-          this.editNumberLbs = 0
-          this.editLbs = null
-          this.forceRerender()
-          this.upservesMongo()
+
               // location.reload()
 
 },
