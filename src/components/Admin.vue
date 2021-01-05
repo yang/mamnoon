@@ -93,23 +93,73 @@
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
 
-<br>
+
+
+<div class="row">
+
+
+<div class="col-6">
 
 
 <label for="lbs">lbs</label>&nbsp;<span>{{serve.lbs}}</span>
 <input id="lbs" type="number" v-model="editNumberLbs" class="lbs-input" :class="{visible: editLbs === serve.id }">
 <button @click="updateRetailItemLbs(serve.id,editNumberLbs)" class="submit-lbs-input" :class="{visible: editLbs === serve.id }">submit {{editNumberLbs}}</button>
 <button @click="editLbs = serve.id" class="edit-lbs-input" :class="{invisible: editLbs === serve.id }">edit</button>
-
-<br>
-
+</div>
+<div class="col-6">
 <label for="oz">oz</label>&nbsp;<span>{{serve.oz}}</span>
 <input id="oz" type="number" v-model="editNumberOz" class="oz-input" :class="{visible: editOz === serve.id }">
 <button @click="updateRetailItemOz(serve.id,editNumberOz)" class="submit-oz-input" :class="{visible: editOz === serve.id }">submit, {{editNumberOz}}</button>
 <button @click="editOz = serve.id" class="edit-oz-input" :class="{invisible: editOz === serve.id }">edit</button>
 
+</div>
+<div class="col-6">
 
-<br>
+<label for="height">height</label>&nbsp;<span>{{serve.height}}</span>
+<input id="height" type="number" v-model="editNumberHeight" class="height-input" :class="{visible: editHeight === serve.id }">
+<button @click="updateRetailItemHeight(serve.id,editNumberHeight)" class="submit-height-input" :class="{visible: editHeight === serve.id }">submit, {{editNumberHeight}}</button>
+<button @click="editHeight = serve.id" class="edit-height-input" :class="{invisible: editHeight === serve.id }">edit</button>
+
+</div>
+<div class="col-6">
+
+
+
+<label for="width">width</label>&nbsp;<span>{{serve.width}}</span>
+<input id="width" type="number" v-model="editNumberWidth" class="width-input" :class="{visible: editWidth === serve.id }">
+<button @click="updateRetailItemWidth(serve.id,editNumberWidth)" class="submit-width-input" :class="{visible: editWidth === serve.id }">submit, {{editNumberWidth}}</button>
+<button @click="editWidth = serve.id" class="edit-width-input" :class="{invisible: editWidth === serve.id }">edit</button>
+
+</div>
+<div class="col-6">
+
+
+<label for="length">length</label>&nbsp;<span>{{serve.length}}</span>
+<input id="length" type="number" v-model="editNumberLength" class="length-input" :class="{visible: editLength === serve.id }">
+<button @click="updateRetailItemLength(serve.id,editNumberLength)" class="submit-length-input" :class="{visible: editLength === serve.id }">submit, {{editNumberLength}}</button>
+<button @click="editLength = serve.id" class="edit-length-input" :class="{invisible: editLength === serve.id }">edit</button>
+
+
+</div>
+<div class="col-6">
+
+
+
+<label for="girth">girth</label>&nbsp;<span>{{serve.girth}}</span>
+<input id="girth" type="number" v-model="editNumberGirth" class="girth-input" :class="{visible: editGirth === serve.id }">
+<button @click="updateRetailItemGirth(serve.id,editNumberGirth)" class="submit-girth-input" :class="{visible: editGirth === serve.id }">submit, {{editNumberGirth}}</button>
+<button @click="editGirth = serve.id" class="edit-girth-input" :class="{invisible: editGirth === serve.id }">edit</button>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
 shippable? {{serve.shippable}}<br>
 <template v-if="serve.shippable">
 
@@ -336,8 +386,16 @@ let storeCurrentOrder = this.currentOrder;
       renderKey: 0,
       editNumberLbs: 0,
       editNumberOz: 0,
+      editNumberHeight: 0,
+      editNumberWidth: 0,
+      editNumberLength: 0,
+      editNumberGirth: 0,
       editLbs: null, 
       editOz: null, 
+      editHeight: null, 
+      editWidth: null, 
+      editLength: null, 
+      editGirth: null, 
       weight: 0,
       shippingAmount: 0,
       shippingOption: false,
@@ -543,6 +601,108 @@ let payload = { id: servid, number: editNumber }
         // location.reload()
  
 },
+
+
+async updateRetailItemHeight(servid,editNumber){
+
+let payload = { id: servid, number: editNumber }
+
+ this.$http.post("/product/retailheight", payload)
+      .then((response) => {
+ console.log(response)
+
+     this.editNumberHeight = 0
+      this.editHeight = null
+      this.forceRerender()
+      this.upservesMongo()
+
+      }).catch((e) => {
+          console.log('error')
+      });
+
+ 
+        // location.reload()
+ 
+},
+
+
+async updateRetailItemWidth(servid,editNumber){
+
+let payload = { id: servid, number: editNumber }
+
+ this.$http.post("/product/retailwidth", payload)
+      .then((response) => {
+ console.log(response)
+
+     this.editNumberWidth = 0
+      this.editWidth = null
+      this.forceRerender()
+      this.upservesMongo()
+
+      }).catch((e) => {
+          console.log('error')
+      });
+
+ 
+        // location.reload()
+ 
+},
+
+
+async updateRetailItemLength(servid,editNumber){
+
+let payload = { id: servid, number: editNumber }
+
+ this.$http.post("/product/retaillength", payload)
+      .then((response) => {
+ console.log(response)
+
+     this.editNumberLength = 0
+      this.editLength = null
+      this.forceRerender()
+      this.upservesMongo()
+
+      }).catch((e) => {
+          console.log('error')
+      });
+
+ 
+        // location.reload()
+ 
+},
+
+
+
+
+async updateRetailItemGirth(servid,editNumber){
+
+let payload = { id: servid, number: editNumber }
+
+ this.$http.post("/product/retailgirth", payload)
+      .then((response) => {
+ console.log(response)
+
+     this.editNumberGirth = 0
+      this.editGirth = null
+      this.forceRerender()
+      this.upservesMongo()
+
+      }).catch((e) => {
+          console.log('error')
+      });
+
+ 
+        // location.reload()
+ 
+},
+
+
+
+
+
+
+
+
   async shippingPrice(orig,dest,lb,oz){
 console.log(orig,dest,lb,oz)
 
@@ -924,8 +1084,8 @@ this.attention = true
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          url: "http://localhost:4000/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          // url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1829,5 +1989,85 @@ display: block;
 
 }
 
+
+
+
+
+
+.submit-height-input,
+.height-input{
+display: none;
+&.visible{
+display: block;
+}
+}
+
+
+.edit-height-input{
+display: block;
+&.invisible{
+  display: none;
+}
+
+}
+
+
+
+.submit-width-input,
+.width-input{
+display: none;
+&.visible{
+display: block;
+}
+}
+
+
+.edit-width-input{
+display: block;
+&.invisible{
+  display: none;
+}
+
+}
+
+
+
+.submit-length-input,
+.length-input{
+display: none;
+&.visible{
+display: block;
+}
+}
+
+
+.edit-length-input{
+display: block;
+&.invisible{
+  display: none;
+}
+
+}
+
+
+
+
+
+.submit-girth-input,
+.girth-input{
+display: none;
+&.visible{
+display: block;
+}
+}
+
+
+.edit-girth-input{
+display: block;
+&.invisible{
+  display: none;
+}
+
+}
 
 </style>

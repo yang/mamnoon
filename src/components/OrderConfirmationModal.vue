@@ -21,11 +21,18 @@
     {{item.name}}
   </li>
   </ul>  
-<b>tip: ${{orderCMR.charges.tip.amount.toFixed(2)/100}}</b>
-  <br />  
+    {{retail}}
+<b v-if="retail">tip: ${{orderCMR.charges.tip.amount.toFixed(2)/100}}</b>
+
+<br />  
+
 <b>taxes: ${{orderCMR.charges.taxes.toFixed(2)/100}}</b>
-  <br />  
+<br />  
+
+
 <b>total: ${{orderCMR.charges.total.toFixed(2)/100}}</b>
+<br /><b v-if="orderCMR.charges.shipping > 0">shipping: ${{orderCMR.charges.shipping}}</b>
+<br />
 <br />
 <hr />
 
@@ -52,7 +59,7 @@ import moment from 'moment'
 import tz from 'moment-timezone'
 export default {
     name: 'OrderConfirmationModal',
-props: ['orderConfirmationModal','orderCMR'],
+props: ['orderConfirmationModal','orderCMR','retail'],
 components: {
 
     CloseModal

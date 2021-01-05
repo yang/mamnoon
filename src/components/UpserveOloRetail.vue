@@ -1,7 +1,7 @@
 <template>
   <div id="upserveolo" class="shopRetail">
     <section>
-<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
+<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" :retail="true" />
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
           <div @click="closeModal()" class="close closeModal">
@@ -95,32 +95,41 @@
           <button @click="incrementCurrentItem()">+</button>
           <div class="add-to-order-footer">
             item total: <b>${{currentItem.price_cents.toFixed(2)/100 * currentItemQuanity }}</b>
+           
+          <div v-if="shippingOption">
+         <button
+            v-if="currentItem.shippable"
+              class="float-right"
+              @click="addToOrder(currentItem)"
+            >add to cart</button>
+               <button
+            v-else
+              class="float-right"
+              @click="addToOrder(currentItem)"
+            disabled>not available for shipping</button>
 
+
+</div>
+<div v-else>
             <button
               class="float-right"
               @click="addToOrder(currentItem)"
             >add to cart</button>
 
+</div>
+
+
+
 
 
 
           </div>
-
-          <!-- {{currentItem}} -->
         </div>
       </div>
-
-
-
-
- 
-
-      <div class="container pt20">
+     <div class="container pt20">
         <div class="row">
           <div class="col-md-12 col-lg-8">
      
-
-
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
        Loading...
@@ -199,8 +208,8 @@
                               >{{serve.description}}</div> -->
                               <div class="food-price">
                             
-                                ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only</span>
-                                <br><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
+                                ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only, </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
+                                <br><span class="weight" v-if="serve.width > 0">w: {{serve.width}}"</span>&nbsp;<span class="weight" v-if="serve.height > 0">h: {{serve.oz}}"</span>&nbsp;<span class="weight" v-if="serve.length > 0">l: {{serve.length}}"</span>
                               </div>
                               </div>
                         
@@ -276,7 +285,7 @@ Come and pick up your items during store hours or get them shipped to your door 
           your pre order
   </template>
 
-  
+
   </button>
 <button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
 
@@ -291,7 +300,7 @@ Come and pick up your items during store hours or get them shipped to your door 
 <template v-if="valid">
 <template v-if="preOrderToggleState">
 
-  <template v-if="!shippingOption">
+  <template v-if="shippingOption === false">
   <div style="margin-top:15px;">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
@@ -563,6 +572,9 @@ Come and pick up your items during store hours or get them shipped to your door 
                   <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
 
 
+<div class="weight">{{order.lbs}}lbs, {{order.oz}}oz </div> 
+<div v-if="!order.shippable">pickup only</div>
+
 
                   <div v-if="order.instructions !== ''" class="order-instructions">
              
@@ -575,7 +587,6 @@ Come and pick up your items during store hours or get them shipped to your door 
                   </div>
                 </li>
               </ul>
-
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
@@ -585,14 +596,23 @@ calculate shipping
 </button>
 </div> -->
 
-{{totalWeight}}
+
+
 <template v-if="this.currentOrder.charges.items.length > 0">
               <!-- <div class="mt10" v-if="total > 0"> -->
+
+
+<div class="small-message" v-if="weightShipping.lbs > 70">
+  package cannot be more than 70lbs
+</div>
+
               <div class="mt10">
                 &nbsp;
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
 
               </div>
+              weight: {{weightShipping.lbs}}lbs, {{weightShipping.oz}}oz
+              <br />
               <!-- <hr />   -->
               total: ${{total.toFixed(2)/100 }}
               <br />
@@ -601,24 +621,15 @@ calculate shipping
               usps priority shipping: ${{shippingAmount}}
                </div>  
      
-            <div v-if="custom === true">
+            <div style="display:none;" v-if="custom === true">
             custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
             </div>
-            <div v-else>
+             <div style="display:none;" v-else>
              tip: ${{currentAmountToAdd | showToFixed }}
             </div>
-
-             
-
               <hr />
-
               <b>order total: ${{orderTotal | showToFixed }}</b>
-
-
 <br />
-
-
-
 </template>
 <template v-else>
 <div class="text-center cart-empty-class">
@@ -628,25 +639,15 @@ cart empty
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
-
-
-
-
-    
-
-
 <!-- </div> -->
 <template v-if="panelShow === 'yourOrder'">
-
  <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
-
-
               <template v-if="panelShow === 'customerInfo'">
             <template v-if="giftCardPanel ===  false">
               <button class="mt10 fw" style="margin-top:20px;"
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                v-if="weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
@@ -770,7 +771,21 @@ export default {
     NadiIconSm
   },
   computed: {	
-    totalWeight(){
+    weightShipping(){
+
+      let weight = {
+        lbs:0,
+        oz:0
+      }
+
+      for(var item in this.currentOrder.charges.items){
+          weight.lbs = Number(weight.lbs) + Number(this.currentOrder.charges.items[item].lbs)
+          weight.oz = Number(weight.oz) + Number(this.currentOrder.charges.items[item].oz)
+      }
+
+      return weight
+    },
+totalWeight(){
       let cost = 0
       for(var item in this.currentOrder.charges.items){
         cost = cost + this.currentOrder.charges.items[item].price
@@ -782,6 +797,7 @@ export default {
 
       let shippingAmountToAdd = Number(this.shippingAmount) * 100
       return Number(this.total) + Number(this.currentTax) + Number(this.tip) + Number(this.currentAmountToAdd) + shippingAmountToAdd
+
     },  
     googleAddress() {	
       return this.$store.state.googleAddress;	
@@ -808,10 +824,13 @@ export default {
   watch: {	
  currentOrder: {
      handler(val){
-       console.log('currentorder change')
       // do stuff
       if(this.shippingOption === true && this.validPostal(this.currentOrder.billing.billing_postal_code)){
-          this.shippingPrice('98122', String(this.currentOrder.billing.billing_postal_code),String(this.totalWeight/100),'0')
+          // this.shippingPrice('98122', String(this.currentOrder.billing.billing_postal_code),String(this.totalWeight/100),'0')
+this.shippingPrice('98122', String(this.currentOrder.billing.billing_postal_code),String(this.weightShipping.lbs),String(this.weightShipping.oz))
+
+
+          
       }
     },
      deep: true
@@ -1034,6 +1053,7 @@ if(newAddress){
         confirmation_code:
           "mamnoon-" + Math.random().toString(36).substr(2, 29),
         charges: {
+          shipping: 0,
           total: 0,
           preTotal: 0,
           fees: 0,
@@ -1089,6 +1109,28 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+
+
+
+removeNonShippables(){
+
+for (var value of this.currentOrder.charges.items) {
+// console.log(value.shippable)
+
+if(value.shippable === false){
+  swal(value.name + ' is not available for shipping and has been removed from your order.')
+  this.removeFromOrder(value)
+}
+
+
+}
+
+
+
+      },
+
+
   async shippingPrice(orig,dest,lb,oz){
 console.log(orig,dest,lb,oz)
 
@@ -1097,6 +1139,11 @@ console.log(orig,dest,lb,oz)
 
 
     this.shippingAmount = responseAcf.data[0].Rate[0]
+    this.currentOrder.charges.shipping = responseAcf.data[0].Rate[0]
+
+    let storeCurrentOrder = this.currentOrder;
+    this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
 
 },
 shipOption(c){
@@ -1108,6 +1155,20 @@ shipOption(c){
 
 let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
+
+if(c === true){
+  console.log('remove non shippables')
+  this.removeNonShippables()
+}else{
+  this.shippingAmount = 0
+  this.currentOrder.charges.shipping = 0
+
+  let storeCurrentOrder = this.currentOrder;
+  this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+}
 
   },
     makePickup(){
@@ -1470,8 +1531,8 @@ this.attention = true
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          url: "http://localhost:4000/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          // url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -1703,6 +1764,9 @@ if(this.tipSelected === 0){
         instructions: this.textdescription,
         modifiers: this.currentItemModifierArray,
         sides: [],
+        lbs: item.lbs * this.currentItemQuanity,
+        oz: item.oz * this.currentItemQuanity,
+        shippable: item.shippable
       };
 
         this.currentOrder.charges.items.push(itemToAdd);
@@ -1908,7 +1972,6 @@ if(this.tipSelected === 0){
         .post("/order/addorder", infoForPayStringify)
         .then((response) => {
         //   console.log('add to mongo emerge pay front end')
-
 // console.log(currentOrder);
 // console.log(currentOrder)
           self.orderConfirmationModal = true;

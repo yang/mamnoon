@@ -1,7 +1,7 @@
 <template>
   <div class="mamnoon">
     <Nav />
-<UpserveOloRetail :title="'Mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :emailAddress="$store.state.currentUserEmail" />
+<UpserveOloRetail :title="'Mamnoon'" :oloEndpoint="'/oloorderretail'" :menuEndpoint="'/product/upserveolo'" :emailAddress="$store.state.currentUserEmail" />
   </div>
 </template>
 <script>
