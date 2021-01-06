@@ -258,6 +258,7 @@
 
 
 <div v-if="currentOrder" class="container text-center">
+ 
               <template v-if="valid">
 <div v-if="shippingOption === false" class="toggleLr">
     <div>
@@ -1153,6 +1154,17 @@ shipOption(c){
   this.shippingOption = c
   c === true ? this.currentOrder.fulfillment_info.type = 'delivery' : this.currentOrder.fulfillment_info.type = 'pickup'
 
+
+
+if(c === true){
+ this.currentOrder.preorder = false 
+}
+
+
+if(c === false){
+ this.currentOrder.preorder = true
+}
+
 let storeCurrentOrder = this.currentOrder;
       this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
@@ -1238,9 +1250,18 @@ for(let i = 0; i < curRest.length; i++){
       if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
 // console.log('it returned true so break')
 this.valid = true
+
 break
       }else{
         // console.log('it didn treturn true')
+
+        console.log('it should be a rpeorder')
+        self.currentOrder.preorder = true
+  let storeCurrentOrder = self.currentOrder
+          self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
+
       }
 
     }
