@@ -21,7 +21,6 @@ order history:
 <button class="fl-right" v-if="!order.shipped" @click="markAsShipped(order._id)">not shipped, mark as shipped</button>
 <button class="fl-right" v-else disabled>shipped</button>
 <br>
-<b>{{order.email}}</b>
 <br>
 <template v-if="order.payInfo.externalTransactionId">
 debit/credit purchase (id: {{order.payInfo.externalTransactionId}})
@@ -33,14 +32,6 @@ giftcard purchase
 <ul class="no-left-pad">
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
 {{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>&nbsp;&nbsp;&nbsp;
-  <template v-if="item.returned">
-  <span>(returned)</span>
-  </template>
-  <template v-else>
-<span class="line-link" v-if="!order.void" @click="issueTokenizedReturn(order.payInfo.uniqueTransId,item.price,item.cartId,order._id)"><u>issue return</u></span>
-  </template>
-
-
 
 </li>
 </ul>
