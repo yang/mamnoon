@@ -209,7 +209,7 @@
                               <div class="food-price">
                             
                                 ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only, </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
-                                <br><span class="weight" v-if="serve.width > 0">w: {{serve.width}}"</span>&nbsp;<span class="weight" v-if="serve.height > 0">h: {{serve.oz}}"</span>&nbsp;<span class="weight" v-if="serve.length > 0">l: {{serve.length}}"</span>
+
                               </div>
                               </div>
                         
