@@ -73,7 +73,12 @@ export default {
     })
     },
     markAsShipped(uniqueTransIdString){
+  
 
+
+
+  var r = confirm("are you sure this item has been shipped?"); 
+  if (r == true) {
       console.log(uniqueTransIdString)
       this.$http
         .post("/order/mark-as-shipped", {
@@ -93,6 +98,11 @@ this.retrieveOrders()
           console.log("errors");
           console.log(e);
         });
+  }
+
+
+
+
 
 
 
