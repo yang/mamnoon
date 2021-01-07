@@ -15,8 +15,8 @@ export default {
     },
   data() {
     return {
-      id:'30FEA77E7D0A9B8D7616376B90063231D39C7C96A1D7376C38AE60E1910A82A10202394E8D6AA574431DCB69ECEA19B52C2754C5E2F6A48DEA4ACA3762773CE1',
-      emailName: 'cm-wodku-wodku',
+      id:'30FEA77E7D0A9B8D7616376B90063231122D972D702C45A0B0908F0B799A85F020393B617D255EDE0CCB8A42B8C75FE29A68A679D39C64E66764C801A0E74F3E',
+      emailName: 'cm-wkithd-wkithd',
       emailAddress: '',
       subscribeText: 'send'
         }
@@ -25,6 +25,10 @@ export default {
     submitEmail(secureUrl) {
       const params = {}
       params[this.emailName] = this.emailAddress
+
+
+      console.log('params')
+  console.log(params)
       // Warning: This response sometimes triggers a recapture if repeat requests are made from the same ip
       return fetch(secureUrl, {
         method: 'POST',
@@ -34,6 +38,7 @@ export default {
         })
       })
         .then(response => {
+          console.log(response)
           this.subscribeText = ' thx!'
           this.starState = '#f58e58'
           this.emailAddress = ''
@@ -58,7 +63,9 @@ export default {
         email: this.emailAddress,
         data: this.id
       }
-      return fetch('https://createsend.com/t/getsecuresubscribelink', {
+        console.log(params)
+      // return fetch('https://createsend.com/t/getsecuresubscribelink', {
+        return fetch('https://createsend.com//t/getsecuresubscribelink', {
         method: 'POST',
         body: new URLSearchParams(params),
         headers: new Headers({
