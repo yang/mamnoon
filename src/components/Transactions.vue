@@ -18,7 +18,7 @@ polling:
 retrieve
 </button>
 <br>
-{{pollResults}}<div v-if="pollResults === '{}'
+<div v-if="pollResults === '{}'
 ">
 
 </div>

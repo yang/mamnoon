@@ -1,11 +1,21 @@
 <template v-if="renderComponent">
   <div id="upserveolo" class="shopRetail" :key="componentKey">
+
+
+<section>
+
+
+     <AllShippingTransactions />
+
+</section>
+
+
     <section>
 
 
       <div class="container pt20">
         <div class="row">
-          <div class="col-md-12 col-lg-8">
+          <div class="col-md-12 col-lg-12">
      
 
 
@@ -53,7 +63,7 @@
  
                 <template v-if="currentFilter === 'All' || currentFilter === item.name">
               
-                <div class="col-6 col-md-4 shop-item no-lr-pad" v-for="piece in item.item_ids" :key="piece">
+                <div class="col-6 col-md-3 shop-item no-lr-pad" v-for="piece in item.item_ids" :key="piece">
 
 
 
@@ -214,7 +224,7 @@ shippable? {{serve.shippable}}<br>
 import CloseModal from "@/components/svgIcons/CloseModal";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
-
+import AllShippingTransactions from "@/components/AllShippingTransactions";
 
 
 import OrderConfirmationModal from "@/components/OrderConfirmationModal"
@@ -238,6 +248,7 @@ export default {
   name: "UpserveOloRetail",
   props: ["data","emailAddress","oloEndpoint","menuEndpoint","title"],
   components: {
+    AllShippingTransactions,
     OrderConfirmationModal,
     OnlineMenuCarousel,
     CloseModal,
@@ -769,35 +780,7 @@ this.currentOrder.fulfillment_info.type = 'delivery'
 }
 
 },
-  async getHours(){
 
-    let self = this
-   
-    let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
-    let AcfBlock = responseAcf
-    this.hours = AcfBlock.data.acf.content_fields.find(o => o.acf_fc_layout === 'timeranges');   
-
-    this.currentRestaurantHours = this.hours.restaurant_hours[0].restaurant_name.find(o => o.name === this.title.toLowerCase());
-    this.openDays = this.currentRestaurantHours.information.days_of_week
-    let curRest = this.currentRestaurantHours.information.open_time_range
-
-
-    for(let i = 0; i < curRest.length; i++){
-          this.showTimeInterVals(curRest[i].time_slot.open.split(':')[0],curRest[i].time_slot.close.split(':')[0])
-    }
-
-for(let i = 0; i < curRest.length; i++){
-    
-      if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
-// console.log('it returned true so break')
-this.valid = true
-break
-      }else{
-        // console.log('it didn treturn true')
-      }
-
-    }
-},
 currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 
     let weekday = ['mon','tue','wed','thu','fri','sat','sun']
@@ -1345,9 +1328,6 @@ if(this.tipSelected === 0){
 
 
     },
-
-
-
     addToOrderDontCloseModal(item) {
 
 
@@ -1459,120 +1439,6 @@ if(this.tipSelected === 0){
       // let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
       // let upserveProducts = responseUpserve.data.doc[0].menu.items;
     },
-
-
-
-
-
-    scheduleAnOrder(currentOrder,approvalData,giftcardbalance) {
-
-
-      let self = this;
-      // this.$http
-      //   .post(this.oloEndpoint, currentOrder)
-      //   .then((response) => {
-      //     console.log(response);
-      //     self.orderConfirmationModal = true;
-      //     self.giftcardbalance = giftcardbalance
-      //     self.orderCMR = response.data;
-      //     let orderCMR = response.data;
-      //     orderCMR.giftcardbalance = giftcardbalance
-      //     self.$store.commit("orderCMR", { orderCMR });
-      //     this.$router.push("/orderconfirmation");
-      //     self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
-      //     self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
-      //     let newDate = new Date();
-      //     self.currentOrder.time_placed = newDate;
-      //     self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-      //     let storeCurrentOrder = self.currentOrder
-      //     self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-      //   })
-      //   .catch((e) => {
-      //     // this.errors.push(e);
-      //     console.log("errors");
-      //     console.log(e);
-      //   });
-  
-      this.$http.post("/confirmationemail",currentOrder)
-      .then((response) => {
-        //   console.log('confirmation email sent')
-      }).catch((e) => {
-        //   console.log("errors");
-        //   console.log(e);
-        });
-
-
-    let infoForPay = {
-          payInfo: approvalData,
-          orderInfo: currentOrder
-        }
-    let infoForPayStringify = infoForPay      
-     this.$http
-        .post("/order/addorder", infoForPayStringify)
-        .then((response) => {
-        //   console.log('add to mongo emerge pay front end')
-
-// console.log(currentOrder);
-// console.log(currentOrder)
-          self.orderConfirmationModal = true;
-          self.giftcardbalance = giftcardbalance
-          self.orderCMR = currentOrder;
-          let orderCMR = currentOrder;
-          orderCMR.giftcardbalance = giftcardbalance
-          self.$store.commit("orderCMR", { orderCMR });
-          this.$router.push("/orderconfirmation");
-
-
-        })
-        .catch((e) => {
-          console.log("errors");
-          console.log(e);
-        });
-      },
-doAnOrder(currentOrder,approvalData,giftcardbalance) {
-      let self = this;
-      this.$http
-        .post(this.oloEndpoint, currentOrder)
-        .then((response) => {
-        //   console.log(response);
-          self.orderConfirmationModal = true;
-          self.giftcardbalance = giftcardbalance
-          self.orderCMR = response.data;
-          let orderCMR = response.data;
-        //   console.log(response.data)
-          orderCMR.giftcardbalance = giftcardbalance
-          self.$store.commit("orderCMR", { orderCMR });
-          this.$router.push("/orderconfirmation");
-          self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
-          self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
-          let newDate = new Date();
-          self.currentOrder.time_placed = newDate;
-          self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-          let storeCurrentOrder = self.currentOrder
-          self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-        })
-        .catch((e) => {
-          // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
-        });
-  
-    let infoForPay = {
-          payInfo: approvalData,
-          orderInfo: currentOrder
-        }
-    let infoForPayStringify = infoForPay      
-     this.$http
-        .post("/order/addorder", infoForPayStringify)
-        .then((response) => {
-          console.log(response);
-          console.log('add to mongo emerge pay front end')
-        })
-        .catch((e) => {
-          console.log("errors");
-          console.log(e);
-        });
-      },
     issueReturn() {
       this.$http
         .post("/issue-return")
@@ -1718,10 +1584,7 @@ dropDown(){
     }
   },
   mounted() {
-
-    this.getHours();
-
-      // this.returnAvailableNow();
+    // this.returnAvailableNow();
     this.getUser();
     // this.upserves();
     this.upservesMongo();
