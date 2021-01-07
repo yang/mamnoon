@@ -2,7 +2,7 @@
 <div class="container pad-yellow-background pd50">
 <!-- {{currentUser.currentUserEmail}} -->
 <br>
-order history:
+shipping order history:
 <hr>
 <br>
 <!-- {{response}} -->
