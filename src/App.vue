@@ -109,7 +109,7 @@ margin: 0 10px 0 0;
 }
 
 li {
-  border-bottom: 0px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
 }
 

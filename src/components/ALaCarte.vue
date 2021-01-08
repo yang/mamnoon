@@ -16,11 +16,11 @@
 
 
 
-              <router-link to="/mbar">
-           <!-- <MamnoonStreet1 :caviarLink="false" /> -->
+              <!-- <router-link to="/mbar" style="pointer-events:none;opacity:0;"> -->
+          <div style="pointer-events:none;opacity:0.25;display: inline;"> <!-- <MamnoonStreet1 :caviarLink="false" /> -->
             <Mbar2 :caviarLink="false" />
-                          </router-link>
-
+                          <!-- </router-link> -->
+</div>
         </div>
     </section>
 </template>

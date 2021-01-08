@@ -1,7 +1,7 @@
 <template>
   <div>
     <input v-model="emailAddress" type="email" placeholder="enter your email" class="lap-right-pad noselect" />
-    <button class="no-button-style" @click="submitForm">
+    <button class="no-button-style w-80-button" @click="submitForm">
         <Send :sendText="subscribeText" />
     </button>
   </div>
@@ -126,6 +126,10 @@ export default {
         outline: none;
         box-shadow: none;
     }
+}
+
+.w-80-button{
+  width: 80px;
 }
 
 </style>

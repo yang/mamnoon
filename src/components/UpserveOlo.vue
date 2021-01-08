@@ -982,7 +982,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
       </div></div>
       </section>
 
-<pre>{{$store.state.storeCurrentOrder}}</pre>
+<pre style="display:none">{{$store.state.storeCurrentOrder}}</pre>
 
 
   </div>
