@@ -1,16 +1,17 @@
-// const webpack = require('webpack')
-// module.exports = {
-//   configureWebpack: {
-//     plugins: [
-//       new webpack.optimize.LimitChunkCountPlugin({
-//         maxChunks: 1
-//       })
-//     ]
-//   },
-//   chainWebpack:
-//     config => {
-//       config.optimization.delete('splitChunks')
-//     }
-// }
-
-module.exports = { chainWebpack: config => { config.optimization.delete('splitChunks') } }
+// vue.config.js
+module.exports = {
+    //...
+    configureWebpack: {
+      output: {
+        filename: "./js/js.js"
+      }
+    },
+    chainWebpack: config => {
+      config.optimization.delete("splitChunks");
+    },
+    css: {
+      extract: {
+        filename: "/css/css.css"
+      }
+    }
+  }
