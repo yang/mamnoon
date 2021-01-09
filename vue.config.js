@@ -1,15 +1,16 @@
-// const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+// const webpack = require('webpack')
 // module.exports = {
 //   configureWebpack: {
 //     plugins: [
-//       new VuetifyLoaderPlugin()
-//     ],
-//     // optimization: {
-//     //     splitChunks: {
-//     //       minSize: 10000,
-//     //       maxSize: 250000,
-//     //   }
-//     // }
-
+//       new webpack.optimize.LimitChunkCountPlugin({
+//         maxChunks: 1
+//       })
+//     ]
 //   },
+//   chainWebpack:
+//     config => {
+//       config.optimization.delete('splitChunks')
+//     }
 // }
+
+module.exports = { chainWebpack: config => { config.optimization.delete('splitChunks') } }
