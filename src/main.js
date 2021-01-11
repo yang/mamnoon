@@ -19,7 +19,7 @@ Vue.component('v-select', vSelect)
 
 
 
-import vueCustomElement from 'vue-custom-element'
+// import vueCustomElement from 'vue-custom-element'
 
 
 
@@ -292,27 +292,27 @@ const store = new Vuex.Store({
 })
 
 
-// new Vue({
-//   router,
-//   store: store,
-//   render: h => h(App),
-//   async mounted () {
+new Vue({
+  router,
+  store: store,
+  render: h => h(App),
+  async mounted () {
 
 
-// let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
-// let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
-// this.$store.commit('updateTockMeals', { inventoryTockAdd })
+let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
+let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
+this.$store.commit('updateTockMeals', { inventoryTockAdd })
 
-// }
-// }).$mount("#app");
-
-
+}
+}).$mount("#app");
 
 
-Vue.use(vueCustomElement)
-App.store = store
-App.router = router
-Vue.customElement('vue-widget', App)
+
+
+// Vue.use(vueCustomElement)
+// App.store = store
+// App.router = router
+// Vue.customElement('vue-widget', App)
 
 
 

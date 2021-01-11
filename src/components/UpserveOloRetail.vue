@@ -211,6 +211,8 @@
                                 ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only, </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
 
                               </div>
+
+                              {{ serve}}
                               </div>
                         
                           
@@ -721,7 +723,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
-<pre style="display:none">{{$store.state.storeCurrentOrder}}</pre>
+<pre>{{$store.state.storeCurrentOrder}}</pre>
   </div>
 </template>
 
@@ -773,7 +775,6 @@ export default {
   },
   computed: {	
     weightShipping(){
-
       let weight = {
         lbs:0,
         oz:0
@@ -783,6 +784,10 @@ export default {
           weight.lbs = Number(weight.lbs) + Number(this.currentOrder.charges.items[item].lbs)
           weight.oz = Number(weight.oz) + Number(this.currentOrder.charges.items[item].oz)
       }
+
+      this.currentOrder.fulfillment_info.weight = weight
+      let storeCurrentOrder = this.currentOrder;	
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
       return weight
     },
@@ -828,10 +833,10 @@ totalWeight(){
       // do stuff
       if(this.shippingOption === true && this.validPostal(this.currentOrder.billing.billing_postal_code)){
           // this.shippingPrice('98122', String(this.currentOrder.billing.billing_postal_code),String(this.totalWeight/100),'0')
-this.shippingPrice('98122', String(this.currentOrder.billing.billing_postal_code),String(this.weightShipping.lbs),String(this.weightShipping.oz))
+this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz))
 
 
-          
+
       }
     },
      deep: true
@@ -945,6 +950,12 @@ if(newAddress){
         googleAddressObject.zip;	
       this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =	
         googleAddressObject.streetNumber + " " + googleAddressObject.route;	
+
+
+
+
+
+
 
     },	
     currentAmountToAdd: function(newCurrent,oldCurrent){	
@@ -1066,6 +1077,7 @@ if(newAddress){
           items: [],
         },
         fulfillment_info: {
+          weight: 0,
           type: "pickup",
           estimated_fulfillment_time: null,
           customer: {
@@ -1132,15 +1144,23 @@ if(value.shippable === false){
       },
 
 
-  async shippingPrice(orig,dest,lb,oz){
-console.log(orig,dest,lb,oz)
-
-    let responseAcf = await this.$http.get(`/shippingcalculation`, { params: { ZipOrigination: orig, ZipDestination: dest, Pounds: lb, Ounces: oz } })
-    console.log(responseAcf.data[0].Rate[0])
+  async shippingPrice(order_info,lb,oz){
+console.log(order_info)
 
 
-    this.shippingAmount = responseAcf.data[0].Rate[0]
-    this.currentOrder.charges.shipping = responseAcf.data[0].Rate[0]
+
+// console.log(JSON.stringify(order_info))
+
+    let responseAcf = await this.$http.get(`/shippingcalculation`, { params: { orderInfo: order_info, Pounds: lb, Ounces: oz } })
+    // console.log(responseAcf.data[0].Rate[0])
+  // console.log(responseAcf.data.rates.filter(word => word.attributes.includes('CHEAPEST')));
+console.log(responseAcf.data.rates)
+let cheapest = responseAcf.data.rates.filter(word => word.servicelevel.token === "usps_priority")
+
+
+
+    this.shippingAmount = cheapest[0].amount
+    this.currentOrder.charges.shipping = cheapest[0].amount
 
     let storeCurrentOrder = this.currentOrder;
     this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
@@ -1787,7 +1807,11 @@ if(this.tipSelected === 0){
         sides: [],
         lbs: item.lbs * this.currentItemQuanity,
         oz: item.oz * this.currentItemQuanity,
-        shippable: item.shippable
+        shippable: item.shippable,
+        height: item.height,
+        width: item.width,
+        length: item.length,
+        girth: item.girth
       };
 
         this.currentOrder.charges.items.push(itemToAdd);
@@ -1816,8 +1840,6 @@ if(this.tipSelected === 0){
             this.currentAmountToAdd = this.tip2
           }else if(this.tipSelected === 3){
             this.currentAmountToAdd = this.tip3
-          }else{
-
           }
 
 
