@@ -21,6 +21,12 @@ shipping order history:
 <button class="fl-right" v-if="!order.shipped" @click="markAsShipped(order._id)">not shipped, mark as shipped</button>
 <button class="fl-right" v-else disabled>shipped</button>
 <br>
+
+<br>
+<pre>
+{{order.shippingInfo}}
+</pre>
+<br>
 <br>
 <template v-if="order.payInfo.externalTransactionId">
 debit/credit purchase (id: {{order.payInfo.externalTransactionId}})
