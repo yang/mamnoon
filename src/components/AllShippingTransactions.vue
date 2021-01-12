@@ -18,11 +18,15 @@ shipping order history:
 
  </pre>
 <!-- {{order.payInfo.externalTransactionId}} -->
-<button class="fl-right" v-if="!order.shipped" @click="markAsShipped(order._id)">not shipped, mark as shipped</button>
+<button class="fl-right" v-if="!order.shipped" @click="markAsShipped(order._id,order)">not shipped, mark as shipped</button>
 <button class="fl-right" v-else disabled>shipped</button>
 <br>
 
 <br>
+<pre>
+{{order}}
+</pre>
+
 <pre>
 {{order.shippingInfo}}
 </pre>
@@ -69,17 +73,17 @@ export default {
         self.orderhistory = response.data
     })
     },
-    markAsShipped(uniqueTransIdString){
+    markAsShipped(uniqueTransIdString, order){
   
-
-
+console.log('mark as shipped')
 
   var r = confirm("are you sure this item has been shipped?"); 
   if (r == true) {
       console.log(uniqueTransIdString)
       this.$http
         .post("/order/mark-as-shipped", {
-            uniqueTransId: uniqueTransIdString,
+            uniqueId: uniqueTransIdString,
+            order: order
           }
           )
         .then((response) => {
