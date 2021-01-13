@@ -91,7 +91,8 @@ let self = this
         ); //Changed
         // removed newBounds = bounds;
         if (!place.geometry) {
-          geocodeAddress(input.value); //Added on 27/09/2016
+          geocodeAddress(input.value);
+          console.log(input.value) //Added on 27/09/2016
           //window.alert("Autocomplete's returned place contains no geometry");
           return;
         }

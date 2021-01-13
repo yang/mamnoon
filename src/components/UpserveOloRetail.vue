@@ -315,11 +315,13 @@ Come and pick up your items during store hours or get them shipped to your door 
 </template>
   <template v-else>
 <template v-if="this.currentOrder.charges.items.length > 0">
-<br>  
+
+<div v-if="shippingOption === false">
+  <br>
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 <div style="margin-top:15px;" v-if="selectedDate !== null">
 <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-</div>
+</div></div>
 
 </template>
 </template>
@@ -650,7 +652,7 @@ cart empty
               <template v-if="panelShow === 'customerInfo'">
             <template v-if="giftCardPanel ===  false">
               <button class="mt10 fw" style="margin-top:20px;"
-                v-if="weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                v-if="shippingOption && shippingAmount > 0 && weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
