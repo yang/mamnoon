@@ -42,9 +42,16 @@
 
 
     </template>
-            <router-link to="/">
-       
-     <Logo />
+    <router-link to="/">
+                <template v-if="$route.name === 'mamnoon'">
+                <LogoMamnoon />
+                </template>
+                <template v-else-if="$route.name === 'mamnoonstreet'">
+                <LogoStreet />
+                </template>
+                <template v-else>
+                <Logo />
+                </template>
         </router-link>
        
 
@@ -200,12 +207,16 @@
 <script>
 import VueJwtDecode from "vue-jwt-decode";
 import Logo from "@/components/Logo";
+import LogoMamnoon from "@/components/LogoMamnoon";
+import LogoStreet from "@/components/LogoStreet";
 import Burger from "@/components/svgIcons/Burger";
 import GoogleAuth from "@/components/GoogleAuth";
 
 export default {
     components: {
     Logo,
+    LogoMamnoon,
+    LogoStreet,
     Burger,
     GoogleAuth
   },
