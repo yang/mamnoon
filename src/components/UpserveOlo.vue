@@ -25,12 +25,12 @@
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
           <div v-if="currentItem.modifier_group_ids.length >= 1">
-            <h4 class="text-left">addons</h4>
+            <h4 class="text-left">add ons</h4>
             <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
                 <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
                   <!-- <div v-if="modifier.minimum_required === 0">
-                    <div v-if="modifier.name !== 'Promotions'">(addons not required)</div>
+                    <div v-if="modifier.name !== 'Promotions'">(add ons not required)</div>
                   </div>
                   <div v-else>
                     minimum_required: {{modifier.minimum_required}}
@@ -136,7 +136,7 @@
 <template v-if="valid">
 <div class="toggleLr">
   <div>
-    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
+    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
   <div>
     <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
     </div> 
@@ -453,7 +453,7 @@ Now accepting preorders for pick up.
 <!--<template v-if="valid">
 <div class="toggleLr">
   <div>
-    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
+    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
   <div>
     <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
     </div> 
@@ -1362,7 +1362,7 @@ if(newAddress){
       currentOrder: { 
         tipSelected: 0,
         currentAmountToAddCustom: 0,
-        sms: true,
+        sms: false,
         restaurant: this.title,
         billing:{
           billing_name: '',

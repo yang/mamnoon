@@ -25,7 +25,7 @@
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
           <div v-if="currentItem.modifier_group_ids.length >= 1">
-            <h4 class="text-left">addons</h4>
+            <h4 class="text-left">add ons</h4>
             <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
               <div v-for="modifier in modifierGroups" :key="modifier.name">
                 <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
@@ -264,7 +264,7 @@
               <template v-if="valid">
 <div v-if="shippingOption === false" class="toggleLr">
     <div>
-    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">asap</button></div> 
+    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
   <div>
     <button class="fl-right" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button> 
     </div> 
@@ -651,14 +651,45 @@ cart empty
 </template>
               <template v-if="panelShow === 'customerInfo'">
             <template v-if="giftCardPanel ===  false">
-              <button class="mt10 fw" style="margin-top:20px;"
-                v-if="shippingOption && shippingAmount > 0 && weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+             
+
+
+                     <template v-if="giftCardPanel ===  false">
+
+
+
+
+ 
+
+
+         <template v-if="shippingOption && shippingAmount > 0">
+
+       <button class="mt10 fw" style="margin-top:20px;"
+                v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== '' && weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
               <button class="mt10 fw" style="margin-top:20px;"
               v-else disabled>Credit/Debit Pay</button>
-        </template>
+     </template>
+     <template v-else>
+
+   <button class="mt10 fw" style="margin-top:20px;"
+                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                id="cip-pay-btn"
+                @click="cippaybutton"
+              >Credit/Debit Pay</button>
+              <button class="mt10 fw" style="margin-top:20px;"
+              v-else disabled>Credit/Debit Pay</button>
+
+            </template>
+
+        </template>       
+        
+        
+        
+        
+         </template>
 
 <template v-if="giftCardPanel ===  false">
 <button 
@@ -725,7 +756,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
-<pre>{{$store.state.storeCurrentOrder}}</pre>
+<pre style="display:none;">{{$store.state.storeCurrentOrder}}</pre>
   </div>
 </template>
 
@@ -889,6 +920,16 @@ this.currentOrder.scheduled_time = this.selectedTime.time
         this.currentOrder.billing.billing_address = ''	
         this.currentOrder.billing.billing_postal_code = ''	
       }	
+
+
+console.log(this.checked)
+this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz))
+
+
+let storeCurrentOrder = this.currentOrder;	
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+
+
     },	
 currentAmountToAddCustom(){	
 this.currentAmountToAdd = this.currentAmountToAddCustom * 100	
@@ -955,9 +996,11 @@ if(newAddress){
 
 
 
-
-
-
+console.log('hap he')
+console.log(this.currentOrder)
+this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz));
+let storeCurrentOrder = this.currentOrder;	
+this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
     },	
     currentAmountToAdd: function(newCurrent,oldCurrent){	
@@ -1047,7 +1090,7 @@ if(newAddress){
       currentOrder: { 
         tipSelected: 0,
         currentAmountToAddCustom: 0,
-        sms: true,
+        sms: false,
         restaurant: this.title,
         billing:{
           billing_name: '',
@@ -1526,6 +1569,17 @@ this.attention = false
 this.toggledDrawer = !this.toggledDrawer
     },
     refreshGoogle() {
+
+
+
+    this.shippingAmount = 0
+    this.currentOrder.charges.shipping = 0
+
+    let storeCurrentOrder = this.currentOrder;
+    this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
+
+
       this.renderKey++;
 
       this.googleAddressObject = {};
@@ -1540,6 +1594,13 @@ this.toggledDrawer = !this.toggledDrawer
       };
 this.attention = true
       this.$store.commit("googleAddress", { googleAddress });
+
+
+
+
+
+
+
     },
     cippaybutton() {
       this.checkForm()

@@ -100,18 +100,19 @@ let self = this
         marker.setMap(map);
         newBounds.extend(place.geometry.location);
         map.fitBounds(newBounds);
-        if (
-          google.maps.geometry.poly.containsLocation(
-            place.geometry.location,
-            polygon
-          )
-        ) {
-            console.log(place)
 
+// if (
+        //   google.maps.geometry.poly.containsLocation(
+        //     place.geometry.location,
+        //     polygon
+        //   )
+        // ) {
+            // console.log(place.address_components)
+let american = place.address_components.filter(x => x.long_name === 'United States')
+if(american.length>0){
 
-
-
-
+         alert("heckin valid.");
+        console.log(american)
 
         let googleAddress = place
 

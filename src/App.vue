@@ -473,6 +473,7 @@ border-top: 0;
     width: 100%;
     margin: 0px 0;
     margin-bottom: 10px;
+    height: 50px;
   }
 }
 
@@ -522,20 +523,20 @@ div{
   background-position: 0;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 200px;
+  height: 100px;
   z-index: 1;
 
   background: #f0ecec;
 
   img, svg {
     width: auto !important;
-    height: 200px;
+    height: 100px;
   }
 
 
 div{
   svg{
-    height: 200px;
+    height: 100px;
   }
 }
 
@@ -546,7 +547,7 @@ div{
 
 
 .item-image-container > div > svg {
-    height: 200px;
+    height: 100px;
  
 }
 }
@@ -586,6 +587,7 @@ textarea {
   border-radius: 4px;
   border: 1px solid #b7b7b7;
   margin-bottom: 10px;
+  height: 50px;
 }
 
 .displayInlineBlock {
@@ -694,6 +696,14 @@ transition: background-color .1s ease;
         bottom: 10px;
         right: 10px;
         z-index: 100;
+
+
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-radius: 0;
+    padding: 3px 10px;
+
     }
 
 

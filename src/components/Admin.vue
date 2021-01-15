@@ -468,7 +468,7 @@ let storeCurrentOrder = this.currentOrder;
       currentOrder: { 
         tipSelected: 0,
         currentAmountToAddCustom: 0,
-        sms: true,
+        sms: false,
         restaurant: this.title,
         billing:{
           billing_name: '',
