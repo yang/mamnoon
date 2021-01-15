@@ -708,6 +708,7 @@ input:checked + .slider:before {
 
 
 ul.dots{
+  display: none;
     margin: 0 auto;
     text-align: center;
     width: 100%;
@@ -895,6 +896,7 @@ height: 704px;
 }
 
 .owl-theme .owl-dots .owl-dot span{
+  display: none !important;
       width: 20px;
     height: 20px;
     margin: 5px 7px;
