@@ -1223,11 +1223,16 @@ shipOption(c){
 
 if(c === true){
  this.currentOrder.preorder = false 
+
+
+this.shippingOption = true
+
 }
 
 
 if(c === false){
  this.currentOrder.preorder = true
+ this.shippingOption = false
 }
 
 let storeCurrentOrder = this.currentOrder;
@@ -1246,6 +1251,10 @@ if(c === true){
   this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
 }
+
+
+
+
 
   },
     makePickup(){

@@ -1,8 +1,8 @@
 <template>
   <main>
     <div>
-      <h2 class="intro-paragraph-header">Welcome</h2>
-      <p class="intro-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mi lacus, cursus sed finibus id, convallis id dui. Maecenas viverra gravida turpis a ultrices.</p>
+      <h2 class="intro-paragraph-header">Welcome!</h2>
+      <p class="intro-paragraph">Nadi Mama is a one stop shop for all things The Mama Group has to offer. Order food, purchase retail items, make a reservation or simply stay up to date with updates for all of our restaurants and services.</p>
     </div>
 
 
