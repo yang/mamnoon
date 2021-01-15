@@ -85,7 +85,7 @@ const store = new Vuex.Store({
     names: [],
     shoppingCartItems: [],
     cart: 0,
-    userName: 'joe',
+    userName: '',
     currentUserEmail: '',
     userInfo: {},
     vegetarian: false,
