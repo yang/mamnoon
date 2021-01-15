@@ -14,7 +14,7 @@
 
               <template v-if="upserveSectionsRendered">
              <!-- <VueAspectRatio ar="6:7" width="100%" class="">   -->
-        <carousel @changed="changed($event)" :items="1" :touchDrag="false" :mouseDrag="false"  :loop="false" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
+        <carousel @changed="changed($event)" :items="1" :touchDrag="false" :mouseDrag="false"  :loop="false" :dots="true" :nav="false" v-if="upserveSections" style="height: 520px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />
@@ -884,12 +884,12 @@ height: 704px;
 .owl-carousel, .owl-item{
   // height: 500px;
 
-      height: 550px;
+      height: 520px;
 }
 
 .owl-item > div {
     width: 100%;
-    height: 550px;
+    height: 520px;
     // pointer-events: none;
     cursor: pointer;
     
