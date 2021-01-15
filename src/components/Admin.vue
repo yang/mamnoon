@@ -163,6 +163,11 @@
 </div>
 
 
+
+
+
+
+
 </div>
 
 
@@ -180,6 +185,27 @@ shippable? {{serve.shippable}}<br>
 
 <button @click="shippableEdit(serve.id,true)">make shippable</button>
 </template>
+
+
+
+
+<br>  <br>  
+
+
+
+visible? {{serve.visible}}<br>
+<template v-if="serve.visible">
+
+<button @click="visibleEdit(serve.id,false)">make not visible</button>
+
+</template>
+<template v-else>
+
+<button @click="visibleEdit(serve.id,true)">make visible</button>
+</template>
+
+
+
                               </div>
                         
                           
@@ -551,8 +577,25 @@ this.componentKey += 1
       this.$forceUpdate();  // Notice we have to use a $ here
     
     },
+    async visibleEdit(servid,e){
 
-    async shippableEdit(servid,e){
+
+let payload = { id: servid, tf: e }
+
+ this.$http.post("/product/visibleedit", payload)
+      .then((response) => {
+ console.log(response)
+     this.upservesMongo()
+          this.forceRerender()
+      }).catch((e) => {
+          console.log('error')
+        });
+      
+          // location.reload()
+      
+    },
+
+async shippableEdit(servid,e){
 
 
 let payload = { id: servid, tf: e }

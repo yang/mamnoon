@@ -174,11 +174,12 @@
  
                 <template v-if="currentFilter === 'All' || currentFilter === item.name">
               
-                <div class="col-6 col-md-4 shop-item no-lr-pad" v-for="piece in item.item_ids" :key="piece">
+                <template v-for="piece in item.item_ids">
               
                     <template v-for="serve in upserveList">
                       <template v-if="serve.id === piece">
-                        <div class="itemContainer" @click="openModal(serve)">
+<div class="col-6 col-md-4 shop-item no-lr-pad" v-if="serve.visible">
+  <div class="itemContainer" @click="openModal(serve)">
                             <template v-if="serve.images">
                               <div
                                 v-if="serve.images"
@@ -207,9 +208,7 @@
                                 v-if="serve.description"
                               >{{serve.description}}</div> -->
                               <div class="food-price">
-                            
                                 ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only, </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
-
                               </div>
 
                           
@@ -219,10 +218,15 @@
                  
 
                         </div>
+
+
+</div>
+
+                
                       </template>
                     </template>
                
-                </div>
+                 </template>
 
          </template>
 
@@ -1883,7 +1887,8 @@ if(this.tipSelected === 0){
         height: item.height,
         width: item.width,
         length: item.length,
-        girth: item.girth
+        girth: item.girth,
+        visible: true
       };
 
         this.currentOrder.charges.items.push(itemToAdd);
