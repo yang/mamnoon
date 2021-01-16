@@ -914,7 +914,7 @@ cart empty
              
 
 
-{{currentOrder.charges.total > 0}}
+<!-- {{currentOrder.charges.total > 0}}
 {{currentOrder.billing.billing_name !== ''}}
 {{currentOrder.billing.billing_address !== ''}}
 {{currentOrder.billing.billing_postal_code !== ''}}
@@ -922,7 +922,7 @@ cart empty
 
 
 {{currentOrder.preorder}}
-{{selectedTime}}
+{{selectedTime}} -->
 
      <button class="mt10 fw" style="margin-top:20px;"
               v-if="currentOrder.preorder === true && selectedTime === null" disabled>Credit/Debit Pay</button>
