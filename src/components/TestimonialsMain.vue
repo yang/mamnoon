@@ -272,5 +272,29 @@ font-size: 18px;
 
 }
 
+
+@media only screen and (max-width: 768px) {
+#testimonials{
+  .quote-container {
+    // height: 200px;
+        min-height: 60px;
+    position: relative;
+
+    .md, .xs{
+      position: absolute;
+      top: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      left: 50%;
+      width: 100%;
+      font-size: 12px !important;
+    }
+}
+
+}
+}
+
+
+
 </style>
 

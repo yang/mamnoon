@@ -183,4 +183,11 @@ float: left;
 }
 }
 
+@media only screen and (max-width: 400px){
+    .lap-right-pad {
+
+    width: 180px;
+}
+}
+
 </style>
