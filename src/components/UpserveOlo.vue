@@ -912,6 +912,18 @@ cart empty
               <template v-if="panelShow === 'customerInfo'">
             <template v-if="giftCardPanel ===  false">
              
+
+
+{{currentOrder.charges.total > 0}}
+{{currentOrder.billing.billing_name !== ''}}
+{{currentOrder.billing.billing_address !== ''}}
+{{currentOrder.billing.billing_postal_code !== ''}}
+
+
+
+{{currentOrder.preorder}}
+{{selectedTime}}
+
      <button class="mt10 fw" style="margin-top:20px;"
               v-if="currentOrder.preorder === true && selectedTime === null" disabled>Credit/Debit Pay</button>
               <button class="mt10 fw" style="margin-top:20px;"
@@ -982,7 +994,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
       </div></div>
       </section>
 
-<pre style="display:none">{{$store.state.storeCurrentOrder}}</pre>
+<pre>{{$store.state.storeCurrentOrder}}</pre>
 
 
   </div>
@@ -1561,9 +1573,9 @@ async upserveMongo(){
         break
         }else{
   
-      this.currentOrder.preorder = true
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+      // this.currentOrder.preorder = true
+      // let storeCurrentOrder = this.currentOrder;
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     }
 }
 },
