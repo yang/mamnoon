@@ -85,6 +85,7 @@ export default {
           // console.log(profile)
           // console.log(currentUserEmail)
           this.$store.commit("setCurrentUserEmail", { currentUserEmail });
+          location.reload()
         })
         .catch((error) => {
           //on fail do something

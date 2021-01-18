@@ -255,7 +255,7 @@
         <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
 </div>
 
-<div v-if="!shippingOption" class="container mb10"> 
+<div v-if="!shippingOption" class="container mb5"> 
     <button v-if="!shippingOption" style="width: 100%;" @click="shipOption(true)">ship</button> 
 
 
@@ -279,7 +279,7 @@
 </template>
 <template v-else>
 <div> 
-Come and pick up your items during store hours or get them shipped to your door via usps!
+Come and pick up your items during store hours or get them shipped to your door via usps!<br><br>
 </div> 
 
 </template>
@@ -471,7 +471,8 @@ Come and pick up your items during store hours or get them shipped to your door 
                 <h4 v-else class="text-left mt10">customer info</h4>
                 <label class="smblk" for="name">name:</label>
                 <br />
-                <input
+                <div v-if="user && user.user.name !== ''" style="margin-bottom: 10px;">{{user.user.name}}</div>
+                <input v-else
                   type="text"
                   id="name"
                   name="name"
@@ -494,7 +495,8 @@ Come and pick up your items during store hours or get them shipped to your door 
 
                <label class="smblk" for="phone">phone:</label>
                 <br />
-                <input
+                     <div v-if="user && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
+                <input v-else
                   type="text"
                   id="phone"
                   name="phone"
@@ -526,7 +528,8 @@ Come and pick up your items during store hours or get them shipped to your door 
 <!-- <div v-if="checked === false"> -->
                 <label class="smblk" for="name">name:</label>
                 <br />
-                <input
+     <div v-if="user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
+                <input v-else
                   type="text"
                   id="name-billing"
                   name="name"
@@ -537,7 +540,8 @@ Come and pick up your items during store hours or get them shipped to your door 
 
                 <label class="smblk" for="address">billing address:</label>
                 <br />
-                <input
+     <div v-if="user && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
+                <input v-else
                   type="text"
                   id="address"
                   name="address"
@@ -547,7 +551,8 @@ Come and pick up your items during store hours or get them shipped to your door 
 
                 <label class="smblk" for="postal_code">billing postal code:</label>
                 <br />
-                <input
+                     <div v-if="user && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
+                <input v-else
                   type="text"
                   id="postal_code"
                   name="postal_code"
@@ -556,7 +561,7 @@ Come and pick up your items during store hours or get them shipped to your door 
                 />
 
 <!-- </div> -->
-  <br />
+
 
               </form>
 
@@ -604,9 +609,6 @@ Come and pick up your items during store hours or get them shipped to your door 
 calculate shipping
 </button>
 </div> -->
-
-
-
 <template v-if="this.currentOrder.charges.items.length > 0">
               <!-- <div class="mt10" v-if="total > 0"> -->
 
@@ -618,7 +620,6 @@ calculate shipping
               <div class="mt10">
                 &nbsp;
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
-
               </div>
               weight: {{weightShipping.lbs}}lbs, {{weightShipping.oz}}oz
               <br />
@@ -663,8 +664,6 @@ cart empty
 
 
 
- 
-
 
          <template v-if="shippingOption && shippingAmount > 0">
 
@@ -676,31 +675,62 @@ cart empty
               <button class="mt10 fw" style="margin-top:20px;"
               v-else disabled>Credit/Debit Pay</button>
      </template>
+     <template v-else-if="currentOrder.preorder === true">
+      <button class="mt10 fw" style="margin-top:20px;"
+                v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                id="cip-pay-btn"
+                @click="cippaybutton"
+              >Credit/Debit Pay</button>
+              <button class="mt10 fw" style="margin-top:20px;"
+              v-else disabled>Credit/Debit Pay</button>
+          </template>
      <template v-else>
-
-   <button class="mt10 fw" style="margin-top:20px;"
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+      <button class="mt10 fw" style="margin-top:20px;"
+                v-if="currentOrder.preorder === true && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
               <button class="mt10 fw" style="margin-top:20px;"
               v-else disabled>Credit/Debit Pay</button>
 
-            </template>
-
+          </template>
         </template>       
-        
-        
-        
-        
-         </template>
+        </template>
 
 <template v-if="giftCardPanel ===  false">
-<button 
-v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-@click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
-<button 
-v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
+
+
+     <template v-if="currentOrder.preorder === true">
+      <button 
+      v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+      @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
+      <button 
+      v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
+          </template>
+     <template v-else>
+
+      <button 
+      v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+      @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
+      <button 
+      v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
+      
+      
+      
+       </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </template>
 
 
@@ -760,7 +790,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
 
 
 
-<pre style="display:none;">{{$store.state.storeCurrentOrder}}</pre>
+<pre style="display:none">{{$store.state.storeCurrentOrder}}</pre>
   </div>
 </template>
 
@@ -1319,30 +1349,38 @@ this.currentOrder.fulfillment_info.type = 'delivery'
     let curRest = this.currentRestaurantHours.information.open_time_range
 
 
+
     for(let i = 0; i < curRest.length; i++){
           this.showTimeInterVals(curRest[i].time_slot.open.split(':')[0],curRest[i].time_slot.close.split(':')[0])
     }
 
-for(let i = 0; i < curRest.length; i++){
-    
+  let today = new Date()
+  let todayDay = today.getDay()
+  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let subdays = days.map(function(x){
+    return x.substring(0,3).toLowerCase()
+  })
+
+if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
+    for(let i = 0; i < curRest.length; i++){
       if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
-// console.log('it returned true so break')
-this.valid = true
+      // console.log('it returned true so break')
 
-break
-      }else{
+      this.valid = true
+      break
+    }else{
         // console.log('it didn treturn true')
-
         console.log('it should be a rpeorder')
         self.currentOrder.preorder = true
-  let storeCurrentOrder = self.currentOrder
-          self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
-
+        let storeCurrentOrder = self.currentOrder
+        self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
       }
-
     }
+  }else{
+      this.currentOrder.preorder = true
+      let storeCurrentOrder = this.currentOrder;
+      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+}
 },
 currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 
@@ -1404,18 +1442,8 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
               let tF = startDate < currentDate && endDate > currentDate
               // this.valid = startDate < currentDate && endDate > currentDate
               // console.log(tF)
-return tF
-
-//               if(this.valid === true){
-// this.currentOrder.preorder = this.valid;
-// break;
-//               }
-
-              
-
-
-              }
-
+              return tF          
+      }
     },
 hideGiftcard(){
   this.giftCardPanel = false
@@ -1432,12 +1460,27 @@ showGiftcard(){
               .get("/user/email/" + this.emailAddress)
               .then(function (response) {
               let userInfo = response.data;
-              
               self.user = userInfo
-
-
               self.cardNumberInput = userInfo.user.giftcard
               self.preferredGiftCard = userInfo.user.giftcard
+
+
+              self.currentOrder.billing.billing_name = userInfo.user.billingAddress.name
+              self.currentOrder.billing.billing_address = userInfo.user.billingAddress.addressLine1 + ' ' + userInfo.user.billingAddress.addressLine2
+              self.currentOrder.billing.billing_postal_code = userInfo.user.billingAddress.zip
+
+self.currentOrder.fulfillment_info.customer.phone = userInfo.user.deliveryAddress.phone
+self.currentOrder.fulfillment_info.customer.first_name = userInfo.user.deliveryAddress.name
+self.currentOrder.fulfillment_info.delivery_info.address.city = userInfo.user.deliveryAddress.city
+self.currentOrder.fulfillment_info.delivery_info.address.state = userInfo.user.deliveryAddress.state
+self.currentOrder.fulfillment_info.delivery_info.address.zip_code = userInfo.user.deliveryAddress.zip
+self.currentOrder.fulfillment_info.delivery_info.address.address_line1 = userInfo.user.deliveryAddress.addressLine1
+self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInfo.user.deliveryAddress.addressLine2
+
+                let storeCurrentOrder = self.currentOrder;
+                self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });      
+
+
               })
               .catch(function (error) {
               console.log(error);

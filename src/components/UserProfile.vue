@@ -2,13 +2,15 @@
 
     <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
+        <UserForm :emailAddress="$store.state.currentUserEmail"/>
         <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
         <!-- <TestimonialForm :emailAddress="$store.state.currentUserEmail" /> -->
-        <!-- {{$store.state}} -->
+
             <!-- <EmailForm :emailAddress="$store.state.currentUserEmail" /> -->
         <!-- <ToggleVegetarian /> -->
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
         <!-- order he -->
+
         <OrderHistory :currentUser="$store.state" />
         </div>
         <div>
@@ -18,6 +20,7 @@
 
 <script type="text/javascript">
 import EmailForm from "@/components/EmailForm";
+import UserForm from "@/components/UserForm";
 import TestimonialForm from "@/components/TestimonialForm";
 
 
@@ -34,6 +37,7 @@ name: 'UserProfile',
   components: {
     TestimonialForm,
     EmailForm,
+    UserForm,
     GiftCardModule,
     ToggleVegetarian,
     OrderHistory
