@@ -3,6 +3,7 @@
     <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <UserForm :emailAddress="$store.state.currentUserEmail"/>
+    
         <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
         <!-- <TestimonialForm :emailAddress="$store.state.currentUserEmail" /> -->
 

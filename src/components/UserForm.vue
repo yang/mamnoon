@@ -10,16 +10,18 @@
 
       <div class="address" v-if="!updateDelivery"> <br>
 <b>delivery address:</b><br>
+<template v-if="user && user.user.deliveryAddress">
 {{user.user.deliveryAddress.name}}<br>
 {{user.user.deliveryAddress.phone}}<br>
 {{user.user.deliveryAddress.addressLine1}}<br>
 {{user.user.deliveryAddress.addressLine2}}<br>
 {{user.user.deliveryAddress.city}}&nbsp;{{user.user.deliveryAddress.state}}&nbsp;{{user.user.deliveryAddress.zip}}
+</template>
 <br><br>
 <button class="sm-button" @click="updateDelivery = true">update delivery address</button>
 <br><br>
 </div>
-
+<br>
 <form @submit.prevent="checkForm" v-if="updateDelivery">
   <!-- <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
@@ -104,7 +106,7 @@
   </p>
 </form>
 <button class="sm-button" v-if="updateDelivery" @click="updateDelivery = false">cancel</button>
-<br>
+<br><br>
     </div>
 
     <div class="col-sm-6">
@@ -114,25 +116,18 @@
 
       <div class="address" v-if="!updateBilling">
 <b>billing address:</b> <br />
+<template v-if="user && user.user.billingAddress">
 {{user.user.billingAddress.name}}<br>
 {{user.user.billingAddress.addressLine1}}<br>
 {{user.user.billingAddress.addressLine2}}<br>
 {{user.user.billingAddress.city}}&nbsp;{{user.user.billingAddress.state}}&nbsp;{{user.user.billingAddress.zip}}
-
+</template>
 <br><br>
 <button class="sm-button" @click="updateBilling = true">update billing address</button>
 <br><br>
 </div>
-
-
+<br>
 <form @submit.prevent="checkFormBilling" v-if="updateBilling">
-  <!-- <p v-if="errors.length">
-    <b>Please correct the following error(s):</b>
-    <ul>
-      <li :key="error" v-for="error in errors">{{ error }}</li>
-    </ul>
-  </p> -->
-
 <b>billing address:</b>
  <br />
  <br />
@@ -202,7 +197,7 @@
   </p>
 </form>
 <button class="sm-button" v-if="updateBilling" @click="updateBilling = false">cancel</button>
-<br>
+<br><br>
     </div>
 
 
@@ -236,6 +231,7 @@ export default {
   },
   data() {
     return {
+      user: {},
       updateBilling: false,
       updateDelivery: false,
       savedDeliveryAddress: {},
@@ -301,45 +297,11 @@ async checkForm() {
           deliveryAddress: this.deliveryAddress
           });
 this.savedDeliveryAddress = response.data.user.deliveryAddress
-
-
-
-
          } catch (err) {
         console.log(err.response);
       }
 
  this.getUser()
-
-// if(this.messageBody.number != null){
-
-// let msgString = this.messageBody.number.toString();
-// var n = this.giftcardArray.includes(msgString);
-
-// console.log(n)
-
-
-
-
-// if(!n){
-//     var regex = /^\d{16}$/;
-//     if(regex.test(this.messageBody.number) === false){
-//       swal('must be 16 digits')
-//     }else{
-
-
-
-
-     
-//     }
-//     }else{
-//       swal('you have already added this number your list')
-//       this.messageBody.number = null
-//     }
-// }else{
-//   console.log(null)
-// }
-    
     },
 
 
