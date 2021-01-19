@@ -213,12 +213,9 @@ const store = new Vuex.Store({
         }
         return false;
     }
-
-
     state.inventory.tockMeals = []
     },
     updateTockMealsStreet(state, { inventoryTockAddStreet }){
-
       function lookup( name ) {
           for(var i = 0, len = state.inventory.tockMeals.length; i < len; i++) {
               if( state.inventory.tockMeals[ i ].createdLink === name )
@@ -226,16 +223,13 @@ const store = new Vuex.Store({
           }
           return false;
       }
-
       inventoryTockAddStreet.forEach(function(e){
         if( !lookup( e.createdLink ) ) {
           state.inventory.tockMeals.push(e);
         }
       })
-
     },
    async updateTockItem(state, { updateTockItem }){
-
       let tockItem = state.inventory.tockMeals[updateTockItem.index]
       let tock = updateTockItem
 
@@ -246,24 +240,14 @@ const store = new Vuex.Store({
       }else if(tock.item === 'image'){
         tockItem.image = tock.text
       }
-
-
           base.post(`/tock/updatetockofferings`, { updateTockItem })
           .then(function(res){
           console.log(res.data.data.tockMeals)
-
-
-
           state.inventory.tockMeals = res.data.data.tockMeals
-
           })
           .catch(function(err){
           console.log(err)
-
           })
-
-
-
     },
     showMessage () {
       console.log('this is th emesae')
@@ -299,9 +283,9 @@ new Vue({
   async mounted () {
 
 
-let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
-let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
-this.$store.commit('updateTockMeals', { inventoryTockAdd })
+// let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
+// let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
+// this.$store.commit('updateTockMeals', { inventoryTockAdd })
 
 }
 }).$mount("#app");

@@ -24,7 +24,7 @@
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
-          <div v-if="currentItem.modifier_group_ids.length >= 1">
+          <div v-if="currentItem.modifier_group_ids && currentItem.modifier_group_ids.length >= 1">
             <h4 class="text-left">add ons</h4>
             <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
@@ -685,20 +685,7 @@ delivery or pickup?
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
   <label class="smblk" for="cutlery">don't include disposable cutlery </label>
                   <br />
-             
-            
-
-
-
-
-
-
-
-
-
-
-
-               <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info</h4>
+                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info</h4>
                 <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info</h4>
                 <h4 v-else class="text-left mt10">customer info</h4>
                 <label class="smblk" for="name">name:</label>
@@ -711,7 +698,6 @@ delivery or pickup?
                   placeholder="name"
                   v-model="currentOrder.fulfillment_info.customer.first_name"
                 />
-        
                <label class="smblk" for="email">email:</label>
                 <br />
                 <div v-if="emailAddress" style="margin-bottom: 10px;">{{emailAddress}}</div>
@@ -984,7 +970,7 @@ v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;"
       </div></div>
       </section>
 
-<pre style="display:none">{{$store.state.storeCurrentOrder}}</pre>
+<pre>{{$store.state.storeCurrentOrder}}</pre>
 
 
   </div>
@@ -1305,6 +1291,7 @@ if(newAddress){
     },
   data() {
     return {
+      user: {},
       noFiltering: true,
       currentRestaurantHours: '',
       nextOpen: '',
@@ -1677,16 +1664,7 @@ returnAvailableNow(startTime,endTime){
 
               let tF = startDate < currentDate && endDate > currentDate
               // this.valid = startDate < currentDate && endDate > currentDate
-              console.log(tF)
-return tF
-
-//               if(this.valid === true){
-// this.currentOrder.preorder = this.valid;
-// break;
-//               }
-
-              
-
+              return tF
 
               }
 
@@ -1714,13 +1692,13 @@ showGiftcard(){
               self.currentOrder.billing.billing_address = userInfo.user.billingAddress.addressLine1 + ' ' + userInfo.user.billingAddress.addressLine2
               self.currentOrder.billing.billing_postal_code = userInfo.user.billingAddress.zip
 
-self.currentOrder.fulfillment_info.customer.phone = userInfo.user.deliveryAddress.phone
-self.currentOrder.fulfillment_info.customer.first_name = userInfo.user.deliveryAddress.name
-self.currentOrder.fulfillment_info.delivery_info.address.city = userInfo.user.deliveryAddress.city
-self.currentOrder.fulfillment_info.delivery_info.address.state = userInfo.user.deliveryAddress.state
-self.currentOrder.fulfillment_info.delivery_info.address.zip_code = userInfo.user.deliveryAddress.zip
-self.currentOrder.fulfillment_info.delivery_info.address.address_line1 = userInfo.user.deliveryAddress.addressLine1
-self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInfo.user.deliveryAddress.addressLine2
+              self.currentOrder.fulfillment_info.customer.phone = userInfo.user.deliveryAddress.phone
+              self.currentOrder.fulfillment_info.customer.first_name = userInfo.user.deliveryAddress.name
+              self.currentOrder.fulfillment_info.delivery_info.address.city = userInfo.user.deliveryAddress.city
+              self.currentOrder.fulfillment_info.delivery_info.address.state = userInfo.user.deliveryAddress.state
+              self.currentOrder.fulfillment_info.delivery_info.address.zip_code = userInfo.user.deliveryAddress.zip
+              self.currentOrder.fulfillment_info.delivery_info.address.address_line1 = userInfo.user.deliveryAddress.addressLine1
+              self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInfo.user.deliveryAddress.addressLine2
 
               
                 let storeCurrentOrder = self.currentOrder;
@@ -2550,7 +2528,7 @@ dropDown(){
     this.getUser();
     emergepay.init();
 
-    this.$store.state.storeCurrentOrder = {};
+    // this.$store.state.storeCurrentOrder = {};
     this.$store.state.orderCMR = {};
     this.$store.state.orderConfirmationModalResponse = {};
 

@@ -278,8 +278,8 @@
 </div>
 </template>
 <template v-else>
-<div> 
-Come and pick up your items during store hours or get them shipped to your door via usps!<br><br>
+<div class="mb5 text-left"> 
+Come and pick up your items during store hours or get them shipped to your door via usps!
 </div> 
 
 </template>
@@ -2574,6 +2574,9 @@ ul li{
 
 .mb5{
     margin-bottom: 5px;
+}
+.text-left{
+  text-align: left;
 }
 
 .weight,
