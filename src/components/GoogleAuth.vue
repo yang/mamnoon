@@ -95,6 +95,10 @@ export default {
 
     handleClickSignOut() {
       localStorage.clear();
+
+
+console.log(this.$store.state)
+this.$store.commit("removeUserInfo");
       this.$store.commit("logOut");
       this.$gAuth
         .signOut()

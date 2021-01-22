@@ -79,6 +79,262 @@ const store = new Vuex.Store({
     orderConfirmation: {},
     googleAddress: {},
     storeCurrentOrder: {},
+    storeCurrentOrderUpdate: { 
+      tipSelected: 0,
+      currentAmountToAddCustom: 0,
+      sms: false,
+      restaurant: "",
+      billing:{
+        billing_name: '',
+        billing_address: '',
+        billing_postal_code: ''
+      },
+      id:
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29),
+      // items: [],
+      preorder: false,
+      scheduled_time: null,
+      time_placed: null,
+      confirmation_code:
+        "mamnoon-" + Math.random().toString(36).substr(2, 29),
+      charges: {
+        total: 0,
+        preTotal: 0,
+        fees: 0,
+        taxes: 0,
+        tip: {
+          amountOptions: [],
+          amount: 0,
+          payment_type: "Generic Online Ordering Integrated",
+        },
+        items: [],
+      },
+      fulfillment_info: {
+        type: "pickup",
+        estimated_fulfillment_time: null,
+        customer: {
+          email: "",
+          phone: "",
+          first_name: "",
+        },
+        instructions: "",
+        no_tableware: false,
+        delivery_info: {
+          is_managed_delivery: false,
+          address: {
+            city: "",
+            state: "",
+            zip_code: "",
+            address_line1: "",
+            address_line2: "",
+          },
+        },
+      },
+      payments: {
+        payments: [
+          {
+            payment_type: "Generic Online Ordering Integrated",
+            amount: null,
+          },
+        ],
+      },
+    },
+    storeCurrentOrderUpdateMamnoon: { 
+      tipSelected: 0,
+      currentAmountToAddCustom: 0,
+      sms: false,
+      restaurant: "Mamnoon",
+      billing:{
+        billing_name: '',
+        billing_address: '',
+        billing_postal_code: ''
+      },
+      id:
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29),
+      // items: [],
+      preorder: false,
+      scheduled_time: null,
+      time_placed: null,
+      confirmation_code:
+        "mamnoon-" + Math.random().toString(36).substr(2, 29),
+      charges: {
+        total: 0,
+        preTotal: 0,
+        fees: 0,
+        taxes: 0,
+        tip: {
+          amountOptions: [],
+          amount: 0,
+          payment_type: "Generic Online Ordering Integrated",
+        },
+        items: [],
+      },
+      fulfillment_info: {
+        type: "pickup",
+        estimated_fulfillment_time: null,
+        customer: {
+          email: "",
+          phone: "",
+          first_name: "",
+        },
+        instructions: "",
+        no_tableware: false,
+        delivery_info: {
+          is_managed_delivery: false,
+          address: {
+            city: "",
+            state: "",
+            zip_code: "",
+            address_line1: "",
+            address_line2: "",
+          },
+        },
+      },
+      payments: {
+        payments: [
+          {
+            payment_type: "Generic Online Ordering Integrated",
+            amount: null,
+          },
+        ],
+      },
+    },
+    storeCurrentOrderUpdateStreet: { 
+      tipSelected: 0,
+      currentAmountToAddCustom: 0,
+      sms: false,
+      restaurant: "Mamnoon Street",
+      billing:{
+        billing_name: '',
+        billing_address: '',
+        billing_postal_code: ''
+      },
+      id:
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29),
+      // items: [],
+      preorder: false,
+      scheduled_time: null,
+      time_placed: null,
+      confirmation_code:
+        "mamnoon-" + Math.random().toString(36).substr(2, 29),
+      charges: {
+        total: 0,
+        preTotal: 0,
+        fees: 0,
+        taxes: 0,
+        tip: {
+          amountOptions: [],
+          amount: 0,
+          payment_type: "Generic Online Ordering Integrated",
+        },
+        items: [],
+      },
+      fulfillment_info: {
+        type: "pickup",
+        estimated_fulfillment_time: null,
+        customer: {
+          email: "",
+          phone: "",
+          first_name: "",
+        },
+        instructions: "",
+        no_tableware: false,
+        delivery_info: {
+          is_managed_delivery: false,
+          address: {
+            city: "",
+            state: "",
+            zip_code: "",
+            address_line1: "",
+            address_line2: "",
+          },
+        },
+      },
+      payments: {
+        payments: [
+          {
+            payment_type: "Generic Online Ordering Integrated",
+            amount: null,
+          },
+        ],
+      },
+    },
+    storeCurrentOrderUpdateMbar: { 
+      tipSelected: 0,
+      currentAmountToAddCustom: 0,
+      sms: false,
+      restaurant: "Mbar",
+      billing:{
+        billing_name: '',
+        billing_address: '',
+        billing_postal_code: ''
+      },
+      id:
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29),
+      // items: [],
+      preorder: false,
+      scheduled_time: null,
+      time_placed: null,
+      confirmation_code:
+        "mamnoon-" + Math.random().toString(36).substr(2, 29),
+      charges: {
+        total: 0,
+        preTotal: 0,
+        fees: 0,
+        taxes: 0,
+        tip: {
+          amountOptions: [],
+          amount: 0,
+          payment_type: "Generic Online Ordering Integrated",
+        },
+        items: [],
+      },
+      fulfillment_info: {
+        type: "pickup",
+        estimated_fulfillment_time: null,
+        customer: {
+          email: "",
+          phone: "",
+          first_name: "",
+        },
+        instructions: "",
+        no_tableware: false,
+        delivery_info: {
+          is_managed_delivery: false,
+          address: {
+            city: "",
+            state: "",
+            zip_code: "",
+            address_line1: "",
+            address_line2: "",
+          },
+        },
+      },
+      payments: {
+        payments: [
+          {
+            payment_type: "Generic Online Ordering Integrated",
+            amount: null,
+          },
+        ],
+      },
+    },
     userProfileModalVisible: true,
     loggedIn: false,
     count: 0,
@@ -133,6 +389,46 @@ const store = new Vuex.Store({
     },
     upserveOrderCurrentOrder(state, { storeCurrentOrder }){
       state.storeCurrentOrder = storeCurrentOrder
+    },
+    removeUserInfo(state){
+
+      let billing = {
+        billing_name: "",
+        billing_address: "",
+        billing_postal_code: ""
+      }
+
+      let customer = {
+        email: "",
+        phone: "",
+        first_name: ""
+      }
+
+      state.storeCurrentOrderUpdate.billing = billing
+      state.storeCurrentOrderUpdate.fulfillment_info.customer = customer
+
+      state.storeCurrentOrderUpdateStreet.billing = billing
+      state.storeCurrentOrderUpdateStreet.fulfillment_info.customer = customer
+
+      state.storeCurrentOrderUpdateMamnoon.billing = billing
+      state.storeCurrentOrderUpdateMamnoon.fulfillment_info.customer = customer
+
+      state.storeCurrentOrderUpdateMbar.billing = billing
+      state.storeCurrentOrderUpdateMbar.fulfillment_info.customer = customer
+
+
+    },
+    upserveOrderCurrentOrderUpdate(state, { storeCurrentOrderUpdate }){
+      state.storeCurrentOrderUpdate = storeCurrentOrderUpdate
+    },
+    upserveOrderCurrentOrderUpdateStreet(state, { storeCurrentOrderUpdateStreet }){
+      state.storeCurrentOrderUpdateStreet = storeCurrentOrderUpdateStreet
+    },
+    upserveOrderCurrentOrderUpdateMamnoon(state, { storeCurrentOrderUpdateMamnoon }){
+      state.storeCurrentOrderUpdateMamnoon = storeCurrentOrderUpdateMamnoon
+    },
+    upserveOrderCurrentOrderUpdateMbar(state, { storeCurrentOrderUpdateMbar }){
+      state.storeCurrentOrderUpdateMbar = storeCurrentOrderUpdateMbar
     },
     reserveFamilyMeal (state, { timeslot }) {
       state.shoppingCartItems.push({timeslot: timeslot})
@@ -201,54 +497,6 @@ const store = new Vuex.Store({
         mamaShop: true
       })
   },
-    updateTockMeals(state, { inventoryTockAdd }){
-
-
-
-
-      function lookup( name ) {
-        for(var i = 0, len = state.inventory.tockMeals.length; i < len; i++) {
-            if( state.inventory.tockMeals[ i ].createdLink === name )
-                return true;
-        }
-        return false;
-    }
-    state.inventory.tockMeals = []
-    },
-    updateTockMealsStreet(state, { inventoryTockAddStreet }){
-      function lookup( name ) {
-          for(var i = 0, len = state.inventory.tockMeals.length; i < len; i++) {
-              if( state.inventory.tockMeals[ i ].createdLink === name )
-                  return true;
-          }
-          return false;
-      }
-      inventoryTockAddStreet.forEach(function(e){
-        if( !lookup( e.createdLink ) ) {
-          state.inventory.tockMeals.push(e);
-        }
-      })
-    },
-   async updateTockItem(state, { updateTockItem }){
-      let tockItem = state.inventory.tockMeals[updateTockItem.index]
-      let tock = updateTockItem
-
-      if(tock.item === 'title'){
-        tockItem.title = tock.text
-      }else if(tock.item === 'description'){
-        tockItem.description = tock.text
-      }else if(tock.item === 'image'){
-        tockItem.image = tock.text
-      }
-          base.post(`/tock/updatetockofferings`, { updateTockItem })
-          .then(function(res){
-          console.log(res.data.data.tockMeals)
-          state.inventory.tockMeals = res.data.data.tockMeals
-          })
-          .catch(function(err){
-          console.log(err)
-          })
-    },
     showMessage () {
       console.log('this is th emesae')
     },
@@ -276,17 +524,18 @@ const store = new Vuex.Store({
 })
 
 
+// new Vue({
+//   router,
+//   store: store,
+//   render: h => h(App)
+// }).$mount("#app");
+
+
 new Vue({
   router,
   store: store,
   render: h => h(App),
   async mounted () {
-
-
-// let responseTockStreet2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/pages`)
-// let inventoryTockAdd = responseTockStreet2.data[0].acf.family_meal_calendar
-// this.$store.commit('updateTockMeals', { inventoryTockAdd })
-
 }
 }).$mount("#app");
 

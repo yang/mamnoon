@@ -2,8 +2,6 @@
 <div>
 <div class="container pad-yellow-background module-header"> food order history</div>
 <div class="container pad-yellow-background">
-<!-- {{currentUsercurrentUserEmail}} -->
-<!-- {{response}} -->
 
 <div id="order-history">
 <table class="w100">
@@ -15,10 +13,10 @@
         <td class="hide-mob"><div>pay method</div></td>
         <!-- <td><div>delivery/pickup</div></td> -->
        <td class="hide-mob w-5"><div style="text-align: right;">status</div></td>
-        <td><div style="text-align: right;">actions</div></td>
+        <td style="display:none;"><div style="text-align: right;">actions</div></td>
 </th>   
 
-
+<template v-if="orderhistory">
 <tr class="w100" v-for="order in orderhistory.user.slice().reverse()" :key="order._id">
  <td class="hide-mob">
     <div>
@@ -35,6 +33,13 @@
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId">
     {{item.quantity}} x
 {{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
+
+
+<div v-if="item.modifiers.length > 0"> 
+<div class="small-message grey" v-for="mod in item.modifiers">
+{{mod.name}} +${{mod.price | showToFixed}}
+</div>
+</div>
 </li>
 </ul>
 </div></td>
@@ -44,7 +49,10 @@
 <td>
     <div class="text-right-mob">
         <span class="smblk">
-    ${{ order.orderInfo.charges.total/100 | toFixed}}
+<div class="small-message grey">subtotal: ${{ order.orderInfo.charges.preTotal/100 | toFixed}}</div>
+<div class="small-message grey">tax: ${{ order.orderInfo.charges.taxes/100 | toFixed}}</div>
+<div class="small-message grey">tip: ${{ order.orderInfo.charges.tip.amount/100 | toFixed}}</div>
+    <b>total: ${{ order.orderInfo.charges.total/100 | toFixed}}</b>
     </span>
     </div></td>
 <td class="hide-mob">
@@ -65,7 +73,7 @@ debit/credit
 {{order.status}}
    </div></td> 
 
-    <td><div>
+    <td style="display:none;"><div>
 <button class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">re order</button>
 
 
@@ -81,7 +89,7 @@ debit/credit
 
 </div></td>
 </tr>
-
+</template>
 
 </table>
 </div>
@@ -149,8 +157,13 @@ toFixed(value){
 reverseArray(value) {
   // slice to make a copy of array, then reverse the copy
   return value.slice().reverse();
+},
+showToFixed: function (value) {
+    let decvalue = value/100
+
+    return decvalue.toFixed(2)
 }
-    },
+  },
 
 
     
@@ -315,6 +328,18 @@ display: none !important;
 .w-5{
     width: 5% !important;
 }
+
+.small-message{
+    color: #f05d5b;
+    font-size: .9rem;
+    font-style: italic;
+
+    &.grey{
+      color: #343a40;
+      font-size: .8rem;
+    }
+}
+
 
 
 @media only screen and (max-width: 768px) {

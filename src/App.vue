@@ -807,6 +807,11 @@ ul.no-left-pad{
     color: #f05d5b;
     font-size: .9rem;
     font-style: italic;
+
+    &.grey{
+      color: #343a40;
+      font-size: .8rem;
+    }
 }
 
 
@@ -955,6 +960,12 @@ form hr{
 .tipButton.quarter {
 
     font-size: 12px;
+
+&.disabled{
+  pointer-events: none;
+  background: grey;
+}
+
 }
 
 

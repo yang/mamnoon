@@ -4,7 +4,20 @@
 
 
   <div class="container">
+        <div class="row">
+
+<div class="col-sm-6">
+  <br>
+  <b>email:</b><br>
+{{user.user.email}}
+  </div>
+    </div>
+    
+    
     <div class="row">
+
+
+      
 
 <div class="col-sm-6">
 

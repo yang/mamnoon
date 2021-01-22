@@ -1,7 +1,7 @@
 <template>
-  <div id="upserveolo" class="shopRetail">
+  <div id="upserveolo">
     <section>
-<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" :retail="true" />
+<OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
           <div @click="closeModal()" class="close closeModal">
@@ -24,16 +24,24 @@
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
+          <template v-if="currentItem.modifier_group_ids">
           <div v-if="currentItem.modifier_group_ids.length >= 1">
             <h4 class="text-left">add ons</h4>
-            <div v-for="modifieritem in currentItem.modifier_group_ids" :key="modifieritem">
-              <div v-for="modifier in modifierGroups" :key="modifier.name">
+            <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
+              <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
                 <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
-        
-                  <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
-                  <div v-for="mod in modifierItems" :key="mod.id">
+                  <!-- <div v-if="modifier.minimum_required === 0">
+                    <div v-if="modifier.name !== 'Promotions'">(add ons not required)</div>
+                  </div>
+                  <div v-else>
+                    minimum_required: {{modifier.minimum_required}}
+                    maximum_required: {{modifier.maximum_required}}
+                  </div> -->
 
-                    <div v-for="m in modifier.modifier_ids" :key="m">
+                  <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
+                  <div v-for="(mod,i) in modifierItems" :key="'C'+ i">
+
+                    <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i">
                       <div v-if="m === mod.id" class="box">
                         <div class="box-inner">
                           {{mod.name}}
@@ -44,9 +52,9 @@
 
 
                           <div v-if="modifier.name === 'Promotions'">
-                            <div v-for="piece in upserveList" :key="piece.name">
+                            <div v-for="(piece,i) in upserveList" :key="'E'+ i">
                               <div v-if="piece.name === mod.name">
-                                <img v-if="piece.images" :src="piece.images.online_ordering_menu.main" />
+                                <img :src="piece.images.online_ordering_menu.main" />
                               </div>
                             </div>
                           </div>
@@ -85,7 +93,12 @@
               </div>
             </div>
           </div>
-        
+          </template>
+            <textarea
+            type="text"
+            placeholder="special instructions"
+            v-model="textdescription"
+            />
           <!-- <hr /> -->
 
           <button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
@@ -95,41 +108,73 @@
           <button @click="incrementCurrentItem()">+</button>
           <div class="add-to-order-footer">
             item total: <b>${{currentItem.price_cents.toFixed(2)/100 * currentItemQuanity }}</b>
-           
-          <div v-if="shippingOption">
-         <button
-            v-if="currentItem.shippable"
-              class="float-right"
-              @click="addToOrder(currentItem)"
-            >add to cart</button>
-               <button
-            v-else
-              class="float-right"
-              @click="addToOrder(currentItem)"
-            disabled>not available for shipping</button>
-
-
-</div>
-<div v-else>
             <button
               class="float-right"
               @click="addToOrder(currentItem)"
-            >add to cart</button>
-
-</div>
-
-
-
-
-
-
+            >add to order</button>
           </div>
         </div>
       </div>
-     <div class="container pt20">
+
+
+      <div class="container pt20 no-bot-pad">
         <div class="row">
-          <div class="col-md-12 col-lg-8">
-     
+          <div class="col-md-12 red-text text-center">
+             <!-- <h1 class="text-center">{{title}}</h1> -->
+             <template v-if="openDays">
+         <span v-if="currentRestaurantHours !== ''">{{title}}, {{openDays[0] | capitalizeFirstLetter }}-{{openDays[openDays.length-1] | capitalizeFirstLetter}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
+         </template>
+        </div>
+      </div>
+      </div>
+
+      <div class="container pt20">
+        <div class="row">
+        
+<div class="col-md-12 col-lg-8">
+
+          <div class="container no-lr-pad">
+
+
+<template v-if="valid">
+<div class="toggleLr">
+  <div>
+    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
+  <div>
+    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+    </div> 
+</div>
+</template>
+<template v-else>
+<div class="mb16"> 
+Now accepting preorders for pick up.
+</div> 
+</template>
+
+<template v-if="valid">
+<template v-if="preOrderToggleState">
+  <div class="leftDropdown">
+<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+</div>
+<div class="rightDropdown" v-if="selectedDate !== null">
+<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+</div>
+</template>
+</template>
+  <template v-else>
+      <template>
+<div class="leftDropdown">
+      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
+ <div class="rightDropdown" v-if="selectedDate !== null">
+      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+      </div>
+
+</template>
+</template>
+</div>
+<div class="container online-menu">
+              <h4>featured</h4>
+            </div>
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
        Loading...
@@ -137,11 +182,68 @@
      </template>
          <template v-else>
    
+<div id="online-menu" class="is-fullheight no-top-pad">
+        <carousel id="FourThree" :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
+              <template class="subprev" slot="prev">
+              <span class="prev">
+              <!-- <Prev /> -->
+              </span>
+              </template>
+            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
+            <template v-for="item in upserveSections">
+            <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids"> 
+                    <template v-if="upserve" v-for="serve in upserve">
+                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
+                        <div @click="openModal(serve,item.timing_mask)">
+                            <template v-if="serve.images">
+                              <div class="slide-show-image-home"
+                                v-if="serve.images.online_ordering_menu"
+                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                              ></div>
 
-</template>
-<div class="container online-menu">
-<h4>Online Shop</h4>
+                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
+
+                            </template>
+                            <template v-else>
+                              <div v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              >
+                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
+                              </div>
+                            </template>
+                              <div class="content-box-upper">
+                              <div class="name">
+                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
+                              {{serve.name}}</div>
+                              
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                            </div></div>
+                            </div>
+                    </template>
+         </div>
+          </template>
+                   <template class="subnext" slot="next">
+            <span class="next">
+              <!-- <Next /> -->
+            </span>
+          </template>
+            </carousel>
 </div>
+</template>
+      <br>
+      <div class="container online-menu">
+      <h4>full menu</h4>
+
+      </div>
+      <div>
+      </div>
+
+
 
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
@@ -149,98 +251,193 @@
      </div>
      </template>
          <template v-else>
-
-
-<div style="background: #f58e58;text-align:center;padding: 10px; margin-bottom: 10px;">
-  <ul class="filters">
-      <li @click="currentFilter = 'All'">All</li>
             <template v-for="item in upserveSections">
-              <li @click="currentFilter = item.name"  v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
-         
-                 {{item.name.replace('- To Go', '').replace('To Go', '')}}
-         
-     </li>
-            </template>
-            </ul>
-</div>
+            <div style="display:none;" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"></div>
+            <template v-else>
 
 
-<div class="container">
 
-<div class="row">
-            <template v-for="item in upserveSections">
-              <template v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
-                <template v-if="item.timing_mask === null">
- 
-                <template v-if="currentFilter === 'All' || currentFilter === item.name">
+    <template v-if="noFiltering">
+
+
+
+
+              <template v-if="item.timing_mask === item.timing_mask">
+                <div class="container menu-line">
+              <div
+                :id="'drawertop-'+ item.id"
+                @click="expandChild(item.id)"
+                class="display-block row no-lr-margin"
+              >
+                <h2 class="menu-header">
+                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
+                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                  <!-- {{item.timing_mask}} -->
+                </h2>
+              </div>
+              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
               
-                <template v-for="piece in item.item_ids">
-              
-                    <template v-for="serve in upserveList">
-                      <template v-if="serve.id === piece">
-<div class="col-6 col-md-4 shop-item no-lr-pad" v-if="serve.visible">
-  <div class="itemContainer" @click="openModal(serve)">
+                    <template v-for="serve in upserveList" class="grey-bg">
+                      <template v-if="serve.id === piece" class="inline-block">
+                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                          <div class="half-width2left">
+                            <div class="content-box">
+                              <div class="name">{{serve.name}}</div>
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                              <br />
+                            </div>
+                          </div>
+                          <div class="half-width2right">
                             <template v-if="serve.images">
                               <div
-                                v-if="serve.images"
-                                class="backgroundImageSquare"
+                                v-if="serve.images.online_ordering_menu"
+                                class="backgroundImage"
                                 v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
                               ></div>
-                            </template>
+                           </template>
                             <template v-else>
-     <div class="backgroundImageSquare">   
-                              <div class="content">
-
-                            
-                              
-                               <NadiIconSm />
-                              </div>
-                              
-                              
-                              </div>
-
+                              <div class="backgroundImage"
+                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              >     <NadiIconSmX style="height:140px;" /></div>
                             </template>
-        
-                    <div class="description-panel">
-                              <div>{{serve.name}}</div>
-                         <!-- {{item.name}} -->
-                              <!-- <div
-                                v-if="serve.description"
-                              >{{serve.description}}</div> -->
-                              <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only, </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
-                              </div>
-
-                          
-                              </div>
-                        
-                          
-                 
-
+                          </div>
                         </div>
-
-
-</div>
-
-                
                       </template>
                     </template>
                
-                 </template>
+                </div>
+              </div>
+              </div>
+                </template>
 
-         </template>
 
-   
-           
 
- </template>
 
-     </template>
 
-            </template>
-</div></div>
+      </template>
+      <template v-else>
+
+
+
+         <template v-if="item.timing_mask === null">
+                <div class="container menu-line">
+              <div
+                :id="'drawertop-'+ item.id"
+                @click="expandChild(item.id)"
+                class="display-block row no-lr-margin"
+              >
+                <h2 class="menu-header">
+                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
+                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                  <!-- {{item.timing_mask}} -->
+                </h2>
+              </div>
+              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+              
+                    <template v-for="serve in upserveList" class="grey-bg">
+                      <template v-if="serve.id === piece" class="inline-block">
+                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                          <div class="half-width2left">
+                            <div class="content-box">
+                              <div class="name">{{serve.name}}</div>
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                              <br />
+                            </div>
+                          </div>
+                          <div class="half-width2right">
+                            <template v-if="serve.images">
+                              <div
+                                v-if="serve.images.online_ordering_menu"
+                                class="backgroundImage"
+                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                              ></div>
+                           </template>
+                            <template v-else>
+                              <div class="backgroundImage"
+                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              >     <NadiIconSmX style="height:140px;" /></div>
+                            </template>
+                          </div>
+                        </div>
+                      </template>
+                    </template>
+               
+                </div>
+              </div>
+              </div>
+                </template>
+                <template v-else>
+              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
+              <div
+                :id="'drawertop-'+ item.id"
+                @click="expandChild(item.id)"
+                class="display-block row no-lr-margin"
+              >
+                <h2 class="menu-header">
+                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
+                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                </h2>
+              </div>
+              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                    <template v-for="serve in upserveList" class="grey-bg">
+                      <template v-if="serve.id === piece" class="inline-block">
+                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                          <div class="half-width2left">
+                            <div class="content-box">
+                              <div class="name">{{serve.name}}</div>
+                              <div
+                                v-if="serve.description"
+                                class="food-description"
+                              >{{serve.description}}</div>
+                              <div class="food-price">
+                                ${{ serve.price_cents.toFixed(2)/100}}
+                              </div>
+                              <br />
+                            </div>
+                          </div>
+                          <div class="half-width2right">
+                            <template v-if="serve.images">
+                              <div
+                                v-if="serve.images.online_ordering_menu"
+                                class="backgroundImage"
+                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                              ></div>
+                              <div
+                                v-else
+                                class="backgroundImage"
+                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                              >     <NadiIconSm /></div>
+                            </template>
+                          </div>
+                        </div>
+                      </template>
+                    </template>
+                </div>
+              </div>
+              </div>
   </template>
-
+  </template>
+  </template>
+  </template>
+  </template>
 
           </div>
 
@@ -249,42 +446,10 @@
 <span v-if="toggledDrawer">hide order</span>
 <span v-else>view order</span>
 </button>
-
-
-<div v-if="shippingOption" class="container mb5"> 
-        <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
-</div>
-
-<div v-if="!shippingOption" class="container mb5"> 
-    <button v-if="!shippingOption" style="width: 100%;" @click="shipOption(true)">ship</button> 
-
-
-        <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
-</div>
-
-
 <div v-if="currentOrder" class="container text-center">
- 
-              <template v-if="valid">
-<div v-if="shippingOption === false" class="toggleLr">
-    <div>
-    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
-  <div>
-    <button class="fl-right" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button> 
-    </div> 
-  <div>
 
-    </div> 
-</div>
-</template>
-<template v-else>
-<div class="mb5 text-left"> 
-Come and pick up your items during store hours or get them shipped to your door via usps!
-</div> 
 
-</template>
-
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="margin-top: 5px;width: 100%;background-color: #f05d5b;color: #fff;">
+<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events:none;width: 100%;background-color: #f05d5b;color: #fff;">
       <template v-if="valid">
           your order
   </template>
@@ -292,22 +457,18 @@ Come and pick up your items during store hours or get them shipped to your door 
           your pre order
   </template>
 
-
+  
   </button>
-<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
+<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:10px;">edit order</button>
 
-
-<template v-if="this.currentOrder.charges.items.length > 0">
+<template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
   <br>
-
 </template>
 
 
-
+<div style="display:none;">
 <template v-if="valid">
 <template v-if="preOrderToggleState">
-
-  <template v-if="shippingOption === false">
   <div style="margin-top:15px;">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
@@ -316,19 +477,19 @@ Come and pick up your items during store hours or get them shipped to your door 
 </div>
 </template>
 </template>
-</template>
   <template v-else>
-<template v-if="this.currentOrder.charges.items.length > 0">
-
-<div v-if="shippingOption === false">
-  <br>
-<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-<div style="margin-top:15px;" v-if="selectedDate !== null">
-<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-</div></div>
+      <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
+      <br>  
+      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+      <div style="margin-top:15px;" v-if="selectedDate !== null">
+      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+      </div>
 
 </template>
 </template>
+</div>
+
+
 </div>
 
 <div v-if="panelShow === 'customerInfo'">
@@ -336,13 +497,10 @@ Come and pick up your items during store hours or get them shipped to your door 
       <hr />
   </div>
             <div v-if="currentOrder" class="container  mt10">
-        
-  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">shipping address</h4>
+  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">address</h4>
 <div v-if="currentOrder.fulfillment_info.type === 'delivery'">
-<div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid shipping address</div>
+<div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid delivery address</div>
 </div>
-            
-
               <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
                
                 <div class="updateAddress">
@@ -360,36 +518,23 @@ Come and pick up your items during store hours or get them shipped to your door 
                   />
                 </div>
               </div>
-
-
-
               <form class="mb20" @submit="checkForm">
-
-
- 
-
                 <div v-if="this.currentOrder.fulfillment_info.type === 'delivery'" style="margin-top: 10px;">
-                 
                   <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1">
                     {{currentOrder.fulfillment_info.delivery_info.address.address_line1}}</span>
                     <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line2 !== ''">,</span>
                   <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line2">
                     {{currentOrder.fulfillment_info.delivery_info.address.address_line2}}
-                    <!-- <br /> -->
                   </span>
-                            <br v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''" />
-          <span
-                    v-if="currentOrder.fulfillment_info.delivery_info.address.city"
+                  <br v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''" />
+                  <span v-if="currentOrder.fulfillment_info.delivery_info.address.city"
                   >{{currentOrder.fulfillment_info.delivery_info.address.city}},</span>
-                  <!-- <span v-if="currentOrder.fulfillment_info.delivery_info.address.state">{{currentOrder.fulfillment_info.delivery_info.address.state}}<br></span> -->
                   <span v-if="currentOrder.fulfillment_info.delivery_info.address.zip_code">
                     {{currentOrder.fulfillment_info.delivery_info.address.zip_code}}
                     <br v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''" />
                   </span>
 
-
-
-                  <span  :class="{attention: attention}" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">floor/unit?</span>&nbsp;&nbsp;
+                  <span :class="{attention: attention}" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">floor/unit?</span>&nbsp;&nbsp;
                   <input
                     v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''"
                     type="text"
@@ -459,14 +604,21 @@ Come and pick up your items during store hours or get them shipped to your door 
                     />
                   </div>
                   <hr />
-                  </div>
+                  <label class="smblk">special instructions:</label>
+                  <br />
+                  <textarea
+                    type="text"
+                    id="specialinstructions"
+                    name="specialinstructions"
+                    placeholder="eg, leave on doorstep"
+                    v-model="currentOrder.fulfillment_info.instructions"
+                  />
 
-             
-          
-
-
-
-               <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info</h4>
+                     </div>
+            <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
+  <label class="smblk" for="cutlery">don't include disposable cutlery </label>
+                  <br />
+                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info</h4>
                 <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info</h4>
                 <h4 v-else class="text-left mt10">customer info</h4>
                 <label class="smblk" for="name">name:</label>
@@ -479,7 +631,6 @@ Come and pick up your items during store hours or get them shipped to your door 
                   placeholder="name"
                   v-model="currentOrder.fulfillment_info.customer.first_name"
                 />
-
                <label class="smblk" for="email">email:</label>
                 <br />
                 <div v-if="emailAddress" style="margin-bottom: 10px;">{{emailAddress}}</div>
@@ -491,7 +642,6 @@ Come and pick up your items during store hours or get them shipped to your door 
                   placeholder="email"
                   v-model="email"
                 />
-                <!-- <br /> -->
 
                <label class="smblk" for="phone">phone:</label>
                 <br />
@@ -507,10 +657,7 @@ Come and pick up your items during store hours or get them shipped to your door 
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
   <label class="smblk" for="sms">enable SMS order updates </label>
 <!-- billing info -->
-
           <h4 class="customer-info text-left mt10">billing info</h4>
-         
-         
          <template v-if="currentOrder.fulfillment_info.type === 'delivery'"> 
           <div style="clear: both;width: 100%;margin-bottom: 10px;height: 20px;" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">
 
@@ -523,8 +670,6 @@ Come and pick up your items during store hours or get them shipped to your door 
               </div>
 </div>
        </template>
-
-
 <!-- <div v-if="checked === false"> -->
                 <label class="smblk" for="name">name:</label>
                 <br />
@@ -557,36 +702,19 @@ Come and pick up your items during store hours or get them shipped to your door 
                   placeholder="postal code"
                   v-model="currentOrder.billing.billing_postal_code"
                 />
-
-<!-- </div> -->
-
-
               </form>
-
-</div>
-      </div>
-
-
-
+            </div>
+            </div>
 <div class="container mt10">
               <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
+                <template v-if="currentOrder.charges">
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
-            
-
-
-                  <button class="removeClose" @click="removeFromOrder(order)">
-                        <CloseModalRedSm />
-                     
+                    <button class="removeClose" @click="removeFromOrder(order)">
+                        <CloseModalRedSm />           
                   </button>
 <div class="mt8">
-
                   <b>{{order.quantity}}</b> {{order.name}}&nbsp;&nbsp;&nbsp;&nbsp;
                   <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
-
-
-<div class="weight">{{order.lbs}}lbs, {{order.oz}}oz </div> 
-<div v-if="!order.shippable">pickup only</div>
-
 
                   <div v-if="order.instructions !== ''" class="order-instructions">
              
@@ -598,45 +726,70 @@ Come and pick up your items during store hours or get them shipped to your door 
                   </div>
                   </div>
                 </li>
+                </template>
               </ul>
+
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
-<!-- <div v-if="shippingOption"> 
-<button v-if="validPostal(currentOrder.billing.billing_postal_code)" @click="shippingPrice('98122', String(currentOrder.billing.billing_postal_code),String(totalWeight),'0')">
-calculate shipping
-</button>
-</div> -->
-<template v-if="this.currentOrder.charges.items.length > 0">
+<template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
               <!-- <div class="mt10" v-if="total > 0"> -->
-
-
-<div class="small-message" v-if="weightShipping.lbs > 70">
-  package cannot be more than 70lbs
-</div>
-
               <div class="mt10">
+                <button id="noTip" class="tipButton quarter" style="display:none;" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
+                <button
+                  id="tipOption1"
+                  class="tipButton quarter"
+                  @click="setTip(1)">
+                  <b>18%</b>
+                  <br>
+                  (${{tip1 | showToFixed }})  
+                  </button>&nbsp;
+                <button
+                  id="tipOption2"
+                  class="tipButton quarter"
+                  @click="setTip(2)">
+                  <b>22%</b>
+                  <br>
+                  (${{tip2 | showToFixed }})  
+                  </button>&nbsp;
+                <button
+                  id="tipOption3"
+                  class="tipButton quarter"
+                  @click="setTip(3)"><b>25%</b>
+                  <br>
+                  (${{tip3 | showToFixed }})  
+                  </button>&nbsp;
+                <br>
+                <button
+                  id="customTip"
+                  class="tipButton customtip"
+                  :class="{activated: this.customTipVisible}"
+                  @click="setTip(4)"
+                >custom</button>
                 &nbsp;
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
               </div>
-              weight: {{weightShipping.lbs}}lbs, {{weightShipping.oz}}oz
-              <br />
-              <!-- <hr />   -->
+              <hr />
+
+              <pre>{{$store.state.storeCurrentOrderUpdate.charges}}</pre>
+
+              <hr />  
               total: ${{total.toFixed(2)/100 }}
               <br />
               tax: ${{currentTax.toFixed(2)/100 }}
-             <div v-if="shippingOption && shippingAmount > 0">   
-              usps priority shipping: ${{shippingAmount}}
-               </div>  
-     
-            <div style="display:none;" v-if="custom === true">
+            <div v-if="custom === true">
             custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
             </div>
-             <div style="display:none;" v-else>
+            <div v-else>
              tip: ${{currentAmountToAdd | showToFixed }}
             </div>
               <hr />
               <b>order total: ${{orderTotal | showToFixed }}</b>
+
+
+
+
+
 <br />
 </template>
 <template v-else>
@@ -644,91 +797,35 @@ calculate shipping
 cart empty
 </div>
 </template>
-<!-- start panel -->
-<!-- start panel -->
-<!-- start panel -->
-<!-- </div> -->
+
 <template v-if="panelShow === 'yourOrder'">
- <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
+
+ <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
-              <template v-if="panelShow === 'customerInfo'">
-            <template v-if="giftCardPanel ===  false">
+<template v-if="panelShow === 'customerInfo'">
+<template v-if="giftCardPanel ===  false">
              
 
-
-                     <template v-if="giftCardPanel ===  false">
-
-
-
-
-
-         <template v-if="shippingOption && shippingAmount > 0">
-
-       <button class="mt10 fw" style="margin-top:20px;"
-                v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== '' && weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-                id="cip-pay-btn"
-                @click="cippaybutton"
-              >Credit/Debit Pay</button>
-              <button class="mt10 fw" style="margin-top:20px;"
-              v-else disabled>Credit/Debit Pay</button>
-     </template>
-     <template v-else-if="currentOrder.preorder === true">
-      <button class="mt10 fw" style="margin-top:20px;"
-                v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-                id="cip-pay-btn"
-                @click="cippaybutton"
-              >Credit/Debit Pay</button>
-              <button class="mt10 fw" style="margin-top:20px;"
-              v-else disabled>Credit/Debit Pay</button>
-          </template>
-     <template v-else>
-      <button class="mt10 fw" style="margin-top:20px;"
-                v-if="currentOrder.preorder === true && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-                id="cip-pay-btn"
-                @click="cippaybutton"
-              >Credit/Debit Pay</button>
-              <button class="mt10 fw" style="margin-top:20px;"
-              v-else disabled>Credit/Debit Pay</button>
-
-          </template>
-        </template>       
-        </template>
+<template v-if="currentOrder.preorder">
+        <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
+            <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
+</template>
+<template v-else>
+        <button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
+            <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
+</template>
+</template>
 
 <template v-if="giftCardPanel ===  false">
-
-
-     <template v-if="currentOrder.preorder === true">
-      <button 
-      v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-      @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
-      <button 
-      v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
-          </template>
-     <template v-else>
-
-      <button 
-      v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-      @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
-      <button 
-      v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
-      
-      
-      
-       </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+<button 
+v-if="currentOrder.preorder === true && selectedTime === null" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
+<button 
+v-else-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+@click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
+<button 
+v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
 </template>
 
 
@@ -768,27 +865,20 @@ cart empty
   </span>
   </u>
 </template>
-
-
-
-
-
-
-
-              </template>
-              <br />
-              <br />
-              <br />
+</template>
+      <br />
+      <br />
+      <br />
       </div>
-          </div>
-        </div>
-        <div>
-</div></div>
-    </section>
+      </div>
+      </div>
+      <div>
+      </div></div>
+      </section>
+
+<pre>{{$store.state.storeCurrentOrderUpdate}}</pre>
 
 
-
-<pre style="display:none">{{$store.state.storeCurrentOrder}}</pre>
   </div>
 </template>
 
@@ -814,15 +904,15 @@ import Prev from "@/components/svgIcons/Prev";
 
 import NadiIcon from "@/components/svgIcons/NadiIcon";
 import NadiIconSm from "@/components/svgIcons/NadiIconSm";
-
+import NadiIconSmX from "@/components/svgIcons/NadiIconSmX";
 
 import moment from 'moment'
 import tz from 'moment-timezone'
 
 import swal from "sweetalert";
 export default {
-  name: "UpserveOloRetail",
-  props: ["data","emailAddress","oloEndpoint","menuEndpoint","title"],
+  name: "UpserveOlo",
+  props: ["data","emailAddress","oloEndpoint","menuEndpoint","title","userData"],
   components: {
     OrderConfirmationModal,
     OnlineMenuCarousel,
@@ -836,46 +926,35 @@ export default {
     Next,
     Prev,
     NadiIcon,
-    NadiIconSm
+    NadiIconSm,
+    NadiIconSmX
   },
   computed: {	
-    weightShipping(){
-      let weight = {
-        lbs:0,
-        oz:0
-      }
 
-      for(var item in this.currentOrder.charges.items){
-          weight.lbs = Number(weight.lbs) + Number(this.currentOrder.charges.items[item].lbs)
-          weight.oz = Number(weight.oz) + Number(this.currentOrder.charges.items[item].oz)
-      }
-
-      this.currentOrder.fulfillment_info.weight = weight
-      let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-      return weight
-    },
-totalWeight(){
-      let cost = 0
-      for(var item in this.currentOrder.charges.items){
-        cost = cost + this.currentOrder.charges.items[item].price
-      }
-
-      return cost
-    },
     orderTotal(){
 
-      let shippingAmountToAdd = Number(this.shippingAmount) * 100
-      return Number(this.total) + Number(this.currentTax) + Number(this.tip) + Number(this.currentAmountToAdd) + shippingAmountToAdd
 
+
+      return Number(this.$store.state.storeCurrentOrderUpdate.charges.preTotal) + Number(this.$store.state.storeCurrentOrderUpdate.charges.taxes) + Number(this.$store.state.storeCurrentOrderUpdate.charges.tip.amount) + Number(this.currentAmountToAdd)
     },  
     googleAddress() {	
       return this.$store.state.googleAddress;	
     },	
+    tip0() {	
+    return Number(this.$store.state.storeCurrentOrderUpdate.charges.preTotal) * 0;	
+    },	
+    tip1() {	
+      return Number(this.$store.state.storeCurrentOrderUpdate.charges.preTotal) * 0.18;	
+    },	
+    tip2() {	
+      return Number(this.$store.state.storeCurrentOrderUpdate.charges.preTotal) * 0.22;	
+    },	
+    tip3() {	
+      return Number(this.$store.state.storeCurrentOrderUpdate.charges.preTotal) * 0.25;	
+    },	
     currentTax(){
 
-        let currentTax = Number(this.total) * Number(this.upserveTaxRate);
+        let currentTax = Number(this.$store.state.storeCurrentOrderUpdate.charges.preTotal) * Number(this.upserveTaxRate);
 
       return Math.round(currentTax)
     }
@@ -883,11 +962,10 @@ totalWeight(){
   watch: {	
  currentOrder: {
      handler(val){
-      // do stuff
-      if(this.shippingOption === true && this.validPostal(this.currentOrder.billing.billing_postal_code)){
-      this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz))
-
-      }
+      // console.log('this.currentOrder nested change')
+      // console.log(this.currentOrder)
+      let storeCurrentOrderUpdate = this.currentOrder;	
+      this.$store.commit("upserveOrderCurrentOrderUpdate", { storeCurrentOrderUpdate });	
     },
      deep: true
   },
@@ -899,25 +977,112 @@ openTimes(){
 },
 selectedDate(){
 
-      this.currentOrder.scheduled_time = null
+if(this.selectedDate === null && this.selectedTime === null){
+this.noFiltering = true
+}else{
+  this.noFiltering = false
+}
 
-      let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-      this.selectedTime = null
+let itemsToRemove = []
+
+if(this.currentOrder.charges){
+for (var value of this.currentOrder.charges.items) {
+  // console.log(moment(this.selectedTime.time).format('HH:mm:ss'))
+  if(value.timing_mask){
+    console.log(value.timing_mask.rules)
+    console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
+  if(!value.timing_mask.rules.includes(this.selectedDate.dayLabel.substring(0,3).toLowerCase())){
+    this.removeFromOrder(value)
+    itemsToRemove.push(value)
+  }
+  }
+}
+}
+let removalItems = []
+if(itemsToRemove.length > 1){
+removalItems = itemsToRemove.map(x => ' ' + x.name.slice(0, -1) )
+}else{
+removalItems = itemsToRemove.map(x => ' ' + x.name )
+}
+
+if(removalItems.length === 2){
+  removalItems[removalItems.length - 1] = " and" + removalItems[removalItems.length - 1]
+  removalItems = removalItems.toString().replace(',','');
+}else if(removalItems.length > 2){
+  removalItems[removalItems.length - 1] = " and" + removalItems[removalItems.length - 1]
+}
+
+if(itemsToRemove.length === 1){
+swal(removalItems + ' is not available at the new day you have selected and has been removed from your order.')
+}else if(itemsToRemove.length>1){
+swal(removalItems + ' are not available at the new day you have selected and have been removed from your order.')
+}
+
+this.currentOrder.scheduled_time = null
+// let storeCurrentOrder = this.currentOrder;	
+// this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+this.selectedTime = null
 
 },
 tipSelected(){
 
 this.currentOrder.tipSelected = this.tipSelected
 
+console.log('tip selected')
 
-let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+// let storeCurrentOrder = this.currentOrder;	
+// this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
 },
-    selectedTime(){
-this.currentOrder.scheduled_time = this.selectedTime.time
-    },
+selectedTime(){
+
+if(this.selectedDate === null && this.selectedTime === null){
+this.noFiltering = true
+}else{
+  this.noFiltering = false
+}
+
+let itemsToRemove = []
+
+if(this.currentOrder.charges){
+for (var value of this.currentOrder.charges.items) {
+if(value.timing_mask){
+if(!this.isBetween(value.timing_mask.start_time,value.timing_mask.end_time,moment(this.selectedTime.time).format('HH:mm:ss'))){
+console.log(value + " not available")
+this.removeFromOrder(value)
+itemsToRemove.push(value)
+}}}
+}
+let removalItems = []
+if(itemsToRemove.length > 1){
+removalItems = itemsToRemove.map(x => ' ' + x.name.slice(0, -1) )
+}else{
+removalItems = itemsToRemove.map(x => ' ' + x.name )
+}
+
+
+if(removalItems.length === 2){
+  removalItems[removalItems.length - 1] = " and" + removalItems[removalItems.length - 1]
+  removalItems = removalItems.toString().replace(',','');
+}else if(removalItems.length > 2){
+  removalItems[removalItems.length - 1] = " and" + removalItems[removalItems.length - 1]
+}
+
+if(itemsToRemove.length === 1){
+swal(removalItems + ' is not available at the new time you have selected and has been removed from your order.')
+}else if(itemsToRemove.length>1){
+swal(removalItems + ' are not available at the new time you have selected and have been removed from your order.')
+}
+
+  if(this.selectedTime){
+    this.currentOrder.scheduled_time = this.selectedTime.time
+  }else{
+    this.currentOrder.scheduled_time = null
+  }
+
+  // let storeCurrentOrder = this.currentOrder;	
+  // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+},
     email(){
         this.currentOrder.fulfillment_info.customer.email = this.email.toLowerCase();
     },
@@ -935,25 +1100,15 @@ this.currentOrder.scheduled_time = this.selectedTime.time
         this.currentOrder.billing.billing_address = ''	
         this.currentOrder.billing.billing_postal_code = ''	
       }	
-
-
-console.log(this.checked)
-this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz))
-
-
-let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-
-
     },	
 currentAmountToAddCustom(){	
 this.currentAmountToAdd = this.currentAmountToAddCustom * 100	
 
 
       this.currentOrder.currentAmountToAddCustom = this.currentAmountToAdd
-
-let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+console.log('this happeneing')
+// let storeCurrentOrder = this.currentOrder;	
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
 
 },	
@@ -967,60 +1122,37 @@ let storeCurrentOrder = this.currentOrder;
         zip: "",	
       };	
 if(newAddress){	
-    let routeArray = newAddress.address_components.filter(	
-    (obj) => {	
-    return obj.types[0] === "route";	
-    }	
-    )
-    if(routeArray.length > 0){
-    googleAddressObject.route = routeArray[0].long_name;	
-    }
+      googleAddressObject.route = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "route";	
+        }	
+      )[0].long_name;	
 }	
 if(newAddress){	
-    let streetArray = newAddress.address_components.filter(	
-    (obj) => {	
-    return obj.types[0] === "street_number";	
-    }	
-    )
-    if(streetArray.length > 0){
-    googleAddressObject.streetNumber = streetArray[0].long_name;	
-    }    
+      googleAddressObject.streetNumber = newAddress.address_components.filter(	
+        (obj) => {	
+          return obj.types[0] === "street_number";	
+        }	
+      )[0].long_name;	
 }	
 if(newAddress){	
-
-  let localityArray = newAddress.address_components.filter(	
+      googleAddressObject.locality = newAddress.address_components.filter(	
         (obj) => {	
           return obj.types[0] === "locality";	
         }	
-      )
-
-      if(localityArray.length > 0){
-      googleAddressObject.locality = localityArray[0].long_name;
-      
-      }
+      )[0].long_name;	
 }	
 if(newAddress){	
-
- let stateArray = newAddress.address_components.filter(	
+      googleAddressObject.state = newAddress.address_components.filter(	
         (obj) => {	
           return obj.types[0] === "administrative_area_level_1";	
         }	
-      )
-
-    if(stateArray.length > 0){
-      googleAddressObject.state = stateArray[0].long_name;
-    }
-
+      )[0].long_name;	
 }	
 if(newAddress){	
-
-let zipArray = newAddress.address_components.filter((obj) => {	
+      googleAddressObject.zip = newAddress.address_components.filter((obj) => {	
         return obj.types[0] === "postal_code";	
-      })
-    if(zipArray.length > 0){
-      googleAddressObject.zip = zipArray[0].long_name;
-    }
-
+      })[0].long_name;	
 }	
       this.googleAddressObject = googleAddressObject;	
       this.currentOrder.fulfillment_info.delivery_info.address.city =	
@@ -1031,11 +1163,6 @@ let zipArray = newAddress.address_components.filter((obj) => {
         googleAddressObject.zip;	
       this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =	
         googleAddressObject.streetNumber + " " + googleAddressObject.route;	
-
-console.log(this.currentOrder)
-this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz));
-let storeCurrentOrder = this.currentOrder;	
-this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
     },	
     currentAmountToAdd: function(newCurrent,oldCurrent){	
@@ -1050,26 +1177,45 @@ this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
     },	
     total: function (newTotal, oldTotal) {	
+
+
+// console.log(this.$store.state.storeCurrentOrderUpdate)
+// console.log('this.currentOrder.charges.total')
+// console.log(this.currentOrder.charges.total)
+// console.log(this.currentOrder.charges.total)
+
+let calculatedTax = this.orderTotal * this.upserveTaxRate
+// console.log(Number(this.upserveTaxRate))
+// console.log(this.orderTotal)
+// console.log('calculatedTax')
+// console.log(calculatedTax)
       this.currentOrder.charges.taxes = this.currentTax;	
+      
+
+
+
+let price = 0
+for (var index in this.currentOrder.charges.items) {
+  price = price + this.currentOrder.charges.items[index].price_cents
+}
+
+      this.currentOrder.charges.preTotal = price
+
+
+
       this.currentOrder.charges.total = this.orderTotal;
-
-
-      this.currentOrder.charges.preTotal = this.orderTotal - this.currentTax - this.tip;
       this.currentOrder.payments.payments[0].amount = this.orderTotal
 
-      // let storeCurrentOrder = this.currentOrder;	
-      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-
+      
     },	
     },
   data() {
     return {
-      weight: 0,
-      shippingAmount: 0,
-      shippingOption: false,
+      user: {},
+      noFiltering: true,
+      currentRestaurantHours: '',
       nextOpen: '',
       preOrderToggleState: false,
-      currentFilter: 'All',
       currentRestaurantDays: [],
       rendered: false,
       timeslotsCreated: [],
@@ -1119,7 +1265,7 @@ this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
       blockedBody: this.data,
       upserve: null,
       upserveList: null,
-      upserveSections: null,
+      upserveSections: [],
       upserveCategories: [],
       currentlyFiltered: [],
       currentOrder: { 
@@ -1145,7 +1291,6 @@ this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
         confirmation_code:
           "mamnoon-" + Math.random().toString(36).substr(2, 29),
         charges: {
-          shipping: 0,
           total: 0,
           preTotal: 0,
           fees: 0,
@@ -1157,7 +1302,6 @@ this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
           items: [],
         },
         fulfillment_info: {
-          weight: 0,
           type: "pickup",
           estimated_fulfillment_time: null,
           customer: {
@@ -1190,6 +1334,23 @@ this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     };
   },
   filters: {
+capitalizeFirstLetter(string) {
+
+  if(string){
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+},
+formatAmPm(value) {
+  if (value) {
+return moment(value, 'HH:mm:ss').format('h:mm:ssa').replace(':00','');
+  }
+},
+formatAmPmFirst(value) {
+  if (value) {
+return moment(value, 'HH:mm:ss').format('h:mm:ss').replace(':00','');
+  }
+},
     capitalize: function (value) {
       if (!value) return "";
       value = value.toString();
@@ -1203,150 +1364,105 @@ showToFixed: function (value) {
   },
   methods: {
 
+addTimes (startTime, endTime) {
+  var times = [ 0, 0, 0 ]
+  var max = times.length
 
+  var a = (startTime || '').split(':')
+  var b = (endTime || '').split(':')
 
+  // normalize time values
+  for (var i = 0; i < max; i++) {
+    a[i] = isNaN(parseInt(a[i])) ? 0 : parseInt(a[i])
+    b[i] = isNaN(parseInt(b[i])) ? 0 : parseInt(b[i])
+  }
 
-removeNonShippables(){
+  // store time values
+  for (var i = 0; i < max; i++) {
+    times[i] = a[i] + b[i]
+  }
 
-for (var value of this.currentOrder.charges.items) {
-// console.log(value.shippable)
+  var hours = times[0]
+  var minutes = times[1]
+  var seconds = times[2]
 
-if(value.shippable === false){
-  swal(value.name + ' is not available for shipping and has been removed from your order.')
-  this.removeFromOrder(value)
-}
+  if (seconds >= 60) {
+    var m = (seconds / 60) << 0
+    minutes += m
+    seconds -= 60 * m
+  }
 
+  if (minutes >= 60) {
+    var h = (minutes / 60) << 0
+    hours += h
+    minutes -= 60 * h
+  }
 
-}
-
-
-
-      },
-
-
-  async shippingPrice(order_info,lb,oz){
-console.log(order_info)
-
-
-
-// console.log(JSON.stringify(order_info))
-
-    let responseAcf = await this.$http.get(`/shippingcalculation`, { params: { orderInfo: order_info, Pounds: lb, Ounces: oz } })
-    // console.log(responseAcf.data[0].Rate[0])
-  // console.log(responseAcf.data.rates.filter(word => word.attributes.includes('CHEAPEST')));
-// console.log(responseAcf.data.rates)
-let cheapest = responseAcf.data.rates.filter(word => word.servicelevel.token === "usps_priority")
-
-
-console.log(cheapest)
-
-
-
-    this.shippingAmount = cheapest[0].amount
-    this.currentOrder.charges.shipping = cheapest[0].amount
-
-    let storeCurrentOrder = this.currentOrder;
-    this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
+  return ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2)
 },
-shipOption(c){
 
 
 
-  this.shippingOption = c
-  c === true ? this.currentOrder.fulfillment_info.type = 'delivery' : this.currentOrder.fulfillment_info.type = 'pickup'
-
-
-
-if(c === true){
- this.currentOrder.preorder = false 
-
-
-this.shippingOption = true
- this.currentOrder.fulfillment_info.delivery_info.address.address_line2 = ''
-}
-
-
-if(c === false){
- this.currentOrder.preorder = true
- this.shippingOption = false
-}
-
-let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
-
-if(c === true){
-  console.log('remove non shippables')
-  this.removeNonShippables()
-}else{
-  this.shippingAmount = 0
-  this.currentOrder.charges.shipping = 0
-
-  let storeCurrentOrder = this.currentOrder;
-  this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-}
-
-
-
-
-
-  },
-    makePickup(){
-
-
-      this.currentOrder.fulfillment_info.type === 'pickup'
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-    },
 preOrderToggle(c){
 
-// this.preOrderToggleState = c
+this.preOrderToggleState = c
 
 
 if(c === true){
-  this.preOrderToggleState = c
       this.currentOrder.preorder = true
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
-this.panelShow = 'customerInfo'
-
- 
-
-}
-
-if(c === false){
-  this.preOrderToggleState = c
+      // let storeCurrentOrder = this.currentOrder;
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+}else{
       this.currentOrder.preorder = false
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
-this.panelShow, this.currentOrder.fulfillment_info.type = ''
-
+      // let storeCurrentOrder = this.currentOrder;
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 }
 
-if(c === 'shipping'){
+},
+    async upserves() {
 
-  this.preOrderToggleState = 'shipping'
-  this.panelShow = 'customerInfo'
-this.currentOrder.fulfillment_info.type = 'delivery'
+      let responseUpserve = await this.$http.get(this.menuEndpoint);
+// console.log(responseUpserve)
+if(responseUpserve.data.body){
+      let upserveProducts = responseUpserve.data.body.items;
+      this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
+      this.upserveSections = responseUpserve.data.body.sections;
+      this.upserveTaxRate =
+        responseUpserve.data.body.tax_rates[0].percentage_rate;
+      this.modifierGroups = responseUpserve.data.body.modifier_groups;
+      this.modifiers = responseUpserve.data.body.modifiers;
+      this.modifierItems = responseUpserve.data.body.modifiers;
+    }
+    },
+async upserveMongo(){
+
+      let self = this
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/${self.title.toLowerCase().replace(' ','')}`);
+
+// console.log(responseUpserve.data.doc[0].menu.items)
+
+if(responseUpserve.data.doc[0].menu){
+
+      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+      this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
+      this.upserveSections = responseUpserve.data.doc[0].menu.sections;
+      this.upserveTaxRate =
+       responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
+      this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
+      this.modifiers =responseUpserve.data.doc[0].menu.modifiers;
+      this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
 }
-
 },
   async getHours(){
 
+
     let self = this
-   
     let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
     let AcfBlock = responseAcf
     this.hours = AcfBlock.data.acf.content_fields.find(o => o.acf_fc_layout === 'timeranges');   
+
 
     this.currentRestaurantHours = this.hours.restaurant_hours[0].restaurant_name.find(o => o.name === this.title.toLowerCase());
     this.openDays = this.currentRestaurantHours.information.days_of_week
@@ -1358,6 +1474,7 @@ this.currentOrder.fulfillment_info.type = 'delivery'
           this.showTimeInterVals(curRest[i].time_slot.open.split(':')[0],curRest[i].time_slot.close.split(':')[0])
     }
 
+
   let today = new Date()
   let todayDay = today.getDay()
   let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -1368,34 +1485,28 @@ this.currentOrder.fulfillment_info.type = 'delivery'
 if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
     for(let i = 0; i < curRest.length; i++){
       if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
-      // console.log('it returned true so break')
-
-      this.valid = true
-      break
-    }else{
-        // console.log('it didn treturn true')
-        // console.log('it should be a rpeorder')
-        self.currentOrder.preorder = true
-        let storeCurrentOrder = self.currentOrder
-        self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-      }
-    }
-  }else{
+        this.valid = true
+        break
+        }else{
       this.currentOrder.preorder = true
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+      // let storeCurrentOrder = this.currentOrder;
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+    }
+}
+}else{
+      this.currentOrder.preorder = true
+      // let storeCurrentOrder = this.currentOrder;
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 }
 },
-currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
+currentlyAvailable(startTime,endTime,rules,futureDay,futureTime){
 
     let weekday = ['mon','tue','wed','thu','fri','sat','sun']
 
             if(!futureDay && !futureTime){
-
                 let currentDate = new Date();   
-
                 let startDate = new Date(currentDate.getTime());
-                // console.log(startDate)
+
                 startDate.setHours(startTime.split(":")[0]);
                 startDate.setMinutes(startTime.split(":")[1]);
 
@@ -1407,27 +1518,60 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
                     return startDate < currentDate && endDate > currentDate
                 }
             }
-          if(futureDay){
-          if(!futureTime){
-              if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
-                  return true
-              }
-          }else{
-              let currentDate = Date.parse(futureTime.time) 
-              let startDate2 = new Date(currentDate);
-              let startDate3 = moment(startDate2)._i
-              // console.log(startDate3)
-              startDate3.setHours(startTime.split(":")[0]);
-              startDate3.setMinutes(startTime.split(":")[1]);
-              let endDate2 = new Date(currentDate);
-              let endDate3 = moment(endDate2)._i
-              endDate3.setHours(endTime.split(":")[0]);
-              endDate3.setMinutes(endTime.split(":")[1]);
-              return startDate3 < currentDate && endDate3 > currentDate
-          }
-          }
+
+    if(futureDay && !futureTime){
+      if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
+        return true
+      }
+    }
+    if(futureDay && futureTime){
+
+    let currentDate = Date.parse(futureTime.time) 
+    let startDate2 = new Date(currentDate);
+    let startDate3 = moment(startDate2)._i
+    startDate3.setHours(startTime.split(":")[0]);
+    startDate3.setMinutes(startTime.split(":")[1]);
+    let endDate2 = new Date(currentDate);
+    let endDate3 = moment(endDate2)._i
+    endDate3.setHours(endTime.split(":")[0]);
+    endDate3.setMinutes(endTime.split(":")[1]);
+    let validTime = startDate3 < currentDate && endDate3 > currentDate
+    let validDay = rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())
+
+    if(validTime && validDay){
+      return true
+    }else{
+      return false
+    }
+}
+
+
+
+
 },
-          returnAvailableNow(startTime,endTime){
+isBetween(startTime,endTime,proposedTime){
+
+
+var format = 'HH:mm'
+// var time = moment() gives you current time. no format required.
+var time = moment(proposedTime,format),
+  beforeTime = moment(startTime, format),
+  afterTime = moment(endTime, format);
+
+
+  console.log(time,beforeTime,afterTime)
+if (time.isBetween(beforeTime, afterTime)) {
+  console.log(true)
+  return true
+} else {
+   console.log(false)
+  return false
+}
+
+
+},
+returnAvailableNow(startTime,endTime){
+
 
               if(startTime && endTime){
 
@@ -1445,9 +1589,10 @@ currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
 
               let tF = startDate < currentDate && endDate > currentDate
               // this.valid = startDate < currentDate && endDate > currentDate
-              // console.log(tF)
-              return tF          
-      }
+              return tF
+
+              }
+
     },
 hideGiftcard(){
   this.giftCardPanel = false
@@ -1467,23 +1612,28 @@ showGiftcard(){
               self.user = userInfo
               self.cardNumberInput = userInfo.user.giftcard
               self.preferredGiftCard = userInfo.user.giftcard
+              
+// console.log(self.currentOrder.billing)
 
+if(self.currentOrder.billing){
 
               self.currentOrder.billing.billing_name = userInfo.user.billingAddress.name
               self.currentOrder.billing.billing_address = userInfo.user.billingAddress.addressLine1 + ' ' + userInfo.user.billingAddress.addressLine2
               self.currentOrder.billing.billing_postal_code = userInfo.user.billingAddress.zip
 
-self.currentOrder.fulfillment_info.customer.phone = userInfo.user.deliveryAddress.phone
-self.currentOrder.fulfillment_info.customer.first_name = userInfo.user.deliveryAddress.name
-self.currentOrder.fulfillment_info.delivery_info.address.city = userInfo.user.deliveryAddress.city
-self.currentOrder.fulfillment_info.delivery_info.address.state = userInfo.user.deliveryAddress.state
-self.currentOrder.fulfillment_info.delivery_info.address.zip_code = userInfo.user.deliveryAddress.zip
-self.currentOrder.fulfillment_info.delivery_info.address.address_line1 = userInfo.user.deliveryAddress.addressLine1
-self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInfo.user.deliveryAddress.addressLine2
+              self.currentOrder.fulfillment_info.customer.phone = userInfo.user.deliveryAddress.phone
+              self.currentOrder.fulfillment_info.customer.first_name = userInfo.user.deliveryAddress.name
+              self.currentOrder.fulfillment_info.delivery_info.address.city = userInfo.user.deliveryAddress.city
+              self.currentOrder.fulfillment_info.delivery_info.address.state = userInfo.user.deliveryAddress.state
+              self.currentOrder.fulfillment_info.delivery_info.address.zip_code = userInfo.user.deliveryAddress.zip
+              self.currentOrder.fulfillment_info.delivery_info.address.address_line1 = userInfo.user.deliveryAddress.addressLine1
+              self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInfo.user.deliveryAddress.addressLine2
 
-                let storeCurrentOrder = self.currentOrder;
-                self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });      
-
+              
+                // let storeCurrentOrder = self.currentOrder;
+                // self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });    
+                
+              }
 
               })
               .catch(function (error) {
@@ -1529,12 +1679,12 @@ self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInf
                 self.currentBalance =
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
                   
-                if(self.$store.state.storeCurrentOrder.preorder === true){
+                if(self.$store.state.storeCurrentOrderUpdate.preorder === true){
                   self.scheduleAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
                 
                 
-               if(self.$store.state.storeCurrentOrder.preorder === false){
+               if(self.$store.state.storeCurrentOrderUpdate.preorder === false){
                   self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
         
@@ -1628,21 +1778,84 @@ this.attention = false
     toggleDrawer(){
 this.toggledDrawer = !this.toggledDrawer
     },
+setTip(index) {
+
+this.tipSelected = index
+
+if(index === 0){
+this.currentOrder.charges.tip.amount = 0
+
+this.currentOrder.charges.total = this.currentOrder.charges.preTotal + this.currentOrder.charges.taxes + this.currentOrder.charges.tip.amount
+
+
+  this.showingCustom(false)
+  document.getElementById("noTip").disabled = true;
+  document.getElementById("tipOption1").disabled = false;
+  document.getElementById("tipOption2").disabled = false;
+  document.getElementById("tipOption3").disabled = false;
+  document.getElementById("customTip").disabled = false;
+  this.currentAmountToAdd = 0
+  this.customTipVisible = false
+
+
+
+
+
+}else if(index === 1){
+      
+  this.showingCustom(false)
+  document.getElementById("noTip").disabled = false;
+  document.getElementById("tipOption1").disabled = true;
+  document.getElementById("tipOption2").disabled = false;
+  document.getElementById("tipOption3").disabled = false;
+  document.getElementById("customTip").disabled = false;
+
+  this.currentAmountToAdd = this.tip1
+  this.customTipVisible = false
+
+}else if(index === 2){
+
+  this.showingCustom(false)
+  document.getElementById("noTip").disabled = false;
+  document.getElementById("tipOption1").disabled = false;
+  document.getElementById("tipOption2").disabled = true;
+  document.getElementById("tipOption3").disabled = false;
+  document.getElementById("customTip").disabled = false;
+  this.currentAmountToAdd = this.tip2
+  this.customTipVisible = false
+
+}else if(index === 3){
+
+  this.showingCustom(false)
+  document.getElementById("noTip").disabled = false;
+  document.getElementById("tipOption1").disabled = false;
+  document.getElementById("tipOption2").disabled = false;
+  document.getElementById("tipOption3").disabled = true;
+  document.getElementById("customTip").disabled = false;
+  this.currentAmountToAdd = this.tip3
+  this.customTipVisible = false
+
+}else if(index === 4){
+
+  this.showingCustom(true)
+  document.getElementById("noTip").disabled = false;
+  document.getElementById("tipOption1").disabled = false;
+  document.getElementById("tipOption2").disabled = false;
+  document.getElementById("tipOption3").disabled = false;
+  document.getElementById("customTip").disabled = true;
+
+  this.customTipVisible = true
+  this.currentAmountToAdd = 0
+  this.currentAmountToAdd = this.currentAmountToAddCustom * 100
+
+}else{
+
+} 
+
+
+
+    },
     refreshGoogle() {
-
-
-      this.currentOrder.fulfillment_info.delivery_info.address.address_line2 = ''
-
-
-
-    this.shippingAmount = 0
-    this.currentOrder.charges.shipping = 0
-
-    let storeCurrentOrder = this.currentOrder;
-    this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
-
       this.renderKey++;
 
       this.googleAddressObject = {};
@@ -1657,13 +1870,6 @@ this.toggledDrawer = !this.toggledDrawer
       };
 this.attention = true
       this.$store.commit("googleAddress", { googleAddress });
-
-
-
-
-
-
-
     },
     cippaybutton() {
       this.checkForm()
@@ -1675,11 +1881,11 @@ this.attention = true
             // console.log("Approval Data", approvalData);
             emergepay.close();
 
-              if(self.$store.state.storeCurrentOrder.preorder === true){
+              if(self.$store.state.storeCurrentOrderUpdate.preorder === true){
                 self.scheduleAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrder.preorder === false){
+              if(self.$store.state.storeCurrentOrderUpdate.preorder === false){
                 self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
               }
           
@@ -1714,30 +1920,16 @@ this.attention = true
           });
       });
     },
-    // deliveryOption(choice) {
-    //   if (choice === "delivery") {
-    //     this.currentOrder.fulfillment_info.type = "delivery";
-    //     this.refreshGoogle();
-    //   } else {
-    //     this.currentOrder.fulfillment_info.type = "pickup";
-    //   }
-
-    //   let storeCurrentOrder = this.currentOrder;
-    //   this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-    // },
     addAddOn(mod, modifieritem) {
       let modAddition = {
         id: mod.id,
         modifier_group_id: modifieritem,
         price: mod.price_cents,
       };
-      // this.currentItemModifierArray.push(modAddition);
 
       this.currentItem.price_cents = Number(this.currentItem.price_cents) + Number(mod.price_cents);
-    //   console.log(this.currentItem)
       document.getElementById("add-" + mod.id).disabled = true;
       document.getElementById("remove-" + mod.id).disabled = false;
-    //   console.log('reset upserves')
 
     },
     removeAddOn(mod, modifieritem) {
@@ -1753,14 +1945,8 @@ this.attention = true
 
     removeFromOrderDontCloseModal(removal) {
 
-
-     document.getElementById("add-" + removal.id).disabled = false;
-      document.getElementById("remove-" + removal.id).disabled = true;
-    //   console.log('reset upserves')
-
-
-
-// console.log(removal)
+    document.getElementById("add-" + removal.id).disabled = false;
+    document.getElementById("remove-" + removal.id).disabled = true;
 
       let currentItems = this.currentOrder.charges.items;
       let updatedItems = currentItems.filter(
@@ -1780,11 +1966,6 @@ this.attention = true
 
   let concatenated = updatedNewItems.concat(newArray);
 
-
-
-// console.log(removal)
-
-
       this.currentOrder.charges.items = concatenated;
 
       let removeCost = removal.price_cents;
@@ -1793,14 +1974,22 @@ this.attention = true
 
       let storeCurrentOrder = this.currentOrder;
 
+if(this.tipSelected === 0){
+  this.currentAmountToAdd = 0
+}else if(this.tipSelected === 1){
+  this.currentAmountToAdd = this.tip1
+}else if(this.tipSelected === 2){
+  this.currentAmountToAdd = this.tip2
+}else if(this.tipSelected === 3){
+  this.currentAmountToAdd = this.tip3
+}else{
+
+}
 
 
 
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
     },
-
-
 removeFromOrder(removal) {
       let currentItems = this.currentOrder.charges.items;
       let updatedItems = currentItems.filter(
@@ -1809,12 +1998,23 @@ removeFromOrder(removal) {
 
       this.currentOrder.charges.items = updatedItems;
       let removeCost = removal.price * removal.quantity;
-      this.total = this.total - removeCost;
+      // this.total = this.total - removeCost;
+      this.currentOrder.charges.total = this.currentOrder.charges.total - removeCost;
       let storeCurrentOrder = this.currentOrder;
 
+      if(this.tipSelected === 0){
+        this.currentAmountToAdd = 0
+      }else if(this.tipSelected === 1){
+        this.currentAmountToAdd = this.tip1
+      }else if(this.tipSelected === 2){
+        this.currentAmountToAdd = this.tip2
+      }else if(this.tipSelected === 3){
+        this.currentAmountToAdd = this.tip3
+      }else{
 
+      }
 
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
     incrementCurrentItem() {
       this.currentItemQuanity++;
@@ -1832,13 +2032,10 @@ removeFromOrder(removal) {
       this.orderConfirmationModal = false;
       this.orderCMR = "";
     },
-    openModal(serve) {
-
+    openModal(serve,timing_mask) {
 
       let current = Object.assign({}, serve);
-
-      // let current = serve
-      
+      current.timing_mask = timing_mask
 
       this.modalOpen = true;
       this.currentItem = current;
@@ -1906,52 +2103,44 @@ removeFromOrder(removal) {
         instructions: this.textdescription,
         modifiers: this.currentItemModifierArray,
         sides: [],
-        lbs: item.lbs * this.currentItemQuanity,
-        oz: item.oz * this.currentItemQuanity,
-        shippable: item.shippable,
-        height: item.height,
-        width: item.width,
-        length: item.length,
-        girth: item.girth,
-        visible: true
+        timing_mask: item.timing_mask
       };
 
-        this.currentOrder.charges.items.push(itemToAdd);
+          // console.log(this.currentOrder)
+          this.currentOrder.charges.items.push(itemToAdd);
+          let addition = Number(item.price_cents * this.currentItemQuanity)
 
-          this.total =
-            Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
+          this.currentOrder.charges.total = this.currentOrder.charges.total + addition
 
+          this.total = this.currentOrder.charges.total 
 
-          // let newDate = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-
           //then close the modal
           this.currentItemModifierArray = [];
           this.closeModal();
-          let storeCurrentOrder = this.currentOrder;
-
-  
+          // let storeCurrentOrder = this.currentOrder;
 
 
+          if(this.tipSelected === 0){
+            this.currentAmountToAdd = 0
+          }else if(this.tipSelected === 1){
+            this.currentAmountToAdd = this.tip1
+          }else if(this.tipSelected === 2){
+            this.currentAmountToAdd = this.tip2
+          }else if(this.tipSelected === 3){
+            this.currentAmountToAdd = this.tip3
+          }else{
 
-
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
+          }
+    // }
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
-
-
-
     addToOrderDontCloseModal(item) {
-
 
       document.getElementById("add-" + item.id).disabled = true;
       document.getElementById("remove-" + item.id).disabled = false;
-    //   console.log('reset upserves')
-
-
 
       let modifierPriceTotal = 0;
       for (let i = 0; i < this.currentItemModifierArray.length; i++) {
@@ -1974,6 +2163,7 @@ removeFromOrder(removal) {
         instructions: this.textdescription,
         modifiers: this.currentItemModifierArray,
         sides: [],
+        timing_mask: item.timing_mask
       };
 
         this.currentOrder.charges.items.push(itemToAdd);
@@ -1981,8 +2171,6 @@ removeFromOrder(removal) {
           this.total =
             Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
 
-
-          // let newDate = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
@@ -1994,16 +2182,19 @@ removeFromOrder(removal) {
 
   
 
+          if(this.tipSelected === 0){
+            this.currentAmountToAdd = 0
+          }else if(this.tipSelected === 1){
+            this.currentAmountToAdd = this.tip1
+          }else if(this.tipSelected === 2){
+            this.currentAmountToAdd = this.tip2
+          }else if(this.tipSelected === 3){
+            this.currentAmountToAdd = this.tip3
+          }else{
 
-
-
-
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-
-
+          }
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
-
-
     filterByCat(cat) {
       this.currentlyFiltered = [];
       for (let i = 0; i < this.upserve.length; i++) {
@@ -2012,78 +2203,14 @@ removeFromOrder(removal) {
         }
       }
     },
-    async upserves() {
-
-      let responseUpserve = await this.$http.get(this.menuEndpoint);
-      let upserveProducts = responseUpserve.data.body.items;
-      this.upserve = upserveProducts;
-      this.upserveList = upserveProducts;
-      this.upserveSections = responseUpserve.data.body.sections;
-      this.upserveTaxRate =
-        responseUpserve.data.body.tax_rates[0].percentage_rate;
-      this.modifierGroups = responseUpserve.data.body.modifier_groups;
-      this.modifiers = responseUpserve.data.body.modifiers;
-      this.modifierItems = responseUpserve.data.body.modifiers;
-
-      // let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
-      // let upserveProducts = responseUpserve.data.doc[0].menu.items;
-    },
-    async upservesMongo() {
-
-      let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
-      let upserveProducts = responseUpserve.data.doc[0].menu.items;
-      this.upserve = upserveProducts;
-      this.upserveList = upserveProducts;
-      this.upserveSections = responseUpserve.data.doc[0].menu.sections;
-      this.upserveTaxRate =
-        responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
-      this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
-      this.modifiers = responseUpserve.data.doc[0].menu.modifiers;
-      this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
-
-      // let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
-      // let upserveProducts = responseUpserve.data.doc[0].menu.items;
-    },
-
-
-
-
-
     scheduleAnOrder(currentOrder,approvalData,giftcardbalance) {
-
-
       let self = this;
-      // this.$http
-      //   .post(this.oloEndpoint, currentOrder)
-      //   .then((response) => {
-      //     console.log(response);
-      //     self.orderConfirmationModal = true;
-      //     self.giftcardbalance = giftcardbalance
-      //     self.orderCMR = response.data;
-      //     let orderCMR = response.data;
-      //     orderCMR.giftcardbalance = giftcardbalance
-      //     self.$store.commit("orderCMR", { orderCMR });
-      //     this.$router.push("/orderconfirmation");
-      //     self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
-      //     self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
-      //     let newDate = new Date();
-      //     self.currentOrder.time_placed = newDate;
-      //     self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-      //     let storeCurrentOrder = self.currentOrder
-      //     self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
-      //   })
-      //   .catch((e) => {
-      //     // this.errors.push(e);
-      //     console.log("errors");
-      //     console.log(e);
-      //   });
-  
       this.$http.post("/confirmationemail",currentOrder)
       .then((response) => {
-        //   console.log('confirmation email sent')
+          console.log('confirmation email sent')
       }).catch((e) => {
-        //   console.log("errors");
-        //   console.log(e);
+          console.log("errors");
+          console.log(e);
         });
 
 
@@ -2095,9 +2222,7 @@ removeFromOrder(removal) {
      this.$http
         .post("/order/addorder", infoForPayStringify)
         .then((response) => {
-        //   console.log('add to mongo emerge pay front end')
-// console.log(currentOrder);
-// console.log(currentOrder)
+
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
           self.orderCMR = currentOrder;
@@ -2113,17 +2238,17 @@ removeFromOrder(removal) {
           console.log(e);
         });
       },
-doAnOrder(currentOrder,approvalData,giftcardbalance) {
+      doAnOrder(currentOrder,approvalData,giftcardbalance) {
       let self = this;
       this.$http
         .post(this.oloEndpoint, currentOrder)
         .then((response) => {
-        //   console.log(response);
+          console.log(response);
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
           self.orderCMR = response.data;
           let orderCMR = response.data;
-        //   console.log(response.data)
+          console.log(response.data)
           orderCMR.giftcardbalance = giftcardbalance
           self.$store.commit("orderCMR", { orderCMR });
           this.$router.push("/orderconfirmation");
@@ -2133,10 +2258,9 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
           self.currentOrder.time_placed = newDate;
           self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
           let storeCurrentOrder = self.currentOrder
-          self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+          // self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
         })
         .catch((e) => {
-          // this.errors.push(e);
           console.log("errors");
           console.log(e);
         });
@@ -2184,12 +2308,10 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
 
         })
         .catch((e) => {
-          // this.errors.push(e);
           console.log("errors");
           console.log(e);
         });
     },
-
 thanksgiving(m,dy) {
   let d = new Date();
   let n = d.getFullYear();
@@ -2206,7 +2328,6 @@ thanksgiving(m,dy) {
   return dat;
 },
 showTimeInterVals(startTime,endTime){
-
 
 let items = [];
 for (var hour = startTime; hour < endTime; hour++) {
@@ -2231,7 +2352,6 @@ const range = items.map(time => {
 });
 
 this.openTimes = this.openTimes.concat(items)
-
 
 },
 dropDown(){
@@ -2299,29 +2419,41 @@ dropDown(){
 
 
    this.rendered = true;
+    },
+    setTipToZero(){
+
+      console.log('set tip to zero')
+
+this.setTip(0)
+
+
+
+
     }
+
   },
   mounted() {
 
+    this.upserveMongo();
     this.getHours();
-
-      // this.returnAvailableNow();
     this.getUser();
-    // this.upserves();
-    this.upservesMongo();
     emergepay.init();
 
-    this.$store.state.storeCurrentOrder = {};
-    this.$store.state.orderCMR = {};
-    this.$store.state.orderConfirmationModalResponse = {};
-//reset
+
+// this.currentOrder = this.$store.state.storeCurrentOrderUpdate
+
+
+this.setTipToZero()
+
+
+this.$store.state.orderCMR = {};
+this.$store.state.orderConfirmationModalResponse = {};
 
 if(this.$store.state.openDrawerOnLoad === true){
   this.toggleDrawer()
   let drawerTrue = false
   this.$store.commit("drawerTrue", { drawerTrue });
 }
-    // this.dropDown();
   }
 };
 </script>
@@ -2331,31 +2463,26 @@ if(this.$store.state.openDrawerOnLoad === true){
 
 .toggleLr{
   div{
-    width: 50%;
+    width: 49%;
     display: inline-block;
 
       &:first-child{
-      //  padding-right: 1%;
        float: left;
       }
             &:last-child{
-      //  padding-left: 1%;
        float: right;
       }
 
     button{
-      width: 98%;
+      width: 100%;
       margin: 0 auto;
-float: left;
 
-&.fl-right{
-  float: right;
-}
     }
-
-
-
   }
+
+    margin-bottom: 10px;
+    display: flow-root;
+
 }
 
 
@@ -2369,23 +2496,16 @@ button.selected{
 }
 
 
-#upserveolo.shopRetail{
-  
-  ul.filters{
-  border-bottom: 0px solid rgba(0, 0, 0, 0.1);
-position: relative;
-display: inline;
-        margin-bottom: 0;
-      li{
-        border-bottom: 0px solid rgba(0, 0, 0, 0.1);
-        color: #fff367;
-        font-weight: 500;
-        margin: 0 5px;
-        text-transform: lowercase;
-            display: inline;
-      }  
-      }
+.mb10{
+  margin-bottom: 6px;
+}
 
+.mb16{
+  margin-bottom: 16px;
+}
+
+.red-text{
+  color: #f05d5b;
 }
 
 
@@ -2395,126 +2515,45 @@ display: inline;
 }
 
 
-.col-sm-4.shop-item{
-  margin-bottom: 10px;
-}
-
-.backgroundImageSquare{
-width: 100%;
-    background-size: 150%;
-    background-position: center;
-
-position: relative;
-.content {
-  background: #f05d5b;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-}
-
-  .backgroundImageSquare:after {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
+.leftDropdown{
+  width: 50%;
+  display:inline-block;
+  padding:0 5px 20px 0;
 }
 
 
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n){
-.itemContainer{
-// background: green;
-padding-left: 8px;
-padding-right: 0;
-}
-}
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n+1){
-.itemContainer{
-// background: red;
-padding-left: 0;
-padding-right: 8px;
-}
-}
-
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n+2){
-.itemContainer{
-// background: pink;
-padding-left: 4px;
-padding-right: 4px;
-}
-}
-
-
-.description-panel{
-  background: #fff367;
-  padding: 10px;
-}
-
-
-.itemContainer{
-      margin-bottom: 12px;
+.rightDropdown{
+width: 50%;
+display:inline-block;
+padding:0 0 20px 5px;
 }
 
 
 @media only screen and (max-width: 768px) {
 
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(odd){
-.itemContainer{
-// background: green;
-padding-left: 0px !important;
-padding-right: 4px !important;
-}
-}
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(even){
-.itemContainer{
-// background: red;
-padding-left: 4px !important;
-padding-right: 0px !important;
-}
-}
-
-
-.container.pt20{
-  padding-left: 20px;
-  padding-right: 20px;
-
-}
-
-
-}
-
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-.itemContainer,
-ul li{
-  cursor: pointer;
-}
-
-
-.mb20{
-  margin-bottom: 20px;
-}
-
-.mb10{
+.leftDropdown{
+  width: 100%;
+  display:block;
+  padding:0;
   margin-bottom: 10px;
 }
 
-.mb5{
-    margin-bottom: 5px;
-}
-.text-left{
-  text-align: left;
+
+.rightDropdown{
+width: 100%;
+display:block;
+  padding:0;
+    margin-bottom: 10px;
 }
 
-.weight,
-.pick-up-only{
-font-style: italic;
-font-size: .875em;
-font-weight: 300;
+
+#upserveolo .online-menu,
+.no-lr-pad{
+   padding-left: 15px;
+   padding-right: 15px;
+ }
+
+
 }
+
 </style>
