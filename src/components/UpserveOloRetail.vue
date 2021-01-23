@@ -126,6 +126,46 @@
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="container pt20 no-bot-pad">
+        <div class="row">
+          <div class="col-md-12 red-text text-center">
+
+                    
+             <!-- <h1 class="text-center">{{title}}</h1> -->
+             <template v-if="openDays">
+         <span v-if="currentRestaurantHours !== ''">{{title}}, {{openDays[0] | capitalizeFirstLetter }}-{{openDays[openDays.length-1] | capitalizeFirstLetter}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
+         </template>
+        </div>
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      <div class="container pt20">
         <div class="row">
           <div class="col-md-12 col-lg-8">
@@ -462,16 +502,14 @@ Come and pick up your items during store hours or get them shipped to your door 
                   </div>
 
              
-          
+               <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
+                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
+                <h4 v-else class="text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
 
 
-
-               <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info</h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info</h4>
-                <h4 v-else class="text-left mt10">customer info</h4>
                 <label class="smblk" for="name">name:</label>
                 <br />
-                <div v-if="user && user.user.name !== ''" style="margin-bottom: 10px;">{{user.user.name}}</div>
+                <div v-if="user.user && user.user.name !== ''" style="margin-bottom: 10px;">{{user.user.name}}</div>
                 <input v-else
                   type="text"
                   id="name"
@@ -495,7 +533,7 @@ Come and pick up your items during store hours or get them shipped to your door 
 
                <label class="smblk" for="phone">phone:</label>
                 <br />
-                     <div v-if="user && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
+                     <div v-if="user.user && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
                 <input v-else
                   type="text"
                   id="phone"
@@ -528,7 +566,7 @@ Come and pick up your items during store hours or get them shipped to your door 
 <!-- <div v-if="checked === false"> -->
                 <label class="smblk" for="name">name:</label>
                 <br />
-     <div v-if="user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
+     <div v-if="user.user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
                 <input v-else
                   type="text"
                   id="name-billing"
@@ -538,7 +576,7 @@ Come and pick up your items during store hours or get them shipped to your door 
                 />
                 <label class="smblk" for="address">billing address:</label>
                 <br />
-     <div v-if="user && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
+     <div v-if="user.user && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
                 <input v-else
                   type="text"
                   id="address"
@@ -549,7 +587,7 @@ Come and pick up your items during store hours or get them shipped to your door 
 
                 <label class="smblk" for="postal_code">billing postal code:</label>
                 <br />
-                     <div v-if="user && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
+                     <div v-if="user.user && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
                 <input v-else
                   type="text"
                   id="postal_code"
@@ -619,12 +657,12 @@ calculate shipping
                 &nbsp;
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
               </div>
-              weight: {{weightShipping.lbs}}lbs, {{weightShipping.oz}}oz
-              <br />
+             <span v-if="shippingOption"> weight: {{weightShipping.lbs}}lbs, {{weightShipping.oz}}oz</span>
+              <br v-if="shippingOption" />
               <!-- <hr />   -->
-              total: ${{total.toFixed(2)/100 }}
+              subtotal: ${{currentOrder.charges.preTotal | showToFixed}}
               <br />
-              tax: ${{currentTax.toFixed(2)/100 }}
+              tax: ${{currentOrder.charges.taxes | showToFixed}}
              <div v-if="shippingOption && shippingAmount > 0">   
               usps priority shipping: ${{shippingAmount}}
                </div>  
@@ -633,10 +671,10 @@ calculate shipping
             custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
             </div>
              <div style="display:none;" v-else>
-             tip: ${{currentAmountToAdd | showToFixed }}
+             tip: ${{currentOrder.charges.tip.amount | showToFixed }}
             </div>
               <hr />
-              <b>order total: ${{orderTotal | showToFixed }}</b>
+              <b>order total: ${{currentOrder.charges.total | showToFixed }}</b>
 <br />
 </template>
 <template v-else>
@@ -662,11 +700,20 @@ cart empty
 
 
 
-
          <template v-if="shippingOption && shippingAmount > 0">
 
+
+  <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
+<!-- shipping option -->
+<!-- {{currentOrder.fulfillment_info.customer.email}} -->
        <button class="mt10 fw" style="margin-top:20px;"
-                v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== '' && weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== '' && weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
                 id="cip-pay-btn"
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
@@ -674,18 +721,44 @@ cart empty
               v-else disabled>Credit/Debit Pay</button>
      </template>
      <template v-else-if="currentOrder.preorder === true">
-      <button class="mt10 fw" style="margin-top:20px;"
-                v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-                id="cip-pay-btn"
+<!-- preorder true -->
+
+{{currentOrder.fulfillment_info.customer.email}}
+
+  <div class="small-message" v-if="selectedTime === null">please select a date and time</div>
+  <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
+
+
+
+
+
+
+        <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
+                class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" 
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
               <button class="mt10 fw" style="margin-top:20px;"
               v-else disabled>Credit/Debit Pay</button>
           </template>
      <template v-else>
-      <button class="mt10 fw" style="margin-top:20px;"
-                v-if="currentOrder.preorder === true && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
-                id="cip-pay-btn"
+<!-- else (get it now) true -->
+  <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
+
+
+
+  <button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" 
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
               <button class="mt10 fw" style="margin-top:20px;"
@@ -700,7 +773,7 @@ cart empty
 
      <template v-if="currentOrder.preorder === true">
       <button 
-      v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+      v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
       @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
       <button 
       v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
@@ -708,29 +781,12 @@ cart empty
      <template v-else>
 
       <button 
-      v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+      v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
       @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
       <button 
       v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
-      
-      
-      
-       </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
+      </template>
 </template>
-
 
 
 
@@ -788,7 +844,7 @@ cart empty
 
 
 
-<pre style="display:none">{{$store.state.storeCurrentOrder}}</pre>
+<pre>{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
   </div>
 </template>
 
@@ -851,8 +907,8 @@ export default {
       }
 
       this.currentOrder.fulfillment_info.weight = weight
-      let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+      // let storeCurrentOrder = this.currentOrder;	
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
       return weight
     },
@@ -881,16 +937,105 @@ totalWeight(){
     }
   },	
   watch: {	
+
+    user:{
+handler(val){
+
+console.log('updateing useing')
+console.log(this.currentOrder.fulfillment_info.customer.email)
+console.log(this.user.user.email)
+
+
+this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+
+          }, deep: true
+    },
+customAmountAddition: {
+      handler(val){
+        // if(this.currentOrder.charges){
+this.currentOrder.charges.tip.amountOptions[4] = this.customAmountAddition
+this.currentOrder.charges.tip.amount = this.customAmountAddition
+      // }
+
+      },
+        deep: true
+},  
+
+
  currentOrder: {
      handler(val){
-      // do stuff
+      let preTotal = 0
+
+
+      let curOr = this.currentOrder
+      curOr.restaurant = this.title
+  //  if(this.currentOrder.charges){
+
+
+if(this.user){
+  // console.log('this.user')
+// console.log(this.user)
+  // console.log(this.user.user.email)
+}
+
+
+
+      for(var item of curOr.charges.items){
+          let itemAddition = item.quantity * item.price
+          preTotal = preTotal + itemAddition
+      }
+
+      curOr.charges.preTotal = preTotal
+      let currentTax = Number(preTotal) * Number(this.upserveTaxRate)
+      curOr.charges.taxes = Math.round(currentTax)
+      
+      curOr.charges.tip.amountOptions[0] = curOr.charges.preTotal * 0
+      curOr.charges.tip.amountOptions[1] = curOr.charges.preTotal * 0.18
+      curOr.charges.tip.amountOptions[2] = curOr.charges.preTotal * 0.22
+      curOr.charges.tip.amountOptions[3] = curOr.charges.preTotal * 0.25
+      curOr.charges.tip.amountOptions[4] = this.customAmountAddition * 100
+    
+      curOr.charges.tip.amount = curOr.charges.tip.amountOptions[curOr.tipSelected]
+      curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount
+      curOr.currentAmountToAddCustom = this.customAmountAddition * 100
+    
+    //  }
+
+
+        let storeCurrentOrderUpdateRetail = curOr;
+        this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
+
       if(this.shippingOption === true && this.validPostal(this.currentOrder.billing.billing_postal_code)){
       this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz))
 
       }
+
+
+
     },
      deep: true
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 openTimesUpdated(){
   this.dropDown();
 },
@@ -901,18 +1046,8 @@ selectedDate(){
 
       this.currentOrder.scheduled_time = null
 
-      let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
       this.selectedTime = null
-
-},
-tipSelected(){
-
-this.currentOrder.tipSelected = this.tipSelected
-
-
-let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
 },
     selectedTime(){
@@ -941,22 +1076,9 @@ console.log(this.checked)
 this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz))
 
 
-let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
 
     },	
-currentAmountToAddCustom(){	
-this.currentAmountToAdd = this.currentAmountToAddCustom * 100	
-
-
-      this.currentOrder.currentAmountToAddCustom = this.currentAmountToAdd
-
-let storeCurrentOrder = this.currentOrder;	
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-
-
-},	
     googleAddress(newAddress, oldAddress) {	
       this.googleAddressView = newAddress;	
       let googleAddressObject = {	
@@ -1034,36 +1156,18 @@ let zipArray = newAddress.address_components.filter((obj) => {
 
 console.log(this.currentOrder)
 this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz));
-let storeCurrentOrder = this.currentOrder;	
-this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+// let storeCurrentOrder = this.currentOrder;	
+// this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
     },	
-    currentAmountToAdd: function(newCurrent,oldCurrent){	
-      this.currentOrder.charges.total = this.orderTotal	
-      this.currentOrder.payments.payments[0].amount = this.orderTotal
-      this.currentOrder.charges.tip.amount = this.currentAmountToAdd	
-    },	
-    tip: function (newTip, oldTip) {	
-      this.currentOrder.charges.tip.amount = this.tip;	
-      this.currentOrder.charges.total = this.orderTotal	
-      this.currentOrder.payments.payments[0].amount = this.orderTotal
-
-    },	
-    total: function (newTotal, oldTotal) {	
-      this.currentOrder.charges.taxes = this.currentTax;	
-      this.currentOrder.charges.total = this.orderTotal;
-
-
-      this.currentOrder.charges.preTotal = this.orderTotal - this.currentTax - this.tip;
-      this.currentOrder.payments.payments[0].amount = this.orderTotal
-
-      // let storeCurrentOrder = this.currentOrder;	
-      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-
-    },	
-    },
+	    },
   data() {
     return {
+      currentRestaurantHours: '',
+      nextOpen: '',
+      preOrderToggleState: false,
+      currentRestaurantDays: [],
+      user: {},
       weight: 0,
       shippingAmount: 0,
       shippingOption: false,
@@ -1190,6 +1294,21 @@ this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     };
   },
   filters: {
+    capitalizeFirstLetter(string) {
+  if(string){
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+},
+formatAmPm(value) {
+  if (value) {
+return moment(value, 'HH:mm:ss').format('h:mm:ssa').replace(':00','');
+  }
+},
+formatAmPmFirst(value) {
+  if (value) {
+return moment(value, 'HH:mm:ss').format('h:mm:ss').replace(':00','');
+  }
+},
     capitalize: function (value) {
       if (!value) return "";
       value = value.toString();
@@ -1225,16 +1344,16 @@ if(value.shippable === false){
 
 
   async shippingPrice(order_info,lb,oz){
-console.log(order_info)
-
-
 
 // console.log(JSON.stringify(order_info))
 
+console.log(order_info)
+console.log(lb)
+console.log(oz)
     let responseAcf = await this.$http.get(`/shippingcalculation`, { params: { orderInfo: order_info, Pounds: lb, Ounces: oz } })
     // console.log(responseAcf.data[0].Rate[0])
   // console.log(responseAcf.data.rates.filter(word => word.attributes.includes('CHEAPEST')));
-// console.log(responseAcf.data.rates)
+console.log(responseAcf)
 let cheapest = responseAcf.data.rates.filter(word => word.servicelevel.token === "usps_priority")
 
 
@@ -1245,8 +1364,7 @@ console.log(cheapest)
     this.shippingAmount = cheapest[0].amount
     this.currentOrder.charges.shipping = cheapest[0].amount
 
-    let storeCurrentOrder = this.currentOrder;
-    this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
 
 
 },
@@ -1273,8 +1391,7 @@ if(c === false){
  this.shippingOption = false
 }
 
-let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
 
 
 
@@ -1285,8 +1402,7 @@ if(c === true){
   this.shippingAmount = 0
   this.currentOrder.charges.shipping = 0
 
-  let storeCurrentOrder = this.currentOrder;
-  this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
 
 }
 
@@ -1299,20 +1415,18 @@ if(c === true){
 
 
       this.currentOrder.fulfillment_info.type === 'pickup'
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
 
     },
 preOrderToggle(c){
 
-// this.preOrderToggleState = c
+this.preOrderToggleState = c
 
 
 if(c === true){
   this.preOrderToggleState = c
       this.currentOrder.preorder = true
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
 
 
 this.panelShow = 'customerInfo'
@@ -1324,8 +1438,7 @@ this.panelShow = 'customerInfo'
 if(c === false){
   this.preOrderToggleState = c
       this.currentOrder.preorder = false
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
 
 
 this.panelShow, this.currentOrder.fulfillment_info.type = ''
@@ -1369,21 +1482,15 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
     for(let i = 0; i < curRest.length; i++){
       if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
       // console.log('it returned true so break')
-
       this.valid = true
+       this.currentOrder.preorder = false
       break
     }else{
-        // console.log('it didn treturn true')
-        // console.log('it should be a rpeorder')
-        self.currentOrder.preorder = true
-        let storeCurrentOrder = self.currentOrder
-        self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+     this.currentOrder.preorder = true
       }
     }
   }else{
       this.currentOrder.preorder = true
-      let storeCurrentOrder = this.currentOrder;
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 }
 },
 currentlyavailable(startTime,endTime,rules,futureDay,futureTime){
@@ -1481,8 +1588,7 @@ self.currentOrder.fulfillment_info.delivery_info.address.zip_code = userInfo.use
 self.currentOrder.fulfillment_info.delivery_info.address.address_line1 = userInfo.user.deliveryAddress.addressLine1
 self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInfo.user.deliveryAddress.addressLine2
 
-                let storeCurrentOrder = self.currentOrder;
-                self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });      
+     
 
 
               })
@@ -1529,13 +1635,13 @@ self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInf
                 self.currentBalance =
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
                   
-                if(self.$store.state.storeCurrentOrder.preorder === true){
-                  self.scheduleAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+                if(self.$store.state.storeCurrentOrderUpdateRetail.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateRetail,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
                 
                 
-               if(self.$store.state.storeCurrentOrder.preorder === false){
-                  self.doAnOrder(self.$store.state.storeCurrentOrder,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+               if(self.$store.state.storeCurrentOrderUpdateRetail.preorder === false){
+                  self.doAnOrder(self.$store.state.storeCurrentOrderUpdateRetail,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
         
               })
@@ -1629,17 +1735,9 @@ this.attention = false
 this.toggledDrawer = !this.toggledDrawer
     },
     refreshGoogle() {
-
-
       this.currentOrder.fulfillment_info.delivery_info.address.address_line2 = ''
-
-
-
     this.shippingAmount = 0
     this.currentOrder.charges.shipping = 0
-
-    let storeCurrentOrder = this.currentOrder;
-    this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
 
 
@@ -1658,12 +1756,6 @@ this.toggledDrawer = !this.toggledDrawer
 this.attention = true
       this.$store.commit("googleAddress", { googleAddress });
 
-
-
-
-
-
-
     },
     cippaybutton() {
       this.checkForm()
@@ -1675,12 +1767,14 @@ this.attention = true
             // console.log("Approval Data", approvalData);
             emergepay.close();
 
-              if(self.$store.state.storeCurrentOrder.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
+            
+
+              if(self.$store.state.storeCurrentOrderUpdateRetail.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateRetail,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrder.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrder,approvalData,null);
+              if(self.$store.state.storeCurrentOrderUpdateRetail.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateRetail,approvalData,null);
               }
           
           },
@@ -1695,7 +1789,6 @@ this.attention = true
     },
     getToken() {
       let self = this;
-
       return new Promise(function (resolve, reject) {
         $.ajax({
           url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
@@ -1703,7 +1796,7 @@ this.attention = true
           type: "POST",
           dataType: "json",
           contentType: "application/json",
-          data: JSON.stringify(self.$store.state.storeCurrentOrder),
+          data: JSON.stringify(self.$store.state.storeCurrentOrderUpdateRetail),
         })
           .done(function (data) {
             if (data.transactionToken) resolve(data.transactionToken);
@@ -1796,7 +1889,7 @@ this.attention = true
 
 
 
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
 
     },
 
@@ -1814,7 +1907,7 @@ removeFromOrder(removal) {
 
 
 
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
     },
     incrementCurrentItem() {
       this.currentItemQuanity++;
@@ -1930,14 +2023,7 @@ removeFromOrder(removal) {
           //then close the modal
           this.currentItemModifierArray = [];
           this.closeModal();
-          let storeCurrentOrder = this.currentOrder;
 
-  
-
-
-
-
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
 
     },
@@ -1990,7 +2076,7 @@ removeFromOrder(removal) {
           //then close the modal
           this.currentItemModifierArray = [];
           // this.closeModal();
-          let storeCurrentOrder = this.currentOrder;
+          // let storeCurrentOrder = this.currentOrder;
 
   
 
@@ -1998,7 +2084,7 @@ removeFromOrder(removal) {
 
 
 
-      this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+      // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
 
 
     },
@@ -2132,8 +2218,8 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
           let newDate = new Date();
           self.currentOrder.time_placed = newDate;
           self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-          let storeCurrentOrder = self.currentOrder
-          self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+          // let storeCurrentOrder = self.currentOrder
+          // self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
         })
         .catch((e) => {
           // this.errors.push(e);
@@ -2311,7 +2397,14 @@ dropDown(){
     this.upservesMongo();
     emergepay.init();
 
-    this.$store.state.storeCurrentOrder = {};
+
+
+        this.currentOrder = this.$store.state.storeCurrentOrderUpdateRetail
+        // this.setTip(this.$store.state.storeCurrentOrderUpdateRetail.tipSelected)
+        this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateRetail.currentAmountToAddCustom/100
+
+
+    // this.$store.state.storeCurrentOrder = {};
     this.$store.state.orderCMR = {};
     this.$store.state.orderConfirmationModalResponse = {};
 //reset
@@ -2517,4 +2610,35 @@ font-style: italic;
 font-size: .875em;
 font-weight: 300;
 }
+
+
+
+
+
+.edit-link{
+      color: #f05d5b;  text-decoration: none;
+    font-size: .9rem;
+a{
+  text-decoration: none;  color: #f05d5b;
+    font-size: .9rem;
+ .edit{
+    color: #f05d5b;
+    // font-size: .9rem;
+}
+  
+
+&:hover{
+   .edit{
+    color: #f05d5b;
+    border-bottom: 1px solid #f05d5b;
+}
+  
+}
+
+}
+
+}
+.red-text {
+    color: #f05d5b;
+    }
 </style>

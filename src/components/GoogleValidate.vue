@@ -111,8 +111,6 @@ let self = this
 let american = place.address_components.filter(x => x.long_name === 'United States')
 if(american.length>0){
 
-        //  alert("valid.");
-        console.log(american)
 
         let googleAddress = place
 

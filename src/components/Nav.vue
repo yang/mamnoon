@@ -43,7 +43,8 @@
 
     </template>
     <router-link to="/">
-                <template v-if="$route.name === 'mamnoon'">
+                <Logo />
+                <!-- <template v-if="$route.name === 'mamnoon'">
                 <LogoMamnoon />
                 </template>
                 <template v-else-if="$route.name === 'mamnoonstreet'">
@@ -51,7 +52,7 @@
                 </template>
                 <template v-else>
                 <Logo />
-                </template>
+                </template> -->
         </router-link>
        
 

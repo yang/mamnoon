@@ -13,15 +13,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "vue-select/src/scss/vue-select.scss";
 import 'document-register-element/build/document-register-element'
 
-
 Vue.use(VueCurrencyInput)
 Vue.component('v-select', vSelect)
-
-
-
-// import vueCustomElement from 'vue-custom-element'
-
-
 
 const base = axios.create({
   baseURL: "https://young-hamlet-03679.herokuapp.com"
@@ -144,6 +137,70 @@ const store = new Vuex.Store({
       },
     },
     storeCurrentOrderUpdateMamnoon: { 
+      tipSelected: 0,
+      currentAmountToAddCustom: 0,
+      sms: false,
+      restaurant: "Mamnoon",
+      billing:{
+        billing_name: '',
+        billing_address: '',
+        billing_postal_code: ''
+      },
+      id:
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29),
+      // items: [],
+      preorder: false,
+      scheduled_time: null,
+      time_placed: null,
+      confirmation_code:
+        "mamnoon-" + Math.random().toString(36).substr(2, 29),
+      charges: {
+        total: 0,
+        preTotal: 0,
+        fees: 0,
+        taxes: 0,
+        tip: {
+          amountOptions: [],
+          amount: 0,
+          payment_type: "Generic Online Ordering Integrated",
+        },
+        items: [],
+      },
+      fulfillment_info: {
+        type: "pickup",
+        estimated_fulfillment_time: null,
+        customer: {
+          email: "",
+          phone: "",
+          first_name: "",
+        },
+        instructions: "",
+        no_tableware: false,
+        delivery_info: {
+          is_managed_delivery: false,
+          address: {
+            city: "",
+            state: "",
+            zip_code: "",
+            address_line1: "",
+            address_line2: "",
+          },
+        },
+      },
+      payments: {
+        payments: [
+          {
+            payment_type: "Generic Online Ordering Integrated",
+            amount: null,
+          },
+        ],
+      },
+    },
+    storeCurrentOrderUpdateRetail: { 
       tipSelected: 0,
       currentAmountToAddCustom: 0,
       sms: false,
@@ -417,9 +474,17 @@ const store = new Vuex.Store({
       state.storeCurrentOrderUpdateMbar.fulfillment_info.customer = customer
 
 
+      state.storeCurrentOrderUpdateRetail.billing = billing
+      state.storeCurrentOrderUpdateRetail.fulfillment_info.customer = customer
+
+
+
     },
     upserveOrderCurrentOrderUpdate(state, { storeCurrentOrderUpdate }){
       state.storeCurrentOrderUpdate = storeCurrentOrderUpdate
+    },
+    upserveOrderCurrentOrderUpdateRetail(state, { storeCurrentOrderUpdateRetail }){
+      state.storeCurrentOrderUpdateRetail = storeCurrentOrderUpdateRetail
     },
     upserveOrderCurrentOrderUpdateStreet(state, { storeCurrentOrderUpdateStreet }){
       state.storeCurrentOrderUpdateStreet = storeCurrentOrderUpdateStreet

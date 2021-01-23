@@ -110,10 +110,11 @@ this.$store.commit("removeUserInfo");
           // clear user current email and clear user info
           this.$store.commit("clearCurrentUser");
 
-          if (this.$router.currentRoute.fullPath === "/") {
-          } else {
-            this.$router.push("/");
-          }
+          // if (this.$router.currentRoute.fullPath === "/") {
+          // } else {
+          //   this.$router.push("/");
+          // }
+          location.reload();
         })
         .catch((error) => {
           //on fail do something
