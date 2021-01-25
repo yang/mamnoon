@@ -17,8 +17,8 @@ Vue.use(VueCurrencyInput)
 Vue.component('v-select', vSelect)
 
 const base = axios.create({
-  // baseURL: "https://young-hamlet-03679.herokuapp.com"
-  baseURL: "http://localhost:4000"
+  baseURL: "https://young-hamlet-03679.herokuapp.com"
+  // baseURL: "http://localhost:4000"
 }); 
 
 
@@ -223,6 +223,7 @@ const store = new Vuex.Store({
       confirmation_code:
         "mamnoon-" + Math.random().toString(36).substr(2, 29),
       charges: {
+        shipping: 0,
         total: 0,
         preTotal: 0,
         fees: 0,

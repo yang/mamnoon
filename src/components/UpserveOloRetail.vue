@@ -376,13 +376,18 @@ Come and pick up your items during store hours or get them shipped to your door 
       <hr />
   </div>
             <div v-if="currentOrder" class="container  mt10">
-        
-  <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">shipping address</h4>
+
+
+<div v-if="shippingOption">
+
+
+
+
+<h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">shipping address</h4>
 <div v-if="currentOrder.fulfillment_info.type === 'delivery'">
 <div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid shipping address</div>
 </div>
             
-
               <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
                
                 <div class="updateAddress">
@@ -403,10 +408,12 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 
 
+</div>
+
               <form class="mb20" @submit="checkForm">
 
 
- 
+<div v-if="shippingOption">
 
                 <div v-if="this.currentOrder.fulfillment_info.type === 'delivery'" style="margin-top: 10px;">
                  
@@ -501,6 +508,9 @@ Come and pick up your items during store hours or get them shipped to your door 
                   <hr />
                   </div>
 
+
+
+</div>
              
                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
                 <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
@@ -657,7 +667,7 @@ calculate shipping
                 &nbsp;
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
               </div>
-             <span v-if="shippingOption"> weight: {{weightShipping.lbs}}lbs, {{weightShipping.oz}}oz</span>
+             <span v-if="shippingOption"> weight: {{formattedWeight}}lbs</span>
               <br v-if="shippingOption" />
               <!-- <hr />   -->
               subtotal: ${{currentOrder.charges.preTotal | showToFixed}}
@@ -712,6 +722,7 @@ cart empty
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
 <!-- shipping option -->
 <!-- {{currentOrder.fulfillment_info.customer.email}} -->
+<!-- dsdd -->
        <button class="mt10 fw" style="margin-top:20px;"
                 v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== '' && weightShipping.lbs < 70 && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
                 id="cip-pay-btn"
@@ -723,7 +734,7 @@ cart empty
      <template v-else-if="currentOrder.preorder === true">
 <!-- preorder true -->
 
-{{currentOrder.fulfillment_info.customer.email}}
+<!-- {{currentOrder.fulfillment_info.customer.email}} -->
 
   <div class="small-message" v-if="selectedTime === null">please select a date and time</div>
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
@@ -738,7 +749,7 @@ cart empty
 
 
 
-
+<!-- dsd -->
         <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
                 class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" 
                 @click="cippaybutton"
@@ -791,14 +802,16 @@ cart empty
 
 
 <template v-if="giftCardPanel ===  true">
-<template v-if="this.$store.state.loggedIn">
+<template v-if="user.user && user.user.email">
+<!-- <template v-if="this.$store.state.loggedIn"> -->
+
    <br>
     <h4 v-if="showInsufficientFunds === true" class="error" style="text-align:left">insufficient funds</h4>
-
-  <input v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
-<br>
+  <input maxlength="16" @change="validator(cardNumberInput)" v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
+<div v-if="validNumber === false" class="small-message">invalid giftcard number</div>
+<!-- <br> -->
               <button class="mt10 fw" style="margin-bottom: 20px;margin-top:10px;"
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                v-if="validNumber && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="useGiftCardBalance()"
               >Pay With Giftcard</button>
@@ -806,10 +819,15 @@ cart empty
                v-else disabled>Pay With Giftcard</button>
 </template>
   <template v-else>
-  <input v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
+  <!-- <input v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number"> -->
 <br>
+
+    <h4 v-if="showInsufficientFunds === true" class="error" style="text-align:left">insufficient funds</h4>
+  <input maxlength="16" @change="validator(cardNumberInput)" v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
+<div v-if="validNumber === false" class="small-message">invalid giftcard number</div>
+
                 <button class="mt0 fw" style="margin-top:10px;margin-bottom: 20px;" 
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                v-if="validNumber && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="useGiftCardBalance()"
               >Pay With Giftcard</button>
@@ -936,8 +954,24 @@ totalWeight(){
       return Math.round(currentTax)
     }
   },	
-  watch: {	
-
+  watch: {
+  shippingAmount:{
+    handler(val){
+      this.currentOrder.charges.shipping =  this.shippingAmount
+    }
+  },
+      cardNumberInput:{
+        handler(val){
+        if(this.cardNumberInput.length === 16){
+          // console.log('is 16')
+          this.lookupBalance()
+          // this.validNumber = true
+        }else{
+          // console.log('not 16')
+        this.validNumber = false
+        }
+        }
+      },
     user:{
 handler(val){
 
@@ -996,19 +1030,33 @@ if(this.user){
       curOr.charges.tip.amountOptions[4] = this.customAmountAddition * 100
     
       curOr.charges.tip.amount = curOr.charges.tip.amountOptions[curOr.tipSelected]
-      curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount
-      curOr.currentAmountToAddCustom = this.customAmountAddition * 100
-    
-    //  }
+
+      console.log(curOr.charges.shipping * 100)
+
+let shipToAdd = curOr.charges.shipping * 100
 
 
-        let storeCurrentOrderUpdateRetail = curOr;
-        this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
 
+if(this.shippingOption === true){
+     curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount + shipToAdd
+}else{
+  curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount
+}
+    curOr.currentAmountToAddCustom = this.customAmountAddition * 100
+//  }
+// console.log('calculate shipping')
+// console.log(this.currentOrder)
+// console.log(String(this.weightShipping.lbs))
+// console.log(String(this.weightShipping.oz))
       if(this.shippingOption === true && this.validPostal(this.currentOrder.billing.billing_postal_code)){
       this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this.weightShipping.oz))
 
       }
+
+        this.weightShippingAmount()
+
+        let storeCurrentOrderUpdateRetail = curOr;
+        this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
 
 
 
@@ -1163,6 +1211,8 @@ this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this
 	    },
   data() {
     return {
+      formattedWeight: 0,
+      validNumber: false,
       currentRestaurantHours: '',
       nextOpen: '',
       preOrderToggleState: false,
@@ -1321,10 +1371,17 @@ showToFixed: function (value) {
 }
   },
   methods: {
+  weightShippingAmount(){
 
+let ounces = this.weightShipping.oz
+let convertedToPounds = ounces/16
+let formatWeight = this.weightShipping.lbs + convertedToPounds
+this.formattedWeight = formatWeight.toFixed(2)
 
-
-
+},
+validator(input){
+console.log(input)
+},
 removeNonShippables(){
 
 for (var value of this.currentOrder.charges.items) {
@@ -1353,11 +1410,11 @@ console.log(oz)
     let responseAcf = await this.$http.get(`/shippingcalculation`, { params: { orderInfo: order_info, Pounds: lb, Ounces: oz } })
     // console.log(responseAcf.data[0].Rate[0])
   // console.log(responseAcf.data.rates.filter(word => word.attributes.includes('CHEAPEST')));
-console.log(responseAcf)
+// console.log(responseAcf)
 let cheapest = responseAcf.data.rates.filter(word => word.servicelevel.token === "usps_priority")
 
 
-console.log(cheapest)
+// console.log(cheapest)
 
 
 
@@ -1561,6 +1618,7 @@ hideGiftcard(){
 },
 showGiftcard(){
   this.giftCardPanel = true
+  this.lookupBalance()
 },
             getUser() {
 
@@ -1605,6 +1663,11 @@ self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInf
       });
       let giftcardResponse = giftcardLookup.data;
 
+      if(giftcardResponse.resSendData.Responses[0].SvInquiry[0].ErrorID[0] === "10001"){
+          this.validNumber = false
+      }else{
+             this.validNumber = true
+      }
       this.currentBalance =
         giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
     },
@@ -1617,12 +1680,16 @@ self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInf
           cardNumber: self.cardNumberInput
         })
         .then(function (response) {
-        //   console.log(response)
+
+      let balanceCheck = self.$store.state.storeCurrentOrderUpdateRetail.charges.total.toFixed(2)/100
+
+          
+
           if (
             Number(
               response.data.resSendData.Responses[0].SvInquiry[0]
                 .CurrentBalance[0]
-            ) >= Number(self.orderTotal.toFixed(2)/100)
+            ) >= balanceCheck
           ) {
             self.showInsufficientFunds = false;
             self.$http
@@ -1791,8 +1858,8 @@ this.attention = true
       let self = this;
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          url: "http://localhost:4000/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          // url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -2415,6 +2482,11 @@ if(this.$store.state.openDrawerOnLoad === true){
   this.$store.commit("drawerTrue", { drawerTrue });
 }
     // this.dropDown();
+
+
+
+
+
   }
 };
 </script>

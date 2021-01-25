@@ -885,14 +885,19 @@ cart empty
 
 
 <template v-if="giftCardPanel ===  true">
-<template v-if="this.$store.state.loggedIn">
-   <br>
-    <h4 v-if="showInsufficientFunds === true" class="error" style="text-align:left">insufficient funds</h4>
+<template v-if="user.user && user.user.email">
 
-  <input v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
 <br>
+
+
+    <h4 v-if="showInsufficientFunds === true" class="error" style="text-align:left">insufficient funds</h4>
+  <input maxlength="16" @change="validator(cardNumberInput)" v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
+<div v-if="validNumber === false" class="small-message">invalid giftcard number</div>
+
+
+
               <button class="mt10 fw" style="margin-bottom: 20px;margin-top:10px;"
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                v-if="validNumber && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="useGiftCardBalance()"
               >Pay With Giftcard</button>
@@ -900,10 +905,16 @@ cart empty
                v-else disabled>Pay With Giftcard</button>
 </template>
   <template v-else>
-  <input v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
 <br>
+
+
+    <h4 v-if="showInsufficientFunds === true" class="error" style="text-align:left">insufficient funds</h4>
+  <input maxlength="16" @change="validator(cardNumberInput)" v-model="cardNumberInput" style="margin-top: 20px;" class="giftcardinput" placeholder="enter your giftcard number">
+<div v-if="validNumber === false" class="small-message">invalid giftcard number</div>
+
+
                 <button class="mt0 fw" style="margin-top:10px;margin-bottom: 20px;" 
-                v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
+                v-if="validNumber && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
                 @click="useGiftCardBalance()"
               >Pay With Giftcard</button>
@@ -1051,6 +1062,18 @@ return this.currentOrder.tipSelected === i
     }
   },	
   watch: {	
+        cardNumberInput:{
+        handler(val){
+        if(this.cardNumberInput.length === 16){
+          // console.log('is 16')
+          this.lookupBalance()
+          // this.validNumber = true
+        }else{
+          // console.log('not 16')
+        this.validNumber = false
+        }
+        }
+      },
     user:{
 handler(val){
 
@@ -1305,6 +1328,7 @@ if(newAddress){
     },
   data() {
   return {
+    validNumber: false,
       updateBilling: false,
       updateDelivery: false,
       savedDeliveryAddress: {},
@@ -1748,13 +1772,18 @@ if(self.currentOrder.billing){
 
     }
     },
-    async lookupBalance() {
+     async lookupBalance() {
 
       let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
         cardNumber: this.cardNumberInput,
       });
       let giftcardResponse = giftcardLookup.data;
 
+      if(giftcardResponse.resSendData.Responses[0].SvInquiry[0].ErrorID[0] === "10001"){
+          this.validNumber = false
+      }else{
+             this.validNumber = true
+      }
       this.currentBalance =
         giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
     },
@@ -1767,18 +1796,27 @@ if(self.currentOrder.billing){
           cardNumber: self.cardNumberInput
         })
         .then(function (response) {
-        //   console.log(response)
+      let balanceCheck
+    if(self.title === 'Mamnoon'){
+      balanceCheck = self.$store.state.storeCurrentOrderUpdateMamnoon.charges.total.toFixed(2)/100
+    }else if(self.title === 'Mamnoon Street'){
+      balanceCheck = self.$store.state.storeCurrentOrderUpdateStreet.charges.total.toFixed(2)/100
+    }else if(self.title === 'Mbar'){
+      balanceCheck = self.$store.state.storeCurrentOrderUpdateMbar.charges.total.toFixed(2)/100
+    }
+          
+          
           if (
             Number(
               response.data.resSendData.Responses[0].SvInquiry[0]
                 .CurrentBalance[0]
-            ) >= Number(self.orderTotal.toFixed(2)/100)
+            ) >= balanceCheck
           ) {
             self.showInsufficientFunds = false;
             self.$http
               .post("/user/usegiftcard", {
                 cardNumber: self.cardNumberInput,
-                useAmount: self.orderTotal.toFixed(2)/100
+                useAmount: balanceCheck
               })
               .then(function (response) {
                     //  console.log(response)
@@ -2070,8 +2108,8 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          url: "http://localhost:4000/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          // url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",

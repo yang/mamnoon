@@ -2,11 +2,19 @@
 <div class="nav-wrap">
 <div class="fixed-nav">
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
+            <div class="hello logButton googleInHeader" style="right: 296px;">
+<CartDropdown />
+         </div>
             <div v-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right:190px">
                     <router-link to="/profile">
                 profile
                     </router-link>
             </div>
+
+
+
+
+            
             <div class="hello logButton googleInHeader" style="right:100px">
                     <router-link to="/retail">
                 shop
@@ -54,8 +62,11 @@
                 <Logo />
                 </template> -->
         </router-link>
-       
 
+
+
+ 
+ 
   </div>
 </div>
 
@@ -91,7 +102,7 @@
 
                             <div v-if="this.$store.state.loggedIn" class="inline-link">
                 <li>
-                    <router-link to="/profile">
+                  <router-link to="/profile">
                         profile
                     </router-link>
                 </li>
@@ -102,7 +113,11 @@
                         <GoogleAuth />
                     </li>
                 </div>
-
+<div class="inline-link">
+    <li class="cursor-pointer">
+<CartDropdown />
+    </li>
+    </div>
 
             </ul>            
             </scrollactive>
@@ -131,7 +146,11 @@
                         <GoogleAuth />
                     </li>
                 </div>
-
+<div class="inline-link">
+          <li class="cursor-pointer">
+<CartDropdown />
+</li>
+    </div>
 
             </ul>            
             </scrollactive>
@@ -163,7 +182,11 @@
                         <GoogleAuth />
                     </li>
                 </div>
-
+<div class="inline-link">
+        <li class="cursor-pointer">
+<CartDropdown />
+            </li>
+    </div>
 
             </ul>            
             </scrollactive>
@@ -190,7 +213,11 @@
                         <GoogleAuth />
                     </li>
                 </div>
-
+<div class="inline-link">
+           <li class="cursor-pointer">
+                        <CartDropdown />
+                    </li>
+                </div>
             </ul>            
             </scrollactive>
         </div>
@@ -213,8 +240,11 @@ import LogoStreet from "@/components/LogoStreet";
 import Burger from "@/components/svgIcons/Burger";
 import GoogleAuth from "@/components/GoogleAuth";
 
+import CartDropdown from "@/components/CartDropdown";
+
 export default {
     components: {
+    CartDropdown,
     Logo,
     LogoMamnoon,
     LogoStreet,
