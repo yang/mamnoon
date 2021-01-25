@@ -2,10 +2,10 @@
 <div class="nav-wrap">
 <div class="fixed-nav">
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
-            <div class="hello logButton googleInHeader" style="right: 296px;">
+            <div class="hello logButton googleInHeader" style="right: 190px;">
 <CartDropdown />
          </div>
-            <div v-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right:190px">
+            <div v-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right: 266px">
                     <router-link to="/profile">
                 profile
                     </router-link>
@@ -13,7 +13,7 @@
 
 
 
-
+    
             
             <div class="hello logButton googleInHeader" style="right:100px">
                     <router-link to="/retail">
