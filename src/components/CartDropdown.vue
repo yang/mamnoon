@@ -5,7 +5,7 @@
         cart
     </div>
     <div v-if="dropdownVisible" class="dropdownCarts">
-        <div class="closeCartMenu" @click="toggleDropdown()"><CloseModalRed /></div>
+        <div class="closeCartMenu" @click="toggleDropdown()"><CloseModalRed2 /></div>
 <ul>
 
 <li v-if="$store.state.storeCurrentOrderUpdateRetail.charges.items.length > 0">
@@ -38,11 +38,11 @@
 
 
 <script>
-import CloseModalRed from "@/components/svgIcons/CloseModalRed";
+import CloseModalRed2 from "@/components/svgIcons/CloseModalRed2";
 
 export default {
     components:{
-        CloseModalRed
+        CloseModalRed2
     },
     data(){
         return{

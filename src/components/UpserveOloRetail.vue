@@ -290,6 +290,19 @@
 <span v-else>view order</span>
 </button>
 
+<div class="container mb10 hide-on-mob"> 
+<div class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
+      <template v-if="valid">
+          <h4>your order</h4>
+  </template>
+      <template v-else>
+          <h4>your pre order</h4>
+  </template>
+
+
+  </div>
+</div>
+
 
 <div v-if="shippingOption" class="container mb5"> 
         <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
@@ -330,21 +343,12 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 
 
-<div v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
-      <template v-if="valid">
-          <h4>your order</h4>
-  </template>
-      <template v-else>
-          <h4>your pre order</h4>
-  </template>
 
-
-  </div>
 <button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
 
 
 <template v-if="this.currentOrder.charges.items.length > 0">
-  <br>
+  <!-- <br> -->
 
 </template>
 
@@ -2533,9 +2537,10 @@ float: left;
 button.selected{
  
    background: transparent !important;
-    border: 2px solid #f05d5b !important;
+      background: #666666 !important;
+    border: 2px solid #666666 !important;
     box-sizing: border-box;
-    color: #f05d5d !important;
+    color: #fff367 !important;
 
 }
 
@@ -2701,14 +2706,15 @@ a{
     font-size: .9rem;
  .edit{
     color: #f05d5b;
+    color: #F1765B;
     // font-size: .9rem;
 }
   
 
 &:hover{
    .edit{
-    color: #f05d5b;
-    border-bottom: 1px solid #f05d5b;
+    color: #F1765B;
+    border-bottom: 1px solid #F1765B;
 }
   
 }
@@ -2719,4 +2725,15 @@ a{
 .red-text {
     color: #f05d5b;
     }
+
+
+@media only screen and (max-width: 992px) {
+
+
+.hide-on-mob{
+  display:none !important;
+}
+}
+
+
 </style>

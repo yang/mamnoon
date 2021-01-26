@@ -29,7 +29,7 @@
 
 </template>
 <div class="container online-menu">
-<h4>Online Shop</h4>
+<h4>online shop</h4>
 </div>
 
    <template v-if="upserveSections.length === 0">

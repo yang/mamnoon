@@ -452,10 +452,9 @@ Now accepting preorders for pick up.
 <span v-if="toggledDrawer">hide order</span>
 <span v-else>view order</span>
 </button>
-<div v-if="currentOrder" class="container text-center">
 
-
-<div v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
+<div class="container mb10 hide-on-mob"> 
+<div @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
       <template v-if="valid">
          <h4> your order</h4>
   </template>
@@ -465,7 +464,14 @@ Now accepting preorders for pick up.
 
   
   </div>
-<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:0px;">edit order</button>
+  </div>
+
+
+<div v-if="currentOrder" class="container text-center">
+
+
+
+<button v-if="!panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:0px;">edit order</button>
 
 <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
   <br>
@@ -2711,6 +2717,15 @@ padding:0 0 20px 5px;
 }
 
 
+@media only screen and (max-width: 992px) {
+
+
+.hide-on-mob{
+  display:none;
+}
+}
+
+
 @media only screen and (max-width: 768px) {
 
 .leftDropdown{
@@ -2756,7 +2771,7 @@ a{
 
 &:hover{
    .edit{
-    color: #f05d5b;
+    color: #F1765B;
     border-bottom: 1px solid #F1765B;
 }
   
