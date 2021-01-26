@@ -753,6 +753,7 @@ ul.no-left-pad{
 
 .small-message{
     color: #f05d5b;
+    color: #F1765B; 
     font-size: .9rem;
     font-style: italic;
 }
@@ -826,6 +827,7 @@ margin-top: -3px;
   position: absolute;
   top: 14px;
   left: 20%;
+    left: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     left: 5%;
@@ -835,6 +837,7 @@ margin-top: -3px;
   position: absolute;
   top: 14px;
   right: 20%;
+    right: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     right: 5%;
@@ -843,7 +846,7 @@ margin-top: -3px;
 
 .is-fullheight{
   padding: 20px 0 0 0;
-  overflow: hidden;
+  // overflow: hidden;
 
 
   &.no-top-pad{

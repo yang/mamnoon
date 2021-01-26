@@ -120,6 +120,7 @@ export default {
     padding: 12px 35px 12px 10px;
     // width: 240px;
         width: 70%;
+        width: 50%;
 
     &:focus,
     &:active{

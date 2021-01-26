@@ -1,6 +1,6 @@
 <template>
 <div id="online-menu" class="is-fullheight no-top-pad">
-        <carousel :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
+        <carousel :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
               <template class="subprev" slot="prev">
               <span class="prev">
               <Prev />
@@ -752,6 +752,7 @@ ul.no-left-pad{
 
 .small-message{
     color: #f05d5b;
+    color: #F1765B;
     font-size: .9rem;
     font-style: italic;
 }
@@ -825,6 +826,7 @@ margin-top: -3px;
   position: absolute;
   top: 14px;
   left: 20%;
+    left: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     left: 5%;
@@ -834,6 +836,7 @@ margin-top: -3px;
   position: absolute;
   top: 14px;
   right: 20%;
+    right: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     right: 5%;
@@ -842,7 +845,7 @@ margin-top: -3px;
 
 .is-fullheight{
   padding: 20px 0 0 0;
-  overflow: hidden;
+  // overflow: hidden;
 
 
   &.no-top-pad{

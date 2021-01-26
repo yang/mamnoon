@@ -38,7 +38,7 @@
         <carousel
           :responsive=" {0:{items:1},480:{items:2},1080:{items:3}}"
           :items="1"
-          :loop="false"
+          :loop="true"
           :dots="false"
           :nav="false"
           :key="refresh"

@@ -299,6 +299,7 @@ that.coverFlowIndex = index
   cursor: pointer;
   position: absolute;
   left: 20%;
+  left: 30%;
   width: auto;
       bottom: 130px;
 }
@@ -308,6 +309,7 @@ that.coverFlowIndex = index
   position: absolute;
   width: auto;
   right: 20%;
+    right: 30%;
       bottom: 130px;
 }
 

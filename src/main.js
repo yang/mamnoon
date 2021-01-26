@@ -474,7 +474,6 @@ const store = new Vuex.Store({
       state.storeCurrentOrderUpdateMbar.billing = billing
       state.storeCurrentOrderUpdateMbar.fulfillment_info.customer = customer
 
-
       state.storeCurrentOrderUpdateRetail.billing = billing
       state.storeCurrentOrderUpdateRetail.fulfillment_info.customer = customer
 

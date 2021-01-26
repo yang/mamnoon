@@ -6,7 +6,7 @@
         <carousel
           :responsive=" {0:{items:1},768:{items:1},1080:{items:1}}"
           :items="1"
-          :loop="false"
+          :loop="true"
           :dots="false"
           :nav="false"
         >

@@ -185,7 +185,9 @@ h4 {
 .is-fullheight [id^="carousel_prev_"] {
   position: absolute;
   top: 14px;
+  //  top: 110px;
   left: 20%;
+    left: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     left: 5%;
@@ -194,7 +196,9 @@ h4 {
 .is-fullheight [id^="carousel_next_"] {
   position: absolute;
   top: 14px;
+    //  top: 110px;
   right: 20%;
+    right: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     right: 5%;
@@ -202,7 +206,7 @@ h4 {
 }
 .is-fullheight {
   padding: 20px 0 0 0;
-  overflow: hidden;
+  // overflow: hidden;
 }
 .familymeal {
   padding: 0 0 0 0;
@@ -365,6 +369,7 @@ button.snipcart-add-item {
   margin-bottom: 80px;
       height: 814px;
           height: 794px;
+                    height: 704px;
   // background-color: #f05d5b;
   background-color: #F58E58;
   overflow: hidden;
@@ -415,6 +420,7 @@ button.snipcart-add-item {
     position: absolute;
     // width: 100%;
   }
+  display: none;
 }
 .width-container {
   width: 100%;

@@ -188,11 +188,11 @@ Now accepting preorders for pick up.
      </template>
          <template v-else>
    
-<div id="online-menu" class="is-fullheight no-top-pad">
-        <carousel id="FourThree" :items="1" :loop="false" :dots="false" :nav="false"  v-if="upserveSections">
+<div id="online-menu" class="is-fullheight no-top-pad" style="position: relative;">
+        <carousel id="FourThree" :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
               <template class="subprev" slot="prev">
               <span class="prev">
-              <!-- <Prev /> -->
+              <Prev />
               </span>
               </template>
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
@@ -235,7 +235,7 @@ Now accepting preorders for pick up.
           </template>
                    <template class="subnext" slot="next">
             <span class="next">
-              <!-- <Next /> -->
+              <Next />
             </span>
           </template>
             </carousel>
@@ -455,17 +455,17 @@ Now accepting preorders for pick up.
 <div v-if="currentOrder" class="container text-center">
 
 
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events:none;width: 100%;background-color: #f05d5b;color: #fff;">
+<div v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
       <template v-if="valid">
-          your order
+         <h4> your order</h4>
   </template>
       <template v-else>
-          your pre order
+          <h4>your pre order</h4>
   </template>
 
   
-  </button>
-<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:10px;">edit order</button>
+  </div>
+<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:0px;">edit order</button>
 
 <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
   <br>
@@ -939,9 +939,9 @@ cart empty
       <div>
       </div></div>
       </section>
-      <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
-      <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-      <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
+      <pre style="display:none" v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+     <pre style="display:none" v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
+     <pre style="display:none" v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
 
 
 
@@ -2669,11 +2669,11 @@ this.setTip(0)
 
 
 button.selected{
- 
-   background: transparent !important;
-    border: 2px solid #f05d5b !important;
+     background: #666666 !important;
+    border: 2px solid #666666 !important;
     box-sizing: border-box;
-    color: #f05d5d !important;
+    // color: #ffffff !important;
+    color: #fff367 !important;
 
 }
 
@@ -2741,21 +2741,23 @@ display:block;
 
 
 .edit-link{
-      color: #f05d5b;  text-decoration: none;
+      color: #F1765B;
+      text-decoration: none;
     font-size: .9rem;
 a{
-  text-decoration: none;  color: #f05d5b;
+  text-decoration: none;  color:#F1765B;
     font-size: .9rem;
  .edit{
     color: #f05d5b;
     // font-size: .9rem;
+    color:#F1765B;
 }
   
 
 &:hover{
    .edit{
     color: #f05d5b;
-    border-bottom: 1px solid #f05d5b;
+    border-bottom: 1px solid #F1765B;
 }
   
 }

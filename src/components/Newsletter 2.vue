@@ -1,17 +1,24 @@
 <template>
-  <section class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4 class="mob-bottom-margin">{{header}}</h4>
-       <p class="description-para noselect hide-mobile">{{body}}</p>
+    <section class="section hero is-primary overflow-hidden is-fullheight mb-80">
+      <div class="newsletter-section">
+        <div class="pad-cont">
+            <h4 class="noselect">
+             {{header}}
+            </h4>
+            <p class="hide-mobile description-para-left noselect">
+          {{body}}
+        </p> 
+        </div>
+      </div>
+      <div class="newsletter-section">
+        <div class="pad-cont-bottom" >
+            <CampaignMonitor />
+        </div>
+      </div>
 
-<div class="width-container text-center translate40">
-<!-- <div v-for="item in data" :key="item.restaurant_title">
-  <Mbar v-if="item.restaurant_title === 'mbar'" />
-  <Mamnoon v-else-if="item.restaurant_title === 'mamnoon'" />
-</div> -->
-  <CampaignMonitor />
-  <br>
-</div>
-</section>
+
+
+    </section>
 </template>
 
 
@@ -138,11 +145,6 @@ float: left;
 }
 
 
-
-.translate40{
-    transform: translate(0px, 0px);
-}
-
 @media only screen and (max-width: 992px){
 
 .description-para-left{
@@ -177,8 +179,7 @@ float: left;
     font-weight: 500;
     letter-spacing: 0.25px;
     padding: 12px 35px 12px 10px;
-    // width: 200px;
-        width: 60%;
+    width: 200px;
 }
 }
 

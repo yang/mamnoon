@@ -691,15 +691,21 @@ display: none !important;
 
 
 .add-giftcard-field{
-    padding: 10px;
-    border-radius: 10px;
+    // padding: 10px;
+    // border-radius: 10px;
+
+    padding: 2px 9px;
+    border-radius: 4px;
     box-shadow: none;
     border: 1px solid grey;
 }
 
 .add-giftcard-button{
-    padding: 10px 20px;
-    border-radius: 10px;
+    // padding: 10px 20px;
+    // border-radius: 10px;
+    padding: 2px 9px;
+    border-radius: 4px;
+
     box-shadow: none;
     border: 1px solid transparent;
 }

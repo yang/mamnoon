@@ -672,8 +672,8 @@ display: none !important;
 }
 
 .add-giftcard-button{
-    padding: 10px 20px;
-    border-radius: 10px;
+    padding: 3px 10px;
+    border-radius: 4px;
     box-shadow: none;
     border: 1px solid transparent;
 }

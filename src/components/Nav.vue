@@ -422,7 +422,8 @@ right: 0;
     position: fixed;
     width: 100%;
     /* top: -154px; */
-        top: -194px;
+        // top: -194px;
+        top: -224px;
     transition: all .5s ease;
 }
 

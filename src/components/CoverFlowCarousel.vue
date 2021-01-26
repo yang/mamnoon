@@ -14,7 +14,7 @@
 
               <template v-if="upserveSectionsRendered">
              <!-- <VueAspectRatio ar="6:7" width="100%" class="">   -->
-        <carousel @changed="changed($event)" :items="1" :touchDrag="false" :mouseDrag="false"  :loop="false" :dots="true" :nav="false" v-if="upserveSections" style="height: 520px;margin-top: 16px;">
+        <carousel @changed="changed($event)" :items="1" :touchDrag="false" :mouseDrag="false"  :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 520px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />
@@ -441,6 +441,7 @@ dumpAcf(){
   cursor: pointer;
   position: absolute;
   left: 20%;
+    left: 30%;
   width: auto;
       bottom: 130px;
 }
@@ -450,6 +451,7 @@ dumpAcf(){
   position: absolute;
   width: auto;
   right: 20%;
+  right: 30%;
       bottom: 130px;
 }
 

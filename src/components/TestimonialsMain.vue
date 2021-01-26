@@ -4,7 +4,7 @@
         
         <p class="description-para noselect hide-mobile">{{description}}</p>
 
-        <carousel :items="1" :loop="false" :dots="false" :nav="false">
+        <carousel :items="1" :loop="true" :dots="false" :nav="false">
             <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />
@@ -288,6 +288,8 @@ font-size: 18px;
       left: 50%;
       width: 100%;
       font-size: 12px !important;
+      font-size: 14px !important;
+    
     }
 }
 

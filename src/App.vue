@@ -82,10 +82,15 @@ h4.error{
 padding: 2px 9px;
 margin: 0;
 border: 0;
-background-color: #f05d5b;
+// background-color: #f05d5b;
+background-color: #F1765B;
 color: white;
 border-radius: 4px;
 margin: 0 10px 0 0;
+
+&:hover{
+  color: #fff367;
+}
 }
 
 
@@ -128,11 +133,15 @@ li button {
 
 button {
   border: 1px solid #f05d5b;
-  background-color: #f05d5b;
+    border: 1px solid #F1765B;
+  // background-color: #f05d5b;
+   background-color: #F1765B;
   color: #ffffff;
   padding: 5px 10px;
   border-radius: 4px;
-      border: 2px solid #f05d5b !important;
+  // border: 2px solid #f05d5b !important;
+  // border: 2px solid #F1765B !important;
+    border: 2px solid #F1765B;
 
       &.deactivated{
              border: 2px solid #999999 !important;
@@ -140,9 +149,11 @@ button {
 }
 
 button:hover {
-  border: 1px solid #f05d5b;
+  // border: 1px solid #f05d5b;
+  // border: 1px solid #F1765B;
   background-color: #f05d5b;
-  color: #ffffff;
+  background-color: #F1765B;
+  color: #fff367;
   padding: 5px 10px;
 }
 
@@ -238,13 +249,18 @@ button.filehalf {
 
     border-radius: 4px;
     border: 2px solid #f05d5b;
+     border: 2px solid #F1765B;
     background: #fff;
+        background: #F1765B;
     color: #f05d5b;
+    color: #ffffff;
     padding-top: 5px;
   &.selected {
     background: #f05d5b;
+        background: #F1765B;
     color: #ffffff;
   border: 2px solid #f05d5b;
+   border: 2px solid #F1765B;
     padding-top: 5px;
   }
 
@@ -255,6 +271,9 @@ button.filehalf {
 
 }
 
+&:hover{
+  color: #fff367;
+}
 
 
 }
@@ -638,8 +657,12 @@ textarea {
     margin-bottom: 5px;
     width: calc(33% - 2px);
     border: 2px solid #f05d5b;
+    border: 2px solid #F1765B;
     background-color: #ffffff;
+    background-color: #F1765B;
     color: #f05d5b;
+    color: #F1765B;
+    color: #ffffff;
     padding: 5px 10px;
     border-radius: 4px;
 
@@ -647,6 +670,8 @@ textarea {
 transition: background-color .1s ease;
     &:hover{
         border: 2px solid #f05d5b;
+        border: 2px solid #F1765B;
+        color: #fff367;
     }
 
     &:disabled{
@@ -805,6 +830,7 @@ ul.no-left-pad{
 
 .small-message{
     color: #f05d5b;
+    color: #F1765B;
     font-size: .9rem;
     font-style: italic;
 
@@ -832,7 +858,7 @@ ul.no-left-pad{
 
 
 .removeClose{
-    height: 30px;
+    height: 27px;
     border-radius: 15px;
 
 
@@ -881,26 +907,37 @@ margin-top: -3px;
 
 .is-fullheight [id^="carousel_prev_"] {
   position: absolute;
-  top: 14px;
+  top: 110px;
+    top: -55px;
+    // position: 
   left: 20%;
+    left: 30%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     left: 5%;
+    top: 102px;
+    top: -55px;
   }
 }
 .is-fullheight [id^="carousel_next_"] {
   position: absolute;
-  top: 14px;
+  top: 110px;
+    top: -55px;
   right: 20%;
+    right: 30%;
+
+
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     right: 5%;
+    top: 102px;
+    top: -55px;
   }
 }
 
 .is-fullheight{
   padding: 20px 0 0 0;
-  overflow: hidden;
+  // overflow: hidden;
 
 
   &.no-top-pad{
@@ -912,9 +949,24 @@ margin-top: -3px;
 
 .removeClose{
   background-color: transparent!important;
+  background-color: #F1765B !important;
+  padding: 5px 7px;
+&:active,
+&:hover,
+&:focus{
+  outline: none;
+}
+
   svg{
-    width: 9px;
-    margin: 7.5px auto 10px;
+    &:active,
+&:hover,
+&:focus{
+  outline: none;
+}
+
+      width: 10px;
+    margin: 4.5px auto 10px
+  
   }
 }
 
@@ -922,9 +974,13 @@ margin-top: -3px;
 
 .removeClose:hover{
     // background-color: #f05d5b;
+      padding: 5px 7px;
   svg{
+        width: 10px;
+
+
 .cls-1closeModalRed {
-    fill: #ffffff !important;
+    fill: #fff367 !important;
 }
   }
 }
@@ -963,7 +1019,10 @@ form hr{
 
 &.disabled{
   pointer-events: none;
-  background: grey;
+  background: #666666;
+  border: 2px solid #666666;
+  color: #fff367;
+
 }
 
 }
@@ -1205,16 +1264,31 @@ input.custom-tip-button{
   }
 
 #upserveolo button.vs__clear{
-    background: transparent;
+    background: #F1765B;
     border-radius: 30px;
     padding: 0 6px;
+    width: 28px;
+    height: 27px;
+    svg{
+      transform: translate(.5px,-2.0px);
+      transform: translate(0px, -2px);
+      width: 11px;
+      path{
+        fill: #ffffff;
+      }
+    }
+
+
+    &:hover{
 
     svg{
       transform: translate(.5px,-2.0px);
+      transform: translate(0px, -2px);
       width: 11px;
       path{
-        fill: #f05d5b;
+        fill: #fff367;
       }
+    }
     }
 
   }
@@ -1248,5 +1322,18 @@ svg{
 
 }
 
+
+
+.is-fullheight [id^=carousel_prev_]{
+  display: block !important;
+}
+
+
+
+.filehalf h4{
+  color: #fff367;
+    font-size: 1.5rem;
+    text-align: center;
+}
 
 </style>

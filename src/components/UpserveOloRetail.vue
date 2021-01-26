@@ -324,16 +324,22 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 </template>
 
-<button v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="margin-top: 5px;width: 100%;background-color: #f05d5b;color: #fff;">
+
+
+
+
+
+
+<div v-if="panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
       <template v-if="valid">
-          your order
+          <h4>your order</h4>
   </template>
       <template v-else>
-          your pre order
+          <h4>your pre order</h4>
   </template>
 
 
-  </button>
+  </div>
 <button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
 
 
@@ -862,7 +868,7 @@ cart empty
 
 
 
-<pre>{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
+<pre style="display: none">{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
   </div>
 </template>
 
