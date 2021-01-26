@@ -316,7 +316,7 @@
 </div>
 
 
-<div v-if="currentOrder" class="container text-center">
+<div v-if="currentOrder" class="container text-center" style="margin-bottom:0px;">
  
               <template v-if="valid">
 <div v-if="shippingOption === false" class="toggleLr">
@@ -354,14 +354,15 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 
 
+
 <template v-if="valid">
 <template v-if="preOrderToggleState">
 
   <template v-if="shippingOption === false">
-  <div style="margin-top:15px;">
+  <div style="margin-top:20px;">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
-<div style="margin-top:15px;" v-if="selectedDate !== null">
+<div style="margin-top:20px;" v-if="selectedDate !== null">
 <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
 </div>
 </template>
@@ -698,7 +699,7 @@ calculate shipping
 <br />
 </template>
 <template v-else>
-<div class="text-center cart-empty-class">
+<div class="text-center cart-empty-class" style="margin-top: 10px;">
 cart empty
 </div>
 </template>
@@ -708,7 +709,7 @@ cart empty
 <!-- </div> -->
 
 <template v-if="panelShow === 'yourOrder'">
- <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
+ <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
               <template v-if="panelShow === 'customerInfo'">

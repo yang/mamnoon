@@ -3,7 +3,7 @@
     <Nav />
 <UpserveOlo :title="'Mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
   
-  {{$store.state.currentUserEmail}}
+  <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>
 <script>
