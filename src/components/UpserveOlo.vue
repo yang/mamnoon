@@ -467,11 +467,11 @@ Now accepting preorders for pick up.
   </div>
 
 
-<div v-if="currentOrder" class="container text-center">
+<div v-if="currentOrder && panelShow === 'customerInfo'" class="container text-center">
 
 
 
-<button v-if="!panelShow === 'yourOrder'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:0px;">edit order</button>
+<button v-if="panelShow === 'customerInfo'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:0px;">edit order</button>
 
 <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
   <br>

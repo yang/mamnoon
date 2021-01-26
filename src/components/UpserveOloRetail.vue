@@ -344,7 +344,7 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 
 
-<button v-else @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
+<button v-if="panelShow === 'customerInfo'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
 
 
 <template v-if="this.currentOrder.charges.items.length > 0">
@@ -706,6 +706,7 @@ cart empty
 <!-- start panel -->
 <!-- start panel -->
 <!-- </div> -->
+
 <template v-if="panelShow === 'yourOrder'">
  <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
@@ -847,7 +848,7 @@ cart empty
 <template v-if="giftCardPanel ===  true">
 <br>
 <u style="cursor:pointer;color:#f05d5b;" @click="hideGiftcard()">
-  <span style="color:#f05d5b;">  
+  <span style="color:#F1765B;">  
   use debit/credit instead
   </span>
   </u>
