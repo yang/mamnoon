@@ -1,9 +1,11 @@
 <template>
   <main>
-    <div>
+    <!-- <div class=""> -->
+      <!-- <div class="container"> -->
       <h2 class="intro-paragraph-header">Welcome!</h2>
       <p class="intro-paragraph">Nadi Mama is a one stop shop for all things The Mama Group has to offer. Order food, purchase retail items, make a reservation or simply stay up to date with our offerings.</p>
-    </div>
+    <!-- </div> -->
+    <!-- </div> -->
 
 
   <div v-for="item in pageData" :key="item.acf_fc_layout">
@@ -383,6 +385,9 @@ button.snipcart-add-item {
     margin: 10px auto 10px;
     text-align: center;
   }
+
+    // margin-top: 90px;
+
 }
 @media only screen and (max-width: 960px) {
   .coverflowsection {
@@ -653,5 +658,33 @@ width: 100%
       font-size: 14px;
     color: #f05d5b;
 }
+.rollbar{
+  position: fixed;
+    width: 100%;
+    min-height: 90px;
+    background: green;
+    top: 142px;
+    left: 0;
+    z-index: 100;
+    padding: 10px 0; 
+}
+
+@media only screen and (max-width: 1080px) {
+.rollbar{
+    top: 92px;
+
+}
+}
+
+@media only screen and (max-width: 992px) {
+
+
+.rollbar{
+    top: 92px;
+
+}
+
+}
+
 
 </style>

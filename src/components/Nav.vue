@@ -2,10 +2,15 @@
 <div class="nav-wrap">
 <div class="fixed-nav">
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
-            <div class="hello logButton googleInHeader" style="right: 190px;">
+            <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 190px;">
 <CartDropdown />
          </div>
-            <div v-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right: 266px">
+            <div v-if="this.$store.state.loggedIn && showCartDropdown" class="hello logButton googleInHeader" style="right: 266px">
+                    <router-link to="/profile">
+                profile
+                    </router-link>
+            </div>
+            <div v-else-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right: 186px">
                     <router-link to="/profile">
                 profile
                     </router-link>
@@ -13,7 +18,7 @@
 
 
 
-    
+
             
             <div class="hello logButton googleInHeader" style="right:100px">
                     <router-link to="/retail">
@@ -61,6 +66,7 @@
                 <template v-else>
                 <Logo />
                 </template> -->
+                <!-- {{showCartDropdown}} -->
         </router-link>
 
 
@@ -113,7 +119,7 @@
                         <GoogleAuth />
                     </li>
                 </div>
-<div class="inline-link">
+  <div v-if="showCartDropdown" class="inline-link">
     <li class="cursor-pointer">
 <CartDropdown />
     </li>
@@ -146,7 +152,7 @@
                         <GoogleAuth />
                     </li>
                 </div>
-<div class="inline-link">
+  <div v-if="showCartDropdown" class="inline-link">
           <li class="cursor-pointer">
 <CartDropdown />
 </li>
@@ -182,7 +188,7 @@
                         <GoogleAuth />
                     </li>
                 </div>
-<div class="inline-link">
+  <div v-if="showCartDropdown" class="inline-link">
         <li class="cursor-pointer">
 <CartDropdown />
             </li>
@@ -213,7 +219,7 @@
                         <GoogleAuth />
                     </li>
                 </div>
-<div class="inline-link">
+  <div v-if="showCartDropdown" class="inline-link">
            <li class="cursor-pointer">
                         <CartDropdown />
                     </li>
@@ -258,9 +264,19 @@ export default {
           logtext: '',
             user: {}
       }
-
   },
-  methods: {
+      computed:{
+          showCartDropdown(){
+
+
+            if(this.$store.state.storeCurrentOrderUpdateRetail.charges.items.length > 0 || this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length > 0 || this.$store.state.storeCurrentOrderUpdateMbar.charges.items.length > 0 || this.$store.state.storeCurrentOrderUpdateStreet.charges.items.length > 0)  {
+            return true
+              }else{
+            return false
+              }
+          }
+      },
+methods: {
        async individualRestaurant(){
         
         let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
