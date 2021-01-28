@@ -758,6 +758,7 @@ Now accepting preorders for pick up.
 <!-- start panel -->
 <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
               <!-- <div class="mt10" v-if="total > 0"> -->
+                <template v-if="panelShow === 'customerInfo'">
               <div class="mt10">
                 <button id="noTip" class="tipButton quarter" style="display:none;" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
                 <button
@@ -797,24 +798,27 @@ Now accepting preorders for pick up.
                 <currency-input class="custom-tip-button" currency="USD" v-if="customTipVisible === true" v-model="currentAmountToAddCustom" />
               </div>
               <hr />
+              </template>
 
-              subtotal: ${{currentOrder.charges.preTotal | showToFixed}}
+                <span v-if="panelShow === 'customerInfo'">subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</span>
+              <span v-else><b>subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</b></span>
+
               <br />
-              tax: ${{currentOrder.charges.taxes | showToFixed}}
+             <span  v-if="panelShow === 'customerInfo'">tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
             <!-- <div v-if="custom === true"> -->
             <!-- custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }} -->
             <!-- </div> -->
-            <div>
+            <div v-if="panelShow === 'customerInfo'">
              tip: ${{currentOrder.charges.tip.amount | showToFixed }}
             </div>
-              <hr />
-              <b>order total: ${{currentOrder.charges.total | showToFixed }}</b>
+              <hr v-if="panelShow === 'customerInfo'" />
+              <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total | showToFixed }}</b>
 
 
 
 
 
-<br />
+<br v-if="panelShow === 'customerInfo'"/>
 </template>
 <template v-else>
 <div class="text-center cart-empty-class">

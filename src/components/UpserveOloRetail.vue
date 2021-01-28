@@ -502,21 +502,16 @@ calculate shipping
              <span v-if="shippingOption"> weight: {{formattedWeight}}lbs</span>
               <br v-if="shippingOption" />
               <!-- <hr />   -->
-              subtotal: ${{currentOrder.charges.preTotal | showToFixed}}
+              <span v-if="panelShow === 'customerInfo'">subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</span>
+              <span v-else><b>subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</b></span>
               <br />
-              tax: ${{currentOrder.charges.taxes | showToFixed}}
-             <div v-if="shippingOption && shippingAmount > 0">   
+             <span v-if="panelShow === 'customerInfo'"> tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
+             <div v-if="shippingOption && shippingAmount > 0 && panelShow === 'customerInfo'">   
               usps priority shipping: ${{shippingAmount}}
                </div>  
      
-            <div style="display:none;" v-if="custom === true">
-            custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }}
-            </div>
-             <div style="display:none;" v-else>
-             tip: ${{currentOrder.charges.tip.amount | showToFixed }}
-            </div>
-              <hr />
-              <b>order total: ${{currentOrder.charges.total | showToFixed }}</b>
+             <hr v-if="panelShow === 'customerInfo'" />
+              <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total | showToFixed }}</b>
 <br />
 </template>
 <template v-else>
