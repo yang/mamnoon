@@ -304,7 +304,7 @@
 </div>
 
 
-<div v-if="shippingOption" class="container mb5"> 
+<!-- <div v-if="shippingOption" class="container mb5"> 
         <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
 </div>
 
@@ -313,7 +313,7 @@
 
 
         <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
-</div>
+</div> -->
 
 
 <div v-if="currentOrder" class="container text-center" style="margin-bottom:0px;">
@@ -331,7 +331,7 @@
 </div>
 </template>
 <template v-else>
-<div class="mb5 text-left"> 
+<div class="mb5 text-left sm-text mt10"> 
 Come and pick up your items during store hours or get them shipped to your door via usps!
 </div> 
 
@@ -345,41 +345,87 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 
 <button v-if="panelShow === 'customerInfo'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
-
-
-<template v-if="this.currentOrder.charges.items.length > 0">
-  <!-- <br> -->
-
-</template>
+<br v-if="panelShow === 'customerInfo'"> <br v-if="panelShow === 'customerInfo'">  
 
 
 
 
-<template v-if="valid">
-<template v-if="preOrderToggleState">
 
-  <template v-if="shippingOption === false">
-  <div style="margin-top:20px;">
-<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+<template v-if="panelShow === 'customerInfo'">
+<!-- ship button -->
+<div v-if="shippingOption" class="mb5 button-container"> 
+
+<div class="button-half"> 
+  <button v-if="shippingOption" class="disabled extra" disabled @click="shipOption(false)">ship</button> 
 </div>
-<div style="margin-top:20px;" v-if="selectedDate !== null">
-<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+<div class="button-half"> 
+  <button v-if="shippingOption" @click="shipOption(false)">pickup</button> 
+</div> 
+
+
+
+
+
 </div>
-</template>
-</template>
-</template>
-  <template v-else>
-<template v-if="this.currentOrder.charges.items.length > 0">
+<div v-if="!shippingOption" class="mb5 button-container"> 
 
-<div v-if="shippingOption === false">
-  <br>
-<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-<div style="margin-top:15px;" v-if="selectedDate !== null">
-<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-</div></div>
+<div class="button-half"> 
+  <button v-if="!shippingOption" @click="shipOption(true)">ship</button> 
+</div>
 
+
+
+<div class="button-half"> 
+  <button v-if="!shippingOption" class="disabled extra" disabled @click="shipOption(false)">pickup</button> 
+</div>
+
+
+</div>
+<!-- ship button -->
 </template>
-</template>
+  
+<!-- time select -->
+
+
+
+<!-- time select -->
+
+
+     <template v-if="panelShow === 'customerInfo'">
+        <template v-if="valid">
+          <template v-if="preOrderToggleState">
+            <template v-if="shippingOption === false">
+            <div style="margin-top:20px;">
+              <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+            </div>
+            <div style="margin-top:20px;" v-if="selectedDate !== null">
+              <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+            </div>
+            </template>
+          </template>
+        </template>
+        <template v-else>
+          <template v-if="this.currentOrder.charges.items.length > 0">
+            <template v-if="shippingOption === false">
+            <div style="margin-top:20px;">
+              <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+            </div>
+            <div style="margin-top:20px;" v-if="selectedDate !== null">
+              <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+            </div>
+            </template>
+          </template>
+        </template>
+  </template>
+
+<!-- time select -->
+
+
+<!-- time select -->
+
+
+
+
 </div>
 
 <div v-if="panelShow === 'customerInfo'">
@@ -387,240 +433,34 @@ Come and pick up your items during store hours or get them shipped to your door 
       <hr />
   </div>
             <div v-if="currentOrder" class="container  mt10">
+                    <div v-if="shippingOption">
+                            <h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">shipping address</h4>
+                            <div v-if="currentOrder.fulfillment_info.type === 'delivery'">
+                              <div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid shipping address</div>
+                            </div>
+                            <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
+                                        <div class="updateAddress">
+                                          <button
+                                            v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
+                                            @click="refreshGoogle()"
+                                          >update address</button>
+                                        </div>
+                                        <div class="googleValidate">
+                                          <GoogleValidate
+                                            class="pointer-all"
+                                            :key="renderKey"
+                                            v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
+                                          />
+                                        </div>
+                            </div>
+                    </div>
 
-
-<div v-if="shippingOption">
-
-
-
-
-<h4 v-if="currentOrder.fulfillment_info.type === 'delivery'" class="address-info text-left mt10">shipping address</h4>
-<div v-if="currentOrder.fulfillment_info.type === 'delivery'">
-<div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid shipping address</div>
-</div>
-            
-              <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
-               
-                <div class="updateAddress">
-                  <button
-                    v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
-                    @click="refreshGoogle()"
-                  >update address</button>
-                </div>
-
-                <div class="googleValidate">
-                  <GoogleValidate
-                    class="pointer-all"
-                    :key="renderKey"
-                    v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
-                  />
-                </div>
-              </div>
+<orderForm :title="title" :user="user" :currentOrder="currentOrder" :checked="checked" :email="email" :emailAddress="emailAddress" :shippingOption="shippingOption" />
 
 
 
-</div>
-
-              <form class="mb20" @submit="checkForm">
 
 
-<div v-if="shippingOption">
-
-                <div v-if="this.currentOrder.fulfillment_info.type === 'delivery'" style="margin-top: 10px;">
-                 
-                  <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1">
-                    {{currentOrder.fulfillment_info.delivery_info.address.address_line1}}</span>
-                    <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line2 !== ''">,</span>
-                  <span v-if="currentOrder.fulfillment_info.delivery_info.address.address_line2">
-                    {{currentOrder.fulfillment_info.delivery_info.address.address_line2}}
-                    <!-- <br /> -->
-                  </span>
-                            <br v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''" />
-          <span
-                    v-if="currentOrder.fulfillment_info.delivery_info.address.city"
-                  >{{currentOrder.fulfillment_info.delivery_info.address.city}},</span>
-                  <!-- <span v-if="currentOrder.fulfillment_info.delivery_info.address.state">{{currentOrder.fulfillment_info.delivery_info.address.state}}<br></span> -->
-                  <span v-if="currentOrder.fulfillment_info.delivery_info.address.zip_code">
-                    {{currentOrder.fulfillment_info.delivery_info.address.zip_code}}
-                    <br v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''" />
-                  </span>
-
-
-
-                  <span  :class="{attention: attention}" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">floor/unit?</span>&nbsp;&nbsp;
-                  <input
-                    v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''"
-                    type="text"
-                    id="address_l2"
-                    name="address_l2"
-                    placeholder="unit/floor"
-                    class="formatted"
-                    :class="{attention: attention}"
-                    autocomplete="no"
-                    @click="removeAttention()"
-                    v-model="currentOrder.fulfillment_info.delivery_info.address.address_line2"
-                  />
-  
-
-                  <div class="address-fields display-none">
-                    <label class="smblk" for="address_l1">address line 1</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="address_l1"
-                      name="address_l1"
-                      placeholder="address line 1"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.address_line1"
-                    />
-                    <br />
-                    <label class="smblk" for="address_l2">address line 2</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="address_l2"
-                      name="address_l2"
-                      placeholder="address line 2"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.address_line2"
-                    />
-                    <br />
-
-                    <label class="smblk" for="city">city:</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="city"
-                      name="city"
-                      placeholder="city"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.city"
-                    />
-                    <br />
-
-                    <label class="smblk" for="state">state:</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="state"
-                      name="state"
-                      placeholder="state"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.state"
-                    />
-                    <br />
-
-                   <label class="smblk" for="zip">zip:</label>
-                    <br />
-                    <input
-                      type="text"
-                      id="zip"
-                      name="zip"
-                      placeholder="10001"
-                      v-model="currentOrder.fulfillment_info.delivery_info.address.zip_code"
-                    />
-                  </div>
-                  <hr />
-                  </div>
-
-
-
-</div>
-             
-               <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
-                <h4 v-else class="text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
-
-
-                <label class="smblk" for="name">name:</label>
-                <br />
-                <div v-if="user.user && user.user.name !== ''" style="margin-bottom: 10px;">{{user.user.name}}</div>
-                <input v-else
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="name"
-                  v-model="currentOrder.fulfillment_info.customer.first_name"
-                />
-
-               <label class="smblk" for="email">email:</label>
-                <br />
-                <div v-if="emailAddress" style="margin-bottom: 10px;">{{emailAddress}}</div>
-                <input
-                v-else
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="email"
-                  v-model="email"
-                />
-                <!-- <br /> -->
-
-               <label class="smblk" for="phone">phone:</label>
-                <br />
-                     <div v-if="user.user && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
-                <input v-else
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  placeholder="(555) 555-5555"
-                  v-model="currentOrder.fulfillment_info.customer.phone"
-                />
-
-            <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
-  <label class="smblk" for="sms">enable SMS order updates </label>
-<!-- billing info -->
-
-          <h4 class="customer-info text-left mt10">billing info</h4>
-         
-         
-         <template v-if="currentOrder.fulfillment_info.type === 'delivery'"> 
-          <div style="clear: both;width: 100%;margin-bottom: 10px;height: 20px;" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">
-
-              <div style="float: left;width: 15px;height: 20px;margin-right: 5px;padding-top: 2px;">
-              <input type="checkbox" id="checkbox" v-model="checked" />
-              </div>
-
-              <div style="float: left; height: 20px;">
-              <label class="smblk" for="checkbox">same as delivery address</label>
-              </div>
-</div>
-       </template>
-
-
-<!-- <div v-if="checked === false"> -->
-                <label class="smblk" for="name">name:</label>
-                <br />
-     <div v-if="user.user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
-                <input v-else
-                  type="text"
-                  id="name-billing"
-                  name="name"
-                  placeholder="name"
-                  v-model="currentOrder.billing.billing_name"
-                />
-                <label class="smblk" for="address">billing address:</label>
-                <br />
-     <div v-if="user.user && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
-                <input v-else
-                  type="text"
-                  id="address"
-                  name="address"
-                  placeholder="address"
-                  v-model="currentOrder.billing.billing_address"
-                />
-
-                <label class="smblk" for="postal_code">billing postal code:</label>
-                <br />
-                     <div v-if="user.user && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
-                <input v-else
-                  type="text"
-                  id="postal_code"
-                  name="postal_code"
-                  placeholder="postal code"
-                  v-model="currentOrder.billing.billing_postal_code"
-                />
-
-<!-- </div> -->
-
-
-              </form>
 
 </div>
       </div>
@@ -628,6 +468,9 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 
 <div class="container mt10">
+
+
+
               <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
             
@@ -658,6 +501,7 @@ Come and pick up your items during store hours or get them shipped to your door 
                   </div>
                 </li>
               </ul>
+
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
@@ -712,6 +556,14 @@ cart empty
  <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
+     
+     
+
+
+
+     
+     
+     
               <template v-if="panelShow === 'customerInfo'">
             <template v-if="giftCardPanel ===  false">
              
@@ -723,15 +575,8 @@ cart empty
 
 
          <template v-if="shippingOption && shippingAmount > 0">
+<ErrorMessages :currentOrder="currentOrder" />
 
-
-  <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
 <!-- shipping option -->
 <!-- {{currentOrder.fulfillment_info.customer.email}} -->
 <!-- dsdd -->
@@ -748,21 +593,10 @@ cart empty
 
 <!-- {{currentOrder.fulfillment_info.customer.email}} -->
 
-  <div class="small-message" v-if="selectedTime === null">please select a date and time</div>
-  <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
+<ErrorMessages :currentOrder="currentOrder" />
 
-
-
-
-
-<!-- dsd -->
-        <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
+<!-- dsd --->
+<button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
                 class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" 
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
@@ -771,13 +605,8 @@ cart empty
           </template>
      <template v-else>
 <!-- else (get it now) true -->
-  <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
+<ErrorMessages :currentOrder="currentOrder" />
+
 
 
 
@@ -874,7 +703,7 @@ cart empty
 
 
 
-<pre style="display: none">{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
+<pre>{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
   </div>
 </template>
 
@@ -906,10 +735,22 @@ import moment from 'moment'
 import tz from 'moment-timezone'
 
 import swal from "sweetalert";
+
+
+
+import ErrorMessages from "@/components/subs/ErrorMessages";
+import vSelects from "@/components/subs/vSelects";
+import orderForm from "@/components/subs/orderForm";
+
+
+
 export default {
   name: "UpserveOloRetail",
   props: ["data","emailAddress","oloEndpoint","menuEndpoint","title"],
   components: {
+    orderForm,
+    vSelects,
+    ErrorMessages,
     OrderConfirmationModal,
     OnlineMenuCarousel,
     CloseModal,
@@ -1043,7 +884,7 @@ if(this.user){
     
       curOr.charges.tip.amount = curOr.charges.tip.amountOptions[curOr.tipSelected]
 
-      console.log(curOr.charges.shipping * 100)
+      // console.log(curOr.charges.shipping * 100)
 
 let shipToAdd = curOr.charges.shipping * 100
 
@@ -1075,26 +916,6 @@ if(this.shippingOption === true){
     },
      deep: true
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 openTimesUpdated(){
   this.dropDown();
@@ -1383,6 +1204,54 @@ showToFixed: function (value) {
 }
   },
   methods: {
+        checkForm: function (e) {
+      this.errors = [];
+      if (!this.currentOrder.fulfillment_info.customer.first_name) {
+        this.errors.push("Name required.");
+                  swal("Name required.");
+      }
+
+      if (!this.currentOrder.fulfillment_info.customer.phone) {
+        this.errors.push("Phone required.");
+
+        swal("Phone required.");
+      }
+      
+      if (!this.currentOrder.fulfillment_info.customer.email) {
+        this.errors.push('Email required.');
+          swal('Valid email required.');
+      } else if (!this.validEmail(this.currentOrder.fulfillment_info.customer.email)) {
+        this.errors.push('Valid email required.');
+        swal('Valid email required.');
+      }
+
+      if (!this.currentOrder.billing.billing_postal_code) {
+        this.errors.push('invalid postal code');
+        swal('invalid postal code');
+
+      } else if (!this.validPostal(this.currentOrder.billing.billing_postal_code)) {
+         this.errors.push('invalid postal code');
+        swal('invalid postal code');
+      }
+
+      if (!this.errors.length) {
+        return true;
+      }
+
+      e.preventDefault();
+    },
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+
+   validPostal: function (postal_code) {
+      var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
+      return re.test(postal_code);
+    },
+
+
+
   weightShippingAmount(){
 
 let ounces = this.weightShipping.oz
@@ -1760,54 +1629,7 @@ this.custom = false
       }
 
     },
-    checkForm: function (e) {
-      this.errors = [];
-      if (!this.currentOrder.fulfillment_info.customer.first_name) {
-        this.errors.push("Name required.");
-                  swal("Name required.");
-      }
-
-      if (!this.currentOrder.fulfillment_info.customer.phone) {
-        this.errors.push("Phone required.");
-
-        swal("Phone required.");
-      }
-      
-      if (!this.currentOrder.fulfillment_info.customer.email) {
-        this.errors.push('Email required.');
-          swal('Valid email required.');
-      } else if (!this.validEmail(this.currentOrder.fulfillment_info.customer.email)) {
-        this.errors.push('Valid email required.');
-        swal('Valid email required.');
-      }
-
-      if (!this.currentOrder.billing.billing_postal_code) {
-        this.errors.push('invalid postal code');
-        swal('invalid postal code');
-
-      } else if (!this.validPostal(this.currentOrder.billing.billing_postal_code)) {
-         this.errors.push('invalid postal code');
-        swal('invalid postal code');
-      }
-
-      if (!this.errors.length) {
-        return true;
-      }
-
-      e.preventDefault();
-    },
-    validEmail: function (email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    },
-
-   validPostal: function (postal_code) {
-      var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
-      return re.test(postal_code);
-    },
-
-
-removeAttention(){
+ removeAttention(){
 this.attention = false
 },
     toggleDrawer(){
@@ -2464,6 +2286,15 @@ dropDown(){
 
 
    this.rendered = true;
+    },
+        validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+
+   validPostal: function (postal_code) {
+      var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
+      return re.test(postal_code);
     }
   },
   mounted() {
@@ -2701,22 +2532,22 @@ font-weight: 300;
 
 
 .edit-link{
-      color: #f05d5b;  text-decoration: none;
+      color: #f58e58;  text-decoration: none;
     font-size: .9rem;
 a{
-  text-decoration: none;  color: #f05d5b;
+  text-decoration: none;  color: #f58e58;
     font-size: .9rem;
  .edit{
     color: #f05d5b;
-    color: #F1765B;
+    color: #f58e58;
     // font-size: .9rem;
 }
   
 
 &:hover{
    .edit{
-    color: #F1765B;
-    border-bottom: 1px solid #F1765B;
+    color: #f58e58;
+    border-bottom: 1px solid #f58e58;
 }
   
 }
@@ -2737,5 +2568,48 @@ a{
 }
 }
 
+.sm-text{
+  color: #4a494b;
+  font-size: 14px;
+  font-style: italic;
+}
+
+#upserveolo{
+button.disabled.extra{
+      pointer-events: none !important;
+    background: #666666 !important;
+    border: 2px solid #666666 !important;
+    color: #fff367 !important;
+}
+}
+
+
+
+
+.button-container{
+  width: 100%;
+  .button-half{
+    width: 50%;
+    display: inline-block;
+
+    &:first-child{
+      text-align: left;
+          button{
+      width: 96%;
+
+    }
+    }
+
+    &:last-child{
+      text-align: right;
+          button{
+      width: 96%;
+
+    }
+    }
+
+
+    }
+}
 
 </style>

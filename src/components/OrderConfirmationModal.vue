@@ -753,7 +753,7 @@ ul.no-left-pad{
 
 .small-message{
     color: #f05d5b;
-    color: #F1765B; 
+    color: #f58e58; 
     font-size: .9rem;
     font-style: italic;
 }

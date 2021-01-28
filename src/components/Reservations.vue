@@ -45,7 +45,7 @@ export default {
   height: 100%;
   margin-top: 10px;
   &:nth-child(odd) {
-    background: #f1765b;
+    background: #f58e58;
   }
   &:nth-child(even) {
     background: #f58e58;
@@ -69,7 +69,7 @@ export default {
   height: 100%;
   margin-top: 10px;
   &:nth-child(odd) {
-    background: #f1765b;
+    background: #f58e58;
   }
   &:nth-child(even) {
     background: #f58e58;
@@ -78,7 +78,7 @@ export default {
 
 
 #reservations .owl-stage .owl-item:nth-child(odd) {
-    background: #f1765b !important;
+    background: #f58e58 !important;
   }
 
 
@@ -156,7 +156,7 @@ font-size: 18px;
   height: 100%;
   margin-top: 10px;
   &:nth-child(odd) {
-    background: #f1765b;
+    background: #f58e58;
   }
   &:nth-child(even) {
     background: #f58e58;

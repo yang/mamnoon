@@ -480,6 +480,9 @@ const store = new Vuex.Store({
 
 
     },
+    upserveOrderCurrentOrderUpdateMamnoonEmail(state, { storeCurrentOrderUpdateMamnoonEmail }){
+      state.storeCurrentOrderUpdateRetail.fulfillment_info.customer.email = storeCurrentOrderUpdateMamnoonEmail
+    },
     upserveOrderCurrentOrderUpdate(state, { storeCurrentOrderUpdate }){
       state.storeCurrentOrderUpdate = storeCurrentOrderUpdate
     },

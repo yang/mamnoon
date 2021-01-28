@@ -335,6 +335,7 @@ methods: {
 
 .nadi-sub-header{
 background-color: #F58E58;
+background-color: #F1765B;
 height: 50px;
 }
 
@@ -487,7 +488,7 @@ right: 0;
     right: 0;
     height: 100%;
     border: 0;
-    background: #F1765B;
+    background: #f58e58;
     color: white;
     font-weight: 700;
     font-size: 18px;
@@ -503,7 +504,7 @@ right: 0;
     right: 120px;
     height: 100%;
     border: 0;
-    background: #F1765B;
+    background: #f58e58;
     color: white;
     font-weight: 700;
     font-size: 18px;

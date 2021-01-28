@@ -83,7 +83,7 @@ padding: 2px 9px;
 margin: 0;
 border: 0;
 // background-color: #f05d5b;
-background-color: #F1765B;
+background-color: #f58e58;
 color: white;
 border-radius: 4px;
 margin: 0 10px 0 0;
@@ -133,15 +133,15 @@ li button {
 
 button {
   border: 1px solid #f05d5b;
-    border: 1px solid #F1765B;
+    border: 1px solid #f58e58;
   // background-color: #f05d5b;
-   background-color: #F1765B;
+   background-color: #f58e58;
   color: #ffffff;
   padding: 5px 10px;
   border-radius: 4px;
   // border: 2px solid #f05d5b !important;
-  // border: 2px solid #F1765B !important;
-    border: 2px solid #F1765B;
+  // border: 2px solid #f58e58 !important;
+    border: 2px solid #f58e58;
 
       &.deactivated{
              border: 2px solid #999999 !important;
@@ -150,9 +150,9 @@ button {
 
 button:hover {
   // border: 1px solid #f05d5b;
-  // border: 1px solid #F1765B;
+  // border: 1px solid #f58e58;
   background-color: #f05d5b;
-  background-color: #F1765B;
+  background-color: #f58e58;
   color: #fff367;
   padding: 5px 10px;
 }
@@ -249,18 +249,18 @@ button.filehalf {
 
     border-radius: 4px;
     border: 2px solid #f05d5b;
-     border: 2px solid #F1765B;
+     border: 2px solid #f58e58;
     background: #fff;
-        background: #F1765B;
+        background: #f58e58;
     color: #f05d5b;
     color: #ffffff;
     padding-top: 5px;
   &.selected {
     background: #f05d5b;
-        background: #F1765B;
+        background: #f58e58;
     color: #ffffff;
   border: 2px solid #f05d5b;
-   border: 2px solid #F1765B;
+   border: 2px solid #f58e58;
     padding-top: 5px;
   }
 
@@ -657,11 +657,11 @@ textarea {
     margin-bottom: 5px;
     width: calc(33% - 2px);
     border: 2px solid #f05d5b;
-    border: 2px solid #F1765B;
+    border: 2px solid #f58e58;
     background-color: #ffffff;
-    background-color: #F1765B;
+    background-color: #f58e58;
     color: #f05d5b;
-    color: #F1765B;
+    color: #f58e58;
     color: #ffffff;
     padding: 5px 10px;
     border-radius: 4px;
@@ -670,7 +670,7 @@ textarea {
 transition: background-color .1s ease;
     &:hover{
         border: 2px solid #f05d5b;
-        border: 2px solid #F1765B;
+        border: 2px solid #f58e58;
         color: #fff367;
     }
 
@@ -830,7 +830,7 @@ ul.no-left-pad{
 
 .small-message{
     color: #f05d5b;
-    color: #F1765B;
+    color: #f58e58;
     font-size: .9rem;
     font-style: italic;
 
@@ -949,7 +949,7 @@ margin-top: -3px;
 
 .removeClose{
   background-color: transparent!important;
-  background-color: #F1765B !important;
+  background-color: #f58e58 !important;
   padding: 5px 7px;
 &:active,
 &:hover,
@@ -1035,14 +1035,30 @@ form hr{
 
 
     width: calc(33% - 2.5px);
+    // width: calc(33% - 1.4px);
     padding: 5px 5px !important;
     font-size: 12px;
 }
 }
+@media only screen and (max-width: 992px) {
+
+.tipButton.quarter {
+    width: calc(33% - 1.4px);
+
+}
+
+
+}
+
+
 
 
 .mt8{
 margin-top: 8px;
+}
+
+.mt5{
+margin-top: 5px;
 }
 
 
@@ -1264,7 +1280,7 @@ input.custom-tip-button{
   }
 
 #upserveolo button.vs__clear{
-    background: #F1765B;
+    background: #f58e58;
     border-radius: 30px;
     padding: 0 6px;
     width: 28px;

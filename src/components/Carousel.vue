@@ -223,7 +223,7 @@ h4 {
   line-height: 1.2;
 }
 .order-bottom.order-top {
-  background: #f1765b;
+  background: #f58e58;
   min-height: 90px;
   text-align: center;
 }
@@ -245,7 +245,7 @@ h4 {
   height: 100%;
   margin-top: 10px;
   &:nth-child(odd) {
-    background: #f1765b;
+    background: #f58e58;
   }
   &:nth-child(even) {
     background: #f58e58;
