@@ -649,7 +649,7 @@ transition: background-color .1s ease;
     bottom: 0;
     left: 0;
     border-radius: 0;
-    padding: 3px 10px;
+    padding: 5px 10px;
 
 
     }

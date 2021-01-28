@@ -316,17 +316,34 @@
 </div> -->
 
 
-<div v-if="currentOrder" class="container text-center" style="margin-bottom:0px;">
+<div v-if="panelShow === 'customerInfo'" class="container mb5"> 
+<button @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
+</div>
+
+
+
+<div v-if="panelShow === 'customerInfo'" class="container text-center" style="margin-bottom:0px;">
  
               <template v-if="valid">
-<div v-if="shippingOption === false" class="toggleLr">
-    <div>
-    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
-  <div>
-    <button class="fl-right" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button> 
-    </div> 
-  <div>
 
+
+                
+<!-- <div v-if="shippingOption === false" class="mb5 button-container"> -->
+  <div class="mb5 button-container">
+    <div class="button-third">
+    <button @click="preOrderToggle(false)" :class="{ selected: getItNow }">get it now</button></div> 
+   <div class="button-third">
+    <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button>  -->
+
+  <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">schedule</button> 
+
+
+
+
+
+    </div> 
+   <div class="button-third">
+    <button @click="shipOption(true)" :class="{ selected: shippingOption }">ship</button> 
     </div> 
 </div>
 </template>
@@ -337,53 +354,13 @@ Come and pick up your items during store hours or get them shipped to your door 
 
 </template>
 
+ 
 
 
 
 
 
-
-
-<button v-if="panelShow === 'customerInfo'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
-<br v-if="panelShow === 'customerInfo'"> <br v-if="panelShow === 'customerInfo'">  
-
-
-
-
-
-<template v-if="panelShow === 'customerInfo'">
-<!-- ship button -->
-<div v-if="shippingOption" class="mb5 button-container"> 
-
-<div class="button-half"> 
-  <button v-if="shippingOption" class="disabled extra" disabled @click="shipOption(false)">ship</button> 
-</div>
-<div class="button-half"> 
-  <button v-if="shippingOption" @click="shipOption(false)">pickup</button> 
-</div> 
-
-
-
-
-
-</div>
-<div v-if="!shippingOption" class="mb5 button-container"> 
-
-<div class="button-half"> 
-  <button v-if="!shippingOption" @click="shipOption(true)">ship</button> 
-</div>
-
-
-
-<div class="button-half"> 
-  <button v-if="!shippingOption" class="disabled extra" disabled @click="shipOption(false)">pickup</button> 
-</div>
-
-
-</div>
-<!-- ship button -->
-</template>
-  
+ 
 <!-- time select -->
 
 
@@ -1044,6 +1021,7 @@ this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this
 	    },
   data() {
     return {
+      getItNow: false,
       formattedWeight: 0,
       validNumber: false,
       currentRestaurantHours: '',
@@ -1204,54 +1182,10 @@ showToFixed: function (value) {
 }
   },
   methods: {
-        checkForm: function (e) {
-      this.errors = [];
-      if (!this.currentOrder.fulfillment_info.customer.first_name) {
-        this.errors.push("Name required.");
-                  swal("Name required.");
-      }
-
-      if (!this.currentOrder.fulfillment_info.customer.phone) {
-        this.errors.push("Phone required.");
-
-        swal("Phone required.");
-      }
-      
-      if (!this.currentOrder.fulfillment_info.customer.email) {
-        this.errors.push('Email required.');
-          swal('Valid email required.');
-      } else if (!this.validEmail(this.currentOrder.fulfillment_info.customer.email)) {
-        this.errors.push('Valid email required.');
-        swal('Valid email required.');
-      }
-
-      if (!this.currentOrder.billing.billing_postal_code) {
-        this.errors.push('invalid postal code');
-        swal('invalid postal code');
-
-      } else if (!this.validPostal(this.currentOrder.billing.billing_postal_code)) {
-         this.errors.push('invalid postal code');
-        swal('invalid postal code');
-      }
-
-      if (!this.errors.length) {
-        return true;
-      }
-
-      e.preventDefault();
-    },
-    validEmail: function (email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    },
-
-   validPostal: function (postal_code) {
-      var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
-      return re.test(postal_code);
-    },
 
 
 
+    
   weightShippingAmount(){
 
 let ounces = this.weightShipping.oz
@@ -1263,7 +1197,7 @@ this.formattedWeight = formatWeight.toFixed(2)
 validator(input){
 console.log(input)
 },
-removeNonShippables(){
+removeNonShippables(){                                      
 
 for (var value of this.currentOrder.charges.items) {
 // console.log(value.shippable)
@@ -1307,9 +1241,10 @@ let cheapest = responseAcf.data.rates.filter(word => word.servicelevel.token ===
 
 },
 shipOption(c){
+ this.getItNow = false
 
-
-
+console.log('clicked ship option')
+console.log(c)
   this.shippingOption = c
   c === true ? this.currentOrder.fulfillment_info.type = 'delivery' : this.currentOrder.fulfillment_info.type = 'pickup'
 
@@ -1318,15 +1253,22 @@ shipOption(c){
 if(c === true){
  this.currentOrder.preorder = false 
 
-
+this.preOrderToggleState = false
+//  this.getItNow = false
 this.shippingOption = true
+console.log(c)
  this.currentOrder.fulfillment_info.delivery_info.address.address_line2 = ''
+ 
 }
 
 
 if(c === false){
  this.currentOrder.preorder = true
  this.shippingOption = false
+
+
+this.preOrderToggleState = true
+//  this.getItNow = false
 }
 
 
@@ -1344,8 +1286,8 @@ if(c === true){
 
 }
 
-
-
+// this.preOrderToggle(false)
+console.log(this.shippingOption)
 
 
   },
@@ -1369,7 +1311,8 @@ if(c === true){
 
 this.panelShow = 'customerInfo'
 
- 
+ this.getItNow = false
+ this.shippingOption = false
 
 }
 
@@ -1377,8 +1320,8 @@ if(c === false){
   this.preOrderToggleState = c
       this.currentOrder.preorder = false
 
-
-
+this.shippingOption = false
+this.getItNow = true
 this.panelShow, this.currentOrder.fulfillment_info.type = ''
 
 }
@@ -1389,6 +1332,8 @@ if(c === 'shipping'){
   this.panelShow = 'customerInfo'
 this.currentOrder.fulfillment_info.type = 'delivery'
 }
+
+// this.getItNow = true
 
 },
   async getHours(){
@@ -1421,10 +1366,12 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
       if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
       // console.log('it returned true so break')
       this.valid = true
+      this.getItNow = true
        this.currentOrder.preorder = false
       break
     }else{
      this.currentOrder.preorder = true
+     this.preOrderToggleState = true
       }
     }
   }else{
@@ -2595,7 +2542,7 @@ button.disabled.extra{
     &:first-child{
       text-align: left;
           button{
-      width: 96%;
+      width: 98%;
 
     }
     }
@@ -2603,13 +2550,51 @@ button.disabled.extra{
     &:last-child{
       text-align: right;
           button{
-      width: 96%;
+      width: 98%;
 
     }
     }
 
 
     }
+
+
+
+  .button-third{
+        width: 33%;
+    display: inline-block;
+
+
+    &:first-child{
+      text-align: left;
+          button{
+      width: 98%;
+
+    }
+    }
+
+
+    &:nth-child(2){
+      text-align: center;
+          button{
+      width: 98%;
+
+    }
+    }
+
+
+    &:last-child{
+      text-align: right;
+          button{
+      width: 98%;
+
+    }
+    }
+
+
+
+    }
+
 }
 
 </style>
