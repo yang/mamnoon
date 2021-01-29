@@ -348,9 +348,26 @@
 </div>
 </template>
 <template v-else>
-<div class="mb5 text-left sm-text mt10"> 
+<div class="text-left sm-text mt10 mb10"> 
 Come and pick up your items during store hours or get them shipped to your door via usps!
 </div> 
+  <div class="mb5 button-container">
+    <div class="button-third">
+    <button class="disabled" disabled>get it now</button></div> 
+   <div class="button-third">
+    <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button>  -->
+
+  <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">schedule</button> 
+
+
+
+
+
+    </div> 
+   <div class="button-third">
+    <button @click="shipOption(true)" :class="{ selected: shippingOption }">ship</button> 
+    </div> 
+  </div> 
 
 </template>
 
