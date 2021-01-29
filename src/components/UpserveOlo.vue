@@ -142,41 +142,45 @@
           <div class="container no-lr-pad">
 
 
-<template v-if="valid">
-<div class="toggleLr">
-  <div>
-    <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
-  <div>
-    <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
-    </div> 
-</div>
-</template>
-<template v-else>
-<div class="mb16"> 
-Now accepting preorders for pick up.
-</div> 
-</template>
+              <template v-if="valid">
+              <div class="toggleLr">
+                <div>
+                  <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
+                <div>
+                  <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+                  </div> 
+              </div>
+              </template>
+              <template v-else>
+              <div class="mb16"> 
+              Now accepting preorders for pick up.
+              </div> 
+              </template>
 
-<template v-if="valid">
-<template v-if="preOrderToggleState">
-  <div class="leftDropdown">
-<v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-</div>
-<div class="rightDropdown" v-if="selectedDate !== null">
-<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-</div>
-</template>
-</template>
-  <template v-else>
-      <template>
-<div class="leftDropdown">
-      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
- <div class="rightDropdown" v-if="selectedDate !== null">
-      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-      </div>
+              <template v-if="valid">
+                  <template v-if="preOrderToggleState">
+                  <div class="leftDropdown">
+                  <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+                  </div>
+                  <div class="rightDropdown" v-if="selectedDate !== null">
+                  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                  </div>
+                </template>
+              </template>
+              <template v-else>
+                  <template>
+                      <div class="leftDropdown">
+                      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
+                      <div class="rightDropdown" v-if="selectedDate !== null">
+                      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                      </div>
+                  </template>
+            </template>
 
-</template>
-</template>
+
+
+
+
 </div>
 <div class="container online-menu">
               <h4>featured</h4>
@@ -469,7 +473,66 @@ Now accepting preorders for pick up.
 
 <!-- {{panelShow}} -->
 
+
+
+<!-- preorder edit here -->
+
+<div v-if="panelShow !== 'customerInfo'" class="container text-center">
+
+              <template v-if="valid">
+              <div class="toggleLr">
+                <div>
+                  <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
+                <div>
+                  <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+                  </div> 
+              </div>
+              </template>
+              <template v-else>
+              <div class="mb16"> 
+              Now accepting preorders for pick up.
+              </div> 
+              </template>
+
+              <template v-if="valid">
+                  <template v-if="preOrderToggleState">
+                  <div class="leftDropdown" style="width: 100%;padding: 0 0 10px 0;">
+                  <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+                  </div>
+                  <div class="rightDropdown" style="width: 100%;padding: 0 0 0px 0;" v-if="selectedDate !== null">
+                  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                  </div>
+                </template>
+              </template>
+              <template v-else>
+                  <template>
+                      <div class="leftDropdown">
+                      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
+                      <div class="rightDropdown" v-if="selectedDate !== null">
+                      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                      </div>
+                  </template>
+            </template>
+
+
+</div>
+
+<!-- preorder edit here -->
+
+
+
+
+
+
 <div v-if="currentOrder && panelShow === 'customerInfo'" class="container text-center">
+
+
+
+
+
+
+
+
 
 
 
@@ -2721,6 +2784,9 @@ display:inline-block;
 padding:0 0 20px 5px;
 }
 
+.show-on-mob{
+  display: none;
+}
 
 @media only screen and (max-width: 992px) {
 
@@ -2728,6 +2794,12 @@ padding:0 0 20px 5px;
 .hide-on-mob{
   display:none;
 }
+
+
+.show-on-mob{
+  display: block;
+}
+
 }
 
 
