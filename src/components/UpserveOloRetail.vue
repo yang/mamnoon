@@ -1379,11 +1379,13 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
       // console.log('it returned true so break')
       this.valid = true
       this.getItNow = true
+      this.preOrderToggleState = false
        this.currentOrder.preorder = false
       break
     }else{
      this.currentOrder.preorder = true
      this.preOrderToggleState = true
+      this.getItNow = false
       }
     }
   }else{
