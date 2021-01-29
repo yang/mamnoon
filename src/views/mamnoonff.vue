@@ -2,7 +2,11 @@
   <div class="mamnoon">
     <Nav />
 
-<h1>  Mamnoon Fine Foods  (coming soon)</h1>
+<div>
+
+
+    <img style="width: 100%;" src="@/assets/img/mamnoonFF_NADI_2-01.png">
+</div>
   <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>
