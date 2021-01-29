@@ -473,7 +473,7 @@ Now accepting preorders for pick up.
 
 
 
-<button v-if="panelShow === 'customerInfo'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:0px;">edit order</button>
+<button v-if="panelShow === 'customerInfo'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:0px;"><span v-if="currentOrder.preorder === true">edit pre order</span><span v-else>edit order</span></button>
 
 <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
   <br>
