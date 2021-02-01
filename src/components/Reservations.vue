@@ -5,7 +5,7 @@
 
 <div class="width-container">
 <div v-for="item in data" :key="item.restaurant_title">
-  <Mbar v-if="item.restaurant_title === 'mbar'" />
+  <Mbar :comingsoon="true" v-if="item.restaurant_title === 'mbar'" />
   <Mamnoon v-else-if="item.restaurant_title === 'mamnoon'" />
 </div>
 </div>
