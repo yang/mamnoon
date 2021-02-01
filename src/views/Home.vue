@@ -1,7 +1,24 @@
 <template>
   <div>
 <Nav />
-      <div class="container mt-5 nav-acc-header">
+
+<div class="rotating-letters-container">
+  <!-- cff -->
+  <div class="container rotating-letters">
+      <h2>
+      MAMA IS: <div class="currentIndexLetters">
+      
+          <transition name="fade"><span v-if="currentIndex === 0">COOL</span></transition><transition name="fade"><span v-if="currentIndex === 1">FRESH</span></transition><transition name="fade"><span v-if="currentIndex === 2">MODERN</span></transition><transition name="fade"><span v-if="currentIndex === 3">SAFE</span></transition><transition name="fade"><span v-if="currentIndex === 4">CONVENIENT</span></transition><transition name="fade"><span v-if="currentIndex === 5">SEXY</span></transition>
+</div>
+
+
+
+    </h2>
+</div>
+</div>
+
+      <!-- <div class="container mt-5 nav-acc-header"> -->
+      <div class="container mt-5">
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group" style="display:none;">
@@ -13,6 +30,7 @@
     {{ item }}
   </li>
   </ul>
+
 <SlideShow />
           </div>
         </div>
@@ -37,11 +55,34 @@ export default {
   },
   data() {
     return {
+        items: [1,2,3,4,5],
+        currentIndex: 0,
       user: {},
       products: ''
       };
   },
   methods: {
+    countDown: function(){
+
+        if(this.currentIndex === 4){
+          this.currentIndex = 0
+          console.log(this.currentIndex)
+        }else{
+          this.currentIndex = this.currentIndex + 1
+                    console.log(this.currentIndex)
+        }
+
+
+    },
+    randomIndex: function () {
+      return Math.floor(Math.random() * this.items.length)
+    },
+    add: function () {
+      this.items.splice(this.randomIndex(), 0, this.nextNum++)
+    },
+    remove: function () {
+      this.items.splice(this.randomIndex(), 1)
+    },
     getUserDetails() {
 
       if(localStorage.getItem("jwt")){
@@ -62,7 +103,14 @@ export default {
     },
   created() {
     this.getUserDetails();
-  }
+  },
+    mounted: function () {
+        this.$nextTick(function () {
+            window.setInterval(() => {
+                this.countDown();
+            },2000);
+        })
+    }
 };
 </script>
 
@@ -100,4 +148,74 @@ transition: padding .5s ease;
 
 }
 
+
+  h2{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    font-style: italic;
+  }
+
+
+.rotating-letters-container{
+  width: 100%;
+  height: 200px;
+  background: orange;
+}
+
+.rotating-letters{
+    padding-top: 158px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 992px) {
+
+
+.rotating-letters-container{
+  width: 100%;
+  height: 150px;
+  background: orange;
+}
+
+
+.rotating-letters{
+  padding-top: 108px;
+  text-align: center;
+}
+
+
+}
+
+
+
+.fade-enter-active {
+  transition: opacity .5s;
+}
+
+.fade-leave-active {
+  transition: opacity 0s;
+}
+
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+
+.currentIndexLetters{
+  display: inline;
+  position: relative;
+  margin-left: 5px;
+  span{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+
+
+.rotating-letters h2{
+      transform: translateX(-50px);
+}
 </style>

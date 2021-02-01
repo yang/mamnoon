@@ -201,6 +201,9 @@ const store = new Vuex.Store({
       },
     },
     storeCurrentOrderUpdateRetail: { 
+      getNow: false,
+      schedule: false,
+      ship: false,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
       sms: false,

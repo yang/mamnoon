@@ -331,11 +331,11 @@
 <!-- <div v-if="shippingOption === false" class="mb5 button-container"> -->
   <div class="mb5 button-container">
     <div class="button-third">
-    <button @click="preOrderToggle(false)" :class="{ selected: getItNow }">get it now</button></div> 
+    <button @click="preOrderToggle(false)" :class="{ selected: currentOrder.getNow === true }">get it now</button></div> 
    <div class="button-third">
     <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button>  -->
 
-  <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">schedule</button> 
+  <button @click="preOrderToggle(true)" :class="{ selected: currentOrder.preorder === true }">schedule</button> 
 
 
 
@@ -356,8 +356,7 @@ Come and pick up your items during store hours or get them shipped to your door 
     <button class="disabled" disabled>get it now</button></div> 
    <div class="button-third">
     <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button>  -->
-
-  <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">schedule</button> 
+  <button @click="preOrderToggle(true)" :class="{ selected: currentOrder.preorder === true }">schedule</button> 
 
 
 
@@ -685,7 +684,7 @@ cart empty
               <br />
       </div>
           </div>
-        </div>
+        </div>ch
         <div>
 </div></div>
     </section>
@@ -854,12 +853,28 @@ if(this.user){
   // console.log(this.user.user.email)
 }
 
-
-
       for(var item of curOr.charges.items){
           let itemAddition = item.quantity * item.price
           preTotal = preTotal + itemAddition
       }
+
+if(curOr.ship === true){
+this.shippingOption = true
+curOr.getNow = false
+curOr.schedule = false
+
+}
+if(curOr.getNow === true){
+this.shippingOption = false
+curOr.ship = false
+curOr.schedule = false
+}
+
+if(curOr.schedule === true){
+this.shippingOption = false
+curOr.getNow = false
+curOr.ship = false
+}
 
       curOr.charges.preTotal = preTotal
       let currentTax = Number(preTotal) * Number(this.upserveTaxRate)
@@ -879,11 +894,19 @@ let shipToAdd = curOr.charges.shipping * 100
 
 
 
+
+  
 if(this.shippingOption === true){
-     curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount + shipToAdd
+
+curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount + shipToAdd
+curOr.payments.payments[0].amount = curOr.charges.total
 }else{
   curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount
+  curOr.payments.payments[0].amount = curOr.charges.total
 }
+
+
+
     curOr.currentAmountToAddCustom = this.customAmountAddition * 100
 //  }
 // console.log('calculate shipping')
@@ -1100,6 +1123,9 @@ this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this
       upserveCategories: [],
       currentlyFiltered: [],
       currentOrder: { 
+        getNow: false,
+        schedule: false,
+        ship: false,
         tipSelected: 0,
         currentAmountToAddCustom: 0,
         sms: false,
@@ -1194,6 +1220,51 @@ showToFixed: function (value) {
 }
   },
   methods: {
+        checkForm: function (e) {
+      this.errors = [];
+      if (!this.currentOrder.fulfillment_info.customer.first_name) {
+        this.errors.push("Name required.");
+                  swal("Name required.");
+      }
+
+      if (!this.currentOrder.fulfillment_info.customer.phone) {
+        this.errors.push("Phone required.");
+
+        swal("Phone required.");
+      }
+      
+      if (!this.currentOrder.fulfillment_info.customer.email) {
+        this.errors.push('Email required.');
+          swal('Valid email required.');
+      } else if (!this.validEmail(this.currentOrder.fulfillment_info.customer.email)) {
+        this.errors.push('Valid email required.');
+        swal('Valid email required.');
+      }
+
+      if (!this.currentOrder.billing.billing_postal_code) {
+        this.errors.push('invalid postal code');
+        swal('invalid postal code');
+
+      } else if (!this.validPostal(this.currentOrder.billing.billing_postal_code)) {
+         this.errors.push('invalid postal code');
+        swal('invalid postal code');
+      }
+
+      if (!this.errors.length) {
+        return true;
+      }
+
+      e.preventDefault();
+    },
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+
+   validPostal: function (postal_code) {
+      var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
+      return re.test(postal_code);
+    },
 
 
 
@@ -1253,11 +1324,14 @@ let cheapest = responseAcf.data.rates.filter(word => word.servicelevel.token ===
 
 },
 shipOption(c){
- this.getItNow = false
 
 console.log('clicked ship option')
 console.log(c)
   this.shippingOption = c
+
+
+
+
   c === true ? this.currentOrder.fulfillment_info.type = 'delivery' : this.currentOrder.fulfillment_info.type = 'pickup'
 
 
@@ -1302,50 +1376,27 @@ if(c === true){
 console.log(this.shippingOption)
 
 
+this.currentOrder.ship = c
+
+
+
   },
-    makePickup(){
+ preOrderToggle(c){
 
-
-      this.currentOrder.fulfillment_info.type === 'pickup'
-
-
-    },
-preOrderToggle(c){
-
-this.preOrderToggleState = c
-
+  this.preOrderToggleState = c
+  this.shippingOption = false
 
 if(c === true){
-  this.preOrderToggleState = c
-      this.currentOrder.preorder = true
-
-
-
-this.panelShow = 'customerInfo'
-
- this.getItNow = false
- this.shippingOption = false
-
+  this.currentOrder.preorder = true
+  this.panelShow = 'customerInfo'
 }
 
 if(c === false){
-  this.preOrderToggleState = c
-      this.currentOrder.preorder = false
-
-this.shippingOption = false
-this.getItNow = true
-this.panelShow, this.currentOrder.fulfillment_info.type = ''
-
+  this.currentOrder.preorder = false
+  this.panelShow =''
+  this.currentOrder.fulfillment_info.type = ''
 }
 
-if(c === 'shipping'){
-
-  this.preOrderToggleState = 'shipping'
-  this.panelShow = 'customerInfo'
-this.currentOrder.fulfillment_info.type = 'delivery'
-}
-
-// this.getItNow = true
 
 },
   async getHours(){
@@ -1378,14 +1429,14 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
       if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
       // console.log('it returned true so break')
       this.valid = true
-      this.getItNow = true
+      // this.getItNow = true
       this.preOrderToggleState = false
        this.currentOrder.preorder = false
       break
     }else{
      this.currentOrder.preorder = true
      this.preOrderToggleState = true
-      this.getItNow = false
+      // this.getItNow = false
       }
     }
   }else{
@@ -1654,7 +1705,7 @@ this.attention = true
       return new Promise(function (resolve, reject) {
         $.ajax({
           url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          // url: "http://localhost:4000/order/start-transaction",
+          // url: "http://localhost:4000/order/start-transaction-retail",
           type: "POST",
           dataType: "json",
           contentType: "application/json",

@@ -489,11 +489,11 @@
               </div>
               </template>
               <template v-else>
-              <div class="mb16"> 
+              <div class="mb16 if-mobile"> 
               Now accepting preorders for pick up.
               </div> 
               </template>
-
+  <div class="if-mobile">
               <template v-if="valid">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown" style="width: 100%;padding: 0 0 10px 0;">
@@ -514,7 +514,7 @@
                   </template>
             </template>
 
-
+</div>
 </div>
 
 <!-- preorder edit here -->
@@ -908,7 +908,7 @@ cart empty
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
 
-        <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
+        <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && email !== '' && emailAddress !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
             <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
 </template>
 <template v-else>
@@ -916,7 +916,7 @@ cart empty
 
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === '' || email === '' || emailAddress === ''">please enter a customer email address</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
@@ -1014,9 +1014,9 @@ cart empty
       <div>
       </div></div>
       </section>
-      <pre style="display:none" v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
-     <pre style="display:none" v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-     <pre style="display:none" v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
+      <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+     <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
+     <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
 
 
 
@@ -1207,8 +1207,10 @@ if(this.user){
     
       curOr.charges.tip.amount = curOr.charges.tip.amountOptions[curOr.tipSelected]
       curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount
+      curOr.payments.payments[0].amount = curOr.charges.total
       curOr.currentAmountToAddCustom = this.customAmountAddition * 100
     
+
     //  }
 
     if(this.title === 'Mamnoon'){
@@ -2802,9 +2804,17 @@ padding:0 0 20px 5px;
 
 }
 
+.if-mobile{
+  display: none;
+}
+
+@media only screen and (max-width: 992px) {
+  .if-mobile{
+  display: block;
+  }
+}
 
 @media only screen and (max-width: 768px) {
-
 .leftDropdown{
   width: 100%;
   display:block;
