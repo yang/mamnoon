@@ -72,6 +72,70 @@ const store = new Vuex.Store({
     orderConfirmation: {},
     googleAddress: {},
     storeCurrentOrder: {},
+    emptyCart: { 
+      tipSelected: 0,
+      currentAmountToAddCustom: 0,
+      sms: false,
+      restaurant: "",
+      billing:{
+        billing_name: '',
+        billing_address: '',
+        billing_postal_code: ''
+      },
+      id:
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29) +
+        "_" +
+        Math.random().toString(36).substr(2, 29),
+      // items: [],
+      preorder: false,
+      scheduled_time: null,
+      time_placed: null,
+      confirmation_code:
+        "mamnoon-" + Math.random().toString(36).substr(2, 29),
+      charges: {
+        total: 0,
+        preTotal: 0,
+        fees: 0,
+        taxes: 0,
+        tip: {
+          amountOptions: [],
+          amount: 0,
+          payment_type: "Generic Online Ordering Integrated",
+        },
+        items: [],
+      },
+      fulfillment_info: {
+        type: "pickup",
+        estimated_fulfillment_time: null,
+        customer: {
+          email: "",
+          phone: "",
+          first_name: "",
+        },
+        instructions: "",
+        no_tableware: false,
+        delivery_info: {
+          is_managed_delivery: false,
+          address: {
+            city: "",
+            state: "",
+            zip_code: "",
+            address_line1: "",
+            address_line2: "",
+          },
+        },
+      },
+      payments: {
+        payments: [
+          {
+            payment_type: "Generic Online Ordering Integrated",
+            amount: null,
+          },
+        ],
+      },
+    },
     storeCurrentOrderUpdate: { 
       tipSelected: 0,
       currentAmountToAddCustom: 0,

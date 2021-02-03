@@ -1583,14 +1583,14 @@ showToFixed: function (value) {
     emptyCart(){
 console.log('empty cart')
 
-
-
+console.log(this.$store.state.storeCurrentOrderUpdate)
+console.log(this.currentOrder)
       if(this.title === 'Mamnoon'){
-        this.currentOrder = this.$store.state.storeCurrentOrderUpdate
+        this.currentOrder = this.$store.state.emptyCart
       }else if(this.title === 'Mamnoon Street'){
-        this.currentOrder = this.$store.state.storeCurrentOrderUpdate
+        this.currentOrder = this.$store.state.emptyCart
       }else if(this.title === 'Mbar'){
-        this.currentOrder = this.$store.state.storeCurrentOrderUpdate
+        this.currentOrder = this.$store.state.emptyCart
       }
 
     },
