@@ -4,6 +4,7 @@
 
 <div class="rotating-letters-container">
   <!-- cff -->
+  <div class="bottom-attach">
   <div class="container rotating-letters">
       <h2>
       MAMA MEANS&nbsp;&nbsp;<div class="currentIndexLetters">
@@ -14,6 +15,7 @@
 
 
     </h2>
+</div>
 </div>
 </div>
 
@@ -63,16 +65,13 @@ export default {
   },
   methods: {
     countDown: function(){
-
         if(this.currentIndex === 4){
           this.currentIndex = 0
-          console.log(this.currentIndex)
+          // console.log(this.currentIndex)
         }else{
           this.currentIndex = this.currentIndex + 1
-                    console.log(this.currentIndex)
+          // console.log(this.currentIndex)
         }
-
-
     },
     randomIndex: function () {
       return Math.floor(Math.random() * this.items.length)
@@ -149,28 +148,35 @@ transition: padding .5s ease;
 }
 
 .rotating-letters{
-
+    // padding-top: 158px;
+        // padding-top: 148px;
+  text-align: center;
   h2{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 50px;
     font-style: italic;
     color: #f38e5e;
+        margin-top: 4px;
   }
 }
 
 .rotating-letters-container{
+    width: 100%;
+    height: 200px;
+    height: 225px;
+    background: transparent;
+    position: relative;
+}
+
+
+.bottom-attach{
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  height: 200px;
-      height: 220px;
   background: #49494a;
 }
 
-.rotating-letters{
-    // padding-top: 158px;
-        padding-top: 148px;
-  text-align: center;
-}
 
 @media only screen and (max-width: 1080px) {
 
@@ -183,7 +189,7 @@ transition: padding .5s ease;
 
 
 .rotating-letters{
-    padding-top: 100px;
+    // padding-top: 100px;
   text-align: center;
 }
 
@@ -220,7 +226,8 @@ span{
 
 .rotating-letters h2{
       text-transform: lowercase;
-
+      margin-top: 4px;
+      padding-top: 2px;
       span{
         color: #fff367;
       }

@@ -2,15 +2,15 @@
 <div class="nav-wrap">
 <div class="fixed-nav">
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
-            <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 90px;">
+            <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 100px;">
 <CartDropdown />
          </div>
-            <div v-if="this.$store.state.loggedIn && showCartDropdown" class="hello logButton googleInHeader" style="right: 266px">
+            <div v-if="this.$store.state.loggedIn && showCartDropdown" class="hello logButton googleInHeader" style="right: 168px;">
                     <router-link to="/profile">
                 profile
                     </router-link>
             </div>
-            <div v-else-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right: 186px">
+            <div v-else-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right: 96px">
                     <router-link to="/profile">
                 profile
                     </router-link>
