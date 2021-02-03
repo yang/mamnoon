@@ -958,6 +958,9 @@ cart empty
 </template>
 
 
+<button @click="emptyCart()">  
+empty cart
+</button>  
 
 
 <template v-if="giftCardPanel ===  true">
@@ -1577,8 +1580,20 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    emptyCart(){
+console.log('empty cart')
 
 
+
+      if(this.title === 'Mamnoon'){
+        this.currentOrder = this.$store.state.storeCurrentOrderUpdate
+      }else if(this.title === 'Mamnoon Street'){
+        this.currentOrder = this.$store.state.storeCurrentOrderUpdate
+      }else if(this.title === 'Mbar'){
+        this.currentOrder = this.$store.state.storeCurrentOrderUpdate
+      }
+
+    },
     resetCart(){
 
     },
@@ -2479,8 +2494,12 @@ console.log(item)
           orderCMR.giftcardbalance = giftcardbalance
 
           self.currentOrder = self.$store.state.storeCurrentOrderUpdate
+
+
+    self.emptyCart();
+
           self.$store.commit("orderCMR", { orderCMR });
-          this.$router.push("/orderconfirmation");
+          self.$router.push("/orderconfirmation");
 
 
         })
@@ -2507,11 +2526,11 @@ console.log(response);
           orderCMR.giftcardbalance = giftcardbalance
 
 
-          this.resetCart();
+         self.emptyCart();
 
 
           self.$store.commit("orderCMR", { orderCMR });
-          this.$router.push("/orderconfirmation");
+          self.$router.push("/orderconfirmation");
           self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
           self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
           let newDate = new Date();

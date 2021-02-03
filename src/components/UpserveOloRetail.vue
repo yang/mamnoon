@@ -190,7 +190,6 @@
      </template>
          <template v-else>
 
-
 <div style="background: #f58e58;text-align:center;padding: 10px; margin-bottom: 10px;">
   <ul class="filters">
       <li @click="currentFilter = 'All'">All</li>
@@ -290,7 +289,7 @@
 <span v-else>view order</span>
 </button>
 
-<div class="container mb10 hide-on-mob"> 
+<div class="container mb10"> 
 <div class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
       <template v-if="valid">
           <h4>your order</h4>
@@ -314,6 +313,10 @@
 
         <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
 </div> -->
+
+
+
+
 
 
 <div v-if="panelShow === 'customerInfo'" class="container mb5"> 
@@ -520,6 +523,9 @@ Come and pick up your items during store hours or get them shipped to your door 
 calculate shipping
 </button>
 </div> -->
+
+
+
 <template v-if="this.currentOrder.charges.items.length > 0">
               <!-- <div class="mt10" v-if="total > 0"> -->
 
@@ -2067,6 +2073,7 @@ removeFromOrder(removal) {
 
       let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
       let upserveProducts = responseUpserve.data.doc[0].menu.items;
+      console.log(upserveProducts)
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.doc[0].menu.sections;
@@ -2138,8 +2145,11 @@ removeFromOrder(removal) {
           self.orderCMR = currentOrder;
           let orderCMR = currentOrder;
           orderCMR.giftcardbalance = giftcardbalance
+
+          self.emptyCart();
+
           self.$store.commit("orderCMR", { orderCMR });
-          this.$router.push("/orderconfirmation");
+         self.$router.push("/orderconfirmation");
 
 
         })
@@ -2162,11 +2172,11 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
           orderCMR.giftcardbalance = giftcardbalance
 
 
-          this.resetCart();
-
+   
+   self.emptyCart();
 
           self.$store.commit("orderCMR", { orderCMR });
-          this.$router.push("/orderconfirmation");
+          self.$router.push("/orderconfirmation");
           self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
           self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
           let newDate = new Date();
