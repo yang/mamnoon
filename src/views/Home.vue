@@ -6,9 +6,9 @@
   <!-- cff -->
   <div class="container rotating-letters">
       <h2>
-      MAMA IS: <div class="currentIndexLetters">
+      MAMA MEANS&nbsp;&nbsp;<div class="currentIndexLetters">
       
-          <transition name="fade"><span v-if="currentIndex === 0">COOL</span></transition><transition name="fade"><span v-if="currentIndex === 1">FRESH</span></transition><transition name="fade"><span v-if="currentIndex === 2">MODERN</span></transition><transition name="fade"><span v-if="currentIndex === 3">SAFE</span></transition><transition name="fade"><span v-if="currentIndex === 4">CONVENIENT</span></transition><transition name="fade"><span v-if="currentIndex === 5">SEXY</span></transition>
+          <transition name="fade"><span v-if="currentIndex === 0">&nbsp;&nbsp;love</span></transition><transition name="fade"><span v-if="currentIndex === 1">reservations</span></transition><transition name="fade"><span v-if="currentIndex === 2">fresh</span></transition><transition name="fade"><span v-if="currentIndex === 3">shopping</span></transition><transition name="fade"><span v-if="currentIndex === 4">delivery</span></transition>
 </div>
 
 
@@ -148,45 +148,83 @@ transition: padding .5s ease;
 
 }
 
+.rotating-letters{
 
   h2{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 50px;
     font-style: italic;
+    color: #f38e5e;
   }
-
+}
 
 .rotating-letters-container{
   width: 100%;
   height: 200px;
-  background: orange;
+      height: 220px;
+  background: #49494a;
 }
 
 .rotating-letters{
-    padding-top: 158px;
+    // padding-top: 158px;
+        padding-top: 148px;
   text-align: center;
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 1080px) {
 
 
 .rotating-letters-container{
   width: 100%;
-  height: 150px;
-  background: orange;
+  height: 146px;
+
 }
 
 
 .rotating-letters{
-  padding-top: 108px;
+    padding-top: 100px;
   text-align: center;
 }
 
 
+.rotating-letters h2{
+      transform: translateX(-50px);
+      text-transform: lowercase;
+          font-size: 30px;
+      span{
+        color: #fff367;
+      }
 }
 
 
+} 
+
+
+@media only screen and (max-width: 640px) {
+.rotating-letters h2{
+font-size: 22px;
+transform: translateX(-70px);
+
+span{
+      left: 4px;
+}
+} 
+
+
+.rotating-letters-container{
+      height: 136px;
+}
+
+}
+
+.rotating-letters h2{
+      text-transform: lowercase;
+
+      span{
+        color: #fff367;
+      }
+}
 
 .fade-enter-active {
   transition: opacity .5s;
@@ -209,13 +247,11 @@ transition: padding .5s ease;
   span{
     position: absolute;
     top: 0;
-    left: 0;
+    left: 9px;
   }
 }
 
 
 
-.rotating-letters h2{
-      transform: translateX(-50px);
-}
+
 </style>

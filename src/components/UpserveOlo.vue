@@ -55,6 +55,7 @@
                             <div v-for="(piece,i) in upserveList" :key="'E'+ i">
                               <div v-if="piece.name === mod.name">
                                 <img :src="piece.images.online_ordering_menu.main" />
+                              {{piece}}
                               </div>
                             </div>
                           </div>
@@ -1576,6 +1577,11 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+
+    resetCart(){
+
+    },
 addTimes (startTime, endTime) {
   var times = [ 0, 0, 0 ]
   var max = times.length
@@ -2499,6 +2505,11 @@ console.log(response);
           let orderCMR = response.data;
           console.log(response.data)
           orderCMR.giftcardbalance = giftcardbalance
+
+
+          this.resetCart();
+
+
           self.$store.commit("orderCMR", { orderCMR });
           this.$router.push("/orderconfirmation");
           self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)

@@ -2,7 +2,7 @@
 <div class="nav-wrap">
 <div class="fixed-nav">
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
-            <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 190px;">
+            <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 90px;">
 <CartDropdown />
          </div>
             <div v-if="this.$store.state.loggedIn && showCartDropdown" class="hello logButton googleInHeader" style="right: 266px">
@@ -19,12 +19,12 @@
 
 
 
-            
+<!--             
             <div class="hello logButton googleInHeader" style="right:100px">
                     <router-link to="/retail">
                 shop
                     </router-link>
-            </div>
+            </div> -->
           <GoogleAuth class="logButton googleInHeader" />
     <div class="container">
 <div class="full-width-logo">
@@ -169,11 +169,11 @@
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
-     <li>
+     <!-- <li>
                     <router-link to="/retail">
                     shop
                     </router-link>
-                </li>
+                </li> -->
 
                     <div v-if="this.$store.state.loggedIn" class="inline-link">
                 <li>
@@ -206,14 +206,14 @@
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
-                                   <div class="inline-link">
-                <li>
+                                   <!-- <div class="inline-link"> -->
+                <!-- <li>
                     <router-link to="/retail">
                     shop
                     </router-link>
-                </li>
+                </li> -->
            
-            </div>  
+            <!-- </div>   -->
 <div class="inline-link">
            <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />

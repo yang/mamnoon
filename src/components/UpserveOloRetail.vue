@@ -353,6 +353,23 @@ Come and pick up your items during store hours or get them shipped to your door 
 </div> 
   <div class="mb5 button-container">
     <div class="button-third">
+      1
+      <button v-if="valid" class="disabled" disabled>get it now</button>
+      <button v-else class="disabled" disabled>get it now</button>
+      </div>
+          <div class="button-third">
+      2
+
+  <button @click="preOrderTrue()" :class="{ selected: currentOrder.preorder === true }">schedule</button> 
+
+      </div>
+    <div class="button-third">
+      3
+      </div>
+      </div>
+
+  <div class="mb5 button-container" style="display:none;">
+    <div class="button-third">
     <button class="disabled" disabled>get it now</button></div> 
    <div class="button-third">
     <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button>  -->
@@ -1220,6 +1237,17 @@ showToFixed: function (value) {
 }
   },
   methods: {
+        resetCart(){
+this.currentOrder = this.$store.state.storeCurrentOrderUpdateStreet
+
+this.currentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
+
+this.currentOrder = this.$store.state.storeCurrentOrderUpdateMbar
+
+
+
+
+    },
         checkForm: function (e) {
       this.errors = [];
       if (!this.currentOrder.fulfillment_info.customer.first_name) {
@@ -1380,6 +1408,14 @@ this.currentOrder.ship = c
 
 
 
+  },
+  preOrderTrue(){
+  this.currentOrder.preorder = true
+  this.panelShow = 'customerInfo'
+  },
+  preOrderFalse(){
+  this.currentOrder.preorder = false
+  this.panelShow = ''
   },
  preOrderToggle(c){
 
@@ -2124,6 +2160,11 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
           let orderCMR = response.data;
         //   console.log(response.data)
           orderCMR.giftcardbalance = giftcardbalance
+
+
+          this.resetCart();
+
+
           self.$store.commit("orderCMR", { orderCMR });
           this.$router.push("/orderconfirmation");
           self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
@@ -2133,6 +2174,7 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
           self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
           // let storeCurrentOrder = self.currentOrder
           // self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
+
         })
         .catch((e) => {
           // this.errors.push(e);
