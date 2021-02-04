@@ -960,7 +960,7 @@ cart empty
 
 <button @click="emptyCart()">  
 empty cart
-</button>  
+</button>
 
 
 <template v-if="giftCardPanel ===  true">
@@ -1230,7 +1230,7 @@ if(this.user){
 
 
 
-console.log(curOr)
+// console.log(curOr)
     },
      deep: true
   },
@@ -1581,17 +1581,35 @@ showToFixed: function (value) {
   },
   methods: {
     emptyCart(){
-console.log('empty cart')
+    
 
-console.log(this.$store.state.storeCurrentOrderUpdate)
-console.log(this.currentOrder)
-      if(this.title === 'Mamnoon'){
-        this.currentOrder = this.$store.state.emptyCart
-      }else if(this.title === 'Mamnoon Street'){
-        this.currentOrder = this.$store.state.emptyCart
-      }else if(this.title === 'Mbar'){
-        this.currentOrder = this.$store.state.emptyCart
-      }
+this.currentOrder.charges.items = []
+
+if(this.$store.state.loggedIn){
+this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+}
+
+
+
+// this.$store.state.storeCurrentOrderUpdateMamnoon
+
+
+    // if(this.title === 'Mamnoon'){
+    //     // this.currentOrder = this.$store.state.emptyCart
+    //     let storeCurrentOrderUpdateMamnoon = this.$store.state.emptyCart
+    //     this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });
+
+    // }else if(this.title === 'Mamnoon Street'){
+    //     // this.currentOrder = this.$store.state.emptyCart
+    //     let storeCurrentOrderUpdateStreet = this.$store.state.emptyCart
+    //     this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });
+    // }else if(this.title === 'Mbar'){
+    //     // this.currentOrder = this.$store.state.emptyCart
+    //     let storeCurrentOrderUpdateMbar = this.$store.state.emptyCart
+    //     this.$store.commit("upserveOrderCurrentOrderUpdateMbar", { storeCurrentOrderUpdateMbar });
+    // }
+
+
 
     },
     resetCart(){

@@ -197,7 +197,8 @@ transition: padding .5s ease;
 .rotating-letters h2{
       transform: translateX(-50px);
       text-transform: lowercase;
-          font-size: 30px;
+        font-size: 30px;
+      transform: translateX(-10%);
       span{
         color: #fff367;
       }
@@ -250,7 +251,7 @@ span{
 .currentIndexLetters{
   display: inline;
   position: relative;
-  margin-left: 5px;
+  margin-left: 4px;
   span{
     position: absolute;
     top: 0;
