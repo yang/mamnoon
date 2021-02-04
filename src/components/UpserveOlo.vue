@@ -903,6 +903,8 @@ cart empty
   <div class="small-message" v-if="selectedTime === null">please select a date and time</div>
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
+
+  {{currentOrder.fulfillment_info.customer.email}}
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
@@ -917,7 +919,8 @@ cart empty
 
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === '' || email === '' || emailAddress === ''">please enter a customer email address</div>
+ <!-- || email === '' || emailAddress === '' -->
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
@@ -1927,14 +1930,21 @@ if(self.currentOrder.billing){
                 .CurrentBalance[0]
             ) >= balanceCheck
           ) {
+
+
+console.log(JSON.stringify(self.cardNumberInput))
+console.log(JSON.stringify(balanceCheck))
             self.showInsufficientFunds = false;
             self.$http
               .post("/user/usegiftcard", {
                 cardNumber: self.cardNumberInput,
-                useAmount: balanceCheck
+                useAmount: JSON.stringify(balanceCheck)
               })
               .then(function (response) {
-                    //  console.log(response)
+console.log('response after giftcard')
+console.log(response)
+
+                     
                 self.currentBalance =
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
                   
@@ -1950,7 +1960,7 @@ if(self.currentOrder.billing){
                   self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
                 
-                
+        
                if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
                   self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
@@ -2223,8 +2233,8 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          // url: "http://localhost:4000/order/start-transaction",
+          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
