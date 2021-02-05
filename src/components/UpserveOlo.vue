@@ -143,7 +143,7 @@
           <div class="container no-lr-pad">
 
 
-              <template v-if="valid">
+              <template v-if="valid || test === 'testing'">
               <div class="toggleLr">
                 <div>
                   <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
@@ -158,7 +158,7 @@
               </div> 
               </template>
 
-              <template v-if="valid">
+              <template v-if="valid || test === 'testing'">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown">
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
@@ -460,7 +460,7 @@
 
 <div class="container mb10 hide-on-mob"> 
 <div @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
-      <template v-if="valid">
+      <template v-if="valid || test === 'testing'">
          <h4>{{title.toLowerCase()}} order</h4>
   </template>
       <template v-else>
@@ -480,7 +480,7 @@
 
 <div v-if="panelShow !== 'customerInfo'" class="container text-center">
 
-              <template v-if="valid">
+              <template v-if="valid || test === 'testing'">
               <div class="toggleLr">
                 <div>
                   <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
@@ -495,7 +495,7 @@
               </div> 
               </template>
   <div class="if-mobile">
-              <template v-if="valid">
+              <template v-if="valid || test === 'testing'">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown" style="width: 100%;padding: 0 0 10px 0;">
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
@@ -545,7 +545,7 @@
 
 
 <div style="display:none;">
-<template v-if="valid">
+<template v-if="valid || test === 'testing'">
 <template v-if="preOrderToggleState">
   <div style="margin-top:15px;">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
@@ -1412,6 +1412,8 @@ if(newAddress){
     },
   data() {
   return {
+    // test: 'testing',
+    test: 'not testing',
     validNumber: false,
       updateBilling: false,
       updateDelivery: false,
@@ -2554,16 +2556,20 @@ console.log(response);
           orderCMR.giftcardbalance = giftcardbalance
 
 
-         self.emptyCart();
+          self.emptyCart();
 
 
-          self.$store.commit("orderCMR", { orderCMR });
-          self.$router.push("/orderconfirmation");
+  
           self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
           self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
           let newDate = new Date();
           self.currentOrder.time_placed = newDate;
           self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+          self.$store.commit("orderCMR", { orderCMR });
+          self.$router.push("/orderconfirmation");
+
+
           // let storeCurrentOrder = self.currentOrder
           // self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
         })
