@@ -1198,7 +1198,15 @@ if(this.user){
 
 
       for(var item of curOr.charges.items){
-          let itemAddition = item.quantity * item.price
+
+        let modifierAmount = 0
+
+            for(var mod of item.modifiers){
+              modifierAmount = modifierAmount + mod.price
+            }
+          console.log(modifierAmount)
+          let price = item.price + modifierAmount
+          let itemAddition = item.quantity * price
           preTotal = preTotal + itemAddition
       }
 
@@ -1957,7 +1965,7 @@ console.log(response)
 
 
     if(self.title === 'Mamnoon'){
-    
+    console.log(self.$store.state.storeCurrentOrderUpdateMamnoon)
                     if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
                   self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
@@ -2269,7 +2277,8 @@ this.currentItemModifierArray.push(modAddition)
 
 
 // console.log(this.currentItem)
-      this.currentItem.price_cents = Number(this.currentItem.price_cents) + Number(mod.price_cents);
+      // this.currentItem.price_cents = Number(this.currentItem.price_cents) + Number(mod.price_cents);
+          this.currentItem.price_cents = Number(this.currentItem.price_cents)
       document.getElementById("add-" + mod.id).disabled = true;
       document.getElementById("remove-" + mod.id).disabled = false;
       
@@ -2281,8 +2290,8 @@ console.log(this.currentItem)
         (item) => item.id !== mod.id
       );
       this.currentItemModifierArray = updatedItems;
-      this.currentItem.price_cents =
-        Number(this.currentItem.price_cents) - Number(mod.price_cents);
+      // this.currentItem.price_cents = Number(this.currentItem.price_cents) - Number(mod.price_cents);
+      this.currentItem.price_cents = Number(this.currentItem.price_cents)
       document.getElementById("add-" + mod.id).disabled = false;
       document.getElementById("remove-" + mod.id).disabled = true;
     },
