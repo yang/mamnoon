@@ -1188,14 +1188,11 @@ this.currentOrder.charges.tip.amount = this.customAmountAddition
       curOr.restaurant = this.title
   //  if(this.currentOrder.charges){
 
-
 if(this.user){
   // console.log('this.user')
 // console.log(this.user)
   // console.log(this.user.user.email)
 }
-
-
 
       for(var item of curOr.charges.items){
 
@@ -1224,9 +1221,7 @@ if(this.user){
       curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount
       curOr.payments.payments[0].amount = curOr.charges.total
       curOr.currentAmountToAddCustom = this.customAmountAddition * 100
-    
-
-    //  }
+  //  }
 
     if(this.title === 'Mamnoon'){
         let storeCurrentOrderUpdateMamnoon = curOr;
@@ -1238,12 +1233,11 @@ if(this.user){
         let storeCurrentOrderUpdateMbar = curOr;
         this.$store.commit("upserveOrderCurrentOrderUpdate", { storeCurrentOrderUpdateMbar });	
     }
-
-
-
-// console.log(curOr)
+    // console.log(curOr)
+    
     },
-     deep: true
+    
+    deep: true
   },
 openTimesUpdated(){
   this.dropDown();
@@ -1420,8 +1414,8 @@ if(newAddress){
     },
   data() {
   return {
-    // test: 'testing',
-    test: 'not testing',
+    test: 'testing',
+    // test: 'not testing',
     validNumber: false,
       updateBilling: false,
       updateDelivery: false,
@@ -1595,34 +1589,11 @@ showToFixed: function (value) {
   methods: {
     emptyCart(){
     
-
-this.currentOrder.charges.items = []
-
-if(this.$store.state.loggedIn){
-this.currentOrder.fulfillment_info.customer.email = this.user.user.email
-}
-
-
-
-// this.$store.state.storeCurrentOrderUpdateMamnoon
-
-
-    // if(this.title === 'Mamnoon'){
-    //     // this.currentOrder = this.$store.state.emptyCart
-    //     let storeCurrentOrderUpdateMamnoon = this.$store.state.emptyCart
-    //     this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });
-
-    // }else if(this.title === 'Mamnoon Street'){
-    //     // this.currentOrder = this.$store.state.emptyCart
-    //     let storeCurrentOrderUpdateStreet = this.$store.state.emptyCart
-    //     this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });
-    // }else if(this.title === 'Mbar'){
-    //     // this.currentOrder = this.$store.state.emptyCart
-    //     let storeCurrentOrderUpdateMbar = this.$store.state.emptyCart
-    //     this.$store.commit("upserveOrderCurrentOrderUpdateMbar", { storeCurrentOrderUpdateMbar });
-    // }
-
-
+      this.currentOrder.charges.items = []
+      
+      if(this.$store.state.loggedIn){
+        this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+      }
 
     },
     resetCart(){
@@ -2548,15 +2519,15 @@ console.log(item)
         });
       },
       doAnOrder(currentOrder,approvalData,giftcardbalance) {
-console.log('do an order')
+
+      console.log('do an order')
       let self = this;
       console.log(this.oloEndpoint)
       console.log(currentOrder)
-      this.$http
-        .post(this.oloEndpoint, currentOrder)
+      this.$http.post(this.oloEndpoint, currentOrder)
         .then((response) => {
           console.log('response happen');
-console.log(response);
+          console.log(response);
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
           self.orderCMR = response.data;
@@ -2574,13 +2545,9 @@ console.log(response);
           let newDate = new Date();
           self.currentOrder.time_placed = newDate;
           self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-
           self.$store.commit("orderCMR", { orderCMR });
           self.$router.push("/orderconfirmation");
 
-
-          // let storeCurrentOrder = self.currentOrder
-          // self.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
         })
         .catch((e) => {
           console.log("errors");
@@ -2784,6 +2751,8 @@ this.setTip(0)
       this.$store.commit("drawerTrue", { drawerTrue });
     }
   
+    this.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
+
   }
 
 };
