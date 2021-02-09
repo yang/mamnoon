@@ -1,6 +1,5 @@
 <template>
-  <div id="upserveolo" :class='{smallerBoxes: currentItem && currentItem.name === "mamnoon @ home" }'>
-      <!-- <div id="upserveolo"> -->
+  <div id="upserveolo" :class='{smallerBoxes: currentItem.name === "mamnoon @ home" }'>
     <section>
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
       <div v-if="modalOpen" class="order-modal">
@@ -26,40 +25,32 @@
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
-        
           <template v-if="currentItem.modifier_group_ids">
           <div v-if="currentItem.modifier_group_ids.length >= 1">
-        <h4 v-if="currentItem.name === 'mamnoon @ home'" class="text-left">options</h4>
+            <h4 v-if="currentItem.name === 'mamnoon @ home'" class="text-left">options</h4>
             <h4 v-else class="text-left">add ons</h4>
             <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
-                <template v-if="modifieritem === modifier.id">
-                  <div class="displayInlineBlock">
-                  <!--<div v-if="modifier.minimum_required === 0">
+                <div v-if="modifieritem === modifier.id" class="displayInlineBlock">
+                  <!-- <div v-if="modifier.minimum_required === 0">
                     <div v-if="modifier.name !== 'Promotions'">(add ons not required)</div>
                   </div>
                   <div v-else>
                     minimum_required: {{modifier.minimum_required}}
                     maximum_required: {{modifier.maximum_required}}
-                  </div>-->
-                  <!-- minimum_required: {{modifier.minimum_required}}
-                  maximum_required: {{modifier.maximum_required}} -->
-                <template v-if="currentItem.name === 'mamnoon @ home'">
+                  </div> -->
+
+                  <template v-if="currentItem.name === 'mamnoon @ home'">
                     <div class="optionHeader">{{modifier.name}}</div>
                   </template>
 
                   <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                   <div v-for="(mod,i) in modifierItems" :key="'C'+ i">
-                   
+
                     <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i">
-                            <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                      <div v-if="m === mod.id" class="box">
                         <div class="box-inner">
                           {{mod.name}}
-
-
-
-
-
                           <br />
                           <!-- {{mod}} -->
                           <i class="small" v-if="mod.price==='0.0'">no extra charge</i>
@@ -88,12 +79,14 @@
 
                           <div v-else class="mt10">
 
-                            <!-- <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
+                           
+
+                            <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                             <button
                               @click="removeAddOn(mod,modifieritem)"
                               :id="'remove-' + mod.id"
                               disabled
-                            >-</button> -->
+                            >-</button>
                           </div>
 
 
@@ -102,8 +95,8 @@
                       </div>
                     </div>
                   
-                  </div> </div>
-                </template>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -115,7 +108,6 @@
             type="text"
             placeholder="special instructions"
             v-model="textdescription"
-            style="margin-top: 10px;"
             />
           <!-- <hr /> -->
 
@@ -126,28 +118,10 @@
           <button @click="incrementCurrentItem()">+</button>
           <div class="add-to-order-footer">
             item total: <b>${{currentItem.price_cents.toFixed(2)/100 * currentItemQuanity }}</b>
-            <template v-if="currentItem.name === 'mamnoon @ home'">
-
-                <template v-if="allOptionsSelected">
-                  <button
-                  class="float-right"
-                  @click="addToOrder(currentItem)"
-                  >add to order</button>
-                </template>
-                <template v-else>
-                  <button
-                  class="float-right"
-                  disabled>please select all options</button>
-                </template>
-
-            </template>
-            <template v-else>
-              <button
-                class="float-right"
-                @click="addToOrder(currentItem)"
-              >add to order</button>
-            </template>
-
+            <button
+              class="float-right"
+              @click="addToOrder(currentItem)"
+            >add to order</button>
           </div>
         </div>
       </div>
@@ -255,9 +229,8 @@
                             </template>
                               <div class="content-box-upper">
                               <div class="name">
-                                {{item.name.replace('Feature - ', '')}}<br>
-                              {{serve.name}}
-                              </div>
+                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
+                              {{serve.name}}</div>
                               
                               <div
                                 v-if="serve.description"
@@ -382,7 +355,7 @@
                   <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
                   <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
-                  {{item.timing_mask}}
+                  <!-- {{item.timing_mask}} -->
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
@@ -740,14 +713,14 @@
                 <label class="smblk" for="name">name:</label>
                 <br />
            
-              <div v-if="user.user && user.user.name !== ''" style="margin-bottom: 10px;">{{user.user.name}}</div>
-             <input v-else
-              type="text"
-              id="name"
-              name="name"
-              placeholder="name"
-              v-model="currentOrder.fulfillment_info.customer.first_name"
-              />
+                <div v-if="user.user && user.user.name !== ''" style="margin-bottom: 10px;">{{user.user.name}}</div>
+                <input v-else
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="name"
+                  v-model="currentOrder.fulfillment_info.customer.first_name"
+                />
                <label class="smblk" for="email">email:</label>
                 <br />
                 <div v-if="emailAddress" style="margin-bottom: 10px;">{{emailAddress}}</div>
@@ -830,9 +803,7 @@
                         <CloseModalRedSm />           
                   </button>
 <div class="mt5">
-                  <b>{{order.quantity}}</b>
-                  {{order.name}}
-                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <b>{{order.quantity}}</b> {{order.name}}&nbsp;&nbsp;&nbsp;&nbsp;
                   <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
 <div v-if="order.modifiers.length > 0"> 
 <div class="small-message grey" v-for="mod in order.modifiers">
@@ -1449,8 +1420,6 @@ if(newAddress){
     },
   data() {
   return {
-    allOptionsSelected: false,
-    currentModifiers: [],
     test: 'testing',
     // test: 'not testing',
     validNumber: false,
@@ -1624,40 +1593,6 @@ showToFixed: function (value) {
 }
   },
   methods: {
-    selectedOption(id, modifier, mod, modifieritem){
-
-
-
-
-
-
-
-
-
-
-
-
-
-      let index = this.currentModifiers.findIndex(p => p.option === id)
-
-      if(index > -1){
-        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].option = null
-        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].selected = false
-         this.removeAddOn(mod,modifieritem)
-      }else{
-        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].option = id
-        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].selected = true
-        this.addAddOn(mod,modifieritem)
-      }
-
-      if(this.currentModifiers.every( (val, i, arr) => val.selected === true ) ){
-          this.allOptionsSelected = true
-        }else{
-          this.allOptionsSelected = false
-        }
-
-
-    },
     emptyCart(){
     
       this.currentOrder.charges.items = []
@@ -2304,6 +2239,7 @@ console.log('transasction success')
     addAddOn(mod, modifieritem) {
 
 
+
       let modAddition = {
         id: mod.id,
         modifier_group_id: modifieritem,
@@ -2311,30 +2247,32 @@ console.log('transasction success')
         name: mod.name
       };
 
-      this.currentItemModifierArray.push(modAddition)
-      this.currentItem.price_cents = Number(this.currentItem.price_cents)
-      // document.getElementById("add-" + mod.id).disabled = true;
-      // document.getElementById("remove-" + mod.id).disabled = false;
+
+
+
+this.currentItemModifierArray.push(modAddition)
+
+
+// console.log(this.currentItem)
+      // this.currentItem.price_cents = Number(this.currentItem.price_cents) + Number(mod.price_cents);
+          this.currentItem.price_cents = Number(this.currentItem.price_cents)
+      document.getElementById("add-" + mod.id).disabled = true;
+      document.getElementById("remove-" + mod.id).disabled = false;
       
+console.log(this.currentItem)
 
     },
     removeAddOn(mod, modifieritem) {
-
-let updatedItems = this.currentItemModifierArray.filter(
+      let updatedItems = this.currentItemModifierArray.filter(
         (item) => item.id !== mod.id
       );
       this.currentItemModifierArray = updatedItems;
       // this.currentItem.price_cents = Number(this.currentItem.price_cents) - Number(mod.price_cents);
       this.currentItem.price_cents = Number(this.currentItem.price_cents)
-      // document.getElementById("add-" + mod.id).disabled = false;
-      // document.getElementById("remove-" + mod.id).disabled = true;
+      document.getElementById("add-" + mod.id).disabled = false;
+      document.getElementById("remove-" + mod.id).disabled = true;
+    },
 
-
-
-
-
-
-},
     removeFromOrderDontCloseModal(removal) {
 
     document.getElementById("add-" + removal.id).disabled = false;
@@ -2408,20 +2346,8 @@ removeFromOrder(removal) {
       let current = Object.assign({}, serve);
       current.timing_mask = timing_mask
 
-      // console.log(current.modifier_group_ids)
-
-
-      this.currentModifiers = current.modifier_group_ids.map(function(x){
-        return { name: x,
-                selected: false,
-                option: null
-              }
-      })
-
-
       this.modalOpen = true;
       this.currentItem = current;
-
     },
     expandChild(drawer) {
       var container = document.getElementById("drawertop-" + drawer)
@@ -2803,7 +2729,7 @@ this.setTip(0)
   mounted() {
 
     this.upserveMongo();
-    // this.getHours();
+    this.getHours();
     this.getUser();
     emergepay.init();
 

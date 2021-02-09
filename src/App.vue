@@ -1352,4 +1352,61 @@ svg{
     text-align: center;
 }
 
+
+
+
+
+
+// mamnoon @ home styling adjustments
+
+#upserveolo.smallerBoxes .box {
+    width: 25%;
+    float: left;
+cursor: pointer;
+    font-size: 14px;
+}
+
+
+.optionHeader{
+    padding: 10px 0;
+    margin-bottom: 5px;
+    font-weight: 500;
+
+}
+
+@media only screen and (max-width: 768px) {
+#upserveolo.smallerBoxes .box {
+    width: 50%;
+    float: left;
+
+}
+
+}
+
+
+
+
+#upserveolo.smallerBoxes .box > div {
+    width: 90%;
+    padding: 10px;  
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+        height: 100px;
+}
+
+
+#upserveolo.smallerBoxes .box.selected > div {
+    width: 90%;
+    padding: 10px;  
+    box-sizing: border-box;
+    border: 1px solid #f05d5b;
+}
+
+
+.optionHeader{
+  width: 100%;
+  // text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
 </style>
