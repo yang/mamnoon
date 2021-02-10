@@ -1388,18 +1388,29 @@ cursor: pointer;
 
 #upserveolo.smallerBoxes .box > div {
     width: 90%;
-    padding: 10px;  
+    // padding: 10px;  
     box-sizing: border-box;
     border: 1px solid #ddd;
-        height: 100px;
+        // height: 100px;
+
+        transition: all .25s ease;
+
+
+  
 }
 
 
 #upserveolo.smallerBoxes .box.selected > div {
     width: 90%;
-    padding: 10px;  
+    // padding: 10px;  
     box-sizing: border-box;
     border: 1px solid #f05d5b;
+    background: #f05d5b;
+    color: white;
+
+
+
+
 }
 
 
@@ -1407,6 +1418,28 @@ cursor: pointer;
   width: 100%;
   // text-align: center;
   border-bottom: 1px solid #ddd;
+}
+
+.pad-10{
+  padding: 10px;
+padding-bottom: 0;
+  &:first-child{
+
+  }
+  p{
+    margin-bottom: 0;
+        font-size: 12px;
+  }
+
+
+.title-bolder{
+  font-weight: bolder;
+}
+
+}
+
+#upserveolo .box-inner{
+  padding-bottom: 10px;
 }
 
 </style>

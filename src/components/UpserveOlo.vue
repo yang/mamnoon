@@ -26,7 +26,9 @@
           <p class="item-description-p">{{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
-        
+
+
+
           <template v-if="currentItem.modifier_group_ids">
           <div v-if="currentItem.modifier_group_ids.length >= 1">
         <h4 v-if="currentItem.name === 'mamnoon @ home'" class="text-left">options</h4>
@@ -48,36 +50,59 @@
                     <div class="optionHeader">{{modifier.name}}</div>
                   </template>
 
+
+
+
                   <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                   <div v-for="(mod,i) in modifierItems" :key="'C'+ i">
                    
                     <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i">
                             <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                         <div class="box-inner">
-                          {{mod.name}}
 
+                        <div v-if="modifier.name.includes(': choose 1')">
+                            <div v-for="(piece,i) in upserveList" :key="'E'+ i">
+                              <div v-if="piece.name.toLowerCase() === mod.name">
+                                <img :src="piece.images.online_ordering_menu.main" />
+     
+                             </div>
+                            </div>
+                          </div>
+   <div class="pad-10">
 
-
-
-
+           <span class="title-bolder"> {{mod.name}}</span>
+   
                           <br />
                           <!-- {{mod}} -->
                           <i class="small" v-if="mod.price==='0.0'">no extra charge</i>
                           <b v-else>{{mod.price}}</b>
 
+                          </div>
 
-                          <div v-if="modifier.name === 'Promotions'">
+
+                       <div v-if="modifier.name.includes(': choose 1')">
                             <div v-for="(piece,i) in upserveList" :key="'E'+ i">
-                              <div v-if="piece.name === mod.name">
-                                <img :src="piece.images.online_ordering_menu.main" />
-                              {{piece}}
+                              <div v-if="piece.name.toLowerCase() === mod.name">
+                     
+                                <div class="pad-10">
+                                <p>
+                              {{piece.description}}
+                              </p>
+                              </div>
                               </div>
                             </div>
                           </div>
+
+
+
+
+
+                          <!-- <div v-if="modifier.name === 'hot mezze : choose 1'"> -->
+           
                           <!-- loop through and get image -->
 
-
-                          <div class="mt10" v-if="modifier.name === 'Promotions'">
+          <div class="mt10" v-if="modifier.name === 'Promotions'">
+                          <!-- <div class="mt10" v-if="modifier.name === 'Promotions'"> -->
 
               
                            
@@ -86,7 +111,7 @@
                               disabled>-</button>
                           </div>
 
-                          <div v-else class="mt10">
+                          <!-- <div v-else class="mt10"> -->
 
                             <!-- <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                             <button
@@ -94,7 +119,7 @@
                               :id="'remove-' + mod.id"
                               disabled
                             >-</button> -->
-                          </div>
+                          <!-- </div> -->
 
 
 
@@ -1451,8 +1476,8 @@ if(newAddress){
   return {
     allOptionsSelected: false,
     currentModifiers: [],
-    test: 'testing',
-    // test: 'not testing',
+    // test: 'testing',
+    test: 'not testing',
     validNumber: false,
       updateBilling: false,
       updateDelivery: false,
