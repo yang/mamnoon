@@ -199,8 +199,18 @@
 
           <div class="container no-lr-pad">
 
+<!-- {{selectedDate}} -->
+<!-- {{selectedTime}} -->
 
-              <template v-if="valid || test === 'testing'">
+
+<!--          <template v-if="valid">
+          we are open
+          </template>
+          <template v-else>
+          we are currently closed
+          </template>-->
+
+              <template v-if="valid">
               <div class="toggleLr">
                 <div>
                   <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
@@ -215,7 +225,7 @@
               </div> 
               </template>
 
-              <template v-if="valid || test === 'testing'">
+              <template v-if="valid">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown">
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
@@ -313,6 +323,144 @@
       </div>
 
 
+      
+
+          <template v-if="valid">
+          <!-- we are openc  {{!preOrderToggleState}} -->
+          </template>
+          <template v-else>
+          <!-- we are currently closed, so no food is available. please select a date and time in the future to see what is available -->
+          </template>
+
+
+
+
+
+
+
+
+<!-- <h1>begin new filter for use when open</h1> -->
+ <!-- beggin 00 -->
+ <template v-if="valid && !preOrderToggleState">
+<template v-for="item in upserveSections">
+  <!-- beggin 0 -->
+  <template v-if="noFiltering">
+    <!-- beggin 1 -->
+      <template>
+         <!-- <div class="container menu-line"> -->
+<!-- <template v-if="nowTime && nowDate"> 
+{{nowTime,nowDate}}
+</template>  -->
+              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line">
+                                                <div
+                                                  :id="'drawertop-'+ item.id"
+                                                  @click="expandChild(item.id)"
+                                                  class="display-block row no-lr-margin"
+                                                >
+                                                  <h2 class="menu-header">
+                                                    <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
+                                                    <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                                                    {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                                                    <!-- {{item.timing_mask}} -->
+                                                  </h2>
+                                                </div>
+                                        <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                                            <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                                                    <template v-for="serve in upserveList" class="grey-bg">
+                                                                  <template v-if="serve.id === piece" class="inline-block">
+                                                                                <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                                                                                            <div class="half-width2left">
+                                                                                                      <div class="content-box">
+                                                                                                          <div class="name">{{serve.name}}</div>
+                                                                                                          <div
+                                                                                                            v-if="serve.description"
+                                                                                                            class="food-description"
+                                                                                                          >{{serve.description}}</div>
+                                                                                                          <div class="food-price">
+                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}
+                                                                                                          </div>
+                                                                                                          <br />
+                                                                                                        </div>
+                                                                                            </div>
+                                                                                              <div class="half-width2right">
+                                                                                                <template v-if="serve.images">
+                                                                                                  <div
+                                                                                                    v-if="serve.images.online_ordering_menu"
+                                                                                                    class="backgroundImage"
+                                                                                                    v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                                                                                                  ></div>
+                                                                                              </template>
+                                                                                                <template v-else>
+                                                                                                  <div class="backgroundImage"
+                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
+                                                                                                </template>
+                                                                                              </div>
+                                                                                </div>
+                                                                  </template>
+                                                    </template>
+                                            </div>
+                                      </div>
+                                    </div>
+      </template>
+      <!-- end 1 -->
+  </template>
+  <!-- end 0 -->
+</template>
+</template>
+<!-- end 00 -->
+
+<!--// <h1>end new</h1>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+<template v-if="preOrderToggleState">
 
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20">
@@ -325,78 +473,79 @@
             <template v-else>
 
 
-
+ <!-- beggin 0 -->
     <template v-if="noFiltering">
 
+              <!-- <br />  -->
+              <!-- no filtering -->
+                  <!-- beggin 1 -->
+                                <template v-if="item.timing_mask === item.timing_mask">
+                                  <div class="container menu-line">
+                                                <div
+                                                  :id="'drawertop-'+ item.id"
+                                                  @click="expandChild(item.id)"
+                                                  class="display-block row no-lr-margin"
+                                                >
+                                                  <h2 class="menu-header">
+                                                    <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
+                                                    <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                                                    {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                                                    <!-- {{item.timing_mask}} -->
+                                                  </h2>
+                                                </div>
+                                        <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                                            <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                                
+                                                    <template v-for="serve in upserveList" class="grey-bg">
+                                                                  <template v-if="serve.id === piece" class="inline-block">
+                                                                                <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                                                                                            <div class="half-width2left">
+                                                                                                      <div class="content-box">
+                                                                                                          <div class="name">{{serve.name}}</div>
+                                                                                                          <div
+                                                                                                            v-if="serve.description"
+                                                                                                            class="food-description"
+                                                                                                          >{{serve.description}}</div>
+                                                                                                          <div class="food-price">
+                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}
+                                                                                                          </div>
+                                                                                                          <br />
+                                                                                                        </div>
+                                                                                            </div>
+                                                                                              <div class="half-width2right">
+                                                                                                <template v-if="serve.images">
+                                                                                                  <div
+                                                                                                    v-if="serve.images.online_ordering_menu"
+                                                                                                    class="backgroundImage"
+                                                                                                    v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                                                                                                  ></div>
+                                                                                              </template>
+                                                                                                <template v-else>
+                                                                                                  <div class="backgroundImage"
+                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
+                                                                                                </template>
+                                                                                              </div>
+                                                                                </div>
+                                                                  </template>
+                                                    </template>
+                                            </div>
+                                      </div>
+                                    </div>
+                                </template>
+                  <!-- end 1 -->
 
 
 
-              <template v-if="item.timing_mask === item.timing_mask">
-                <div class="container menu-line">
-              <div
-                :id="'drawertop-'+ item.id"
-                @click="expandChild(item.id)"
-                class="display-block row no-lr-margin"
-              >
-                <h2 class="menu-header">
-                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
-                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
-                  <!-- {{item.timing_mask}} -->
-                </h2>
-              </div>
-              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
-              
-                    <template v-for="serve in upserveList" class="grey-bg">
-                      <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
-                          <div class="half-width2left">
-                            <div class="content-box">
-                              <div class="name">{{serve.name}}</div>
-                              <div
-                                v-if="serve.description"
-                                class="food-description"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                              <br />
-                            </div>
-                          </div>
-                          <div class="half-width2right">
-                            <template v-if="serve.images">
-                              <div
-                                v-if="serve.images.online_ordering_menu"
-                                class="backgroundImage"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-                           </template>
-                            <template v-else>
-                              <div class="backgroundImage"
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >     <NadiIconSmX style="height:140px;" /></div>
-                            </template>
-                          </div>
-                        </div>
-                      </template>
-                    </template>
-               
-                </div>
-              </div>
-              </div>
-                </template>
-
-
-
-
-
+      <!-- end 0 - this one below -->
       </template>
       <template v-else>
 
-
+<!-- filtering -->
+<!-- {{item.timing_mask}} -->
 
          <template v-if="item.timing_mask === null">
+           <!-- no timing mask -->
                 <div class="container menu-line">
               <div
                 :id="'drawertop-'+ item.id"
@@ -452,7 +601,11 @@
               </div>
                 </template>
                 <template v-else>
+
+
+
               <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
+            <!-- this is available at the started time -->
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
@@ -508,6 +661,9 @@
   </template>
   </template>
 
+
+
+</template>
           </div>
 
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
@@ -518,7 +674,7 @@
 
 <div class="container mb10 hide-on-mob"> 
 <div @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
-      <template v-if="valid || test === 'testing'">
+      <template v-if="valid">
          <h4>{{title.toLowerCase()}} order</h4>
   </template>
       <template v-else>
@@ -538,7 +694,7 @@
 
 <div v-if="panelShow !== 'customerInfo'" class="container text-center">
 
-              <template v-if="valid || test === 'testing'">
+              <template v-if="valid">
               <div class="toggleLr">
                 <div>
                   <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
@@ -553,7 +709,7 @@
               </div> 
               </template>
   <div class="if-mobile">
-              <template v-if="valid || test === 'testing'">
+              <template v-if="valid">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown" style="width: 100%;padding: 0 0 10px 0;">
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
@@ -603,7 +759,7 @@
 
 
 <div style="display:none;">
-<template v-if="valid || test === 'testing'">
+<template v-if="valid">
 <template v-if="preOrderToggleState">
   <div style="margin-top:15px;">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
@@ -1081,9 +1237,9 @@ empty cart
       <div>
       </div></div>
       </section>
-      <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
-     <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-     <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
+<!--      <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
+    <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
+     <!--<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>-->
 
 
 
@@ -1359,6 +1515,11 @@ if(this.selectedDate === null && this.selectedTime === null){
 this.noFiltering = true
 }else{
   this.noFiltering = false
+
+console.log(this.selectedDate)
+console.log(this.selectedTime)
+
+
 }
 
 let itemsToRemove = []
@@ -1474,6 +1635,8 @@ if(newAddress){
     },
   data() {
   return {
+    nowTime: null,
+    nowDate: null,
     allOptionsSelected: false,
     currentModifiers: [],
     // test: 'testing',
@@ -1649,6 +1812,9 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    showCurrentlyAvailable(){
+
+    },
     selectedOption(id, modifier, mod, modifieritem){
 
 
@@ -1827,6 +1993,9 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 
 },
 currentlyAvailable(startTime,endTime,rules,futureDay,futureTime){
+
+
+
 
     let weekday = ['mon','tue','wed','thu','fri','sat','sun']
 
@@ -2748,6 +2917,66 @@ const range = items.map(time => {
 this.openTimes = this.openTimes.concat(items)
 
 },
+filterForNow(){
+
+
+let today = new Date()
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+let subdays = days.map(function(x){
+return x.substring(0,3).toLowerCase()
+})
+
+let self2 = this
+let tFs = subdays.map(function(x){
+return self2.openDays.includes(x)
+})
+
+
+
+let tomorrow = new Date(today)
+tomorrow.setDate(tomorrow.getDate() + 0)
+
+let timeslotsCreated = [];
+console.log(this.openTimesUpdated)
+for(let i = 1; i < this.openTimesUpdated.length; i++){ 
+timeslotsCreated.push({
+time: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)),
+timelabel: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)).toLocaleTimeString().replace(":00","")
+})
+} 
+let createdItem = {
+dayLabel: days[tomorrow.getDay()],
+dayName: days[tomorrow.getDay()],
+closed: false,
+dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
+dateFormatted: tomorrow.toISOString().slice(0,10),
+timeslots: timeslotsCreated,
+time: {
+// time: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)),
+time: new Date(),
+timelabel: new Date().toLocaleTimeString().replace(":00","")
+}
+}
+
+
+
+let createdTime = {
+// time: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)),
+time: new Date(),
+timelabel: new Date().toLocaleTimeString().replace(":00","")
+}
+console.log('createdTime')
+console.log(createdTime)
+
+// console.log(createdItem)
+// this.selectedDate = createdItem
+// this.selectedTime = createdTime
+
+this.nowTime = createdTime
+this.nowDate = createdItem
+
+},
 dropDown(){
 
      let today = new Date()
@@ -2827,9 +3056,31 @@ this.setTip(0)
   },
   mounted() {
 
+
+
+
+// if(this.valid){
+  // console.log('open now so filter to what is available now')
+  // this.createSingle()
+// }else{
+    // console.log('open now so filter to what is available now')
+  // this.createSingle()
+// }
+
+// if(this.valid){
+this.filterForNow()
+// }
+
+console.log(this.valid)
+
+
     this.upserveMongo();
-    // this.getHours();
+    this.getHours();
     this.getUser();
+
+
+    this.showCurrentlyAvailable();
+
     emergepay.init();
 
 
