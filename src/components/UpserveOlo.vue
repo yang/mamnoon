@@ -226,8 +226,8 @@
               </template>
 
 
-{{selectedTime}}
-{{selectedDate}}
+<!-- {{selectedTime}} -->
+<!-- {{selectedDate}} -->
               <template v-if="valid">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown">
