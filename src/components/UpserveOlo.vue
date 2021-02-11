@@ -225,6 +225,9 @@
               </div> 
               </template>
 
+
+{{selectedTime}}
+{{selectedDate}}
               <template v-if="valid">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown">
@@ -1907,6 +1910,8 @@ if(c === true){
 
 }else{
       this.currentOrder.preorder = false
+this.selectedTime, this.selectedDate = null
+
 
 }
 
