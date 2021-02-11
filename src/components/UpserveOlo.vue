@@ -270,6 +270,7 @@
               <Prev />
               </span>
               </template>
+              {{item.name}}
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <template v-for="item in upserveSections">
             <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids"> 
