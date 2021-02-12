@@ -14,10 +14,10 @@ name: 'nadiicon'
 
 
 <style>
-.cls-1nadiiconxx{fill:#aaaaaa;}
-.cls-3nadiiconxx{fill:#fff;}
+.cls-1nadiiconxx{fill:#fede32;}
+.cls-3nadiiconxx{fill:#eee;}
 /* .cls-1nadiiconxx{stroke:#ddd;stroke-miterlimit:10;stroke-width:0px;} */
-.cls-2nadiiconxx{fill:#4a494b;}
+.cls-2nadiiconxx{fill:#f65c5d;}
 
 svg#nadiIconxx{
     /* background: pink; */

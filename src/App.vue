@@ -1361,9 +1361,11 @@ svg{
 
 #upserveolo.smallerBoxes .box {
     width: 25%;
+        width: 20%;
     float: left;
 cursor: pointer;
     font-size: 14px;
+    margin-bottom: 15px;
 }
 
 
@@ -1438,8 +1440,24 @@ padding-bottom: 0;
 
 }
 
+
+
+@media only screen and (max-width: 992px) {
 #upserveolo .box-inner{
   padding-bottom: 10px;
+}
+
+
+
+#upserveolo.smallerBoxes .box.selected > div {
+    width: 100%;
+
+
+
+
+}
+
+
 }
 
 </style>

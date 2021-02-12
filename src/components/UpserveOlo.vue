@@ -47,11 +47,12 @@
                   <!-- minimum_required: {{modifier.minimum_required}}
                   maximum_required: {{modifier.maximum_required}} -->
                 <template v-if="currentItem.name === 'mamnoon @ home'">
-                    <div class="optionHeader">{{modifier.name}}</div>
+                    <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
 
 <!-- ddddd -->
-<div class="option-choices">
+<div class="container">
+<div class="option-choices row row-eq-height">
                                               <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                                               <template v-for="(mod,i) in modifierItems">
                                                 <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
@@ -60,6 +61,7 @@
                                                         <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
 
+<!-- {{modifier}} -->
                                                             <div class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
@@ -68,6 +70,7 @@
                                                                               <NadiIconxx />
                                                                         </div>
 
+<!-- ddd -->
                                                                         <div style="position: absolute;top:0;width:100%;">
                                                                             <div v-if="modifier.name.includes(': choose 1')">
                                                                             <template v-for="(piece,i) in upserveList">
@@ -91,8 +94,10 @@
 
                                                                           <br />
                                                                           <!-- {{mod}} -->
-                                                                          <i class="small" v-if="mod.price==='0.0'">no extra charge</i>
-                                                                          <b v-else>{{mod.price}}</b>
+                                                                          <i class="small" v-if="mod.price==='0.0'">
+                                                                            <!-- no extra charge -->
+                                                                            </i>
+                                                                          <b v-else>+${{mod.price}}</b>
 
                                                                           </div>
 
@@ -137,7 +142,7 @@
 
 <!-- end container -->
 </div>
-
+         </div>
                   </div>
                 </template>
               </div>
@@ -3508,20 +3513,40 @@ a{
 
 
 .option-choices{
-width: 100%;
-  display: flex;
-  width: 100%;
-  // display: table;
-  // width: 100%;
+// width: 100%;
+//   display: flex;
+//   width: 100%;
+//   // display: table;
+//   // width: 100%;
+
+  // display: grid;
+  // Essentially switch the default axis
+  // grid-auto-flow: column;
+
+
+
+    // display: flex;
+  // flex-direction: column;
+    // border: 1px solid red;
+    // display: table;
+        // border-spacing: 20px;
+
+
 }
 
 
 .option-choices .box{
-    flex: 2;
-width: 25%;
+    // flex: 2;
+// width: 25%;
   // display: table-cell;
   // padding: 16px;
 // height: 100%;
+// width: 25%;
+
+
+
+    // display: table-cell;
+
 }
 
 
