@@ -405,12 +405,15 @@ form textarea,
     width: 100%;  
 
   .name {
+    font-weight: 500;
   }
 
   .food-description {
     font-size: 0.9rem;
     margin-bottom: 0px;
   }
+
+  height: 120px;
 }
 
 
@@ -849,8 +852,9 @@ ul.no-left-pad{
 
 
 .fw{
-      width: 100%;
-      margin-top: 20px;
+width: 100%;
+// margin-top: 20px;
+margin-top: 10px;
 
 }
 
@@ -1123,12 +1127,27 @@ li.modal-item{
 
 
 .slide-show-image{
+    // position: absolute;
+    // top: 0px;
+    // left: 50%;
+    // height: 440px;
+    // width: auto !important;
+    // transform: translate(-50%);
+
+
+
     position: absolute;
     top: 0px;
     left: 50%;
     height: 440px;
     width: auto !important;
+    -webkit-transform: translate(-50%);
     transform: translate(-50%);
+    width: 50% !important;
+    background-size: 100%;
+    background-position: center;
+    color: transparent;
+
     }
 
 
@@ -1371,7 +1390,7 @@ cursor: pointer;
 
 .optionHeader{
     padding: 10px 0;
-    margin-bottom: 5px;
+    // margin-bottom: 5px;
     font-weight: 500;
 
 }
@@ -1380,6 +1399,7 @@ cursor: pointer;
 #upserveolo.smallerBoxes .box {
     width: 50%;
     float: left;
+    margin-bottom: 5px;
 
 }
 
@@ -1442,6 +1462,12 @@ padding-bottom: 0;
 
 
 
+.hide-on-desktop{
+  display: none;
+}
+
+
+
 @media only screen and (max-width: 992px) {
 #upserveolo .box-inner{
   padding-bottom: 10px;
@@ -1457,7 +1483,23 @@ padding-bottom: 0;
 
 }
 
+.hide-on-desktop{
+display: flow-root;
+}
 
+
+}
+
+
+.fw{
+  width: 100%;
+  padding: 0 15px;
+}
+
+
+#upserveolo .item-description-p.noTopMarge,
+.noTopMarge{
+  margin-top: 0;
 }
 
 </style>

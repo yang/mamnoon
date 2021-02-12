@@ -23,7 +23,12 @@
             <NadiIcon />
             </div>
           </template>
-          <p class="item-description-p">{{currentItem.description}}</p>
+   
+          <p class="item-description-p" :class="{noTopMarge: currentItem.name === 'mamnoon @ home'}">
+                            <template v-if="currentItem.name === 'mamnoon @ home'">
+                     <b>{{currentItem.name}}</b><br>
+                     </template>
+                     {{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
                     <hr />
 
@@ -50,8 +55,8 @@
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
 
-<!-- ddddd -->
-<div class="container">
+<!-- d -->
+<div class="fw">
 <div class="option-choices row row-eq-height">
                                               <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                                               <template v-for="(mod,i) in modifierItems">
@@ -294,17 +299,31 @@
             <!-- <template v-for="item in upserveSections"> -->
           <template v-for="item in upserveSections" v-if="item.name === 'mamnoon @ home'">
                      <!-- {{item.name}} -->
-            <div style="width:100%;height: 500px" class="" v-for="piece in item.item_ids"> 
+            <div class="pieces" v-for="piece in item.item_ids"> 
                     <template v-if="upserve" v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
                         <div @click="openModal(serve,item.timing_mask)">
                             <template v-if="serve.images">
-                              <div class="slide-show-image-home"
-                                v-if="serve.images.online_ordering_menu"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
+                                <!--inline background v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }" -->
+                             
+                             
+                             <div class="square-green">
 
-                              <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main">
+                               <div class="content" :style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }">
+
+                               </div>
+                             </div>
+                             
+                             
+<!--                              <div class="slide-show-image-home"
+                                v-if="serve.images.online_ordering_menu"
+                              ></div>-->
+
+
+                              <!-- <div class="slide-show-image" :style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"> -->
+
+                              <!-- <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main"> -->
+                              <!-- _</div> -->
 
                             </template>
                             <template v-else>
@@ -315,13 +334,13 @@
                             </template>
                               <div class="content-box-upper">
                               <div class="name">
-                                {{item.name.replace('Feature - ', '')}}<br>
+                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
                               {{serve.name}}
                               </div>
                               
                               <div
                                 v-if="serve.description"
-                                class="food-description"
+                                class="food-description hide-on-mob"
                               >{{serve.description}}</div>
                               <div class="food-price">
                                 ${{ serve.price_cents.toFixed(2)/100}}
@@ -377,7 +396,8 @@
 <!-- <template v-if="nowTime && nowDate"> 
 {{nowTime,nowDate}}
 </template>  -->
-              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line">
+              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line" :key="resizeIndex">
+                
                                                 <div
                                                   :id="'drawertop-'+ item.id"
                                                   @click="expandChild(item.id)"
@@ -453,7 +473,7 @@
   <!-- beggin 0 -->
   <template v-if="noFiltering">
     <!-- beggin 1 -->
-                                 <div class="container menu-line">
+                                 <div class="container menu-line" :key="resizeIndex">
                    
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -512,8 +532,9 @@
 <!-- else -->
 <!-- {{selectedDate}} -->
 <!-- {{selectedTime}} -->
-              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line">
+              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line" :key="resizeIndex">
             <!-- this is available at the started time -->
+            
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
@@ -679,7 +700,8 @@
               <!-- no filtering -->
                   <!-- beggin 1 -->
                                 <template v-if="item.timing_mask === item.timing_mask">
-                                  <div class="container menu-line">
+                                  <div class="container menu-line" :key="resizeIndex">
+                                    
                                                 <div
                                                   :id="'drawertop-'+ item.id"
                                                   @click="expandChild(item.id)"
@@ -745,7 +767,8 @@
 
          <template v-if="item.timing_mask === null">
            <!-- no timing mask -->
-                <div class="container menu-line">
+                <div class="container menu-line" :key="resizeIndex">
+                  
               <div
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
@@ -803,7 +826,8 @@
 
 
 
-              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
+              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line" :key="resizeIndex">
+                
             <!-- this is available at the started time -->
               <div
                 :id="'drawertop-'+ item.id"
@@ -894,7 +918,7 @@
 <div v-if="panelShow !== 'customerInfo'" class="container text-center">
 
               <template v-if="valid">
-              <div class="toggleLr">
+              <div class="toggleLr hide-on-desktop">
                 <div>
                   <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
                 <div>
@@ -1836,6 +1860,7 @@ if(newAddress){
     },
   data() {
   return {
+    resizeIndex: 1,
     nowTime: null,
     nowDate: null,
     allOptionsSelected: false,
@@ -2013,21 +2038,13 @@ showToFixed: function (value) {
 }
   },
   methods: {
-    showCurrentlyAvailable(){
+ setResizeIndex(){
+  this.resizeIndex = Math.random();
+ },
+  showCurrentlyAvailable(){
 
-    },
+  },
     selectedOption(id, modifier, mod, modifieritem){
-
-
-
-
-
-
-
-
-
-
-
 
 
       let index = this.currentModifiers.findIndex(p => p.option === id)
@@ -3313,6 +3330,16 @@ console.log(this.valid)
   
     this.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
 
+
+
+this.$nextTick(function() {
+window.addEventListener(`resize`, this.setResizeIndex);
+
+})
+
+
+
+
   }
 
 };
@@ -3341,7 +3368,7 @@ console.log(this.valid)
   }
 
     margin-bottom: 10px;
-    display: flow-root;
+    // display: flow-root;
 
 }
 
@@ -3477,6 +3504,7 @@ a{
   width: 100%;
 }
 
+
 .square:after {
   content: "";
   display: block;
@@ -3488,7 +3516,88 @@ a{
   width: 100%;
   height: 100%;
   color: transparent;
+  background-size: 100%;
 }
+
+
+.square-green{
+      position: absolute;
+    width: 100%;
+    background: #06bff9;
+    left: 50%;
+    transform: translate(-50%);
+    height: 440px;
+
+
+
+    .content{
+          position: absolute;
+    width: 400px;
+    height: 400px;
+    color: transparent;
+    background-size: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    // top: 30px;
+        top: 20px;
+    }
+}
+
+.square-green:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+
+
+.pieces{
+width:100%;
+height: 560px;
+
+}
+
+
+@media only screen and (max-width: 992px) {
+
+.square-green{
+      position: absolute;
+    width: 100%;
+    background: #06bff9;
+    left: 50%;
+    transform: translate(-50%);
+    height: 440px;
+
+
+
+    .content{
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    color: transparent;
+    background-size: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    // top: 30px;
+        top: 20px;
+    }
+}
+
+
+
+#upserveolo  .content-box-upper{
+      height: 90px;
+}
+
+.pieces{
+  height: 410px;
+}
+
+}
+
+
+
+
 
 
 #upserveolo.smallerBoxes .box > div{
