@@ -882,7 +882,7 @@ padding-bottom:5px;
   // height: 710px;
 
 // height: 674px;
-height: 704px;
+// height: 704px;
 .owl-carousel, .owl-item{
   // height: 500px;
 

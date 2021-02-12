@@ -360,22 +360,9 @@ button.snipcart-add-item {
   background: green;
 }
 .coverflowsection {
-  padding: 0 0 0 0;
-  // height: 600px;
-  // height: 510px;
-  // height: 600px;
-  // height: 600px;
-  // height: 830px;
-
-  // height: 820px;
-  height: 784px;
-  height: 814px;
+  padding: 0 0 20px 0;
   margin-bottom: 80px;
-      height: 814px;
-          height: 794px;
-                    height: 704px;
-  // background-color: #f05d5b;
-  background-color: #F58E58;
+  background-color: #f05d5b;
   overflow: hidden;
   position: relative;
   h4 {
@@ -407,7 +394,7 @@ button.snipcart-add-item {
 @media only screen and (max-width: 480px) {
   .coverflowsection {
 // height: 880px;
-    height: 804px;
+    // height: 804px;
   }
 }
 .bottom-button {
@@ -618,7 +605,7 @@ width: 100%
 
 .coverflowsection{
 
-    height: 814px;
+    // height: 814px;
 }
 }
 
@@ -642,7 +629,7 @@ width: 100%
 
 .coverflowsection{
 
-    height: 745px;
+    // height: 745px;
 }
 
 
