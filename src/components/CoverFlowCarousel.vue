@@ -21,8 +21,8 @@
             </span>
           </template>
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature'"> -->
-            <template v-for="item in upserveSections">
+            <template v-for="item in upserveSections" v-if="item.name === 'mamnoon @ home'">
+            <!-- <template v-for="item in upserveSections"> -->
             <div v-for="(piece,index) in item.item_ids" :key="Math.random() + index + Math.random()">  
                     <template v-for="serve in upserve">
             <div v-if="serve.id === piece" class="inline-block full-height-slide" :data="serve.restaurant" style="height:400px;">  
