@@ -7,9 +7,14 @@
   <div class="bottom-attach">
   <div class="container rotating-letters">
       <h2>
-      MAMA MEANS&nbsp;&nbsp;<div class="currentIndexLetters">
+      <!-- MAMA MEANS&nbsp;&nbsp; -->
+      <div class="currentIndexLetters" style="width:100%;">
       
-          <transition name="fade"><span v-if="currentIndex === 0">&nbsp;&nbsp;love</span></transition><transition name="fade"><span v-if="currentIndex === 1">reservations</span></transition><transition name="fade"><span v-if="currentIndex === 2">fresh</span></transition><transition name="fade"><span v-if="currentIndex === 3">shopping</span></transition><transition name="fade"><span v-if="currentIndex === 4">delivery</span></transition>
+          <transition name="fade"><div v-if="currentIndex === 0">mama means <span>love</span></div></transition>
+          <transition name="fade"><div v-if="currentIndex === 1">mama means <span>reservations</span></div></transition>
+          <transition name="fade"><div v-if="currentIndex === 2">mama means <span>fresh</span></div></transition>
+          <transition name="fade"><div v-if="currentIndex === 3">mama means <span>shopping</span></div></transition>
+          <transition name="fade"><div v-if="currentIndex === 4">mama means <span>delivery</span></div></transition>
 </div>
 
 
@@ -57,7 +62,7 @@ export default {
   },
   data() {
     return {
-        items: [1,2,3,4,5],
+        // items: [1,2,3,4,5],
         currentIndex: 0,
       user: {},
       products: ''
@@ -73,15 +78,15 @@ export default {
           // console.log(this.currentIndex)
         }
     },
-    randomIndex: function () {
-      return Math.floor(Math.random() * this.items.length)
-    },
-    add: function () {
-      this.items.splice(this.randomIndex(), 0, this.nextNum++)
-    },
-    remove: function () {
-      this.items.splice(this.randomIndex(), 1)
-    },
+    // randomIndex: function () {
+    //   return Math.floor(Math.random() * this.items.length)
+    // },
+    // add: function () {
+    //   this.items.splice(this.randomIndex(), 0, this.nextNum++)
+    // },
+    // remove: function () {
+    //   this.items.splice(this.randomIndex(), 1)
+    // },
     getUserDetails() {
 
       if(localStorage.getItem("jwt")){
@@ -158,6 +163,7 @@ transition: padding .5s ease;
     // font-style: italic;
     color: #f38e5e;
         margin-top: 4px;
+        position: relative;
   }
 }
 
@@ -175,6 +181,7 @@ transition: padding .5s ease;
   bottom: 0;
   width: 100%;
   background: #49494a;
+  height: 60px;
 }
 
 
@@ -195,10 +202,10 @@ transition: padding .5s ease;
 
 
 .rotating-letters h2{
-      transform: translateX(-50px);
+      // transform: translateX(-50px);
       text-transform: lowercase;
         font-size: 30px;
-      transform: translateX(-10%);
+      // transform: translateX(-10%);
       span{
         color: #fff367;
       }
@@ -211,7 +218,7 @@ transition: padding .5s ease;
 @media only screen and (max-width: 640px) {
 .rotating-letters h2{
 font-size: 22px;
-transform: translateX(-70px);
+// transform: translateX(-70px);
 
 span{
       left: 4px;
@@ -229,8 +236,9 @@ span{
       text-transform: lowercase;
       margin-top: 4px;
       padding-top: 2px;
+             color: #fff367;
       span{
-        color: #fff367;
+        color: #f38e5e;
       }
 }
 
@@ -239,7 +247,7 @@ span{
 }
 
 .fade-leave-active {
-  transition: opacity 0s;
+  transition: opacity .5s;
 }
 
 
@@ -249,17 +257,25 @@ span{
 
 
 .currentIndexLetters{
-  display: inline;
+  // display: inline;
+  // position: relative;
+  // margin-left: 4px;
   position: relative;
-  margin-left: 4px;
   span{
-    position: absolute;
-    top: 0;
-    left: 9px;
+    // position: absolute;
+    // top: 0;
+    // left: 9px;
   }
 }
 
 
-
+.currentIndexLetters > div{
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 38px;
+}
 
 </style>

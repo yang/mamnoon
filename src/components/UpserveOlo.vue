@@ -183,7 +183,7 @@
                 <template v-else>
                   <button
                   class="float-right"
-                  disabled>please select all options</button>
+                  disabled>please select one option from each course</button>
                 </template>
 
             </template>
