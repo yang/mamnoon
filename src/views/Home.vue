@@ -155,7 +155,7 @@ transition: padding .5s ease;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 50px;
-    font-style: italic;
+    // font-style: italic;
     color: #f38e5e;
         margin-top: 4px;
   }
