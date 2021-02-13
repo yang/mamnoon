@@ -71,6 +71,8 @@
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
 
+
+    <template v-if="currentItem.name !== 'mamnoon @ home'">
                                                                         <div style="position: absolute;top:0;width:100%">
                                                                               <NadiIconxx />
                                                                         </div>
@@ -89,6 +91,11 @@
                                                                             </template>
                                                                             </div>
                                                                         </div>
+
+
+
+</template>
+
                                                                       </div>
                                                             </div>
                                                             </div>
