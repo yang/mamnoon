@@ -2073,7 +2073,7 @@ removeFromOrder(removal) {
 
       let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
       let upserveProducts = responseUpserve.data.doc[0].menu.items;
-      console.log(upserveProducts)
+      // console.log(upserveProducts)
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.doc[0].menu.sections;

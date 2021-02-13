@@ -344,7 +344,7 @@ upserveProducts.forEach(function (element) {
 
 
 
-console.log(upserveProducts)
+// console.log(upserveProducts)
 
     this.upserve = this.upserve.concat(upserveProducts);
     this.upserveSections = this.upserveSections.concat(responseUpserve.data.doc[0].menu.sections);
@@ -358,7 +358,7 @@ upserveProducts.forEach(function (element) {
   element.restaurant = 'Mbar';
 });
 
-console.log(upserveProducts)
+// console.log(upserveProducts)
 
     this.upserve = this.upserve.concat(upserveProducts);
     this.upserveSections = this.upserveSections.concat(responseUpserve.data.doc[0].menu.sections);
@@ -374,7 +374,7 @@ upserveProducts.forEach(function (element) {
   element.restaurant = 'Mamnoon Street';
 });
 
-console.log(upserveProducts)
+// console.log(upserveProducts)
 
 
 

@@ -73,6 +73,7 @@ const store = new Vuex.Store({
     googleAddress: {},
     storeCurrentOrder: {},
     emptyCart: { 
+      timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
       sms: false,
@@ -201,6 +202,7 @@ const store = new Vuex.Store({
       },
     },
     storeCurrentOrderUpdateMamnoon: { 
+      timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
       sms: false,
@@ -333,6 +335,7 @@ const store = new Vuex.Store({
       },
     },
     storeCurrentOrderUpdateStreet: { 
+      timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
       sms: false,
@@ -397,6 +400,7 @@ const store = new Vuex.Store({
       },
     },
     storeCurrentOrderUpdateMbar: { 
+      timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
       sms: false,

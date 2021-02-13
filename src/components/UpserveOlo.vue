@@ -396,7 +396,7 @@
 <!-- <template v-if="nowTime && nowDate"> 
 {{nowTime,nowDate}}
 </template>  -->
-              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line" :key="resizeIndex">
+              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line">
                 
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -473,7 +473,7 @@
   <!-- beggin 0 -->
   <template v-if="noFiltering">
     <!-- beggin 1 -->
-                                 <div class="container menu-line" :key="resizeIndex">
+                                 <div class="container menu-line">
                    
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -532,7 +532,7 @@
 <!-- else -->
 <!-- {{selectedDate}} -->
 <!-- {{selectedTime}} -->
-              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line" :key="resizeIndex">
+              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line">
             <!-- this is available at the started time -->
             
               <div
@@ -700,7 +700,7 @@
               <!-- no filtering -->
                   <!-- beggin 1 -->
                                 <template v-if="item.timing_mask === item.timing_mask">
-                                  <div class="container menu-line" :key="resizeIndex">
+                                  <div class="container menu-line">
                                     
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -767,7 +767,7 @@
 
          <template v-if="item.timing_mask === null">
            <!-- no timing mask -->
-                <div class="container menu-line" :key="resizeIndex">
+                <div class="container menu-line">
                   
               <div
                 :id="'drawertop-'+ item.id"
@@ -826,7 +826,7 @@
 
 
 
-              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line" :key="resizeIndex">
+              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
                 
             <!-- this is available at the started time -->
               <div
@@ -1342,31 +1342,90 @@ cart empty
   <div class="small-message" v-if="selectedTime === null">please select a date and time</div>
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
+<template v-if="this.$store.state.loggedIn">
 
-  {{currentOrder.fulfillment_info.customer.email}}
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+
+
+</template>
+<template v-else>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+
+</template>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
 
-        <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && email !== '' && emailAddress !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
+
+
+
+<template v-if="this.$store.state.loggedIn">
+
+        <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
             <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
+
+</template>
+<template v-else>
+        <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
+            <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
+</template>
+
 </template>
 <template v-else>
 <!-- {{user}} -->
 
+
+
+
+
+
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
- <!-- || email === '' || emailAddress === '' -->
+
+<template v-if="this.$store.state.loggedIn">
+
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+
+
+</template>
+<template v-else>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+
+</template>
+
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
 
-        <button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
-            <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
+
+
+
+<template v-if="this.$store.state.loggedIn">
+you are logged in
+<button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
+<button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
+
+
+</template>
+<template v-else>
+you are not logged in
+
+<button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
+<button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
+
+
+</template>
+
+
+
+
+
+
+
+
+
 </template>
 </template>
 
@@ -1460,9 +1519,9 @@ empty cart
       <div>
       </div></div>
       </section>
-<!--      <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
-    <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
-     <!--<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>-->
+ <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+ <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
+ <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
 
 
 
@@ -1642,7 +1701,7 @@ if(this.user){
             for(var mod of item.modifiers){
               modifierAmount = modifierAmount + mod.price
             }
-          console.log(modifierAmount)
+          // console.log(modifierAmount)
           let price = item.price + modifierAmount
           let itemAddition = item.quantity * price
           preTotal = preTotal + itemAddition
@@ -1650,6 +1709,18 @@ if(this.user){
 
       curOr.charges.preTotal = preTotal
       let currentTax = Number(preTotal) * Number(this.upserveTaxRate)
+
+
+console.log('this.upserveTaxRate')
+console.log(Number(this.upserveTaxRate))
+      console.log('preTotal')
+      console.log(Number(preTotal))
+
+      console.log('currentTax')
+      console.log(currentTax)
+
+
+
       curOr.charges.taxes = Math.round(currentTax)
       
       curOr.charges.tip.amountOptions[0] = curOr.charges.preTotal * 0
@@ -1933,7 +2004,7 @@ if(newAddress){
       currentItemModifierArray: [],
       modifierItems: [],
       modifierGroups: [],
-      upserveTaxRate: "0.101",
+      upserveTaxRate: 0.101,
       modalOpen: false,
       currentItem: null,
       currentItemQuanity: 1,
@@ -1946,6 +2017,7 @@ if(newAddress){
       upserveCategories: [],
       currentlyFiltered: [],
       currentOrder: { 
+        timeStamp: null,
         tipSelected: 0,
         currentAmountToAddCustom: 0,
         sms: false,
@@ -2068,12 +2140,25 @@ showToFixed: function (value) {
 
     },
     emptyCart(){
-    
+
       this.currentOrder.charges.items = []
       
       if(this.$store.state.loggedIn){
         this.currentOrder.fulfillment_info.customer.email = this.user.user.email
       }
+
+    if(this.title === 'Mamnoon'){
+        let storeCurrentOrderUpdateMamnoon = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+    }else if(this.title === 'Mamnoon Street'){
+        let storeCurrentOrderUpdateStreet = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });	
+    }else if(this.title === 'Mbar'){
+        let storeCurrentOrderUpdateMbar = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdate", { storeCurrentOrderUpdateMbar });	
+    }
+
+
 
     },
     resetCart(){
@@ -2140,8 +2225,9 @@ if(responseUpserve.data.body){
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.body.sections;
-      this.upserveTaxRate =
-        responseUpserve.data.body.tax_rates[0].percentage_rate;
+
+      this.upserveTaxRate = Number(responseUpserve.data.body.tax_rates.filter(x=>x.name === "Sales Tax")[0].percentage_rate)
+
       this.modifierGroups = responseUpserve.data.body.modifier_groups;
       this.modifiers = responseUpserve.data.body.modifiers;
       this.modifierItems = responseUpserve.data.body.modifiers;
@@ -2159,8 +2245,9 @@ if(responseUpserve.data.doc[0].menu){
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.doc[0].menu.sections;
-      this.upserveTaxRate =
-       responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
+
+      this.upserveTaxRate = Number(responseUpserve.data.doc[0].menu.tax_rates.filter(x=>x.name === "Sales Tax")[0].percentage_rate)
+
       this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
       this.modifiers =responseUpserve.data.doc[0].menu.modifiers;
       this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
@@ -3292,7 +3379,7 @@ if(this.valid){
 this.filterForNow()
 }
 
-console.log(this.valid)
+// console.log(this.valid)
 
 
     this.upserveMongo();
@@ -3305,16 +3392,68 @@ console.log(this.valid)
     emergepay.init();
 
 
+      // let ffAgo = Date.now() - 2700000
+      let ffAgo = Date.now() - 10000
+
     if(this.title === 'Mamnoon'){
+
+      if(this.$store.state.storeCurrentOrderUpdateMamnoon.timeStamp === null){
+        this.$store.state.storeCurrentOrderUpdateMamnoon.timeStamp = Date.now()
+      }
+
+
+      let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateMamnoon.timeStamp
+      let decider = cachedTimeStamp - ffAgo
+      if(decider < 0){
+        console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
+        this.emptyCart()
+      }else{
+        console.log('not empty yet')
+      }
+
+
         this.currentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
         this.setTip(this.$store.state.storeCurrentOrderUpdateMamnoon.tipSelected)
         this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateMamnoon.currentAmountToAddCustom/100
     }else if(this.title === 'Mamnoon Street'){
+
+
+if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
+  this.$store.state.storeCurrentOrderUpdateStreet.timeStamp = Date.now()
+}
+
+
+
+      let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateStreet.timeStamp
+      let decider = cachedTimeStamp - ffAgo
+      if(decider < 0){
+        console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
+          this.emptyCart()
+      }else{
+        console.log('not empty yet')
+      }
+
         this.currentOrder = this.$store.state.storeCurrentOrderUpdateStreet
+
         this.setTip(this.$store.state.storeCurrentOrderUpdateStreet.tipSelected)
         this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateStreet.currentAmountToAddCustom/100
     }else if(this.title === 'Mbar'){
+
+      if(this.$store.state.storeCurrentOrderUpdateMbar.timeStamp === null){
+        this.$store.state.storeCurrentOrderUpdateMbar.timeStamp = Date.now()
+      }
+
+      let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateMbar.timeStamp
+      let decider = cachedTimeStamp - ffAgo
+      if(decider < 0){
+          this.emptyCart()
+        console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
+      }else{
+        console.log('not empty yet')
+      }
+
         this.currentOrder = this.$store.state.storeCurrentOrderUpdateMbar
+     
         this.setTip(this.$store.state.storeCurrentOrderUpdateMbar.tipSelected)
         this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateMbar.currentAmountToAddCustom/100
     }
@@ -3349,6 +3488,7 @@ window.addEventListener(`resize`, this.setResizeIndex);
 <style lang="scss">
 
 .toggleLr{
+      display: flow-root;
   div{
     width: 49%;
     display: inline-block;
@@ -3372,6 +3512,17 @@ window.addEventListener(`resize`, this.setResizeIndex);
 
 }
 
+
+.toggleLr.hide-on-desktop{
+  display:none;
+}
+
+
+@media only screen and (max-width: 992px) {
+  .toggleLr.hide-on-desktop{
+    display: flow-root;
+  }
+}
 
 button.selected{
      background: #666666 !important;

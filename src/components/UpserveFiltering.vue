@@ -47,7 +47,7 @@ let responseUpserve = await this.$http.get("/product/upserve");
 console.log(responseUpserve)
         let upserveProducts = responseUpserve.data.body.objects
   
-        console.log(upserveProducts)
+        // console.log(upserveProducts)
         this.upserve = upserveProducts
 
         for(let i = 0;i<upserveProducts.length;i++){
