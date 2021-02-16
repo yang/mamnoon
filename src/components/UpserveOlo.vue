@@ -64,7 +64,7 @@
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
                                                         <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
-                                                            <div class="hide-on-mob square">
+                                                            <div v-if="currentItem.name === 'mamnoon @ home'" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
 
@@ -126,22 +126,34 @@
 
                                                       <!-- <div v-if="modifier.name === 'hot mezze : choose 1'"> -->
                                                                 <!-- loop through and get image -->
-                                                                      <div class="mt10" v-if="modifier.name === 'Promotions'">
+                                                                     <!-- <div class="mt10" v-if="modifier.name === 'Promotions'">
                                                                                       <!-- <div class="mt10" v-if="modifier.name === 'Promotions'"> -->
                                                                         
                                                                                     
-                                                                                        <button @click="addToOrderDontCloseModal(mod)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
+                                                                    <!--    <button @click="addToOrderDontCloseModal(mod)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                                                                                         <button @click="removeFromOrderDontCloseModal(mod)" :id="'remove-' + mod.id"
+                                                                                          disabled>-</button>-->
+
+
+                                                                                         <!--  <button @click="addAddOn(mod)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
+                                                                                        <button @click="removeAddOn(mod)" :id="'remove-' + mod.id"
                                                                                           disabled>-</button>
-                                                                                      </div>
-                                                      <!-- <div v-else class="mt10"> -->
-                                                        <!-- <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
+
+
+
+                                                                                      <!--</div>-->
+                                                      <div v-else class="mt10">
+
+                                                      <div class="pad-10" style="padding-bottom: 10px;">
+                                                        <button v-if="currentItem.name !== 'mamnoon @ home'" @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                                                         <button
+                                                        v-if="currentItem.name !== 'mamnoon @ home'" 
                                                           @click="removeAddOn(mod,modifieritem)"
                                                           :id="'remove-' + mod.id"
                                                           disabled
-                                                        >-</button> -->
-                                                      <!-- </div> -->
+                                                        >-</button>
+                                                        </div>
+                                                      </div>
                                                     </div>
                                                   </div>
                                                 </template>
@@ -2836,8 +2848,8 @@ console.log('transasction success')
       this.currentItemModifierArray.push(modAddition)
       this.currentItem.price_cents = Number(this.currentItem.price_cents);
       // this.currentItem.price_cents = Number(this.currentItem.price_cents)
-      // document.getElementById("add-" + mod.id).disabled = true;
-      // document.getElementById("remove-" + mod.id).disabled = false;
+      document.getElementById("add-" + mod.id).disabled = true;
+      document.getElementById("remove-" + mod.id).disabled = false;
       
 
     },
@@ -2851,8 +2863,8 @@ let updatedItems = this.currentItemModifierArray.filter(
       this.currentItemModifierArray = updatedItems;
       this.currentItem.price_cents = Number(this.currentItem.price_cents);
       // this.currentItem.price_cents = Number(this.currentItem.price_cents)
-      // document.getElementById("add-" + mod.id).disabled = false;
-      // document.getElementById("remove-" + mod.id).disabled = true;
+      document.getElementById("add-" + mod.id).disabled = false;
+      document.getElementById("remove-" + mod.id).disabled = true;
 
 
 

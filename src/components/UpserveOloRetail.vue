@@ -640,7 +640,7 @@ cart empty
               <br />
       </div>
           </div>
-        </div>ch
+        </div>
         <div>
 </div></div>
     </section>

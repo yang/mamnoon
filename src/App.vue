@@ -460,6 +460,14 @@ form textarea,
   width: 33.33%;
   // border: 1px solid red;
   float: left;
+
+
+    width: 20%;
+    float: left;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 15px;
+
 }
 
 .box-inner {
@@ -469,7 +477,24 @@ form textarea,
 
   border: 0px solid red;
   float: left;
+
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+    width: 90%;
+
 }
+
+
+
+
+
+
+
+
+
+
 
 .order-modal-width {
   width: 700px;

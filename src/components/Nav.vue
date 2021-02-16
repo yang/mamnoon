@@ -3,7 +3,7 @@
 <div class="fixed-nav">
 
 <div class="beta hide-on-mobile">
-    our site is in beta mode. we would appreciate your feedback if you encounter any bugs. <a :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile}%20%20%0D%0A%0D%0A${JSON.stringify(this.$store.state)}`">submit feedback</a>
+    our site is in beta mode. we would appreciate your feedback if you encounter any bugs. <a :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile}%20%20%0D%0A%0D%0A${JSON.stringify($store.state)}`">submit feedback</a>
 </div>
 
 
