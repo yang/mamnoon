@@ -1,13 +1,13 @@
 <template>
 <div class="nav-wrap">
-<div class="fixed-nav">
+<div class="fixed-nav" :class="{bugMessage: betaMode}">
 
 <!--<div class="beta hide-on-mobile">
     our site is in beta mode. we would appreciate your feedback if you encounter any bugs. <a :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile}%20%20%0D%0A%0D%0A${JSON.stringify($store.state)}`">submit feedback</a>
 </div>-->
 
-<div class="beta hide-on-mobile">
-    our site is in beta mode. we would appreciate your feedback if you encounter any bugs.  <a @click="sendState(randomId,$store.state,location,userAgent,isMobile)" :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile},%0D%0A%0D%0A%20bug%20id:%20${randomId}`">submit feedback</a>
+<div class="beta">
+    our site is in beta mode. if you encounter any bugs, please <a @click="sendState(randomId,$store.state,location,userAgent,isMobile)" :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile},%0D%0A%0D%0A%20bug%20id:%20${randomId}`"><u>submit feedback</u></a>!
 </div>
 
 
@@ -292,6 +292,7 @@ export default {
   },
   data () {
       return {
+          betaMode: true,
           isMobile: false,
           informationalWindow: true,
           location: window.location.href,
@@ -319,9 +320,6 @@ export default {
       },
 methods: {
     sendState(randomId,storeState,location,userAgent,isMobile){
-
-
-
 
       this.$http.post("/sendbugstate",{
           randomId,
@@ -441,6 +439,14 @@ this.getUserAgent();
     padding: 5px;
     width: 100px;
     font-size: 10px;
+    @media only screen and (max-width: 992px) {
+            width: 100%;
+    }
+
+    @media only screen and (max-width: 640px) {
+        font-size: 8px;
+    }
+    
 }
 
 
@@ -509,7 +515,16 @@ ul#menu li.active{
     width: 100%;
     /* z-index: 100; */
         z-index: 101;
+
+
+@media only screen and (max-width: 992px) {
+&.bugMessage{
+    top: 20px;
 }
+}
+}
+
+
 
 
 .scrollactive-nav{
