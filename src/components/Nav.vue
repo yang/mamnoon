@@ -2,8 +2,12 @@
 <div class="nav-wrap">
 <div class="fixed-nav">
 
-<div class="beta hide-on-mobile">
+<!--<div class="beta hide-on-mobile">
     our site is in beta mode. we would appreciate your feedback if you encounter any bugs. <a :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile}%20%20%0D%0A%0D%0A${JSON.stringify($store.state)}`">submit feedback</a>
+</div>-->
+
+<div class="beta hide-on-mobile">
+    our site is in beta mode. we would appreciate your feedback if you encounter any bugs.  <a @click="sendState(randomId,$store.state,location,userAgent,isMobile)" :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile},%0D%0A%0D%0A%20bug%20id:%20${randomId}`">submit feedback</a>
 </div>
 
 
@@ -300,6 +304,9 @@ export default {
       }
   },
       computed:{
+          randomId(){
+                    return Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
+          },
           showCartDropdown(){
 
 
@@ -311,6 +318,30 @@ export default {
           }
       },
 methods: {
+    sendState(randomId,storeState,location,userAgent,isMobile){
+
+
+
+
+      this.$http.post("/sendbugstate",{
+          randomId,
+          storeState,
+          location,
+          userAgent,
+          isMobile
+      })
+      .then((response) => {
+          console.log('bug email sent')
+      }).catch((e) => {
+          console.log("errors");
+          console.log(e);
+        });
+
+
+
+
+
+    },
 endFirstTimeView(){
 
 this.informationalWindow = false
