@@ -2334,20 +2334,6 @@ dropDown(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       let ffAgo = Date.now() - 2700000
       // let ffAgo = Date.now() - 10000
 
