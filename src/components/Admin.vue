@@ -44,7 +44,7 @@
   <ul class="filters">
       <li @click="currentFilter = 'All'">All</li>
             <template v-for="item in upserveSections">
-              <li @click="currentFilter = item.name"  v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
+              <li @click="currentFilter = item.name"  v-if="item.name === 'Spices'||item.name === 'Retail'||item.name === 'Pantry Items'">
          
                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
          
@@ -58,7 +58,7 @@
 
 <div class="row">
             <template v-for="item in upserveSections">
-              <template v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
+              <template v-if="item.name === 'Spices'||item.name === 'Retail'||item.name === 'Pantry Items'">
                 <template v-if="item.timing_mask === null">
  
                 <template v-if="currentFilter === 'All' || currentFilter === item.name">
@@ -915,7 +915,8 @@ showGiftcard(){
               
               self.user = userInfo
 
-
+console.log('get user')
+console.log(self.user)
               self.cardNumberInput = userInfo.user.giftcard
               self.preferredGiftCard = userInfo.user.giftcard
               })
@@ -1110,8 +1111,8 @@ this.attention = true
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          url: "http://localhost:4000/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          // url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",

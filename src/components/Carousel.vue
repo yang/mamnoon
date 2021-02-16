@@ -294,12 +294,7 @@ h4 {
   font-size: 18px;
 }
 .md {
-  // font-size: 18px;
-  // font-size: 38px;
-
-
-font-size: 18px;
-
+  font-size: 18px;
 }
 .lg {
   font-size: 64px;
@@ -380,29 +375,32 @@ button.snipcart-add-item {
 }
 @media only screen and (max-width: 960px) {
   .coverflowsection {
-    // height: 660px;
-  //  height: 880px;
+        // height: 660px;
+        // height: 880px;
   }
 }
 @media only screen and (max-width: 640px) {
   .coverflowsection {
-    // height: 660px;
-        // height: 800px
-  //  height: 880px;
+      // height: 660px;
+      // height: 800px
+      //  height: 880px;
   }
 }
 @media only screen and (max-width: 480px) {
   .coverflowsection {
-// height: 880px;
-    // height: 804px;
+
+      // height: 880px;
+      // height: 804px;
   }
 }
 .bottom-button {
+
   // position: absolute;
   // bottom: 0;
   // background: #FFF367;
   // width: 100%;
   // padding: 10px 0;
+
   position: absolute;
   bottom: 0;
   background: #fff367;

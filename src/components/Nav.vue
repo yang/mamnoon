@@ -1,6 +1,32 @@
 <template>
 <div class="nav-wrap">
 <div class="fixed-nav">
+
+<div class="beta">
+    our site is in beta mode. we would appreciate your feedback if you encounter any bugs. <a :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent}%20%20%0D%0A%0D%0A${JSON.stringify(this.$store.state)}`">submit feedback</a>
+</div>
+
+
+<div v-if="informationalWindow && $route.name === 'home' && $store.state.isFirstTime === true" class="informational-window">
+
+
+<div class="info-modal">
+<!-- <button @click="endFirstTimeView">close</button> -->
+
+
+<div class="topBlock">
+    <div @click="endFirstTimeView">
+<CloseModalRed />
+</div>
+</div>
+welcome to nadi mama
+
+</div>
+
+</div>
+
+
+
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
             <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 100px;">
 <CartDropdown />
@@ -247,9 +273,12 @@ import Burger from "@/components/svgIcons/Burger";
 import GoogleAuth from "@/components/GoogleAuth";
 
 import CartDropdown from "@/components/CartDropdown";
+import CloseModalRed from "@/components/svgIcons/CloseModalRed";
+
 
 export default {
     components: {
+    CloseModalRed,
     CartDropdown,
     Logo,
     LogoMamnoon,
@@ -259,6 +288,10 @@ export default {
   },
   data () {
       return {
+          informationalWindow: true,
+          location: window.location.href,
+          userAgent: null,
+          feedbackEmail: 'joe.waine@gmail.com',
           pageData: null,
           mobNavExpanded: false,
           logtext: '',
@@ -277,6 +310,12 @@ export default {
           }
       },
 methods: {
+endFirstTimeView(){
+
+this.informationalWindow = false
+this.$store.commit('endFirstTime')
+
+},
        async individualRestaurant(){
         
         let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
@@ -307,6 +346,24 @@ methods: {
 
 
       console.log(decoded)
+    },
+    getUserAgent(){
+        navigator.sayswho= (function(){
+    var ua= navigator.userAgent, tem, 
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE '+(tem[1] || '');
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return M.join(' ');
+})();
+this.userAgent = navigator.sayswho
     }
   },
   created() {
@@ -315,6 +372,10 @@ methods: {
   },
     mounted() {
       this.individualRestaurant();
+
+
+this.getUserAgent();
+
   }
   }
 
@@ -322,6 +383,22 @@ methods: {
 
 
 <style lang="scss">
+
+
+
+
+
+.beta{
+    position: fixed;
+    width: 100%;
+    background: white;
+    color:#F05D5B;
+    top: 0;
+    z-index: 1000;
+    padding: 5px;
+    width: 100px;
+    font-size: 10px;
+}
 
 
 .trans{
@@ -538,6 +615,55 @@ right: 0;
     border: 0;
 }
 
+
+
+.topBlock{
+display: block;
+text-align: right;
+padding: 0 10px;
+cursor: pointer;
+}
+
+
+.informational-window{
+
+    position: fixed;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    height: 100vh;
+
+}
+
+
+.info-modal{
+    position: absolute;
+    top: 20px;
+    width: 50%;
+    background: white;
+    left: 50%;
+    height: 90vh;
+    transform: translateX(-50%);
+    padding: 10px;
+}
+
+
+@media only screen and (max-width: 992px) {
+
+.info-modal{
+    position: absolute;
+    top: 10px;
+    width: 90%;
+    background: white;
+    left: 50%;
+    height: 90vh;
+    transform: translateX(-50%);
+    padding: 10px;
+}
+
+
+
+}
 
 
 

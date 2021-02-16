@@ -98,7 +98,7 @@
            
           <div v-if="shippingOption">
          <button
-            v-if="currentItem.shippable"
+            v-if="!currentItem.shippable"
               class="float-right"
               @click="addToOrder(currentItem)"
             >add to cart</button>
@@ -115,25 +115,13 @@
               class="float-right"
               @click="addToOrder(currentItem)"
             >add to cart</button>
-
 </div>
-
-
-
 
 
 
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
 
 
 
@@ -149,20 +137,6 @@
         </div>
       </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -194,8 +168,8 @@
   <ul class="filters">
       <li @click="currentFilter = 'All'">All</li>
             <template v-for="item in upserveSections">
-              <li @click="currentFilter = item.name"  v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
-         
+              <li @click="currentFilter = item.name"  v-if="item.name === 'Spices'||item.name === 'Retail'">
+          <!-- <li @click="currentFilter = item.name"> -->
                  {{item.name.replace('- To Go', '').replace('To Go', '')}}
          
      </li>
@@ -208,16 +182,20 @@
 
 <div class="row">
             <template v-for="item in upserveSections">
-              <template v-if="item.name === 'Spices'||item.name === 'Holiday Retail'||item.name === 'Pantry Items'">
+              <template v-if="item.name === 'Spices'||item.name === 'Retail'">
+
+                <!-- <template> -->
                 <template v-if="item.timing_mask === null">
- 
+
                 <template v-if="currentFilter === 'All' || currentFilter === item.name">
-              
+
                 <template v-for="piece in item.item_ids">
-              
+     
                     <template v-for="serve in upserveList">
                       <template v-if="serve.id === piece">
-<div class="col-6 col-md-4 shop-item no-lr-pad" v-if="serve.visible">
+                          <!-- {{serve}} -->
+<!-- <div class="col-6 col-md-4 shop-item no-lr-pad" v-if="serve.visible"> -->
+                <div class="col-6 col-md-4 shop-item no-lr-pad">
   <div class="itemContainer" @click="openModal(serve)">
                             <template v-if="serve.images">
                               <div
@@ -230,8 +208,6 @@
      <div class="backgroundImageSquare">   
                               <div class="content">
 
-                            
-                              
                                <NadiIconSm />
                               </div>
                               
@@ -247,26 +223,16 @@
                                 v-if="serve.description"
                               >{{serve.description}}</div> -->
                               <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only, </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
+                                ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only. </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
                               </div>
 
                           
                               </div>
-                        
-                          
-                 
-
-                        </div>
-
-
-</div>
-
-                
-                      </template>
+                            </div>
+                          </div>
+                       </template>
                     </template>
-               
-                 </template>
-
+                </template>
          </template>
 
    
@@ -302,23 +268,6 @@
   </div>
 </div>
 
-
-<!-- <div v-if="shippingOption" class="container mb5"> 
-        <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
-</div>
-
-<div v-if="!shippingOption" class="container mb5"> 
-    <button v-if="!shippingOption" style="width: 100%;" @click="shipOption(true)">ship</button> 
-
-
-        <button v-if="shippingOption" style="width: 100%;" @click="shipOption(false)">pickup</button> 
-</div> -->
-
-
-
-
-
-
 <div v-if="panelShow === 'customerInfo'" class="container mb5"> 
 <button @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:6px;">edit order</button>
 </div>
@@ -340,10 +289,6 @@
 
   <button @click="preOrderToggle(true)" :class="{ selected: currentOrder.preorder === true }">schedule</button> 
 
-
-
-
-
     </div> 
    <div class="button-third">
     <button @click="shipOption(true)" :class="{ selected: shippingOption }">ship</button> 
@@ -356,18 +301,22 @@ Come and pick up your items during store hours or get them shipped to your door 
 </div> 
   <div class="mb5 button-container">
     <div class="button-third">
-      1
+      <!-- 1 -->
       <button v-if="valid" class="disabled" disabled>get it now</button>
       <button v-else class="disabled" disabled>get it now</button>
       </div>
           <div class="button-third">
-      2
+      <!-- 2 -->
 
   <button @click="preOrderTrue()" :class="{ selected: currentOrder.preorder === true }">schedule</button> 
 
       </div>
     <div class="button-third">
-      3
+      3  ss
+
+    <button @click="shipOption(true)" :class="{ selected: shippingOption }">ship</button> 
+
+
       </div>
       </div>
 
@@ -387,23 +336,9 @@ Come and pick up your items during store hours or get them shipped to your door 
     <button @click="shipOption(true)" :class="{ selected: shippingOption }">ship</button> 
     </div> 
   </div> 
-
 </template>
-
- 
-
-
-
-
-
- 
 <!-- time select -->
-
-
-
 <!-- time select -->
-
-
      <template v-if="panelShow === 'customerInfo'">
         <template v-if="valid">
           <template v-if="preOrderToggleState">
@@ -430,17 +365,9 @@ Come and pick up your items during store hours or get them shipped to your door 
           </template>
         </template>
   </template>
-
 <!-- time select -->
-
-
 <!-- time select -->
-
-
-
-
 </div>
-
 <div v-if="panelShow === 'customerInfo'">
   <div class="container">
       <hr />
@@ -554,9 +481,12 @@ calculate shipping
 <br />
 </template>
 <template v-else>
-<div class="text-center cart-empty-class" style="margin-top: 10px;">
+<div v-if="panelShow === 'yourOrder'" class="text-center cart-empty-class" style="margin-top: 10px;">
+
 cart empty
+
 </div>
+
 </template>
 <!-- start panel -->
 <!-- start panel -->
@@ -568,6 +498,9 @@ cart empty
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
      
+     
+
+
      
 
 
@@ -845,6 +778,11 @@ console.log(this.user.user.email)
 
 
 this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+
+let storeCurrentOrderUpdateRetail = this.currentOrder;
+this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
+
+console.log('do this')
 
           }, deep: true
     },
@@ -1243,6 +1181,20 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    emptyCart(){
+
+      this.currentOrder.charges.items = []
+      
+      if(this.$store.state.loggedIn){
+        this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+      }
+
+
+        let storeCurrentOrderUpdateRetail = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
+
+
+    },
         resetCart(){
 this.currentOrder = this.$store.state.storeCurrentOrderUpdateStreet
 
@@ -2073,7 +2025,7 @@ removeFromOrder(removal) {
 
       let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
       let upserveProducts = responseUpserve.data.doc[0].menu.items;
-      // console.log(upserveProducts)
+      console.log(upserveProducts)
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.doc[0].menu.sections;
@@ -2373,9 +2325,87 @@ dropDown(){
 
 
 
-        this.currentOrder = this.$store.state.storeCurrentOrderUpdateRetail
-        // this.setTip(this.$store.state.storeCurrentOrderUpdateRetail.tipSelected)
-        this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateRetail.currentAmountToAddCustom/100
+// cached timestap
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      let ffAgo = Date.now() - 2700000
+      // let ffAgo = Date.now() - 10000
+
+      if(this.$store.state.storeCurrentOrderUpdateRetail.timeStamp === null){
+        this.$store.state.storeCurrentOrderUpdateRetail.timeStamp = Date.now()
+      }
+
+      let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateRetail.timeStamp
+      let decider = cachedTimeStamp - ffAgo
+      if(decider < 0){
+        console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
+        this.emptyCart()
+      }else{
+        console.log('not empty yet')
+      }
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// cached timestamp
+
+
+
+    this.currentOrder = this.$store.state.storeCurrentOrderUpdateRetail
+    // this.setTip(this.$store.state.storeCurrentOrderUpdateRetail.tipSelected)
+    this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateRetail.currentAmountToAddCustom/100
 
 
     // this.$store.state.storeCurrentOrder = {};

@@ -68,6 +68,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    isFirstTime: true,
     openDrawerOnLoad: false,
     orderConfirmation: {},
     googleAddress: {},
@@ -138,6 +139,7 @@ const store = new Vuex.Store({
       },
     },
     storeCurrentOrderUpdate: { 
+      timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
       sms: false,
@@ -270,6 +272,7 @@ const store = new Vuex.Store({
       getNow: false,
       schedule: false,
       ship: false,
+      timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
       sms: false,
@@ -641,6 +644,9 @@ const store = new Vuex.Store({
     },
     updateCurrentUser(state, { currentUserInfo }){
       state.userInfo = currentUserInfo
+    },
+    endFirstTime(state){
+      state.isFirstTime = false
     },
     setCurrentUserEmail(state, { currentUserEmail }){
       state.currentUserEmail = currentUserEmail

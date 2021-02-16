@@ -54,10 +54,9 @@
                 <template v-if="currentItem.name === 'mamnoon @ home'">
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
-
-<!-- d -->
-<div class="fw">
-<div class="option-choices row row-eq-height">
+                  <!-- d -->
+                  <div class="fw">
+                  <div class="option-choices row row-eq-height">
                                               <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
                                               <template v-for="(mod,i) in modifierItems">
                                                 <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
@@ -65,14 +64,12 @@
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
                                                         <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
-
-<!-- {{modifier}} -->
                                                             <div class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
 
 
-    <template v-if="currentItem.name === 'mamnoon @ home'">
+                                                            <template v-if="currentItem.name === 'mamnoon @ home'">
                                                                         <div style="position: absolute;top:0;width:100%">
                                                                               <NadiIconxx />
                                                                         </div>
@@ -178,9 +175,9 @@
           <span id="value">{{currentItemQuanity}}</span>&nbsp;&nbsp;
           <button @click="incrementCurrentItem()">+</button>
           <div class="add-to-order-footer">
-            item total: <b>${{currentItem.price_cents.toFixed(2)/100 * currentItemQuanity }}</b>
+            item total: <b>${{computedAddition * currentItemQuanity }}</b>
+            
             <template v-if="currentItem.name === 'mamnoon @ home'">
-
                 <template v-if="allOptionsSelected">
                   <button
                   class="float-right"
@@ -1593,6 +1590,16 @@ export default {
     NadiIconSmX
   },
   computed: {	
+computedAddition(){
+  
+  let addOn = 0
+  this.currentModifiers.forEach(function(x){
+    addOn = addOn + x.price
+  })
+  let combo = addOn + this.currentItem.price_cents
+  return combo/100
+
+},
 correctTipSelected(i){
 return this.currentOrder.tipSelected === i
 },
@@ -1718,13 +1725,13 @@ if(this.user){
       let currentTax = Number(preTotal) * Number(this.upserveTaxRate)
 
 
-console.log('this.upserveTaxRate')
-console.log(Number(this.upserveTaxRate))
-      console.log('preTotal')
-      console.log(Number(preTotal))
+      // console.log('this.upserveTaxRate')
+      // console.log(Number(this.upserveTaxRate))
+      // console.log('preTotal')
+      // console.log(Number(preTotal))
 
-      console.log('currentTax')
-      console.log(currentTax)
+      // console.log('currentTax')
+      // console.log(currentTax)
 
 
 
@@ -1778,8 +1785,8 @@ if(this.currentOrder.charges){
 for (var value of this.currentOrder.charges.items) {
   // console.log(moment(this.selectedTime.time).format('HH:mm:ss'))
   if(value.timing_mask){
-    console.log(value.timing_mask.rules)
-    console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
+    // console.log(value.timing_mask.rules)
+    // console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
   if(!value.timing_mask.rules.includes(this.selectedDate.dayLabel.substring(0,3).toLowerCase())){
     this.removeFromOrder(value)
     itemsToRemove.push(value)
@@ -1819,8 +1826,8 @@ this.noFiltering = true
 }else{
   this.noFiltering = false
 
-console.log(this.selectedDate)
-console.log(this.selectedTime)
+// console.log(this.selectedDate)
+// console.log(this.selectedTime)
 
 
 }
@@ -1831,7 +1838,7 @@ if(this.currentOrder.charges){
 for (var value of this.currentOrder.charges.items) {
 if(value.timing_mask){
 if(!this.isBetween(value.timing_mask.start_time,value.timing_mask.end_time,moment(this.selectedTime.time).format('HH:mm:ss'))){
-console.log(value + " not available")
+// console.log(value + " not available")
 this.removeFromOrder(value)
 itemsToRemove.push(value)
 }}}
@@ -2126,15 +2133,22 @@ showToFixed: function (value) {
     selectedOption(id, modifier, mod, modifieritem){
 
 
+
+
+// console.log(mod.price)
+
+
       let index = this.currentModifiers.findIndex(p => p.option === id)
 
       if(index > -1){
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].option = null
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].selected = false
+        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].price = 0
          this.removeAddOn(mod,modifieritem)
       }else{
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].option = id
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].selected = true
+        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].price = mod.price_cents
         this.addAddOn(mod,modifieritem)
       }
 
@@ -2369,12 +2383,12 @@ var time = moment(proposedTime,format),
   afterTime = moment(endTime, format);
 
 
-  console.log(time,beforeTime,afterTime)
+  // console.log(time,beforeTime,afterTime)
 if (time.isBetween(beforeTime, afterTime)) {
-  console.log(true)
+  // console.log(true)
   return true
 } else {
-   console.log(false)
+  //  console.log(false)
   return false
 }
 
@@ -2820,7 +2834,8 @@ console.log('transasction success')
       };
 
       this.currentItemModifierArray.push(modAddition)
-      this.currentItem.price_cents = Number(this.currentItem.price_cents)
+      this.currentItem.price_cents = Number(this.currentItem.price_cents);
+      // this.currentItem.price_cents = Number(this.currentItem.price_cents)
       // document.getElementById("add-" + mod.id).disabled = true;
       // document.getElementById("remove-" + mod.id).disabled = false;
       
@@ -2828,12 +2843,14 @@ console.log('transasction success')
     },
     removeAddOn(mod, modifieritem) {
 
+
+
 let updatedItems = this.currentItemModifierArray.filter(
         (item) => item.id !== mod.id
       );
       this.currentItemModifierArray = updatedItems;
-      // this.currentItem.price_cents = Number(this.currentItem.price_cents) - Number(mod.price_cents);
-      this.currentItem.price_cents = Number(this.currentItem.price_cents)
+      this.currentItem.price_cents = Number(this.currentItem.price_cents);
+      // this.currentItem.price_cents = Number(this.currentItem.price_cents)
       // document.getElementById("add-" + mod.id).disabled = false;
       // document.getElementById("remove-" + mod.id).disabled = true;
 
@@ -2919,10 +2936,13 @@ removeFromOrder(removal) {
       // console.log(current.modifier_group_ids)
 
 
+
+
       this.currentModifiers = current.modifier_group_ids.map(function(x){
         return { name: x,
                 selected: false,
-                option: null
+                option: null,
+                price: 0
               }
       })
 
@@ -3399,8 +3419,8 @@ this.filterForNow()
     emergepay.init();
 
 
-      // let ffAgo = Date.now() - 2700000
-      let ffAgo = Date.now() - 10000
+      let ffAgo = Date.now() - 2700000
+      // let ffAgo = Date.now() - 10000
 
     if(this.title === 'Mamnoon'){
 

@@ -6,48 +6,51 @@ shipping order history:
 <hr>
 <br>
 <!-- {{response}} -->
-
+<template v-if="orderhistory">
+  <template v-if="orderhistory.user">
 <template v-for="order in orderhistory.user.slice().reverse()">
   <template v-if="order.shippingOrder">
   {{order.orderInfo.confirmation_code}}
-  <pre>
-{{order.orderInfo.fulfillment_info.customer.first_name}}
-{{order.orderInfo.fulfillment_info.customer.email}}
-{{order.orderInfo.fulfillment_info.customer.phone}}
-{{order.orderInfo.fulfillment_info.delivery_info.address}}
+                            <pre>
+                          {{order.orderInfo.fulfillment_info.customer.first_name}}
+                          {{order.orderInfo.fulfillment_info.customer.email}}
+                          {{order.orderInfo.fulfillment_info.customer.phone}}
+                          {{order.orderInfo.fulfillment_info.delivery_info.address}}
 
- </pre>
+                          </pre>
 <!-- {{order.payInfo.externalTransactionId}} -->
-<button class="fl-right" v-if="!order.shipped" @click="markAsShipped(order._id,order)">not shipped, mark as shipped</button>
-<button class="fl-right" v-else disabled>shipped</button>
-<br>
+                        <button class="fl-right" v-if="!order.shipped" @click="markAsShipped(order._id,order)">not shipped, mark as shipped</button>
+                        <button class="fl-right" v-else disabled>shipped</button>
+                        <br>
 
-<br>
-<pre>
-{{order}}
-</pre>
+                        <br>
+                        <!-- <pre> -->
+                        <!-- {{order}} -->
+                        <!-- </pre> -->
 
-<pre>
-{{order.shippingInfo}}
-</pre>
-<br>
-<br>
-<template v-if="order.payInfo.externalTransactionId">
-debit/credit purchase (id: {{order.payInfo.externalTransactionId}})
+                        <!-- <pre>
+                        {{order.shippingInfo}}
+                        </pre> -->
+                        <br>
+                        <br>
+                        <template v-if="order.payInfo.externalTransactionId">
+                        debit/credit purchase (id: {{order.payInfo.externalTransactionId}})
+                        </template>
+                        <template v-else>
+                        giftcard purchase
+                        </template>
+                          <br>  
+                          <ul class="no-left-pad">
+                          <li v-for="item in order.orderInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
+                          {{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>&nbsp;&nbsp;&nbsp;
+
+                          </li>
+                          </ul>
+                          <br>
+
+                          <hr>
 </template>
-<template v-else>
-giftcard purchase
 </template>
-<br>  
-<ul class="no-left-pad">
-<li v-for="item in order.orderInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
-{{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>&nbsp;&nbsp;&nbsp;
-
-</li>
-</ul>
-<br>
-
-<hr>
 </template>
 </template>
 
