@@ -439,10 +439,10 @@ this.getUserAgent();
     padding: 5px;
     width: 100px;
     font-size: 10px;
-    @media only screen and (max-width: 992px) {
+    // @media only screen and (max-width: 992px) {
             width: 100%;
-    }
-
+    // }
+text-align: center;
     @media only screen and (max-width: 640px) {
         font-size: 8px;
     }
@@ -517,10 +517,10 @@ ul#menu li.active{
         z-index: 101;
 
 
-@media only screen and (max-width: 992px) {
 &.bugMessage{
     top: 20px;
 }
+@media only screen and (max-width: 992px) {
 }
 }
 

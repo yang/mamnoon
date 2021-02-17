@@ -57,6 +57,7 @@ self.preferredGiftCard = userInfo.user.giftcard
 <style>
 .mamnoon{
     /* padding-top: 120px; */
-    padding-top: 92px;
+    /* padding-top: 92px; */
+padding-top: 112px;
 }
 </style>

@@ -2866,11 +2866,6 @@ let updatedItems = this.currentItemModifierArray.filter(
       document.getElementById("add-" + mod.id).disabled = false;
       document.getElementById("remove-" + mod.id).disabled = true;
 
-
-
-
-
-
 },
     removeFromOrderDontCloseModal(removal) {
 
@@ -2901,7 +2896,7 @@ let updatedItems = this.currentItemModifierArray.filter(
 
       this.total = this.total - removeCost;
 
-      let storeCurrentOrder = this.currentOrder;
+      // let storeCurrentOrder = this.currentOrder;
 
 
 

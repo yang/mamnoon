@@ -1,6 +1,5 @@
 <template>
   <div id="upserveolo" class="shopRetail">
-
         <section>
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" :retail="true" />
       <div v-if="modalOpen" class="order-modal">
@@ -145,50 +144,59 @@
         <div class="row">
           <div class="col-md-12 col-lg-8">
      
+   <template v-if="upserveSections.length === 0">
+     <div class="container text-center pt20">
+       Loading...
+     </div>
+     </template>
+         <template v-else>
+   
 
+</template>
 <div class="container online-menu">
 <h4>Online Shop</h4>
 </div>
 
-
-         <template>
-
-
-<!-- {{upserveListCategories}} -->
+   <template v-if="upserveSections.length === 0">
+     <div class="container text-center pt20">
+       Loading...
+     </div>
+     </template>
+         <template v-else>
 
 <div style="background: #f58e58;text-align:center;padding: 10px; margin-bottom: 10px;">
- <ul class="filters">
+ <!-- <ul class="filters">
       <li @click="currentFilter = 'All'">All</li>
-            <template v-for="item in upserveListCategories">
-              <li @click="currentFilter = item">{{item}}</li>
+            <template v-for="item in upserveSections">
+              <li @click="currentFilter = item.name"  v-if="item.name === 'Spices'||item.name === 'Retail'">
+          <li @click="currentFilter = item.name">
+                 {{item.name.replace('- To Go', '').replace('To Go', '')}}
+         
+     </li>
             </template>
-            </ul>
+            </ul>-->
 </div>
 
 
 <div class="container">
 
 <div class="row">
-      <!-- <template v-for="item in upserveListCategories"> -->
-            <!-- <template v-for="item in upserveSections">
-              <template v-if="item.name === 'Spices'||item.name === 'Retail'"> -->
+
+            <template v-for="item in upserveSections">
+              <template v-if="item.name === 'Spices'||item.name === 'Retail'">
 
                 <!-- <template> -->
-                <!-- <template v-if="item.timing_mask === null"> -->
+                <template v-if="item.timing_mask === null">
 
-        
+                <template v-if="currentFilter === 'All' || currentFilter === item.name">
 
-                <!-- <template v-for="piece in item.item_ids"> -->
-   <!-- {{item}} -->
+                <template v-for="piece in item.item_ids">
+   
                     <template v-for="serve in upserveList">
-      <!-- <template v-if="currentFilter === 'All' || currentFilter === serve.category"> -->
-
-<!-- {{serve.category}} -->
-                      <!-- <template v-if="serve.id === piece"> -->
+                      <template v-if="serve.id === piece">
                           <!-- {{serve}} -->
 <!-- <div class="col-6 col-md-4 shop-item no-lr-pad" v-if="serve.visible"> -->
-     <template v-if="serve.visible">
-                <div class="col-6 col-md-4 shop-item no-lr-pad" v-if="currentFilter === 'All' || currentFilter === serve.category">
+                <div class="col-6 col-md-4 shop-item no-lr-pad">
   <div class="itemContainer" @click="openModal(serve)">
                             <template v-if="serve.images">
                               <div
@@ -225,16 +233,17 @@
                           </div>
                        </template>
                     </template>
-                <!-- </template> -->
-   
+                </template>
+         </template>
+
    
            
 
- <!-- </template> -->
+ </template>
 
-     <!-- </template>
+     </template>
 
-            </template> -->
+            </template>
 </div></div>
   </template>
 
@@ -703,15 +712,6 @@ export default {
     NadiIconSm
   },
   computed: {	
-    upserveListCategories(){
-      const catArray = this.upserveList.map(function(x){
-        return x.category
-      })
-
-      const uniqueSet = new Set(catArray)
-
-        return [...uniqueSet]
-    },
     weightShipping(){
       let weight = {
         lbs:0,
@@ -1700,8 +1700,8 @@ this.attention = true
       let self = this;
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          // url: "http://localhost:4000/order/start-transaction-retail",
+          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          url: "http://localhost:4000/order/start-transaction-retail",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -2312,7 +2312,7 @@ dropDown(){
   },
   mounted() {
 
-    this.getHours();
+    // this.getHours();
 
       // this.returnAvailableNow();
     this.getUser();

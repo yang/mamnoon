@@ -5,7 +5,7 @@
 <section>
 
 
-     <AllShippingTransactions />
+     <!-- <AllShippingTransactions /> -->
 
 </section>
 
@@ -14,12 +14,22 @@
 
 
       <div class="container pt20">
+
+       <div class="row">
+          <div class="col-md-12 col-lg-12">
+<button @click="importNewItems()">
+  import new items
+</button>
+<br><br>
+
+          </div>
+          </div>
         <div class="row">
           <div class="col-md-12 col-lg-12">
      
 
 
-   <template v-if="upserveSections.length === 0">
+   <template v-if="1 === 0">
      <div class="container text-center pt20">
        Loading...
      </div>
@@ -29,10 +39,10 @@
 
 </template>
 <div class="container online-menu">
-<h4>online shop</h4>
+<h4>items</h4>
 </div>
 
-   <template v-if="upserveSections.length === 0">
+   <template v-if="1 === 0">
      <div class="container text-center pt20">
        Loading...
      </div>
@@ -40,37 +50,20 @@
          <template v-else>
 
 
-<div style="background: #f58e58;text-align:center;padding: 10px; margin-bottom: 10px;">
-  <ul class="filters">
-      <li @click="currentFilter = 'All'">All</li>
-            <template v-for="item in upserveSections">
-              <li @click="currentFilter = item.name"  v-if="item.name === 'Spices'||item.name === 'Retail'||item.name === 'Pantry Items'">
-         
-                 {{item.name.replace('- To Go', '').replace('To Go', '')}}
-         
-     </li>
-            </template>
-            </ul>
-</div>
+
 
 
 <div class="container">
 
 <div class="row">
-            <template v-for="item in upserveSections">
-              <template v-if="item.name === 'Spices'||item.name === 'Retail'||item.name === 'Pantry Items'">
-                <template v-if="item.timing_mask === null">
- 
-                <template v-if="currentFilter === 'All' || currentFilter === item.name">
-              
-                <div class="col-6 col-md-3 shop-item no-lr-pad" v-for="piece in item.item_ids" :key="piece">
 
-
-
-     
+              <template v-if="1 === 1">
+                <template v-if="1 === 1">
+                <template v-if="1 === 1">
+                <div class="col-6 col-md-3 shop-item no-lr-pad" style="display: contents;">
                     <template v-for="serve in upserveList">
-                      <template v-if="serve.id === piece">
-                        <div class="itemContainer">
+                      <template v-if="1 === 1">
+                        <div class="itemContainer" style="width: 25%;">
                             <template v-if="serve.images">
                               <div
                                 v-if="serve.images"
@@ -81,9 +74,6 @@
                             <template v-else>
      <div class="backgroundImageSquare">   
                               <div class="content">
-
-                            
-                              
                                <NadiIconSm />
                               </div>
                               
@@ -93,6 +83,7 @@
                             </template>
         
                     <div class="description-panel">
+                      {{serve.category}}
                               <div>{{serve.name}}</div>
                          <!-- {{item.name}} -->
                               <!-- <div
@@ -185,25 +176,29 @@ shippable? {{serve.shippable}}<br>
 
 <button @click="shippableEdit(serve.id,true)">make shippable</button>
 </template>
-
-
-
-
 <br>  <br>  
 
 
-
+<template v-if="serve.lbs && serve.oz && serve.height && serve.width && serve.length">
 visible? {{serve.visible}}<br>
 <template v-if="serve.visible">
-
 <button @click="visibleEdit(serve.id,false)">make not visible</button>
-
+</template>
+<template v-else>
+<button @click="visibleEdit(serve.id,true)">make visible</button>
+</template>
 </template>
 <template v-else>
 
-<button @click="visibleEdit(serve.id,true)">make visible</button>
+<div class="small-message">please enter item dimensions and weight</div>
+<br>
+
+
 </template>
 
+
+
+<button @click="deleteItem(serve.id)">delete item</button>
 
 
                               </div>
@@ -226,7 +221,7 @@ visible? {{serve.visible}}<br>
 
      </template>
 
-            </template>
+
 </div></div>
   </template>
 
@@ -569,6 +564,12 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    async importNewItems(){
+      let responseAcf = await this.$http.get(`product/newupdateditems`)
+      console.log(responseAcf)    
+
+      location.reload()
+      },
     forceRerender() {
 this.componentKey += 1
     },
@@ -577,11 +578,33 @@ this.componentKey += 1
       this.$forceUpdate();  // Notice we have to use a $ here
     
     },
+async deleteItem(serveid){
+
+
+let payload = { id: serveid }
+console.log(payload)
+ this.$http.post("/product/deleteitem", payload)
+      .then((response) => {
+ console.log(response)
+    //  this.upservesMongoLog()
+          // this.forceRerender()
+                location.reload()
+      }).catch((e) => {
+          console.log('error')
+        });
+
+
+
+
+
+
+
+},
     async visibleEdit(servid,e){
 
 
 let payload = { id: servid, tf: e }
-
+console.log(payload)
  this.$http.post("/product/visibleedit", payload)
       .then((response) => {
  console.log(response)
@@ -1469,20 +1492,38 @@ if(this.tipSelected === 0){
     },
     async upservesMongo() {
 
-      let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
-      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoonretail`);
+      let upserveProducts = responseUpserve.data.doc[0].menu;
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
-      this.upserveSections = responseUpserve.data.doc[0].menu.sections;
-      this.upserveTaxRate =
-        responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
-      this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
-      this.modifiers = responseUpserve.data.doc[0].menu.modifiers;
-      this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
+      // this.upserveSections = responseUpserve.data.doc[0].menu.sections;
+      // this.upserveTaxRate =
+      //   responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
+      // this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
+      // this.modifiers = responseUpserve.data.doc[0].menu.modifiers;
+      // this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
 
       // let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
       // let upserveProducts = responseUpserve.data.doc[0].menu.items;
     },
+    async upservesMongoLog() {
+
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoonretail`);
+      let upserveProducts = responseUpserve.data.doc[0].menu;
+      console.log(upserveProducts)
+      this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
+      // this.upserveSections = responseUpserve.data.doc[0].menu.sections;
+      // this.upserveTaxRate =
+      //   responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
+      // this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
+      // this.modifiers = responseUpserve.data.doc[0].menu.modifiers;
+      // this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
+
+      // let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
+      // let upserveProducts = responseUpserve.data.doc[0].menu.items;
+    },
+
     issueReturn() {
       this.$http
         .post("/issue-return")
