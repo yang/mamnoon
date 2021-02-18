@@ -83,10 +83,10 @@
                                                                             <template v-for="(piece,i) in upserveList">
                                                                             <!-- <template v-for="(piece,i) in upserveList" :key="'E'+ i"> -->
                                                                             <template v-if="piece.name.toLowerCase() === mod.name">
-                                                                            <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
+                                            <!-- <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }"> -->
                                                                             <!-- <img :src="piece.images.online_ordering_menu.main" /> -->
                                                                             <div class="content">.</div>
-                                                                            </div>
+                                                                            <!-- </div> -->
                                                                             </template>
                                                                             </template>
                                                                             </div>
