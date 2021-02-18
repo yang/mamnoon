@@ -28,8 +28,9 @@
 
 
 <div class="dropdown" v-if="dropdown">
-
-profile
+                 <router-link to="/profile">
+                        profile
+                    </router-link>
 <br>
 
 
