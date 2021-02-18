@@ -600,6 +600,7 @@ right: 0;
     z-index: 100;
     width: 100%;
     top: 92px;
+        top: 112px;
 }
 .burger{
     position: absolute;

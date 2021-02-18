@@ -55,6 +55,9 @@
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
                   <!-- d -->
+
+<!-- {{allOptionsSelected}} -->
+                  <!-- <pre>{{currentModifiers}}</pre> -->
                   <div class="fw">
                   <div class="option-choices row row-eq-height">
                                               <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
@@ -2150,6 +2153,8 @@ showToFixed: function (value) {
 // console.log(mod.price)
 
 
+
+
       let index = this.currentModifiers.findIndex(p => p.option === id)
 
       if(index > -1){
@@ -2164,6 +2169,8 @@ showToFixed: function (value) {
         this.addAddOn(mod,modifieritem)
       }
 
+
+// console.log(this.currentModifiers.every( (val, i, arr) => val.selected === true ))
       if(this.currentModifiers.every( (val, i, arr) => val.selected === true ) ){
           this.allOptionsSelected = true
         }else{
@@ -2848,9 +2855,14 @@ console.log('transasction success')
       this.currentItemModifierArray.push(modAddition)
       this.currentItem.price_cents = Number(this.currentItem.price_cents);
       // this.currentItem.price_cents = Number(this.currentItem.price_cents)
-      document.getElementById("add-" + mod.id).disabled = true;
-      document.getElementById("remove-" + mod.id).disabled = false;
-      
+
+
+      if(document.getElementById("add-" + mod.id)){
+        document.getElementById("add-" + mod.id).disabled = true;
+      }
+      if(document.getElementById("remove-" + mod.id)){
+        document.getElementById("remove-" + mod.id).disabled = false;
+      }
 
     },
     removeAddOn(mod, modifieritem) {
@@ -2863,8 +2875,14 @@ let updatedItems = this.currentItemModifierArray.filter(
       this.currentItemModifierArray = updatedItems;
       this.currentItem.price_cents = Number(this.currentItem.price_cents);
       // this.currentItem.price_cents = Number(this.currentItem.price_cents)
+
+
+      if(document.getElementById("add-" + mod.id)){
       document.getElementById("add-" + mod.id).disabled = false;
+      }
+       if(document.getElementById("remove-" + mod.id)){
       document.getElementById("remove-" + mod.id).disabled = true;
+       }
 
 },
     removeFromOrderDontCloseModal(removal) {

@@ -112,7 +112,7 @@ export default {
         this.$nextTick(function () {
             window.setInterval(() => {
                 this.countDown();
-            },2000);
+            },3000);
         })
     }
 };
