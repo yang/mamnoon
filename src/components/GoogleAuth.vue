@@ -1,45 +1,54 @@
 <template>
   <div class="hello">
+      <!-- v-if="!isSignIn" -->
+
     <a
       type="primary"
       icon="fas fa-edit"
       @click="handleClickSignIn"
-      v-if="!isSignIn"
       :disabled="!isInit"
+       v-if="$store.state.currentUserEmail === null"
     >
       sign in
     </a>
 
+    <!-- v-if="isSignIn" -->
     <a
       type="primary"
       icon="fas fa-edit"
-
-      v-if="isSignIn"
+      @click="toggleDropdown2()"
+      v-if="$store.state.currentUserEmail"
       :disabled="!isInit"
     >
       <!-- sign out -->
-<div class="character-icon" @click="toggleDropdown()">
+<div class="character-icon">
 
 {{$store.state.currentUserEmail.charAt(0).toUpperCase()}}
 
 </div>
 
-    </a>
-
 
 <div class="dropdown" v-if="dropdown">
-                 <router-link to="/profile">
+
+<ul>
+<li>
+                <router-link to="/profile">
                         profile
                     </router-link>
-<br>
 
+</li>
 
+<li>
 <span @click="handleClickSignOut">
 sign out
 </span>
+</li>
 
-
+</ul>
 </div>
+    </a>
+
+
 
   </div>
 </template>
@@ -59,7 +68,7 @@ export default {
     };
   },
   methods: {
-    toggleDropdown(){
+    toggleDropdown2(){
 
         this.dropdown = !this.dropdown
 
@@ -187,12 +196,126 @@ h3 {
 
 
 .dropdown{
+    background: #fff367;
     position: absolute;
-    background: green;
-    width: 100px;
-    right: 0;
+    width: 190px;
     top: 92px;
-    padding: 0 10px;
+    left: 0px;
+
+
+
+ul{
+list-style-type: none;
+    padding: 10px 25px;
+margin-bottom: 0;
+
+    li{
+        height: 40px;
+        line-height: 40px;
+         a{
+        color: #F05D5B !important;
+        height: 40px;
+        line-height: 40px;
+        font-size: .8rem;
+        font-weight: 400;
+        &:hover{
+         color: #F05D5B;
+         text-decoration: underline;   
+        }
+    }}
 }
+
+
+}
+
+</style>
+
+
+
+<style lang="scss">
+      .dropdown{
+      background: #fff367;
+      position: absolute;
+      width: 190px;
+      top: 92px;
+      left: 0px;
+
+
+      ul{
+      list-style-type: none;
+      padding: 10px 25px;
+      margin-bottom: 0;
+
+      li{
+      height: 40px;
+      line-height: 40px;
+                  color: #f05d5b;
+              font-weight: 400;
+              span{
+                    font-size: 0.8rem;
+              }
+        a{
+      color: #F05D5B !important;
+      height: 40px;
+      line-height: 40px;
+      font-size: .8rem;
+      font-weight: 400;
+      &:hover{
+        color: #F05D5B;
+        text-decoration: underline;   
+      }
+      }}
+      }
+      }
+
+@media only screen and (max-width: 992px) {
+
+
+
+.dropdown{
+    background: #fff367;
+    position: fixed;
+    width: 100%;
+    top: 92px;
+    left: 0px;
+
+
+ul{
+list-style-type: none;
+    padding: 10px 25px;
+margin-bottom: 0;
+
+    li{
+        height: 40px;
+        line-height: 40px;
+                    color: #f05d5b;
+                font-weight: 400;
+
+
+        span{
+                    font-size: 0.8rem;
+              }
+
+         a{
+        color: #F05D5B;
+        height: 40px;
+        line-height: 40px;
+            color: #f05d5b;
+                font-weight: 400;
+
+        &:hover{
+         color: #F05D5B;
+         text-decoration: underline;   
+        }
+    }}
+}
+}
+
+
+}
+
+
+
+
 
 </style>

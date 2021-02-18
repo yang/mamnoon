@@ -35,7 +35,7 @@ welcome to nadi mama
             <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 100px;">
 <CartDropdown />
          </div>
-            <div v-if="this.$store.state.loggedIn && showCartDropdown" class="hello logButton googleInHeader" style="right: 168px;">
+            <!--<div v-if="this.$store.state.loggedIn && showCartDropdown" class="hello logButton googleInHeader" style="right: 168px;">
                     <router-link to="/profile">
                 profile
                     </router-link>
@@ -44,7 +44,7 @@ welcome to nadi mama
                     <router-link to="/profile">
                 profile
                     </router-link>
-            </div>
+            </div>-->
 
 
 
@@ -136,13 +136,13 @@ welcome to nadi mama
         
                 </div>  
 
-                            <div v-if="this.$store.state.loggedIn" class="inline-link">
+                     <!--       <div v-if="this.$store.state.loggedIn" class="inline-link">
                 <li>
                   <router-link to="/profile">
                         profile
                     </router-link>
                 </li>
-            </div>
+            </div>-->
 
 <div class="inline-link">
            <li class="cursor-pointer" @click="toggleMenu()">
