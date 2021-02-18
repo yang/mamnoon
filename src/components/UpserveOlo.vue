@@ -2170,7 +2170,9 @@ showToFixed: function (value) {
       }
 
 
-// console.log(this.currentModifiers.every( (val, i, arr) => val.selected === true ))
+
+
+console.log(this.currentModifiers.every( (val, i, arr) => val.selected === true ))
       if(this.currentModifiers.every( (val, i, arr) => val.selected === true ) ){
           this.allOptionsSelected = true
         }else{
