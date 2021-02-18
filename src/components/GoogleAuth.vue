@@ -9,15 +9,37 @@
     >
       sign in
     </a>
+
     <a
       type="primary"
       icon="fas fa-edit"
-      @click="handleClickSignOut"
+
       v-if="isSignIn"
       :disabled="!isInit"
     >
-      sign out
+      <!-- sign out -->
+<div class="character-icon" @click="toggleDropdown()">
+
+{{$store.state.currentUserEmail.charAt(0).toUpperCase()}}
+
+</div>
+
     </a>
+
+
+<div class="dropdown" v-if="dropdown">
+
+profile
+<br>
+
+
+<span @click="handleClickSignOut">
+sign out
+</span>
+
+
+</div>
+
   </div>
 </template>
 
@@ -32,9 +54,15 @@ export default {
     return {
       isInit: false,
       isSignIn: false,
+      dropdown: false
     };
   },
   methods: {
+    toggleDropdown(){
+
+        this.dropdown = !this.dropdown
+
+    },
     handleClickLogin() {
       this.$gAuth
         .getAuthCode()
@@ -143,4 +171,27 @@ this.$store.commit("removeUserInfo");
 h3 {
   margin: 40px 0 0;
 }
+
+
+.character-icon{
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background: white;
+    color: black;
+    margin-top: 22px;
+    line-height: 52px;
+}
+
+
+.dropdown{
+    position: absolute;
+    background: green;
+    width: 100px;
+    right: 0;
+    top: 92px;
+    padding: 0 10px;
+}
+
 </style>
