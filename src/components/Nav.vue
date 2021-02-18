@@ -437,11 +437,16 @@ this.getUserAgent();
     top: 0;
     z-index: 1000;
     padding: 5px;
-    width: 100px;
-    font-size: 10px;
-    // @media only screen and (max-width: 992px) {
+
+    font-size: 20px;
+    
+    
+    @media only screen and (max-width: 992px) {
             width: 100%;
-    // }
+                font-size: 10px;
+    }
+
+
 text-align: center;
     @media only screen and (max-width: 640px) {
         font-size: 8px;
@@ -518,9 +523,10 @@ ul#menu li.active{
 
 
 &.bugMessage{
-    top: 20px;
-}
+    top: 40px;
 @media only screen and (max-width: 992px) {
+        top: 20px;
+}
 }
 }
 
@@ -601,6 +607,7 @@ right: 0;
     width: 100%;
     top: 92px;
         top: 112px;
+                top: 132px;
 }
 .burger{
     position: absolute;

@@ -171,6 +171,7 @@ transition: padding .5s ease;
     width: 100%;
     height: 200px;
     height: 225px;
+        height: 245px;
     background: transparent;
     position: relative;
 }
@@ -182,6 +183,13 @@ transition: padding .5s ease;
   width: 100%;
   background: #49494a;
   height: 60px;
+
+
+@media only screen and (max-width: 640px) {
+
+    height: 35px;
+    }
+
 }
 
 
@@ -190,7 +198,8 @@ transition: padding .5s ease;
 
 .rotating-letters-container{
   width: 100%;
-  height: 146px;
+  // height: 146px;
+  height: 176px;
 
 }
 
@@ -227,7 +236,9 @@ span{
 
 
 .rotating-letters-container{
-      height: 136px;
+      // height: 136px;
+          // height: 176px;
+              height: 150px;
 }
 
 }
@@ -276,6 +287,13 @@ span{
   left: 50%;
   transform: translateX(-50%);
   font-size: 38px;
+
+
+@media only screen and (max-width: 640px) {
+      font-size: 18px;
+}
+
+
 }
 
 </style>
