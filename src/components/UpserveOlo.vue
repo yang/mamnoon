@@ -259,7 +259,7 @@
                   <!-- <h2 v-if="preOrderToggleState">Preorder</h2> -->
 
 
-                  
+
                   </div> 
                 <div>
                   <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
@@ -1332,6 +1332,12 @@
               <hr />
               </template>
 
+
+<span v-if="panelShow === 'customerInfo'&& currentOrder.preorder === true && this.currentOrder.scheduled_time !== null">
+scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br><br>
+</span>
+
+
                 <span v-if="panelShow === 'customerInfo'">subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</span>
               <span v-else><b>subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</b></span>
 
@@ -2123,6 +2129,12 @@ if(newAddress){
     };
   },
   filters: {
+  formatDate(value) {
+  if (value) {
+        let order = moment(String(value));
+        return order.tz('America/Los_Angeles').format('LLLL').replace(', 2020', ', at');
+  }
+},
 capitalizeFirstLetter(string) {
   if(string){
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -3541,6 +3553,7 @@ window.addEventListener(`resize`, this.setResizeIndex);
 })
 
 
+this.currentOrder.scheduled_time = null
 
 
   }
