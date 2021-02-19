@@ -1,14 +1,12 @@
 <template>
   <div class="">
       <!-- v-if="!isSignIn" -->
-
-
 <a class="hide-on-desktop"
-v-if="$store.state.currentUserEmail === null">
+  v-if="!$store.state.loggedIn">
   <span @click="handleClickSignIn">sign in</span>
 </a>
 <a class="hide-on-desktop"
-v-if="$store.state.currentUserEmail"
+  v-if="$store.state.loggedIn"
 @click="handleClickSignOut"
 :disabled="!isInit">
   sign out of {{$store.state.currentUserEmail.replace('@gmail.com','')}}
@@ -16,8 +14,11 @@ v-if="$store.state.currentUserEmail"
 
 
 
+<!-- {{this.$store.state.loggedIn}} -->
+
+
 <!--desktop-->
-    <a
+    <!-- <a
     class="hide-on-mobile"
       type="primary"
       icon="fas fa-edit"
@@ -34,7 +35,28 @@ v-if="$store.state.currentUserEmail"
       @click="toggleDropdown2()"
       v-if="$store.state.currentUserEmail"
       :disabled="!isInit"
+    > -->
+
+    <a
+    class="hide-on-mobile"
+      type="primary"
+      icon="fas fa-edit"
+      @click="handleClickSignIn"
+      :disabled="!isInit"
+       v-if="!$store.state.loggedIn"
     >
+      sign in
+    </a>
+    <a
+      class="hide-on-mobile"
+      type="primary"
+      icon="fas fa-edit"
+      @click="toggleDropdown2()"
+      v-if="$store.state.loggedIn"
+      :disabled="!isInit"
+    >
+
+
     <div class="character-icon">
       {{$store.state.currentUserEmail.charAt(0).toUpperCase()}}
     </div>

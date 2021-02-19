@@ -253,9 +253,19 @@
               <template v-if="valid">
               <div class="toggleLr">
                 <div>
-                  <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
+                  <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
+
+                  <!-- <h2 v-if="!preOrderToggleState">Get it now (or <u>preorder</u>)</h2> -->
+                  <!-- <h2 v-if="preOrderToggleState">Preorder</h2> -->
+
+
+                  
+                  </div> 
                 <div>
                   <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+
+
+                  <!-- <button v-if="preOrderToggleState" @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button> -->
                   </div> 
               </div>
               </template>

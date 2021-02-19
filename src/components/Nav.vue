@@ -1,6 +1,6 @@
 <template>
 <div class="nav-wrap">
-    <div v-if="informationalWindowOpen === false" class="info-q" @click="informationalWindowOpen = true">?</div>
+    <div v-if="informationalWindowOpen === false && $route.name === 'home'" class="info-q" @click="informationalWindowOpen = true">?</div>
 <div class="fixed-nav" :class="{bugMessage: betaMode}">
 
 <!--<div class="beta hide-on-mobile">
@@ -223,7 +223,7 @@ welcome to nadi mama
                 </li>
             </div>
 
-<div class="inline-link">ddd
+<div class="inline-link">   
            <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />
                     </li>
@@ -780,7 +780,7 @@ cursor: pointer;
 
 
 .info-q{
-width: 50px;
+    width: 50px;
     height: 50px;
     position: fixed;
     bottom: 10px;

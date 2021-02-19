@@ -350,7 +350,7 @@ form textarea,
   }
 
   .food-description {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 5px;
   }
 }
@@ -370,7 +370,7 @@ form textarea,
   }
 
   .food-description {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 0px;
   }
 }
