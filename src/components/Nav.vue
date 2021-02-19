@@ -1,5 +1,6 @@
 <template>
 <div class="nav-wrap">
+    <div v-if="informationalWindowOpen === false" class="info-q" @click="informationalWindowOpen = true">?</div>
 <div class="fixed-nav" :class="{bugMessage: betaMode}">
 
 <!--<div class="beta hide-on-mobile">
@@ -12,28 +13,37 @@
 
 
 <div v-if="informationalWindow && $route.name === 'home' && $store.state.isFirstTime === true" class="informational-window">
-
-
 <div class="info-modal">
 <!-- <button @click="endFirstTimeView">close</button> -->
-
-
 <div class="topBlock">
     <div @click="endFirstTimeView">
 <CloseModalRed />
 </div>
 </div>
 welcome to nadi mama
-
+</div>
 </div>
 
+
+
+<div v-if="informationalWindowOpen && $route.name === 'home'" class="informational-window">
+<div class="info-modal">
+<!-- <button @click="endFirstTimeView">close</button> -->
+<div class="topBlock">
+    <div @click="informationalWindowOpen = false">
+<CloseModalRed />
 </div>
+</div>
+welcome to nadi mama
+</div>
+</div>
+
 
 
 
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header">
-            <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 100px;">
-<CartDropdown />
+        <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 100px;">
+            <CartDropdown />
          </div>
             <!--<div v-if="this.$store.state.loggedIn && showCartDropdown" class="hello logButton googleInHeader" style="right: 168px;">
                     <router-link to="/profile">
@@ -136,13 +146,13 @@ welcome to nadi mama
         
                 </div>  
 
-                     <!--       <div v-if="this.$store.state.loggedIn" class="inline-link">
+    <div v-if="this.$store.state.loggedIn" class="inline-link hide-on-desktop">
                 <li>
                   <router-link to="/profile">
                         profile
                     </router-link>
                 </li>
-            </div>-->
+            </div>
 
 <div class="inline-link">
            <li class="cursor-pointer" @click="toggleMenu()">
@@ -213,7 +223,7 @@ welcome to nadi mama
                 </li>
             </div>
 
-<div class="inline-link">
+<div class="inline-link">ddd
            <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />
                     </li>
@@ -244,7 +254,7 @@ welcome to nadi mama
                 </li> -->
            
             <!-- </div>   -->
-<div class="inline-link">
+<div class="inline-link">ddd
            <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />
                     </li>
@@ -292,6 +302,7 @@ export default {
   },
   data () {
       return {
+          informationalWindowOpen: false,
           betaMode: true,
           isMobile: false,
           informationalWindow: true,
@@ -541,10 +552,45 @@ ul#menu li.active{
     width: 100%;
     position: relative;
     text-align: center;
+
+
+&:after{
+    content: "(beta version)";
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    font-size: .8em;
 }
+
+}
+
+@media only screen and (max-width: 768px) {
+.full-width-logo{
+
+
+&:after{
+    content: "(beta version)";
+    color: #fff;
+    position: absolute;
+    bottom: -1px;
+    left: 25%;
+    font-size: .8em;
+}
+
+}
+}
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 992px) {
 
+.inline-link.hide-on-mobile,
 .hide-on-mobile,
 .googleInHeader{
     display: none;
@@ -588,6 +634,7 @@ right: 0;
 
 .mobile-nav.expanded{
     top: 92px;
+    top: 112px;
     z-index: 100;
 }
 
@@ -731,6 +778,23 @@ cursor: pointer;
 
 }
 
+
+.info-q{
+width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 10px;
+    right: 5px;
+    z-index: 102;
+    background: #f58e58;
+    color: #fff;
+    font-weight: 500;
+    font-size: 24px;
+    padding-top: 6px;
+    text-align: center;
+    border-radius: 25px;
+    cursor: pointer;
+}
 
 
 </style>

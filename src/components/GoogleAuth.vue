@@ -1,8 +1,24 @@
 <template>
-  <div class="hello">
+  <div class="">
       <!-- v-if="!isSignIn" -->
 
+
+<a class="hide-on-desktop"
+v-if="$store.state.currentUserEmail === null">
+  <span @click="handleClickSignIn">sign in</span>
+</a>
+<a class="hide-on-desktop"
+v-if="$store.state.currentUserEmail"
+@click="handleClickSignOut"
+:disabled="!isInit">
+  sign out of {{$store.state.currentUserEmail.replace('@gmail.com','')}}
+</a>
+
+
+
+<!--desktop-->
     <a
+    class="hide-on-mobile"
       type="primary"
       icon="fas fa-edit"
       @click="handleClickSignIn"
@@ -11,43 +27,33 @@
     >
       sign in
     </a>
-
-    <!-- v-if="isSignIn" -->
     <a
+      class="hide-on-mobile"
       type="primary"
       icon="fas fa-edit"
       @click="toggleDropdown2()"
       v-if="$store.state.currentUserEmail"
       :disabled="!isInit"
     >
-      <!-- sign out -->
-<div class="character-icon">
-
-{{$store.state.currentUserEmail.charAt(0).toUpperCase()}}
-
-</div>
-
-
-<div class="dropdown" v-if="dropdown">
-
-<ul>
-<li>
-                <router-link to="/profile">
-                        profile
-                    </router-link>
-
-</li>
-
-<li>
-<span @click="handleClickSignOut">
-sign out
-</span>
-</li>
-
+    <div class="character-icon">
+      {{$store.state.currentUserEmail.charAt(0).toUpperCase()}}
+    </div>
+    <div class="dropdown" v-if="dropdown">
+      <ul>
+      <li>
+        <router-link to="/profile">
+            profile
+        </router-link>
+      </li>
+      <li>
+        <span @click="handleClickSignOut">
+          sign out
+        </span>
+      </li>
 </ul>
 </div>
     </a>
-
+<!--desktop-->
 
 
   </div>
@@ -130,7 +136,6 @@ export default {
           console.error(error);
         });
     },
-
     handleClickSignOut() {
       localStorage.clear();
 

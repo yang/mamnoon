@@ -20,5 +20,6 @@ export default {
     /* padding-top: 120px; */
     /* padding-top: 92px; */
 padding-top: 112px;
+    padding-top: 132px;
 }
 </style>

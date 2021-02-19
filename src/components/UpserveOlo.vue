@@ -379,7 +379,7 @@
 </template>
       <br>
       <div class="container online-menu">
-      <h4>full menu</h4>
+      <h4>order from the full menu</h4>
 
       </div>
       <div>
@@ -1256,10 +1256,10 @@
                   <b>{{order.quantity}}</b>
                   {{order.name}}
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <b>${{order.price_cents.toFixed(2)/100 * order.quantity}}</b>
+                  ${{order.price_cents.toFixed(2)/100 * order.quantity}}
 <div v-if="order.modifiers.length > 0"> 
 <div class="small-message grey" v-for="mod in order.modifiers">
-{{mod.name}} +${{mod.price | showToFixed}}
+{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b>
 </div>
 </div>
                   <div v-if="order.instructions !== ''" class="order-instructions">
@@ -1422,14 +1422,14 @@ cart empty
 
 
 <template v-if="this.$store.state.loggedIn">
-you are logged in
+<!-- you are logged in -->
 <button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
 
 
 </template>
 <template v-else>
-you are not logged in
+<!-- you are not logged in -->
 
 <button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton">Credit/Debit Pay</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybutton" disabled>Credit/Debit Pay</button> 
