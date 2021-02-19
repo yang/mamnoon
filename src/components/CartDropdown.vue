@@ -2,7 +2,7 @@
 
     <div>
     <div @click="toggleDropdown()">
-        cart
+        carts
     </div>
     <div v-if="dropdownVisible" class="dropdownCarts">
         <div class="closeCartMenu" @click="toggleDropdown()"><CloseModalRed2 /></div>
