@@ -254,7 +254,7 @@ welcome to nadi mama
                 </li> -->
            
             <!-- </div>   -->
-<div class="inline-link">ddd
+<div class="inline-link">
            <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />
                     </li>
