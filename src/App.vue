@@ -1069,15 +1069,16 @@ form hr{
 }
 }
 @media only screen and (max-width: 992px) {
-
-.tipButton.quarter {
+  .tipButton.quarter {
     width: calc(33% - 1.4px);
-
+  }
 }
 
-
+@media only screen and (max-width: 640px) {
+  .tipButton.quarter {
+    width: calc(32.2%);
 }
-
+}
 
 
 

@@ -20,7 +20,10 @@
 <CloseModalRed />
 </div>
 </div>
-welcome to nadi mama
+
+
+
+    <NadiIntro />
 </div>
 </div>
 
@@ -34,7 +37,10 @@ welcome to nadi mama
 <CloseModalRed />
 </div>
 </div>
-welcome to nadi mama
+
+
+    <NadiIntro />
+
 </div>
 </div>
 
@@ -287,6 +293,10 @@ import Burger from "@/components/svgIcons/Burger";
 import GoogleAuth from "@/components/GoogleAuth";
 
 import CartDropdown from "@/components/CartDropdown";
+
+
+import NadiIntro from "@/components/NadiIntro";
+
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 
 
@@ -298,7 +308,8 @@ export default {
     LogoMamnoon,
     LogoStreet,
     Burger,
-    GoogleAuth
+    GoogleAuth,
+    NadiIntro
   },
   data () {
       return {

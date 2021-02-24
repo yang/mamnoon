@@ -226,8 +226,14 @@
             <!-- {{emailAddress}} -->
              <!-- <h1 class="text-center">{{title}}</h1> -->
              <template v-if="openDays">
-         <span v-if="currentRestaurantHours !== ''">{{title}}, {{openDays[0] | capitalizeFirstLetter }}-{{openDays[openDays.length-1] | capitalizeFirstLetter}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
-         </template>
+         <span v-if="currentRestaurantHours !== ''">{{title.toLowerCase()}}, {{openDays[0] }}-{{openDays[openDays.length-1]}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
+         </template><br>
+    <span v-if="this.title === 'Mamnoon'"><a class="weblink" href="https://mamnoonrestaurant.com/" target="_blank">mamnoon's website</a></span>
+ <span v-if="this.title === 'Mamnoon Street'"><a class="weblink" href="https://mamnoonstreet.com/" target="_blank">mamnoon street's website</a></span>
+<span v-if="this.title === 'Mbar'"><a class="weblink" href="http://mbarseattle.com/" target="_blank">mbar's website</a></span>
+
+
+
         </div>
       </div>
       </div>
@@ -1788,7 +1794,7 @@ if(this.user){
         this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });	
     }else if(this.title === 'Mbar'){
         let storeCurrentOrderUpdateMbar = curOr;
-        this.$store.commit("upserveOrderCurrentOrderUpdate", { storeCurrentOrderUpdateMbar });	
+        this.$store.commit("upserveOrderCurrentOrderUpdateMbar", { storeCurrentOrderUpdateMbar });	
     }
     // console.log(curOr)
     
@@ -2219,7 +2225,7 @@ console.log(this.currentModifiers.every( (val, i, arr) => val.selected === true 
         this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });	
     }else if(this.title === 'Mbar'){
         let storeCurrentOrderUpdateMbar = this.currentOrder
-        this.$store.commit("upserveOrderCurrentOrderUpdate", { storeCurrentOrderUpdateMbar });	
+        this.$store.commit("upserveOrderCurrentOrderUpdateMbar", { storeCurrentOrderUpdateMbar });	
     }
 
 
@@ -3884,6 +3890,14 @@ height: 560px;
 
     // display: table-cell;
 
+}
+
+.weblink{
+  color: #f05d5b;
+  text-decoration: underline;
+  &:hover{
+    color: #666666;
+  }
 }
 
 

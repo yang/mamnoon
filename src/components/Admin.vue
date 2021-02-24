@@ -63,7 +63,9 @@
                 <div class="col-6 col-md-3 shop-item no-lr-pad" style="display: contents;">
                     <template v-for="serve in upserveList">
                       <template v-if="1 === 1">
-                        <div class="itemContainer" style="width: 25%;">
+                        
+
+                        <div class="itemContainer" :class="{ visibleItem: serve.visible }" style="width: 25%;">
                             <template v-if="serve.images">
                               <div
                                 v-if="serve.images"
@@ -178,8 +180,12 @@ shippable? {{serve.shippable}}<br>
 </template>
 <br>  <br>  
 
-
-<template v-if="serve.lbs && serve.oz && serve.height && serve.width && serve.length">
+{{typeof(serve.lbs)}}
+{{serve.oz}}
+{{serve.height}}
+{{serve.width}}
+{{serve.length}}
+<template v-if="serve.lbs !== undefined && serve.oz !== undefined && serve.height !== undefined && serve.width !== undefined && serve.length !== undefined">
 visible? {{serve.visible}}<br>
 <template v-if="serve.visible">
 <button @click="visibleEdit(serve.id,false)">make not visible</button>
@@ -1839,7 +1845,7 @@ padding-right: 4px;
 
 
 .description-panel{
-  background: #fff367;
+  // background: #fff367;
   padding: 10px;
 }
 
@@ -2017,5 +2023,22 @@ display: block;
 }
 
 }
+
+
+
+
+
+
+
+.itemContainer{
+   background: #fff367;
+&.visibleItem{
+  background-color: #c9ffc9;
+}
+
+
+}
+
+
 
 </style>
