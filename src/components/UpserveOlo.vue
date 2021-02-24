@@ -85,7 +85,8 @@
                                                                         <div style="position: absolute;top:0;width:100%;">
                                                                             <div>
                                                                             <template v-for="(piece,i) in upserveList">
-                                                                            <template v-if="piece.name.toLowerCase() === mod.name">
+                                                                          <h1 style="position:absolute;z-index:100;">{{piece.name.toLowerCase()}}{{mod.name}}</h1>  
+                                                                            <template v-if="piece.name.toLowerCase().replace(' ','') === mod.name.toLowerCase().replace(' ','')">
                                                                           <template v-if="piece.images">
                                             <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
                                                                             <div class="content">.</div>
@@ -121,7 +122,10 @@
                                                                         <div style="position: absolute;top:0;width:100%;">
                                                                             <div>
                                                                             <template v-for="(piece,i) in upserveList">
+
+                                                                         
                                                                             <template v-if="piece.name.toLowerCase() === mod.name">
+                                                                                 
                                                                           <template v-if="piece.images">
                                             <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
                                                                             <div class="content">.</div>
