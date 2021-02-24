@@ -20,7 +20,7 @@
     </li>
 <li v-if="$store.state.storeCurrentOrderUpdateMbar.charges.items.length > 0">
           <router-link to="/mbar">
-    mbar {{$store.state.storeCurrentOrderUpdateMbar.charges.items.length}})
+    mbar ({{$store.state.storeCurrentOrderUpdateMbar.charges.items.length}})
           </router-link>
     </li>
 <li v-if="$store.state.storeCurrentOrderUpdateStreet.charges.items.length > 0">

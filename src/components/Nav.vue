@@ -565,14 +565,7 @@ ul#menu li.active{
     text-align: center;
 
 
-&:after{
-    content: "(beta version)";
-    color: #fff;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    font-size: .8em;
-}
+
 
 }
 
@@ -580,14 +573,6 @@ ul#menu li.active{
 .full-width-logo{
 
 
-&:after{
-    content: "(beta version)";
-    color: #fff;
-    position: absolute;
-    bottom: -1px;
-    left: 25%;
-    font-size: .8em;
-}
 
 }
 }
