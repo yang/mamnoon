@@ -395,9 +395,7 @@ form textarea,
 
 .content-box-upper {
   // margin: 10px;
-
-
-      position: absolute;
+    position: absolute;
     bottom: 0;
     background: #fff367;
     padding: 10px;
@@ -413,6 +411,13 @@ form textarea,
   }
 
   height: 120px;
+
+transition: all .5s ease;
+&:hover{
+  background: #f05d5b;
+  color: #ffffff;
+}
+
 }
 
 

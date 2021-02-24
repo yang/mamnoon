@@ -48,7 +48,7 @@ props: ['image']
     // padding-top: 11px;
     
 
-position: absolute;
+    position: absolute;
     bottom: 0;
     background: #FFF367;
     width: 100%;

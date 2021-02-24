@@ -24,6 +24,8 @@
             </div>
           </template>
    
+
+  
           <p class="item-description-p" :class="{noTopMarge: currentItem.name === 'mamnoon @ home'}">
                             <template v-if="currentItem.name === 'mamnoon @ home'">
                      <b>{{currentItem.name}}</b><br>
@@ -51,8 +53,12 @@
                   </div>-->
                   <!-- minimum_required: {{modifier.minimum_required}}
                   maximum_required: {{modifier.maximum_required}} -->
+             
                 <template v-if="currentItem.name === 'mamnoon @ home'">
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
+                  </template>
+                    <template v-else>
+                    <div class="optionHeader">{{modifier.name}}</div>
                   </template>
                   <!-- d -->
 
@@ -60,97 +66,80 @@
                   <!-- <pre>{{currentModifiers}}</pre> -->
                   <div class="fw">
                   <div class="option-choices row row-eq-height">
-                                              <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div>
+                                              <!-- <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div> -->
                                               <template v-for="(mod,i) in modifierItems">
                                                 <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
                                                 <template v-for="(m,i) in modifier.modifier_ids">
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
-                                                        <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                  
+                                                  <template v-if="currentItem.name === 'mamnoon @ home'">
+                                                  <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
                                                             <div v-if="currentItem.name === 'mamnoon @ home'" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
-
-
                                                             <template v-if="currentItem.name === 'mamnoon @ home'">
                                                                         <div style="position: absolute;top:0;width:100%">
                                                                               <NadiIconxx />
                                                                         </div>
-
-<!-- ddd -->
                                                                         <div style="position: absolute;top:0;width:100%;">
-                                                                            <div v-if="modifier.name.includes(': choose 1')">
+                                                                            <div>
                                                                             <template v-for="(piece,i) in upserveList">
-                                                                            <!-- <template v-for="(piece,i) in upserveList" :key="'E'+ i"> -->
                                                                             <template v-if="piece.name.toLowerCase() === mod.name">
-                                            <!-- <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }"> -->
-                                                                            <!-- <img :src="piece.images.online_ordering_menu.main" /> -->
+                                                                          <template v-if="piece.images">
+                                            <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
                                                                             <div class="content">.</div>
-                                                                            <!-- </div> -->
-                                                                            </template>
-                                                                            </template>
-                                                                            </div>
-                                                                        </div>
-
-
-
-</template>
-
-                                                                      </div>
-                                                            </div>
-                                                            </div>
-
+                                                                            </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
-
                                                                           <span class="title-bolder"> {{mod.name}}</span>
-
                                                                           <br />
-                                                                          <!-- {{mod}} -->
-                                                                          <i class="small" v-if="mod.price==='0.0'">
-                                                                            <!-- no extra charge -->
-                                                                            </i>
-                                                                          <b v-else>+${{mod.price}}</b>
-
+                                                                        <b v-if="mod.price > 0">+${{mod.price}}</b>
                                                                           </div>
-
-
-                                                                            <div v-if="modifier.name.includes(': choose 1')">
+                                                                          <div v-if="modifier.name.includes(': choose 1')">
                                                                                   <div v-for="(piece,i) in upserveList" :key="'E'+ i">
-                                                                                    <div v-if="piece.name.toLowerCase() === mod.name">
-                                                                          
-                                                                                      <div class="pad-10">
-                                                                                      <p>
-                                                                                    {{piece.description}}
-                                                                                    </p>
-                                                                                    </div>
-                                                                                    </div>
+                                                                                    <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
                                                                                   </div>
                                                                                 </div>
-
-                                                      <!-- <div v-if="modifier.name === 'hot mezze : choose 1'"> -->
-                                                                <!-- loop through and get image -->
-                                                                     <!-- <div class="mt10" v-if="modifier.name === 'Promotions'">
-                                                                                      <!-- <div class="mt10" v-if="modifier.name === 'Promotions'"> -->
-                                                                        
-                                                                                    
-                                                                    <!--    <button @click="addToOrderDontCloseModal(mod)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
-                                                                                        <button @click="removeFromOrderDontCloseModal(mod)" :id="'remove-' + mod.id"
-                                                                                          disabled>-</button>-->
-
-
-                                                                                         <!--  <button @click="addAddOn(mod)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
-                                                                                        <button @click="removeAddOn(mod)" :id="'remove-' + mod.id"
-                                                                                          disabled>-</button>
-
-
-
-                                                                                      <!--</div>-->
-                                                      <div v-else class="mt10">
-
-                                                      <div class="pad-10" style="padding-bottom: 10px;">
-                                                        <button v-if="currentItem.name !== 'mamnoon @ home'" @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
+                                                                                <div v-else class="mt10">
+                                                                <div class="pad-10" style="padding-bottom: 10px;">
+            
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  </template>
+                                                <template v-else>
+                                                <div v-if="m === mod.id" class="box" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                    <div class="box-inner">
+                                                            <div v-if="currentItem.name === 'mamnoon @ home'" class="hide-on-mob square">
+                                                            <div class="content">
+                                                                      <div style="width:100%;position: relative;">
+                                                            <template v-if="currentItem.name === 'mamnoon @ home'">
+                                                                        <div style="position: absolute;top:0;width:100%">
+                                                                              <NadiIconxx />
+                                                                        </div>
+                                                                        <div style="position: absolute;top:0;width:100%;">
+                                                                            <div>
+                                                                            <template v-for="(piece,i) in upserveList">
+                                                                            <template v-if="piece.name.toLowerCase() === mod.name">
+                                                                          <template v-if="piece.images">
+                                            <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
+                                                                            <div class="content">.</div>
+                                                                            </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
+                                                                          <div class="pad-10">
+                                                                          <span class="title-bolder"> {{mod.name}}</span>
+                                                                          <br />
+                                                                        <b>+${{mod.price}}</b>
+                                                                          </div>
+                                                                          <div v-if="modifier.name.includes(': choose 1')">
+                                                                                  <div v-for="(piece,i) in upserveList" :key="'E'+ i">
+                                                                                    <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
+                                                                                  </div>
+                                                                                </div>
+                                                                                <div v-else class="mt10">
+                                                                <div class="pad-10" style="padding-bottom: 10px;">
+                                                        <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                                                         <button
-                                                        v-if="currentItem.name !== 'mamnoon @ home'" 
                                                           @click="removeAddOn(mod,modifieritem)"
                                                           :id="'remove-' + mod.id"
                                                           disabled
@@ -159,6 +148,15 @@
                                                       </div>
                                                     </div>
                                                   </div>
+                                                </template>
+
+
+
+
+
+
+
+
                                                 </template>
                                               </template> 
 
@@ -1560,7 +1558,7 @@ empty cart
       <div>
       </div></div>
       </section>
- <!-- <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre> -->
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -1629,8 +1627,12 @@ export default {
   computed: {	
 computedAddition(){
   
+
+  //  {{currentItemModifierArray}}
+
+
   let addOn = 0
-  this.currentModifiers.forEach(function(x){
+  this.currentItemModifierArray.forEach(function(x){
     addOn = addOn + x.price
   })
   let combo = addOn + this.currentItem.price_cents
@@ -2175,32 +2177,35 @@ showToFixed: function (value) {
   },
     selectedOption(id, modifier, mod, modifieritem){
 
-
-
-
 // console.log(mod.price)
-
-
-
-
       let index = this.currentModifiers.findIndex(p => p.option === id)
 
       if(index > -1){
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].option = null
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].selected = false
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].price = 0
-         this.removeAddOn(mod,modifieritem)
+         this.removeAddOnOne(mod,modifieritem)
       }else{
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].option = id
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].selected = true
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].price = mod.price_cents
-        this.addAddOn(mod,modifieritem)
+        this.addAddOnOne(mod,modifieritem)
       }
 
 
+// currentModifiers
+//  {{currentItemModifierArray}}
+// remove it from currentMOdifier array if it doenst exist in top one (current modifiers)
 
+let self = this
+let filteredCurrent = this.currentItemModifierArray.filter(function(x){
+ return self.currentModifiers.findIndex(p => p.option === x.id) > -1
 
-console.log(this.currentModifiers.every( (val, i, arr) => val.selected === true ))
+});
+
+this.currentItemModifierArray = filteredCurrent
+
+// console.log(this.currentModifiers.every( (val, i, arr) => val.selected === true ))
       if(this.currentModifiers.every( (val, i, arr) => val.selected === true ) ){
           this.allOptionsSelected = true
         }else{
@@ -2872,7 +2877,78 @@ console.log('transasction success')
           });
       });
     },
-    addAddOn(mod, modifieritem) {
+
+
+
+
+
+
+
+
+    addAddOnOne(mod, modifieritem) {
+
+
+      let modAddition = {
+        id: mod.id,
+        modifier_group_id: modifieritem,
+        price: mod.price_cents,
+        name: mod.name
+      };
+
+      this.currentItemModifierArray.push(modAddition)
+      this.currentItem.price_cents = Number(this.currentItem.price_cents);
+      // this.currentItem.price_cents = Number(this.currentItem.price_cents)
+
+
+      if(document.getElementById("add-" + mod.id)){
+        document.getElementById("add-" + mod.id).disabled = true;
+      }
+      if(document.getElementById("remove-" + mod.id)){
+        document.getElementById("remove-" + mod.id).disabled = false;
+      }
+
+    },
+    removeAddOnOne(mod, modifieritem) {
+
+
+
+let updatedItems = this.currentItemModifierArray.filter(
+        (item) => item.id !== mod.id
+      );
+      this.currentItemModifierArray = updatedItems;
+      this.currentItem.price_cents = Number(this.currentItem.price_cents);
+      // this.currentItem.price_cents = Number(this.currentItem.price_cents)
+
+
+      if(document.getElementById("add-" + mod.id)){
+      document.getElementById("add-" + mod.id).disabled = false;
+      }
+       if(document.getElementById("remove-" + mod.id)){
+      document.getElementById("remove-" + mod.id).disabled = true;
+       }
+
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+addAddOn(mod, modifieritem) {
 
 
       let modAddition = {
@@ -2978,6 +3054,8 @@ removeFromOrder(removal) {
       this.currentItem = null;
       this.currentItemQuanity = 1;
       this.textdescription = "";
+
+      this.currentItemModifierArray = [];
     },
     closeConfirmationModal() {
       this.orderConfirmationModal = false;
@@ -3821,6 +3899,11 @@ height: 560px;
 
 #upserveolo  .content-box-upper{
       height: 90px;
+
+
+      &:hover{
+background-color: #f05d5b;
+      }
 }
 
 .pieces{
@@ -3836,6 +3919,11 @@ height: 560px;
 
 #upserveolo.smallerBoxes .box > div{
   height: 100%;
+}
+
+
+#upserveolo .box-inner{
+      height: 100%;
 }
 
 @media only screen and (max-width: 992px) {
@@ -3901,6 +3989,11 @@ height: 560px;
 }
 
 
+.owl-item{
+&:hover{
+  cursor: pointer;
+}  
+}
 
 
 </style>
