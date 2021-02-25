@@ -1,5 +1,6 @@
 <template>
 <div>
+<div class="small-message" v-if="currentOrder.ship === false && currentOrder.preorder === true && selectedTime === null">please select a date and time</div>
 <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
 <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
 <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
@@ -12,7 +13,7 @@
 
 <script>  
 export default{
-    props: ['currentOrder']
+    props: ['currentOrder','selectedTime']
 }
 
 </script>  

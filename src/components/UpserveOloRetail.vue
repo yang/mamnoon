@@ -275,11 +275,10 @@
 <!-- <div v-if="shippingOption === false" class="mb5 button-container"> -->
   <div class="mb5 button-container">
     <div class="button-third">
-    <button disabled @click="preOrderToggle(false)" :class="{ selected: currentOrder.getNow === true }">get it now</button></div> 
+  <button @click="preOrderFalse()" :class="{ selected: currentOrder.preorder === false }">get it now</button></div> 
    <div class="button-third">
-    <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button>  -->
 
-  <button @click="preOrderToggle(true)" :class="{ selected: currentOrder.preorder === true }">schedule</button> 
+ <button @click="preOrderToggleTrue()" :class="{ selected: preOrderToggleState === true }">schedule</button> 
 
     </div> 
    <div class="button-third">
@@ -299,13 +298,9 @@ Come and pick up your items during store hours or get them shipped to your door 
       </div>
           <div class="button-third">
       <!-- 2 -->
-
-  <button @click="preOrderTrue()" :class="{ selected: currentOrder.preorder === true }">schedule</button> 
-
+      <button @click="preOrderToggleTrue()" :class="{ selected: preOrderToggleState === true }">schedule</button> 
       </div>
     <div class="button-third">
-      3  ss
-
     <button @click="shipOption(true)" :class="{ selected: shippingOption }">ship</button> 
 
 
@@ -316,8 +311,7 @@ Come and pick up your items during store hours or get them shipped to your door 
     <div class="button-third">
     <button class="disabled" disabled>get it now</button></div> 
    <div class="button-third">
-    <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button>  -->
-  <button @click="preOrderToggle(true)" :class="{ selected: currentOrder.preorder === true }">schedule</button> 
+<button @click="preOrderToggleTrue()" :class="{ selected: preOrderToggleState === true }">schedule</button> 
 
 
 
@@ -484,7 +478,6 @@ cart empty
 <!-- start panel -->
 <!-- start panel -->
 <!-- </div> -->
-{{email}}
 <template v-if="panelShow === 'yourOrder'">
  <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShow = 'customerInfo'" class="mt10 fw filehalf" v-else>checkout</button>
@@ -501,6 +494,8 @@ cart empty
      
      
               <template v-if="panelShow === 'customerInfo'">
+
+
             <template v-if="giftCardPanel ===  false">
              
 
@@ -511,7 +506,8 @@ cart empty
 
 
          <template v-if="shippingOption && shippingAmount > 0">
-<ErrorMessages :currentOrder="currentOrder" />
+<ErrorMessages :currentOrder="currentOrder" :selectedTime="selectedTime" />
+
 
 <!-- shipping option -->
 <!-- {{currentOrder.fulfillment_info.customer.email}} -->
@@ -529,7 +525,8 @@ cart empty
 
 <!-- {{currentOrder.fulfillment_info.customer.email}} -->
 
-<ErrorMessages :currentOrder="currentOrder" />
+
+<ErrorMessages :currentOrder="currentOrder" :selectedTime="selectedTime" />
 
 <!-- dsd --->
 <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
@@ -541,11 +538,7 @@ cart empty
           </template>
      <template v-else>
 <!-- else (get it now) true -->
-<ErrorMessages :currentOrder="currentOrder" />
-
-
-
-
+<ErrorMessages :currentOrder="currentOrder" :selectedTime="selectedTime" />
   <button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" 
                 @click="cippaybutton"
               >Credit/Debit Pay</button>
@@ -557,7 +550,6 @@ cart empty
         </template>
 
 <template v-if="giftCardPanel ===  false">
-<ErrorMessages :currentOrder="currentOrder" />
 
      <template v-if="currentOrder.preorder === true">
       <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
@@ -852,6 +844,9 @@ curOr.getNow = false
 curOr.ship = false
 }
 
+
+
+
       curOr.charges.preTotal = preTotal
       let currentTax = Number(preTotal) * Number(this.upserveTaxRate)
       curOr.charges.taxes = Math.round(currentTax)
@@ -1040,7 +1035,6 @@ this.shippingPrice(this.currentOrder,String(this.weightShipping.lbs),String(this
       validNumber: false,
       currentRestaurantHours: '',
       nextOpen: '',
-      preOrderToggleState: false,
       currentRestaurantDays: [],
       user: {},
       weight: 0,
@@ -1351,6 +1345,10 @@ this.shippingOption = true
 console.log(c)
  this.currentOrder.fulfillment_info.delivery_info.address.address_line2 = ''
  
+
+  console.log('remove non shippables')
+  this.removeNonShippables()
+
 }
 
 
@@ -1361,24 +1359,14 @@ if(c === false){
 
 this.preOrderToggleState = true
 //  this.getItNow = false
-}
 
-
-
-
-
-if(c === true){
-  console.log('remove non shippables')
-  this.removeNonShippables()
-}else{
   this.shippingAmount = 0
   this.currentOrder.charges.shipping = 0
 
-
-
 }
 
-// this.preOrderToggle(false)
+
+
 console.log(this.shippingOption)
 
 
@@ -1395,22 +1383,15 @@ this.currentOrder.ship = c
   this.currentOrder.preorder = false
   this.panelShow = ''
   },
- preOrderToggle(c){
+ preOrderToggleTrue(){
 
-  this.preOrderToggleState = c
-  this.shippingOption = false
-
-if(c === true){
   this.currentOrder.preorder = true
   this.panelShow = 'customerInfo'
-}
+  this.preOrderToggleState = true
+  // this.shippingOption = false
 
-if(c === false){
-  this.currentOrder.preorder = false
-  this.panelShow =''
-  this.currentOrder.fulfillment_info.type = ''
-}
 
+  this.shipOption(false)
 
 },
   async getHours(){
@@ -1449,7 +1430,14 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
       break
     }else{
      this.currentOrder.preorder = true
+
+
+     if(this.currentOrder.ship === false){
      this.preOrderToggleState = true
+     }else{
+            this.preOrderToggleState = false
+     }
+
       // this.getItNow = false
       }
     }
@@ -2374,7 +2362,16 @@ dropDown(){
 
 
 
+if(this.currentOrder.ship === true){
 
+this.preOrderToggleState = false
+
+
+console.log('set preOrderToggleState to false')
+}else{
+console.log('set preOrderToggleState to true')
+
+}
 
 
 
