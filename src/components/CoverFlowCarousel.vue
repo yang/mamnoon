@@ -263,18 +263,10 @@ this.upserveSectionsRendered = false
       setTimeout(() => {
 this.upserveSectionsRendered = true
       }, 100)
-
-
-
-
-
     },
     count(newCount, oldCount) {
-
-
     // console.log('newCount')
     // console.log(newCount)
-
     }
   },
   mounted() {
@@ -282,16 +274,11 @@ this.upserveSectionsRendered = true
     // this.upserves();
     // this.streetupserves();
     // this.mbarupserves();
-
-
     this.upservesMongo();
     this.streetupservesMongo();
     // this.mbarupservesMongo();
-
-
-
-  window.scrollTo(0, 0);
-  // window.addEventListener("scroll", this.lazyLoad);
+    window.scrollTo(0, 0);
+    // window.addEventListener("scroll", this.lazyLoad);
 
   },
   props: ["data","header","tag","descriptionbody"],

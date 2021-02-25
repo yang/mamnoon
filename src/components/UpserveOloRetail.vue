@@ -275,7 +275,7 @@
 <!-- <div v-if="shippingOption === false" class="mb5 button-container"> -->
   <div class="mb5 button-container">
     <div class="button-third">
-    <button @click="preOrderToggle(false)" :class="{ selected: currentOrder.getNow === true }">get it now</button></div> 
+    <button disabled @click="preOrderToggle(false)" :class="{ selected: currentOrder.getNow === true }">get it now</button></div> 
    <div class="button-third">
     <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">pickup later</button>  -->
 
@@ -484,10 +484,10 @@ cart empty
 <!-- start panel -->
 <!-- start panel -->
 <!-- </div> -->
-
+{{email}}
 <template v-if="panelShow === 'yourOrder'">
  <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
- <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
+ <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShow = 'customerInfo'" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
      
      
@@ -560,16 +560,14 @@ cart empty
 
 
      <template v-if="currentOrder.preorder === true">
-      <button 
-      v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
+      <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
       @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
       <button 
       v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
           </template>
      <template v-else>
 
-      <button 
-      v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
+  <button v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
       @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
       <button 
       v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
@@ -640,7 +638,7 @@ cart empty
 
 
 
-<pre>{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
+<!--<pre>{{$store.state.storeCurrentOrderUpdateRetail}}</pre>-->
   </div>
 </template>
 
@@ -775,12 +773,20 @@ totalWeight(){
 handler(val){
 
 console.log('updateing useing')
-console.log(this.currentOrder.fulfillment_info.customer.email)
-console.log(this.user.user.email)
 
-if(this.currentOrder.fulfillment_info.customer && this.user.user){
+
+
+if(this.user.user){
 this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+}else{
+ this.currentOrder.fulfillment_info.customer.email = this.currentOrder.fulfillment_info.customer.email 
 }
+
+
+console.log('ffe ' + this.currentOrder.fulfillment_info.customer.email)
+console.log('ue ' + this.user.user.email)
+
+
 let storeCurrentOrderUpdateRetail = this.currentOrder;
 this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
 
@@ -814,6 +820,13 @@ if(this.user){
   // console.log('this.user')
 // console.log(this.user)
   // console.log(this.user.user.email)
+}
+
+
+if(this.user.user){
+this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+}else{
+ this.currentOrder.fulfillment_info.customer.email = this.currentOrder.fulfillment_info.customer.email 
 }
 
       for(var item of curOr.charges.items){
@@ -910,7 +923,10 @@ selectedDate(){
 this.currentOrder.scheduled_time = this.selectedTime.time
     },
     email(){
+
+      if(this.email){
         this.currentOrder.fulfillment_info.customer.email = this.email.toLowerCase();
+      }
     },
     checked(){	
       if(this.checked){	
@@ -1188,9 +1204,9 @@ showToFixed: function (value) {
       this.currentOrder.charges.items = []
       
       if(this.$store.state.loggedIn){
-        if(this.currentOrder.fulfillment_info.customer && this.user.user){
+
         this.currentOrder.fulfillment_info.customer.email = this.user.user.email
-        }
+
       }
 
 

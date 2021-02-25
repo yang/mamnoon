@@ -180,11 +180,11 @@ shippable? {{serve.shippable}}<br>
 </template>
 <br>  <br>  
 
-{{typeof(serve.lbs)}}
+<!--{{typeof(serve.lbs)}}
 {{serve.oz}}
 {{serve.height}}
 {{serve.width}}
-{{serve.length}}
+{{serve.length}}-->
 <template v-if="serve.lbs !== undefined && serve.oz !== undefined && serve.height !== undefined && serve.width !== undefined && serve.length !== undefined">
 visible? {{serve.visible}}<br>
 <template v-if="serve.visible">
