@@ -557,7 +557,7 @@ cart empty
         </template>
 
 <template v-if="giftCardPanel ===  false">
-
+<ErrorMessages :currentOrder="currentOrder" />
 
      <template v-if="currentOrder.preorder === true">
       <button v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" 
