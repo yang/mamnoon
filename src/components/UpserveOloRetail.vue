@@ -778,9 +778,9 @@ console.log('updateing useing')
 console.log(this.currentOrder.fulfillment_info.customer.email)
 console.log(this.user.user.email)
 
-
+if(this.currentOrder.fulfillment_info.customer && this.user.user){
 this.currentOrder.fulfillment_info.customer.email = this.user.user.email
-
+}
 let storeCurrentOrderUpdateRetail = this.currentOrder;
 this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
 
@@ -1188,7 +1188,9 @@ showToFixed: function (value) {
       this.currentOrder.charges.items = []
       
       if(this.$store.state.loggedIn){
+        if(this.currentOrder.fulfillment_info.customer && this.user.user){
         this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+        }
       }
 
 

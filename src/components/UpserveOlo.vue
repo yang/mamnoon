@@ -57,9 +57,9 @@
                 <template v-if="currentItem.name === 'mamnoon @ home'">
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
-                    <template v-else>
-                    <div class="optionHeader">{{modifier.name}}</div>
-                  </template>
+                    <!-- <template v-else> -->
+                    <!-- <div class="optionHeader">{{modifier.name}}</div> -->
+                  <!-- </template> -->
                   <!-- d -->
 
 <!-- {{allOptionsSelected}} -->
@@ -85,7 +85,6 @@
                                                                         <div style="position: absolute;top:0;width:100%;">
                                                                             <div>
                                                                             <template v-for="(piece,i) in upserveList">
-                                                                          <h1 style="position:absolute;z-index:100;">{{piece.name.toLowerCase()}}{{mod.name}}</h1>  
                                                                             <template v-if="piece.name.toLowerCase().replace(' ','').replace('mamnoon','').substring(0,8) === mod.name.toLowerCase().replace(' ','').replace('mamnoon','').substring(0,8)">
                                                                           <template v-if="piece.images">
                                             <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
@@ -110,28 +109,14 @@
                                                   </div>
                                                   </template>
                                                 <template v-else>
-                                                <div v-if="m === mod.id" class="box" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                <div v-if="m === mod.id" class="box normal" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
-                                                            <div v-if="currentItem.name === 'mamnoon @ home'" class="hide-on-mob square">
-                                                            <div class="content">
-                                                                      <div style="width:100%;position: relative;">
-                                                            <template v-if="currentItem.name === 'mamnoon @ home'">
-                                                                        <div style="position: absolute;top:0;width:100%">
-                                                                              <NadiIconxx />
-                                                                        </div>
-                                                                        <div style="position: absolute;top:0;width:100%;">
-                                                                            <div>
-                                                                            <template v-for="(piece,i) in upserveList">
+                                                     
 
-                                                                         
-                                                                            <template v-if="piece.name.toLowerCase() === mod.name">
-                                                                                 
-                                                                          <template v-if="piece.images">
-                                            <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
-                                                                            <div class="content">.</div>
-                                                                            </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
-                                                                          <div class="pad-10">
-                                                                          <span class="title-bolder"> {{mod.name}}</span>
+
+
+                                                                          <div class="pad-10 leftmodbuttons">
+                                                                          <span class="title-bolder">{{mod.name.replace('add ','')}}</span>
                                                                           <br />
                                                                         <b>+${{mod.price}}</b>
                                                                           </div>
@@ -140,7 +125,7 @@
                                                                                     <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
                                                                                   </div>
                                                                                 </div>
-                                                                                <div v-else class="mt10">
+                                                                                <div v-else class="mt10 modbuttons">
                                                                 <div class="pad-10" style="padding-bottom: 10px;">
                                                         <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                                                         <button
@@ -1720,9 +1705,9 @@ console.log('updateing useing')
 console.log(this.currentOrder.fulfillment_info.customer.email)
 console.log(this.user.user.email)
 
-
+if(this.currentOrder.fulfillment_info.customer && this.user.user){
 this.currentOrder.fulfillment_info.customer.email = this.user.user.email
-
+}
           }, deep: true
     },
 customAmountAddition: {
@@ -2223,7 +2208,9 @@ this.currentItemModifierArray = filteredCurrent
       this.currentOrder.charges.items = []
       
       if(this.$store.state.loggedIn){
+        if(this.currentOrder.fulfillment_info.customer && this.user.user){
         this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+        }
       }
 
     if(this.title === 'Mamnoon'){
@@ -3998,6 +3985,57 @@ background-color: #f05d5b;
   cursor: pointer;
 }  
 }
+
+
+
+#upserveolo .box.normal{
+
+@media only screen and (max-width: 992px) {
+
+  width: 100%;
+
+
+
+}
+
+
+.box-inner{
+  @media only screen and (max-width: 992px) {
+
+  width: 100%;
+
+
+
+}
+}
+
+
+}
+
+
+
+  @media only screen and (max-width: 992px) {
+
+    #upserveolo .box.normal{
+        .leftmodbuttons{
+          width: 55%;
+          float: left;
+        }
+
+      .modbuttons{
+          width: 40%;
+          float: right;
+          text-align: right;
+    }
+
+}
+
+
+
+  }
+
+
+
 
 
 </style>
