@@ -132,6 +132,21 @@ A crispy, slightly thicker pita chip is great for any dips or for soaking up dre
 </div>
 </div>
 
+<div class="row">
+<div class="col-md-8 mb20">
+<h2>Available at the following Seattle locations:</h2>
+
+<p>
+Cone & Steiner Capitol Hill & Pioneer Square - <a href="https://www.coneandsteiner.com" target="_blank">https://www.coneandsteiner.com</a>
+<br>DeLaurenti Pike Place Market - <a href="https://delaurenti.com" target="_blank">https://delaurenti.com</a>
+<br>Ken's Market Greenwood - <a href="https://www.kensmarkets.com" target="_blank">https://www.kensmarkets.com</a>
+<br>Ken's Market Queen Anne - <a href="https://www.kens-qa.com" target="_blank">https://www.kens-qa.com</a>
+<br>Leschi Market- <a href="https://www.leschimart.com" target="_blank">https://www.leschimart.com</a>
+<br>Marketime Fremont - <a href="https://www.kensmarkets.com" target="_blank">https://www.kensmarkets.com</a>
+<br>All Metropolitan Markets - <a href="https://metropolitan-market.com" target="_blank">https://metropolitan-market.com</a>
+</p>
+</div>
+</div>
 
 
 <div class="row pad-sm">
@@ -149,19 +164,8 @@ A crispy, slightly thicker pita chip is great for any dips or for soaking up dre
 
 
 
-<!-- 
-<div class="row">
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/chips1.png">
-</div>
-<div class="col-md-8 mb20">
-<h2>pita chips</h2>
-<h3>(our house-made arabic bread crisped to perfection)</h3>
-<p>
 
-</p>
-</div>
-</div> -->
+
 
 
 </div>
@@ -241,6 +245,11 @@ font-weight: bold;
 
   p{
 
+  }
+
+  a{
+    color: #F05D5B;
+    text-decoration: underline;
   }
 }
 
