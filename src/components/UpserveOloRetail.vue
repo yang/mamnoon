@@ -99,16 +99,11 @@
            
           <div v-if="shippingOption">
          <button
-            v-if="!currentItem.shippable"
+            v-if="currentItem.shippable === true"
               class="float-right"
               @click="addToOrder(currentItem)"
             >add to cart</button>
-               <button
-            v-else
-              class="float-right"
-              @click="addToOrder(currentItem)"
-            disabled>not available for shipping</button>
-
+              <button v-else class="float-right" disabled>not available for shipping</button>
 
 </div>
 <div v-else>
@@ -215,8 +210,9 @@
                               <!-- <div
                                 v-if="serve.description"
                               >{{serve.description}}</div> -->
+                              <!-- {{serve.shippable}} -->
                               <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="!serve.shippable">pickup only. </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
+                                ${{ serve.price_cents.toFixed(2)/100}} <span class="pick-up-only" v-if="serve.shippable === false">pickup only. </span><span class="weight" v-if="serve.lbs > 0">{{serve.lbs}}lbs</span>&nbsp;<span class="weight" v-if="serve.oz > 0">{{serve.oz}}oz</span>
                               </div>
 
                           
@@ -630,7 +626,7 @@ cart empty
 
 
 
-<!--<pre>{{$store.state.storeCurrentOrderUpdateRetail}}</pre>-->
+<pre>{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
   </div>
 </template>
 
@@ -1302,9 +1298,7 @@ if(value.shippable === false){
 
 // console.log(JSON.stringify(order_info))
 
-console.log(order_info)
-console.log(lb)
-console.log(oz)
+
     let responseAcf = await this.$http.get(`/shippingcalculation`, { params: { orderInfo: order_info, Pounds: lb, Ounces: oz } })
     // console.log(responseAcf.data[0].Rate[0])
   // console.log(responseAcf.data.rates.filter(word => word.attributes.includes('CHEAPEST')));
@@ -1815,6 +1809,10 @@ removeFromOrder(removal) {
         (item) => item.cartId !== removal.cartId
       );
 
+
+    console.log('upt ' + currentItems)
+        console.log('cur ' + updatedItems)
+
       this.currentOrder.charges.items = updatedItems;
       let removeCost = removal.price * removal.quantity;
       this.total = this.total - removeCost;
@@ -2033,7 +2031,7 @@ removeFromOrder(removal) {
 
       let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoonretail`);
       let upserveProducts = responseUpserve.data.doc[0].menu;
-      console.log(upserveProducts)
+      // console.log(upserveProducts)
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       // this.upserveSections = responseUpserve.data.doc[0].menu.sections;
@@ -2350,7 +2348,7 @@ dropDown(){
         console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
         this.emptyCart()
       }else{
-        console.log('not empty yet')
+        // console.log('not empty yet')
       }
 
 
@@ -2360,19 +2358,18 @@ dropDown(){
 
 
 
+console.log(this.currentOrder.ship)
 
+console.log(this.shippingOption)
 
-if(this.currentOrder.ship === true){
-
+if(this.shippingOption === true){
 this.preOrderToggleState = false
+// }
 
 
-console.log('set preOrderToggleState to false')
-}else{
-console.log('set preOrderToggleState to true')
 
+  this.removeNonShippables()
 }
-
 
 
 
