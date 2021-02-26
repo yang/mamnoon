@@ -85,7 +85,7 @@
                                                                         <div style="position: absolute;top:0;width:100%;">
                                                                             <div>
                                                                             <template v-for="(piece,i) in upserveList">
-                                                                            <template v-if="piece.name.toLowerCase().replace(' ','').replace('mamnoon','').substring(0,8) === mod.name.toLowerCase().replace(' ','').replace('mamnoon','').substring(0,8)">
+                                                                            <template v-if="piece.name.toLowerCase().replace(' ','').replace('mamnoon','') === mod.name.toLowerCase().replace(' ','').replace('mamnoon','')">
                                                                           <template v-if="piece.images">
                                             <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
                                                                             <div class="content">.</div>
