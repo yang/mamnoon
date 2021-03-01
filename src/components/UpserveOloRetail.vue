@@ -237,7 +237,9 @@
 
           </div>
 
+
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
+            <div class="right-column">
 <button @click="toggleDrawer()" class="toggle">
 <span v-if="toggledDrawer">hide order</span>
 <span v-else>view order</span>
@@ -617,12 +619,14 @@ cart empty
               <br />
               <br />
       </div>
-          </div>
-        </div>
-        <div>
-</div></div>
-    </section>
+   
 
+                  </div>
+          </div>
+   
+        </div>
+</div>
+    </section>
 
 
 

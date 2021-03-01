@@ -15,7 +15,7 @@ export default {
 <style lang="scss">
 
 html, body{
-    overflow-x: hidden;
+    // overflow-x: hidden;
 }
 
 #preview-coverflow,
@@ -1531,5 +1531,20 @@ display: flow-root;
 .noTopMarge{
   margin-top: 0;
 }
+
+
+
+.right-column{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 150px;
+
+   @media only screen and (max-width: 992px) {
+      top: 0;
+    }
+ 
+
+}
+
 
 </style>

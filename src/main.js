@@ -12,7 +12,7 @@ import vSelect from "vue-select";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "vue-select/src/scss/vue-select.scss";
 import 'document-register-element/build/document-register-element'
-
+import Sticky from 'vue-sticky-directive'
 Vue.use(VueCurrencyInput)
 Vue.component('v-select', vSelect)
 
@@ -21,6 +21,9 @@ const base = axios.create({
   // baseURL: "http://localhost "
 }); 
 
+
+
+Vue.use(Sticky)
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 

@@ -911,7 +911,12 @@
 </template>
           </div>
 
+
+
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
+
+
+<div class="right-column">
 <button @click="toggleDrawer()" class="toggle">
 <span v-if="toggledDrawer">hide order</span>
 <span v-else>view order</span>
@@ -1541,18 +1546,27 @@ empty cart
       <br />
       <br />
       <br />
+  
       </div>
+ </div>
+<!--      // end of right col-->
+
       </div>
+      <!--<h1>ccc</h1>-->   
       </div>
       <div>
-      </div></div>
+
+      </div>
+      
+      
+      </div>
       </section>
 <!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
 
-
+   <!--// ccc-->
 
 
 

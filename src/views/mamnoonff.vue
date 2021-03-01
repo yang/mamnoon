@@ -136,7 +136,7 @@ A crispy, slightly thicker pita chip is great for any dips or for soaking up dre
 <div class="col-md-8 mb20">
 <h2>Available at the following Seattle locations:</h2>
 
-<p>
+<p class="list-of-links">
 Cone & Steiner Capitol Hill & Pioneer Square - <a href="https://www.coneandsteiner.com" target="_blank">https://www.coneandsteiner.com</a>
 <br>DeLaurenti Pike Place Market - <a href="https://delaurenti.com" target="_blank">https://delaurenti.com</a>
 <br>Ken's Market Greenwood - <a href="https://www.kensmarkets.com" target="_blank">https://www.kensmarkets.com</a>
@@ -252,5 +252,22 @@ font-weight: bold;
     text-decoration: underline;
   }
 }
+
+
+
+   @media only screen and (max-width: 992px) {
+
+
+.list-of-links{
+  margin-top: 40px;
+  a{
+    display: block;
+  }
+}
+
+
+   }
+
+
 
 </style>
