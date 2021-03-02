@@ -16,7 +16,7 @@
     </div>
 
 </div>
-    <div class="bottom-attach orange" style="bottom:0px;left:100%;width: 100%;">
+    <div class="bottom-attach orange flip-horizontal moved-over" style="bottom:0px;width: 100%;">
     <div>
 <h1>12324</h1>
     </div>
@@ -38,7 +38,7 @@
 
 
   <!-- <div class="bottom-attach yellow" style="bottom:0px;left:5px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/yellowzig.svg') + ')' }"> -->
-    <div class="bottom-attach yellow" style="bottom:0px;left:100%;width: 100%;">
+    <div class="bottom-attach yellow flip-horizontal moved-over" style="bottom:0px;width: 100%;">
     <div>
 <h1>12322324</h1>
     </div>
@@ -69,6 +69,13 @@
     </h2>
 </div>
 </div>
+
+
+
+
+
+
+
 </div>
 
       <!-- <div class="container mt-5 nav-acc-header"> -->
@@ -243,7 +250,7 @@ position: absolute;
 
 &.yellow{
 &:after{
-  animation: marquee 60s linear infinite;
+  animation: marquee 90s linear infinite;
     background: linear-gradient(-45deg, #FFF367 16px, transparent 0), linear-gradient(45deg, #FFF367 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
@@ -261,7 +268,7 @@ position: absolute;
 
 
 &:before{
-  animation: marquee 60s linear infinite;
+  animation: marquee 90s linear infinite;
     background: linear-gradient(-45deg, #FFF367 16px, transparent 0), linear-gradient(45deg, #FFF367 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
@@ -341,7 +348,7 @@ bottom: -32px;
 
 &:before{
 
-    background: linear-gradient(-45deg, #49494A 16px, transparent 0), linear-gradient(45deg, #49494A 16px, transparent 0);
+    background: linear-gradient(-45deg, #49494A 16px, transparent 0px), linear-gradient(45deg, #49494A 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
     background-size: 32px 32px;
@@ -349,7 +356,7 @@ bottom: -32px;
     display: block;
     position: absolute;
     top: -32px;
-    left: 0px;
+    left: 0;
     width: 100%;
     height: 32px;
 
@@ -467,7 +474,14 @@ span{
 
 
 
-
+ .flip-horizontal{
+    //    -moz-transform: scaleX(-1);
+    // -webkit-transform: scaleX(-1);
+    // -o-transform: scaleX(-1);
+    // transform: scaleX(-1);
+    // -ms-filter: fliph; /*IE*/
+    // filter: fliph; /*IE*/
+ }
 
 
 
@@ -482,4 +496,10 @@ span{
 }
 // marqueeOp 
 
+
+ .moved-over{
+
+   left: calc(100%);
+
+ }
 </style>
