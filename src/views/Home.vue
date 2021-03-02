@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow-x:hidden;">
 <Nav />
 
 <div class="rotating-letters-container">
@@ -10,13 +10,13 @@
 
 
   <!-- <div class="bottom-attach orange" style="bottom:0px;left:10px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/orangezig.svg') + ')' }"> -->
-    <div class="bottom-attach orange" style="bottom:0px;left:0px;width: 100%;">
+    <div class="bottom-attach orange" style="bottom:0px;left:0px;width: 100%;color: transparent;">
     <div>
 <h1>12324</h1>
     </div>
 
 </div>
-    <div class="bottom-attach orange flip-horizontal moved-over" style="bottom:0px;width: 100%;">
+    <div class="bottom-attach orange flip-horizontal moved-over" style="bottom:0px;width: 100%;color: transparent;">
     <div>
 <h1>12324</h1>
     </div>
@@ -25,7 +25,7 @@
 
 
   <!-- <div class="bottom-attach yellow" style="bottom:0px;left:5px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/yellowzig.svg') + ')' }"> -->
-    <div class="bottom-attach yellow" style="bottom:0px;left:0px;width: 100%;">
+    <div class="bottom-attach yellow" style="bottom:0px;left:0px;width: 100%;color: transparent;">
     <div>
 <h1>12322324</h1>
     </div>
@@ -38,7 +38,7 @@
 
 
   <!-- <div class="bottom-attach yellow" style="bottom:0px;left:5px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/yellowzig.svg') + ')' }"> -->
-    <div class="bottom-attach yellow flip-horizontal moved-over" style="bottom:0px;width: 100%;">
+    <div class="bottom-attach yellow flip-horizontal moved-over" style="bottom:0px;width: 100%;color: transparent;">
     <div>
 <h1>12322324</h1>
     </div>

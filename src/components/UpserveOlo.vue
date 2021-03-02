@@ -299,6 +299,7 @@
 
 
 <!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line"> -->
+
 <div class="container online-menu">
               <h4>featured</h4>
             </div>
@@ -319,7 +320,7 @@
        
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
             <!-- <template v-for="item in upserveSections"> -->
-          <template v-for="item in upserveSections" v-if="item.name === 'mamnoon @ home'">
+          <template v-for="item in upserveSections" v-if="item.name === 'mamnoon @ home' || item.name == 'featured item'">
                      <!-- {{item.name}} -->
             <div class="pieces" v-for="piece in item.item_ids"> 
                     <template v-if="upserve" v-for="serve in upserve">
@@ -554,7 +555,7 @@
 <!-- else -->
 <!-- {{selectedDate}} -->
 <!-- {{selectedTime}} -->
-              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line">
+              <div v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line">
             <!-- this is available at the started time -->
             
               <div
@@ -716,7 +717,7 @@
 
 
  <!-- beggin 0 -->
-    <template v-if="noFiltering">
+    <template v-if="noFiltering && item.name !== 'featured item'">
 
               <!-- <br />  -->
               <!-- no filtering -->

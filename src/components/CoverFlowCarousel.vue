@@ -21,7 +21,13 @@
             </span>
           </template>
             <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <template v-for="item in upserveSections" v-if="item.name === 'mamnoon @ home'">
+           
+<!-- beggining -->
+<!-- beggining -->
+<!-- beggining -->
+<!-- beggining -->
+            <template v-for="item in upserveSections" v-if="item.name === 'mamnoon @ home' || item.name === 'featured item'">
+            <!-- <template v-for="item in upserveSections"> -->
             <!-- <template v-for="item in upserveSections"> -->
             <div v-for="(piece,index) in item.item_ids" :key="Math.random() + index + Math.random()">  
                     <template v-for="serve in upserve">
@@ -37,7 +43,7 @@
 </template>
 
 
-<div v-if="serve.restaurant === 'Mamnoon Street'" class="top-bar mamnoon-street-colors">
+<div v-if="serve.restaurant === 'Mamnoon Street'" class="top-bar mamnoonstreetcolors">
   <!-- {{item.name.replace('Feature - ', '')}} -->
 {{serve.restaurant}}
   </div>
@@ -47,18 +53,12 @@
   </div>
 
 
-  <div v-if="serve.restaurant === 'Mbar'" class="top-bar mbar-colors">
+  <div v-if="serve.restaurant === 'Mbar'" class="top-bar mbarcolors">
   <!-- {{item.name.replace('Feature - ', '')}} -->
 {{serve.restaurant}}
   </div>
 
 
-<template v-if="serve.restaurant === 'Mbear'">
-  <!-- <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main.replace('upload/','upload/c_lpad,g_center,h_300,w_700,c_limit,f_auto,q_auto:best,dpr_3.0/')" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;"> -->
-</template>
-<template v-else>
-  <!-- <img v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;"> -->
-</template>
 
 
 
@@ -74,7 +74,7 @@
 
 <template v-if="serve.restaurant === 'Mamnoon Street'">
  <div
-                                class="food-description bottom-bar mamnoon-street-colors">
+                                class="food-description bottom-bar mamnoonstreetcolors">
                                 <span class="desc-desk">
                                  {{serve.name}}<span v-if="serve.description">: {{serve.description | truncate(140, '...')}}</span>
                                 </span>
@@ -98,7 +98,7 @@
 </template>
 <template v-if="serve.restaurant === 'Mbar'">
  <div
-                                class="food-description bottom-bar mbar-colors">
+                                class="food-description bottom-bar mbarcolors">
                                 <span class="desc-desk">
                                  {{serve.name}}<span v-if="serve.description">: {{serve.description | truncate(140, '...')}}</span>
                                 </span>
@@ -120,6 +120,137 @@
                     </template>
          </div>
           </template>
+
+<!-- end -->
+<!-- end -->
+<!-- end -->
+<!-- end -->
+<!-- end -->
+<!-- end -->
+
+
+<!--// one-->
+<!--// one-->
+
+<div v-for="slide in feature">
+<div class="inline-block full-height-slide" style="height:400px;"> 
+
+     <div class="outside-slideshow" @click="goToLink(slide.slide.link)">
+
+
+<template v-if="slide.slide.image">
+<img :src="slide.slide.image" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
+</template>
+
+         <div class="top-bar" :class="{mamnoonstreetcolors: slide.slide.restaurant === 'Mamnoon Street', mbarcolors: slide.slide.restaurant === 'Mbar'}">
+                       {{slide.slide.restaurant}}
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<template v-if="slide.slide.image">
+<img :src="slide.slide.image" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;">
+</template>
+<template v-else>
+<NadiIcon style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -55%);" />
+</template>
+      <div class="food-description bottom-bar" :class="{mamnoonstreetcolors: slide.slide.restaurant === 'Mamnoon Street', mbarcolors: slide.slide.restaurant === 'Mbar'}">
+                        <span class="desc-desk">
+                                {{slide.slide.title}}<span v-if="slide.slide.description">: {{slide.slide.description | truncate(140, '...')}}</span>
+                                </span>
+
+                                <span class="desc-mob">
+                                {{slide.slide.title}}<span v-if="slide.slide.description">: {{slide.slide.description | truncate(90, '...')}}</span>
+                                </span>
+                                  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--// one-->
+
+
+
+
+
+
+
+<!--// one-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <template class="subnext" slot="next">
             <span class="next">
               <Next />
@@ -281,8 +412,11 @@ this.upserveSectionsRendered = true
     // window.addEventListener("scroll", this.lazyLoad);
 
   },
-  props: ["data","header","tag","descriptionbody"],
+  props: ["data","header","tag","descriptionbody","feature"],
   methods: {
+goToLink(link){
+window.open(link, "_blank");
+},
 goToRestaurant(link){
 console.log('122')
       let linkstripped = '/' + link.toLowerCase().replace(" ","")
@@ -955,12 +1089,12 @@ display: inline;
  text-align: center;
  font-weight: 500;
 
-&.mamnoon-street-colors{
+&.mamnoonstreetcolors{
    background: #ffffff;
    color: #f05d5b;
 }
 
-&.mbar-colors{
+&.mbarcolors{
 color: #FFCC3E;
   background: #324144;
 }
@@ -978,12 +1112,12 @@ font-size: 14px;
 height: 83px;
 text-align: center;
 
-&.mamnoon-street-colors{
+&.mamnoonstreetcolors{
    background: #ffffff;
    color: #f05d5b;
 }
 
-&.mbar-colors{
+&.mbarcolors{
   background: #324144;
 color: #FFCC3E;
 }
