@@ -14,7 +14,7 @@
 
               <template v-if="upserveSectionsRendered">
              <!-- <VueAspectRatio ar="6:7" width="100%" class="">   -->
-        <carousel @changed="changed($event)" :items="1" :touchDrag="false" :mouseDrag="false"  :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 520px;margin-top: 16px;">
+        <carousel @changed="changed($event)" :items="1" :touchDrag="false" :mouseDrag="false"  :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />
@@ -1007,19 +1007,21 @@ padding-bottom:5px;
 .owl-carousel, .owl-item{
   // height: 500px;
 
-      height: 520px;
+      // height: 520px;
+          height: 550px;
 }
 
 .owl-item > div {
     width: 100%;
-    height: 520px;
+    // height: 520px;
+        height: 550px;
     // pointer-events: none;
     cursor: pointer;
     
 }
 
 .owl-theme .owl-dots .owl-dot span{
-  display: none !important;
+  // display: none !important;
       width: 20px;
     height: 20px;
     margin: 5px 7px;
@@ -1055,8 +1057,8 @@ padding-bottom:5px;
 
 
 .owl-dots .owl-dot {
-display: none;
-outline: none;
+// display: none;
+// outline: none;
 }
 
 
@@ -1198,5 +1200,10 @@ background: #8c8c8c;
 }
 }
 
+
+
+.owl-dot:focus{
+  outline: none;
+}
 
 </style>
