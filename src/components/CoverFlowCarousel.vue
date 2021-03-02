@@ -26,7 +26,8 @@
 <!-- beggining -->
 <!-- beggining -->
 <!-- beggining -->
-            <template v-for="item in upserveSections" v-if="item.name === 'mamnoon @ home' || item.name === 'featured item'">
+            <!-- <template v-for="item in upserveSections"> -->
+            <template v-for="item in upserveSections" v-if="item.name === 'featured item'">
             <!-- <template v-for="item in upserveSections"> -->
             <!-- <template v-for="item in upserveSections"> -->
             <div v-for="(piece,index) in item.item_ids" :key="Math.random() + index + Math.random()">  
