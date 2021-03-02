@@ -4,8 +4,55 @@
 
 <div class="rotating-letters-container">
   <!-- cff -->
-  <div class="bottom-attach">
+
+
+
+
+
+  <!-- <div class="bottom-attach orange" style="bottom:0px;left:10px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/orangezig.svg') + ')' }"> -->
+    <div class="bottom-attach orange" style="bottom:0px;left:0px;width: 100%;">
+    <div>
+<h1>12324</h1>
+    </div>
+
+</div>
+    <div class="bottom-attach orange" style="bottom:0px;left:100%;width: 100%;">
+    <div>
+<h1>12324</h1>
+    </div>
+
+</div>
+
+
+  <!-- <div class="bottom-attach yellow" style="bottom:0px;left:5px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/yellowzig.svg') + ')' }"> -->
+    <div class="bottom-attach yellow" style="bottom:0px;left:0px;width: 100%;">
+    <div>
+<h1>12322324</h1>
+    </div>
+
+</div>
+
+
+
+
+
+
+  <!-- <div class="bottom-attach yellow" style="bottom:0px;left:5px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/yellowzig.svg') + ')' }"> -->
+    <div class="bottom-attach yellow" style="bottom:0px;left:100%;width: 100%;">
+    <div>
+<h1>12322324</h1>
+    </div>
+
+</div>
+
+
+
+
+
+  <!-- <div class="bottom-attach grey" style="bottom:0px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/greyzig.svg') + ')' }"> -->
+     <div class="bottom-attach grey" style="bottom:0px;width: 100%;">
   <div class="container rotating-letters">
+
       <h2>
       <!-- MAMA MEANS&nbsp;&nbsp; -->
       <div class="currentIndexLetters" style="width:100%;">
@@ -172,23 +219,145 @@ transition: padding .5s ease;
     height: 200px;
     height: 225px;
         height: 245px;
+            height: 265px;
+                height: 285px;
     background: transparent;
     position: relative;
 }
 
 
 .bottom-attach{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: #49494a;
-  height: 60px;
-
-
+  
+position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 63px;
+    background-size: 28%;
+    background-repeat: repeat-x;
 @media only screen and (max-width: 640px) {
 
     height: 35px;
     }
+
+
+
+&.yellow{
+&:after{
+  animation: marquee 60s linear infinite;
+    background: linear-gradient(-45deg, #FFF367 16px, transparent 0), linear-gradient(45deg, #FFF367 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -32px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+    transform: rotate(180deg)
+}
+
+
+
+&:before{
+  animation: marquee 60s linear infinite;
+    background: linear-gradient(-45deg, #FFF367 16px, transparent 0), linear-gradient(45deg, #FFF367 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    top: -32px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+
+}
+
+
+
+}
+
+
+&.orange{
+&:after{
+  animation: marqueeOp 60s linear infinite;
+    background: linear-gradient(-45deg, #F38E5E 16px, transparent 0), linear-gradient(45deg, #F38E5E 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -32px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+    transform: rotate(180deg)
+}
+
+
+&:before{
+  animation: marqueeOp 60s linear infinite;
+    background: linear-gradient(-45deg, #F38E5E 16px, transparent 0), linear-gradient(45deg, #F38E5E 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    top: -32px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+
+}
+
+}
+
+
+&.grey{
+  background-color: #49494A;
+&:after{
+  // animation: marquee 20s linear infinite;
+    background: linear-gradient(-45deg, #49494A 16px, transparent 0), linear-gradient(45deg, #49494A 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+bottom: -32px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+    transform: rotate(180deg)
+
+}
+
+
+
+&:before{
+
+    background: linear-gradient(-45deg, #49494A 16px, transparent 0), linear-gradient(45deg, #49494A 16px, transparent 0);
+    background-position: left-bottom;
+    background-repeat: repeat-x;
+    background-size: 32px 32px;
+    content: " ";
+    display: block;
+    position: absolute;
+    top: -32px;
+    left: 0px;
+    width: 100%;
+    height: 32px;
+
+}
+
+
+}
+
 
 }
 
@@ -295,5 +464,22 @@ span{
 
 
 }
+
+
+
+
+
+
+
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: -100%; }
+}
+
+@keyframes marqueeOp {
+  0% { left: -100%; }
+  100% { left: 0%; }
+}
+// marqueeOp 
 
 </style>
