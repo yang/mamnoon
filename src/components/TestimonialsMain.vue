@@ -4,7 +4,7 @@
         
         <p class="description-para noselect hide-mobile">{{description}}</p>
 
-        <carousel :items="1" :loop="true" :dots="false" :nav="false">
+        <carousel :autoplay="true" :autoplaySpeed="1000"  :items="1" :loop="true" :dots="false" :nav="false">
             <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />

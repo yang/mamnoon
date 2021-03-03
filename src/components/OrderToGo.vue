@@ -4,6 +4,7 @@
         {{tag}}
 <!--carousel-->
         <carousel
+        :autoplay="true" :autoplaySpeed="1000"  
           :responsive=" {0:{items:1},768:{items:1},1080:{items:1}}"
           :items="1"
           :loop="true"

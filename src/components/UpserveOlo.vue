@@ -311,7 +311,7 @@
          <template v-else>
    
 <div id="online-menu" class="is-fullheight no-top-pad" style="position: relative;">
-        <carousel id="FourThree" :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
+        <carousel :autoplay="true" :autoplaySpeed="1000"  id="FourThree" :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
               <template class="subprev" slot="prev">
               <span class="prev">
               <Prev />

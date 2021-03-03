@@ -14,7 +14,7 @@
 
               <template v-if="upserveSectionsRendered">
              <!-- <VueAspectRatio ar="6:7" width="100%" class="">   -->
-        <carousel @changed="changed($event)" :items="1" :touchDrag="false" :mouseDrag="false"  :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
+        <carousel @changed="changed($event)" :items="1" :touchDrag="false" :autoplay="true" :autoplaySpeed="1000"  :mouseDrag="false"  :loop="true" :dots="true" :nav="false" v-if="upserveSections" style="height: 550px;margin-top: 16px;">
                                  <template class="subprev" slot="prev">
                 <span class="prev">
                     <Prev />

@@ -13,6 +13,7 @@
           :loop="true"
           :dots="false"
           :nav="false"
+          :autoplay="true" :autoplaySpeed="1000"  
         >
            <template class="subprev" slot="prev">
             <span class="prev">
