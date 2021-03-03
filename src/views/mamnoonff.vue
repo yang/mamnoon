@@ -5,84 +5,37 @@
 <div>
 
 
+ 
+
+
+
 
 <div class="container pad ff">
 
 <div class="row">
 
 
-<div class="col-md-4 mb20"><img style="width: 100%;" src="@/assets/img/logo1.png"></div>
-<div class="col-md-8 mb20">
-
-<p>
-  At mamnoon we believe strongly in the value of food as an essential part of family and social interactions. We take great pride in the power of the intense flavors, colors, and vitality of the traditional Levantine cuisine: the heart of mamnoon. We want to shout from the rooftops about the strengths brought to us from Lebanon and Syria, as well as share them with our community. 
-</p>
-<p>
-Our new products are prepared simply but with boundless expertise and passion. They celebrate a lifestyle that harmoniously blends long lasting traditions of culture and flavor with the convenience of the modern world. Our deep love of pure ingredients has helped us build a reputation for unforgettable dining experiences that are both delicious and healthy. 
-</p>
-<p>
-Wassef and Racha Haroun established Mamnoon restaurant in 2012 and have solidified its reputation as a Seattle staple ever since. Their shared mission tells a story of Middle Eastern cuisine in an approachable, unique, and exciting way. Growing up in Lebanon and Syria, they are proud to showcase the unique flavors and hospitality they experienced by forging a path for Levantine cuisine in Seattle.
-</p>
-</div>
-
-</div>
-
-
-<div class="row pad-sm">
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/hummus.png">
-</div>
-<div class="col-md-8 mb20">
-<h2>hummus</h2>
-<h3>(chickpea, tahini, lemon, garlic)</h3>
-<p>
-Our traditional Lebanese approach to hummus is a perfect, clean balance between citrus and tahini with just a hint of garlic to pull it all together. The creamy texture adds luxuriousness and lightness.
-</p>
+<div class="col-md-4 mb20"><img style="width: 100%;" :src="ffdata.header_image"></div>
+<div class="col-md-8 mb20" v-html="ffdata.body_text">
 </div>
 </div>
 
 
 
-<div class="row pad-sm">
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/labneh.png">
-</div>
-<div class="col-md-8 mb20">
-<h2>labneh</h2>
-<h3>(strained yogurt, nigella, dried mint, olive oil)</h3>
-<p>
-Yogurt just won the lottery and the result is our labneh! Tangy, rich, and slightly salted with the dried mint bringing an earthy uniqueness.
-</p>
-</div>
-</div>
+<template v-for="item in ffdata.fine_foods">
 
 
 
 
 <div class="row pad-sm">
 <div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/baba.png">
+  <img style="width: 100%;" :src="item.shop_item.image">
 </div>
 <div class="col-md-8 mb20">
-<h2>baba ganoush</h2>
-<h3>(smoked eggplant, tahini, garlic)</h3>
+<h2>{{item.shop_item.name}}</h2>
+<h3>{{item.shop_item.ingredients}}</h3>
 <p>
-With its custardy texture and smoky flavor our baba ganoush is a savory and smoky vegan dish laden with umami flavor. 
-</p>
-</div>
-</div>
-
-
-
-<div class="row pad-sm">
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/muha.png">
-</div>
-<div class="col-md-8 mb20">
-<h2>muhammara</h2>
-<h3>(walnut, pepper paste, cumin, pomegranate molasses, bread crumbs)</h3>
-<p>
-Our muhammara is a flavor punch for your taste buds. The richness of the pepper paste and walnuts is cut with the tangy sweetness of the pomegranate molasses.
+{{item.shop_item.description}}
 </p>
 </div>
 </div>
@@ -90,78 +43,40 @@ Our muhammara is a flavor punch for your taste buds. The richness of the pepper 
 
 
 
-<div class="row pad-sm">
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/fatoush1.png">
-</div>
-<div class="col-md-8 mb20">
-<h2>fattoush dressing</h2>
-<h3>(sumac, pomegranate molasses, champagne vinegar, olive oil)</h3>
-<p>
-This dressing gets its name from a Lebanese bread salad. Our tangy vinaigrette compliments juicy vegetables like cucumbers and radish and soaks beautifully into our pita chips.
-</p>
-</div>
-</div>
 
 
 
-<div class="row pad-sm">
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/harra1.png">
-</div>
-<div class="col-md-8 mb20">
-<h2>harra sauce</h2>
-<h3>(fresno chili, garlic, smoked paprika, cumin)</h3>
-<p>
-Fresno chilis gives our hot sauce its slightly smokey and fruity flavor while the cumin adds some unique dusky notes.
-</p>
-</div>
-</div>
+</template>
 
 
-<div class="row pad-sm">
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/chips1.png">
-</div>
-<div class="col-md-8 mb20">
-<h2>pita chips</h2>
-<h3>(our house-made arabic bread crisped to perfection)</h3>
-<p>
-A crispy, slightly thicker pita chip is great for any dips or for soaking up dressing in a traditional Lebanese fattoush salad.
-</p>
-</div>
-</div>
+
 
 <div class="row">
 <div class="col-md-8 mb20">
-<h2>Available at the following Seattle locations:</h2>
+<h2>{{ffdata.locations_sub_header}}</h2>
+
+
+
+
 
 <p class="list-of-links">
-Cone & Steiner Capitol Hill & Pioneer Square - <a href="https://www.coneandsteiner.com" target="_blank">https://www.coneandsteiner.com</a>
-<br>DeLaurenti Pike Place Market - <a href="https://delaurenti.com" target="_blank">https://delaurenti.com</a>
-<br>Ken's Market Greenwood - <a href="https://www.kensmarkets.com" target="_blank">https://www.kensmarkets.com</a>
-<br>Ken's Market Queen Anne - <a href="https://www.kens-qa.com" target="_blank">https://www.kens-qa.com</a>
-<br>Leschi Market- <a href="https://www.leschimart.com" target="_blank">https://www.leschimart.com</a>
-<br>Marketime Fremont - <a href="https://www.kensmarkets.com" target="_blank">https://www.kensmarkets.com</a>
-<br>All Metropolitan Markets - <a href="https://metropolitan-market.com" target="_blank">https://metropolitan-market.com</a>
+<template v-for="link in ffdata.locations_link_repeater">
+{{link.name}} - <a :href="link.url" target="_blank">{{link.url}}</a><br />
+</template>
 </p>
 </div>
 </div>
 
 
-<div class="row pad-sm">
+
+<div class="row pad-sm" v-if="ffdata.bottom_images">
+<template v-for="image in ffdata.bottom_images">
 <div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/collection.jpg">
+  <img style="width: 100%;" :src="image.image">
 </div>
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/foodsstack.jpg">
-</div>
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" src="@/assets/img/stackback.jpg">
-</div>
+</template>
 
 </div>
-
 
 
 
@@ -179,13 +94,43 @@ Cone & Steiner Capitol Hill & Pioneer Square - <a href="https://www.coneandstein
 import UpserveOlo from "@/components/UpserveOlo";
 import Nav from "@/components/Nav";
 export default {
+  props: ['data'],
   data(){
 return {
-user: null
+user: null,
+pageData: null,
+ffdata: null
 }
   },
   components: {
     Nav
+  },
+  methods:{
+      async individualRestaurant(){
+   
+    let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+    let AcfBlock = responseAcf
+    this.pageData = AcfBlock.data.acf.content_fields
+
+    for(var item in AcfBlock.data.acf.content_fields){
+      // console.log(item)
+
+      // console.log(AcfBlock.data.acf.content_fields[item].acf_fc_layout)
+
+      let acf = AcfBlock.data.acf.content_fields
+      if(acf[item].acf_fc_layout === 'fine foods'){
+        this.ffdata = acf[item]
+      }
+
+    }
+
+
+
+
+}
+  },
+  mounted(){
+    this.individualRestaurant()
   }
 };
 
