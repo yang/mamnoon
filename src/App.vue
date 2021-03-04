@@ -1547,4 +1547,9 @@ display: flow-root;
 }
 
 
+
+.owl-stage-outer{
+  background: white;
+}
+
 </style>
