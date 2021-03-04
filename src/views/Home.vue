@@ -250,7 +250,7 @@ position: absolute;
 
 &.yellow{
 &:after{
-  animation: marquee 90s linear infinite;
+  animation: marqueeOp 120s linear infinite;
     background: linear-gradient(-45deg, #FFF367 16px, transparent 0), linear-gradient(45deg, #FFF367 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
@@ -268,7 +268,7 @@ position: absolute;
 
 
 &:before{
-  animation: marquee 90s linear infinite;
+  animation: marquee 120s linear infinite;
     background: linear-gradient(-45deg, #FFF367 16px, transparent 0), linear-gradient(45deg, #FFF367 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
@@ -290,7 +290,7 @@ position: absolute;
 
 &.orange{
 &:after{
-  animation: marqueeOp 60s linear infinite;
+  animation: marquee 120s linear infinite;
     background: linear-gradient(-45deg, #F38E5E 16px, transparent 0), linear-gradient(45deg, #F38E5E 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
@@ -307,7 +307,7 @@ position: absolute;
 
 
 &:before{
-  animation: marqueeOp 60s linear infinite;
+  animation: marqueeOp 120s linear infinite;
     background: linear-gradient(-45deg, #F38E5E 16px, transparent 0), linear-gradient(45deg, #F38E5E 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;

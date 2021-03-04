@@ -1091,6 +1091,7 @@ display: inline;
  padding: 10px;
  text-align: center;
  font-weight: 500;
+ text-transform: lowercase;
 
 &.mamnoonstreetcolors{
    background: #ffffff;

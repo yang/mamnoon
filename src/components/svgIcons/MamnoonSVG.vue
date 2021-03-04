@@ -51,6 +51,7 @@ export default {
         <style lang="scss">
   .cls-156 {
     fill: #49494a;
+        fill: #000000;
   }
 
 

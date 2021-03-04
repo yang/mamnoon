@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="halfwidth-orange" @click="openLink(linkOut2)" id="reservemamnoonbutton"> -->
-  <div class="halfwidth-yellow1">
+  <div class="halfwidth-yellow1" style="background: #f05c58;">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05">
       <defs>
       </defs>
@@ -74,6 +74,7 @@ export default {
         <style lang="scss">
   .cls-156 {
     fill: #49494a;
+        fill: #000000;
   }
 
 
