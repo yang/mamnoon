@@ -630,7 +630,7 @@ cart empty
 
 
 
-<pre>{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
+<pre style="display:none;">{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
   </div>
 </template>
 
