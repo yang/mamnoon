@@ -1547,9 +1547,8 @@ display: flow-root;
 }
 
 
-
-.owl-stage-outer{
-  background: white;
+#fine_foods .owl-stage-outer{
+  background:#eee;
 }
 
 </style>

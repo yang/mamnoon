@@ -1,5 +1,5 @@
 <template>
-    <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
+    <section :id="tag.replace(' ','_')" class="section hero is-primary is-fullheight position-relative mb-80">
         <h4 class="mob-bottom-margin">
           
              <router-link to="/mamnoonff">
