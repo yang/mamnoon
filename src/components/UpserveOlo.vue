@@ -215,6 +215,9 @@
              <template v-if="openDays">
          <span v-if="currentRestaurantHours !== ''">{{title.toLowerCase()}}, {{openDays[0] }}-{{openDays[openDays.length-1]}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
          </template><br>
+         
+         <span v-if="dates_additional_information">{{dates_additional_information}}</span>
+         <br v-if="dates_additional_information">
     <span v-if="this.title === 'Mamnoon'"><a class="weblink" href="https://mamnoonrestaurant.com/" target="_blank">mamnoon's website</a></span>
  <span v-if="this.title === 'Mamnoon Street'"><a class="weblink" href="https://mamnoonstreet.com/" target="_blank">mamnoon street's website</a></span>
 <span v-if="this.title === 'Mbar'"><a class="weblink" href="http://mbarseattle.com/" target="_blank">mbar's website</a></span>
@@ -1373,7 +1376,7 @@ cart empty
 <template v-if="currentOrder.preorder === true">
 
 
-  <div class="small-message" v-if="selectedTime === null">please select a date and time</div>
+  <div class="small-message" v-if="selectedTime === null">please select a date and time at the top of this page</div>
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
 <template v-if="this.$store.state.loggedIn">
@@ -2027,6 +2030,7 @@ if(newAddress){
       openTimesUpdated: [],
       openTimes: [],
       openDays: [],
+      dates_additional_information: null,
       futureDay:null,
       futureTime:null,
       valid: false,
@@ -2347,7 +2351,7 @@ if(responseUpserve.data.doc[0].menu){
     this.openDays = this.currentRestaurantHours.information.days_of_week
     let curRest = this.currentRestaurantHours.information.open_time_range
 
-
+    this.dates_additional_information = this.currentRestaurantHours.information.additional_information
 
     for(let i = 0; i < curRest.length; i++){
           this.showTimeInterVals(curRest[i].time_slot.open.split(':')[0],curRest[i].time_slot.close.split(':')[0])
