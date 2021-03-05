@@ -755,6 +755,7 @@ cursor: pointer;
     height: 90vh;
     transform: translateX(-50%);
     padding: 10px;
+        overflow: scroll;
 }
 
 
@@ -769,6 +770,7 @@ cursor: pointer;
     height: 90vh;
     transform: translateX(-50%);
     padding: 10px;
+        overflow: scroll;
 }
 
 
