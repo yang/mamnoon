@@ -26,11 +26,11 @@
             required
           />
 
-          <p>
+          <!-- <p>
             Dont have an account??&nbsp;<router-link to="/register"
               >click here</router-link
             >
-          </p>
+          </p> -->
 
           <!-- Sign in button -->
           <center>

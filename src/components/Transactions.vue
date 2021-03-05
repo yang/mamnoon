@@ -4,6 +4,9 @@
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <div class="container nav-acc-header pad-yellow-background">
           <ul class="navbar-nav">
+            <li>
+              <router-link to="/admin">go to retail admin</router-link>
+            </li>
             <li class="nav-item active">
               <button class="nav-link" @click="logUserOut"> Logout</button>
             </li>

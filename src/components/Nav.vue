@@ -622,8 +622,9 @@ right: 0;
     position: fixed;
     width: 100%;
     /* top: -154px; */
-        // top: -194px;
-        top: -224px;
+    // top: -194px;
+    top: -224px;
+    top: -240px;
     transition: all .5s ease;
 }
 

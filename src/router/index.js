@@ -31,7 +31,10 @@ const routes = [
   {
     path: "/admin",
     name: "admin",
-    component: () => import("../views/admin.vue")
+    component: () => import("../views/admin.vue"),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/mamnoon",
@@ -63,11 +66,11 @@ const routes = [
     name: "login",
     component: () => import("../views/login.vue")
   },
-  {
-    path: "/register",
-    name: "register",
-    component: () => import("../views/register.vue")
-  },
+  // {
+  //   path: "/register",
+  //   name: "register",
+  //   component: () => import("../views/register.vue")
+  // },
   {
     path: "/addproduct",
     name: "addproduct",

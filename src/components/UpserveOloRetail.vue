@@ -273,14 +273,20 @@
 <!-- <div v-if="shippingOption === false" class="mb5 button-container"> -->
   <div class="mb5 button-container">
     <div class="button-third">
-  <button @click="preOrderFalse()" :class="{ selected: currentOrder.preorder === false }">get it now</button></div> 
+  <button @click="preOrderFalse()" :class="{ selected: this.currentOrder.preorder === false && this.currentOrder.ship === false }">pickup now</button></div> 
+   
+   
+
+   
    <div class="button-third">
+
+
 
  <button @click="preOrderToggleTrue()" :class="{ selected: preOrderToggleState === true }">schedule</button> 
 
     </div> 
    <div class="button-third">
-    <button @click="shipOption(true)" :class="{ selected: shippingOption }">ship</button> 
+    <button @click="shipOption(true)" :class="{ selected: shippingOption && this.currentOrder.ship === true }">ship</button> 
     </div> 
 </div>
 </template>
@@ -337,7 +343,7 @@ Come and pick up your items during store hours or get them shipped to your door 
           </template>
         </template>
         <template v-else>
-          <template v-if="this.currentOrder.charges.items.length > 0">
+          <template v-if="currentOrder.charges.items.length > 0">
             <template v-if="shippingOption === false">
             <div style="margin-top:20px;">
               <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
@@ -365,7 +371,7 @@ Come and pick up your items during store hours or get them shipped to your door 
                             <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
                                         <div class="updateAddress">
                                           <button
-                                            v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
+                                            v-if="currentOrder.fulfillment_info.type === 'delivery'"
                                             @click="refreshGoogle()"
                                           >update address</button>
                                         </div>
@@ -373,7 +379,7 @@ Come and pick up your items during store hours or get them shipped to your door 
                                           <GoogleValidate
                                             class="pointer-all"
                                             :key="renderKey"
-                                            v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
+                                            v-if="currentOrder.fulfillment_info.type === 'delivery'"
                                           />
                                         </div>
                             </div>
@@ -437,7 +443,7 @@ calculate shipping
 
 
 
-<template v-if="this.currentOrder.charges.items.length > 0">
+<template v-if="currentOrder.charges.items.length > 0">
               <!-- <div class="mt10" v-if="total > 0"> -->
 
 
@@ -477,7 +483,7 @@ cart empty
 <!-- start panel -->
 <!-- </div> -->
 <template v-if="panelShow === 'yourOrder'">
- <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;" v-if="this.currentOrder.charges.items.length === 0">customer info</button>
+ <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;" v-if="currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShow = 'customerInfo'" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
      
@@ -568,7 +574,7 @@ cart empty
 
 <template v-if="giftCardPanel ===  true">
 <template v-if="user.user && user.user.email">
-<!-- <template v-if="this.$store.state.loggedIn"> -->
+<!-- <template v-if="$store.state.loggedIn"> -->
 
    <br>
     <h4 v-if="showInsufficientFunds === true" class="error" style="text-align:left">insufficient funds</h4>
@@ -1379,7 +1385,15 @@ this.currentOrder.ship = c
   },
   preOrderFalse(){
   this.currentOrder.preorder = false
-  this.panelShow = ''
+  this.panelShow = 'customerInfo'
+
+  this.currentOrder.ship = false
+
+
+this.preOrderToggleState = false
+this.shippingOption = false
+
+
   },
  preOrderToggleTrue(){
 
