@@ -12,6 +12,17 @@
 
 <div class="container pad ff">
 
+
+<div class="row">
+
+
+<div class="col-md-12 mb20">
+  <h1>Mamnoon Fine Foods</h1>
+</div>
+
+</div>
+
+
 <div class="row">
 
 
@@ -201,6 +212,10 @@ font-weight: bold;
 
 
    @media only screen and (max-width: 992px) {
+
+     .ff{
+       padding-top: 0;
+     }
 
 
 .list-of-links{
