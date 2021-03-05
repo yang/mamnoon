@@ -73,6 +73,12 @@ svg{
     line-height: 1.6;
     color: #f05d5b;
 
+       @media only screen and (max-width: 992px) {
+    font-size: 16px;
+    line-height: 1.4;
+
+       }
+
 }
 
 </style>
