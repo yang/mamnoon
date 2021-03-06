@@ -1706,6 +1706,7 @@ return this.currentOrder.tipSelected === i
   watch: {	
         cardNumberInput:{
         handler(val){
+   if(this.cardNumberInput){
         if(this.cardNumberInput.length === 16){
           // console.log('is 16')
           this.lookupBalance()
@@ -1713,6 +1714,9 @@ return this.currentOrder.tipSelected === i
         }else{
           // console.log('not 16')
         this.validNumber = false
+        }
+
+
         }
         }
       },

@@ -700,6 +700,7 @@ export default {
   },
   computed: {	
     upserveListCategories(){
+if(this.upserveList){
       const catArray = this.upserveList.map(function(x){
         return x.category
       })
@@ -707,7 +708,9 @@ export default {
       const uniqueSet = new Set(catArray)
 
         return [...uniqueSet]
+    }
     },
+
     weightShipping(){
       let weight = {
         lbs:0,
@@ -757,6 +760,7 @@ totalWeight(){
   },
       cardNumberInput:{
         handler(val){
+             if(this.cardNumberInput){
         if(this.cardNumberInput.length === 16){
           // console.log('is 16')
           this.lookupBalance()
@@ -765,6 +769,7 @@ totalWeight(){
           // console.log('not 16')
         this.validNumber = false
         }
+             }
         }
       },
     user:{
