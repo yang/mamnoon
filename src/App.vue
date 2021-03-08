@@ -16,7 +16,7 @@ export default {
       titleTemplate: '%s | Beta Version',
                   meta: [
                 { name: 'Nadi Mama', content:  'Welcome to Nadi Mama, the home for all things the Mama Group has to offer. Swipe through to see some of our latest special offerings hand curated by our lead chef, browse the full menu and order items individually, peruse our new retail items, learn more about wholesale resale opportunities of our house made products, make reservations for a special night at one of our locations, or simply stay in touch with us!'},
-                { property: 'og:title', content: "Nadi Mama -  Home for all things the Mama Group has to offer."},
+                { property: 'og:title', content: "Nadi Mama - Home for all things the Mama Group has to offer."},
                 { property: 'og:site_name', content: 'Nadi Mama'},
                 {property: 'og:type', content: 'website'},    
                 {name: 'robots', content: 'index,follow'} 
