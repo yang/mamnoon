@@ -10,6 +10,12 @@
 import Nav from "@/components/Nav";
 import Transactions from "@/components/Transactions";
 export default {
+          metaInfo: {
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'Transactions',
+      // all titles will be injected into this template
+      titleTemplate: '%s | Nadi Mama'
+  },
   components: {
 
     Nav,

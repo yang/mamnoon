@@ -1612,6 +1612,13 @@ import tz from 'moment-timezone'
 
 import swal from "sweetalert";
 export default {
+      metaInfo: {
+      name: 'UpserveOlo',
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'Order Online',
+      // all titles will be injected into this template
+      titleTemplate: '%s | Nadi Mama'
+    },
   name: "UpserveOlo",
   props: ["data","emailAddress","oloEndpoint","menuEndpoint","title","userData"],
   components: {

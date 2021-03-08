@@ -678,6 +678,12 @@ import orderForm from "@/components/subs/orderForm";
 
 
 export default {
+  metaInfo: {
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'Retail',
+      // all titles will be injected into this template
+      titleTemplate: '%s | Nadi Mama'
+  },
   name: "UpserveOloRetail",
   props: ["data","emailAddress","oloEndpoint","menuEndpoint","title"],
   components: {

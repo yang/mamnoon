@@ -13,6 +13,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "vue-select/src/scss/vue-select.scss";
 import 'document-register-element/build/document-register-element'
 import Sticky from 'vue-sticky-directive'
+import VueMeta from 'vue-meta'
+Vue.use(VueMeta)
 Vue.use(VueCurrencyInput)
 Vue.component('v-select', vSelect)
 

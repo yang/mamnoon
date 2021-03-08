@@ -105,6 +105,12 @@
 import UpserveOlo from "@/components/UpserveOlo";
 import Nav from "@/components/Nav";
 export default {
+    metaInfo: {
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'Fine Foods',
+      // all titles will be injected into this template
+      titleTemplate: '%s | Nadi Mama'
+  },
   props: ['data'],
   data(){
 return {

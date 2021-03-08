@@ -10,6 +10,12 @@
 import Nav from "@/components/Nav";
 import UserProfile from "@/components/UserProfile";
 export default {
+      metaInfo: {
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'Profile',
+      // all titles will be injected into this template
+      titleTemplate: '%s | Nadi Mama'
+  },
   components: {
 
     Nav,
