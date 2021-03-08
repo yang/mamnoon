@@ -35,13 +35,13 @@
             <div v-if="serve.id === piece" class="inline-block full-height-slide" :data="serve.restaurant" style="height:400px;">  
             <!-- <template v-if="serve.images"> -->
                <template>
-     <div class="outside-slideshow" @click="goToRestaurant(serve.restaurant)">
+     <div class="outside-slideshow" @click="goToRestaurant(serve.restaurant)" style="background-color: #06bff9;">
       
+<!-- #06bff9 -->
 
-
-<template v-if="serve.item_images.length > 0">
+<!-- <template v-if="serve.item_images.length > 0">
 <img v-if="serve.item_images[0]" :src="serve.item_images[0].url" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
-</template>
+</template> -->
 
 
 <div v-if="serve.restaurant === 'Mamnoon Street'" class="top-bar mamnoonstreetcolors">
@@ -136,12 +136,12 @@
 <div v-for="slide in feature">
 <div class="inline-block full-height-slide" style="height:400px;"> 
 
-     <div class="outside-slideshow" @click="goToLink(slide.slide.link)">
+     <div class="outside-slideshow" @click="goToLink(slide.slide.link)" style="background: #06bff9;">
 
 
-<template v-if="slide.slide.image">
+<!--<template v-if="slide.slide.image">
 <img :src="slide.slide.image" alt="" style="height: 100%;position: absolute;top: 0px;left: 0px;width: 100% !important;filter: blur(4px);transform: scale(1.5);opacity: .9;">
-</template>
+</template>-->
 
          <div class="top-bar" :class="{mamnoonstreetcolors: slide.slide.restaurant === 'Mamnoon Street', mbarcolors: slide.slide.restaurant === 'Mbar'}">
                        {{slide.slide.restaurant}}
