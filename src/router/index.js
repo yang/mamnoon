@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import AxiosPlugin from 'vue-axios-cors';
-import sitemapMiddleware from './middleware/sitemapMiddleware';
+
 
 
 Vue.use(AxiosPlugin)
