@@ -52,16 +52,7 @@
 
 
 <div @click="goToRetail()" class="text-center" style="" v-for="item in retailItems" :key="item.id">
-
-
-
-
-
-<div v-if="item.images" class="squareAspect" :style="{'backgroundImage': 'url('+item.images.online_ordering_menu.main+')'}">
-
-
-
-  <!-- <img :src="item.images.online_ordering_menu.main" alt=""> -->
+<div v-if="item.images" class="squareAspect" :style="{'backgroundImage': 'url('+item.images.online_ordering_menu.main +')'}">
   </div>
 <div v-else>
 

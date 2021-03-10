@@ -40,7 +40,7 @@
 
 <div class="row pad-sm">
 <div class="col-md-4 mb20">
-  <img style="width: 100%;" :src="item.shop_item.image">
+  <img style="width: 100%;" :src="item.shop_item.image.sizes.medium_large">
 </div>
 <div class="col-md-8 mb20">
 <h2>{{item.shop_item.name}}</h2>
