@@ -44,7 +44,7 @@
             </span>
           </template>
         </carousel>
-      <div class="text-center mb-perfect" @onclick="leadInScroll()">
+      <div class="text-center mb-perfect">
         <router-link to="/mamnoon">
        <ShowAll />
         </router-link>
@@ -70,9 +70,7 @@ export default {
     name: 'onlineshop',
     props: ['data','header','tag','description'],
     methods: {
-      leadInScroll: function(){
-console.log('send and expand to retail')
-      }
+
     }
 }
 </script>

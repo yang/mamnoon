@@ -79,7 +79,7 @@
             </span>
           </template>
         </carousel>
-      <div class="text-center mb-perfect" @onclick="leadInScroll()">
+      <div class="text-center mb-perfect">
         <router-link to="/retail">
        <ShowAll />
         </router-link>
@@ -120,9 +120,6 @@ export default {
     methods: {
       goToRetail(){
  this.$router.push("/retail");
-      },
-      leadInScroll: function(){
-console.log('send and expand to retail')
       },
        async upservesMongo() {
       let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
