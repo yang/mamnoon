@@ -1490,15 +1490,8 @@ cart empty
 
 
 
-
-
-
 </template>
 
-
-<button @click="emptyCart()">  
-empty cart
-</button>
 
 
 <template v-if="giftCardPanel ===  true">

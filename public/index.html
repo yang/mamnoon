@@ -1,305 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>Nadi Mama</title>
-    <meta name="title" content="Nadi Mama -  Home for all things the Mama Group has to offer.">
-    <meta name="description" content="Swipe through to see some of our latest special offerings hand curated by our lead chef, browse the full menu and order items individually, peruse our new retail items, learn more about wholesale resale opportunities of our house made products, or make a reservation!">
-    <meta property="og:image" content="assets/nadi-banner.jpg" />
 
-    <link rel="preconnect" href="https://app.snipcart.com">
-    <link rel="preconnect" href="https://cdn.snipcart.com">
-    <!-- <link rel="stylesheet" href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" /> -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>Nadi Mama</title>
+  <meta name="title" content="Nadi Mama -  Home for all things the Mama Group has to offer.">
+  <meta name="description"
+    content="Swipe through to see some of our latest special offerings hand curated by our lead chef, browse the full menu and order items individually, peruse our new retail items, learn more about wholesale resale opportunities of our house made products, or make a reservation!">
+  <meta property="og:image" content="assets/nadi-banner.jpg" />
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">   
-    <!-- <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.18/default/snipcart.css" /> -->
-<style type="text/css">
+  <link rel="preconnect" href="https://app.snipcart.com">
+  <link rel="preconnect" href="https://cdn.snipcart.com">
+  <!-- <link rel="stylesheet" href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" /> -->
 
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.18/default/snipcart.css" /> -->
+  <style type="text/css">
+    .coverflow {
+      z-index: 10;
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+      -webkit-touch-callout: none;
+    }
 
+    .coverflow .coverflow-wrap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
-.coverflow {
-  z-index: 10;
-  position: relative;
-  overflow: hidden;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-text-size-adjust: none;
-  -ms-text-size-adjust: none;
-  -webkit-touch-callout: none; }
+    .coverflow .coverflow-tray,
+    .coverflow .coverflow-rect {
+      position: absolute;
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+      -o-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+    }
 
-.coverflow .coverflow-wrap {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; }
+    .coverflow .coverflow-tray,
+    .coverflow .coverflow-cell {
+      /* pointer-events: none; */
+      position: absolute;
+      -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      -moz-transition: -moz-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      -ms-transition: -ms-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      -o-transition: -o-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
 
-.coverflow .coverflow-tray,
-.coverflow .coverflow-rect {
-  position: absolute;
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
-  -o-transform-style: preserve-3d;
-  transform-style: preserve-3d; }
+    .coverflow .coverflow-hit {
+      position: absolute;
+      opacity: 0;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
 
-.coverflow .coverflow-tray,
-.coverflow .coverflow-cell {
-  /* pointer-events: none; */
-  position: absolute;
-  -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  -moz-transition: -moz-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  -ms-transition: -ms-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  -o-transition: -o-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
-
-.coverflow .coverflow-hit {
-  position: absolute;
-  opacity: 0;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
-
-.coverflow .coverflow-cell canvas {
-  /* pointer-events: none; */
-  outline: 1px solid transparent;
-  position: absolute; }
-
-
-
-/* individual */
-/* individual */
-
-
-
-.individual .coverflow {
-  z-index: 10;
-  position: relative;
-  overflow: hidden;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-text-size-adjust: none;
-  -ms-text-size-adjust: none;
-  -webkit-touch-callout: none; }
-
-  .individual .coverflow .coverflow-wrap {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; }
-
-  .individual .coverflow .coverflow-tray,
-  .individual .coverflow .coverflow-rect {
-  position: absolute;
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
-  -o-transform-style: preserve-3d;
-  transform-style: preserve-3d; }
-
-  .individual .coverflow .coverflow-tray,
-  .individual .coverflow .coverflow-cell {
-  /* pointer-events: none; */
-  position: absolute;
-  -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  -moz-transition: -moz-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  -ms-transition: -ms-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  -o-transition: -o-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
-
-  .individual .coverflow .coverflow-hit {
-  position: absolute;
-  opacity: 0;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
-
-  .individual .coverflow .coverflow-cell canvas {
-  /* pointer-events: none; */
-  outline: 1px solid transparent;
-  position: absolute; }
+    .coverflow .coverflow-cell canvas {
+      /* pointer-events: none; */
+      outline: 1px solid transparent;
+      position: absolute;
+    }
 
 
 
+    /* individual */
+    /* individual */
 
 
 
-/* individual */
-/* individual */
+    .individual .coverflow {
+      z-index: 10;
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+      -webkit-touch-callout: none;
+    }
 
+    .individual .coverflow .coverflow-wrap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
+    .individual .coverflow .coverflow-tray,
+    .individual .coverflow .coverflow-rect {
+      position: absolute;
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+      -o-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+    }
 
+    .individual .coverflow .coverflow-tray,
+    .individual .coverflow .coverflow-cell {
+      /* pointer-events: none; */
+      position: absolute;
+      -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      -moz-transition: -moz-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      -ms-transition: -ms-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      -o-transition: -o-transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
 
+    .individual .coverflow .coverflow-hit {
+      position: absolute;
+      opacity: 0;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
 
+    .individual .coverflow .coverflow-cell canvas {
+      /* pointer-events: none; */
+      outline: 1px solid transparent;
+      position: absolute;
+    }
 
 
 
 
 
 
+    /* individual */
+    /* individual */
 
 
 
 
-.coverflow-text {
-  position: absolute;
-  width: 100%; }
 
 
 
-.coverflow-rect{
-  pointer-events: none;
-}
-
-.coverflow-text h1,
-.coverflow-text h2 {
-  margin: 0; }
-
-
-button[aria-label='close modal'],
-button[aria-label='close modal']:active,
-button[aria-label='close modal']:focus{
-    background-color: transparent !important;
-    background-image: url(assets/img/closeX.svg);
-    background-repeat: no-repeat;
-    width: 36px;
-    height: 36px;
-    color: transparent !important;
-    font-size: 0;
-    outline: none;
-    background-size: 60% !important;
-    background-position: center center;
-    font-size: 0 !important;
-    margin-top: 5px;
-}
 
 
 
-#reservembarbutton,
-#reservemamnoonbutton{
-  display: none;
-}
 
 
-	</style>
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-43KF1NJ5RD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-43KF1NJ5RD');
-</script>
+    .coverflow-text {
+      position: absolute;
+      width: 100%;
+    }
+
+
+
+    .coverflow-rect {
+      pointer-events: none;
+    }
+
+    .coverflow-text h1,
+    .coverflow-text h2 {
+      margin: 0;
+    }
+
+
+    button[aria-label='close modal'],
+    button[aria-label='close modal']:active,
+    button[aria-label='close modal']:focus {
+      background-color: transparent !important;
+      background-image: url(assets/img/closeX.svg);
+      background-repeat: no-repeat;
+      width: 36px;
+      height: 36px;
+      color: transparent !important;
+      font-size: 0;
+      outline: none;
+      background-size: 60% !important;
+      background-position: center center;
+      font-size: 0 !important;
+      margin-top: 5px;
+    }
+
+
+
+    #reservembarbutton,
+    #reservemamnoonbutton {
+      display: none;
+    }
+  </style>
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-43KF1NJ5RD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-43KF1NJ5RD');
+  </script>
 
 </head>
 
-  <body>
-    <noscript>
-      <strong>We're sorry but authapp doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+<body>
+  <noscript>
+    <strong>We're sorry but authapp doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
 
-    <div id="app"></div>
 
-    <!-- <vue-widget></vue-widget> -->
-    <div id="reservembarbutton">
-      reserve mbar
+
+
+  <div id="app"></div>
+
+  <!-- <vue-widget></vue-widget> -->
+  <div id="reservembarbutton">
+    reserve mbar
+  </div>
+
+
+  <div id="reservemamnoonbutton">
+    reserve mamnoon
+  </div>
+
+
+
+  <div class="emergepay-container">
+
+    <!-- These are the elements that the fields will be appended to -->
+    <div>
+      <!-- Elements that fields will be appended to for credit card transactions -->
+      <div id="cardNumberContainer"></div>
+      <div id="expirationDateContainer"></div>
+      <div id="securityCodeContainer"></div>
+      <!-- Elements that fields will be appended to for ACH transactions -->
+      <div id="accountNumberContainer"></div>
+      <div id="routingNumberContainer"></div>
+      <div id="accountHolderNameContainer"></div>
+      <!-- The hosted field for displaying the transaction amount is common for all transaction types -->
+      <div id="amountContainer"></div>
+
     </div>
 
-
-    <div id="reservemamnoonbutton">
-      reserve mamnoon
-    </div>
-   
-
-
-<div class="emergepay-container">
-
-<!-- These are the elements that the fields will be appended to -->
-<div>
-  <!-- Elements that fields will be appended to for credit card transactions -->
-  <div id="cardNumberContainer"></div>
-  <div id="expirationDateContainer"></div>
-  <div id="securityCodeContainer"></div>
-  <!-- Elements that fields will be appended to for ACH transactions -->
-  <div id="accountNumberContainer"></div>
-  <div id="routingNumberContainer"></div>
-  <div id="accountHolderNameContainer"></div>
-  <!-- The hosted field for displaying the transaction amount is common for all transaction types -->       
-  <div id="amountContainer"></div>
-
-</div>
-
-</div>
-<!-- 
+  </div>
+  <!-- 
 Load emergepay fields javascript file. 
 NOTE: make sure you replace assets_url with the correct url for the environment you're working in. 
 -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- sandbox --> 
-       <!-- <script src="https://assets.emergepay-sandbox.chargeitpro.com/cip-hosted-modal.js"></script> -->
-<!-- production --> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- sandbox -->
+  <!-- <script src="https://assets.emergepay-sandbox.chargeitpro.com/cip-hosted-modal.js"></script> -->
+  <!-- production -->
   <script src="https://assets.emergepay.chargeitpro.com/cip-hosted-modal.js"></script>
   <script type="text/javascript" src="https://js.createsend1.com/javascript/copypastesubscribeformlogic.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwegA6SBLg8wfP47WBd-bj-_ghO9kRTs8&libraries=geometry,places&callback=initMap"
-     async defer></script>
-<!-- modal versoin -->
-<!-- modal version -->
-<script src="./sevenRooms1.js"></script>
-<script>
-SevenroomsWidget.init({
-        venueId: 'mbarseattle',
-        triggerId: 'reservembarbutton',
-        type: 'reservations',
-        defaultPartySize: 2,
-        defaultTime: '7:00PM',
-        allVenues: ['mbarseattle'] 
-      });
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwegA6SBLg8wfP47WBd-bj-_ghO9kRTs8&libraries=geometry,places&callback=initMap"
+    async defer></script>
+  <!-- modal versoin -->
+  <!-- modal version -->
+  <script src="./sevenRooms1.js"></script>
+  <script>
+    SevenroomsWidget.init({
+      venueId: 'mbarseattle',
+      triggerId: 'reservembarbutton',
+      type: 'reservations',
+      defaultPartySize: 2,
+      defaultTime: '7:00PM',
+      allVenues: ['mbarseattle']
+    });
 
-      SevenroomsWidget2.init({
-        venueId: 'mamnoon',
-        triggerId: 'reservemamnoonbutton',
-        type: 'reservations',
-        defaultPartySize: 2,
-        defaultTime: '7:00PM',
-        allVenues: ['mamnoon']
-      })
-      </script>
+    SevenroomsWidget2.init({
+      venueId: 'mamnoon',
+      triggerId: 'reservemamnoonbutton',
+      type: 'reservations',
+      defaultPartySize: 2,
+      defaultTime: '7:00PM',
+      allVenues: ['mamnoon']
+    })
+  </script>
 
 
-  </body>
+</body>
+
 </html>
