@@ -22,7 +22,7 @@
             </span>
           </template>
 <div class="text-center" v-for="item in data" :key="item.shop_item.name">
-<img class="lazy" :src="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
+<img class="lazy" width="100%" height="100%" :src="item.shop_item.image.replace('.jpg','-768x768.jpg')" />
 
 
 
