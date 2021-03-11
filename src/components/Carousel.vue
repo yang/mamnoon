@@ -223,6 +223,7 @@ h4 {
   font-size: 18px;
   font-weight: 500;
   line-height: 1.2;
+  text-transform: lowercase;
 }
 .order-bottom.order-top {
   background: #f58e58;

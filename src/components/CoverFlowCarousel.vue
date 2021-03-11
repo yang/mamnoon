@@ -1092,7 +1092,7 @@ display: inline;
  text-align: center;
  font-weight: 500;
  text-transform: lowercase;
-
+    font-size: 1.4em;
 &.mamnoonstreetcolors{
    background: #ffffff;
    color: #f05d5b;
