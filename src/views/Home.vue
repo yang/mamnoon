@@ -262,7 +262,7 @@ position: absolute;
     left: 0px;
     width: 100%;
     height: 32px;
-    transform: rotate(180deg);
+    // transform: rotate(180deg);
 
 
     background-image: url('https://www.nadimama.com/assets/img/yellowtri.svg');
@@ -272,7 +272,7 @@ position: absolute;
 
 &:before{
   animation: marquee 120s linear infinite;
-    background: linear-gradient(-45deg, #FFF367 16px, transparent 0), linear-gradient(45deg, #FFF367 16px, transparent 0);
+    // background: linear-gradient(-45deg, #FFF367 16px, transparent 0), linear-gradient(45deg, #FFF367 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
     background-size: 32px 32px;
@@ -284,6 +284,7 @@ position: absolute;
     width: 100%;
     height: 32px;
 background-image: url('https://www.nadimama.com/assets/img/yellowtri.svg');
+    transform: rotate(180deg);
 }
 
 
@@ -294,7 +295,7 @@ background-image: url('https://www.nadimama.com/assets/img/yellowtri.svg');
 &.orange{
 &:after{
   animation: marquee 120s linear infinite;
-    background: linear-gradient(-45deg, #F38E5E 16px, transparent 0), linear-gradient(45deg, #F38E5E 16px, transparent 0);
+    // background: linear-gradient(-45deg, #F38E5E 16px, transparent 0), linear-gradient(45deg, #F38E5E 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
     background-size: 32px 32px;
@@ -305,14 +306,14 @@ background-image: url('https://www.nadimama.com/assets/img/yellowtri.svg');
     left: 0px;
     width: 100%;
     height: 32px;
-    transform: rotate(180deg);
+    // transform: rotate(180deg);
     background-image: url('https://www.nadimama.com/assets/img/orangetri.svg');
 }
 
 
 &:before{
   animation: marqueeOp 120s linear infinite;
-    background: linear-gradient(-45deg, #F38E5E 16px, transparent 0), linear-gradient(45deg, #F38E5E 16px, transparent 0);
+    // background: linear-gradient(-45deg, #F38E5E 16px, transparent 0), linear-gradient(45deg, #F38E5E 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
     background-size: 32px 32px;
@@ -323,6 +324,7 @@ background-image: url('https://www.nadimama.com/assets/img/yellowtri.svg');
     left: 0px;
     width: 100%;
     height: 32px;
+        transform: rotate(180deg);
     background-image: url('https://www.nadimama.com/assets/img/orangetri.svg');
 
 }
