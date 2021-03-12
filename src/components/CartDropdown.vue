@@ -67,7 +67,7 @@ this.dropdownVisible = !this.dropdownVisible
     position: absolute;
     width: 190px;
     top: 92px;
-        top: 112px;
+        // top: 112px;
     left: 0px;
 
 
@@ -111,7 +111,7 @@ margin-bottom: 0;
     position: fixed;
     width: 100%;
     top: 92px;
-        top: 112px;
+        // top: 112px;
     left: 0px;
 
 

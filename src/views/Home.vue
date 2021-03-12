@@ -24,7 +24,6 @@
 </div>
 
 
-  <!-- <div class="bottom-attach yellow" style="bottom:0px;left:5px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/yellowzig.svg') + ')' }"> -->
     <div class="bottom-attach yellow" style="bottom:0px;left:0px;width: 100%;color: transparent;">
     <div>
 1
@@ -37,7 +36,7 @@
 
 
 
-  <!-- <div class="bottom-attach yellow" style="bottom:0px;left:5px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/yellowzig.svg') + ')' }"> -->
+
     <div class="bottom-attach yellow flip-horizontal moved-over" style="bottom:0px;width: 100%;color: transparent;">
     <div>
 1

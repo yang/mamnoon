@@ -2047,8 +2047,13 @@ removeFromOrder(removal) {
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.body.sections;
+
+      console.log(responseUpserve.data.body);
       this.upserveTaxRate =
         responseUpserve.data.body.tax_rates[0].percentage_rate;
+
+        console.log('upserveTaxRate')
+        console.log(upserveTaxRate)
       this.modifierGroups = responseUpserve.data.body.modifier_groups;
       this.modifiers = responseUpserve.data.body.modifiers;
       this.modifierItems = responseUpserve.data.body.modifiers;
@@ -2064,8 +2069,15 @@ removeFromOrder(removal) {
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       // this.upserveSections = responseUpserve.data.doc[0].menu.sections;
-      // this.upserveTaxRate =
-      //   responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
+
+        console.log(responseUpserve.data)
+               console.log('upserveTaxRate')
+
+
+this.upserveTaxRate =
+        responseUpserve.data.doc[0].menu.tax_rates[0].percentage_rate;
+
+        console.log(upserveTaxRate)
       // this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
       // this.modifiers = responseUpserve.data.doc[0].menu.modifiers;
       // this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
