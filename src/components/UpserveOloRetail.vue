@@ -465,9 +465,10 @@ calculate shipping
              <div v-if="shippingOption && shippingAmount > 0 && panelShow === 'customerInfo'">   
               usps priority shipping: ${{shippingAmount}}
                </div>  
-     
+
              <hr v-if="panelShow === 'customerInfo'" />
-              <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total | showToFixed }}</b>
+              <!-- ${{currentOrder.charges.total | showToFixed }} -->
+              <b v-if="panelShow === 'customerInfo'">order total: ${{ orderTotal | showToFixed }}</b>
 <br />
 </template>
 <template v-else>
@@ -636,7 +637,7 @@ cart empty
 
 
 
-<pre style="display:none;">{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
+<pre style="display: none;">{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
   </div>
 </template>
 
@@ -742,6 +743,12 @@ totalWeight(){
 
       return cost
     },
+    orderTotalWithShipping(){
+
+      let shippingAmountToAdd = Number(this.shippingAmount) * 100
+      return Number(this.total) + Number(this.currentTax) + Number(this.tip) + Number(this.currentAmountToAdd) + shippingAmountToAdd
+
+    },  
     orderTotal(){
 
       let shippingAmountToAdd = Number(this.shippingAmount) * 100
@@ -885,8 +892,8 @@ let shipToAdd = curOr.charges.shipping * 100
 
   
 if(this.shippingOption === true){
-
-curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount + shipToAdd
+curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount
+// curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount + shipToAdd
 curOr.payments.payments[0].amount = curOr.charges.total
 }else{
   curOr.charges.total = curOr.charges.preTotal + curOr.charges.taxes + curOr.charges.tip.amount
@@ -1729,7 +1736,7 @@ this.attention = true
       let self = this;
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction-retail",
           // url: "http://localhost:4000/order/start-transaction-retail",
           type: "POST",
           dataType: "json",
