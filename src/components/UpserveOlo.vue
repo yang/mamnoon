@@ -1543,7 +1543,7 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
+<!-- <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre> -->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -2097,7 +2097,8 @@ if(newAddress){
           tip: {
             amountOptions: [],
             amount: 0,
-            payment_type: "Generic Online Ordering Integrated",
+            // payment_type: "Generic Online Ordering Integrated",
+            payment_type: "Nadi Mama"
           },
           items: [],
         },
@@ -2125,7 +2126,8 @@ if(newAddress){
         payments: {
           payments: [
             {
-              payment_type: "Generic Online Ordering Integrated",
+              // payment_type: "Generic Online Ordering Integrated",
+              payment_type: "Nadi Mama",
               amount: null,
             },
           ],
