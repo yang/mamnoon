@@ -3905,9 +3905,9 @@ height: 560px;
       height: 90px;
     height: 70px;
 
-      &:hover{
-background-color: #f05d5b;
-      }
+//       &:hover{
+// background-color: #f05d5b;
+//       }
 }
 
 .pieces{

@@ -240,7 +240,7 @@ h2.menu-header {
 }
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 992px) {
 h2.menu-header {
   font-size: 14px;
 }
@@ -445,8 +445,8 @@ form textarea,
 
 transition: all .5s ease;
 &:hover{
-  background: #f05d5b;
-  color: #ffffff;
+  // background: #f05d5b;
+  // color: #ffffff;
 }
 
 }
@@ -751,7 +751,7 @@ transition: background-color .1s ease;
       display: none;
     }
 
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 992px) {
 .drawer-on-mobile{
     position: fixed;
     left: 100%;

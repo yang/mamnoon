@@ -611,7 +611,7 @@ transition: background-color .1s ease;
       display: none;
     }
 
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 992px) {
 .drawer-on-mobile{
     position: fixed;
     left: 100%;
