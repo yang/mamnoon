@@ -239,6 +239,16 @@ h2.menu-header {
   font-weight: 400;
 }
 
+
+@media only screen and (max-width: 600px) {
+h2.menu-header {
+  font-size: 14px;
+}
+
+}
+
+
+
 @media only screen and (max-width: 600px) {
 h2.menu-header {
  padding-left: 10px;
@@ -780,7 +790,7 @@ transition: background-color .1s ease;
     bottom: 0;
     left: 0;
     border-radius: 0;
-    padding: 5px 10px;
+    padding: 15px 10px;
 
     }
 
@@ -1570,6 +1580,12 @@ display: flow-root;
 
 #fine_foods .owl-stage-outer{
   background:#eee;
+}
+
+
+.no-lr-margin{
+  margin-left: 0;
+  margin-right: 0;
 }
 
 </style>

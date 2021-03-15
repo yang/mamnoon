@@ -206,7 +206,7 @@
 
 
       <div class="container pt20 no-bot-pad">
-        <div class="row">
+        <div class="row no-lr-margin">
           <div class="col-md-12 red-text text-center">
 
 
@@ -229,7 +229,7 @@
       </div>
 
       <div class="container pt20">
-        <div class="row">
+        <div class="row no-lr-margin">
         
 <div class="col-md-12 col-lg-8">
 
@@ -328,29 +328,14 @@
             <div class="pieces" v-for="piece in item.item_ids"> 
                     <template v-if="upserve" v-for="serve in upserve">
                       <div v-if="serve.id === piece" class="inline-block full-height-slide">
+           
                         <div @click="openModal(serve,item.timing_mask)">
                             <template v-if="serve.images">
-                                <!--inline background v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }" -->
-                             
-                             
                              <div class="square-green">
-
-                               <div class="content" :style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }">
-
+   <div class="content" :style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }">
                                </div>
                              </div>
-                             
-                             
-<!--                              <div class="slide-show-image-home"
-                                v-if="serve.images.online_ordering_menu"
-                              ></div>-->
-
-
-                              <!-- <div class="slide-show-image" :style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"> -->
-
-                              <!-- <img class="slide-show-image" v-if="serve.images.online_ordering_menu" :src="serve.images.online_ordering_menu.main"> -->
-                              <!-- _</div> -->
-
+                          
                             </template>
                             <template v-else>
                               <div v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
@@ -3869,6 +3854,11 @@ a{
     }
 }
 
+
+
+
+
+
 .square-green:after {
   content: "";
   display: block;
@@ -3892,20 +3882,20 @@ height: 560px;
     background: #06bff9;
     left: 50%;
     transform: translate(-50%);
-    height: 440px;
+    height: 270px;
 
 
 
     .content{
     position: absolute;
-    width: 280px;
-    height: 280px;
+    width: 140px;
+    height: 140px;
     color: transparent;
     background-size: 100%;
     left: 50%;
     transform: translateX(-50%);
     // top: 30px;
-        top: 20px;
+        top: 10px;
     }
 }
 
@@ -3913,7 +3903,7 @@ height: 560px;
 
 #upserveolo  .content-box-upper{
       height: 90px;
-
+    height: 70px;
 
       &:hover{
 background-color: #f05d5b;
@@ -3921,7 +3911,7 @@ background-color: #f05d5b;
 }
 
 .pieces{
-  height: 410px;
+  height: 230px;
 }
 
 }

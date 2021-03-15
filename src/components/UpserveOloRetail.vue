@@ -122,7 +122,7 @@
 
 
       <div class="container pt20 no-bot-pad">
-        <div class="row">
+        <div class="row no-lr-margin">
           <div class="col-md-12 red-text text-center">
 
                     
@@ -137,7 +137,7 @@
 
 
      <div class="container pt20">
-        <div class="row">
+        <div class="row no-lr-margin">
           <div class="col-md-12 col-lg-8">
      
 

@@ -11,7 +11,15 @@ order history:
   {{order.orderInfo.confirmation_code}}
 
 <!-- {{order.payInfo.externalTransactionId}} -->
-
+<br>
+preorder? {{order.orderInfo.preorder}}
+<br>
+{{order.orderInfo.scheduled_time}}
+<br>
+{{order.orderInfo.time_placed}}
+<br>
+${{order.orderInfo.charges.total | showToFixed}}
+<br>
 <h1 v-if="order.void">VOID</h1>
 <button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.uniqueTransId)">void</button>
 <br>
@@ -58,6 +66,13 @@ export default {
     },
     name: 'OrderHistory',
     props: ['currentUser'],
+    filters: {
+    showToFixed: function (value) {
+    let decvalue = value/100
+
+    return decvalue.toFixed(2)
+}
+    },
     methods: {
     retrieveOrders() {
     let self = this
