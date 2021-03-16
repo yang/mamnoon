@@ -8,15 +8,30 @@
     <!-- </div> -->
     <!-- </div> -->
 
-
+<!-- {{visibility}} -->
   <div v-for="item in pageData" :key="item.acf_fc_layout">
-    <TestimonialsMain v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
-    <CoverFlowCarousel v-else-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
-    <Reservations v-else-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
-    <OnlineShopUpserve v-else-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
-    <FineFoods v-else-if="item.acf_fc_layout === 'fine foods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
-    <ALaCarte v-else-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
-    <Newsletter v-else-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
+      <div id="testimonials" v-if="item.acf_fc_layout === 'testimonials'" v-observe-visibility="visibilityChanged">
+    <TestimonialsMain v-if="visibility.testimonials === true && item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
+     </div>
+      <div id="coverflow" v-if="item.acf_fc_layout === 'meal_calendar'" v-observe-visibility="visibilityChanged">
+    <CoverFlowCarousel v-if="visibility.coverflow === true && item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
+   </div>
+       <div id="reservations" v-if="item.acf_fc_layout === 'reservations'" v-observe-visibility="visibilityChanged">
+    <Reservations v-if="visibility.reservations === true && item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
+   </div>
+        <div id="onlineshop" v-if="item.acf_fc_layout === 'online_shop'" v-observe-visibility="visibilityChanged">
+    <OnlineShopUpserve v-if="visibility.onlineshop === true && item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
+   </div>
+        <div id="finefoods" v-if="item.acf_fc_layout === 'fine foods'" v-observe-visibility="visibilityChanged">
+    <FineFoods v-if="visibility.finefoods === true && item.acf_fc_layout === 'fine foods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
+   </div>
+      <div id="alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" v-observe-visibility="visibilityChanged">
+    <ALaCarte v-if="visibility.alacarte === true && item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
+   </div>
+    <div id="newsletter" v-if="item.acf_fc_layout === 'newsletter'" v-observe-visibility="visibilityChanged">
+
+    <Newsletter v-if="visibility.newsletter === true && item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
+   </div>
   </div>
 
 
@@ -82,11 +97,37 @@ export default {
       blockedBody: this.apiData,
       upserve: null,
       upserveCategories: [],
-      currentlyFiltered: []
+      currentlyFiltered: [],
+      entryText: null,
+      visibility: {
+        testimonials: false,
+        coverflow: false,
+        reservations: false,
+        onlineshop: false,
+        finefoods: false,
+        alacarte: false,
+        newsletter: false
+      
+
+      }
     };
   },
   props: ['apiData', 'blok'],
   methods: {
+visibilityChanged (isVisible, entry) {
+  this.isVisible = isVisible
+  console.log(entry.target.id)
+  console.log(entry.isVisible)
+
+
+this.visibility[entry.target.id] = true
+
+
+console.log(this.visibility[entry.target.id])
+
+  this.entryText = JSON.stringify(entry)
+},
+
   async individualRestaurant(){
    
     let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
