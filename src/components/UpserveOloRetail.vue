@@ -761,7 +761,8 @@ totalWeight(){
     currentTax(){
 
         let currentTax = Number(this.total) * Number(this.upserveTaxRate);
-
+console.log('currentTax')
+console.log(currentTax)
       return Math.round(currentTax)
     }
   },	
