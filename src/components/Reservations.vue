@@ -1,5 +1,5 @@
 <template>
-  <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
+  <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80" :if="visible">
         <h4 class="mob-bottom-margin">{{header}}</h4>
        <p class="description-para noselect hide-mobile">{{description}}</p>
 
@@ -29,7 +29,7 @@ export default {
         Mamnoon
     },
     name: 'reservations',
-    props: ['data','header','tag','description']
+    props: ['data','header','tag','description','visible']
 }
 </script>
 

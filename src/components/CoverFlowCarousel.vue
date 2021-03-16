@@ -1,5 +1,5 @@
 <template>
-    <section :id="tag" class="coverflowsection">
+    <section :id="tag" class="coverflowsection" :if="visible">
 <div class="is-fullheight no-top-pad" id="cover-carousel">
 <h4 class="noselect">{{header}}</h4>
     <p class="description-para hide-mobile" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
@@ -413,7 +413,7 @@ this.upserveSectionsRendered = true
     // window.addEventListener("scroll", this.lazyLoad);
 
   },
-  props: ["data","header","tag","descriptionbody","feature"],
+  props: ["data","header","tag","descriptionbody","feature","visible"],
   methods: {
 goToLink(link){
 window.open(link, "_blank");

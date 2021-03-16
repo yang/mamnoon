@@ -1,6 +1,6 @@
 <template>
 <!-- fine foods fix -->
-    <section :id="tag.replace(' ','_')" class="section hero is-primary is-fullheight position-relative mb-80">
+    <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80" :if="visible">
              <h4 class="mob-bottom-margin">
           
              <router-link to="/mamnoonff">
@@ -62,7 +62,7 @@ export default {
         Order
     },
     name: 'onlineshop',
-    props: ['data','header','tag','description'],
+    props: ['data','header','tag','description','visible'],
     methods: {
       leadInScroll: function(){
 console.log('send and expand to retail')

@@ -7,31 +7,18 @@
       <!-- <p class="intro-paragraph">Nadi Mama is a one stop shop for all things The Mama Group has to offer. Order food, purchase retail items, make a reservation or simply stay up to date with our offerings.</p> -->
     <!-- </div> -->
     <!-- </div> -->
-
-<!-- {{visibility}} -->
+<div style="display:none;position: fixed;top:100px;z-index:10000;width: 100%;background: pink;">
+{{visibility}}
+</div>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
-      <div id="testimonials" v-if="item.acf_fc_layout === 'testimonials'" v-observe-visibility="visibilityChanged">
-    <TestimonialsMain v-if="visibility.testimonials === true && item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
-     </div>
-      <div id="coverflow" v-if="item.acf_fc_layout === 'meal_calendar'" v-observe-visibility="visibilityChanged">
-    <CoverFlowCarousel v-if="visibility.coverflow === true && item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
-   </div>
-       <div id="reservations" v-if="item.acf_fc_layout === 'reservations'" v-observe-visibility="visibilityChanged">
-    <Reservations v-if="visibility.reservations === true && item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
-   </div>
-        <div id="onlineshop" v-if="item.acf_fc_layout === 'online_shop'" v-observe-visibility="visibilityChanged">
-    <OnlineShopUpserve v-if="visibility.onlineshop === true && item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
-   </div>
-        <div id="finefoods" v-if="item.acf_fc_layout === 'fine foods'" v-observe-visibility="visibilityChanged">
-    <FineFoods v-if="visibility.finefoods === true && item.acf_fc_layout === 'fine foods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
-   </div>
-      <div id="alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" v-observe-visibility="visibilityChanged">
-    <ALaCarte v-if="visibility.alacarte === true && item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
-   </div>
-    <div id="newsletter" v-if="item.acf_fc_layout === 'newsletter'" v-observe-visibility="visibilityChanged">
 
-    <Newsletter v-if="visibility.newsletter === true && item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
-   </div>
+    <TestimonialsMain v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.testimonials" v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
+    <CoverFlowCarousel v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
+    <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
+    <OnlineShopUpserve v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.onlineshop" v-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
+    <FineFoods v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.finefoods" v-if="item.acf_fc_layout === 'finefoods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
+    <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
+    <Newsletter v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.newsletter" v-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
   </div>
 
 
@@ -98,14 +85,13 @@ export default {
       upserve: null,
       upserveCategories: [],
       currentlyFiltered: [],
-      entryText: null,
       visibility: {
         testimonials: false,
-        coverflow: false,
+        planahead: false,
         reservations: false,
-        onlineshop: false,
+        shop: false,
         finefoods: false,
-        alacarte: false,
+        fullonlinemenu: false,
         newsletter: false
       
 
@@ -117,15 +103,15 @@ export default {
 visibilityChanged (isVisible, entry) {
   this.isVisible = isVisible
   console.log(entry.target.id)
-  console.log(entry.isVisible)
+  console.log(entry.isIntersecting)
+console.log(entry)
+
+// this.visibility[entry.target.id] = true
 
 
-this.visibility[entry.target.id] = true
+this.visibility[entry.target.id] = entry.isIntersecting
 
 
-console.log(this.visibility[entry.target.id])
-
-  this.entryText = JSON.stringify(entry)
 },
 
   async individualRestaurant(){

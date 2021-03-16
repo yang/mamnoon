@@ -1,6 +1,7 @@
 <template>
-  <section class="section hero is-primary is-fullheight position-relative mb-80">
-        <h4 class="mob-bottom-margin">{{header}}</h4>
+
+  <section id="newsletter" class="section hero is-primary is-fullheight position-relative mb-80" :if="visible">
+        <h4 class="mob-bottom-margin">{{header}} {{visible}}</h4>
        <p class="description-para noselect hide-mobile">{{body}}</p>
 
 <div class="width-container text-center translate40">
@@ -23,7 +24,7 @@ import CampaignMonitor from '@/components/CampaignMonitor.vue'
 import Send from '@/components/Send.vue'
 
 export default {
-props: ['title', 'description','header','body'],
+props: ['title', 'description','header','body','visible'],
 components: {
     Send,
     CampaignMonitor
@@ -41,6 +42,7 @@ components: {
     padding: 0;
     display: inline-block;
     width: 100%;
+    padding-top: 20px;
 }
 
 
