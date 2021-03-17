@@ -101,11 +101,13 @@ export default {
 
 #testimonials .owl-stage .owl-item:nth-child(odd) {
     background: #f58e58 !important;
+    background: #fff367 !important;
   }
 
 
 #testimonials .owl-stage .owl-item:nth-child(even) {
     background: #f58e58 !important;
+    background: #fff367 !important;
   }
 
 .owl-stage {

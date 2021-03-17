@@ -16,7 +16,7 @@
     <CoverFlowCarousel v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
     <OnlineShopUpserve v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.onlineshop" v-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
-    <FineFoods v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.finefoods" v-if="item.acf_fc_layout === 'finefoods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
+   <FineFoods v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.finefoods" v-if="item.acf_fc_layout === 'fine foods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
     <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
     <Newsletter v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.newsletter" v-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
   </div>
@@ -206,7 +206,7 @@ h4 {
 .narrow {
   background-color: #f05d5b;
   h4 {
-    color: #fff367;
+    color: #fff367;    font-weight: bold;
   }
 }
 .section.hero.familymeal {
@@ -390,6 +390,7 @@ button.snipcart-add-item {
   position: relative;
   h4 {
     color: #fff367;
+    font-weight: bold;
   }
   p {
     color: white;
@@ -400,11 +401,17 @@ button.snipcart-add-item {
 
     // margin-top: 90px;
 
+    width: 70%;
+
+    margin-left: auto;
+    margin-right: auto;
+
 }
 @media only screen and (max-width: 960px) {
   .coverflowsection {
         // height: 660px;
         // height: 880px;
+           width: 100%;
   }
 }
 @media only screen and (max-width: 640px) {
@@ -552,6 +559,7 @@ section {
       left: 50%;
       width: 100%;
       font-size: 20px;
+      color: #f05d5b;
     }
 }
 
