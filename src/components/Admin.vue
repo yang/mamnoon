@@ -5,7 +5,7 @@
 <section>
 
 
-     <!-- <AllShippingTransactions /> -->
+     <AllShippingTransactions />
 
 </section>
 

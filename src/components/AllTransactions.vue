@@ -24,6 +24,12 @@ ${{order.orderInfo.charges.total | showToFixed}}
 <button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.uniqueTransId)">void</button>
 <br>
 <b>{{order.email}}</b>
+
+<pre>
+  {{order.orderInfo}}
+</pre>
+
+<br>customer name: {{order.orderInfo.fulfillment_info.customer.first_name}}
 <br>
 <template v-if="order.payInfo.externalTransactionId">
 debit/credit purchase (id: {{order.payInfo.externalTransactionId}})
@@ -34,7 +40,7 @@ giftcard purchase
 <br>  
 <ul class="no-left-pad">
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
-{{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>&nbsp;&nbsp;&nbsp;
+<b>{{item.quantity}} x</b> {{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>&nbsp;&nbsp;&nbsp;
   <template v-if="item.returned">
   <span>(returned)</span>
   </template>
