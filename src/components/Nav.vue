@@ -1,6 +1,8 @@
 <template>
 <div class="nav-wrap">
-    <div v-if="informationalWindowOpen === false && $route.name === 'home'" class="info-q" @click="informationalWindowOpen = true">?</div>
+    <div v-if="informationalWindowOpen === false && $route.name === 'home'" class="info-q" @click="informationalWindowOpen = true">
+        <Star /> 
+    </div>
 <div class="fixed-nav" :class="{bugMessage: betaMode}">
 
 <!--<div class="beta hide-on-mobile">
@@ -290,6 +292,7 @@ import Logo from "@/components/Logo";
 import LogoMamnoon from "@/components/LogoMamnoon";
 import LogoStreet from "@/components/LogoStreet";
 import Burger from "@/components/svgIcons/Burger";
+import Star from "@/components/svgIcons/Star";
 import GoogleAuth from "@/components/GoogleAuth";
 
 import CartDropdown from "@/components/CartDropdown";
@@ -305,6 +308,7 @@ export default {
     CloseModalRed,
     CartDropdown,
     Logo,
+    Star,
     LogoMamnoon,
     LogoStreet,
     Burger,
@@ -785,11 +789,11 @@ cursor: pointer;
     bottom: 10px;
     right: 5px;
     z-index: 102;
-    background: #f58e58;
+    // background: #f58e58;
     color: #fff;
     font-weight: 500;
     font-size: 24px;
-    padding-top: 6px;
+    // padding-top: 6px;
     text-align: center;
     border-radius: 25px;
     cursor: pointer;
