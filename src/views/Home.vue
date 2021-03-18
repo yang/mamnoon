@@ -10,41 +10,6 @@
 
 
   <!-- <div class="bottom-attach orange" style="bottom:0px;left:10px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/orangezig.svg') + ')' }"> -->
-    <div class="bottom-attach orange" style="bottom:0px;left:0px;width: 100%;color: transparent;">
-    <div>
-1
-    </div>
-
-</div>
-    <div class="bottom-attach orange flip-horizontal moved-over" style="bottom:0px;width: 100%;color: transparent;">
-    <div>
-1
-    </div>
-
-</div>
-
-
-    <div class="bottom-attach yellow" style="bottom:0px;left:0px;width: 100%;color: transparent;">
-    <div>
-1
-    </div>
-
-</div>
-
-
-
-
-
-
-
-    <div class="bottom-attach yellow flip-horizontal moved-over" style="bottom:0px;width: 100%;color: transparent;">
-    <div>
-1
-    </div>
-
-</div>
-
-
 
 
 
@@ -217,6 +182,7 @@ transition: padding .5s ease;
     color: #f38e5e;
         margin-top: 4px;
         position: relative;
+            margin-top: 25px;
   }
 }
 
@@ -224,9 +190,10 @@ transition: padding .5s ease;
     width: 100%;
     height: 200px;
     height: 225px;
-        height: 245px;
-            height: 265px;
-                height: 285px;
+    height: 245px;
+    height: 265px;
+    height: 285px;
+    height: 315px;
     background: transparent;
     position: relative;
 }
@@ -237,7 +204,8 @@ transition: padding .5s ease;
 position: absolute;
     bottom: 0;
     width: 100%;
-    height: 63px;
+    // height: 63px;
+    height: 106px;
     background-size: 28%;
     background-repeat: repeat-x;
 @media only screen and (max-width: 640px) {
@@ -333,40 +301,40 @@ background-image: url('https://www.nadimama.com/assets/img/yellowtri.svg');
 
 &.grey{
   background-color: #49494A;
-&:after{
-  // animation: marquee 20s linear infinite;
-    background: linear-gradient(-45deg, #49494A 16px, transparent 0), linear-gradient(45deg, #49494A 16px, transparent 0);
-    background-position: left-bottom;
-    background-repeat: repeat-x;
-    background-size: 32px 32px;
-    content: " ";
-    display: block;
-    position: absolute;
-bottom: -32px;
-    left: 0px;
-    width: 100%;
-    height: 32px;
-    transform: rotate(180deg)
+// &:after{
+//   // animation: marquee 20s linear infinite;
+//     background: linear-gradient(-45deg, #49494A 16px, transparent 0), linear-gradient(45deg, #49494A 16px, transparent 0);
+//     background-position: left-bottom;
+//     background-repeat: repeat-x;
+//     background-size: 32px 32px;
+//     content: " ";
+//     display: block;
+//     position: absolute;
+// bottom: -32px;
+//     left: 0px;
+//     width: 100%;
+//     height: 32px;
+//     transform: rotate(180deg)
 
-}
+// }
 
 
 
-&:before{
+// &:before{
 
-    background: linear-gradient(-45deg, #49494A 16px, transparent 0px), linear-gradient(45deg, #49494A 16px, transparent 0);
-    background-position: left-bottom;
-    background-repeat: repeat-x;
-    background-size: 32px 32px;
-    content: " ";
-    display: block;
-    position: absolute;
-    top: -32px;
-    left: 0;
-    width: 100%;
-    height: 32px;
+//     background: linear-gradient(-45deg, #49494A 16px, transparent 0px), linear-gradient(45deg, #49494A 16px, transparent 0);
+//     background-position: left-bottom;
+//     background-repeat: repeat-x;
+//     background-size: 32px 32px;
+//     content: " ";
+//     display: block;
+//     position: absolute;
+//     top: -32px;
+//     left: 0;
+//     width: 100%;
+//     height: 32px;
 
-}
+// }
 
 
 }
