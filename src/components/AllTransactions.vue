@@ -25,7 +25,10 @@ ${{order.orderInfo.charges.total | showToFixed}}
 <br>
 <b>{{order.email}}</b>
 
-<pre>
+
+<button @click="toggleOrder(order.orderInfo.id)">show/hide full order data</button>
+
+<pre :id="'order-' + order.orderInfo.id" style="display:none;">
   {{order.orderInfo}}
 </pre>
 
@@ -80,6 +83,15 @@ export default {
 }
     },
     methods: {
+toggleOrder(id){
+
+console.log(document.getElementById('order-'+id))
+
+
+
+
+
+},
     retrieveOrders() {
     let self = this
         this.$http.get(`/order/orderhistory/`).then(function (response) {

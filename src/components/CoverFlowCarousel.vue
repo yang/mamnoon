@@ -35,7 +35,7 @@
             <div v-if="serve.id === piece" class="inline-block full-height-slide" :data="serve.restaurant" style="height:400px;">  
             <!-- <template v-if="serve.images"> -->
                <template>
-     <div class="outside-slideshow" @click="goToRestaurant(serve.restaurant)" style="background-color: #06bff9;">
+     <div class="outside-slideshow" @click="goToRestaurant(serve.restaurant)" style="background-color: #1daeef;">
       
 <!-- #06bff9 -->
 
@@ -136,7 +136,7 @@
 <div v-for="slide in feature">
 <div class="inline-block full-height-slide" style="height:400px;"> 
 
-     <div class="outside-slideshow" @click="goToLink(slide.slide.link)" style="background: #06bff9;">
+     <div class="outside-slideshow" @click="goToLink(slide.slide.link)" style="background: #1daeef;">
 
 
 <!--<template v-if="slide.slide.image">
@@ -1086,7 +1086,7 @@ display: inline;
  top: 0;
  width: 500px;
  background: #fff367;
- color: #f05d5b;
+ color: rgb(73, 73, 74);
  margin: 0 auto;
  padding: 10px;
  text-align: center;
@@ -1095,7 +1095,9 @@ display: inline;
     font-size: 1.4em;
 &.mamnoonstreetcolors{
    background: #ffffff;
+   background: rgb(73, 73, 74);
    color: #f05d5b;
+   color: #ffffff;
 }
 
 &.mbarcolors{
@@ -1111,14 +1113,16 @@ position: absolute;
 bottom: 0;
 width: 500px;
 background: #fff367;
-color: #f05d5b;
+color: rgb(73, 73, 74);
 font-size: 14px;
 height: 83px;
 text-align: center;
 
 &.mamnoonstreetcolors{
    background: #ffffff;
+   background: rgb(73, 73, 74);
    color: #f05d5b;
+   color: #ffffff;
 }
 
 &.mbarcolors{
