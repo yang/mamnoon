@@ -484,7 +484,7 @@ cart empty
 <!-- start panel -->
 <!-- </div> -->
 <template v-if="panelShow === 'yourOrder'">
- <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;" v-if="currentOrder.charges.items.length === 0">customer info</button>
+ <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;display:none;" v-if="currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShow = 'customerInfo'" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
      
@@ -2519,10 +2519,11 @@ button.selected{
 #upserveolo.shopRetail{
   
   ul.filters{
-  border-bottom: 0px solid rgba(0, 0, 0, 0.1);
-position: relative;
-display: inline;
-        margin-bottom: 0;
+      border-bottom: 0px solid rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: inline;
+      margin-bottom: 0;
+      padding-left: 0;
       li{
         border-bottom: 0px solid rgba(0, 0, 0, 0.1);
         color: #fff367;

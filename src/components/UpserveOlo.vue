@@ -249,7 +249,8 @@
               <template v-if="valid">
               <div class="toggleLr">
                 <div>
-                  <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
+ <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+                  <!-- <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button> -->
 
                   <!-- <h2 v-if="!preOrderToggleState">Get it now (or <u>preorder</u>)</h2> -->
                   <!-- <h2 v-if="preOrderToggleState">Preorder</h2> -->
@@ -258,7 +259,8 @@
 
                   </div> 
                 <div>
-                  <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+                  <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
+                  <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button>  -->
 
 
                   <!-- <button v-if="preOrderToggleState" @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button> -->
@@ -1352,7 +1354,7 @@ cart empty
 </template>
 
 <template v-if="panelShow === 'yourOrder'">
- <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">customer info</button>
+<button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;display:none;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">customer info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
 <template v-if="panelShow === 'customerInfo'">
