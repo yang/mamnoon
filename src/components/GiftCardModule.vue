@@ -93,7 +93,9 @@ add a giftcard for {{emailAddress}}
     <button class="sm-button add-giftcard-button" type="submit" value="Submit">
    submit
       </button>
-
+    <a href="https://ecommerce.custcon.com/Recharge/account?c=364cfc03-d428-44bf-b814-1efbdcaed08d" target="_blank" class="sm-button add-giftcard-button update-balance">
+  update card balance
+      </a>
   </p>
 </form>
 </div>
@@ -730,6 +732,15 @@ th.w100{
 
 #gift-card-table tr:last-child {
     border-bottom: 0;
+}
+
+
+.update-balance{
+ padding:5px 9px;
+
+ &:hover{
+   text-decoration: none;
+ }
 }
 
 </style>
