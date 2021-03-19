@@ -14,7 +14,7 @@
 
 
   <!-- <div class="bottom-attach grey" style="bottom:0px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/greyzig.svg') + ')' }"> -->
-     <div class="bottom-attach grey" style="bottom:0px;width: 100%;">
+     <div class="bottom-attach grey" style="bottom:0px;width: 100%;padding-top: 20px;">
   <div class="container rotating-letters">
 
       <h2>
