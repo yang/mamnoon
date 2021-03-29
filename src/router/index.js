@@ -93,6 +93,14 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/newsletterarchive',
+    name: "newsletterarchive",
+    component: () => import("../views/newsletterarchive.vue"),
+    meta: {
+      requiresAuth: true
+    }
   }
 
 ];
