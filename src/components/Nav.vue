@@ -17,7 +17,7 @@
 <div v-if="informationalWindow && $route.name === 'home' && $store.state.isFirstTime === true" class="informational-window">
 <div class="info-modal">
 <!-- <button @click="endFirstTimeView">close</button> -->
-<div class="topBlock">
+<div class="topBlock" style="position: absolute;right: 10px;">
     <div @click="endFirstTimeView">
 <CloseModalRed />
 </div>
@@ -34,7 +34,7 @@
 <div v-if="informationalWindowOpen && $route.name === 'home'" class="informational-window">
 <div class="info-modal">
 <!-- <button @click="endFirstTimeView">close</button> -->
-<div class="topBlock">
+<div class="topBlock" style="position: absolute;right: 10px;">
     <div @click="informationalWindowOpen = false">
 <CloseModalRed />
 </div>
@@ -507,7 +507,7 @@ font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 font-weight: bold;
 font-size: 20px;
 text-align: center;
-padding: 0 20px;
+padding: 0 10px;
 color: #ffffff;
 }
 
@@ -753,10 +753,10 @@ cursor: pointer;
 .info-modal{
     position: absolute;
     top: 20px;
-    width: 50%;
+    width: 45%;
     background: white;
     left: 50%;
-    height: 90vh;
+    // height: 90vh;
     transform: translateX(-50%);
     padding: 10px;
         overflow: scroll;
@@ -771,7 +771,7 @@ cursor: pointer;
     width: 90%;
     background: white;
     left: 50%;
-    height: 90vh;
+    // height: 90vh;
     transform: translateX(-50%);
     padding: 10px;
         overflow: scroll;
