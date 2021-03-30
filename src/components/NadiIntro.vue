@@ -88,4 +88,9 @@ text-transform: lowercase;
 
 }
 
+    @media only screen and (max-width: 1700px) {
+        .body{
+            padding-top: 35px;
+        }
+    }
 </style>

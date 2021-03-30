@@ -1,6 +1,6 @@
 <template>
 <div id="online-menu" class="is-fullheight no-top-pad">
-        <carousel :lazyLoad="true" :autoplay="true" :autoplaySpeed="1000"  :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
+        <carousel :lazyLoad="true" :autoplay="true"  :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
               <template class="subprev" slot="prev">
               <span class="prev">
               <Prev />

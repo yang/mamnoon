@@ -102,9 +102,9 @@ export default {
   methods: {
 visibilityChanged (isVisible, entry) {
   this.isVisible = isVisible
-  console.log(entry.target.id)
-  console.log(entry.isIntersecting)
-console.log(entry)
+  ///console.log(entry.target.id)
+  //console.log(entry.isIntersecting)
+///console.log(entry)
 
 // this.visibility[entry.target.id] = true
 
@@ -131,9 +131,6 @@ this.visibility[entry.target.id] = entry.isIntersecting
     },
     dayChange(e) {
       this.currentDay = e + 1;
-    },
-    loggit() {
-      console.log(134);
     },
     toggle: function(event) {
       if (event.target.classList.contains("is-open")) {

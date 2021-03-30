@@ -36,7 +36,7 @@
 
                 <p class="description-para noselect hide-mobile">{{description}}</p>
         <carousel
-        :autoplay="true" :autoplaySpeed="1000"  
+        :autoplay="true"  
           :responsive=" {0:{items:1},480:{items:2},1080:{items:3}}"
           :items="1"
           :loop="true"

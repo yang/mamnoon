@@ -10,7 +10,7 @@
 
 
 
-<div class="container pad ff">
+<div v-if="ffdata" class="container pad ff">
 
 
 <div class="row">
@@ -23,7 +23,7 @@
 </div>
 
 
-<div class="row">
+<div class="row" v-if="ffdata">
 
 
 <div class="col-md-4 mb20"><img style="width: 100%;" :src="ffdata.header_image"></div>
