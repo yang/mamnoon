@@ -9,8 +9,11 @@
 import postscribe from 'postscribe'
 export default {  
   name: 'Gist-Example',
-  mounted: function () {
-    postscribe('#gist', `<script src="https://mamnoonrestaurant.createsend.com/t/i/p/ethth/0/1/1/1/0/"><\/script>`)
+  mounted: function () {  
+
+
+
+    postscribe('#gist', `<script src="https://mamnoonrestaurant.createsend.com/t/i/p/ethth/0/1/1/1/1/"><\/script>`)
   }
 }
 </script>
@@ -22,3 +25,4 @@ export default {
     padding-bottom: 50px;
 }
 </style>
+
