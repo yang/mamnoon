@@ -21,6 +21,7 @@
     "mongodb": "^3.5.9",
     "mongodb-client-encryption": "^1.1.0",
     "npm-check": "^5.9.2",
+    "postscribe": "^2.0.8",
     "router": "^1.3.5",
     "sweetalert": "^2.1.2",
     "vue": "^2.6.10",
