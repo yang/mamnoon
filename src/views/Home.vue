@@ -350,7 +350,7 @@ background-image: url('https://www.nadimama.com/assets/img/yellowtri.svg');
   width: 100%;
   // height: 146px;
   height: 176px;
-
+display: none;
 }
 
 
@@ -476,4 +476,16 @@ span{
    left: calc(100%);
 
  }
+
+
+
+
+
+
+@media only screen and (max-width: 1080px) {
+.container.mt-5{
+padding-top: 100px;
+}
+
+}
 </style>
