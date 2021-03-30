@@ -99,7 +99,7 @@ const routes = [
     name: "newsletterarchive",
     component: () => import("../views/newsletterarchive.vue"),
     meta: {
-      requiresAuth: true
+      requiresAuth: false
     }
   }
 
