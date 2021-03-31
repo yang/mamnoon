@@ -1412,6 +1412,7 @@ svg{
 
 svg{
     transform: translate(-50%, -77%);
+    margin-top: 8px;
 }
 
 }

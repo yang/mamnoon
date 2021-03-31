@@ -114,6 +114,9 @@ export default {
 @media only screen and (max-width: 768px) {
   .halfwidth-yellow1.wider.mbar.mbar12{
   width: 100%;
+    svg{
+  margin-top: 6px;
+  }
 }
 
 }
@@ -125,7 +128,7 @@ export default {
 
 .coming-soon2{
   color: #f05d5b;
-    bottom: 14%;
+    bottom: 10%;
   left: 50%;
   position: absolute;
   transform: translate(-50%,-50%);
