@@ -12,24 +12,16 @@
 
 <div v-if="ffdata" class="container pad ff">
 
-
-<div class="row">
-
-
-<div class="col-md-12 mb20">
-  <h1>Mamnoon Fine Foods</h1>
-</div>
-
-</div>
+<div class="row lower-margin" v-if="ffdata">
 
 
-<div class="row" v-if="ffdata">
-
-
-<div class="col-md-4 mb20"><img style="width: 100%;" :src="ffdata.header_image"></div>
-<div class="col-md-8 mb20" v-html="ffdata.body_text">
+<div class="col-md-6 mb20"><img style="width: 100%;" :src="ffdata.header_image"></div>
+<div class="col-md-6 mb20 pt20" v-html="ffdata.body_text">
 </div>
 </div>
+
+
+
 
 
 
@@ -38,11 +30,22 @@
 
 
 
-<div class="row pad-sm">
-<div class="col-md-4 mb20">
+<div class="row">
+<div class="col-md-10 offset-md-1">
+ 
+ 
+ <div class="border-red">
+ 
+
+<div class="col-l">
+
   <img style="width: 100%;" :src="item.shop_item.image.sizes.medium_large">
+
 </div>
-<div class="col-md-8 mb20">
+
+
+<div class="col-r">
+  <div>  
 <h2>{{item.shop_item.name}}</h2>
 <h3>{{item.shop_item.ingredients}}</h3>
 <p>
@@ -52,6 +55,13 @@
 </div>
 
 
+</div>
+
+</div>
+
+</div>
+
+
 
 
 
@@ -62,10 +72,20 @@
 
 
 
-<div class="row">
-<div class="col-md-8 mb20">
-<h2>{{ffdata.locations_sub_header}}</h2>
 
+
+
+
+
+
+
+
+
+
+<div class="row">
+<div class="col-md-12 mb20">
+<Borderline />
+<h2>{{ffdata.locations_sub_header}}</h2>
 
 
 
@@ -75,18 +95,22 @@
 {{link.name}} - <a :href="link.url" target="_blank">{{link.url}}</a><br />
 </template>
 </p>
+<Borderline />
 </div>
 </div>
 
 
 
 <div class="row pad-sm" v-if="ffdata.bottom_images">
-<template v-for="image in ffdata.bottom_images">
-<div class="col-md-4 mb20">
-  <img style="width: 100%;" :src="image.image">
-</div>
-</template>
 
+
+
+
+<template v-for="image in ffdata.bottom_images">
+<!-- <div class="col-md-4 mb20"> -->
+  <img class="inblock-red" :src="image.image">
+<!-- </div> -->
+</template>
 </div>
 
 
@@ -102,8 +126,10 @@
   </div>
 </template>
 <script>
-import UpserveOlo from "@/components/UpserveOlo";
 import Nav from "@/components/Nav";
+import Borderline from "@/components/svgIcons/Borderline";
+
+
 export default {
     metaInfo: {
       // if no subcomponents specify a metaInfo.title, this title will be used
@@ -120,7 +146,8 @@ ffdata: null
 }
   },
   components: {
-    Nav
+    Nav,
+    Borderline
   },
   methods:{
       async individualRestaurant(){
@@ -239,5 +266,123 @@ font-weight: bold;
    }
 
 
+
+.ff h2{
+  text-transform: lowercase;
+  margin-bottom: 24px;
+  font-size: 36px;
+}
+
+
+
+p.list-of-links{
+font-size: 20px;
+font-weight: bold;
+line-height: 2;
+a{
+  font-style: italic;
+}
+}
+
+
+
+.border-left{
+border: 4px solid #F05D5B;
+box-sizing: border-box;
+padding: 0;
+border-right: 0;
+}
+.border-right{
+border: 4px solid #F05D5B;
+box-sizing: border-box;
+border-left: 0;
+}
+
+
+
+.border-red{
+  border: 4px solid #F05D5B;
+  margin-bottom: 50px;
+  .col-l {
+width: 50%;
+display: inline-block;
+  }
+  .col-r {
+width: 50%;
+display: inline-block;
+
+div{
+  padding: 40px;
+} 
+  }
+
+}
+
+.lower-margin{
+  margin-bottom: 60px;
+}
+
+
+.pt20{
+  padding-top: 20px;
+}
+
+
+.inblock-red{
+border: 4px solid #F05D5B;
+display: inline-block;
+width: 50%;
+
+&:first-child{
+ border-right: 0px;
+
+}
+
+}
+
+
+
+
+
+
+
+   @media only screen and (max-width: 1220px) {
+
+.border-red{
+  .col-r {
+    div{
+    padding: 10px 20px;
+  } 
+}
+}
+
+
+
+}
+
+   @media only screen and (max-width: 992px) {
+
+
+.border-red{
+  border: 4px solid #F05D5B;
+  margin-bottom: 50px;
+  .col-l {
+width: 100%;
+display: inline-block;
+  }
+  .col-r {
+width: 100%;
+display: inline-block;
+
+div{
+  padding: 40px;
+} 
+  }
+
+}
+
+
+
+   }
 
 </style>
