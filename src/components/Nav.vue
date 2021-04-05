@@ -505,7 +505,8 @@ ul#menu li {
 display:inline;
 font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 font-weight: bold;
-font-size: 20px;
+// font-size: 20px;
+font-size: 16px;
 text-align: center;
 padding: 0 10px;
 color: #ffffff;

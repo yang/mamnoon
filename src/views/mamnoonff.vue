@@ -111,6 +111,7 @@
   <img class="inblock-red" :src="image.image">
 <!-- </div> -->
 </template>
+
 </div>
 
 

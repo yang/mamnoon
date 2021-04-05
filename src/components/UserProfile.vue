@@ -3,7 +3,10 @@
     <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <UserForm :emailAddress="$store.state.currentUserEmail"/>
-    
+     
+        <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+        <CreditSaveForm :emailAddress="$store.state.currentUserEmail" />
+         </template>
         <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
         <!-- <TestimonialForm :emailAddress="$store.state.currentUserEmail" /> -->
 
@@ -24,7 +27,7 @@ import EmailForm from "@/components/EmailForm";
 import UserForm from "@/components/UserForm";
 import TestimonialForm from "@/components/TestimonialForm";
 
-
+import CreditSaveForm from "@/components/CreditSaveForm";
 
 import GiftCardModule from "@/components/GiftCardModule";
 import ToggleVegetarian from "@/components/ToggleVegetarian";
@@ -41,7 +44,8 @@ name: 'UserProfile',
     UserForm,
     GiftCardModule,
     ToggleVegetarian,
-    OrderHistory
+    OrderHistory,
+    CreditSaveForm
   },
 methods: {
     hideUserModal () {

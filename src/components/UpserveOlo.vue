@@ -316,7 +316,7 @@
          <template v-else>
    
 <div id="online-menu" class="is-fullheight no-top-pad" style="position: relative;">
-        <carousel :lazyLoad="true" :autoplay="true" :autoplaySpeed="1000"  id="FourThree" :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
+        <carousel :lazyLoad="true" :autoplay="true"  id="FourThree" :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
               <template class="subprev" slot="prev">
               <span class="prev">
               <Prev />
@@ -434,7 +434,7 @@
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description}}</div>
+                                                                                                          >{{serve.description | truncate(140, '...')}}</div>
                                                                                                           <div class="food-price">
                                                                                                             ${{ serve.price_cents.toFixed(2)/100}}
                                                                                                           </div>
@@ -511,7 +511,7 @@
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description}}</div>
+                                                                                                          >{{serve.description | truncate(140, '...')}}</div>
                                                                                                           <div class="food-price">
                                                                                                             ${{ serve.price_cents.toFixed(2)/100}}
                                                                                                           </div>
@@ -573,7 +573,7 @@
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description}}</div>
+                              >{{serve.description | truncate(140, '...')}}</div>
                               <div class="food-price">
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
@@ -739,7 +739,7 @@
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description}}</div>
+                                                                                                          >{{serve.description | truncate(140, '...')}}</div>
                                                                                                           <div class="food-price">
                                                                                                             ${{ serve.price_cents.toFixed(2)/100}}
                                                                                                           </div>
@@ -806,7 +806,7 @@
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description}}</div>
+                              >{{serve.description | truncate(140, '...')}}</div>
                               <div class="food-price">
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
@@ -842,7 +842,7 @@
               <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
                 
             <!-- this is available at the started time -->
-              <div
+              <div  
                 :id="'drawertop-'+ item.id"
                 @click="expandChild(item.id)"
                 class="display-block row no-lr-margin"
@@ -864,7 +864,7 @@
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description}}</div>
+                              >{{serve.description | truncate(140, '...')}}</div>
                               <div class="food-price">
                                 ${{ serve.price_cents.toFixed(2)/100}}
                               </div>
@@ -1382,6 +1382,55 @@ cart empty
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
 
 
+<template v-if="this.$store.state.loggedIn && panelShow === 'customerInfo'">
+
+<template v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''">
+<!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="false" :emailAddress="emailAddress" :title="title" /> -->
+
+
+  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+<template v-for="savedCard in savedCards">
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+</button> 
+</template>
+</template>
+</template>
+<template v-else>
+
+  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+<template v-for="savedCard in savedCards">
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+</button> 
+</template>
+</template>
+
+
+<!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="true" :emailAddress="emailAddress" :title="title" /> -->
+</template>
+
+
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <template v-if="this.$store.state.loggedIn">
@@ -1422,6 +1471,47 @@ cart empty
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
+
+
+
+
+
+
+
+
+<template v-if="this.$store.state.loggedIn && panelShow === 'customerInfo'">
+
+<template v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''">
+<!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="false" :emailAddress="emailAddress" :title="title" /> -->
+
+
+  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+<template v-for="savedCard in savedCards">
+
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+</button> 
+</template>
+</template>
+
+
+</template>
+<template v-else>
+
+
+  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+<template v-for="savedCard in savedCards">
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+</button> 
+</template>
+
+</template>
+<!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="true" :emailAddress="emailAddress" :title="title" /> -->
+</template>
+
+
+</template>
+
+
 
 
 
@@ -1575,7 +1665,7 @@ import CloseModalSm from "@/components/svgIcons/CloseModalSm";
 
 import OrderConfirmationModal from "@/components/OrderConfirmationModal"
 import OnlineMenuCarousel from "@/components/OnlineMenuCarousel";
-
+import SavedCard from "@/components/SavedCard";
 import CloseModalRedSm from "@/components/svgIcons/CloseModalRedSm";
 
 import VueAspectRatio from "vue-aspect-ratio";
@@ -1616,7 +1706,8 @@ export default {
     NadiIcon,
     NadiIconxx,
     NadiIconSm,
-    NadiIconSmX
+    NadiIconSmX,
+    SavedCard
   },
   computed: {	
 computedAddition(){
@@ -1982,6 +2073,7 @@ if(newAddress){
     },
   data() {
   return {
+    savedCards: null,
     resizeIndex: 1,
     nowTime: null,
     nowDate: null,
@@ -2170,6 +2262,85 @@ showToFixed: function (value) {
 }
   },
   methods: {
+            async tokenizedPayment(orderTotal,transId){
+console.log(orderTotal)
+
+console.log(transId)
+
+      try {
+        let response = await this.$http.post("/credit/tokenizedpayment/",{
+            orderTotal,
+            transId
+        });
+        console.log(response.data)
+
+
+
+console.log('transasction success')
+   if(this.title === 'Mamnoon'){
+
+              if(this.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
+                this.scheduleAnOrder(this.$store.state.storeCurrentOrderUpdateMamnoon,response.data,null);
+              }
+              
+              if(this.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
+                this.doAnOrder(this.$store.state.storeCurrentOrderUpdateMamnoon,response.data,null);
+              }
+
+
+
+    }else if(this.title === 'Mamnoon Street'){
+
+
+              if(this.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
+                this.scheduleAnOrder(this.$store.state.storeCurrentOrderUpdateStreet,response.data,null);
+              }
+              
+              if(this.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
+                this.doAnOrder(this.$store.state.storeCurrentOrderUpdateStreet,response.data,null);
+              }
+
+
+
+    }else if(this.title === 'Mbar'){
+
+
+              if(this.$store.state.storeCurrentOrderUpdateMbar.preorder === true){
+                this.scheduleAnOrder($store.state.storeCurrentOrderUpdateMbar,response.data,null);
+              }
+              
+              if(this.$store.state.storeCurrentOrderUpdateMbar.preorder === false){
+                this.doAnOrder($store.state.storeCurrentOrderUpdateMbar,response.data,null);
+              }
+
+    }
+
+
+
+
+
+
+
+ 
+         } catch (err) {
+        console.log(err.response);
+      }
+
+
+
+        },
+                async getCreditCards() {
+      // console.log('get credit cards')
+      try {
+        let response = await this.$http.get("/credit/getcreditcards/" + this.emailAddress);
+        console.log(response.data)
+        this.savedCards = response.data.usercreditcards
+ 
+         } catch (err) {
+        console.log(err.response);
+      }
+
+    },
  setResizeIndex(){
   this.resizeIndex = Math.random();
  },
@@ -3529,7 +3700,7 @@ this.setTip(0)
 
 
 
-
+ this.getCreditCards()
 // if(this.valid){
   // console.log('open now so filter to what is available now')
   // this.createSingle()
@@ -4052,7 +4223,12 @@ height: 560px;
   }
 
 
-
+.disabled{
+    border: 1px solid #999999 !important;
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    pointer-events: none;
+}
 
 
 </style>

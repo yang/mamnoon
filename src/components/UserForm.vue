@@ -238,12 +238,49 @@ import Submit from "@/components/svgIcons/Submit";
 import Check from "@/components/svgIcons/Check";
 import swal from "sweetalert";
 export default {
+    computed:{
+    ccBillingNameValid(){
+      if(this.ccBillingName == null){
+        return false
+      }else{
+        return true
+      }
+    },
+    ccBillingAddressValid(){
+      if(this.ccBillingAddress == null){
+        return false
+      }else{
+        return true
+      }
+    },
+    ccBillingPostalCodeValid(){
+
+      return /^\d{5}(-\d{4})?$/.test(this.ccBillingPostalCode);
+
+ 
+    },
+    ccSaveFieldsValid(){
+
+      if(this.ccBillingNameValid && this.ccBillingAddressValid && this.ccBillingPostalCodeValid){
+        return false
+      }else{
+        return true
+      }
+
+
+
+    }
+  },
   components: {
     Check,
     Submit
   },
   data() {
     return {
+            savedCards:[],
+    ccBillingName: null,
+    ccBillingAddress: null,
+    ccBillingPostalCode: null,
       user: {},
       updateBilling: false,
       updateDelivery: false,
@@ -343,7 +380,11 @@ self.preferredGiftCard = userInfo.user.giftcard
 
 
 <style lang="scss">
-
+.sm-button.disabled{
+  background: #eeeeee;
+  color: #bbbbbb;
+  border: 1px solid #bbbbbb; 
+}
 
 .address,
 form{
@@ -700,6 +741,11 @@ th.w100{
     border-bottom: 0;
 }
 
+
+
+.mt20{
+  margin-top: 20px;
+}
 </style>
 
 
