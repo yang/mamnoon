@@ -4,7 +4,7 @@
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <UserForm :emailAddress="$store.state.currentUserEmail"/>
      
-        <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+        <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com' || $store.state.currentUserEmail === 'sofien@mamnoonrestaurant.com' || $store.state.currentUserEmail === 'wassef@mamnoonrestaurant.com'">
         <CreditSaveForm :emailAddress="$store.state.currentUserEmail" />
          </template>
         <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
