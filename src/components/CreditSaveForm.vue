@@ -11,7 +11,7 @@
 <div class="col-sm-6 no-lr-pad">
 
       <div class="save-button" v-if="!updateDelivery">
-<button class="sm-button" :class="{disabled: showAddCardFormVisible}" @click="showAddCardForm()">add new card</button>
+<button class="sm-button" @click="cippaybuttoncreditsave">add new card</button>
 <!-- <button class="sm-button disabled" v-else disabled>add new card</button> -->
 <div class="bg-modal-2" v-if="showAddCardFormVisible"></div>
 <div class="modal-2" v-if="showAddCardFormVisible">
@@ -29,8 +29,8 @@
 <input v-model="ccBillingPostalCode" />
 <br>
 
-<button class="mt10 fw mt20 sm-button disabled" v-if="!ccSaveFieldsValid" disabled>complete fields to enter card number</button>
-<button class="mt10 fw mt20 sm-button" id="cip-pay-btn" @click="cippaybuttoncreditsave" v-else>click here to enter card number</button>
+<!-- <button class="mt10 fw mt20 sm-button disabled" v-if="!ccSaveFieldsValid" disabled>complete fields to enter card number</button> -->
+<!-- <button class="mt10 fw mt20 sm-button" id="cip-pay-btn" @click="cippaybuttoncreditsave" v-else>click here to enter card number</button> -->
 <br><br>
 
 
@@ -47,11 +47,12 @@
 <table class="w100">
 
 <th class="w100 no-bot-pad">
-<td>
+<!-- <td>
    <div>
   name
    </div>
-  </td><td>
+  </td> -->
+  <td>
        <div>
     number
      </div>
@@ -71,7 +72,7 @@
 
 
 <tr class="w100" v-for="card in savedCards">
-  <td> {{card.approvalData.billingName}} </td>
+  <!-- <td> {{card.approvalData.billingName}} </td> -->
   <td>
 
 
@@ -272,7 +273,7 @@ console.log(response)
 
 
 },
-        async removeCreditCard(creditCardId){
+        async removeCreditCard(creditCardId,email){
 
 
 
@@ -282,6 +283,7 @@ console.log(response)
       }) 
      
       console.log(response)
+            this.setPrimaryIfOnlyOne(email)
  this.getCreditCards();
     } catch (err) {
                swal("Error", "Something Went Wrong", "error");
@@ -439,8 +441,8 @@ console.log('store card name and information')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
-          // url: "http://localhost:4000/order/start-credit-save",
+          // url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
+          url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -803,7 +805,7 @@ table td div{
   td{
 
 
-            width: 25% !important;
+            width: 33.33% !important;
     display: inline-block;
   }
 }

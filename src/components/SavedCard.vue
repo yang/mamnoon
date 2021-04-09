@@ -1,6 +1,6 @@
 <template>
 <div>
-      <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com' || $store.state.currentUserEmail === 'sofien@mamnoonrestaurant.com' || $store.state.currentUserEmail === 'wassef@mamnoonrestaurant.com'">
+      <template>
 <template v-for="savedCard in savedCards">
 <button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(orderTotal,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
