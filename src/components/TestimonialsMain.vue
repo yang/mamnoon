@@ -1,7 +1,7 @@
 <template>
-  <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80">
+  <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80" v-if="!showHide">
         <h4 class="mob-bottom-margin">{{header}}</h4>
-        
+   
         <p class="description-para noselect hide-mobile">{{description}}</p>
 
         <carousel :lazyLoad="true" :autoplay="true"  :items="1" :loop="true" :dots="false" :nav="false">
@@ -45,7 +45,7 @@ export default {
         Prev
     },
     name: 'testimonials',
-    props: ['data','header','tag','description']
+    props: ['data','header','tag','description','showHide']
     }
 </script>
 

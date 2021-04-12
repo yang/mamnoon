@@ -21,6 +21,17 @@ Vue.use(VueMeta)
 Vue.use(VueCurrencyInput)
 Vue.component('v-select', vSelect)
 
+
+Vue.use(VueMq, {
+  breakpoints: {
+    mobile: 450,
+    tablet: 992,
+    laptop: 1250,
+    desktop: Infinity,
+  }
+})
+
+
 const base = axios.create({
   baseURL: "https://young-hamlet-03679.herokuapp.com"
   // baseURL: "http://localhost:4000"

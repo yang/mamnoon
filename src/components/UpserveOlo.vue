@@ -374,7 +374,9 @@
       <br>
       <div class="container online-menu">
       <h4>order from the full menu</h4>
+{{emailAddress}}
 
+<button @click="handleClickSignInForCard()">button</button>
       </div>
       <div>
       </div>
@@ -1388,7 +1390,7 @@ cart empty
 <!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="false" :emailAddress="emailAddress" :title="title" /> -->
 
 
-  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com' || $store.state.currentUserEmail === 'sofien@mamnoonrestaurant.com' || $store.state.currentUserEmail === 'wassef@mamnoonrestaurant.com'">
+  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
 <template v-for="savedCard in savedCards">
 <button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
@@ -1397,7 +1399,7 @@ cart empty
 </template>
 <template v-else>
 
-  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com' || $store.state.currentUserEmail === 'sofien@mamnoonrestaurant.com' || $store.state.currentUserEmail === 'wassef@mamnoonrestaurant.com'">
+  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
 <template v-for="savedCard in savedCards">
 <button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
@@ -1485,7 +1487,7 @@ cart empty
 <!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="false" :emailAddress="emailAddress" :title="title" /> -->
 
 
-  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com' || $store.state.currentUserEmail === 'sofien@mamnoonrestaurant.com' || $store.state.currentUserEmail === 'wassef@mamnoonrestaurant.com'">
+  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
 <template v-for="savedCard in savedCards">
 
 <button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
@@ -1498,7 +1500,7 @@ cart empty
 <template v-else>
 
 
-  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com' || $store.state.currentUserEmail === 'sofien@mamnoonrestaurant.com' || $store.state.currentUserEmail === 'wassef@mamnoonrestaurant.com'">
+  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
 <template v-for="savedCard in savedCards">
 <button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
@@ -2262,6 +2264,136 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    clearOrderAndReRoute(){
+
+
+          this.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
+          this.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
+          let newDate = new Date();
+          this.currentOrder.time_placed = newDate;
+          this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          this.$store.commit("orderCMR", { orderCMR });
+          this.$router.push("/orderconfirmation");
+
+
+    },
+    handleClickSignInForCard(emailAddress,approvalData) {
+      let self = this
+      this.$gAuth
+        .signIn()
+        .then((GoogleUser) => {
+          var profile = GoogleUser.getBasicProfile();
+
+          // console.log("Email: " + profile.getEmail());
+
+          // console.log(this.$gAuth.isAuthorized)
+          // console.log(profile)
+          // this.showUserInfo(profile.getEmail())
+          self.isSignIn = self.$gAuth.isAuthorized;
+
+          self.$store.commit("logIn");
+
+          let currentUserEmail = profile.getEmail();
+          // console.log(profile)
+          // console.log(currentUserEmail)
+          self.$store.commit("setCurrentUserEmail", { currentUserEmail });
+          // location.reload()
+          self.checkAndSend(self.emailAddress,approvalData)
+
+          self.clearOrderAndReRoute()
+        })
+        .catch((error) => {
+          //on fail do something
+          console.error(error);
+        });
+    },
+    async checkAndSend(email,approvalData){
+      console.log('check credit card')
+
+    try {
+      let response = await this.$http.post('/credit/checkcreditcard/',{
+        email,
+        approvalData
+      }) 
+      console.log('check credit card length')
+
+
+      console.log(response.data.user)
+     if(response.data.user.length > 0){
+      swal("this card has already been saved to your account");
+               this.ccBillingPostalCode = null
+               this.ccBillingAddress = null
+               this.ccBillingName = null
+
+    this.showAddCardFormVisible = false
+
+      }else{
+    this.sendApprovalDataToMongo(email, approvalData)
+      }
+     
+ 
+
+    } catch (err) {
+               swal("Error", "Something Went Wrong", "error");
+        console.log(err);
+      }
+
+
+
+
+   
+
+    },
+  sendApprovalDataToMongo(email, approvalData){
+
+
+console.log('send approval ')
+
+console.log(email, approvalData)
+
+
+    let infoForPay = {
+          approvalData: approvalData,
+         email: email
+        }
+    let infoForPayStringify = infoForPay      
+     this.$http
+        .post("/credit/creditsavemongo", infoForPayStringify)
+        .then((response) => {
+
+            this.ccBillingPostalCode = null
+            this.ccBillingAddress = null
+            this.ccBillingName = null
+
+    this.showAddCardFormVisible = false
+      this.setPrimaryIfOnlyOne(email)
+ this.getCreditCards();
+        })
+        .catch((e) => {x
+          console.log("errors");
+          console.log(e);
+        });
+  },
+    setPrimaryIfOnlyOne(email){
+      console.log('spio1')
+        let self = this;
+        let emailBody = {
+          email
+        }
+      this.$http
+        .post("/credit/setprimaryifonlyone", emailBody)
+        .then((response) => {
+
+          console.log(response)
+          self.getCreditCards();
+        })
+        .catch((e) => {
+          console.log("errors");
+          console.log(e);
+        });
+
+
+  },
             async tokenizedPayment(orderTotal,transId){
 console.log(orderTotal)
 
@@ -3035,8 +3167,8 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          // url: "http://localhost:4000/order/start-transaction",
+          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -3424,8 +3556,30 @@ console.log(item)
 
     self.emptyCart();
 
-          self.$store.commit("orderCMR", { orderCMR });
-          self.$router.push("/orderconfirmation");
+
+
+        if(self.$store.state.loggedIn){
+          if (confirm("save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
+              console.log("You pressed OK!");
+              console.log(approvalData.maskedAccount.replace('************',''))
+              self.checkAndSend(self.emailAddress,approvalData)
+              self.clearOrderAndReRoute()
+          }
+        }else{
+          if (confirm("log in/create an account and save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
+            self.handleClickSignInForCard(self.emailAddress,approvalData)
+          }
+        }
+
+
+
+
+
+
+
+
+          // self.$store.commit("orderCMR", { orderCMR });
+          // self.$router.push("/orderconfirmation");
 
 
         })
@@ -3454,15 +3608,29 @@ console.log(item)
 
           self.emptyCart();
 
+        if(self.$store.state.loggedIn){
+          if (confirm("save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
+              console.log("You pressed OK!");
+              console.log(approvalData.maskedAccount.replace('************',''))
+              self.checkAndSend(self.emailAddress,approvalData)
+              self.clearOrderAndReRoute()
+          }
+        }else{
+          if (confirm("log in/create an account and save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
+            self.handleClickSignInForCard(self.emailAddress,approvalData)
+          }
+        }
 
-  
-          self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
-          self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
-          let newDate = new Date();
-          self.currentOrder.time_placed = newDate;
-          self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-          self.$store.commit("orderCMR", { orderCMR });
-          self.$router.push("/orderconfirmation");
+
+
+
+          // self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
+          // self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
+          // let newDate = new Date();
+          // self.currentOrder.time_placed = newDate;
+          // self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          // self.$store.commit("orderCMR", { orderCMR });
+          // self.$router.push("/orderconfirmation");
 
         })
         .catch((e) => {

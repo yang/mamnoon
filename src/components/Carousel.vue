@@ -11,14 +11,26 @@
 {{visibility}}
 </div>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
-
-    <TestimonialsMain v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.testimonials" v-if="item.acf_fc_layout === 'testimonials'" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
+<template v-if="$mq === 'tablet'">
+    <!-- <button v-if="item.acf_fc_layout === 'testimonials'">testimonials</button> -->
+    <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
+    <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
+  <template v-if="item.acf_fc_layout === 'online_shop'">
+      <router-link class="orange-button" to="/retail">Retail Items</router-link>
+  </template>
+  <template v-if="item.acf_fc_layout === 'fine foods'">
+      <router-link class="orange-button" to="/mamnoonstreet">Fine Foods</router-link>
+  </template>
+   </template>
+  <template v-else>
+    <TestimonialsMain v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.testimonials" v-if="item.acf_fc_layout === 'testimonials'" :showHide="item.showhide" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
     <CoverFlowCarousel v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
     <OnlineShopUpserve v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.onlineshop" v-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
    <FineFoods v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.finefoods" v-if="item.acf_fc_layout === 'fine foods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
     <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
     <Newsletter v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.newsletter" v-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
+  </template>
   </div>
 
 
@@ -706,5 +718,19 @@ width: 100%
 
 }
 
+
+.orange-button{
+  padding:30px;
+  background: #f58e58;
+  display: block;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 40px;
+  transition: all .5s ease;
+  &:hover{
+    text-decoration: none;
+  }
+}
 
 </style>
