@@ -28,7 +28,12 @@ props: ['title', 'description','header','body','visible'],
 components: {
     Send,
     CampaignMonitor
-}
+},
+  created(){
+    let recaptchaScriptModal = document.createElement('script')
+      recaptchaScriptModal.setAttribute('src', 'https://js.createsend1.com/javascript/copypastesubscribeformlogic.js')
+      document.head.appendChild(recaptchaScriptModal)
+  }
 
 
 };
