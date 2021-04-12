@@ -91,8 +91,39 @@ const routes = [
     meta: {
       requiresAuth: false
     }
-  }
-
+  },
+  {
+    path: '/featured',
+    name: "featured",
+    component: () => import("../views/featured.vue"),
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/reservations',
+    name: "reservations",
+    component: () => import("../views/reservations.vue"),
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/onlinemenu',
+    name: "onlinemenu",
+    component: () => import("../views/onlinemenu.vue"),
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/newsletter',
+    name: "newsletter",
+    component: () => import("../views/newsletterarchive.vue"),
+    meta: {
+      requiresAuth: false
+    }
+  },
 ];
 
 

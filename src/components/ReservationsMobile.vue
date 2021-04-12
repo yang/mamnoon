@@ -2,7 +2,7 @@
 <div>
   <main>
     <!-- <div class=""> -->
-      <!-- <div class="container"> -->
+      <div class="container mt-5">
       <!-- <h2 class="intro-paragraph-header">Welcome!</h2> -->
       <!-- <p class="intro-paragraph">Nadi Mama is a one stop shop for all things The Mama Group has to offer. Order food, purchase retail items, make a reservation or simply stay up to date with our offerings.</p> -->
     <!-- </div> -->
@@ -11,58 +11,12 @@
 {{visibility}}
 </div>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
-  <template v-if="!isMobile()">
-    <TestimonialsMain v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.testimonials" v-if="item.acf_fc_layout === 'testimonials'" :showHide="item.showhide" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
-    <CoverFlowCarousel v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
+
     <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
-    <OnlineShopUpserve v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.onlineshop" v-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
-   <FineFoods v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.finefoods" v-if="item.acf_fc_layout === 'fine foods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
-    <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
-    <Newsletter v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.newsletter" v-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
-  </template>
-  <template v-else>
-
-
-
-
-<!-- mobile featured.  -->
-     <template v-if="item.acf_fc_layout === 'meal_calendar'">
-        <router-link class="orange-button" to="/featured">featured</router-link>
-      </template>
-<!-- mobile reservations. -->
-
-      <template v-if="item.acf_fc_layout === 'reservations'">
-        <router-link class="orange-button" to="/reservations">reservations</router-link>
-      </template>
-
-<!-- mobile online shop. -->
-      <template v-if="item.acf_fc_layout === 'online_shop'">
-        <router-link class="orange-button" to="/retail">retail items</router-link>
-      </template>
-<!-- mobile find foods. -->
-      <template v-if="item.acf_fc_layout === 'fine foods'">
-        <router-link class="orange-button" to="/mamnoonff">fine foods</router-link>
-      </template>
-<!-- mobile a la cart. -->
-      <template v-if="item.acf_fc_layout === 'a_la_carte'">
-        <router-link class="orange-button" to="/onlinemenu">online menu</router-link>
-      </template>
-<!-- mobile newsletter. -->
-      <template v-if="item.acf_fc_layout === 'newsletter'">
-        <router-link class="orange-button" to="/newsletter">newsletter</router-link>
-      </template>
-
-
-
-
-  </template>
-
-
-
 
 
   </div>
-
+  </div>
 
   </main>
   </div>
@@ -770,4 +724,9 @@ width: 100%
   }
 }
 
+
+.container.mt-5{
+    margin-top: 3rem!important;
+    padding-top: 100px;
+}
 </style>

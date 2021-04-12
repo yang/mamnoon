@@ -488,4 +488,13 @@ padding-top: 100px;
 }
 
 }
+
+
+@media only screen and (max-width: 640px) {
+.container.mt-5{
+padding-top: 80px;
+}
+
+}
+
 </style>
