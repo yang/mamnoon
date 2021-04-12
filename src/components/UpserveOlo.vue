@@ -374,9 +374,9 @@
       <br>
       <div class="container online-menu">
       <h4>order from the full menu</h4>
-{{emailAddress}}
+<!--{{emailAddress}}-->
 
-<button @click="handleClickSignInForCard()">button</button>
+<!--<button @click="handleClickSignInForCard()">button</button>-->
       </div>
       <div>
       </div>
@@ -3980,6 +3980,13 @@ window.addEventListener(`resize`, this.setResizeIndex);
 
 
 this.currentOrder.scheduled_time = null
+
+
+
+
+      let recaptchaScriptModal = document.createElement('script')
+      recaptchaScriptModal.setAttribute('src', 'https://assets.emergepay.chargeitpro.com/cip-hosted-modal.js')
+      document.head.appendChild(recaptchaScriptModal)
 
 
   }
