@@ -11,18 +11,7 @@
 {{visibility}}
 </div>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
-<template v-if="$mq === 'tablet'">
-    <!-- <button v-if="item.acf_fc_layout === 'testimonials'">testimonials</button> -->
-    <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
-    <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
-  <template v-if="item.acf_fc_layout === 'online_shop'">
-      <router-link class="orange-button" to="/retail">Retail Items</router-link>
-  </template>
-  <template v-if="item.acf_fc_layout === 'fine foods'">
-      <router-link class="orange-button" to="/mamnoonstreet">Fine Foods</router-link>
-  </template>
-   </template>
-  <template v-else>
+  <template v-if="!isMobile()">
     <TestimonialsMain v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.testimonials" v-if="item.acf_fc_layout === 'testimonials'" :showHide="item.showhide" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
     <CoverFlowCarousel v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
@@ -31,6 +20,22 @@
     <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
     <Newsletter v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.newsletter" v-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
   </template>
+  <template v-else>
+      <!-- <button v-if="item.acf_fc_layout === 'testimonials'">testimonials</button> -->
+      <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
+      <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
+      <template v-if="item.acf_fc_layout === 'online_shop'">
+        <router-link class="orange-button" to="/retail">Retail Items</router-link>
+      </template>
+      <template v-if="item.acf_fc_layout === 'fine foods'">
+        <router-link class="orange-button" to="/mamnoonstreet">Fine Foods</router-link>
+      </template>
+  </template>
+
+
+
+
+
   </div>
 
 
@@ -112,6 +117,13 @@ export default {
   },
   props: ['apiData', 'blok'],
   methods: {
+ isMobile() {
+   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+     return true
+   } else {
+     return false
+   }
+ },
 visibilityChanged (isVisible, entry) {
   this.isVisible = isVisible
   ///console.log(entry.target.id)
