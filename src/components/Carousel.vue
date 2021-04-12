@@ -28,7 +28,7 @@
         <router-link class="orange-button" to="/retail">Retail Items</router-link>
       </template>
       <template v-if="item.acf_fc_layout === 'fine foods'">
-        <router-link class="orange-button" to="/mamnoonstreet">Fine Foods</router-link>
+        <router-link class="orange-button" to="/mamnoonff">Fine Foods</router-link>
       </template>
   </template>
 
