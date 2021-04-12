@@ -49,7 +49,7 @@
       </template>
 <!-- mobile newsletter. -->
       <template v-if="item.acf_fc_layout === 'newsletter'">
-        <router-link class="orange-button" to="/newsletter">newsletter</router-link>
+        <router-link class="orange-button" to="/newsletterarchive">newsletter archive</router-link>
       </template>
 
 

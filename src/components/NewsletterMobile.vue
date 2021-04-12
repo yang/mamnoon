@@ -7,9 +7,7 @@
       <!-- <p class="intro-paragraph">Nadi Mama is a one stop shop for all things The Mama Group has to offer. Order food, purchase retail items, make a reservation or simply stay up to date with our offerings.</p> -->
     <!-- </div> -->
     <!-- </div> -->
-<div style="display:none;position: fixed;top:100px;z-index:10000;width: 100%;background: pink;">
-{{visibility}}
-</div>
+
   <div v-for="item in pageData" :key="item.acf_fc_layout">
 
     <Newsletter v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.newsletter" v-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
@@ -22,42 +20,12 @@
 
 <script type="text/javascript">
 
-import carousel from "vue-owl-carousel";
-import Order from "@/components/svgIcons/Order";
-import Next from "@/components/svgIcons/Next";
-import Prev from "@/components/svgIcons/Prev";
-import Mamnoon from "@/components/svgIcons/Mamnoon";
-import Mbar from "@/components/svgIcons/Mbar";
-import ShowAll from "@/components/svgIcons/ShowAll";
-import MamnoonSVG from "@/components/svgIcons/MamnoonSVG";
+
 import Newsletter from "@/components/Newsletter";
-import CoverFlowCarousel from "@/components/CoverFlowCarousel";
-import UpserveFiltering  from "@/components/UpserveFiltering";
-import TestimonialsMain from "@/components/TestimonialsMain";
-import Reservations from "@/components/Reservations";
-import ALaCarte from "@/components/ALaCarte";
-import OnlineShop from "@/components/OnlineShop";
-import FineFoods from "@/components/FineFoods";
-import OnlineShopUpserve from "@/components/OnlineShopUpserve";
+
 export default {
   components: {
-    FineFoods,
-    ALaCarte,
-    carousel,
-    Order,
-    Next,
-    Prev,
-    Newsletter,
-    CoverFlowCarousel,
-    Mbar,
-    Mamnoon,
-    MamnoonSVG,
-    ShowAll,
-    UpserveFiltering,
-    TestimonialsMain,
-    Reservations,
-    OnlineShop,
-    OnlineShopUpserve
+    Newsletter
   },
   computed: {
     count() {

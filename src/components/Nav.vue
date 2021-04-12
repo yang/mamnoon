@@ -105,16 +105,7 @@
     </template>
     <router-link to="/">
                 <Logo />
-                <!-- <template v-if="$route.name === 'mamnoon'">
-                <LogoMamnoon />
-                </template>
-                <template v-else-if="$route.name === 'mamnoonstreet'">
-                <LogoStreet />
-                </template>
-                <template v-else>
-                <Logo />
-                </template> -->
-                <!-- {{showCartDropdown}} -->
+
         </router-link>
 
 
@@ -290,16 +281,12 @@
 import VueJwtDecode from "vue-jwt-decode";
 import Logo from "@/components/Logo";
 import LogoMamnoon from "@/components/LogoMamnoon";
-import LogoStreet from "@/components/LogoStreet";
 import Burger from "@/components/svgIcons/Burger";
 import Star from "@/components/svgIcons/Star";
 import GoogleAuth from "@/components/GoogleAuth";
 
 import CartDropdown from "@/components/CartDropdown";
-
-
 import NadiIntro from "@/components/NadiIntro";
-
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 
 
@@ -310,7 +297,6 @@ export default {
     Logo,
     Star,
     LogoMamnoon,
-    LogoStreet,
     Burger,
     GoogleAuth,
     NadiIntro
