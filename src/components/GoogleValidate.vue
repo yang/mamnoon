@@ -131,6 +131,9 @@ if(american.length>0){
   mounted() {
     this.initMap();
 
+
+
+
 },
 };
 </script>

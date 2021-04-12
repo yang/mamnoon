@@ -51,7 +51,12 @@ methods: {
     hideUserModal () {
     this.$store.commit('hideUserModal')
     }
-}
+},
+  created(){
+    let recaptchaScriptModal = document.createElement('script')
+      recaptchaScriptModal.setAttribute('src', 'https://assets.emergepay.chargeitpro.com/cip-hosted-modal.js')
+      document.head.appendChild(recaptchaScriptModal)
+  }
 }
 </script>
 

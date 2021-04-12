@@ -2466,7 +2466,20 @@ if(this.$store.state.openDrawerOnLoad === true){
 
 
 
+  
 
+
+
+  },
+  created(){
+    let recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBwegA6SBLg8wfP47WBd-bj-_ghO9kRTs8&libraries=geometry,places&callback=initMap')
+      document.head.appendChild(recaptchaScript)
+
+
+      let recaptchaScriptModal = document.createElement('script')
+      recaptchaScriptModal.setAttribute('src', 'https://assets.emergepay.chargeitpro.com/cip-hosted-modal.js')
+      document.head.appendChild(recaptchaScriptModal)
 
   }
 };
