@@ -22,14 +22,7 @@ Vue.use(VueCurrencyInput)
 Vue.component('v-select', vSelect)
 
 
-Vue.use(VueMq, {
-  breakpoints: {
-    mobile: 450,
-    tablet: 992,
-    laptop: 1250,
-    desktop: Infinity,
-  }
-})
+
 
 
 const base = axios.create({
