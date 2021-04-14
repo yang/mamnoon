@@ -123,7 +123,7 @@
 
       <div class="container pt20 no-bot-pad">
         <div class="row no-lr-margin">
-          <div class="col-md-12 red-text text-center">
+          <div class="col-md-12 grey-text">
 
                     
              <!-- <h1 class="text-center">{{title}}</h1> -->
@@ -142,7 +142,7 @@
      
 
 <div class="container online-menu">
-<h4>Online Shop</h4>
+<h4>online shop</h4>
 </div>
 
 
@@ -183,7 +183,7 @@
                           <!-- {{serve}} -->
 <!-- <div class="col-6 col-md-4 shop-item no-lr-pad" v-if="serve.visible"> -->
      <template v-if="serve.visible">
-                <div class="col-6 col-md-4 shop-item no-lr-pad" v-if="currentFilter === 'All' || currentFilter === serve.category">
+                <div class="col-6 col-md-6 shop-item no-lr-pad" v-if="currentFilter === 'All' || currentFilter === serve.category">
   <div class="itemContainer" @click="openModal(serve)">
                             <template v-if="serve.images">
                               <div
@@ -2520,12 +2520,8 @@ float: left;
 
 button.selected{
  
-   background: transparent !important;
-      background: #666666 !important;
-    border: 2px solid #666666 !important;
-    box-sizing: border-box;
-    color: #fff367 !important;
-
+  box-sizing: border-box;
+color: #666666 !important;
 }
 
 
@@ -2541,7 +2537,7 @@ button.selected{
         border-bottom: 0px solid rgba(0, 0, 0, 0.1);
         color: #fff367;
         font-weight: 500;
-        margin: 0 5px;
+        margin: 0 10px;
         text-transform: lowercase;
             display: inline;
       }  
@@ -2582,14 +2578,14 @@ position: relative;
 }
 
 
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n){
+.col-6.col-md-6.shop-item.no-lr-pad:nth-child(2n){
 .itemContainer{
 // background: green;
 padding-left: 8px;
 padding-right: 0;
 }
 }
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n+1){
+.col-6.col-md-6.shop-item.no-lr-pad:nth-child(2n+1){
 .itemContainer{
 // background: red;
 padding-left: 0;
@@ -2597,7 +2593,7 @@ padding-right: 8px;
 }
 }
 
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(3n+2){
+.col-6.col-md-6.shop-item.no-lr-pad:nth-child(2n+2){
 .itemContainer{
 // background: pink;
 padding-left: 4px;
@@ -2619,14 +2615,14 @@ padding-right: 4px;
 
 @media only screen and (max-width: 768px) {
 
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(odd){
+.col-6.col-md-6.shop-item.no-lr-pad:nth-child(odd){
 .itemContainer{
 // background: green;
 padding-left: 0px !important;
 padding-right: 4px !important;
 }
 }
-.col-6.col-md-4.shop-item.no-lr-pad:nth-child(even){
+.col-6.col-md-6.shop-item.no-lr-pad:nth-child(even){
 .itemContainer{
 // background: red;
 padding-left: 4px !important;
@@ -2709,6 +2705,10 @@ a{
 }
 .red-text {
     color: #f05d5b;
+    }
+
+    .grey-text{
+      color: #666666;
     }
 
 

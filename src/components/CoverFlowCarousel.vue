@@ -1,8 +1,8 @@
 <template>
     <section :id="tag" class="coverflowsection" :if="visible">
-<div class="is-fullheight no-top-pad" id="cover-carousel">
+<div class="is-fullheight less-left-right no-top-pad" id="cover-carousel">
 <h4 class="noselect">{{header}}</h4>
-    <p class="description-para hide-mobile" style="text-align:center;margin-top: 20px;">{{descriptionbody}}</p>
+    <p class="description-para hide-mobile" style="text-align:left;margin-top: 20px;">{{descriptionbody}}</p>
    <template v-if="upserveSections.length === 0">
      <div class="container text-center pt20 white-text" style="height: 550px;margin-top: 100px;position: relative;">
        <div class="loading-box">
@@ -1108,15 +1108,16 @@ color: #FFCC3E;
 }
 
 .bottom-bar{
-padding: 10px;
+padding: 10px 25px;
 position: absolute;
 bottom: 0;
 width: 500px;
 background: #fff367;
 color: rgb(73, 73, 74);
-font-size: 14px;
+font-size: 15px;
+line-height: 20px;
 height: 83px;
-text-align: center;
+text-align: left;
 
 &.mamnoonstreetcolors{
    background: #ffffff;
@@ -1128,6 +1129,13 @@ text-align: center;
 &.mbarcolors{
   background: #324144;
 color: #FFCC3E;
+}
+
+
+@media only screen and (max-width: 640px) {
+  font-size: 13px;
+line-height: 18px;
+padding: 10px;
 }
 
 }

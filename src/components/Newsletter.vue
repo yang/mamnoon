@@ -147,7 +147,7 @@ float: left;
 
 
 .translate40{
-    transform: translate(0px, 0px);
+    transform: translate(20px, 0px);
 }
 
 @media only screen and (max-width: 992px){

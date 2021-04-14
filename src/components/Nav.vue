@@ -53,53 +53,21 @@
         <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 100px;">
             <CartDropdown />
          </div>
-            <!--<div v-if="this.$store.state.loggedIn && showCartDropdown" class="hello logButton googleInHeader" style="right: 168px;">
-                    <router-link to="/profile">
-                profile
-                    </router-link>
-            </div>
-            <div v-else-if="this.$store.state.loggedIn" class="hello logButton googleInHeader" style="right: 96px">
-                    <router-link to="/profile">
-                profile
-                    </router-link>
-            </div>-->
 
-
-
-
-<!--             
-            <div class="hello logButton googleInHeader" style="right:100px">
-                    <router-link to="/retail">
-                shop
-                    </router-link>
-            </div> -->
           <GoogleAuth class="logButton googleInHeader" />
     <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
-    <a v-if="$route.name === 'home'" class="burger" @click="toggleMenu()">
-        <Burger />
-    </a>
 
-    <a v-if="$route.name === 'retail'" class="burger" @click="toggleMenu()">
-        <Burger />
-    </a>
+<!-- ss -->
+<!-- {{$route.name}} -->
 
-
-    <a v-if="$route.name === 'mamnoon'" class="burger" @click="toggleMenu()">
-        <Burger />
-    </a>
-    <a v-if="$route.name === 'mamnoonstreet'" class="burger" @click="toggleMenu()">
-        <Burger />
-    </a>
-    <a v-if="$route.name === 'mbar'" class="burger" @click="toggleMenu()">
+        <a v-if="correctPages" class="burger" @click="toggleMenu()">
         <Burger />
     </a>
 
 
-    <a v-if="$route.name === 'profile'" class="burger" @click="toggleMenu()">
-        <Burger />
-    </a>
+
 
 
     </template>
@@ -118,7 +86,7 @@
     </div>
     </div>
     <template v-if="$mq === 'lg'">
-    <nav v-if="$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header">
+    <nav v-if="correctPages" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header">
         <div class="container">
           <scrollactive :offset="180" ref="scrollactive">   
              <ul id="menu">
@@ -134,7 +102,7 @@
     </nav>
 </template>
 <template v-if="$mq === 'sm'">
-        <nav v-if="$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <nav v-if="correctPages" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
@@ -163,13 +131,10 @@
 <CartDropdown />
     </li>
     </div>
-
             </ul>            
             </scrollactive>
         </div>
     </nav>
-
-
 
 
         <nav v-if="$route.name === 'retail'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
@@ -208,11 +173,6 @@
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
-     <!-- <li>
-                    <router-link to="/retail">
-                    shop
-                    </router-link>
-                </li> -->
 
                     <div v-if="this.$store.state.loggedIn" class="inline-link">
                 <li>
@@ -245,14 +205,6 @@
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
-                                   <!-- <div class="inline-link"> -->
-                <!-- <li>
-                    <router-link to="/retail">
-                    shop
-                    </router-link>
-                </li> -->
-           
-            <!-- </div>   -->
 <div class="inline-link">
            <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />
@@ -317,6 +269,28 @@ export default {
       }
   },
       computed:{
+          correctPages(){
+
+if(this.$route.name === 'home' ||
+    this.$route.name === 'retail' ||
+    this.$route.name === 'mamnoon' ||
+    this.$route.name === 'mamnoonstreet' ||
+    this.$route.name === 'mbar' ||
+    this.$route.name === 'profile' ||
+    this.$route.name === 'featured' ||
+    this.$route.name === 'onlinemenu' ||
+    this.$route.name === 'reservations' ||
+    this.$route.name === 'mamnoonff' ||
+    this.$route.name === 'newsletterarchive'){
+        return true
+    }else{
+        return false
+    }
+
+
+
+
+          },
           randomId(){
                     return Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
           },
@@ -331,6 +305,10 @@ export default {
           }
       },
 methods: {
+
+
+
+    
     sendState(randomId,storeState,location,userAgent,isMobile){
 
       this.$http.post("/sendbugstate",{
@@ -740,7 +718,8 @@ cursor: pointer;
 .info-modal{
     position: absolute;
     top: 20px;
-    width: 45%;
+ 
+        width: 60%;
     background: white;
     left: 50%;
     // height: 90vh;
@@ -786,6 +765,10 @@ cursor: pointer;
     cursor: pointer;
 }
 
+
+.navbar{
+    padding: .5rem 1rem .5rem 1rem !important;
+}
 
 </style>
 

@@ -248,6 +248,7 @@ h4 {
   text-align: center;
 }
 .is-fullheight,
+.is-fullheight2,
 .familymeal,
 .narrow {
   background-color: #f05d5b;
@@ -265,6 +266,7 @@ h4 {
   //  top: 110px;
   left: 20%;
     left: 30%;
+        left: 35%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     left: 5%;
@@ -276,12 +278,17 @@ h4 {
     //  top: 110px;
   right: 20%;
     right: 30%;
+        right: 35%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     right: 5%;
   }
 }
-.is-fullheight {
+
+
+
+.is-fullheight,
+.is-fullheight2 {
   padding: 20px 0 0 0;
   // overflow: hidden;
 }
@@ -768,6 +775,14 @@ width: 100%
   &:hover{
     text-decoration: none;
   }
+}
+
+
+
+.container.mt-5{
+    margin-top: 3rem!important;
+    padding-top: 100px;
+
 }
 
 </style>

@@ -429,7 +429,7 @@ form textarea,
     position: absolute;
     bottom: 0;
     background: #fff367;
-    padding: 10px;
+    padding: 12px 20px;
     width: 100%;  
 
   .name {
@@ -437,12 +437,12 @@ form textarea,
   }
 
   .food-description {
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin-bottom: 0px;
   }
 
-  height: 120px;
-
+  // height: 120px;
+height: 140px;
 transition: all .5s ease;
 &:hover{
   // background: #f05d5b;
@@ -976,6 +976,7 @@ margin-top: -3px;
     // position: 
   left: 20%;
     left: 30%;
+        left: 35%;
   cursor: pointer;
   @media only screen and (max-width: 768px) {
     left: 5%;
@@ -989,7 +990,7 @@ margin-top: -3px;
     top: -55px;
   right: 20%;
     right: 30%;
-
+    right: 35%;
 
   cursor: pointer;
   @media only screen and (max-width: 768px) {
@@ -998,6 +999,37 @@ margin-top: -3px;
     top: -55px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .is-fullheight{
   padding: 20px 0 0 0;
@@ -1362,12 +1394,12 @@ input.custom-tip-button{
 #upserveolo button.vs__clear{
     background: #f58e58;
     border-radius: 30px;
-    padding: 0 6px;
-    width: 28px;
-    height: 27px;
+    padding: 0 1px;
+    width: 26px;
+    height: 26px;
     svg{
-      transform: translate(.5px,-2.0px);
-      transform: translate(0px, -2px);
+ 
+      transform: translate(0px, -3px);
       width: 11px;
       path{
         fill: #ffffff;
@@ -1378,8 +1410,8 @@ input.custom-tip-button{
     &:hover{
 
     svg{
-      transform: translate(.5px,-2.0px);
-      transform: translate(0px, -2px);
+
+     transform: translate(0px, -3px);
       width: 11px;
       path{
         fill: #fff367;
@@ -1588,5 +1620,25 @@ display: flow-root;
   margin-left: 0;
   margin-right: 0;
 }
+
+
+
+.is-fullheight.less-left-right [id^="carousel_prev_"] {
+    left: 30%;
+
+   @media only screen and (max-width: 992px) {
+    left: 5%;
+    }
+
+}
+.is-fullheight.less-left-right [id^="carousel_next_"] {
+    right: 30%;
+
+
+       @media only screen and (max-width: 992px) {
+    right: 5%;
+    }
+}
+
 
 </style>

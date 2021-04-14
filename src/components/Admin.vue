@@ -1785,7 +1785,7 @@ display: inline;
         border-bottom: 0px solid rgba(0, 0, 0, 0.1);
         color: #fff367;
         font-weight: 500;
-        margin: 0 5px;
+        margin: 0 10px;
         text-transform: lowercase;
             display: inline;
       }  

@@ -130,7 +130,7 @@ export default {
         this.$nextTick(function () {
             window.setInterval(() => {
                 this.countDown();
-            },5000);
+            },4000);
         })
     }
 };
@@ -492,7 +492,7 @@ padding-top: 100px;
 
 @media only screen and (max-width: 640px) {
 .container.mt-5{
-padding-top: 80px;
+padding-top: 110px;
 }
 
 }

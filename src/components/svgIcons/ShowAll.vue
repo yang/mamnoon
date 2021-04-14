@@ -10,7 +10,7 @@
 
 svg#show-all{
     width:172px;
-    margin: 20px auto 10px;
+    margin: 21px auto 10px;
 }
 
 

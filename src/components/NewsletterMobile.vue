@@ -167,44 +167,12 @@ this.visibility[entry.target.id] = entry.isIntersecting
 h4 {
   text-align: center;
 }
-.is-fullheight,
-.familymeal,
-.narrow {
-  background-color: #f05d5b;
-  h4 {
-    color: #fff367;    font-weight: bold;
-  }
-}
+
 .section.hero.familymeal {
   width: 88%;
   margin: 0 auto;
 }
-.is-fullheight [id^="carousel_prev_"] {
-  position: absolute;
-  top: 14px;
-  //  top: 110px;
-  left: 20%;
-    left: 30%;
-  cursor: pointer;
-  @media only screen and (max-width: 768px) {
-    left: 5%;
-  }
-}
-.is-fullheight [id^="carousel_next_"] {
-  position: absolute;
-  top: 14px;
-    //  top: 110px;
-  right: 20%;
-    right: 30%;
-  cursor: pointer;
-  @media only screen and (max-width: 768px) {
-    right: 5%;
-  }
-}
-.is-fullheight {
-  padding: 20px 0 0 0;
-  // overflow: hidden;
-}
+
 .familymeal {
   padding: 0 0 0 0;
 }
@@ -694,5 +662,10 @@ width: 100%
 .container.mt-5{
     margin-top: 3rem!important;
     padding-top: 100px;
+
+    @media only screen and (max-width: 992px) {
+          padding-top: 0px;
+              margin-top: 1rem!important;
+    }
 }
 </style>

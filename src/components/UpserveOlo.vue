@@ -207,7 +207,7 @@
 
       <div class="container pt20 no-bot-pad">
         <div class="row no-lr-margin">
-          <div class="col-md-12 red-text text-center">
+          <div class="col-md-12 grey-text">
 
 
             <!-- {{emailAddress}} -->
@@ -4038,13 +4038,10 @@ this.currentOrder.scheduled_time = null
 }
 
 button.selected{
-     background: #666666 !important;
-    border: 2px solid #666666 !important;
-    box-sizing: border-box;
-    // color: #ffffff !important;
-    color: #fff367 !important;
-
+  box-sizing: border-box;
+color: #666666 !important;
 }
+
 
 
 .mb10{
@@ -4058,6 +4055,9 @@ button.selected{
 .red-text{
   color: #f05d5b;
 }
+.grey-text{
+  color: #666666;
+  }
 
 
 .no-lr-pad{
@@ -4068,15 +4068,16 @@ button.selected{
 
 .leftDropdown{
   width: 50%;
-  display:inline-block;
-  padding:0 5px 20px 0;
+  display: block;
+  padding: 0 6px 15px 0;
+  margin-top: 15px;
 }
 
 
 .rightDropdown{
 width: 50%;
-display:inline-block;
-padding:0 0 20px 5px;
+display: block;
+padding: 0 6px 15px 0;
 }
 
 .show-on-mob{
@@ -4187,7 +4188,8 @@ a{
 .square-green{
       position: absolute;
     width: 100%;
-    background: #06bff9;
+
+    background: rgb(29, 174, 239);
     left: 50%;
     transform: translate(-50%);
     height: 440px;
@@ -4232,7 +4234,7 @@ height: 560px;
 .square-green{
       position: absolute;
     width: 100%;
-    background: #06bff9;
+    background: rgb(29, 174, 239);
     left: 50%;
     transform: translate(-50%);
     height: 270px;
@@ -4338,7 +4340,7 @@ height: 560px;
 }
 
 .weblink{
-  color: #f05d5b;
+  color: #666666;
   text-decoration: underline;
   &:hover{
     color: #666666;

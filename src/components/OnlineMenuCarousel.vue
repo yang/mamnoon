@@ -361,14 +361,14 @@ form textarea,
       position: absolute;
     bottom: 0;
     background: #fff367;
-    padding: 10px;
+    padding: 12px 20px;
     width: 100%;  
 
   .name {
   }
 
   .food-description {
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin-bottom: 0px;
   }
 }

@@ -696,5 +696,10 @@ width: 100%
 .container.mt-5{
     margin-top: 3rem!important;
     padding-top: 100px;
+
+    @media only screen and (max-width: 992px) {
+          padding-top: 0px;
+              margin-top: 1rem!important;
+    }
 }
 </style>
