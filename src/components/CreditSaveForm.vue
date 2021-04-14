@@ -874,6 +874,15 @@ display: none !important;
     border-radius: 10px;
     box-shadow: none;
     border: 1px solid grey;
+
+
+@media only screen and (max-width: 768px) {
+  display: block;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+
 }
 
 .add-giftcard-button{

@@ -234,6 +234,7 @@
 </div></div>
   </template>
 
+<br><br>
 
           </div>
 
@@ -2619,14 +2620,20 @@ padding-right: 4px;
 .itemContainer{
 // background: green;
 padding-left: 0px !important;
-padding-right: 4px !important;
+padding-right: 0px !important;
+width: 100% !important;
+    max-width: 100% !important;
+        flex: 0 0 100% !important;
 }
 }
 .col-6.col-md-6.shop-item.no-lr-pad:nth-child(even){
 .itemContainer{
 // background: red;
-padding-left: 4px !important;
+padding-left: 0px !important;
 padding-right: 0px !important;
+width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
 }
 }
 
@@ -2635,6 +2642,13 @@ padding-right: 0px !important;
   padding-left: 20px;
   padding-right: 20px;
 
+}
+
+
+.col-6.col-md-6.shop-item.no-lr-pad{
+  width: 100% !important;
+ max-width: 100% !important;
+ flex: 0 0 100% !important;
 }
 
 

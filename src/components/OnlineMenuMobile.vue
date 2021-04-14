@@ -2,7 +2,7 @@
 <div>
   <main>
     <!-- <div class=""> -->
-      <div class="container mt-5">
+      <div class="container mt-5 mobilePage">
       <!-- <h2 class="intro-paragraph-header">Welcome!</h2> -->
       <!-- <p class="intro-paragraph">Nadi Mama is a one stop shop for all things The Mama Group has to offer. Order food, purchase retail items, make a reservation or simply stay up to date with our offerings.</p> -->
     <!-- </div> -->
@@ -186,7 +186,7 @@ h4 {
   left: 20%;
     left: 30%;
   cursor: pointer;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 992px) {
     left: 5%;
   }
 }
@@ -197,7 +197,7 @@ h4 {
   right: 20%;
     right: 30%;
   cursor: pointer;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 992px) {
     right: 5%;
   }
 }
@@ -691,13 +691,20 @@ width: 100%
 }
 
 
-.container.mt-5{
+
+
+.container.mt-5.mobilePage{
     margin-top: 3rem!important;
     padding-top: 100px;
 
     @media only screen and (max-width: 992px) {
-          padding-top: 0px;
+            padding-top:0px;
+
+
+
               margin-top: 1rem!important;
     }
 }
+
+
 </style>

@@ -31,7 +31,7 @@
 
 
 <div class="row">
-<div class="col-md-8 offset-md-2">
+<div class="col-md-8 offset-md-2 overflow-x-hidden">
  
  
  <div class="border-red">
@@ -83,7 +83,7 @@
 
 
 <div class="row">
-<div class="mb20 col-md-8 offset-md-2">
+<div class="mb20 col-md-8 offset-md-2 overflow-x-hidden">
 <Borderline />
 <h2>{{ffdata.locations_sub_header}}</h2>
 
@@ -394,8 +394,17 @@ div{
 
 }
 
-
+.ff{
+  padding-top:20px;
+}
 
    }
+
+
+
+
+.overflow-x-hidden{
+  overflow-x: hidden;
+}
 
 </style>

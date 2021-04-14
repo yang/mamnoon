@@ -70,7 +70,7 @@
 <div class="container pad-yellow-background module-header">
 add a giftcard for {{emailAddress}}
   </div>
- <div class="container nav-acc-header pad-yellow-background">
+ <div class="container nav-acc-header pad-yellow-background overflow-x-hidden">
 <div class="row">
 <div class="col-12 col-lg-12">
 <form id="app" @submit.prevent="checkForm">
@@ -741,6 +741,11 @@ th.w100{
  &:hover{
    text-decoration: none;
  }
+}
+
+
+.overflow-x-hidden{
+  overflow-x: hidden;
 }
 
 </style>

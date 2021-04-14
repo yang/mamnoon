@@ -1560,7 +1560,15 @@ padding-bottom: 0;
   display: none;
 }
 
+@media only screen and (max-width: 1080px) {
 
+.hide-on-desktop{
+display: flow-root;
+}
+
+
+
+}
 
 @media only screen and (max-width: 992px) {
 #upserveolo .box-inner{
@@ -1577,9 +1585,6 @@ padding-bottom: 0;
 
 }
 
-.hide-on-desktop{
-display: flow-root;
-}
 
 
 }

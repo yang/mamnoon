@@ -43,7 +43,7 @@
 </div>
 
       <!-- <div class="container mt-5 nav-acc-header"> -->
-      <div class="container mt-5">
+      <div class="container mt-5 home-page">
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group" style="display:none;">
@@ -491,8 +491,8 @@ padding-top: 100px;
 
 
 @media only screen and (max-width: 640px) {
-.container.mt-5{
-padding-top: 110px;
+.container.mt-5.home-page{
+padding-top: 80px;
 }
 
 }

@@ -829,7 +829,7 @@ margin-top: -3px;
   left: 20%;
     left: 30%;
   cursor: pointer;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 992px) {
     left: 5%;
   }
 }
@@ -839,7 +839,7 @@ margin-top: -3px;
   right: 20%;
     right: 30%;
   cursor: pointer;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 992px) {
     right: 5%;
   }
 }

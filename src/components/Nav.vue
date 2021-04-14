@@ -86,7 +86,7 @@
     </div>
     </div>
     <template v-if="$mq === 'lg'">
-    <nav v-if="correctPages" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header">
+    <nav v-if="this.$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header">
         <div class="container">
           <scrollactive :offset="180" ref="scrollactive">   
              <ul id="menu">
@@ -102,16 +102,19 @@
     </nav>
 </template>
 <template v-if="$mq === 'sm'">
-        <nav v-if="correctPages" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <nav v-if="this.$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
+               
+               <template v-if="!isMobileUserAgent()">
                 <div class="inline-link" v-for="item in pageData" :key="item.tagname">
                     <li v-if="item.tagname">
                         <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
                     </li>
         
                 </div>  
+                    </template>
 
     <div v-if="this.$store.state.loggedIn" class="inline-link hide-on-desktop">
                 <li>
@@ -137,39 +140,10 @@
     </nav>
 
 
-        <nav v-if="$route.name === 'retail'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
-        <div class="container">
-          <scrollactive :offset="100" ref="scrollactive">
-                          <ul id="menu" class="mobile-menu">
-
-
-                    <div v-if="this.$store.state.loggedIn" class="inline-link">
-                <li>
-                    <router-link to="/profile">
-                        profile
-                    </router-link>
-                </li>
-            </div>
-
-<div class="inline-link">
-           <li class="cursor-pointer" @click="toggleMenu()">
-                        <GoogleAuth />
-                    </li>
-                </div>
-  <div v-if="showCartDropdown" class="inline-link">
-          <li class="cursor-pointer">
-<CartDropdown />
-</li>
-    </div>
-
-            </ul>            
-            </scrollactive>
-        </div>
-    </nav>
 
 
 
-        <nav v-if="$route.name === 'mamnoon'||$route.name === 'mamnoonff'||$route.name === 'mamnoonstreet'||$route.name === 'mbar'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <nav v-if="$route.name === 'newsletterarchive'||$route.name === 'retail'||$route.name === 'profile'||$route.name === 'mamnoon'||$route.name === 'mamnoonff'||$route.name === 'mamnoonstreet'||$route.name === 'mbar'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
@@ -201,24 +175,7 @@
 
 
 
-        <nav v-if="$route.name === 'profile'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
-        <div class="container">
-          <scrollactive :offset="100" ref="scrollactive">
-                          <ul id="menu" class="mobile-menu">
-<div class="inline-link">
-           <li class="cursor-pointer" @click="toggleMenu()">
-                        <GoogleAuth />
-                    </li>
-                </div>
-  <div v-if="showCartDropdown" class="inline-link">
-           <li class="cursor-pointer">
-                        <CartDropdown />
-                    </li>
-                </div>
-            </ul>            
-            </scrollactive>
-        </div>
-    </nav>
+
     <div>
         <div class="container">
 
@@ -306,7 +263,13 @@ if(this.$route.name === 'home' ||
       },
 methods: {
 
-
+ isMobileUserAgent() {
+   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+     return true
+   } else {
+     return false
+   }
+ },
 
     
     sendState(randomId,storeState,location,userAgent,isMobile){
@@ -431,7 +394,7 @@ this.getUserAgent();
     font-size: 20px;
     
     
-    @media only screen and (max-width: 992px) {
+    @media only screen and (max-width: 1080px) {
             width: 100%;
                 font-size: 10px;
     }
@@ -515,7 +478,7 @@ ul#menu li.active{
 
 &.bugMessage{
     top: 40px;
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 1080px) {
         top: 20px;
 }
 }
@@ -547,10 +510,23 @@ ul#menu li.active{
 }
 
 
+@media only screen and (max-width: 1080px) {
+    .hide-on-mobile,
+    .googleInHeader{
+    display: none;
+}
+}
 
 
+@media only screen and (max-width: 992px) {
 
+.inline-link.hide-on-mobile,
+.hide-on-mobile,
+.googleInHeader{
+    display: none;
+}
 
+}
 
 
 @media only screen and (max-width: 992px) {
@@ -571,7 +547,7 @@ ul#menu li.active{
 
 .full-width-logo{
 
-    text-align: left;
+    // text-align: left;
     /* width: 60%; */
     width: 100%;
 }
@@ -602,6 +578,7 @@ right: 0;
     top: 92px;
     top: 112px;
     z-index: 100;
+    padding-top: 15px !important;
 }
 
 
@@ -743,7 +720,9 @@ cursor: pointer;
         overflow: scroll;
 }
 
-
+.navbar-expand-lg{
+    display: none;
+}
 
 }
 
