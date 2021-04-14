@@ -15,8 +15,8 @@
 <div class="row lower-margin" v-if="ffdata">
 
 
-<div class="col-md-6 mb20"><img style="width: 100%;" :src="ffdata.header_image"></div>
-<div class="col-md-6 mb20 pt20" v-html="ffdata.body_text">
+<div class="col-md-4 mb20 offset-md-2"><img style="width: 100%;" :src="ffdata.header_image"></div>
+<div class="col-md-4 mb20 pt20" v-html="ffdata.body_text">
 </div>
 </div>
 
@@ -31,7 +31,7 @@
 
 
 <div class="row">
-<div class="col-md-10 offset-md-1">
+<div class="col-md-8 offset-md-2">
  
  
  <div class="border-red">
@@ -83,7 +83,7 @@
 
 
 <div class="row">
-<div class="col-md-12 mb20">
+<div class="mb20 col-md-8 offset-md-2">
 <Borderline />
 <h2>{{ffdata.locations_sub_header}}</h2>
 
@@ -102,16 +102,18 @@
 
 
 <div class="row pad-sm" v-if="ffdata.bottom_images">
-
-
+<div class="mb20 col-md-8 offset-md-2">
 
 
 <template v-for="image in ffdata.bottom_images">
 <!-- <div class="col-md-4 mb20"> -->
-  <img class="inblock-red" :src="image.image">
+  <div class="inblock-red" :style="{ backgroundImage: 'url(' + image.image + ')' }">
+    _
+
+    </div>
 <!-- </div> -->
 </template>
-
+</div>
 </div>
 
 
@@ -302,15 +304,18 @@ border-left: 0;
 
 
 .border-red{
-  border: 4px solid #F05D5B;
-  margin-bottom: 50px;
+    border: 5px solid #F05D5B;
+    margin-bottom: 50px;
+    display: inline-block;
   .col-l {
-width: 50%;
-display: inline-block;
+    width: 50%;
+    display: block;
+    float: left;
   }
   .col-r {
-width: 50%;
-display: inline-block;
+    width: 50%;
+    display: block;
+    float: left;
 
 div{
   padding: 40px;
@@ -330,9 +335,16 @@ div{
 
 
 .inblock-red{
-border: 4px solid #F05D5B;
+border: 5px solid #F05D5B;
 display: inline-block;
-width: 50%;
+// width: 50%;
+float: left;
+color: transparent;
+background-size: cover;
+background-position: center center;
+
+ width: 50%;
+    padding-bottom: 50%;
 
 &:first-child{
  border-right: 0px;
