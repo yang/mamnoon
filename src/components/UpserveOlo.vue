@@ -3994,6 +3994,12 @@ this.currentOrder.scheduled_time = null
       document.head.appendChild(recaptchaScriptModal)
   }
 
+
+
+      let recaptchaScriptJquery = document.createElement('script')
+      recaptchaScriptJquery.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+      document.head.appendChild(recaptchaScriptJquery)
+
 };
 </script>
 

@@ -2482,6 +2482,16 @@ if(this.$store.state.openDrawerOnLoad === true){
       recaptchaScriptModal.setAttribute('src', 'https://assets.emergepay.chargeitpro.com/cip-hosted-modal.js')
       document.head.appendChild(recaptchaScriptModal)
 
+
+
+      let recaptchaScriptJquery = document.createElement('script')
+      recaptchaScriptJquery.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+      document.head.appendChild(recaptchaScriptJquery)
+
+
+
+
+
   }
 };
 </script>
