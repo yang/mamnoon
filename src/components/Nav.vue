@@ -720,9 +720,9 @@ cursor: pointer;
         overflow: scroll;
 }
 
-.navbar-expand-lg{
-    display: none;
-}
+// .navbar-expand-lg{
+//     display: none;
+// }
 
 }
 
