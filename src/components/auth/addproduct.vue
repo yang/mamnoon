@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import swal from "sweetalert";
+import swal from "vue-sweetalert2";
 import VueJwtDecode from "vue-jwt-decode";
 export default {
   data() {

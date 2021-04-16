@@ -10,7 +10,7 @@
 
   <div v-for="item in pageData" :key="item.acf_fc_layout">
 
-    <Newsletter v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.newsletter" v-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
+    <Newsletter :visible="visibility.newsletter" v-if="item.acf_fc_layout === 'newsletter'" :header="item.header" :body="item.description" :tag="item.tagname" />
   </div>
   </div>
 

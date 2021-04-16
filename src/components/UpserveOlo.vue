@@ -2264,30 +2264,6 @@ showToFixed: function (value) {
 }
   },
   methods: {
-    alertSwal(){
-swal('111')
-//   swal({ 
-//     title: "Are you sure ?",
-//     text: "You will not be able to recover this page !",
-//     type: "warning",
-//     showCancelButton: true,
-//     confirmButtonColor: "#DD6B55",
-//     confirmButtonText: "Yes, delete it !",
-//     cancelButtonText: "No, cancel !",
-//     closeOnConfirm: false,
-//     closeOnCancel: false 
-//   }).then((confirmed) => {
-//     if (confirmed) {
-//    console.log('swal')
-// console.log(true)
-//     } else {
-//    console.log('swal')
-
-// console.log(false)
-//     }
-//   });
-
-    },
     clearOrderAndReRoute(){
 
 
@@ -2352,6 +2328,13 @@ swal('111')
     this.showAddCardFormVisible = false
 
       }else{
+
+
+
+
+
+
+
     this.sendApprovalDataToMongo(email, approvalData)
       }
      
@@ -2385,13 +2368,25 @@ console.log(email, approvalData)
         .post("/credit/creditsavemongo", infoForPayStringify)
         .then((response) => {
 
-            this.ccBillingPostalCode = null
-            this.ccBillingAddress = null
-            this.ccBillingName = null
 
-    this.showAddCardFormVisible = false
-      this.setPrimaryIfOnlyOne(email)
- this.getCreditCards();
+
+ this.$swal({ 
+    title: "success! card has been saved."
+  });
+
+
+
+
+          this.ccBillingPostalCode = null
+          this.ccBillingAddress = null
+          this.ccBillingName = null
+
+          this.showAddCardFormVisible = false
+          this.setPrimaryIfOnlyOne(email)
+          this.getCreditCards();
+
+
+
         })
         .catch((e) => {x
           console.log("errors");
@@ -3583,16 +3578,62 @@ console.log(item)
 
 
         if(self.$store.state.loggedIn){
-          if (confirm("save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
-              console.log("You pressed OK!");
-              console.log(approvalData.maskedAccount.replace('************',''))
+          // if (confirm("save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
+          //     console.log("You pressed OK!");
+          //     console.log(approvalData.maskedAccount.replace('************',''))
+          //     self.checkAndSend(self.emailAddress,approvalData)
+          //     self.clearOrderAndReRoute()
+          // }
+
+
+  this.$swal({ 
+    title: "save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?",
+    showDenyButton: true,
+    confirmButtonText: `Save`
+  }).then((confirmed) => {
+    if (confirmed) {
+              // console.log("You pressed OK!");
+              // console.log(approvalData.maskedAccount.replace('************',''))
               self.checkAndSend(self.emailAddress,approvalData)
               self.clearOrderAndReRoute()
-          }
+
+    } else {
+
+    }
+  });
+
+
+
+
+
+
+
+
+
+
         }else{
-          if (confirm("log in/create an account and save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
-            self.handleClickSignInForCard(self.emailAddress,approvalData)
-          }
+      
+
+
+
+  this.$swal({ 
+    title: "log in/create an account and save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?",
+    showDenyButton: true,
+    confirmButtonText: `Login And Save`
+  }).then((confirmed) => {
+    if (confirmed) {
+
+
+
+                self.handleClickSignInForCard(self.emailAddress,approvalData)
+
+    } else {
+
+    }
+  });
+
+
+
         }
 
 
@@ -3633,16 +3674,57 @@ console.log(item)
           self.emptyCart();
 
         if(self.$store.state.loggedIn){
-          if (confirm("save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
-              console.log("You pressed OK!");
-              console.log(approvalData.maskedAccount.replace('************',''))
+          // if (confirm("save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
+          //     console.log("You pressed OK!");
+          //     console.log(approvalData.maskedAccount.replace('************',''))
+          //     self.checkAndSend(self.emailAddress,approvalData)
+          //     self.clearOrderAndReRoute()
+          // }
+
+
+
+
+
+  this.$swal({ 
+    title: "save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?",
+        showDenyButton: true,
+    confirmButtonText: `Save`
+  }).then((confirmed) => {
+    if (confirmed) {
+              // console.log("You pressed OK!");
+              // console.log(approvalData.maskedAccount.replace('************',''))
               self.checkAndSend(self.emailAddress,approvalData)
               self.clearOrderAndReRoute()
-          }
+
+    } else {
+
+    }
+  });
+
+
         }else{
-          if (confirm("log in/create an account and save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
-            self.handleClickSignInForCard(self.emailAddress,approvalData)
-          }
+
+
+  this.$swal({ 
+    title: "log in/create an account and save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?",
+    showDenyButton: true,
+    confirmButtonText: `Save`
+  }).then((confirmed) => {
+    if (confirmed) {
+
+
+self.handleClickSignInForCard(self.emailAddress,approvalData)
+
+    } else {
+
+    }
+  });
+
+
+
+          // if (confirm("log in/create an account and save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
+          //   self.handleClickSignInForCard(self.emailAddress,approvalData)
+          // }
         }
 
 
@@ -3893,7 +3975,7 @@ this.setTip(0)
  
 
 
-this.alertSwal()
+
 
 
  this.getCreditCards()

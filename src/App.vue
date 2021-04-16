@@ -1646,4 +1646,30 @@ display: flow-root;
 }
 
 
+
+
+
+.swal2-popup{
+    border-radius: 0 !important;
+    padding: 0 !important;
+    padding-bottom: 20px !important;
+}
+
+.swal2-header{
+   background-color: #f05d5b !important;
+   padding: 10px !important;
+        h2{
+            color: #fff367 !important;
+            font-size: 20px !important;
+            margin-bottom: 4px !important;
+        }
+    }
+
+.swal2-actions button{
+    background: #f58e58 !important;
+    color: white !important;
+    border-radius: 0 !important;
+}
+
+
 </style>

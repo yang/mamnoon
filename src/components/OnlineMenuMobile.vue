@@ -10,7 +10,7 @@
 
   <div v-for="item in pageData" :key="item.acf_fc_layout">
 
-    <ALaCarte v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
+    <ALaCarte :visible="visibility.alacarte" v-if="item.acf_fc_layout === 'a_la_carte'" :header="item.header" :description="item.description" :data="item.service" :tag="item.tagname" />
 
   </div>
   </div>

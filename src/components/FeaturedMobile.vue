@@ -12,7 +12,7 @@
 </div>
   <div v-for="item in pageData" :key="item.acf_fc_layout">
 
-   <CoverFlowCarousel v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
+   <CoverFlowCarousel :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
 
 
 

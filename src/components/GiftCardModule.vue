@@ -136,7 +136,7 @@ add a giftcard for {{emailAddress}}
 <script type="text/javascript">
 import Submit from "@/components/svgIcons/Submit";
 import Check from "@/components/svgIcons/Check";
-import swal from "sweetalert";
+import swal from "vue-sweetalert2";
 export default {
   components: {
     Check,

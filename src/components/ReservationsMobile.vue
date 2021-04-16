@@ -10,7 +10,7 @@
 
   <div v-for="item in pageData" :key="item.acf_fc_layout">
 
-    <Reservations v-observe-visibility="{callback: visibilityChanged,once: false}" :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
+    <Reservations :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
 
 
   </div>

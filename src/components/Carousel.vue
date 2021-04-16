@@ -23,8 +23,6 @@
   <template v-else>
 
 
-
-
 <!-- mobile featured.  -->
      <template v-if="item.acf_fc_layout === 'meal_calendar'">
         <router-link class="orange-button" to="/featured">featured</router-link>
