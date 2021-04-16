@@ -669,7 +669,7 @@ import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 import moment from 'moment'
 import tz from 'moment-timezone'
 
-import swal from "sweetalert";
+import swal from "vue-sweetalert2";
 
 
 

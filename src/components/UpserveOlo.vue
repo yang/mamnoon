@@ -1682,7 +1682,7 @@ import NadiIconSmX from "@/components/svgIcons/NadiIconSmX";
 import moment from 'moment'
 import tz from 'moment-timezone'
 
-import swal from "sweetalert";
+import swal from "vue-sweetalert2";
 export default {
       metaInfo: {
       name: 'UpserveOlo',
@@ -2264,6 +2264,30 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    alertSwal(){
+swal('111')
+//   swal({ 
+//     title: "Are you sure ?",
+//     text: "You will not be able to recover this page !",
+//     type: "warning",
+//     showCancelButton: true,
+//     confirmButtonColor: "#DD6B55",
+//     confirmButtonText: "Yes, delete it !",
+//     cancelButtonText: "No, cancel !",
+//     closeOnConfirm: false,
+//     closeOnCancel: false 
+//   }).then((confirmed) => {
+//     if (confirmed) {
+//    console.log('swal')
+// console.log(true)
+//     } else {
+//    console.log('swal')
+
+// console.log(false)
+//     }
+//   });
+
+    },
     clearOrderAndReRoute(){
 
 
@@ -2449,7 +2473,7 @@ console.log('transasction success')
 
 
 
-
+this.toggledDrawer = false
 
 
 
@@ -3866,6 +3890,10 @@ this.setTip(0)
   },
   mounted() {
 
+ 
+
+
+this.alertSwal()
 
 
  this.getCreditCards()
@@ -3992,13 +4020,11 @@ this.currentOrder.scheduled_time = null
     let recaptchaScriptModal = document.createElement('script')
       recaptchaScriptModal.setAttribute('src', 'https://assets.emergepay.chargeitpro.com/cip-hosted-modal.js')
       document.head.appendChild(recaptchaScriptModal)
-  }
-
-
 
       let recaptchaScriptJquery = document.createElement('script')
       recaptchaScriptJquery.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
       document.head.appendChild(recaptchaScriptJquery)
+}
 
 };
 </script>
