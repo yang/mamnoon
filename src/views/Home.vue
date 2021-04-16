@@ -588,10 +588,22 @@ overflow: hidden;
     // position: relative;
     position: absolute;
   top:0;
-  width:28%;
+
   height: 500px;
   background: transparent;
   border-bottom: 1px solid yellow;
+
+  width:28%;
+
+
+@media only screen and (min-width: 1600px) {
+  width:30%;
+}
+
+@media only screen and (min-width: 2400px) {
+  width:35%;
+}
+
 
 
 
