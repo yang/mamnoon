@@ -14,8 +14,63 @@
 
 
   <!-- <div class="bottom-attach grey" style="bottom:0px;width: 100%;" :style="{ backgroundImage: 'url(' + require('@/assets/greyzig.svg') + ')' }"> -->
-     <div class="bottom-attach grey" style="bottom:0px;width: 100%;padding-top: 20px;">
-  <div class="container rotating-letters">
+     <div class="bottom-attach grey" style="bottom:0px;width: 100%;overflow:hidden;height: 100px;">
+
+<div style="position:absolute;width: 100%;height: 100px;top:0;left:0;">
+<div style="position:relative;width: 100%;height: 100px;">
+
+<div class="sliderDiv left">
+
+<Stars />
+<Stars />
+<Stars />
+<Stars />
+<Stars />
+
+
+
+     </div>
+
+
+
+<div class="sliderDiv left xx-left">
+
+<Stars />
+<Stars />
+<Stars />
+<Stars />
+<Stars />
+
+
+
+     </div>
+
+
+
+<div class="sliderDiv right">
+<StarsLeft />
+<StarsLeft />
+<StarsLeft />
+<StarsLeft />
+<StarsLeft />
+
+     </div>
+
+
+<div class="sliderDiv right xx-right">
+<StarsLeft />
+<StarsLeft />
+<StarsLeft />
+<StarsLeft />
+<StarsLeft />
+
+     </div>
+
+
+
+</div>
+</div>
+  <div class="container rotating-letters" style="padding-top: 20px;">
 
       <h2>
       <!-- MAMA MEANS&nbsp;&nbsp; -->
@@ -71,12 +126,19 @@ import UserProfile from "@/components/UserProfile";
 import Products from "@/components/Products";
 import Nav from "@/components/Nav";
 
+
+import Stars from "@/components/Stars";
+import StarsLeft from "@/components/StarsLeft";
+
+
 export default {
     components: {
     SlideShow,
     Products,
     UserProfile,
-    Nav
+    Nav,
+    Stars,
+    StarsLeft,
   },
   data() {
     return {
@@ -496,5 +558,82 @@ padding-top: 80px;
 }
 
 }
+
+
+
+.sliderDiv{
+
+overflow: hidden;
+  animation-name: slider;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+
+
+
+@keyframes slider {
+    0%   { transform: translateY(0) }
+    100% { transform: translateY(-400px) }
+}
+
+
+
+
+
+.sliderDiv{
+
+    // position: relative;
+    position: absolute;
+  top:0;
+  width:28%;
+  height: 500px;
+  background: transparent;
+  border-bottom: 1px solid yellow;
+
+
+
+
+  &.left{
+  left:0;
+
+
+&.xx-left{
+  left: -500px;
+}
+
+  }
+
+
+
+  &.right{
+  right:0;
+
+
+&.xx-right{
+  right: -500px;
+}
+
+  }
+
+}
+
+.squareStar{
+  display:block;
+  width:100%;
+  height:50px;
+    background: orange;
+}
+
+
+.squareStar1{
+  display:block;
+  width:100%;
+  height:50px;
+      background: transparent;
+}
+
 
 </style>
