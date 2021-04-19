@@ -3100,7 +3100,7 @@ this.attention = true
       this.$store.commit("googleAddress", { googleAddress });
     },
     cippaybutton() {
-      this.checkForm()
+      // this.checkForm()
       let self = this;
       this.getToken().then(function (transactionToken) {
         emergepay.open({
