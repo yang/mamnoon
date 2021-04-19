@@ -727,6 +727,26 @@ cursor: pointer;
 }
 
 
+@media only screen and (min-width: 1400px) {
+
+.info-modal{
+    position: absolute;
+    top: 10px;
+    width: 30%;
+    background: white;
+    left: 50%;
+    // height: 90vh;
+    transform: translateX(-50%);
+    padding: 10px;
+        overflow: scroll;
+}
+
+// .navbar-expand-lg{
+//     display: none;
+// }
+
+}
+
 .info-q{
     width: 50px;
     height: 50px;
