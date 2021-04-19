@@ -4778,6 +4778,7 @@ left: 50%;
 transform: translateX(-50%);
 background: white;
 width: 50%;
+    border: 1px solid #f05d5b;
 }
 
 @media only screen and (max-width: 992px) {
@@ -4785,6 +4786,20 @@ width: 50%;
       width: 96%;
       top: 20px;
    } 
+
+
+
+.container.online-menu.order-modal-width.full-width-modal-header{
+       width: 100% !important;
+}
+
+}
+
+
+@media only screen and (max-width: 768px) {
+  .container.online-menu.order-modal-width.full-width-modal-header{
+       width: 100% !important;
+}
 }
 
 .full-width-modal-header{
