@@ -31,7 +31,7 @@
 {{user.user.deliveryAddress.city}}&nbsp;{{user.user.deliveryAddress.state}}&nbsp;{{user.user.deliveryAddress.zip}}
 </template>
 <br><br>
-<button class="sm-button" @click="updateDelivery = true">update delivery address</button>
+<button class="sm-button" @click="updateDeliveryClick()">update delivery address</button>
 <br><br>
 </div>
 <br>
@@ -70,7 +70,7 @@
       v-model="deliveryAddress.addressLine1"
       type="text"
       name="addressLine1"
-      placeholder="add addressLine1"
+      placeholder="add address line 1"
       class="add-addressLine1-field"
     >
     <br>
@@ -79,7 +79,7 @@
       v-model="deliveryAddress.addressLine2"
       type="text"
       name="addressLine2"
-      placeholder="add addressLine2"
+      placeholder="add address line 2"
       class="add-addressLine2-field"
     >
     <br>
@@ -136,7 +136,7 @@
 {{user.user.billingAddress.city}}&nbsp;{{user.user.billingAddress.state}}&nbsp;{{user.user.billingAddress.zip}}
 </template>
 <br><br>
-<button class="sm-button" @click="updateBilling = true">update billing address</button>
+<button class="sm-button" @click="updateBillingClick()">update billing address</button>
 <br><br>
 </div>
 <br>
@@ -161,7 +161,7 @@
       v-model="billingAddress.addressLine1"
       type="text"
       name="addressLine1"
-      placeholder="add addressLine1"
+      placeholder="add address line 1"
       class="add-addressLine1-field"
     >
     <br>
@@ -170,7 +170,7 @@
       v-model="billingAddress.addressLine2"
       type="text"
       name="addressLine2"
-      placeholder="add addressLine2"
+      placeholder="add address line 2"
       class="add-addressLine2-field"
     >
     <br>
@@ -319,8 +319,37 @@ billingAddress: {
     },
 props: ['emailAddress'],
   methods: {
+  updateBillingClick(){
+        this.updateBilling = true
+
+      this.billingAddress.name = this.user.user.billingAddress.name
+      this.billingAddress.addressLine1 = this.user.user.billingAddress.addressLine1
+      this.billingAddress.addressLine2 = this.user.user.billingAddress.addressLine2
+      this.billingAddress.city = this.user.user.billingAddress.city
+      this.billingAddress.state = this.user.user.billingAddress.state
+      this.billingAddress.zip = this.user.user.billingAddress.zip
 
 
+
+
+
+  },
+    updateDeliveryClick(){
+        this.updateDelivery = true
+
+
+
+      this.deliveryAddress.name = this.user.user.deliveryAddress.name
+      this.deliveryAddress.phone = this.user.user.deliveryAddress.phone
+      this.deliveryAddress.addressLine1 = this.user.user.deliveryAddress.addressLine1
+      this.deliveryAddress.addressLine2 = this.user.user.deliveryAddress.addressLine2
+      this.deliveryAddress.city = this.user.user.deliveryAddress.city
+      this.deliveryAddress.state = this.user.user.deliveryAddress.state
+      this.deliveryAddress.zip = this.user.user.deliveryAddress.zip
+
+
+
+    },
     async checkFormBilling() {
           this.updateBilling = false
         try {

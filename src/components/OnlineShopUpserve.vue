@@ -27,13 +27,6 @@
 
 
 
-
-
-
-
-
-
-
                 <p class="description-para noselect hide-mobile">{{description}}</p>
         <carousel
         :autoplay="true"  
@@ -51,7 +44,7 @@
           </template>
 
 
-<div @click="goToRetail()" class="text-center" style="" v-for="item in retailItems" :key="item.id">
+<div @click="goToRetail()" class="text-center" style="" v-if="upserveList2 !== []" v-for="item in upserveList2" :key="item.id">
 <div v-if="item.images" class="squareAspect" :style="{'backgroundImage': 'url('+item.images.online_ordering_menu.main +')'}">
   </div>
 <div v-else>
@@ -94,6 +87,8 @@ export default {
           refresh: 0,
         upserve: [],
         upserveList: [],
+        upserve2: [],
+        upserveList2: [],
         upserveSections: [],
         retailItems: []
       }
@@ -109,6 +104,14 @@ export default {
     name: 'onlineshop',
     props: ['data','header','tag','description'],
     methods: {
+          async upservesMongo2() {
+
+      let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoonretail`);
+      let upserveProducts = responseUpserve.data.doc[0].menu;
+      this.upserve2 = upserveProducts;
+      this.upserveList2 = upserveProducts;
+
+    },
       goToRetail(){
  this.$router.push("/retail");
       },
@@ -160,7 +163,7 @@ let upserveSectionsRetail = this.upserveSections.filter(item => item.name === 'S
     },
     mounted(){
 // this.upserves()
-
+this.upservesMongo2()
 this.upservesMongo()
     }
 }
