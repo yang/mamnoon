@@ -4780,6 +4780,13 @@ background: white;
 width: 50%;
 }
 
+@media only screen and (max-width: 992px) {
+   .editInfoModal{
+      width: 96%;
+      top: 20px;
+   } 
+}
+
 .full-width-modal-header{
 width: 100%!important;
 max-width:100%;
