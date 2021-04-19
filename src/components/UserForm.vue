@@ -10,6 +10,7 @@
   <br>
   <b>email:</b><br>
 {{user.user.email}}
+<br><br>
   </div>
     </div>
     
@@ -21,21 +22,22 @@
 
 <div class="col-sm-6">
 
-      <div class="address" v-if="!updateDelivery"> <br>
-<b>delivery address:</b><br>
+      <div class="address" v-if="!updateDelivery">
+<!-- <b>delivery address:</b><br> -->
+<b>customer info:</b><br>
 <template v-if="user && user.user.deliveryAddress">
 {{user.user.deliveryAddress.name}}<br>
 {{user.user.deliveryAddress.phone}}<br>
-{{user.user.deliveryAddress.addressLine1}}<br>
-{{user.user.deliveryAddress.addressLine2}}<br>
-{{user.user.deliveryAddress.city}}&nbsp;{{user.user.deliveryAddress.state}}&nbsp;{{user.user.deliveryAddress.zip}}
+<!-- {{user.user.deliveryAddress.addressLine1}}<br> -->
+<!-- {{user.user.deliveryAddress.addressLine2}}<br> -->
+<!-- {{user.user.deliveryAddress.city}}&nbsp;{{user.user.deliveryAddress.state}}&nbsp;{{user.user.deliveryAddress.zip}} -->
 </template>
 <br><br>
-<button class="sm-button" @click="updateDeliveryClick()">update delivery address</button>
+<button class="sm-button" @click="updateDeliveryClick()">update customer info</button>
 <br><br>
 </div>
-<br>
-<form @submit.prevent="checkForm" v-if="updateDelivery">
+
+<form class="infoForm" @submit.prevent="checkForm" v-if="updateDelivery">
   <!-- <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
     <ul>
@@ -63,6 +65,8 @@
       placeholder="(555) 555-5555"
       class="add-phone-field"
     >
+    <br>
+    <!--
     <br>
 
     <input
@@ -109,23 +113,24 @@
       placeholder="add zip"
       class="add-zip-field"
     >
-
+-->
 
     &nbsp;&nbsp;&nbsp;
+    <br>
     <button class="sm-button add-delivery-address-button" type="submit" value="Submit">
    submit
       </button>
-
+<button class="sm-button" v-if="updateDelivery" @click="updateDelivery = false">cancel</button>
   </p>
 </form>
-<button class="sm-button" v-if="updateDelivery" @click="updateDelivery = false">cancel</button>
+
 <br><br>
     </div>
 
     <div class="col-sm-6">
 
 
-<br>
+
 
       <div class="address" v-if="!updateBilling">
 <b>billing address:</b> <br />
@@ -139,11 +144,11 @@
 <button class="sm-button" @click="updateBillingClick()">update billing address</button>
 <br><br>
 </div>
-<br>
-<form @submit.prevent="checkFormBilling" v-if="updateBilling">
+
+<form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling">
 <b>billing address:</b>
  <br />
- <br />
+
   <p>
     <input
       id="nameBilling"
@@ -203,13 +208,14 @@
 
 
     &nbsp;&nbsp;&nbsp;
+<br>
 <button class="sm-button add-billing-address-button" type="submit" value="Submit">
    submit
       </button>
-
+<button class="sm-button" v-if="updateBilling" @click="updateBilling = false">cancel</button>
   </p>
 </form>
-<button class="sm-button" v-if="updateBilling" @click="updateBilling = false">cancel</button>
+
 <br><br>
     </div>
 
@@ -775,6 +781,17 @@ th.w100{
 .mt20{
   margin-top: 20px;
 }
+
+.infoForm{
+  input{
+    padding:5px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    width: 60%;
+  }
+}
+
 </style>
 
 

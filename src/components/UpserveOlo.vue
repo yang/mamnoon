@@ -2,6 +2,194 @@
   <div id="upserveolo" :class='{smallerBoxes: currentItem && currentItem.name === "mamnoon @ home" }'>
       <!-- <div id="upserveolo"> -->
     <section>
+
+
+
+
+
+<div v-if="editInfoVisible === true" style="position: fixed;z-index:999;top: 0;left: 0;background: rgba(255,255,255,.5);width: 100%;height: 100vh;">
+
+
+
+</div>
+
+<div v-if="editInfoVisible === true" style="position: fixed;z-index:1000;top: 100px;left: 50%;transform: translateX(-50%);background: white;width: 50%;">
+        <div class="container online-menu order-modal-width" style="width: 100%;margin-top: 0;">
+          <div @click="editInfoVisible = false" class="close closeModal">
+            <CloseModal />
+          </div>
+          <h4>edit info</h4>
+        </div>
+
+
+
+
+
+
+<div class="cIEdit">
+
+
+
+      <div class="address" v-if="!updateCI">
+<b>customer info:</b> <br />
+<template v-if="user && user.user.deliveryAddress">
+{{user.user.deliveryAddress.name}}<br>
+{{user.user.deliveryAddress.phone}}<br>
+</template>
+<br>
+<button class="sm-button" @click="updateCI = true">update customer info</button>
+<br>
+</div>
+
+
+
+<form class="infoForm" @submit.prevent="checkFormCustomerInfo" v-if="updateCI">
+
+<b>customer info:</b>
+ <br>
+  <p>
+    <input
+      id="name"
+      v-model="user.user.deliveryAddress.name"
+      type="text"
+      name="name"
+      placeholder="add name"
+      class="add-name-field"
+    >
+    <br>
+    <input
+      id="phone"
+      v-model="user.user.deliveryAddress.phone"
+      type="text"
+      name="phone"
+      placeholder="(555) 555-5555"
+      class="add-phone-field"
+    >
+    <br>
+
+
+
+
+    &nbsp;&nbsp;&nbsp;
+    <br>
+    <button class="sm-button add-delivery-address-button" type="submit" value="Submit">
+   submit
+      </button>
+<button class="sm-button" v-if="updateCI" @click="updateCI = false">cancel</button>
+  </p>
+</form>
+
+
+
+</div>
+
+
+
+
+
+<div class="billingEdit">
+
+
+
+      <div class="address" v-if="!updateBilling">
+<b>billing info:</b> <br />
+<template v-if="user && user.user.billingAddress">
+{{user.user.billingAddress.name}}<br>
+{{user.user.billingAddress.addressLine1}}<br>
+{{user.user.billingAddress.addressLine2}}<br>
+{{user.user.billingAddress.city}}&nbsp;{{user.user.billingAddress.state}}&nbsp;{{user.user.billingAddress.zip}}
+</template>
+<br><br>
+<button class="sm-button" @click="updateBilling = true">update billing info</button>
+<br><br>
+</div>
+
+
+
+<form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling">
+<b>billing address:</b>
+ <br />
+
+  <p>
+    <input
+      id="nameBilling"
+      v-model="user.user.billingAddress.name"
+      type="text"
+      name="name"
+      placeholder="add name"
+      class="add-name-field"
+    >
+    <br>
+
+  
+    <input
+      id="addressLine1Billing"
+      v-model="user.user.billingAddress.addressLine1"
+      type="text"
+      name="addressLine1"
+      placeholder="add address line 1"
+      class="add-addressLine1-field"
+    >
+    <br>
+        <input
+      id="addressLine2Billing"
+      v-model="user.user.billingAddress.addressLine2"
+      type="text"
+      name="addressLine2"
+      placeholder="add address line 2"
+      class="add-addressLine2-field"
+    >
+    <br>
+    <input
+      id="cityBilling"
+      v-model="user.user.billingAddress.city"
+      type="text"
+      name="city"
+      placeholder="add city"
+      class="add-city-field"
+    >
+    <br>
+      <input
+      id="stateBilling"
+      v-model="user.user.billingAddress.state"
+      type="text"
+      name="state"
+      placeholder="add state"
+      class="add-state-field"
+    >
+    <br>
+      <input
+      id="zipBilling"
+      v-model="user.user.billingAddress.zip"
+      type="text"
+      name="zip"
+      placeholder="add zip"
+      class="add-zip-field"
+    >
+
+
+    &nbsp;&nbsp;&nbsp;
+<br>
+<button class="sm-button add-billing-address-button" type="submit" value="Submit">
+   submit
+      </button>
+<button class="sm-button" v-if="updateBilling" @click="updateBilling = false">cancel</button>
+  </p>
+</form>
+
+</div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
@@ -1153,9 +1341,9 @@
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
   <label class="smblk" for="cutlery">don't include disposable cutlery </label>
                   <br />
-                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
-                <h4 v-else class="text-left mt10">customer info<span class="edit-link" v-if="user.user"><router-link to="/profile">&nbsp;(<span class="edit">edit</span>)</router-link></span></h4>
+                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <h4 v-else class="text-left mt10">customer info<span class="edit-link" v-if="user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
 
 
 
@@ -1163,8 +1351,8 @@
 
                 <label class="smblk" for="name">name:</label>
                 <br />
-           
-              <div v-if="user.user && user.user.name !== ''" style="margin-bottom: 10px;">{{user.user.name}}</div>
+
+              <div v-if="user.user && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.name}}</div>
              <input v-else
               type="text"
               id="name"
@@ -1198,7 +1386,11 @@
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
   <label class="smblk" for="sms">enable SMS order updates </label>
 <!-- billing info -->
-          <h4 class="customer-info text-left mt10">billing info</h4>
+          <h4 class="customer-info text-left mt10">billing info
+          
+               <span class="edit-link" v-if="user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span>
+          
+          </h4>         
          <template v-if="currentOrder.fulfillment_info.type === 'delivery'"> 
           <div style="clear: both;width: 100%;margin-bottom: 10px;height: 20px;" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 !== ''">
 
@@ -1214,7 +1406,8 @@
 <!-- <div v-if="checked === false"> -->
                 <label class="smblk" for="name">name:</label>
                 <br />
-     <div v-if="user.user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
+  
+   <div v-if="user.user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
                 <input v-else
                   type="text"
                   id="name-billing"
@@ -1390,7 +1583,7 @@ cart empty
 <!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="false" :emailAddress="emailAddress" :title="title" /> -->
 
 
-  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+  <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 <button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
@@ -1399,7 +1592,7 @@ cart empty
 </template>
 <template v-else>
 
-  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+  <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 <button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
@@ -1487,7 +1680,7 @@ cart empty
 <!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="false" :emailAddress="emailAddress" :title="title" /> -->
 
 
-  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+  <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 
 <button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
@@ -1500,7 +1693,7 @@ cart empty
 <template v-else>
 
 
-  <template v-if="$store.state.currentUserEmail === 'joe.waine@gmail.com'">
+  <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 <button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
@@ -2075,6 +2268,11 @@ if(newAddress){
     },
   data() {
   return {
+          savedDeliveryAddress: {},
+      savedBillingAddress: {},
+    updateCI: false,
+    updateBilling: false,
+    editInfoVisible: false,
     savedCards: null,
     resizeIndex: 1,
     nowTime: null,
@@ -2264,6 +2462,43 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    async checkFormBilling() {
+          this.updateBilling = false
+        try {
+        let response = await this.$http.post("/user/submitbillingaddress", {
+          email: this.emailAddress,
+          billingAddress: this.user.user.billingAddress
+          });
+ console.log(response)
+          this.savedBillingAddress = response.data.user.billingAddress
+          // this.updateBilling = false
+
+       
+         } catch (err) {
+        console.log(err.response);
+      }
+        this.getUser()
+    },
+async checkFormCustomerInfo() {
+ this.updateCI = false
+        try {
+        let response = await this.$http.post("/user/submitdeliveryaddress", {
+          email: this.emailAddress,
+          deliveryAddress: this.user.user.deliveryAddress
+          });
+this.savedDeliveryAddress = response.data.user.deliveryAddress
+         } catch (err) {
+        console.log(err.response);
+      }
+
+ this.getUser()
+    },
+    editInfo(){
+
+       this.editInfoVisible = true 
+
+
+    },
     clearOrderAndReRoute(){
 
 
@@ -2806,7 +3041,7 @@ showGiftcard(){
             getUser() {
 
             if(this.emailAddress){
-
+ 
               let self = this
               this.$http
               .get("/user/email/" + this.emailAddress)
@@ -4248,7 +4483,9 @@ display:block;
 
 }
 
-
+ .edit{
+    cursor: pointer;
+ }
 
 .edit-link{
       color: #f58e58;
@@ -4262,6 +4499,7 @@ a{
     color: #f05d5b;
     // font-size: .9rem;
     color:#f58e58;
+
 }
   
 
@@ -4524,5 +4762,9 @@ height: 560px;
     pointer-events: none;
 }
 
+.cIEdit,
+.billingEdit{
+  padding: 20px;
+}
 
 </style>
