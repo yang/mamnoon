@@ -45,7 +45,7 @@
     </ul>
   </p> -->
 
-<b>delivery address:</b>
+<b>customer info:</b>
  <br>
   <p>
     <input
