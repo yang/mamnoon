@@ -3,18 +3,10 @@
       <!-- <div id="upserveolo"> -->
     <section>
 
-
-
-
-
-<div v-if="editInfoVisible === true" style="position: fixed;z-index:999;top: 0;left: 0;background: rgba(255,255,255,.5);width: 100%;height: 100vh;">
-
-
-
+<div v-if="editInfoVisible === true" class="editInfoModalBg">
 </div>
-
-<div v-if="editInfoVisible === true" style="position: fixed;z-index:1000;top: 100px;left: 50%;transform: translateX(-50%);background: white;width: 50%;">
-        <div class="container online-menu order-modal-width" style="width: 100%;margin-top: 0;">
+<div v-if="editInfoVisible === true" class="editInfoModal">
+        <div class="container online-menu order-modal-width full-width-modal-header">
           <div @click="editInfoVisible = false" class="close closeModal">
             <CloseModal />
           </div>
@@ -4766,5 +4758,33 @@ height: 560px;
 .billingEdit{
   padding: 20px;
 }
+
+
+.editInfoModalBg{
+position: fixed;
+z-index:999;
+top: 0;
+left: 0;
+background: rgba(255,255,255,.5);
+width: 100%;
+height: 100vh;
+}
+
+.editInfoModal{
+position: fixed;
+z-index:1000;
+top: 100px;
+left: 50%;
+transform: translateX(-50%);
+background: white;
+width: 50%;
+}
+
+.full-width-modal-header{
+width: 100%;
+max-width:100%;
+margin-top: 0;
+}
+
 
 </style>
