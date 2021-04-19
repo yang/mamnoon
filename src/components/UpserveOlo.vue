@@ -4781,9 +4781,9 @@ width: 50%;
 }
 
 .full-width-modal-header{
-width: 100%;
+width: 100%!important;
 max-width:100%;
-margin-top: 0;
+margin-top: 0 !important;
 }
 
 
