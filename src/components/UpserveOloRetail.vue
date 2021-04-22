@@ -469,7 +469,13 @@ calculate shipping
 
              <hr v-if="panelShow === 'customerInfo'" />
               <!-- ${{currentOrder.charges.total | showToFixed }} -->
-              <b v-if="panelShow === 'customerInfo'">order total: ${{ orderTotal | showToFixed }}</b>
+
+
+
+
+
+
+              <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total + currentOrder.charges.shipping*100 | showToFixed}}</b>
 <br />
 </template>
 <template v-else>
@@ -1338,7 +1344,7 @@ let cheapest = responseAcf.data.rates.filter(word => word.servicelevel.token ===
 
 // console.log(cheapest)
 
-
+console.log(cheapest)
 
     this.shippingAmount = cheapest[0].amount
     this.currentOrder.charges.shipping = cheapest[0].amount
