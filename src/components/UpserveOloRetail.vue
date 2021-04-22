@@ -1256,30 +1256,52 @@ this.currentOrder = this.$store.state.storeCurrentOrderUpdateMbar
       this.errors = [];
       if (!this.currentOrder.fulfillment_info.customer.first_name) {
         this.errors.push("Name required.");
-                  swal("Name required.");
+         
+
+
+        this.$swal({ 
+           text: 'Name required.'
+          });
+
+
       }
 
       if (!this.currentOrder.fulfillment_info.customer.phone) {
         this.errors.push("Phone required.");
+        this.$swal({ 
+           text: 'Phone required.'
+          });
 
-        swal("Phone required.");
       }
       
       if (!this.currentOrder.fulfillment_info.customer.email) {
         this.errors.push('Email required.');
-          swal('Valid email required.');
+       
+
+      this.$swal({ 
+           text: 'Valid email required.'
+          });
+
       } else if (!this.validEmail(this.currentOrder.fulfillment_info.customer.email)) {
         this.errors.push('Valid email required.');
-        swal('Valid email required.');
+         this.$swal({ 
+           text: 'Valid email required.'
+          });
+
       }
 
       if (!this.currentOrder.billing.billing_postal_code) {
         this.errors.push('invalid postal code');
-        swal('invalid postal code');
+      this.$swal({ 
+           text: 'invalid postal code'
+          });
+
 
       } else if (!this.validPostal(this.currentOrder.billing.billing_postal_code)) {
          this.errors.push('invalid postal code');
-        swal('invalid postal code');
+      this.$swal({ 
+           text: 'invalid postal code'
+          });
       }
 
       if (!this.errors.length) {
@@ -1318,7 +1340,12 @@ for (var value of this.currentOrder.charges.items) {
 // console.log(value.shippable)
 
 if(value.shippable === false){
-  swal(value.name + ' is not available for shipping and has been removed from your order.')
+
+
+        this.$swal({ 
+           text: value.name + ' is not available for shipping and has been removed from your order.'
+          });
+
   this.removeFromOrder(value)
 }
 
@@ -1744,7 +1771,8 @@ this.attention = true
       let self = this;
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction-retail",
+          // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction-retail",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
           // url: "http://localhost:4000/order/start-transaction-retail",
           type: "POST",
           dataType: "json",

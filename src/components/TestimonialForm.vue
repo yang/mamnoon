@@ -164,7 +164,13 @@ methods: {
 
     this.getTestimonials();
     } catch (err) {
-               swal("Error", "Something Went Wrong", "error");
+
+        this.$swal({ 
+           text: 'Error.'
+          });
+
+      
+
         console.log(err.response);
       }
 

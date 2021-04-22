@@ -221,7 +221,14 @@ console.log(n)
 if(!n){
     var regex = /^\d{16}$/;
     if(regex.test(this.messageBody.number) === false){
-      swal('must be 16 digits')
+   
+
+
+       this.$swal({ 
+           text: 'must be 16 digits'
+          });
+
+
     }else{
 
 
@@ -238,8 +245,11 @@ if(!n){
      
     }
     }else{
-      swal('you have already added this number your list')
-      this.messageBody.number = null
+        this.$swal({ 
+           text: 'you have already added this number your list'
+          });
+          
+          this.messageBody.number = null
     }
 }else{
   console.log(null)
@@ -271,7 +281,13 @@ if(!n){
 
     this.getGiftCards();
     } catch (err) {
-               swal("Error", "Something Went Wrong", "error");
+
+
+
+        this.$swal({ 
+           text: 'Error'
+          });
+               
         console.log(err.response);
       }
       

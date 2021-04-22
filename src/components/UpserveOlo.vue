@@ -2124,9 +2124,23 @@ if(removalItems.length === 2){
 }
 
 if(itemsToRemove.length === 1){
-swal(removalItems + ' is not available at the new day you have selected and has been removed from your order.')
+
+
+        this.$swal({ 
+           text: removalItems + ' is not available at the new day you have selected and has been removed from your order.'
+          });
+
+
+
 }else if(itemsToRemove.length>1){
-swal(removalItems + ' are not available at the new day you have selected and have been removed from your order.')
+
+
+        this.$swal({ 
+           text: removalItems + ' are not available at the new day you have selected and have been removed from your order.'
+          });
+
+
+
 }
 
 this.currentOrder.scheduled_time = null
@@ -2174,9 +2188,23 @@ if(removalItems.length === 2){
 }
 
 if(itemsToRemove.length === 1){
-swal(removalItems + ' is not available at the new time you have selected and has been removed from your order.')
+
+
+
+
+        this.$swal({ 
+           text: removalItems + ' is not available at the new day you have selected and has been removed from your order.'
+          });
+
+
+
 }else if(itemsToRemove.length>1){
-swal(removalItems + ' are not available at the new time you have selected and have been removed from your order.')
+
+        this.$swal({ 
+           text: removalItems + ' are not available at the new day you have selected and have been removed from your order.'
+          });
+
+
 }
 
   if(this.selectedTime){
@@ -2547,7 +2575,13 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
 
       console.log(response.data.user)
      if(response.data.user.length > 0){
-      swal("this card has already been saved to your account");
+
+
+ this.$swal({ 
+    title: "this card has already been saved to your account"
+  });
+
+
                this.ccBillingPostalCode = null
                this.ccBillingAddress = null
                this.ccBillingName = null
@@ -2568,7 +2602,12 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
  
 
     } catch (err) {
-               swal("Error", "Something Went Wrong", "error");
+
+ this.$swal({ 
+    title: "Error"
+  });
+
+       
         console.log(err);
       }
 
@@ -3234,30 +3273,56 @@ this.custom = false
       this.errors = [];
       if (!this.currentOrder.fulfillment_info.customer.first_name) {
         this.errors.push("Name required.");
-                  swal("Name required.");
+           
+
+
+ this.$swal({ 
+    title: "Name required."
+  });
+
       }
 
       if (!this.currentOrder.fulfillment_info.customer.phone) {
         this.errors.push("Phone required.");
 
-        swal("Phone required.");
+
+ this.$swal({ 
+    title: "Phone required."
+  });
+
+
+  
       }
       
       if (!this.currentOrder.fulfillment_info.customer.email) {
         this.errors.push('Email required.');
-          swal('Valid email required.');
+    
+       this.$swal({ 
+            title: "Valid email required."
+          });
+
+
+
       } else if (!this.validEmail(this.currentOrder.fulfillment_info.customer.email)) {
         this.errors.push('Valid email required.');
-        swal('Valid email required.');
+    
+    this.$swal({ 
+            title: "Valid email required."
+          });
       }
 
       if (!this.currentOrder.billing.billing_postal_code) {
         this.errors.push('invalid postal code');
-        swal('invalid postal code');
+    
+       this.$swal({ 
+            title: "invalid postal code"
+          });
 
       } else if (!this.validPostal(this.currentOrder.billing.billing_postal_code)) {
          this.errors.push('invalid postal code');
-        swal('invalid postal code');
+      this.$swal({ 
+            title: "invalid postal code"
+          });
       }
 
       if (!this.errors.length) {
@@ -3410,10 +3475,11 @@ console.log('transasction success')
     }else if(self.title === 'Mbar'){
       dataToSend = self.$store.state.storeCurrentOrderUpdateMbar
   }
-
+// added 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction"
           // url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
@@ -4200,12 +4266,13 @@ this.setTip(0)
   mounted() {
 
  
-
+   if(this.$store.state.loggedIn){
 
 
 
 
  this.getCreditCards()
+   }
 // if(this.valid){
   // console.log('open now so filter to what is available now')
   // this.createSingle()
