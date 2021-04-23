@@ -575,8 +575,8 @@ overflow: hidden;
 
 
 @keyframes slider {
-    0%   { transform: translateY(0) }
-    100% { transform: translateY(-400px) }
+    0%   { transform: translateY(-400px) }
+    100% { transform: translateY(0px) }
 }
 
 
