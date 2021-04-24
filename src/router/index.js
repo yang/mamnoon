@@ -62,6 +62,14 @@ const routes = [
     component: () => import("../views/orderconfirmation.vue")
   },
   {
+    path: "/upserveinfo",
+    name: "upserveinfo",
+    component: () => import("../views/upserveInfo.vue"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: "/profile",
     name: "profile",
     component: () => import("../views/profile.vue")
