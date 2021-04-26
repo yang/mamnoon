@@ -698,7 +698,7 @@ width: 100%
     padding-top: 100px;
 
     @media only screen and (max-width: 992px) {
-            padding-top:0px;
+            // padding-top:0px;
 
 
 

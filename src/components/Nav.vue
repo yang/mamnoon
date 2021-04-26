@@ -165,7 +165,7 @@
 
 
 
-        <nav v-if="$route.name === 'newsletterarchive'||$route.name === 'retail'||$route.name === 'profile'||$route.name === 'mamnoon'||$route.name === 'mamnoonff'||$route.name === 'mamnoonstreet'||$route.name === 'mbar'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <nav v-if="$route.name === 'newsletterarchive'||$route.name === 'retail'||$route.name === 'profile'||$route.name === 'mamnoon'||$route.name === 'about'||$route.name === 'mamnoonff'||$route.name === 'mamnoonstreet'||$route.name === 'mbar'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
@@ -176,8 +176,24 @@
                         profile
                     </router-link>
                 </li>
-            </div>
 
+    </div>
+                <div class="inline-link">
+                    <li>
+                        <router-link to="/about">
+                            about
+                        </router-link>
+                    </li>
+                
+            </div>
+                <div class="inline-link">
+                    <li>
+                        <router-link to="/mamnoonff">
+                           fine foods
+                        </router-link>
+                    </li>
+                
+            </div>
 <div class="inline-link">   
            <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />
@@ -260,6 +276,7 @@ if(this.$route.name === 'home' ||
     this.$route.name === 'onlinemenu' ||
     this.$route.name === 'reservations' ||
     this.$route.name === 'mamnoonff' ||
+    this.$route.name === 'about' ||
     this.$route.name === 'newsletterarchive'){
         return true
     }else{
