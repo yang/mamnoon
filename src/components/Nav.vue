@@ -85,16 +85,29 @@
 
     </div>
     </div>
+
     <template v-if="$mq === 'lg'">
     <nav v-if="this.$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header">
         <div class="container">
           <scrollactive :offset="180" ref="scrollactive">   
              <ul id="menu">
-                <div class="inline-link" v-for="item in pageData" :key="item.tagname">
+                 <template v-for="item in pageData">
+                <div class="inline-link" v-if="item.tagname !== 'testimonials'">
+
                     <li v-if="item.tagname">
                         <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
                     </li>
+                </div>  
+                </template> 
+           <div class="inline-link">
+
+                    <li>
+                        <router-link to="/about">
+                            about
+                        </router-link>
+                    </li>
                 </div>   
+
             </ul>
             </scrollactive
           >
@@ -108,12 +121,21 @@
                           <ul id="menu" class="mobile-menu">
                
                <template v-if="!isMobileUserAgent()">
-                <div class="inline-link" v-for="item in pageData" :key="item.tagname">
+                <template v-for="item in pageData">
+            <div class="inline-link"  v-if="item.tagname !== 'testimonials'">
                     <li v-if="item.tagname">
-                        <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
+                     <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
                     </li>
-        
-                </div>  
+        </div>
+                </template>  
+           <div class="inline-link">
+
+                    <li>
+                        <router-link to="/about">
+                            about
+                        </router-link>
+                    </li>
+                </div>   
                     </template>
 
     <div v-if="this.$store.state.loggedIn" class="inline-link hide-on-desktop">
