@@ -2,15 +2,16 @@
   <div class="profile">
 
  <div class="container">
-
+upserve info
 <div v-for="up in upserveProducts">
 
 
 <!-- <b>{{up.reservationsList.roomsinfo.allInfo.first_name}} {{up.reservationsList.roomsinfo.allinfo.last_name}}</b> -->
 
 
-<h1>{{up.reservationsList.roomsinfo.allInfo.first_name}} {{up.reservationsList.roomsinfo.last}}</h1>
 
+<h1>{{up.reservationsList.roomsinfo.allInfo.first_name}} {{up.reservationsList.roomsinfo.last}}</h1>
+cc name: {{up.upserveInfo.upserveInfo.cc_name}}
 <br><br>
 table_number(s): {{up.reservationsList.roomsinfo.allInfo.table_numbers}}
 <br><br>
@@ -22,13 +23,31 @@ email: {{up.reservationsList.roomsinfo.allInfo.email}}
 </template>
 <template v-if="up.reservationsList.roomsinfo.allInfo.phone !== ''">
 <br><br>
-phone: {{up.reservationsList.roomsinfo.phone}}
+phone: {{up.reservationsList.roomsinfo.phone.replaceAll(' ','').replaceAll('+1','').replaceAll('-','')}}
 </template>
 <br><br>
 food and drinks ordered:<br>
-<div v-for="item in up.upserveInfo.upserveInfo.items">{{item.name}}</div>
 
-<br><br>
+
+
+
+<div v-for="item in up.upserveInfo.upserveInfo.items">{{item.name}}, ${{item.price}}</div>
+
+
+<br>
+${{up.upserveInfo.upserveInfo.amount}}
+<br>
+${{up.upserveInfo.upserveInfo.tip_amount}}
+<br>
+  
+reservation date: {{up.reservationsList.roomsinfo.allInfo.date}}<br>
+max guests: {{up.reservationsList.roomsinfo.allInfo.max_guests}}<br>
+booked by: {{up.reservationsList.roomsinfo.allInfo.booked_by}}<br>
+shift category: {{up.reservationsList.roomsinfo.allInfo.shift_category}}<br>
+arrival time: {{up.reservationsList.roomsinfo.allInfo.arrival_time}}<br>
+vip? {{up.reservationsList.roomsinfo.allInfo.is_vip}}
+
+
 <hr>
 <br><br>
 
@@ -49,7 +68,7 @@ upserveProducts: null
 },
       methods: {
           async upserves() {
-
+console.log('doing this')
       let responseUpserve = await this.$http.get(`/dateoverlaplive`, {
            params: {
             date: '20210422'

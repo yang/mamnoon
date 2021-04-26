@@ -196,4 +196,14 @@ color: #fff367;
   padding-bottom: 100%;
 }
 
+
+// .owl-stage>div{
+//     width: 100% !important;
+// }
+
+
+
+// .text-center{
+//   width: 33.33%
+// }
 </style>

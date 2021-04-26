@@ -7,6 +7,9 @@
             <li>
               <router-link to="/admin">go to retail admin</router-link>
             </li>
+                 <li>
+              <router-link to="/upserveinfo">upserve info</router-link>
+            </li>
             <li class="nav-item active">
               <button class="nav-link" @click="logUserOut"> Logout</button>
             </li>
