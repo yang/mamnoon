@@ -1375,8 +1375,8 @@
                   v-model="currentOrder.fulfillment_info.customer.phone"
                 />
 
-            <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
-  <label class="smblk" for="sms">enable SMS order updates </label>
+            <input style="width: auto;margin-right: 10px;transform: translateY(1px);display:none;" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
+  <label class="smblk" for="sms" style="display:none;">enable SMS order updates </label>
 <!-- billing info -->
           <h4 class="customer-info text-left mt10">billing info
           
