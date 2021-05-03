@@ -35,7 +35,7 @@
 
 
 
-<form class="infoForm" @submit.prevent="checkFormCustomerInfo" v-if="updateCI && user">
+<form class="infoForm" @submit.prevent="checkFormCustomerInfo" v-if="updateCI && user && user.user && user.user.deliveryAddress">
 
 <b>customer info:</b>
  <br>
@@ -98,7 +98,7 @@
 
 
 
-<form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling && user && user.user.billingAddress">
+<form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling && user && user.user && user.user.billingAddress">
 <b>billing address:</b>
  <br />
 
@@ -1344,7 +1344,7 @@
                 <label class="smblk" for="name">name:</label>
                 <br />
 
-              <div v-if="user && user.user && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.name}}</div>
+              <div v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.name}}</div>
              <input v-else
               type="text"
               id="name"
