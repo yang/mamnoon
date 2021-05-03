@@ -35,7 +35,7 @@
 
 
 
-<form class="infoForm" @submit.prevent="checkFormCustomerInfo" v-if="updateCI">
+<form class="infoForm" @submit.prevent="checkFormCustomerInfo" v-if="updateCI && user">
 
 <b>customer info:</b>
  <br>
@@ -98,7 +98,7 @@
 
 
 
-<form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling">
+<form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling && user">
 <b>billing address:</b>
  <br />
 
@@ -1333,9 +1333,9 @@
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
   <label class="smblk" for="cutlery">don't include disposable cutlery </label>
                   <br />
-                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
-                <h4 v-else class="text-left mt10">customer info<span class="edit-link" v-if="user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <h4 v-else class="text-left mt10">customer info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
 
 
 
@@ -1344,7 +1344,7 @@
                 <label class="smblk" for="name">name:</label>
                 <br />
 
-              <div v-if="user.user && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.name}}</div>
+              <div v-if="user && user.user && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.name}}</div>
              <input v-else
               type="text"
               id="name"
@@ -1366,7 +1366,7 @@
 
                <label class="smblk" for="phone">phone:</label>
                 <br />
-                     <div v-if="user.user && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
+                     <div v-if="user && user.user && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
                 <input v-else
                   type="text"
                   id="phone"
@@ -1380,7 +1380,7 @@
 <!-- billing info -->
           <h4 class="customer-info text-left mt10">billing info
           
-               <span class="edit-link" v-if="user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span>
+               <span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span>
           
           </h4>         
          <template v-if="currentOrder.fulfillment_info.type === 'delivery'"> 
@@ -1399,7 +1399,7 @@
                 <label class="smblk" for="name">name:</label>
                 <br />
   
-   <div v-if="user.user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
+   <div v-if="user && user.user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
                 <input v-else
                   type="text"
                   id="name-billing"
@@ -1409,7 +1409,7 @@
                 />
                 <label class="smblk" for="address">billing address:</label>
                 <br />
-     <div v-if="user.user && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
+     <div v-if="user && user.user && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
                 <input v-else
                   type="text"
                   id="address"
@@ -1420,7 +1420,7 @@
 
                 <label class="smblk" for="postal_code">billing postal code:</label>
                 <br />
-                     <div v-if="user.user && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
+                     <div v-if="user && user.user && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
                 <input v-else
                   type="text"
                   id="postal_code"
@@ -1759,7 +1759,7 @@ cart empty
 
 
 <template v-if="giftCardPanel ===  true">
-<template v-if="user.user && user.user.email">
+<template v-if="user && user.user && user.user.email">
 
 <br>
 
@@ -1988,9 +1988,9 @@ return this.currentOrder.tipSelected === i
     user:{
 handler(val){
 
-console.log('updateing useing')
-console.log(this.currentOrder.fulfillment_info.customer.email)
-console.log(this.user.user.email)
+// console.log('updateing useing')
+// console.log(this.currentOrder.fulfillment_info.customer.email)
+// console.log(this.user.user.email)
 
 if(this.currentOrder.fulfillment_info.customer && this.user.user){
 this.currentOrder.fulfillment_info.customer.email = this.user.user.email

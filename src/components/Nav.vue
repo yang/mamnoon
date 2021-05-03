@@ -86,6 +86,22 @@
     </div>
     </div>
 
+
+    <div class="navbar-end" style="display:none;">
+      <div class="navbar-item">
+        <div class="buttons">
+          <!-- Check that the SDK client is not currently loading before accessing is methods -->
+          <div v-if="!$auth.loading">
+            <!-- show login when not authenticated -->
+            <a v-if="!$auth.isAuthenticated" @click="login" class="button is-dark"><strong>Sign in</strong></a>
+            <!-- show logout when authenticated -->
+            <a v-if="$auth.isAuthenticated" @click="logout" class="button is-dark"><strong>Log out</strong></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <template v-if="$mq === 'lg'">
     <nav v-if="this.$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header">
         <div class="container">
@@ -301,7 +317,16 @@ if(this.$route.name === 'home' ||
           }
       },
 methods: {
-
+// Log the user in
+    login() {
+    this.$auth.loginWithRedirect();
+  },
+  // Log the user out
+  logout() {
+    this.$auth.logout({
+      returnTo: window.location.origin
+    });
+  },
  isMobileUserAgent() {
    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
      return true

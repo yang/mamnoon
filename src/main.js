@@ -19,6 +19,27 @@ import VueSweetalert2 from 'vue-sweetalert2';
 // If you don't need the styles, do not connect
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+
+// auth
+import { domain, clientId } from "../auth_config.json";
+import { Auth0Plugin } from "./auth";
+
+
+Vue.use(Auth0Plugin, {
+  domain,
+  clientId,
+  onRedirectCallback: appState => {
+    router.push(
+      appState && appState.targetUrl
+        ? appState.targetUrl
+        : window.location.pathname
+    );
+  }
+});
+
+// auth
+
+
 Vue.use(VueObserveVisibility)
 Vue.use(VueMeta)
 Vue.use(VueCurrencyInput)
@@ -29,6 +50,13 @@ const base = axios.create({
   baseURL: "https://young-hamlet-03679.herokuapp.com"
   // baseURL: "http://localhost:4000"
 }); 
+
+
+
+
+
+
+
 
 
 
