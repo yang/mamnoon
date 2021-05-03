@@ -98,7 +98,7 @@
 
 
 
-<form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling && user">
+<form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling && user && user.user.billingAddress">
 <b>billing address:</b>
  <br />
 
@@ -1399,7 +1399,7 @@
                 <label class="smblk" for="name">name:</label>
                 <br />
   
-   <div v-if="user && user.user && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
+   <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
                 <input v-else
                   type="text"
                   id="name-billing"
@@ -1409,7 +1409,7 @@
                 />
                 <label class="smblk" for="address">billing address:</label>
                 <br />
-     <div v-if="user && user.user && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
+     <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
                 <input v-else
                   type="text"
                   id="address"
@@ -1420,7 +1420,7 @@
 
                 <label class="smblk" for="postal_code">billing postal code:</label>
                 <br />
-                     <div v-if="user && user.user && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
+                     <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
                 <input v-else
                   type="text"
                   id="postal_code"
@@ -3084,7 +3084,7 @@ showGiftcard(){
               
 // console.log(self.currentOrder.billing)
 
-if(self.currentOrder.billing){
+if(self.currentOrder.billing && userInfo.user.billingAddress){
 
               self.currentOrder.billing.billing_name = userInfo.user.billingAddress.name
               self.currentOrder.billing.billing_address = userInfo.user.billingAddress.addressLine1 + ' ' + userInfo.user.billingAddress.addressLine2
