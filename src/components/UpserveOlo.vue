@@ -24,7 +24,7 @@
 
       <div class="address" v-if="!updateCI">
 <b>customer info:</b> <br />
-<template v-if="user && user.user.deliveryAddress">
+<template v-if="user && user.user && user.user.deliveryAddress">
 {{user.user.deliveryAddress.name}}<br>
 {{user.user.deliveryAddress.phone}}<br>
 </template>
@@ -85,7 +85,7 @@
 
       <div class="address" v-if="!updateBilling">
 <b>billing info:</b> <br />
-<template v-if="user && user.user.billingAddress">
+<template v-if="user && user.user && user.user.billingAddress">
 {{user.user.billingAddress.name}}<br>
 {{user.user.billingAddress.addressLine1}}<br>
 {{user.user.billingAddress.addressLine2}}<br>
@@ -1344,7 +1344,7 @@
                 <label class="smblk" for="name">name:</label>
                 <br />
 
-              <div v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.name}}</div>
+              <div v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.name}}</div>
              <input v-else
               type="text"
               id="name"
@@ -1366,7 +1366,7 @@
 
                <label class="smblk" for="phone">phone:</label>
                 <br />
-                     <div v-if="user && user.user && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
+                     <div v-if="user && user.user && user.user.deliveryAddress.phone && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
                 <input v-else
                   type="text"
                   id="phone"
