@@ -40,6 +40,7 @@ Vue.use(Auth0Plugin, {
 // auth
 
 
+
 Vue.use(VueObserveVisibility)
 Vue.use(VueMeta)
 Vue.use(VueCurrencyInput)

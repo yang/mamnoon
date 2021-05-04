@@ -54,7 +54,10 @@
             <CartDropdown />
          </div>
 
-          <GoogleAuth class="logButton googleInHeader" />
+          <!-- <GoogleAuth class="logButton googleInHeader" /> -->
+
+
+          <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" class="logButton googleInheader" />
     <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
@@ -87,19 +90,6 @@
     </div>
 
 
-    <div class="navbar-end" style="display:none;">
-      <div class="navbar-item">
-        <div class="buttons">
-          <!-- Check that the SDK client is not currently loading before accessing is methods -->
-          <div v-if="!$auth.loading">
-            <!-- show login when not authenticated -->
-            <a v-if="!$auth.isAuthenticated" @click="login" class="button is-dark"><strong>Sign in</strong></a>
-            <!-- show logout when authenticated -->
-            <a v-if="$auth.isAuthenticated" @click="logout" class="button is-dark"><strong>Log out</strong></a>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
     <template v-if="$mq === 'lg'">
@@ -164,7 +154,8 @@
 
 <div class="inline-link">
            <li class="cursor-pointer" @click="toggleMenu()">
-                        <GoogleAuth />
+                        <!-- <GoogleAuth /> -->
+                       <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" />
                     </li>
                 </div>
   <div v-if="showCartDropdown" class="inline-link">
@@ -212,7 +203,8 @@
             </div>
 <div class="inline-link">   
            <li class="cursor-pointer" @click="toggleMenu()">
-                        <GoogleAuth />
+                        <!-- <GoogleAuth /> -->
+                      <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" />
                     </li>
                 </div>
   <div v-if="showCartDropdown" class="inline-link">
@@ -246,7 +238,8 @@ import Logo from "@/components/Logo";
 import LogoMamnoon from "@/components/LogoMamnoon";
 import Burger from "@/components/svgIcons/Burger";
 import Star from "@/components/svgIcons/Star";
-import GoogleAuth from "@/components/GoogleAuth";
+// import GoogleAuth from "@/components/GoogleAuth";
+import NewAuth from "@/components/NewAuth";
 
 import CartDropdown from "@/components/CartDropdown";
 import NadiIntro from "@/components/NadiIntro";
@@ -261,7 +254,8 @@ export default {
     Star,
     LogoMamnoon,
     Burger,
-    GoogleAuth,
+    // GoogleAuth,
+    NewAuth,
     NadiIntro
   },
   data () {
@@ -317,16 +311,6 @@ if(this.$route.name === 'home' ||
           }
       },
 methods: {
-// Log the user in
-    login() {
-    this.$auth.loginWithRedirect();
-  },
-  // Log the user out
-  logout() {
-    this.$auth.logout({
-      returnTo: window.location.origin
-    });
-  },
  isMobileUserAgent() {
    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
      return true
@@ -433,6 +417,8 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 
 this.getUserAgent();
+
+
 
   }
   }
