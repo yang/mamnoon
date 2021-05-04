@@ -54,10 +54,10 @@
             <CartDropdown />
          </div>
 
-          <!-- <GoogleAuth class="logButton googleInHeader" /> -->
+          <GoogleAuth class="logButton googleInHeader" />
 
 
-          <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" class="logButton googleInheader" />
+          <!-- <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" class="logButton googleInheader" /> -->
     <div class="container">
 <div class="full-width-logo">
 <template v-if="$mq === 'sm'">
@@ -154,8 +154,8 @@
 
 <div class="inline-link">
            <li class="cursor-pointer" @click="toggleMenu()">
-                        <!-- <GoogleAuth /> -->
-                       <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" />
+                        <GoogleAuth />
+                       <!-- <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" /> -->
                     </li>
                 </div>
   <div v-if="showCartDropdown" class="inline-link">
@@ -203,8 +203,8 @@
             </div>
 <div class="inline-link">   
            <li class="cursor-pointer" @click="toggleMenu()">
-                        <!-- <GoogleAuth /> -->
-                      <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" />
+                        <GoogleAuth />
+                      <!-- <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" /> -->
                     </li>
                 </div>
   <div v-if="showCartDropdown" class="inline-link">
@@ -238,8 +238,8 @@ import Logo from "@/components/Logo";
 import LogoMamnoon from "@/components/LogoMamnoon";
 import Burger from "@/components/svgIcons/Burger";
 import Star from "@/components/svgIcons/Star";
-// import GoogleAuth from "@/components/GoogleAuth";
-import NewAuth from "@/components/NewAuth";
+import GoogleAuth from "@/components/GoogleAuth";
+// import NewAuth from "@/components/NewAuth";
 
 import CartDropdown from "@/components/CartDropdown";
 import NadiIntro from "@/components/NadiIntro";
@@ -254,8 +254,8 @@ export default {
     Star,
     LogoMamnoon,
     Burger,
-    // GoogleAuth,
-    NewAuth,
+    GoogleAuth,
+    // NewAuth,
     NadiIntro
   },
   data () {

@@ -2,15 +2,15 @@
 
     <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
-        <!-- <UserForm :emailAddress="$store.state.currentUserEmail"/> -->
-        <UserForm :emailAddress="$auth._data.user.email"/>
+        <UserForm :emailAddress="$store.state.currentUserEmail"/>
+        <!-- <UserForm :emailAddress="$auth._data.user.email"/> -->
      <!-- {{$auth._data.user.email}} -->
         <template>
-        <!-- <CreditSaveForm :emailAddress="$store.state.currentUserEmail" /> -->
-               <CreditSaveForm :emailAddress="$auth._data.user.email" />
+        <CreditSaveForm :emailAddress="$store.state.currentUserEmail" />
+               <!-- <CreditSaveForm :emailAddress="$auth._data.user.email" /> -->
          </template>
-        <!-- <GiftCardModule :emailAddress="$store.state.currentUserEmail" /> -->
-        <GiftCardModule :emailAddress="$auth._data.user.email" />
+        <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
+        <!-- <GiftCardModule :emailAddress="$auth._data.user.email" /> -->
         <!-- <TestimonialForm :emailAddress="$store.state.currentUserEmail" /> -->
 
             <!-- <EmailForm :emailAddress="$store.state.currentUserEmail" /> -->
@@ -18,7 +18,8 @@
         <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
         <!-- order he -->
 
-        <OrderHistory :currentUser="$store.state" :emailAddress="$auth._data.user.email" />
+        <!-- <OrderHistory :currentUser="$store.state" :emailAddress="$auth._data.user.email" /> -->
+                <OrderHistory :currentUser="$store.state" />
         </div>
         <div>
         </div>

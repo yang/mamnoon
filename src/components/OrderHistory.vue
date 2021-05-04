@@ -139,8 +139,8 @@ if(order.restaurant === 'Mamnoon'){
         },
     retrieveOrders() {
     let self = this
-        // this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
-this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
+        this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
+// this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
 
 
 
