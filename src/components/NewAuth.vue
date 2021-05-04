@@ -131,8 +131,10 @@ export default {
   // Log the user out
   logout() {
     this.$auth.logout({
-      returnTo: window.location.origin
+      returnTo: 'https://nadimama.com'
     });
+
+
          this.$store.commit("logOut");
   },
     toggleDropdown2(){
