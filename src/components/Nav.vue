@@ -121,58 +121,7 @@
     </nav>
 </template>
 <template v-if="$mq === 'sm'">
-        <nav v-if="this.$route.name === 'home'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
-        <div class="container">
-          <scrollactive :offset="100" ref="scrollactive">
-                          <ul id="menu" class="mobile-menu">
-               
-               <template v-if="!isMobileUserAgent()">
-                <template v-for="item in pageData">
-            <div class="inline-link"  v-if="item.tagname !== 'testimonials'">
-                    <li v-if="item.tagname">
-                     <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
-                    </li>
-        </div>
-                </template>  
-           <div class="inline-link">
-
-                    <li>
-                        <router-link to="/about">
-                            about
-                        </router-link>
-                    </li>
-                </div>   
-                    </template>
-
-    <div v-if="this.$store.state.loggedIn" class="inline-link hide-on-desktop">
-                <li>
-                  <router-link to="/profile">
-                        profile
-                    </router-link>
-                </li>
-            </div>
-
-<div class="inline-link">
-           <li class="cursor-pointer" @click="toggleMenu()">
-                        <GoogleAuth />
-                       <!-- <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" /> -->
-                    </li>
-                </div>
-  <div v-if="showCartDropdown" class="inline-link">
-    <li class="cursor-pointer">
-<CartDropdown />
-    </li>
-    </div>
-            </ul>            
-            </scrollactive>
-        </div>
-    </nav>
-
-
-
-
-
-        <nav v-if="$route.name === 'newsletterarchive'||$route.name === 'retail'||$route.name === 'profile'||$route.name === 'mamnoon'||$route.name === 'about'||$route.name === 'mamnoonff'||$route.name === 'mamnoonstreet'||$route.name === 'mbar'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
+        <nav class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
@@ -218,15 +167,6 @@
         </div>
     </nav>
 
-
-
-
-
-    <div>
-        <div class="container">
-
-        </div>
-    </div>
     </template>
 
 </div>
@@ -762,7 +702,8 @@ cursor: pointer;
 .info-modal{
     position: absolute;
     top: 10px;
-    width: 90%;
+    // width: 90%;
+        width: 80vh;
     background: white;
     left: 50%;
     // height: 90vh;
