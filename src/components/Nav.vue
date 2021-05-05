@@ -65,9 +65,9 @@
 <!-- ss -->
 <!-- {{$route.name}} -->
 
-        <a v-if="correctPages" class="burger" @click="toggleMenu()">
+        <div v-if="correctPages" class="burger" @click="toggleMenu()" style="width: 60px;text-align: right;height: 80px;">
         <Burger />
-    </a>
+    </div>
 
 
 
@@ -126,30 +126,55 @@
           <scrollactive :offset="100" ref="scrollactive">
                           <ul id="menu" class="mobile-menu">
 
-                    <div v-if="this.$store.state.loggedIn" class="inline-link">
+                    <div  class="inline-link">
                 <li>
-                    <router-link to="/profile">
-                        profile
+                    <router-link to="/featured">
+                        featured
                     </router-link>
                 </li>
 
-    </div>
-                <div class="inline-link">
-                    <li>
-                        <router-link to="/about">
-                            about
-                        </router-link>
-                    </li>
-                
-            </div>
-                <div class="inline-link">
-                    <li>
+                <li>
+                    <router-link to="/onlinemenu">
+                        online menu
+                    </router-link>
+                </li>
+
+                <li>
+                    <router-link to="/reservations">
+                        reservations
+                    </router-link>
+                </li>
+          <li>
                         <router-link to="/mamnoonff">
                            fine foods
                         </router-link>
                     </li>
                 
+          <li>
+                        <router-link to="/retail">
+                          retail items
+                        </router-link>
+                    </li>
+
+                              <li>
+                        <router-link to="/newsletterarchive">
+                          newsletter archive
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/about">
+                            about
+                        </router-link>
+                    </li>
+                <li v-if="this.$store.state.loggedIn">
+                    <router-link to="/profile">
+                        profile
+                    </router-link>
+                </li>
+
+                
             </div>
+    
 <div class="inline-link">   
            <li class="cursor-pointer" @click="toggleMenu()">
                         <GoogleAuth />

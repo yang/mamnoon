@@ -49,17 +49,24 @@
       <template v-if="item.acf_fc_layout === 'newsletter'">
         <router-link class="orange-button" to="/newsletterarchive">newsletter archive</router-link>
       </template>
+<!-- about. -->
+      <template v-if="item.acf_fc_layout === 'about'">
+        <router-link class="orange-button" to="/about">about</router-link>
+      </template>
 
 
 
 
   </template>
-
-
-
-
-
   </div>
+
+  <template v-if="isMobile()">
+ <router-link class="orange-button" to="/about">about</router-link>
+
+  </template>
+
+
+
 
 
   </main>
@@ -762,7 +769,8 @@ width: 100%
 
 
 .orange-button{
-  padding:20px;
+      padding: 14px 20px;
+  // padding:20px;
   background: #f58e58;
   display: block;
   text-align: center;
