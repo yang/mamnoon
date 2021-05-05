@@ -44,7 +44,7 @@
           </template>
 
 
-<div @click="goToRetail()" class="text-center" style="" v-if="upserveList2 !== []" v-for="item in upserveList2" :key="item.id">
+<!-- <div @click="goToRetail()" class="text-center" style="" v-if="upserveList2 !== []" v-for="item in upserveList2" :key="item.id">
 <div v-if="item.images" class="squareAspect" :style="{'backgroundImage': 'url('+item.images.online_ordering_menu.main +')'}">
   </div>
 <div v-else>
@@ -55,7 +55,20 @@
               <div class="order-bottom">
                 {{item.name}}
               </div>
+        </div> -->
+
+
+
+
+<div @click="goToRetail()" class="text-center" v-for="item in data">
+<img class="lazy" width="100%" :src="item.shop_item.image" />
+              <div class="order-bottom">
+                {{item.shop_item.name}}
+              </div>
         </div>
+
+
+
           <!-- <template v-if="index === 0 || index === 1" slot="next"></template> -->
           <template class="subnext" slot="next">
             <span class="next">
