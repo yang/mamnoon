@@ -746,7 +746,8 @@ cursor: pointer;
     position: absolute;
     top: 20px;
  
-        width: 60%;
+        // width: 60%;
+            width: 80vh;
     background: white;
     left: 50%;
     // height: 90vh;
@@ -782,7 +783,7 @@ cursor: pointer;
 .info-modal{
     position: absolute;
     top: 10px;
-    width: 30%;
+    // width: 30%;
     background: white;
     left: 50%;
     // height: 90vh;
