@@ -289,16 +289,19 @@
                                                   </div>
                                                   </template>
                                                 <template v-else>
-                                                <div v-if="m === mod.id" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                <div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
                                                      
 
 
 
                                                                           <div class="pad-10 leftmodbuttons">
+
+
+                                                                            <!-- {{mod.id}} -->
                                                                           <span class="title-bolder">{{mod.name.replace('add ','')}}</span>
                                                                           <br />
-                                                                        <b v-if="mod.price != 0.0">+${{mod.price}}</b>
+                                                                        <b v-if="mod.price != 0.0"><span class="thin">+</span>${{mod.price}}</b>
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
                                                                                   <div v-for="(piece,i) in upserveList" :key="'E'+ i">
@@ -4899,4 +4902,10 @@ margin-top: 0 !important;
 }
   
 }
+
+
+b span.thin{
+font-weight: 300;
+}
+
 </style>
