@@ -289,7 +289,7 @@
                                                   </div>
                                                   </template>
                                                 <template v-else>
-                                                <div v-if="m === mod.id" class="box normal" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                <div v-if="m === mod.id" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
                                                      
 
@@ -298,7 +298,7 @@
                                                                           <div class="pad-10 leftmodbuttons">
                                                                           <span class="title-bolder">{{mod.name.replace('add ','')}}</span>
                                                                           <br />
-                                                                        <b>+${{mod.price}}</b>
+                                                                        <b v-if="mod.price != 0.0">+${{mod.price}}</b>
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
                                                                                   <div v-for="(piece,i) in upserveList" :key="'E'+ i">
@@ -307,12 +307,12 @@
                                                                                 </div>
                                                                                 <div v-else class="mt10 modbuttons">
                                                                 <div class="pad-10" style="padding-bottom: 10px;">
-                                                        <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
+                                                        <!-- <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
                                                         <button
                                                           @click="removeAddOn(mod,modifieritem)"
                                                           :id="'remove-' + mod.id"
                                                           disabled
-                                                        >-</button>
+                                                        >-</button> -->
                                                         </div>
                                                       </div>
                                                     </div>
@@ -3549,23 +3549,26 @@ let updatedItems = this.currentItemModifierArray.filter(
 
 
 
+toggleAddOn(mod,modifieritem){
 
 
 
+let element = document.getElementById("toggle-" + mod.id)
+
+if(element.classList.contains('selectedAddOn')){
+element.classList.remove('selectedAddOn');
+this.removeAddOn(mod, modifieritem);
+}else{
+element.classList.add('selectedAddOn');
+
+this.addAddOn(mod, modifieritem);
 
 
 
+}
 
 
-
-
-
-
-
-
-
-
-
+},
 addAddOn(mod, modifieritem) {
 
 
@@ -4876,4 +4879,24 @@ margin-top: 0 !important;
 }
 
 
+
+
+
+    // {
+    // -webkit-transition: all 0.25s ease;
+    // transition: all 0.25s ease;
+    // }
+
+
+.selectedAddOn{
+
+
+.box-inner{
+  background-color: rgb(240, 93, 91);
+  .title-bolder,b{
+    color: white;
+  }
+}
+  
+}
 </style>
