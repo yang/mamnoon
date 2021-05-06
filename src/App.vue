@@ -228,9 +228,9 @@ h2 {
 }
 
 .menu-line {
-  // border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 10px 0 6px;
-  // margin: 6px 0;
+  margin: 6px 0;
 }
 
 h2.menu-header {
@@ -384,14 +384,22 @@ form textarea,
   float: left;
   height: 180px;
   background: transparent;
-  padding: 0;
+  padding: 5px;
+  overflow: hidden;
+
+}
+
+.filtree-full-new {
+  width: calc(100% - 0px);
+  float: left;
+  height: 180px;
+  background: transparent;
+  padding: 0px;
   overflow: hidden;
   margin-bottom: 5px;
   border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
+    padding-bottom: 5px;
 }
-
-
 
 @media only screen and (max-width: 768px) {
 

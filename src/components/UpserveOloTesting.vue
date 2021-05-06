@@ -541,7 +541,7 @@
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class="row no-lr-margin">
-                                            <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                                            <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
