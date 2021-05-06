@@ -487,13 +487,19 @@
 
 
 
-      <br>
+ 
       <div class="container online-menu">
-      <h4>order from the full menu</h4>
-<!--{{emailAddress}}-->
+      <h4>order from the full mednu</h4>
 
-<!--<button @click="handleClickSignInForCard()">button</button>-->
-      </div>
+
+
+
+
+
+
+       
+       
+       </div>
       <div>
       </div>
 
@@ -527,6 +533,10 @@
 <!-- <template v-if="nowTime && nowDate"> 
 {{nowTime,nowDate}}
 </template>  -->
+
+<!-- <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace(' ','')">
+  {{item.name.replace('- To Go', '').replace('To Go', '').replace(' ','')}}
+</div> -->
               <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
                 
                                                 <div
