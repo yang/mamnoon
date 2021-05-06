@@ -233,6 +233,12 @@ h2 {
   margin: 6px 0;
 }
 
+.menu-line-testing {
+  border-bottom: 0 solid #ddd;
+  padding: 10px 0 6px;
+  margin: 6px 0;
+}
+
 h2.menu-header {
   // padding: 0 18px;
   font-size: 18px;
@@ -389,7 +395,7 @@ form textarea,
 
 }
 
-.filtree-full-new {
+.filtree-full-testing {
   width: calc(100% - 0px);
   float: left;
   height: 180px;
@@ -1293,6 +1299,7 @@ li.modal-item{
 @media only screen and (max-width: 768px) {
 
   .filtree-full,
+    .filtree-full-testing,
 .half-width2right,
 .half-width2left,
 .half-width2left{
@@ -1346,7 +1353,8 @@ svg#nadiIconSm{
   display: none !important;
 }
 
-#upserveolo .filtree-full{
+#upserveolo .filtree-full,
+#upserveolo .filtree-full-testing{
     height: 90px!important;
 }
 

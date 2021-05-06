@@ -476,7 +476,7 @@
 </div>
 
 
-<!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line"> -->
+<!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing"> -->
 <div class="testPage">testpage, please use nadimama.com/mamnoon for an actual experience.</div>
 
 <div class="container online-menu">
@@ -523,19 +523,18 @@
   <template v-if="noFiltering">
     <!-- beggin 1 -->
       <template>
-         <!-- <div class="container menu-line"> -->
+         <!-- <div class="container menu-line-testing"> -->
 <!-- <template v-if="nowTime && nowDate"> 
 {{nowTime,nowDate}}
 </template>  -->
-              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line">
+              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
                 
                                                 <div
                                                   :id="'drawertop-'+ item.id"
                                                   class="display-block row no-lr-margin"
                                                 >
                                                   <h2 class="menu-header">
-                                                    <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                                                    <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                                       
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
@@ -603,7 +602,7 @@
   <!-- beggin 0 -->
   <template v-if="noFiltering">
     <!-- beggin 1 -->
-                                 <div class="container menu-line">
+                                 <div class="container menu-line-testing">
                    
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -611,14 +610,13 @@
                                                   class="display-block row no-lr-margin"
                                                 >
                                                   <h2 class="menu-header">
-                                                    <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                                                    <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+       
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                                            <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                                            <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
@@ -662,7 +660,7 @@
 <!-- else -->
 <!-- {{selectedDate}} -->
 <!-- {{selectedTime}} -->
-              <div v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line">
+              <div v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line-testing">
             <!-- this is available at the started time -->
             
               <div
@@ -680,7 +678,7 @@
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
@@ -830,7 +828,7 @@
               <!-- no filtering -->
                   <!-- beggin 1 -->
                                 <template v-if="item.timing_mask === item.timing_mask">
-                                  <div class="container menu-line">
+                                  <div class="container menu-line-testing">
                                     
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -845,7 +843,7 @@
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                                            <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                                            <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                                 
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
@@ -897,7 +895,7 @@
 
          <template v-if="item.timing_mask === null">
            <!-- no timing mask -->
-                <div class="container menu-line">
+                <div class="container menu-line-testing">
                   
               <div
                 :id="'drawertop-'+ item.id"
@@ -912,7 +910,7 @@
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
               
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
@@ -956,7 +954,7 @@
 
 
 
-              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line">
+              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line-testing">
                 
             <!-- this is available at the started time -->
               <div  
@@ -971,7 +969,7 @@
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
-                <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
+                <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">

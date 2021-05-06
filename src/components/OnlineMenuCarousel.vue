@@ -186,6 +186,14 @@ h2 {
   margin: 6px 0;
 }
 
+
+.menu-line-testing {
+  border-bottom: 0px solid #ddd;
+  padding: 10px 0 6px;
+  margin: 6px 0;
+}
+
+
 h2.menu-header {
   // padding: 0 18px;
   font-size: 18px;
