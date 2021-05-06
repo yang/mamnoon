@@ -183,6 +183,11 @@
 
 
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
+
+
+
+
+
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width">
           <div @click="closeModal()" class="close closeModal">
@@ -474,76 +479,14 @@
 <!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line"> -->
 <div class="testPage">testpage, please use nadimama.com/mamnoon for an actual experience.</div>
 
-
-<Swiper :upserveSections="upserveSections" :upserve="upserve"/> 
-
-
 <div class="container online-menu">
               <h4>featured</h4>
             </div>
-   <template v-if="upserveSections.length === 0">
-     <div class="container text-center pt20">
-       Loading...
-     </div>
-     </template>
-         <template v-else>
-   
-<div id="online-menu" class="is-fullheight no-top-pad" style="position: relative;">
-        <carousel :lazyLoad="true" :autoplay="true"  id="FourThree" :items="1" :loop="true" :dots="false" :nav="false"  v-if="upserveSections">
-              <template class="subprev" slot="prev">
-              <span class="prev">
-              <Prev />
-              </span>
-              </template>
-       
-            <!-- <template v-for="item in upserveSections" v-if="item.name === 'Feature - Tuesday'||item.name === 'Feature - Wednesday'||item.name === 'Feature - Thursday'||item.name === 'Feature - Friday'||item.name === 'Feature - Saturday'"> -->
-            <!-- <template v-for="item in upserveSections"> -->
-          <template v-for="item in upserveSections" v-if="item.name === 'mamnoon @ home' || item.name == 'featured item'">
-                     <!-- {{item.name}} -->
-            <div class="pieces" v-for="piece in item.item_ids"> 
-                    <template v-if="upserve" v-for="serve in upserve">
-                      <div v-if="serve.id === piece" class="inline-block full-height-slide">
-           
-                        <div @click="openModal(serve,item.timing_mask)">
-                            <template v-if="serve.images">
-                             <div class="square-green">
-   <div class="content" :style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }">
-                               </div>
-                             </div>
-                          
-                            </template>
-                            <template v-else>
-                              <div v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >
-                              <NadiIcon  style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -65%);" />
-                              </div>
-                            </template>
-                              <div class="content-box-upper">
-                              <div class="name">
-                                <!-- {{item.name.replace('Feature - ', '')}}<br> -->
-                              {{serve.name}}
-                              </div>
-                              
-                              <div
-                                v-if="serve.description"
-                                class="food-description hide-on-mob"
-                              >{{serve.description}}</div>
-                              <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
-                              </div>
-                            </div></div>
-                            </div>
-                    </template>
-         </div>
-          </template>
-                   <template class="subnext" slot="next">
-            <span class="next">
-              <Next />
-            </span>
-          </template>
-            </carousel>
-</div>
-</template>
+<Swiper :upserveSections="upserveSections" :upserve="upserve"/> 
+
+
+
+
       <br>
       <div class="container online-menu">
       <h4>order from the full menu</h4>
@@ -588,7 +531,6 @@
                 
                                                 <div
                                                   :id="'drawertop-'+ item.id"
-                                                  @click="expandChild(item.id)"
                                                   class="display-block row no-lr-margin"
                                                 >
                                                   <h2 class="menu-header">
@@ -598,7 +540,7 @@
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
                                                 </div>
-                                        <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                                        <div :data="'drawer' + item.id" class="row no-lr-margin">
                                             <div class="filtree-full" v-for="piece in item.item_ids" :key="piece">
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">

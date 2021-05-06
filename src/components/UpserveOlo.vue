@@ -4905,7 +4905,7 @@ margin-top: 0 !important;
 
 
 b span.thin{
-font-weight: 300;
+  font-weight: 100;
 }
 
 </style>
