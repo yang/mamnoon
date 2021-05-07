@@ -517,8 +517,61 @@
 
 
 
+ 
+
+<SliderNav :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
 
 
+<!-- list goes here -->
+<!-- BEGINNING OF ORIGINAL -->
+<!-- BEGINNING OF ORIGINAL -->
+ <!--<template v-if="valid && !preOrderToggleState">1
+  <template v-for="item in upserveSections">2
+    <template v-if="noFiltering">3
+        <template v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) ||!item.timing_mask">4
+          {{ item.name }}<br><br>
+        </template>
+    </template>
+  </template>
+</template>
+ <template v-if="!valid">5 not valid
+<template v-for="item in upserveSections">6
+  <template v-if="noFiltering">without filtering {{ item.name }}<br><br></template>
+  <template v-else>8 with filtering
+    <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">9
+      {{ item.name }}<br><br>
+    </template>
+  </template>
+</template>
+</template>
+<template v-if="preOrderToggleState">10
+    <template v-for="item in upserveSections">11
+ <template v-if="noFiltering && item.name !== 'featured item'">12
+  <template v-if="item.timing_mask === item.timing_mask">13
+    {{ item.name }}<br><br>
+  </template>
+</template>
+<template v-else>14
+  <template v-if="item.timing_mask === null">15
+    {{ item.name }}<br><br>
+  </template>
+  <template v-else>16
+    <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">{{ item.name }}<br><br></template>17
+  </template>
+</template>
+         </template>
+            </template>-->
+<!-- END OF ORIGINAL -->
+<!-- END OF ORIGINAL -->
+<!-- end list -->
+
+
+
+
+<!-- BEGINNING OF ORIGINAL -->
+<!-- BEGINNING OF ORIGINAL -->
+<!-- BEGINNING OF ORIGINAL -->
+<!-- BEGINNING OF ORIGINAL -->
 
 <!-- <h1>begin new filter for use when open</h1> -->
  <!-- beggin 00 -->
@@ -536,15 +589,15 @@
 
 <!-- <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace(' ','')">
   {{item.name.replace('- To Go', '').replace('To Go', '').replace(' ','')}}
-</div> -->
-              <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
+</div> -->  
+              <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
                 
                                                 <div
                                                   :id="'drawertop-'+ item.id"
                                                   class="display-block row no-lr-margin"
                                                 >
                                                   <h2 class="menu-header">
-                                       
+                                       <!-- <div >{{item.id}}</div> -->
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
@@ -612,7 +665,7 @@
   <!-- beggin 0 -->
   <template v-if="noFiltering">
     <!-- beggin 1 -->
-                                 <div class="container menu-line-testing">
+                             <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="container menu-line-testing">
                    
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -625,7 +678,7 @@
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
                                                 </div>
-                                        <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                                        <div :data="'drawer' + item.id" class=" row no-lr-margin">
                                             <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
@@ -670,7 +723,7 @@
 <!-- else -->
 <!-- {{selectedDate}} -->
 <!-- {{selectedTime}} -->
-              <div v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line-testing">
+           <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line-testing">
             <!-- this is available at the started time -->
             
               <div
@@ -687,7 +740,7 @@
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
-              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+              <div :data="'drawer' + item.id" class=" row no-lr-margin">
                 <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
@@ -838,7 +891,7 @@
               <!-- no filtering -->
                   <!-- beggin 1 -->
                                 <template v-if="item.timing_mask === item.timing_mask">
-                                  <div class="container menu-line-testing">
+                                <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="container menu-line-testing">
                                     
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -852,7 +905,7 @@
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
                                                 </div>
-                                        <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+                                        <div :data="'drawer' + item.id" class=" row no-lr-margin">
                                             <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                                 
                                                     <template v-for="serve in upserveList" class="grey-bg">
@@ -905,7 +958,7 @@
 
          <template v-if="item.timing_mask === null">
            <!-- no timing mask -->
-                <div class="container menu-line-testing">
+              <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="container menu-line-testing">
                   
               <div
                 :id="'drawertop-'+ item.id"
@@ -919,7 +972,7 @@
                   {{item.timing_mask}}
                 </h2>
               </div>
-              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+              <div :data="'drawer' + item.id" class=" row no-lr-margin">
                 <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
               
                     <template v-for="serve in upserveList" class="grey-bg">
@@ -964,7 +1017,7 @@
 
 
 
-              <div v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line-testing">
+          <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line-testing">
                 
             <!-- this is available at the started time -->
               <div  
@@ -978,7 +1031,7 @@
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
-              <div :data="'drawer' + item.id" class="hidden-drawer row no-lr-margin">
+              <div :data="'drawer' + item.id" class=" row no-lr-margin">
                 <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
@@ -1021,7 +1074,10 @@
   </template>
   </template>
   </template>
-
+<!-- END OF ORIGINAL -->
+<!-- END OF ORIGINAL -->
+<!-- END OF ORIGINAL -->
+<!-- END OF ORIGINAL -->
 
 
 </template>
@@ -1765,7 +1821,7 @@ cart empty
       
       </div>
       </section>
-<!-- <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre> -->
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -1808,6 +1864,9 @@ import NadiIcon from "@/components/svgIcons/NadiIcon";
 import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 import NadiIconSmX from "@/components/svgIcons/NadiIconSmX";
 
+
+import SliderNav from "@/components/SliderNav";
+
 import moment from 'moment'
 import tz from 'moment-timezone'
 
@@ -1839,7 +1898,8 @@ export default {
     NadiIconSm,
     NadiIconSmX,
     SavedCard,
-    Swiper
+    Swiper,
+    SliderNav
   },
   computed: {	
 computedAddition(){
@@ -1913,7 +1973,17 @@ return this.currentOrder.tipSelected === i
       
     }
   },	
-  watch: {	
+  watch: {
+    upserveSections:{
+handler(val){
+  console.log('this.upserveSections')
+console.log(this.upserveSections)
+
+
+this.computedSections = this.upserveSections
+
+}
+    },
         cardNumberInput:{
         handler(val){
    if(this.cardNumberInput){
