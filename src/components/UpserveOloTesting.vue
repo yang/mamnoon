@@ -606,7 +606,7 @@
                                             <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
-                                                                                <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                                                                                <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
                                                                                                           <div class="name">{{serve.name}}</div>
@@ -682,7 +682,7 @@
                                             <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
-                                                                                <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                                                                                <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
                                                                                                           <div class="name">{{serve.name}}</div>
@@ -744,7 +744,7 @@
                 <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                        <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
                               <div class="name">{{serve.name}}</div>
@@ -910,7 +910,7 @@
                                 
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
-                                                                                <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                                                                                <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
                                                                                                           <div class="name">{{serve.name}}</div>
@@ -977,7 +977,7 @@
               
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                        <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
                               <div class="name">{{serve.name}}</div>
@@ -1035,7 +1035,7 @@
                 <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg" @click="openModal(serve,item.timing_mask)">
+                        <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
                               <div class="name">{{serve.name}}</div>
@@ -1821,7 +1821,7 @@ cart empty
       
       </div>
       </section>
-<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -4929,6 +4929,18 @@ font-weight: 300;
   top:0;
   left: 0;
   z-index: 1000;
+}
+
+
+
+#upserveolo .yellow-bg-test{
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+      width: calc(100% - 3px);
+  .content-box{
+      background: transparent;
+  }
 }
 
 </style>

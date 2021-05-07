@@ -277,7 +277,7 @@ form textarea,
   width: 100%;
 }
 
-.yellow-bg {
+.yellow-bg, .yellow-bg-test {
   background: #fff367;
   width: 100%;
   display: inherit;
@@ -683,7 +683,7 @@ transition: background-color .1s ease;
   width: 100%;
 }
 
-.yellow-bg {
+.yellow-bg, .yellow-bg-test {
   background: #fff367;
   width: 100%;
   display: inherit;

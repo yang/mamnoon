@@ -341,7 +341,7 @@ form textarea,
   width: 100%;
 }
 
-.yellow-bg {
+.yellow-bg, .yellow-bg-test {
   background: #fff367;
   width: 100%;
   display: inherit;
@@ -396,16 +396,23 @@ form textarea,
 }
 
 .filtree-full-testing {
-  width: calc(100% - 0px);
+  width: calc(50% - 0px);
   float: left;
   height: 180px;
   background: transparent;
   padding: 0px;
   overflow: hidden;
   margin-bottom: 5px;
-  border-bottom: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
 }
+
+@media only screen and (max-width: 768px) {
+  .filtree-full-testing {
+  width: calc(100%);
+}
+}
+
 
 @media only screen and (max-width: 768px) {
 
@@ -831,7 +838,7 @@ transition: background-color .1s ease;
   width: 100%;
 }
 
-.yellow-bg {
+.yellow-bg, .yellow-bg-test {
   background: #fff367;
   width: 100%;
   display: inherit;

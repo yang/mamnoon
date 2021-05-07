@@ -154,17 +154,21 @@ overflow:hidden;
 
 a.scrollactive-item.nav-item{
   color: #F05D5B;
-  font-size: 12px;
+  font-size: 14px;
     margin-right: 10px;
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
 
+    padding-bottom: 3px;
+line-height: 30px;
   &:hover{
     text-decoration: none;
   }
 
 transition: all .25s ease;
 &.is-active{
-  border-bottom: 2px solid #F05D5B;
+
+      border-bottom: 1px solid #F05D5B;
+    padding-bottom: 3px;
 }
 
 }
@@ -181,8 +185,10 @@ transition: all .25s ease;
 // }
 
 .inside{
+  border-bottom: 1px solid #ddd;
 .scrollactive-nav{
   text-align: center;
+  padding: 6px 0;
 }
 }
 
