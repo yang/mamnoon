@@ -1373,6 +1373,21 @@ svg#nadiIconSm{
 
 
 @media only screen and (max-width: 992px) {
+
+
+#upserveolo .filtree-full,
+#upserveolo .filtree-full-testing{
+    height: 90px!important;
+
+
+.yellow-bg-test{
+      height: 90px!important;
+}
+
+}
+
+
+
 .hide-mobile{
   display: none;
 }
