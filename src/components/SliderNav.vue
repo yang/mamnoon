@@ -180,4 +180,10 @@ transition: all .25s ease;
 //   text-decoration: underline;
 // }
 
+.inside{
+.scrollactive-nav{
+  text-align: center;
+}
+}
+
 </style>
