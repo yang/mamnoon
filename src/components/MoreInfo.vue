@@ -1,34 +1,27 @@
 <template>
-    <div class="menuBar">
+   <div class="moreInfoClickModal">
+
+       <button @click="toggleExpand(true)">?</button>
+    <div class="menuBarClickModal iconVersion" :class="{ expanded: expandedMenu }">
    <div class="relative">
       <div class="inside">
-        <!-- <MoreInfo /> -->
-
-     
-    
-        <div class="inside-left" @click="left()">
+        <!-- <moreInfoClickModal /> -->
 
 
+       <button @click="toggleExpand(false)">x</button>
 
 
-<i class="icono-arrow4-right"></i>
-        </div>
-                <div class="inside-right" @click="right()">
-
-<i class="icono-arrow4-left"></i>
-
-                </div>
    <scrollactive :offset="400" ref="scrollactive" v-on:itemchanged="onItemChanged">   
-          <swiper  id="swiperMenu" ref="mySwiperRef" class="swiper" :options="swiperOption">
+        
  <template v-if="valid && !preOrderToggleState">
 
   <template v-for="(item, index) in upserveSections">
     <template v-if="noFiltering">
         <template v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) ||!item.timing_mask">
                   
-                     <swiper-slide>
-                      <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
-          </swiper-slide>
+                  
+                      <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+       
         </template>
     </template>
   </template>
@@ -39,15 +32,15 @@
  
   <template v-for="(item, index) in upserveSections">
   <template v-if="noFiltering">
-       <swiper-slide>
-     <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
-     </swiper-slide>
+    
+     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+  
   </template>
   <template v-else>
     <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">
-         <swiper-slide>
-    <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
-       </swiper-slide>
+      
+    <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+    
     </template>
   </template>
 
@@ -59,22 +52,22 @@
   <template v-for="(item, index) in upserveSections">
  <template v-if="noFiltering && item.name !== 'featured item'">
   <template v-if="item.timing_mask === item.timing_mask">
-       <swiper-slide>
-     <a :index="index"  :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
-     </swiper-slide>
+    
+     <a @click="toggleExpand(false)" :index="index"  :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+  
   </template>
 </template>
 <template v-else>
   <template v-if="item.timing_mask === null">
-       <swiper-slide>
-     <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
-    </swiper-slide>
+    
+     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+ 
   </template>
   <template v-else>
     <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
-        <swiper-slide>
-       <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
-      </swiper-slide>
+     
+       <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+   
       </template>
   </template>
 
@@ -83,40 +76,34 @@
             </template>
 
 
-   </swiper>
+
    </scrollactive>   
                    </div>
             </div>
-        </div> 
+        </div>      </div> 
 </template>
 
 
 <script>
 
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-    import 'swiper/swiper.min.css'
-// import  MoreInfo from "@/components/MoreInfo";
+
+
 export default {
+    name: 'moreInfoClickModal',
       components: {
-      Swiper,
-      SwiperSlide,
-      // MoreInfo
+
     },
     data(){
 return{
-          swiperOption: {
-          slidesPerView: 'auto',
-          spaceBetween: 0,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-          }
-        }
+    expandedMenu: false
 }
     },
     name: 'slidernav',
     props: ['valid','preOrderToggleState','upserveSections','noFiltering','nowDate','nowTime','futureDay','futureTime'],
     methods:{
+        toggleExpand(e){
+            this.expandedMenu = e;
+        },
 
   onItemChanged(event, currentItem, lastActiveItem) {
 
@@ -210,8 +197,11 @@ if(currentItem){
 
 
 <style lang="scss">
-.menuBar{
+.menuBarClickModal{
 
+.inside a{
+    display: block;
+}
 
 
 // position: sticky;
@@ -224,7 +214,7 @@ overflow:hidden;
 
     // margin-left: -15px;
     /* margin-right: -15px; */
-    // width: calc(100% + 30px);
+    width: calc(100% + 30px);
 
    @media only screen and (max-width: 992px) {
       // top: 0;
@@ -268,6 +258,23 @@ padding: 10px;
 }
 }
 
+    // display: none;
+    opacity: 0;
+    transition: opacity .5s ease;
+    pointer-events: none;
+&.expanded{
+        pointer-events: all;
+      opacity:1;
+    // display: block;
+        position: fixed;
+    top: 0px;
+    width: 100% !important;
+    height: 100vh;
+   overflow: scroll;
+   left:0;
+        background: white !important;
+}
+
 }
 
 // .swiper-slide-active{
@@ -301,7 +308,7 @@ padding: 10px;
 }
 
 
-.menuBar .relative .inside{
+.menuBarClickModal .relative .inside{
   .swiper-slide{
     width: auto !important;
   }
@@ -365,11 +372,19 @@ width: 30px;
 
 
 
-.moreInfo{
+.moreInfoClickModal{
 
 
+button{
+    float: right;
+    margin: 5px;
+        position: fixed;
+    right: 0;
+}
+
+position: absolute;
     background: white;
-    position: absolute;
+    // position: sticky;
     left: 0;
     height: 40px;
     width: 40px;
@@ -393,5 +408,13 @@ width: 30px;
       margin: 0 5px;
 }
 
+
+.iconVersion{
+    width: 40px !important;
+    height: 40px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    background: white !important;
+}
 
 </style>

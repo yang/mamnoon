@@ -500,8 +500,8 @@
        
        
        </div>
-      <div>
-      </div>
+      <!-- <div> -->
+      <!-- </div> -->
 
 
       
@@ -514,13 +514,14 @@
           </template>
 
 
-
-
-
+<div class="stickyPosition"> 
+<div class="relative"> 
+<MoreInfo :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
  
 
 <SliderNav :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
-
+</div> 
+</div> 
 
 <!-- list goes here -->
 <!-- BEGINNING OF ORIGINAL -->
@@ -1863,7 +1864,7 @@ import NadiIconxx from "@/components/svgIcons/NadiIconxx";
 import NadiIcon from "@/components/svgIcons/NadiIcon";
 import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 import NadiIconSmX from "@/components/svgIcons/NadiIconSmX";
-
+import  MoreInfo from "@/components/MoreInfo";
 
 import SliderNav from "@/components/SliderNav";
 
@@ -1899,7 +1900,8 @@ export default {
     NadiIconSmX,
     SavedCard,
     Swiper,
-    SliderNav
+    SliderNav,
+    MoreInfo
   },
   computed: {	
 computedAddition(){
@@ -4425,6 +4427,17 @@ this.currentOrder.scheduled_time = null
 
 
 <style lang="scss">
+.stickyPosition{
+  background: #fff;
+position:sticky;
+top: 132px;
+    z-index: 1000;
+    
+.relative{
+position: relative;
+}
+} 
+
 
 .toggleLr{
       display: flow-root;
