@@ -105,40 +105,6 @@ return{
             this.expandedMenu = e;
         },
 
-  onItemChanged(event, currentItem, lastActiveItem) {
-
-
-if(currentItem){
-
-  this.$refs.mySwiperRef.$swiper.slideTo(currentItem.getAttribute('index'), 300);
-
-
-
-// if(currentItem.getAttribute('index') == 0){
-
-// document.getElementById('swiperMenu').classList.remove("morePadding");
-  
-
-// }else{
-
-// document.getElementById('swiperMenu').classList.add("morePadding");
-
-// }
-
-
-}
-
-
-
-
-  },
-
-            left(){
-        this.$refs.mySwiperRef.$swiper.slidePrev()
-      },
-      right(){
-      this.$refs.mySwiperRef.$swiper.slideNext()
-      },
         currentlyAvailable(startTime,endTime,rules,futureDay,futureTime){
 
 
