@@ -14,16 +14,16 @@
 <i class="icono-arrow4-left"></i>
 
                 </div>
-   <scrollactive :offset="200" ref="scrollactive">   
+   <scrollactive :offset="200" ref="scrollactive" v-on:itemchanged="onItemChanged">   
           <swiper  ref="mySwiperRef" class="swiper" :options="swiperOption">
  <template v-if="valid && !preOrderToggleState">
 
-  <template v-for="item in upserveSections">
+  <template v-for="(item, index) in upserveSections">
     <template v-if="noFiltering">
         <template v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) ||!item.timing_mask">
                   
                      <swiper-slide>
-                      <a :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+                      <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
           </swiper-slide>
         </template>
     </template>
@@ -33,16 +33,16 @@
  <template v-if="!valid">
 
  
-<template v-for="item in upserveSections">
+  <template v-for="(item, index) in upserveSections">
   <template v-if="noFiltering">
        <swiper-slide>
-      <a :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+     <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
      </swiper-slide>
   </template>
   <template v-else>
     <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">
          <swiper-slide>
-      <a :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+    <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
        </swiper-slide>
     </template>
   </template>
@@ -52,24 +52,24 @@
 </template>
 <template v-if="preOrderToggleState">
 
-    <template v-for="item in upserveSections">
+  <template v-for="(item, index) in upserveSections">
  <template v-if="noFiltering && item.name !== 'featured item'">
   <template v-if="item.timing_mask === item.timing_mask">
        <swiper-slide>
-      <a :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+     <a :index="index"  :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
      </swiper-slide>
   </template>
 </template>
 <template v-else>
   <template v-if="item.timing_mask === null">
        <swiper-slide>
-     <a :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+     <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
     </swiper-slide>
   </template>
   <template v-else>
     <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
         <swiper-slide>
-         <a :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+       <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
       </swiper-slide>
       </template>
   </template>
@@ -112,6 +112,18 @@ return{
     name: 'slidernav',
     props: ['valid','preOrderToggleState','upserveSections','noFiltering','nowDate','nowTime','futureDay','futureTime'],
     methods:{
+
+  onItemChanged(event, currentItem, lastActiveItem) {
+
+console.log(event, currentItem, lastActiveItem);
+
+
+console.log(currentItem.getAttribute('index'));
+
+  this.$refs.mySwiperRef.$swiper.slideTo(currentItem.getAttribute('index'), 0);
+
+  },
+
             left(){
         this.$refs.mySwiperRef.$swiper.slidePrev()
       },
@@ -166,8 +178,6 @@ return{
       return false
     }
 }
-
-
 
 
 }
@@ -282,5 +292,8 @@ width: 30px;
 }
 
 }
+
+
+
 
 </style>
