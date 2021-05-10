@@ -2,6 +2,8 @@
     <div class="menuBar">
    <div class="relative">
       <div class="inside">
+        <!-- <MoreInfo /> -->
+        <div class="moreInfo">?</div>
         <div class="inside-left" @click="left()">
 
 
@@ -120,7 +122,7 @@ console.log(event, currentItem, lastActiveItem);
 
 console.log(currentItem.getAttribute('index'));
 
-  this.$refs.mySwiperRef.$swiper.slideTo(currentItem.getAttribute('index'), 0);
+  this.$refs.mySwiperRef.$swiper.slideTo(currentItem.getAttribute('index'), 300);
 
   },
 
@@ -215,7 +217,9 @@ overflow:hidden;
 
 .inside{
 
-
+    width: calc(100% - 40px);
+    // background: green;
+    float: right;
 
 
 a.scrollactive-item.nav-item{
@@ -271,10 +275,10 @@ transition: all .25s ease;
 
 .inside-left{
   cursor: pointer;
-position: absolute;
-left: 0;
-width: 30px;
-// background:pink;
+  position: absolute;
+  left: 0;
+  width: 30px;
+  left: 40px;
 }
 .inside-right{
     cursor: pointer;
@@ -295,5 +299,17 @@ width: 30px;
 
 
 
+.moreInfo{
+
+
+    background: white;
+    position: absolute;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+
+
+}
 
 </style>
