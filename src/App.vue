@@ -804,20 +804,44 @@ transition: background-color .1s ease;
 
 }
 
-    .toggle{
-        display: block;
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        z-index: 100;
+    // .toggle{
+    //     display: block;
+    //     position: fixed;
+    //     bottom: 10px;
+    //     right: 10px;
+    //     z-index: 100;
 
 
-    width: 100%;
+    // width: 100%;
+    // bottom: 0;
+    // left: 0;
+    // border-radius: 0;
+    // padding: 15px 10px;
+
+    // }
+
+
+ .toggle{
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 100;
+    /* width: 50px; */
     bottom: 0;
-    left: 0;
+    /* left: 0; */
     border-radius: 0;
-    padding: 15px 10px;
+    /* padding: 15px 10px; */
+    width: 50px;
+    right: 10px;
+    bottom: 70px;
+    border-radius: 25px;
+    height: 50px;
+    border: 1px solid #fff;
 
+    &:focus{
+      outline: none;
+    }
     }
 
 

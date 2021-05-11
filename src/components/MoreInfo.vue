@@ -1,7 +1,11 @@
 <template>
    <div class="moreInfoClickModal">
 
-       <button @click="toggleExpand(true)" style="position:absolute;top:0;left:0;z-index:99">?</button>
+       <button class="listIcon" @click="toggleExpand(true)">
+
+<ListIcon />
+
+       </button>
     <div class="menuBarClickModal iconVersion" :class="{ expanded: expandedMenu }">
    <div class="relative">
       <div class="inside">
@@ -20,7 +24,12 @@
         <template v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) ||!item.timing_mask">
                   
                   
-                      <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+                      <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+
+
+                      </a>
        
         </template>
     </template>
@@ -33,13 +42,22 @@
   <template v-for="(item, index) in upserveSections">
   <template v-if="noFiltering">
     
-     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+
+     </a>
   
   </template>
   <template v-else>
     <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">
       
-    <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+    <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+
+
+    </a>
     
     </template>
   </template>
@@ -53,20 +71,30 @@
  <template v-if="noFiltering && item.name !== 'featured item'">
   <template v-if="item.timing_mask === item.timing_mask">
     
-     <a @click="toggleExpand(false)" :index="index"  :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
-  
+     <a @click="toggleExpand(false)" :index="index"  :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+
+
+     </a>
   </template>
 </template>
 <template v-else>
   <template v-if="item.timing_mask === null">
     
-     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+     </a>
  
   </template>
   <template v-else>
     <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
      
-       <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+       <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+       </a>
    
       </template>
   </template>
@@ -86,12 +114,12 @@
 
 <script>
 
-
+import ListIcon from "@/components/svgIcons/ListIcon";
 
 export default {
     name: 'moreInfoClickModal',
       components: {
-
+ListIcon
     },
     data(){
 return{
@@ -234,6 +262,7 @@ padding: 10px;
     // display: block;
         position: fixed;
     top: 0px;
+    top: 132px;
     width: 100% !important;
     height: 100vh;
    overflow: scroll;
@@ -266,7 +295,7 @@ padding: 10px;
 // }
 
 .inside{
-  border-bottom: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
 .scrollactive-nav{
   text-align: center;
   padding: 6px 0;
@@ -381,6 +410,28 @@ position: absolute;
     margin-left: 0 !important;
     margin-right: 0 !important;
     background: white !important;
+}
+
+
+button.listIcon{
+      position:absolute;
+      top:0;
+      left:0;
+      z-index:99;
+      background: transparent !important;
+      border: 0 !important;
+      padding: 3px 5px 3px 0 !important;
+      &:active,
+      &:focus,
+      &:hover{
+        outline: none;
+        border: 0 !important;
+      }
+
+      &:hover{
+opacity:.5;
+      }
+
 }
 
 </style>

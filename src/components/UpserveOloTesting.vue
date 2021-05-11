@@ -591,7 +591,7 @@
 <!-- <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace(' ','')">
   {{item.name.replace('- To Go', '').replace('To Go', '').replace(' ','')}}
 </div> -->  
-              <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
+              <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
                 
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -614,7 +614,7 @@
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description | truncate(140, '...')}}</div>
+                                                                                                          >{{serve.description | truncate(100, '...')}}</div>
                                                                                                           <div class="food-price">
                                                                                                             ${{ serve.price_cents.toFixed(2)/100}}
                                                                                                           </div>
@@ -666,7 +666,7 @@
   <!-- beggin 0 -->
   <template v-if="noFiltering">
     <!-- beggin 1 -->
-                             <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="container menu-line-testing">
+                             <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="container menu-line-testing">
                    
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -724,7 +724,7 @@
 <!-- else -->
 <!-- {{selectedDate}} -->
 <!-- {{selectedTime}} -->
-           <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line-testing">
+           <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line-testing">
             <!-- this is available at the started time -->
             
               <div
@@ -892,7 +892,7 @@
               <!-- no filtering -->
                   <!-- beggin 1 -->
                                 <template v-if="item.timing_mask === item.timing_mask">
-                                <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="container menu-line-testing">
+                                <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="container menu-line-testing">
                                     
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -959,7 +959,7 @@
 
          <template v-if="item.timing_mask === null">
            <!-- no timing mask -->
-              <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="container menu-line-testing">
+              <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="container menu-line-testing">
                   
               <div
                 :id="'drawertop-'+ item.id"
@@ -1018,7 +1018,7 @@
 
 
 
-          <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line-testing">
+          <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line-testing">
                 
             <!-- this is available at the started time -->
               <div  
@@ -1091,8 +1091,8 @@
 
 <div class="right-column">
 <button @click="toggleDrawer()" class="toggle">
-<span v-if="toggledDrawer">hide order</span>
-<span v-else>view order</span>
+<span v-if="toggledDrawer"><CloseModalSm2 /></span>
+<span v-else><CartIcon /></span>
 </button>
 
 <div class="container mb10 hide-on-mob"> 
@@ -1872,6 +1872,8 @@ import moment from 'moment'
 import tz from 'moment-timezone'
 
 import swal from "vue-sweetalert2";
+import CartIcon from "@/components/svgIcons/CartIcon";
+import CloseModalSm2 from "@/components/svgIcons/CloseModalSm2";
 export default {
       metaInfo: {
       name: 'UpserveOloTesting',
@@ -1885,7 +1887,7 @@ export default {
   components: {
     OrderConfirmationModal,
     OnlineMenuCarousel,
-    CloseModal,
+    CloseModalSm2,
     CloseModalRed,
     CloseModalSm,
     CloseModalRedSm,
@@ -1901,7 +1903,8 @@ export default {
     SavedCard,
     Swiper,
     SliderNav,
-    MoreInfo
+    MoreInfo,
+    CartIcon
   },
   computed: {	
 computedAddition(){
@@ -4437,6 +4440,12 @@ this.currentOrder.scheduled_time = null
 .relative{
 position: relative;
 }
+    border-bottom: 1px solid #ddd;
+@media only screen and (max-width: 992px) {
+
+    top: 112px;
+}
+
 } 
 
 

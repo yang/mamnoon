@@ -18,7 +18,7 @@
 <i class="icono-arrow4-left"></i>
 
                 </div>
-   <scrollactive :offset="400" ref="scrollactive" v-on:itemchanged="onItemChanged">   
+   <scrollactive :offset="200" ref="scrollactive" v-on:itemchanged="onItemChanged">   
           <swiper  id="swiperMenu" ref="mySwiperRef" class="swiper" :options="swiperOption">
  <template v-if="valid && !preOrderToggleState">
 
@@ -27,7 +27,10 @@
         <template v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) ||!item.timing_mask">
                   
                      <swiper-slide>
-                      <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+                      <a :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+                      </a>
           </swiper-slide>
         </template>
     </template>
@@ -40,13 +43,24 @@
   <template v-for="(item, index) in upserveSections">
   <template v-if="noFiltering">
        <swiper-slide>
-     <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+     <a :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
+     {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+
+     </a>
      </swiper-slide>
   </template>
   <template v-else>
     <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">
          <swiper-slide>
-    <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+    <a :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
+    {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+
+
+
+
+    </a>
        </swiper-slide>
     </template>
   </template>
@@ -60,20 +74,29 @@
  <template v-if="noFiltering && item.name !== 'featured item'">
   <template v-if="item.timing_mask === item.timing_mask">
        <swiper-slide>
-     <a :index="index"  :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+     <a :index="index"  :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
+     {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+       
+     </a>
      </swiper-slide>
   </template>
 </template>
 <template v-else>
   <template v-if="item.timing_mask === null">
        <swiper-slide>
-     <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+     <a :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
+     {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+       
+     </a>
     </swiper-slide>
   </template>
   <template v-else>
     <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
         <swiper-slide>
-       <a :index="index" :href="'#'+item.name.replace('- To Go', '').replace('To Go', '').replace('@', '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
+       <a :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
+       {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
+         
+       </a>
       </swiper-slide>
       </template>
   </template>
@@ -246,7 +269,7 @@ a.scrollactive-item.nav-item{
   color: #F05D5B;
   font-size: 14px;
     margin-right: 10px;
-  border-bottom: 1px solid transparent;
+  // border-bottom: 1px solid transparent;
 
     padding-bottom: 3px;
 line-height: 30px;
@@ -257,11 +280,8 @@ line-height: 30px;
 transition: all .25s ease;
    text-transform: lowercase;
 &.is-active{
-background: #F05D5B;
-color: white;
-
-padding: 10px;
-    // background: black;
+    // font-weight: 700;
+    border-bottom: 2px solid #F05D5B;
 
 }
 
@@ -293,7 +313,7 @@ padding: 10px;
 // }
 
 .inside{
-  border-bottom: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
 .scrollactive-nav{
   text-align: center;
   padding: 6px 0;
