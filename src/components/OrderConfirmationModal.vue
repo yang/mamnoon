@@ -266,7 +266,7 @@ form textarea,
   background-position: center center;
   background-size: cover;
 
-  // height: 180px;
+  // height: 140px;
   // background-size: 129%;
 
   height: 100%;
@@ -281,7 +281,7 @@ form textarea,
   background: #fff367;
   width: 100%;
   display: inherit;
-  height: 180px;
+  height: 140px;
   cursor: pointer;
   transition: all 0.5s ease;
 
@@ -296,25 +296,25 @@ form textarea,
 .half-width2left {
   width: 65%;
   float: left;
-  height: 180px;
+  height: 140px;
   overflow: hidden;
 }
 
 .half-width2right {
   width: 35%;
   float: left;
-  height: 180px;
+  height: 140px;
   overflow: hidden;
 }
 
 .grey-bg {
-  height: 180px;
+  height: 140px;
 }
 
 .filtree-half {
   width: calc(50% - 0px);
   float: left;
-  height: 180px;
+  height: 140px;
   background: transparent;
   padding: 5px;
   overflow: hidden;
@@ -324,7 +324,7 @@ form textarea,
 .filtree-full {
   width: calc(100% - 0px);
   float: left;
-  height: 180px;
+  height: 140px;
   background: transparent;
   padding: 5px;
   overflow: hidden;
@@ -335,7 +335,7 @@ form textarea,
   .filtree-half {
     width: calc(100% - 0px);
     float: left;
-    height: 180px;
+    height: 140px;
     background: transparent;
     padding: 5px;
     overflow: hidden;

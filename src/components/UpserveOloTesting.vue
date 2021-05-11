@@ -479,17 +479,17 @@
 <!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing"> -->
 <!-- <div class="testPage">testpage, please use nadimama.com/mamnoon for an actual experience.</div> -->
 
-<div class="container online-menu">
+<div class="container online-menu" style="display:none;">
               <h4>featured</h4>
             </div>
-<Swiper :upserveSections="upserveSections" :upserve="upserve"/> 
+<!-- <Swiper :upserveSesctions="upserveSections" :upserve="upserve"/>  -->
 
 
 
 
  
       <div class="container online-menu">
-      <h4>order from the full mednu</h4>
+      <h4>order from the full menu</h4>
 
 
 
@@ -4429,10 +4429,11 @@ this.currentOrder.scheduled_time = null
 <style lang="scss">
 .stickyPosition{
   background: #fff;
-position:sticky;
-top: 132px;
-    z-index: 1000;
-    
+  position:sticky;
+  top: 132px;
+  // z-index: 1000;
+  z-index: 80;
+
 .relative{
 position: relative;
 }
