@@ -477,7 +477,7 @@
 
 
 <!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing"> -->
-<div class="testPage">testpage, please use nadimama.com/mamnoon for an actual experience.</div>
+<!-- <div class="testPage">testpage, please use nadimama.com/mamnoon for an actual experience.</div> -->
 
 <div class="container online-menu">
               <h4>featured</h4>

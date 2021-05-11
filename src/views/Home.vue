@@ -1,8 +1,8 @@
 <template>
-<div style="overflow-x:hidden;">
+<div class="pt180" style="overflow-x:hidden;">
 <Nav />
 
-<div class="rotating-letters-container">
+<div class="rotating-letters-container" style="display:none;">
   <!-- cff -->
 
 
@@ -219,7 +219,19 @@ transition: padding .5s ease;
 }
 }
 
+
+.pt180{
+  padding-top:180px;
+}
+
 @media only screen and (max-width: 1080px) {
+
+.pt180{
+  padding-top:0px;
+}
+
+
+
 .nav-acc-header{
   // padding-top: 90px;
     padding-top: 60px;

@@ -1,17 +1,17 @@
 <template>
    <div class="moreInfoClickModal">
 
-       <button @click="toggleExpand(true)">?</button>
+       <button @click="toggleExpand(true)" style="position:absolute;top:0;left:0;z-index:99">?</button>
     <div class="menuBarClickModal iconVersion" :class="{ expanded: expandedMenu }">
    <div class="relative">
       <div class="inside">
+       <button @click="toggleExpand(false)">x</button>
         <!-- <moreInfoClickModal /> -->
 
 
-       <button @click="toggleExpand(false)">x</button>
 
 
-   <scrollactive :offset="400" ref="scrollactive" v-on:itemchanged="onItemChanged">   
+   <scrollactive :offset="400" ref="scrollactive">   
         
  <template v-if="valid && !preOrderToggleState">
 
