@@ -9,13 +9,15 @@
     <div class="menuBarClickModal iconVersion" :class="{ expanded: expandedMenu }">
    <div class="relative">
       <div class="inside">
-       <button @click="toggleExpand(false)">x</button>
+       <button @click="toggleExpand(false)">
+         <CloseModalSm2 />
+       </button>
         <!-- <moreInfoClickModal /> -->
 
 
 
 
-   <scrollactive :offset="400" ref="scrollactive">   
+   <scrollactive :offset="200" ref="scrollactive">   
         
  <template v-if="valid && !preOrderToggleState">
 
@@ -115,11 +117,14 @@
 <script>
 
 import ListIcon from "@/components/svgIcons/ListIcon";
+import CloseModalSm2 from "@/components/svgIcons/CloseModalSm2";
+
 
 export default {
     name: 'moreInfoClickModal',
       components: {
-ListIcon
+ListIcon,
+CloseModalSm2
     },
     data(){
 return{
@@ -223,14 +228,14 @@ overflow:hidden;
 
     width: calc(100% - 40px);
     // background: green;
-    float: right;
+    // float: right;
 
 
 a.scrollactive-item.nav-item{
   color: #F05D5B;
   font-size: 14px;
     margin-right: 10px;
-  border-bottom: 1px solid transparent;
+  border-bottom: 2px solid transparent;
 
     padding-bottom: 3px;
 line-height: 30px;
@@ -241,10 +246,13 @@ line-height: 30px;
 transition: all .25s ease;
    text-transform: lowercase;
 &.is-active{
-background: #F05D5B;
-color: white;
+// background: #F05D5B;
+// color: white;
 
-padding: 10px;
+
+  border-bottom: 2px solid #F05D5B;
+width: max-content;
+// padding: 10px;
     // background: black;
 
 }
@@ -257,17 +265,24 @@ padding: 10px;
     transition: opacity .5s ease;
     pointer-events: none;
 &.expanded{
-        pointer-events: all;
-      opacity:1;
-    // display: block;
-        position: fixed;
-    top: 0px;
-    top: 132px;
-    width: 100% !important;
-    height: 100vh;
-   overflow: scroll;
-   left:0;
-        background: white !important;
+
+    pointer-events: all;
+    opacity: 1;
+    position: absolute;
+    top: 50px;
+    /* top: 132px; */
+    width: 400px !important;
+    height: auto;
+    overflow: scroll;
+    left: 0;
+    background: white !important;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: left;
+
+a{
+  text-align: left;
+}
 }
 
 }
@@ -371,10 +386,12 @@ width: 30px;
 
 
 button{
-    float: right;
+
+float: right;
     margin: 5px;
-        position: fixed;
+    position: absolute;
     right: 0;
+
 }
 
 position: absolute;

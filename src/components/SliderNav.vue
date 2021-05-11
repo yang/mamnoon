@@ -145,23 +145,7 @@ return{
 
 
 if(currentItem){
-
   this.$refs.mySwiperRef.$swiper.slideTo(currentItem.getAttribute('index'), 300);
-
-
-
-// if(currentItem.getAttribute('index') == 0){
-
-// document.getElementById('swiperMenu').classList.remove("morePadding");
-  
-
-// }else{
-
-// document.getElementById('swiperMenu').classList.add("morePadding");
-
-// }
-
-
 }
 
 
