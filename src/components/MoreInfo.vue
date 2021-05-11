@@ -9,8 +9,10 @@
     <div class="menuBarClickModal iconVersion" :class="{ expanded: expandedMenu }">
    <div class="relative">
       <div class="inside">
-       <button @click="toggleExpand(false)">
-         <CloseModalSm2 />
+       <button class="close-toggle" @click="toggleExpand(false)">
+         <CloseModalRedSm2 />
+
+
        </button>
         <!-- <moreInfoClickModal /> -->
 
@@ -117,14 +119,14 @@
 <script>
 
 import ListIcon from "@/components/svgIcons/ListIcon";
-import CloseModalSm2 from "@/components/svgIcons/CloseModalSm2";
+import CloseModalRedSm2 from "@/components/svgIcons/CloseModalRedSm2";
 
 
 export default {
     name: 'moreInfoClickModal',
       components: {
 ListIcon,
-CloseModalSm2
+CloseModalRedSm2
     },
     data(){
 return{
@@ -392,6 +394,20 @@ float: right;
     position: absolute;
     right: 0;
 
+
+    border-radius: 10px !important;
+    background-color: white !important;
+    // width: 20px;
+    // height: 20px;
+border:0 !important;
+
+
+&:active,
+&:hover,
+&:focus{
+  outline: none;
+}
+
 }
 
 position: absolute;
@@ -450,5 +466,8 @@ opacity:.5;
       }
 
 }
+
+
+
 
 </style>
