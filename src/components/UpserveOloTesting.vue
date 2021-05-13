@@ -405,8 +405,19 @@
         <div class="row no-lr-margin">
         
 <div class="col-md-12 col-lg-8">
+      <div class="container no-pad"> 
+      <h4 class="text-left red">full menu</h4>
 
-          <div class="container no-lr-pad">
+
+
+
+
+
+
+       
+       
+       </div>
+          <div class="container no-lr-pad" style="margin-top: 16px;">
 
 <!-- {{selectedDate}} -->
 <!-- {{selectedTime}} -->
@@ -422,7 +433,7 @@
               <template v-if="valid">
               <div class="toggleLr">
                 <div>
- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+ <button class="oloButton" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
                   <!-- <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button> -->
 
                   <!-- <h2 v-if="!preOrderToggleState">Get it now (or <u>preorder</u>)</h2> -->
@@ -432,7 +443,7 @@
 
                   </div> 
                 <div>
-                  <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
+                  <button class="oloButton"  @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
                   <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button>  -->
 
 
@@ -487,7 +498,7 @@
 
 
 
- 
+<!--  
       <div class="container online-menu">
       <h4>order from the full menu</h4>
 
@@ -499,7 +510,7 @@
 
        
        
-       </div>
+       </div> -->
       <!-- <div> -->
       <!-- </div> -->
 
@@ -1096,12 +1107,12 @@
 </button>
 
 <div class="container mb10 hide-on-mob"> 
-<div @click="panelShowChoose('yourOrder')" class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
+<div @click="panelShowChoose('yourOrder')" class="filehalf" style="">
       <template v-if="valid">
-         <h4>{{title.toLowerCase()}} order</h4>
+         <h4 class="text-left red">your {{title.toLowerCase()}} order</h4>
   </template>
       <template v-else>
-          <h4>{{title.toLowerCase()}} pre order</h4>
+          <h4 class="text-left red">{{title.toLowerCase()}} pre order</h4>
   </template>
 
   
@@ -1120,9 +1131,9 @@
               <template v-if="valid">
               <div class="toggleLr hide-on-desktop">
                 <div>
-                  <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
+                  <button class="oloButton" @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
                 <div>
-                  <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+                  <button class="oloButton" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
                   </div> 
               </div>
               </template>
@@ -1890,6 +1901,7 @@ export default {
     CloseModalSm2,
     CloseModalRed,
     CloseModalSm,
+    CloseModal,
     CloseModalRedSm,
     GoogleValidate,
     carousel,
@@ -4486,10 +4498,10 @@ position: relative;
   }
 }
 
-button.selected{
-  box-sizing: border-box;
-color: #666666 !important;
-}
+// button.selected{
+//   box-sizing: border-box;
+// color: #666666 !important;
+// }
 
 
 
@@ -4965,5 +4977,55 @@ font-weight: 300;
       background: transparent;
   }
 }
+
+
+.text-left{
+  text-align:left;
+}
+
+
+.no-pad{
+  padding: 0;
+}
+
+.red,h4.red{
+      color: #F05D5B;
+}
+
+
+
+#upserveolo{
+  button.oloButton{
+    &:active,
+    &:hover,
+    &:focus{
+      outline: none;
+    }
+
+      box-sizing: border-box;
+      background-color: #f8e1d5;
+      color: #f58e58;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 2px solid #f8e1d5;
+      font-weight: 600;
+
+
+
+      &.selected{
+
+
+      background-color: #f58e58;
+      color: #ffffff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 2px solid #f58e58;
+
+
+
+      }
+  }
+}
+
 
 </style>
