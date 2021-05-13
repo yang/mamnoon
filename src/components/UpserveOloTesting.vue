@@ -5028,4 +5028,9 @@ font-weight: 300;
 }
 
 
+.order-sidebar{
+  border-top: 1px solid #ddd;
+    margin-top: 16px;
+}
+
 </style>
