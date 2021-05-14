@@ -1991,6 +1991,14 @@ return this.currentOrder.tipSelected === i
     }
   },	
   watch: {
+//     valid:{
+// handler(val){
+//   console.log('valid - changed')
+
+
+//   this.forceRerender()
+// }
+//     },
     upserveSections:{
 handler(val){
   console.log('this.upserveSections')
@@ -2320,6 +2328,7 @@ if(newAddress){
     },
   data() {
   return {
+    componentKey: 0,
           savedDeliveryAddress: {},
       savedBillingAddress: {},
     updateCI: false,
@@ -2514,6 +2523,11 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    //  forceRerender() {
+    //   this.componentKey += 1;
+
+    //   console.log('force rerender happened')
+    // },
     async checkFormBilling() {
           this.updateBilling = false
         try {
