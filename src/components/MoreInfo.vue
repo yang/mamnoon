@@ -16,9 +16,6 @@
        </button>
         <!-- <moreInfoClickModal /> -->
 
-
-
-
    <scrollactive :offset="200" ref="scrollactive">   
         
  <template v-if="valid && !preOrderToggleState">
@@ -29,12 +26,21 @@
                   
                   
                       <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-
-
-
-
                       </a>
        
+                                        <div :data="'drawer' + item.id">
+                                            <div v-for="piece in item.item_ids" :key="piece">
+                                                    <template v-for="serve,index in upserveList">
+                                                                  <template v-if="serve.id === piece">
+                                                                            
+                                                                                                     {{ index}}
+                                                                                                        
+                                                                                    
+                                                                  </template>
+                                                    </template>
+                                            </div>
+                                      </div>
+
         </template>
     </template>
   </template>
@@ -51,7 +57,7 @@
 
 
      </a>
-  
+  d
   </template>
   <template v-else>
     <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">
@@ -62,7 +68,7 @@
 
 
     </a>
-    
+    d
     </template>
   </template>
 
@@ -81,6 +87,7 @@
 
 
      </a>
+     d
   </template>
 </template>
 <template v-else>
@@ -90,7 +97,7 @@
 
 
      </a>
- 
+ d
   </template>
   <template v-else>
     <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
@@ -99,7 +106,7 @@
 
 
        </a>
-   
+   d
       </template>
   </template>
 
@@ -134,7 +141,7 @@ return{
 }
     },
     name: 'slidernav',
-    props: ['valid','preOrderToggleState','upserveSections','noFiltering','nowDate','nowTime','futureDay','futureTime'],
+    props: ['valid','preOrderToggleState','upserveSections','upserveList','noFiltering','nowDate','nowTime','futureDay','futureTime'],
     methods:{
         toggleExpand(e){
             this.expandedMenu = e;

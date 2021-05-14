@@ -527,7 +527,7 @@
 
 <div class="stickyPosition"> 
 <div class="relative"> 
-<MoreInfo :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
+<MoreInfo :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :upserveList="upserveList" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
  
 
 <SliderNav :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
