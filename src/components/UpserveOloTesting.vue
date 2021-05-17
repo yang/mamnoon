@@ -411,10 +411,6 @@
 
 
 
-
-
-
-       
        
        </div>
           <div class="container no-lr-pad" style="margin-top: 16px;">
@@ -621,6 +617,15 @@
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
+
+
+
+
+
+
+
+<div class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
+
                                                                                                           <div class="name">{{serve.name}}</div>
                                                                                                           <div
                                                                                                             v-if="serve.description"
@@ -697,6 +702,7 @@
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
+                                                                                              <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                                                                                                           <div class="name">{{serve.name}}</div>
                                                                                                           <div
                                                                                                             v-if="serve.description"
@@ -759,6 +765,7 @@
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
+                              <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
                                 v-if="serve.description"
@@ -925,6 +932,7 @@
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
+                                                                                                       <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                                                                                                           <div class="name">{{serve.name}}</div>
                                                                                                           <div
                                                                                                             v-if="serve.description"
@@ -992,6 +1000,7 @@
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
+                              <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
                                 v-if="serve.description"
@@ -1050,6 +1059,7 @@
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
+                              <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
                                 v-if="serve.description"
@@ -1991,6 +2001,36 @@ return this.currentOrder.tipSelected === i
     }
   },	
   watch: {
+
+
+    orderHistory:{
+
+      
+      handler(val){
+      let self = this;
+
+
+    if(self.orderHistory){
+      for(var order in self.orderHistory.user.slice().reverse()){
+      for(var item in self.orderHistory.user[order].orderInfo.charges.items){
+        if(!self.orderHistoryList.some(itemIndex => itemIndex.item === self.orderHistory.user[order].orderInfo.charges.items[item].item_id)){
+          self.orderHistoryList.push({
+            name: self.orderHistory.user[order].orderInfo.charges.items[item].name,
+            item: self.orderHistory.user[order].orderInfo.charges.items[item].item_id,
+            date: self.orderHistory.user[order].orderInfo.time_placed
+        })
+}
+}
+
+
+
+}
+      }
+
+
+}
+
+    },
 //     valid:{
 // handler(val){
 //   console.log('valid - changed')
@@ -2328,6 +2368,8 @@ if(newAddress){
     },
   data() {
   return {
+    orderHistoryList: [],
+    orderHistory: null,
     componentKey: 0,
           savedDeliveryAddress: {},
       savedBillingAddress: {},
@@ -2523,6 +2565,58 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+
+returnOrder(itemid){
+
+
+var result = jsObjects.find(obj => {
+  return obj.b === 6
+})
+
+},
+    checkIfOrdered(itemid){
+      if(this.orderHistoryList){
+
+
+var result = this.orderHistoryList.find(obj => {
+  return obj.item === itemid
+})
+
+if(result !== undefined){
+        let order = moment(String(result.date));
+        return 'ordered on ' + order.tz('America/Los_Angeles').format('MM/DD')
+
+
+}
+
+    }
+
+      },
+    retrieveOrders() {
+    let self = this
+        this.$http.get(`/order/email/${this.emailAddress}`).then(function (response) {
+// this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
+
+
+
+
+ 
+
+
+
+        self.orderHistory = response.data
+
+
+
+
+
+
+
+
+    })
+    },
+
     //  forceRerender() {
     //   this.componentKey += 1;
 
@@ -4314,6 +4408,9 @@ this.setTip(0)
   },
   mounted() {
 
+
+    this.retrieveOrders();
+
  
    if(this.$store.state.loggedIn){
 
@@ -4456,6 +4553,16 @@ this.currentOrder.scheduled_time = null
 
 
 <style lang="scss">
+
+.orderedOn{
+  color: rgb(29, 174, 239);
+  font-weight: 600;
+    position: absolute;
+    bottom: 7px;
+    font-size: 12px;
+    font-style: italic;
+}
+
 .stickyPosition{
   background: #fff;
   position:sticky;
