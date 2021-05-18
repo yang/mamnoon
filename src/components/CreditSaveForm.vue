@@ -77,15 +77,18 @@
 
 
 <span>
+  <span v-if="card.approvalData.accountCardType === 'VS'" class="visa-xs"></span>
+<span v-else-if="card.approvalData.accountCardType === 'MC'" class="mastercard-xs"></span>
 ends in  {{card.approvalData.maskedAccount.replace('************','')}}
+
+<br>
+<!-- <span class="amex-xs"></span>
+<span class="dinersclub-xs"></span>
+<span class="discover-xs"></span>
+<span class="jcb-xs"></span>
+-->
+
 </span>
-
-
-<!-- {{card}} -->
-
-
-
-
 </td>
 
 <td>
@@ -816,7 +819,7 @@ tr{
 }
 
 tr td{
-    padding: 18px 10px 15px 10px;
+    padding: 15px 10px 15px 10px;
     height: 56px;
     margin-bottom: 0;
 

@@ -687,7 +687,7 @@ tr{
 }
 
 tr td{
-    padding: 18px 10px 15px 10px;
+    padding: 15px 10px 15px 10px;
     height: 56px;
     margin-bottom: 0;
 
