@@ -58,7 +58,7 @@
      </div>
     </td><td>
          <div>
-      expiration date
+      expires
        </div>
       </td><td>
            <div>
@@ -79,7 +79,7 @@
 <span>
   <span v-if="card.approvalData.accountCardType === 'VS'" class="visa-xs"></span>
 <span v-else-if="card.approvalData.accountCardType === 'MC'" class="mastercard-xs"></span>
-ends in  {{card.approvalData.maskedAccount.replace('************','')}}
+<span class="desktop">ends in</span>  {{card.approvalData.maskedAccount.replace('************','')}}
 
 <br>
 <!-- <span class="amex-xs"></span>
@@ -100,7 +100,7 @@ ends in  {{card.approvalData.maskedAccount.replace('************','')}}
 <button class="sm-button fl-right hide-mob" @click="removeCreditCard(card._id,card.email)">remove</button>
         &nbsp;&nbsp;&nbsp;
   
-        <button class="sm-button fl-right mr-10" v-if="!card.primary" @click="primaryCreditCard(card._id,card.email)">set primary</button>
+        <button class="sm-button fl-right mr-10" v-if="!card.primary" @click="primaryCreditCard(card._id,card.email)">primary</button>
         <button class="sm-button disabled-b fl-right" v-else disabled style="pointer-events:none;">(primary)</button>
 </td>
 

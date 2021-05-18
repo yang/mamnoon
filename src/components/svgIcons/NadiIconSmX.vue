@@ -23,6 +23,6 @@ name: 'nadiicon'
 
 svg#nadiIconSmx{
    width: 100%;
-    height: 170px;
+    height: 140px;
 }
 </style>

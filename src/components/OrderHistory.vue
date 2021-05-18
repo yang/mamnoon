@@ -13,7 +13,7 @@
         <td class="hide-mob"><div>pay method</div></td>
         <!-- <td><div>delivery/pickup</div></td> -->
        <td class="hide-mob w-5"><div style="text-align: right;">status</div></td>
-        <td style="display:none;"><div style="text-align: right;">actions</div></td>
+        <td v-if="currentUser.currentUserEmail === 'joe.waine@gmail.com'"><div style="text-align: right;">actions</div></td>
 </th>   
 
 <template v-if="orderhistory">
@@ -73,20 +73,12 @@ debit/credit
 {{order.status}}
    </div></td> 
 
-    <td style="display:none;"><div>
-<button class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">re order</button>
+    <td><div>
 
 
-
-
-<!-- <pre>
-
-
-{{order.orderInfo}}
-
-</pre> -->
-
-
+      <!-- {{order.orderInfo.restaurant}} -->
+<button v-if="currentUser.currentUserEmail === 'joe.waine@gmail.com' && order.orderInfo.restaurant === 'Mamnoon'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order</button>
+<!-- <pre>{{order.orderInfo}}</pre> -->
 </div></td>
 </tr>
 </template>
@@ -114,23 +106,16 @@ export default {
     methods: {
         reorder(order){
 
-console.log(order)
-
-
-
             let storeCurrentOrder = order
-            // this.$store.commit("orderFromTransactionHistory", { orderFromTransactionHistory });
             this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-            // console.log(order)
 
-
-let drawerTrue = true
+            let drawerTrue = true
 
 this.$store.commit("drawerTrue", { drawerTrue });
 
 
 if(order.restaurant === 'Mamnoon'){
-     this.$router.push("/mamnoon");
+     this.$router.push("/mamnoontesting");
 }else{
      this.$router.push("/mamnoonstreet");
 }

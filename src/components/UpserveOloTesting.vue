@@ -411,7 +411,82 @@
 
 
 
-       
+
+
+<!-- .storeCurrentOrder -->
+<!-- emptyReOrderObject -->
+<!-- reOrder -->
+<template v-if="reOrder.id && $store.state.storeCurrentOrder.id">
+
+
+
+
+
+<div class="order-modal"> 
+
+        <div class="container online-menu order-modal-width">
+          <div @click="emptyReOrderObject()" class="close closeModal">
+            <CloseModal />
+          </div>
+          <h4>order again</h4>
+        </div>
+
+            <div class="container modal-body order-modal-width order-modal-body">
+
+<div class=""> 
+
+<div class="block mb20" v-for="item in reOrder.charges.items">
+
+
+
+<div class="yellow-bg-test">
+  <div class="half-width2left">
+    <div class="content-box">
+      <div class="name">{{item.quantity}} x {{item.name}}</div>
+      <!-- <div class="food-description">chickpeas, garlic, lemon, tahini (served with 4 pita)</div> -->
+      <div class="food-price"> $8 </div>
+      <br>
+  <button class="float-right" @click="addToOrderFromReorder(item)">
+add
+</button>
+      </div>
+      </div>
+      <div class="half-width2right">
+
+
+        <div class="backgroundImage"  v-if="item.images" v-bind:style="{ backgroundImage: 'url(' + item.images.online_ordering_menu.main + ')' }"></div>
+         <div class="backgroundImage" v-else
+                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundColor: '#dddddd' }"
+                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
+
+        </div>
+        </div>
+
+
+  
+
+
+
+<hr />  
+</div>
+
+
+</div>
+
+
+          <div class="add-to-order-footer">
+ <button  style="margin-right: 10px;" class="float-right" @click="emptyReOrderObject()">cancel  </button>  &nbsp;&nbsp;
+ <button class="float-right" style="margin-right: 10px;" @click="addToAllItemsToOrder(reOrder.charges.items)">add everything to cart  </button>   &nbsp;&nbsp;
+
+          </div>
+
+
+</div>
+</div>
+</template>
+
+
+
        </div>
           <div class="container no-lr-pad" style="margin-top: 16px;">
 
@@ -1469,8 +1544,8 @@
 {{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b>
 </div>
 </div>
-                  <div v-if="order.instructions !== ''" class="order-instructions">
-             
+            <div v-if="order.instructions !== ''" class="order-instructions">
+          
                     <i>{{order.instructions}}</i>
             
                   </div>
@@ -2001,8 +2076,13 @@ return this.currentOrder.tipSelected === i
     }
   },	
   watch: {
+    reOrder:{
+      handler(val){
+console.log('reorder changes')
+console.log(this.reOrder)
 
-
+      }
+      },
     orderHistory:{
 
       
@@ -2041,8 +2121,8 @@ return this.currentOrder.tipSelected === i
 //     },
     upserveSections:{
 handler(val){
-  console.log('this.upserveSections')
-console.log(this.upserveSections)
+//   console.log('this.upserveSections')
+// console.log(this.upserveSections)
 
 
 this.computedSections = this.upserveSections
@@ -2145,8 +2225,12 @@ if(this.user){
   //  }
 
     if(this.title === 'Mamnoon'){
-        let storeCurrentOrderUpdateMamnoon = curOr;
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+        // let storeCurrentOrderUpdateMamnoon = curOr;
+        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+
+        let storeCurrentOrderUpdateMamnoonTesting = curOr;
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });
+
     }else if(this.title === 'Mamnoon Street'){
         let storeCurrentOrderUpdateStreet = curOr;
         this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });	
@@ -2368,6 +2452,7 @@ if(newAddress){
     },
   data() {
   return {
+    reOrder: {},
     orderHistoryList: [],
     orderHistory: null,
     componentKey: 0,
@@ -2565,8 +2650,12 @@ showToFixed: function (value) {
 }
   },
   methods: {
+emptyReOrderObject(){
 
+this.$store.commit('upserveOrderCurrentOrder', {});
 
+this.reOrder = {};
+},
 returnOrder(itemid){
 
 
@@ -2890,7 +2979,7 @@ this.toggledDrawer = false
       // console.log('get credit cards')
       try {
         let response = await this.$http.get("/credit/getcreditcards/" + this.emailAddress);
-        console.log(response.data)
+        // console.log(response.data)
         this.savedCards = response.data.usercreditcards
  
          } catch (err) {
@@ -2954,8 +3043,13 @@ this.currentItemModifierArray = filteredCurrent
       }
 
     if(this.title === 'Mamnoon'){
-        let storeCurrentOrderUpdateMamnoon = this.currentOrder
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+        // let storeCurrentOrderUpdateMamnoon = this.currentOrder
+        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+
+
+        let storeCurrentOrderUpdateMamnoonTesting = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });	
+
     }else if(this.title === 'Mamnoon Street'){
         let storeCurrentOrderUpdateStreet = this.currentOrder
         this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });	
@@ -3886,7 +3980,50 @@ removeFromOrder(removal) {
         document.getElementById("minus-" + drawer).classList.remove("visible");
       }
     },
+
+
+    addToOrderFromReorder(item) {
+      let modifierPriceTotal = 0;
+      for (let i = 0; i < item.modifiers.length; i++) {
+        modifierPriceTotal =
+          modifierPriceTotal + item.modifiers[i].price;
+      }
+
+      let itemToAdd = {
+        name: item.name,
+        cartId:
+          Math.random().toString(36).substr(2, 29) +
+          "_" +
+          Math.random().toString(36).substr(2, 29) +
+          "_" +
+          Math.random().toString(36).substr(2, 29),
+        item_id: item.id,
+        price: item.price_cents,
+        price_cents: item.price_cents,
+        instructions: item.instructions,
+        modifiers: item.modifiers,
+        quantity: item.quantity,
+        sides: item.sides,
+        timing_mask: item.timing_mask
+      };
+
+          // console.log(this.currentOrder)
+          this.currentOrder.charges.items.push(itemToAdd);
+
+          let newDate = new Date();
+          this.currentOrder.time_placed = newDate;
+          this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+          // this.currentItemModifierArray = [];
+          // this.allOptionsSelected = false
+          // this.closeModal();
+
+    },
+
     addToOrder(item) {
+
+
+      console.log(item)
       let modifierPriceTotal = 0;
       for (let i = 0; i < this.currentItemModifierArray.length; i++) {
         modifierPriceTotal =
@@ -3908,7 +4045,8 @@ removeFromOrder(removal) {
         instructions: this.textdescription,
         modifiers: this.currentItemModifierArray,
         sides: [],
-        timing_mask: item.timing_mask
+        timing_mask: item.timing_mask,
+        images: item.images ? item.images : ''
       };
 
           // console.log(this.currentOrder)
@@ -4409,6 +4547,18 @@ this.setTip(0)
   mounted() {
 
 
+
+// <button @click="$store.commit('upserveOrderCurrentOrder', {})">empty reorder object</button>  
+
+
+// if(this.$store.state.upserveOrderCurrentOrder !== {}){
+//   console.log(this.$store.state.upserveOrderCurrentOrder)
+// }
+
+ 
+this.reOrder = this.$store.state.storeCurrentOrder
+
+
     this.retrieveOrders();
 
  
@@ -4460,7 +4610,7 @@ this.filterForNow()
         console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
         this.emptyCart()
       }else{
-        console.log('not empty yet')
+        // console.log('not empty yet')
       }
 
 
@@ -4649,6 +4799,7 @@ position: relative;
 
 
 .leftDropdown{
+    cursor: pointer;
   width: 50%;
   display: block;
   padding: 0 6px 15px 0;
@@ -4692,6 +4843,7 @@ padding: 0 6px 15px 0;
 
 @media only screen and (max-width: 768px) {
 .leftDropdown{
+    cursor: pointer;
   width: 100%;
   display:block;
   padding:0;
@@ -5152,6 +5304,17 @@ font-weight: 300;
 .order-sidebar{
   border-top: 1px solid #ddd;
     margin-top: 16px;
+}
+
+
+.reOrderModal{
+    background-color: orange;
+    position: fixed;
+    z-index: 100;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100px;
 }
 
 </style>

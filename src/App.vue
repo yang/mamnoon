@@ -134,6 +134,7 @@ margin: 0 10px 0 0;
   height: 100vh;
   width: 100%;
   top: 0;
+  left: 0;
 }
 
 li {
@@ -1213,6 +1214,9 @@ margin-top: 5px;
   margin-bottom: 20px;
 }
 
+.mb40{
+  margin-bottom: 40px;
+}
 
 .pt20{
   padding: 20px 0;
@@ -1949,10 +1953,11 @@ display: flow-root;
   	background-repeat: no-repeat;
 	display: inline-block;
 
-    transform: translateY(5px);
+    transform: translateY(6px);
     margin-right: 3px;
 
 }
+
 
 .amex-lg{
 	background-position: 0 0;
@@ -2061,6 +2066,24 @@ display: flow-root;
 	width: 32px;
 	height: 21px;
 }
+
+
+
+
+
+
+@media only screen and (max-width: 992px) {
+  .desktop{
+    display:none;
+  }
+}
+
+
+
+.block{
+  display: block;
+}
+
 
 
 

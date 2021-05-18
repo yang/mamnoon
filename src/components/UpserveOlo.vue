@@ -4481,6 +4481,7 @@ color: #666666 !important;
 
 
 .leftDropdown{
+  cursor: pointer;
   width: 50%;
   display: block;
   padding: 0 6px 15px 0;
@@ -4524,6 +4525,7 @@ padding: 0 6px 15px 0;
 
 @media only screen and (max-width: 768px) {
 .leftDropdown{
+    cursor: pointer;
   width: 100%;
   display:block;
   padding:0;

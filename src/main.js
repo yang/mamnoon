@@ -614,6 +614,9 @@ const store = new Vuex.Store({
     upserveOrderCurrentOrderUpdateMamnoon(state, { storeCurrentOrderUpdateMamnoon }){
       state.storeCurrentOrderUpdateMamnoon = storeCurrentOrderUpdateMamnoon
     },
+    upserveOrderCurrentOrderUpdateMamnoonTesting(state, { storeCurrentOrderUpdateMamnoonTesting }){
+      state.storeCurrentOrderUpdateMamnoonTesting = storeCurrentOrderUpdateMamnoonTesting
+    },
     upserveOrderCurrentOrderUpdateMbar(state, { storeCurrentOrderUpdateMbar }){
       state.storeCurrentOrderUpdateMbar = storeCurrentOrderUpdateMbar
     },
