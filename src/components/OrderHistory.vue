@@ -112,9 +112,9 @@ export default {
             let storeCurrentOrder = order
             this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
 
-            let drawerTrue = true
+            // let drawerTrue = true
 
-this.$store.commit("drawerTrue", { drawerTrue });
+// this.$store.commit("drawerTrue", { drawerTrue });
 
 
 if(order.restaurant === 'Mamnoon'){

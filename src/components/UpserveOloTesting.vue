@@ -445,8 +445,8 @@
       <div class="name">{{item.quantity}} x {{item.name}}</div>
       <!-- <div class="food-description">chickpeas, garlic, lemon, tahini (served with 4 pita)</div> -->
       <div class="food-price"> $8 </div>
-      <br>
-  <button class="float-right" @click="addToOrderFromReorder(item)">
+
+  <button class="float-right mt40dt" @click="addToOrderFromReorder(item)">
 add
 </button>
       </div>
@@ -5202,7 +5202,19 @@ width: 50%;
 }
 
 
+
+.mt40dt{
+  margin-top: 30px;
+}
+
 @media only screen and (max-width: 768px) {
+
+.mt40dt{
+  margin-top: 0px;
+}
+
+
+
   .container.online-menu.order-modal-width.full-width-modal-header{
        width: 100% !important;
 }
@@ -5328,6 +5340,16 @@ font-weight: 300;
     left: 50%;
     transform: translateX(-50%);
     top: 100px;
+}
+
+@media only screen and (max-width: 768px) {
+
+
+#upserveolo .order-modal{
+  .yellow-bg-test {
+    height: 100px;
+  }
+}
 }
 
 </style>
