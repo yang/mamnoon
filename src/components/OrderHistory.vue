@@ -7,7 +7,7 @@
 <table class="w100">
     <th class="w100">
        <td class="hide-mob"><div>restaurant</div></td>
-        <td class="w-5"><div>date</div></td>
+        <td class="w-5 hide-mob"><div>date</div></td>
         <td class="w-20"><div>items</div></td>
         <td><div class="text-right-mob"> price</div></td>
         <td class="hide-mob"><div>pay method</div></td>
@@ -24,14 +24,14 @@
     <b> {{order.orderInfo.restaurant.toLowerCase()}}</b>
     </div>
 </td>
- <td class="w-5"><div>
+ <td class="w-5 hide-mob"><div>
     <span class="smblk">
 {{order.orderInfo.time_placed | formatDate}}
 </span>
 </div></td>
  <td class="w-20"><div>
+    <b class="mobile orderDetail"> {{order.orderInfo.restaurant.toLowerCase()}}</b> <i class="small-message grey orderDetail">{{order.orderInfo.time_placed | formatDate}}</i>
 <ul class="order-items">
-    <b class="mobile"> {{order.orderInfo.restaurant.toLowerCase()}}</b>
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId">
     {{item.quantity}} x
 {{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
@@ -343,21 +343,15 @@ display: none !important;
 }
 }
 
-.order-items{
-    .mobile{
+.orderDetail{
         display: none;
     }
-}
 
 @media only screen and (max-width: 768px) {
 
-
-.order-items{
-    .mobile{
-        display: block;
+.orderDetail{
+        display: inline;
     }
-}
-
 }
 
 
