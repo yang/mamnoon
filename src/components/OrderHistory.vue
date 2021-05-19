@@ -119,10 +119,10 @@ export default {
 
 if(order.restaurant === 'Mamnoon'){
      this.$router.push("/mamnoon");
-               location.reload();
+            //    location.reload();
 }else{
      this.$router.push("/mamnoonstreet");
-               location.reload();
+            //    location.reload();
 }
 
 
