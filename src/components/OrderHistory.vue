@@ -21,7 +21,7 @@
 <tr class="w100" v-for="order in orderhistory.user.slice().reverse()" :key="order._id">
  <td class="hide-mob">
     <div>
-        {{order.orderInfo.restaurant}}
+    <b> {{order.orderInfo.restaurant.toLowerCase()}}</b>
     </div>
 </td>
  <td class="w-5"><div>
@@ -31,6 +31,7 @@
 </div></td>
  <td class="w-20"><div>
 <ul class="order-items">
+    <b class="mobile"> {{order.orderInfo.restaurant.toLowerCase()}}</b>
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId">
     {{item.quantity}} x
 {{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
@@ -340,6 +341,23 @@ display: none !important;
 .w-20{
     width: 30% !important;
 }
+}
+
+.order-items{
+    .mobile{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+
+.order-items{
+    .mobile{
+        display: block;
+    }
+}
+
 }
 
 
