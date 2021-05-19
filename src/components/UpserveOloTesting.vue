@@ -4681,9 +4681,9 @@ if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
     }
   
 
-  if(this.currentOrder){
+  // if(this.currentOrder){
     this.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
-  }
+  // }
 
 
 this.$nextTick(function() {
