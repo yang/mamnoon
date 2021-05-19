@@ -25,8 +25,7 @@
         <template v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) ||!item.timing_mask">
                   
                   <div class="block text-left mb10">
-                      <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-                      </a>
+                      <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
        
                                  
                                                                                                      {{ item.item_ids.length}}
@@ -44,11 +43,7 @@
   <template v-for="(item, index) in upserveSections">
   <template v-if="noFiltering">
         <div class="block text-left mb10">
-     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-
-
-
-     </a>
+     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
   
 
                                    
@@ -60,12 +55,7 @@
   <template v-else>
     <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">
           <div class="block text-left mb10">
-    <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-
-
-
-
-    </a>
+    <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
     
 
 
@@ -86,12 +76,7 @@
  <template v-if="noFiltering && item.name !== 'featured item'">
   <template v-if="item.timing_mask === item.timing_mask">
         <div class="block text-left mb10">
-     <a @click="toggleExpand(false)" :index="index"  :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-
-
-
-
-     </a>
+     <a @click="toggleExpand(false)" :index="index"  :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
      
 
                            
@@ -105,10 +90,7 @@
 <template v-else>
   <template v-if="item.timing_mask === null">
         <div class="block text-left mb10">
-     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-
-
-     </a>
+     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
  
 
                                       
@@ -119,10 +101,7 @@
   <template v-else>
     <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
          <div class="block text-left mb10">
-       <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-
-
-       </a>
+       <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
    
 
                                                                                                      {{ item.item_ids.length}}
@@ -302,7 +281,7 @@ width: max-content;
     position: absolute;
     top: 50px;
     /* top: 132px; */
-    width: 400px !important;
+    width: 300px !important;
     height: auto;
     overflow: scroll;
     left: 0;

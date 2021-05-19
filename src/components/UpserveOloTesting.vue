@@ -476,7 +476,19 @@ add
 
           <div class="add-to-order-footer">
  <button  style="margin-right: 10px;" class="float-right" @click="emptyReOrderObject()">cancel  </button>  &nbsp;&nbsp;
- <button class="float-right" style="margin-right: 10px;" @click="addToAllItemsToOrder(reOrder.charges.items)">add everything to cart  </button>   &nbsp;&nbsp;
+
+
+ <button class="float-right" style="margin-right: 10px;" @click="addToAllItemsToOrder(reOrder.charges.items)">
+   <template v-if="reOrder.charges.items.length > 1"> 
+   add everything to order
+   </template>
+    <template v-else> 
+   add item to order
+   </template>
+   </button>   &nbsp;&nbsp;
+
+
+
 
           </div>
 
@@ -3980,8 +3992,18 @@ removeFromOrder(removal) {
         document.getElementById("minus-" + drawer).classList.remove("visible");
       }
     },
+addToAllItemsToOrder(items){
 
 
+let self = this
+
+items.forEach(function(x){
+  self.addToOrderFromReorder(x)
+});
+
+  this.emptyReOrderObject()
+
+},
     addToOrderFromReorder(item) {
       let modifierPriceTotal = 0;
       for (let i = 0; i < item.modifiers.length; i++) {

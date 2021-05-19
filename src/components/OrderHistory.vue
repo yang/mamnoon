@@ -13,7 +13,8 @@
         <td class="hide-mob"><div>pay method</div></td>
         <!-- <td><div>delivery/pickup</div></td> -->
        <td class="hide-mob w-5"><div style="text-align: right;">status</div></td>
-        <td v-if="currentUser.currentUserEmail === 'joe.waine@gmail.com'"><div style="text-align: right;">actions</div></td>
+        <!-- <td v-if="currentUser.currentUserEmail === 'joe.waine@gmail.com'"><div style="text-align: right;">actions</div></td> -->
+                <td><div style="text-align: right;">actions</div></td>
 </th>   
 
 <template v-if="orderhistory">
@@ -77,7 +78,9 @@ debit/credit
 
 
       <!-- {{order.orderInfo.restaurant}} -->
-<button v-if="currentUser.currentUserEmail === 'joe.waine@gmail.com' && order.orderInfo.restaurant === 'Mamnoon'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order</button>
+
+<button v-if="order.orderInfo.restaurant === 'Mamnoon'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order</button>
+<!-- <button v-if="currentUser.currentUserEmail === 'joe.waine@gmail.com' && order.orderInfo.restaurant === 'Mamnoon'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order</button> -->
 <!-- <pre>{{order.orderInfo}}</pre> -->
 </div></td>
 </tr>
