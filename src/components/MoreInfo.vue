@@ -496,9 +496,12 @@ opacity:.5;
 
 }
 
-
+.menuBarClickModal .inside a.inline,
 .inline{
   display: inline;
 }
+
+
+
 
 </style>
