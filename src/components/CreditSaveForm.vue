@@ -42,7 +42,7 @@
 
 </div>
 
-<template v-if="savedCards.length > 0">
+<template v-if="savedCards && savedCards.length > 0">
 <div id="credit-save-table" class="col-12 col-lg-12 creditcards-list no-lr-pad">
 <table class="w100">
 
@@ -304,11 +304,10 @@ console.log(response)
         email,
         approvalData
       }) 
-      console.log('check credit card length')
 
 
-      console.log(response.data.user)
-     if(response.data.user.length > 0){
+
+     if(response.data && response.data.user && response.data.user.length > 0){
       swal("this card has already been saved to your account");
                this.ccBillingPostalCode = null
                this.ccBillingAddress = null
@@ -500,7 +499,7 @@ let self = this
         .get("/user/email/" + this.emailAddress)
         .then(function (response) {
           let userInfo = response.data;
-          console.log(userInfo);
+          // console.log(userInfo);
           self.user = userInfo
 self.cardNumberInput = userInfo.user.giftcard
 self.preferredGiftCard = userInfo.user.giftcard

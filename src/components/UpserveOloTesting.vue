@@ -416,7 +416,7 @@
 <!-- .storeCurrentOrder -->
 <!-- emptyReOrderObject -->
 <!-- reOrder -->
-<template v-if="reOrder.id && $store.state.storeCurrentOrder.id">
+<template v-if="reOrder && $store.state.storeCurrentOrder && reOrder.id && $store.state.storeCurrentOrder.id">
 
 
 
@@ -2091,7 +2091,7 @@ return this.currentOrder.tipSelected === i
     reOrder:{
       handler(val){
 console.log('reorder changes')
-console.log(this.reOrder)
+// console.log(this.reOrder)
 
       }
       },
@@ -2102,7 +2102,7 @@ console.log(this.reOrder)
       let self = this;
 
 
-    if(self.orderHistory){
+    if(self.orderHistory && self.orderHistory.user){
       for(var order in self.orderHistory.user.slice().reverse()){
       for(var item in self.orderHistory.user[order].orderInfo.charges.items){
         if(!self.orderHistoryList.some(itemIndex => itemIndex.item === self.orderHistory.user[order].orderInfo.charges.items[item].item_id)){
@@ -2762,6 +2762,7 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
     },
     clearOrderAndReRoute(){
 
+      if(this.currentOrder){
 
           this.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
           this.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
@@ -2771,7 +2772,7 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
           this.$store.commit("orderCMR", { orderCMR });
           this.$router.push("/orderconfirmation");
 
-
+        }
     },
     handleClickSignInForCard(emailAddress,approvalData) {
       let self = this
@@ -4085,7 +4086,7 @@ items.forEach(function(x){
     },
     addToOrderDontCloseModal(item) {
 
-console.log(item)
+
       document.getElementById("add-" + item.id).disabled = true;
       document.getElementById("remove-" + item.id).disabled = false;
 
@@ -4316,23 +4317,11 @@ self.handleClickSignInForCard(self.emailAddress,approvalData)
     }
   });
 
-
-
-          // if (confirm("log in/create an account and save card ending in " + approvalData.maskedAccount.replace('************','') + " for future use?")) {
-          //   self.handleClickSignInForCard(self.emailAddress,approvalData)
-          // }
         }
 
 
 
 
-          // self.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
-          // self.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
-          // let newDate = new Date();
-          // self.currentOrder.time_placed = newDate;
-          // self.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-          // self.$store.commit("orderCMR", { orderCMR });
-          // self.$router.push("/orderconfirmation");
 
         })
         .catch((e) => {
@@ -4691,8 +4680,10 @@ if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
       this.$store.commit("drawerTrue", { drawerTrue });
     }
   
-    this.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
 
+  if(this.currentOrder){
+    this.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29)
+  }
 
 
 this.$nextTick(function() {

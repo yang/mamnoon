@@ -173,11 +173,8 @@ export default {
     },
     cardNumberInput(oldcardNumberInput, newcardNumberInput){
 // console.log(oldNumberInput)
-console.log(newcardNumberInput)
-
-
-
-console.log(this.cardNumberInput)
+// console.log(newcardNumberInput)
+// console.log(this.cardNumberInput)
 
 this.lookupBalance()
 
@@ -365,7 +362,7 @@ let self = this
         .get("/user/email/" + this.emailAddress)
         .then(function (response) {
           let userInfo = response.data;
-          console.log(userInfo);
+          // console.log(userInfo);
           self.user = userInfo
 
 

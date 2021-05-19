@@ -9,7 +9,9 @@
 <div class="col-sm-6">
   <br>
   <b>email:</b><br>
+<template v-if="user && user.user && user.user.email">
 {{user.user.email}}
+</template>
 <br><br>
   </div>
     </div>
@@ -396,7 +398,7 @@ let self = this
         .get("/user/email/" + this.emailAddress)
         .then(function (response) {
           let userInfo = response.data;
-          console.log(userInfo);
+          // console.log(userInfo);
           self.user = userInfo
 self.cardNumberInput = userInfo.user.giftcard
 self.preferredGiftCard = userInfo.user.giftcard
