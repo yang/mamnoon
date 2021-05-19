@@ -79,6 +79,12 @@
 <span>
   <span v-if="card.approvalData.accountCardType === 'VS'" class="visa-xs"></span>
 <span v-else-if="card.approvalData.accountCardType === 'MC'" class="mastercard-xs"></span>
+
+<span v-else-if="card.approvalData.accountCardType === 'JC'" class="jcb-xs"></span>
+<span v-else-if="card.approvalData.accountCardType === 'DN'" class="dinersclub-xs"></span>
+<span v-else-if="card.approvalData.accountCardType === 'DC'" class="discover-xs"></span>
+<span v-else-if="card.approvalData.accountCardType === 'AX'" class="amex-xs"></span>
+
 <span class="desktop">ends in</span>  {{card.approvalData.maskedAccount.replace('************','')}}
 
 <br>

@@ -2303,7 +2303,7 @@ if(itemsToRemove.length === 1){
 
 
         this.$swal({ 
-           text: removalItems + ' is not available at the new day you have selected and has been removed from your order.'
+           title: removalItems + ' is not available at the new day you have selected and has been removed from your order.'
           });
 
 
@@ -2312,7 +2312,7 @@ if(itemsToRemove.length === 1){
 
 
         this.$swal({ 
-           text: removalItems + ' are not available at the new day you have selected and have been removed from your order.'
+           title: removalItems + ' are not available at the new day you have selected and have been removed from your order.'
           });
 
 
@@ -4254,7 +4254,7 @@ items.forEach(function(x){
 
       console.log('do an order')
       let self = this;
-      console.log(this.oloEndpoint)
+      // console.log(this.oloEndpoint)
       console.log(currentOrder)
       this.$http.post(this.oloEndpoint, currentOrder)
         .then((response) => {
