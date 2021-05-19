@@ -2237,11 +2237,11 @@ if(this.user){
   //  }
 
     if(this.title === 'Mamnoon'){
-        // let storeCurrentOrderUpdateMamnoon = curOr;
-        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+        let storeCurrentOrderUpdateMamnoon = curOr;
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
 
-        let storeCurrentOrderUpdateMamnoonTesting = curOr;
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });
+        // let storeCurrentOrderUpdateMamnoonTesting = curOr;
+        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });
 
     }else if(this.title === 'Mamnoon Street'){
         let storeCurrentOrderUpdateStreet = curOr;

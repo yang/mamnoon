@@ -1,16 +1,16 @@
 <template>
   <div class="mamnoon-street">
     <Nav />
-    <UpserveOlo :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :userData="user" :menuEndpoint="'/product/upserveolostreet'" :emailAddress="$store.state.currentUserEmail" />
+    <UpserveOloTesting :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :userData="user" :menuEndpoint="'/product/upserveolostreet'" :emailAddress="$store.state.currentUserEmail" />
   </div>
 </template>
 <script>
-import UpserveOlo from "@/components/UpserveOlo";
+import UpserveOloTesting from "@/components/UpserveOloTesting";
 import Nav from "@/components/Nav";
 export default {
   components: {
     Nav,
-    UpserveOlo
+    UpserveOloTesting
   }
 };
 </script>
