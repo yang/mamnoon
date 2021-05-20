@@ -408,7 +408,7 @@
       <div class="container no-pad"> 
       <h4 class="text-left red">full menu</h4>
 
-{{this.currentOrder}}
+<!-- {{this.currentOrder}} -->
 
 
 
