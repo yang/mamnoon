@@ -442,6 +442,7 @@
 <div class="yellow-bg-test">
   <div class="half-width2left">
     <div class="content-box">
+      <!-- {{item}} -->
       <div class="name">{{item.quantity}} x {{item.name}}</div>
       <!-- <div class="food-description">chickpeas, garlic, lemon, tahini (served with 4 pita)</div> -->
       <div class="food-price"> $8 </div>
@@ -706,7 +707,7 @@ add
                                                                                                       <div class="content-box">
 
 
-
+<!--{{serve.id}}-->
 
 
 
@@ -789,6 +790,7 @@ add
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
+                                                                                                        <!--{{serve.id}}-->
                                                                                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                                                                                                           <div class="name">{{serve.name}}</div>
                                                                                                           <div
@@ -852,6 +854,7 @@ add
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
+                              <!--{{serve.id}}-->
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
@@ -1019,6 +1022,7 @@ add
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
+                                                                                                         <!--{{serve.id}}-->
                                                                                                        <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                                                                                                           <div class="name">{{serve.name}}</div>
                                                                                                           <div
@@ -1087,6 +1091,7 @@ add
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
+                               <!--{{serve.id}}-->
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
@@ -1146,6 +1151,7 @@ add
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
+                               <!--{{serve.id}}-->
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
@@ -1930,7 +1936,7 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
+<!-- <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre> -->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -4006,6 +4012,8 @@ items.forEach(function(x){
 
 },
     addToOrderFromReorder(item) {
+
+      console.log(item)
       let modifierPriceTotal = 0;
       for (let i = 0; i < item.modifiers.length; i++) {
         modifierPriceTotal =
@@ -4020,7 +4028,7 @@ items.forEach(function(x){
           Math.random().toString(36).substr(2, 29) +
           "_" +
           Math.random().toString(36).substr(2, 29),
-        item_id: item.id,
+        item_id: item.item_id,
         price: item.price_cents,
         price_cents: item.price_cents,
         instructions: item.instructions,
