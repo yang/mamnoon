@@ -542,8 +542,6 @@ add
               </template>
 
 
-<!-- {{selectedTime}} -->
-<!-- {{selectedDate}} -->
               <template v-if="valid">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown">
@@ -2094,6 +2092,30 @@ return this.currentOrder.tipSelected === i
     }
   },	
   watch: {
+    rendered:{
+      handler(val){
+
+
+
+
+
+
+
+if(window.location.search){
+
+
+      let filteredSelection = this.dropDownDays.filter(function(x){
+        return x.dateFormatted === window.location.search.substring(1);
+      });
+
+      console.log(filteredSelection)
+      this.selectedDate = filteredSelection[0]
+
+}
+
+
+      }
+      },
     reOrder:{
       handler(val){
 console.log('reorder changes')
@@ -2470,6 +2492,7 @@ if(newAddress){
     },
   data() {
   return {
+    fetchedDate: '',
     reOrder: {},
     orderHistoryList: [],
     orderHistory: null,
@@ -4501,7 +4524,7 @@ dropDown(){
         })
 
 
-         for(let i = 0;i<7;i++){
+         for(let i = 0;i<42;i++){
           let tomorrow = new Date(today)
           tomorrow.setDate(tomorrow.getDate() + i)
 
@@ -4567,7 +4590,6 @@ this.setTip(0)
 
 
 
-// <button @click="$store.commit('upserveOrderCurrentOrder', {})">empty reorder object</button>  
 
 
 // if(this.$store.state.upserveOrderCurrentOrder !== {}){
