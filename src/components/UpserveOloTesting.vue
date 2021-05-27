@@ -1689,7 +1689,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled, disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -1698,7 +1698,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -1787,7 +1787,7 @@ cart empty
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 
-<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled, disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -1799,7 +1799,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 
@@ -2492,6 +2492,7 @@ if(newAddress){
     },
   data() {
   return {
+    disabledButton: false,
     fetchedDate: '',
     reOrder: {},
     orderHistoryList: [],
@@ -2950,10 +2951,40 @@ console.log(email, approvalData)
 
 
   },
-            async tokenizedPayment(orderTotal,transId){
-console.log(orderTotal)
+  confirmTokenizedPayment(orderTotal,transId){
 
-console.log(transId)
+    let decvalue = orderTotal/100
+
+  this.$swal({ 
+    title: "confirm saved card payment for $" + decvalue.toFixed(2).replace('.00', '') + " ?",
+    showDenyButton: true,
+    confirmButtonText: `Confirm`
+  }).then((confirmed) => {
+    if (confirmed) {
+
+      if(confirmed.isConfirmed){
+  
+        this.disabledButton = true;
+        this.tokenizedPayment(orderTotal,transId);
+
+      }
+
+    } else {
+
+    }
+  });
+
+
+
+  },
+            async tokenizedPayment(orderTotal,transId){
+
+
+
+////////
+
+
+
 
       try {
         let response = await this.$http.post("/credit/tokenizedpayment/",{
@@ -3013,6 +3044,10 @@ this.toggledDrawer = false
          } catch (err) {
         console.log(err.response);
       }
+            
+//////
+
+
 
 
 

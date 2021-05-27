@@ -79,7 +79,6 @@
 <span>
   <span v-if="card.approvalData.accountCardType === 'VS'" class="visa-xs"></span>
 <span v-else-if="card.approvalData.accountCardType === 'MC'" class="mastercard-xs"></span>
-
 <span v-else-if="card.approvalData.accountCardType === 'JC'" class="jcb-xs"></span>
 <span v-else-if="card.approvalData.accountCardType === 'DN'" class="dinersclub-xs"></span>
 <span v-else-if="card.approvalData.accountCardType === 'DC'" class="discover-xs"></span>
@@ -318,8 +317,7 @@ console.log(response)
                this.ccBillingPostalCode = null
                this.ccBillingAddress = null
                this.ccBillingName = null
-
-    this.showAddCardFormVisible = false
+                this.showAddCardFormVisible = false
 
       }else{
     this.sendApprovalDataToMongo(email, approvalData)
