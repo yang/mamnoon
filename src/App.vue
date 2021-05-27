@@ -1731,7 +1731,7 @@ display: flow-root;
    padding: 10px !important;
         h2{
             color: #fff367 !important;
-            font-size: 20px !important;
+            font-size: 16px !important;
             margin-bottom: 4px !important;
         }
     }
