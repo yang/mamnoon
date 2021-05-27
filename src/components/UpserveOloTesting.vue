@@ -1934,7 +1934,7 @@ cart empty
       
       </div>
       </section>
-<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<!-- <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre> -->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -2397,7 +2397,7 @@ if(itemsToRemove.length === 1){
 
 
         this.$swal({ 
-           text: removalItems + ' is not available at the new day you have selected and has been removed from your order.'
+           title: removalItems + ' is not available at the new day you have selected and has been removed from your order.'
           });
 
 
@@ -2405,7 +2405,7 @@ if(itemsToRemove.length === 1){
 }else if(itemsToRemove.length>1){
 
         this.$swal({ 
-           text: removalItems + ' are not available at the new day you have selected and have been removed from your order.'
+           title: removalItems + ' are not available at the new day you have selected and have been removed from your order.'
           });
 
 
