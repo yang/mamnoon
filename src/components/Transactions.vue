@@ -4,6 +4,9 @@
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <div class="container nav-acc-header pad-yellow-background">
           <ul class="navbar-nav">
+              <li>
+              <router-link to="/packages">packages</router-link>
+            </li>
             <li>
               <router-link to="/admin">go to retail admin</router-link>
             </li>
