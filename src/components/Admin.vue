@@ -3,6 +3,14 @@
 
 
 <section>
+<PackagesAdmin />
+
+
+
+  </section>
+
+
+<section>
 
 
      <AllShippingTransactions />
@@ -253,6 +261,7 @@ import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
 import AllShippingTransactions from "@/components/AllShippingTransactions";
 
+import PackagesAdmin from "@/components/PackagesAdmin";
 
 import OrderConfirmationModal from "@/components/OrderConfirmationModal"
 import OnlineMenuCarousel from "@/components/OnlineMenuCarousel";
@@ -292,7 +301,8 @@ export default {
     Next,
     Prev,
     NadiIcon,
-    NadiIconSm
+    NadiIconSm,
+    PackagesAdmin
   },
   computed: {	
     totalWeight(){

@@ -128,6 +128,7 @@ if(order.restaurant === 'Mamnoon'){
 
         },
     retrieveOrders() {
+        console.log('retriev orders frome end')
     let self = this
         this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
 // this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {

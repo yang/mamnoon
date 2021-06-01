@@ -61,7 +61,7 @@ shipping order history:
 <script>  
 
 export default {
-    data( ) {
+    data() {
     return {
         orderhistory: null,
         response: null
