@@ -1946,7 +1946,7 @@ cart empty
       
       </div>
       </section>
-<!-- <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre> -->
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -2705,6 +2705,50 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+
+decrementIfMatch(currentOrder){
+
+
+let self = this;
+// console.log(currentOrder.charges.items);
+
+
+if(self.packages){
+// console.log('self.packages');
+// console.log(self.packages);
+   for(let i = 0;i < currentOrder.charges.items.length;i++){
+    console.log('currentOrder.charges.items[i]');
+ console.log(currentOrder.charges.items[i]);
+
+
+console.log('self.packages');
+console.log(self.packages);
+
+      let result = self.packages.find(pack => {
+        return pack.upserveId === currentOrder.charges.items[i].item_id
+      });
+console.log('result');
+console.log(result);
+self.decrementPackageByUpserveId(result.upserveId);
+
+}
+
+
+}
+
+},
+      async decrementPackageByUpserveId(id) {
+            console.log('retriev orders frome')
+            console.log(id);
+                 console.log('end id')
+            let decrementPack = await this.$http.post(`/package/decrementpackagebyupserveid`, {
+                upserveId: id
+              });
+
+        let decrementPackResponse = decrementPack.data;
+        console.log(decrementPackResponse);
+        },
     async retrievePackages() {
 
     console.log('retriev orders frome')
@@ -4307,6 +4351,14 @@ items.forEach(function(x){
         .post("/order/addorder", infoForPayStringify)
         .then((response) => {
 
+
+
+
+
+          // decrement if match
+
+          self.decrementIfMatch(self.currentOrder);
+
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
           self.orderCMR = currentOrder;
@@ -4404,6 +4456,13 @@ items.forEach(function(x){
       console.log(currentOrder)
       this.$http.post(this.oloEndpoint, currentOrder)
         .then((response) => {
+
+
+
+
+//decrement if currentOrder
+self.decrementIfMatch(self.currentOrder);
+
           console.log('response happen');
           console.log(response);
           self.orderConfirmationModal = true;
@@ -4702,6 +4761,7 @@ this.setTip(0)
     }
   },
   mounted() {
+
 
 
 this.retrievePackages();
