@@ -20,6 +20,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 
+
 // auth
 import { domain, clientId } from "../auth_config.json";
 import { Auth0Plugin } from "./auth";
@@ -53,7 +54,7 @@ Vue.use(VueSweetalert2);
 
 const base = axios.create({
   baseURL: "https://young-hamlet-03679.herokuapp.com"
-  //baseURL: "http://localhost:4000"
+  // baseURL: "http://localhost:4000"
 }); 
 
 

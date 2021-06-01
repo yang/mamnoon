@@ -3,13 +3,13 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import AxiosPlugin from 'vue-axios-cors';
 
-
+import Datepicker from 'vuejs-datepicker';
 
 Vue.use(AxiosPlugin)
 Vue.use(VueRouter);
 
 
-
+Vue.use(Datepicker)
 
 
 const routes = [
@@ -45,6 +45,14 @@ const routes = [
     path: "/mamnoon",
     name: "mamnoon",
     component: () => import("../views/mamnoon.vue")
+  },
+  {
+    path: "/packages",
+    name: "packages",
+    component: () => import("../views/packages.vue"),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/mamnoontesting",

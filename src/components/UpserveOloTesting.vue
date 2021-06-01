@@ -408,6 +408,9 @@
       <div class="container no-pad"> 
       <h4 class="text-left red">full menu</h4>
 
+
+
+<!-- {{packages}} -->
 <!-- {{this.currentOrder}} -->
 
 
@@ -697,7 +700,8 @@ add
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class="row no-lr-margin">
-                                            <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
+                                            <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
+                                         
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
@@ -716,9 +720,9 @@ add
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description | truncate(100, '...')}}</div>
+                                                                                                          >{{serve.description | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
-                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}
+                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                                                                                                           </div>
                                                                                                           <br />
                                                                                                         </div>
@@ -782,21 +786,23 @@ add
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class=" row no-lr-margin">
-                                            <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
+                                            <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
+                                      
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
                                                                                                         <!--{{serve.id}}-->
+                                                                                       
                                                                                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                                                                                                           <div class="name">{{serve.name}}</div>
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description | truncate(140, '...')}}</div>
+                                                                                                          >{{serve.description | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
-                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}
+                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}            <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                                                                                                           </div>
                                                                                                           <br />
                                                                                                         </div>
@@ -846,21 +852,23 @@ add
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class=" row no-lr-margin">
-                <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
+                <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
+                    
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
                               <!--{{serve.id}}-->
+                 
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description | truncate(140, '...')}}</div>
+                              >{{serve.description | truncate(60, '...')}}</div>
                               <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
+                                ${{ serve.price_cents.toFixed(2)/100}}            <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                               </div>
                               <br />
                             </div>
@@ -1013,22 +1021,23 @@ add
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class=" row no-lr-margin">
-                                            <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
-                                
+                                            <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
+      
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
                                                                                                       <div class="content-box">
                                                                                                          <!--{{serve.id}}-->
+                                                                                                 
                                                                                                        <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                                                                                                           <div class="name">{{serve.name}}</div>
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description | truncate(140, '...')}}</div>
+                                                                                                          >{{serve.description | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
-                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}
+                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}      <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                                                                                                           </div>
                                                                                                           <br />
                                                                                                         </div>
@@ -1082,22 +1091,23 @@ add
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class=" row no-lr-margin">
-                <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
-              
+                <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
+           
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
                                <!--{{serve.id}}-->
+                     
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description | truncate(140, '...')}}</div>
+                              >{{serve.description | truncate(60, '...')}}</div>
                               <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
+                                ${{ serve.price_cents.toFixed(2)/100}}       <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                               </div>
                               <br />
                             </div>
@@ -1143,21 +1153,23 @@ add
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class=" row no-lr-margin">
-                <div class="filtree-full-testing" v-for="piece in item.item_ids" :key="piece">
+                <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
+                
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
                             <div class="content-box">
                                <!--{{serve.id}}-->
+                     
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{serve.name}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description | truncate(140, '...')}}</div>
+                              >{{serve.description | truncate(60, '...')}}</div>
                               <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}
+                                ${{ serve.price_cents.toFixed(2)/100}}       <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                               </div>
                               <br />
                             </div>
@@ -2492,6 +2504,7 @@ if(newAddress){
     },
   data() {
   return {
+    packages: null,
     disabledButton: false,
     fetchedDate: '',
     reOrder: {},
@@ -2692,6 +2705,13 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    async retrievePackages() {
+
+    console.log('retriev orders frome')
+    let responseUpserve = await this.$http.get(`/package/retrieve`);
+    this.packages = responseUpserve.data.packs;
+
+    },
 emptyReOrderObject(){
 
 this.$store.commit('upserveOrderCurrentOrder', {});
@@ -2706,7 +2726,63 @@ var result = jsObjects.find(obj => {
 })
 
 },
+
+    checkIfPackageAvailable(itemid){
+      if(this.packages){
+      let result = this.packages.find(pack => {
+        return pack.upserveId === itemid
+      });
+
+// console.log(result);
+if(result !== undefined){
+
+
+
+if(result.number === 0){
+  return false;
+}else{
+  return true;
+}
+
+}else{
+return true;
+}
+
+    }
+
+      },
+
+
+
+
+checkIfPackage(itemid){
+      if(this.packages){
+      let result = this.packages.find(pack => {
+        return pack.upserveId === itemid
+      });
+
+// console.log(result);
+if(result !== undefined){
+
+
+
+if(result.number === 0){
+  return 'sold out'
+}else{
+  return ' (' + result.number + ' remain)';
+}
+
+}else{
+  // return 'dsf';
+}
+
+    }
+
+      },
+
     checkIfOrdered(itemid){
+
+      // console.log(itemid);
       if(this.orderHistoryList){
 
 
@@ -2714,6 +2790,7 @@ var result = this.orderHistoryList.find(obj => {
   return obj.item === itemid
 })
 
+// console.log(result);
 if(result !== undefined){
         let order = moment(String(result.date));
         return 'ordered on ' + order.tz('America/Los_Angeles').format('MM/DD')
@@ -4627,7 +4704,7 @@ this.setTip(0)
   mounted() {
 
 
-
+this.retrievePackages();
 
 
 // if(this.$store.state.upserveOrderCurrentOrder !== {}){
@@ -4794,6 +4871,19 @@ this.currentOrder.scheduled_time = null
     font-size: 12px;
     font-style: italic;
 }
+
+
+
+
+.checkIfPackage{
+  color: #f47495;
+  font-weight: 600;
+    // position: absolute;
+    //  bottom: 23px;
+    font-size: 12px;
+    font-style: italic;
+}
+
 
 .stickyPosition{
   background: #fff;
