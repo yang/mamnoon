@@ -2107,23 +2107,42 @@ return this.currentOrder.tipSelected === i
     rendered:{
       handler(val){
 
+console.log(this.title);
+let startdate = window.location.search.substring(1);
+var new_date = moment(startdate, "YYYY-MM-DD").add('days', 1);
+
+var day = new_date.format('DD');
+var month = new_date.format('MM');
+var year = new_date.format('YYYY');
 
 
 
 
+let correctDate = year + '-' + month + '-' + day;
+
+if(this.title === 'Mamnoon' && window.location.search){
 
 
-if(window.location.search){
 
+  // console.log(moment(window.location.search.substring(1)).add(1,'days'));
+
+
+console.log(correctDate);
+console.log(this.dropDownDays[0].dateFormatted);
 
       let filteredSelection = this.dropDownDays.filter(function(x){
-        return x.dateFormatted === window.location.search.substring(1);
+        return x.dateFormatted === correctDate;
       });
 
-      console.log(filteredSelection)
+      // console.log(filteredSelection)
       this.selectedDate = filteredSelection[0]
 
 }
+
+
+
+
+
 
 
       }
