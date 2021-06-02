@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import NewHome from "../views/NewHome.vue";
 import AxiosPlugin from 'vue-axios-cors';
 
 import Datepicker from 'vuejs-datepicker';
@@ -17,6 +18,11 @@ const routes = [
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/newhome",
+    name: "newhome",
+    component: NewHome
   },
   {
     path: "/mamnoonff",
@@ -92,6 +98,11 @@ const routes = [
     name: "login",
     component: () => import("../views/login.vue")
   },
+  // {
+  //   path: "/register",
+  //   name: "register",
+  //   component: () => import("../views/register.vue")
+  // },
   {
     path: "/loginauth",
     name: "loginauth",

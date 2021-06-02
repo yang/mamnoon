@@ -1,4 +1,7 @@
 <template>
+      <div class="container home-page">
+        <div class="row">
+          <div class="col-md-12">
   <section :id="tag" class="section hero is-primary is-fullheight position-relative mb-80" :if="visible">
         <h4 class="mob-bottom-margin">{{header}}</h4>
        <p class="description-para noselect hide-mobile">{{description}}</p>
@@ -10,6 +13,7 @@
 </div>
 </div>
 </section>
+</div></div></div>
 </template>
 
 <script>

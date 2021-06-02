@@ -1,45 +1,62 @@
 <template>
 <div class="container pad-yellow-background pd50">
 <!-- {{currentUser.currentUserEmail}} -->
+
+<br>
+<!-- {{response}} -->
+<h1>number of orders: {{orderhistory.user.length}}</h1>
+<br>
 <br>
 order history:
 <hr>
 <br>
-<!-- {{response}} -->
-
 <div v-for="order in orderhistory.user.slice().reverse()" :key="order._id" class="position-relative">
-  {{order.orderInfo.confirmation_code}}
+  confirmation code: {{order.orderInfo.confirmation_code}}
 
 <!-- {{order.payInfo.externalTransactionId}} -->
 <br>
-preorder? {{order.orderInfo.preorder}}
+<!-- preorder? {{order.orderInfo.preorder}} -->
 <br>
-{{order.orderInfo.scheduled_time}}
+scheduled time: {{order.orderInfo.scheduled_time}}
 <br>
-{{order.orderInfo.time_placed}}
+time placed: {{order.orderInfo.time_placed}}
 <br>
 ${{order.orderInfo.charges.total | showToFixed}}
 <br>
 <h1 v-if="order.void">VOID</h1>
-<button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.uniqueTransId)">void</button>
+<!-- <pre> -->
+<!-- {{order.payInfo}} -->
+<!-- </pre> -->
+
+
+<template v-if="order.payInfo.data">
+<button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.data.uniqueTransId,true)">void</button>
+</template>
+
+<template v-if="order.payInfo.uniqueTransId">
+<button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.uniqueTransId,false)">void</button>
+</template>
+
+
+
 <br>
 <b>{{order.email}}</b>
-
+&nbsp;&nbsp;
 
 <button @click="toggleOrder(order.orderInfo.id)">show/hide full order data</button>
 
-<pre :id="'order-' + order.orderInfo.id" style="">
-  {{order.orderInfo}}
+<pre :id="'order-' + order.orderInfo.id" class="hidden">
+  {{order}}
 </pre>
 
 <br>customer name: {{order.orderInfo.fulfillment_info.customer.first_name}}
 <br>
-<template v-if="order.payInfo.externalTransactionId">
+<!-- <template v-if="order.payInfo.externalTransactionId">
 debit/credit purchase (id: {{order.payInfo.externalTransactionId}})
 </template>
 <template v-else>
 giftcard purchase
-</template>
+</template> -->
 <br>  
 <ul class="no-left-pad">
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
@@ -85,9 +102,19 @@ export default {
     methods: {
 toggleOrder(id){
 
-console.log(document.getElementById('order-'+id))
+
+let drawer = document.getElementById('order-'+id)
 
 
+// console.log(document.getElementById('order-'+id))
+
+if (drawer.classList.contains('hidden')) {
+    // do some stuff
+
+    drawer.classList.remove("hidden");
+}else{
+    drawer.classList.add("hidden");
+}
 
 
 
@@ -148,19 +175,20 @@ console.log(amountToSend)
           console.log(e);
         });
     },
-    issueVoid(uniqueTransIdString) {
+    issueVoid(uniqueTransIdString,data) {
 
       console.log(uniqueTransIdString)
       this.$http
         .post("/order/issue-void", {
             uniqueTransId: uniqueTransIdString,
+            data
           }
           )
         .then((response) => {
         console.log(response)
 
 
-      this.voidByTransId(uniqueTransIdString)
+      this.voidByTransId(uniqueTransIdString,data)
 
         })
         .catch((e) => {
@@ -169,12 +197,13 @@ console.log(amountToSend)
           console.log(e);
         });
     },
-    voidByTransId(uniqueTransIdString){
+    voidByTransId(uniqueTransIdString,data){
 
       console.log(uniqueTransIdString)
       this.$http
         .post("/order/void-transid", {
             uniqueTransId: uniqueTransIdString,
+            data
           }
           )
         .then((response) => {
@@ -221,6 +250,10 @@ h1{
   padding-left: 0;
 }
 
+
+pre.hidden{
+  display: none;
+}
 </style>
 
 
