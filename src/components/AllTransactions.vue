@@ -42,15 +42,16 @@ ${{order.orderInfo.charges.total | showToFixed}}
 <br>
 <b>{{order.email}}</b>
 &nbsp;&nbsp;
-
-<button @click="toggleOrder(order.orderInfo.id)">show/hide full order data</button>
-
-<pre :id="'order-' + order.orderInfo.id" class="hidden">
-  {{order}}
-</pre>
-
 <br>customer name: {{order.orderInfo.fulfillment_info.customer.first_name}}
 <br>
+<br>
+<button @click="toggleOrder(order.orderInfo.id)">show/hide full order data</button>
+
+<pre :id="'order-' + order.orderInfo.id" class="">
+  {{order}}
+</pre>
+<br>
+
 <!-- <template v-if="order.payInfo.externalTransactionId">
 debit/credit purchase (id: {{order.payInfo.externalTransactionId}})
 </template>
@@ -61,14 +62,15 @@ giftcard purchase
 <ul class="no-left-pad">
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
 <b>{{item.quantity}} x</b> {{item.name}}&nbsp;&nbsp;&nbsp;<b>${{item.price.toFixed()/100}}</b>&nbsp;&nbsp;&nbsp;
+<br>  
+&nbsp;&nbsp;
+&nbsp;&nbsp;
   <template v-if="item.returned">
   <span>(returned)</span>
   </template>
   <template v-else>
-<span class="line-link" v-if="!order.void" @click="issueTokenizedReturn(order.payInfo.uniqueTransId,item.price,item.cartId,order._id)"><u>issue return</u></span>
+<span class="line-link" v-if="!order.void" @click="issueTokenizedReturn(order.payInfo.uniqueTransId,item.price,order.orderInfo.charges.taxes/order.orderInfo.charges.preTotal,item.cartId,order._id)"><u>issue return</u></span>
   </template>
-
-
 
 </li>
 </ul>
@@ -125,14 +127,17 @@ if (drawer.classList.contains('hidden')) {
         self.orderhistory = response.data
     })
     },
-        issueTokenizedReturn(uniqueTransIdString,amount,cartId,orderId) {
+        issueTokenizedReturn(uniqueTransIdString,amount,taxRate,cartId,orderId) {
+
+// console.log(taxRate);
 
 
-
-
-let tax = amount * 0.101
+let tax = amount * taxRate
 
 let amountToCalcWithTax = amount + tax
+
+
+console.log(amountToCalcWithTax);
 
 let amountDiv100 = amountToCalcWithTax/100
 let amountToSend = amountDiv100.toFixed(2).toString()
