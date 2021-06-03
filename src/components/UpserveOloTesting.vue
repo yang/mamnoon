@@ -1,5 +1,5 @@
 <template>
-  <div id="upserveolo" :class='{smallerBoxes: currentItem && currentItem.name === "mamnoon @ home" || currentItem.name === "Street Combo" }'>
+  <div id="upserveolo" :class='{smallerBoxes: currentItem && returnCorrect }'>
       <!-- <div id="upserveolo"> -->
     <section>
 
@@ -2034,6 +2034,25 @@ export default {
     CartIcon
   },
   computed: {	
+    returnCorrect(){
+
+// this.currentItem.name
+
+if(this.currentItem){
+if(this.currentItem.name === "mamnoon @ home"|| this.currentItem.name === "Street Combo"){
+  return true
+  }else{
+    return false
+  }
+
+}else{
+  return false
+}
+// currentItem.name === "mamnoon @ home" || currentItem.name === "Street Combo"
+
+
+
+    },
 computedAddition(){
   
 
@@ -4780,7 +4799,7 @@ this.setTip(0)
     }
   },
   mounted() {
-
+console.log(this.returnCorrect);
 
 
 this.retrievePackages();
