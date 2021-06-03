@@ -4799,7 +4799,7 @@ this.setTip(0)
     }
   },
   mounted() {
-console.log(this.returnCorrect);
+// console.log(this.returnCorrect);
 
 
 this.retrievePackages();
