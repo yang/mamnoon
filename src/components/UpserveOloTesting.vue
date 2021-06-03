@@ -2763,13 +2763,15 @@ if(self.packages){
 console.log('self.packages');
 console.log(self.packages);
 
+
+if(self.packages.length > 0){
       let result = self.packages.find(pack => {
         return pack.upserveId === currentOrder.charges.items[i].item_id
       });
 console.log('result');
 console.log(result);
 self.decrementPackageByUpserveId(result.upserveId);
-
+   }
 }
 
 
