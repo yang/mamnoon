@@ -246,12 +246,13 @@ h2.menu-header {
   // padding: 0 18px;
   font-size: 18px;
   font-weight: 400;
+      margin-bottom: 10px;
 }
 
 
 @media only screen and (max-width: 992px) {
 h2.menu-header {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 }
@@ -260,7 +261,7 @@ h2.menu-header {
 
 @media only screen and (max-width: 600px) {
 h2.menu-header {
- padding-left: 10px;
+//  padding-left: 10px;
      padding-right: 10px;
      line-height: 1.4;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="upserveolo" :class='{smallerBoxes: currentItem && currentItem.name === "mamnoon @ home" }'>
+  <div id="upserveolo" :class='{smallerBoxes: currentItem && currentItem.name === "mamnoon @ home" || currentItem.name === "Street Combo" }'>
       <!-- <div id="upserveolo"> -->
     <section>
 
@@ -196,7 +196,7 @@
           <h4>{{currentItem.name}}</h4>
         </div>
         <div class="container modal-body order-modal-width order-modal-body">
-          <template v-if="currentItem.name !== 'mamnoon @ home'">
+          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo'">
           <div
             class="item-image-container"
             v-if="currentItem.images"
@@ -213,7 +213,7 @@
   
           <p class="item-description-p" :class="{noTopMarge: currentItem.name === 'mamnoon @ home'}">
                             <template v-if="currentItem.name === 'mamnoon @ home'">
-                     <b>{{currentItem.name}}</b><br>
+                    <b>{{currentItem.name}}</b><br>
                      </template>
                      {{currentItem.description}}</p>
         <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
@@ -223,14 +223,16 @@
 
           <template v-if="currentItem.modifier_group_ids">
           <div v-if="currentItem.modifier_group_ids.length >= 1">
-        <h4 v-if="currentItem.name === 'mamnoon @ home'" class="text-left">options</h4>
+        
+        <h4 v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Street Combo'" class="text-left">options</h4>
             <h4 v-else class="text-left">add ons</h4>
+       
             <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
                 <template v-if="modifieritem === modifier.id">
                   <div class="displayInlineBlock">
              
-                <template v-if="currentItem.name === 'mamnoon @ home'">
+                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
 
@@ -242,13 +244,13 @@
                                                 <template v-for="(m,i) in modifier.modifier_ids">
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
                                                   
-                                                  <template v-if="currentItem.name === 'mamnoon @ home'">
+                                                  <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
                                                   <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
-                                                            <div v-if="currentItem.name === 'mamnoon @ home'" class="hide-on-mob square">
+                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
-                                                            <template v-if="currentItem.name === 'mamnoon @ home'">
+                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
                                                                         <div style="position: absolute;top:0;width:100%">
                                                                               <NadiIconxx />
                                                                         </div>
@@ -352,7 +354,7 @@
           <div class="add-to-order-footer">
             item total: <b>${{computedAddition * currentItemQuanity }}</b>
             
-            <template v-if="currentItem.name === 'mamnoon @ home'">
+            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
                 <template v-if="allOptionsSelected">
                   <button
                   class="float-right"
