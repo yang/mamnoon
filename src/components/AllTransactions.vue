@@ -47,7 +47,7 @@ ${{order.orderInfo.charges.total | showToFixed}}
 <br>
 <button @click="toggleOrder(order.orderInfo.id)">show/hide full order data</button>
 
-<pre :id="'order-' + order.orderInfo.id" class="">
+<pre :id="'order-' + order.orderInfo.id" class="hidden">
   {{order}}
 </pre>
 <br>
@@ -258,6 +258,10 @@ h1{
 
 pre.hidden{
   display: none;
+}
+.line-link{
+  cursor: pointer;
+
 }
 </style>
 
