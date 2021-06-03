@@ -5588,4 +5588,12 @@ font-weight: 300;
 }
 }
 
+
+.content-box .name,
+.content-box .food-description,
+.menu-header{
+text-transform: lowercase;
+}
+
+
 </style>
