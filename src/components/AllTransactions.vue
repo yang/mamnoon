@@ -16,8 +16,10 @@ order history:
 <!-- {{order.payInfo.externalTransactionId}} -->
 <br>
 <!-- preorder? {{order.orderInfo.preorder}} -->
+<template v-if="order.orderInfo.preorder">
 <br>
 scheduled time: {{order.orderInfo.scheduled_time}}
+</template>
 <br>
 time placed: {{order.orderInfo.time_placed}}
 <br>

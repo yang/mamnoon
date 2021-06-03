@@ -98,8 +98,7 @@
           <scrollactive :offset="180" ref="scrollactive">   
              <ul id="menu">
                  <template v-for="item in pageData">
-                <div class="inline-link" v-if="item.tagname !== 'testimonials'">
-
+                <div class="inline-link" v-if="item.tagname !== 'testimonials' && item.tagname !== 'planahead'">
                     <li v-if="item.tagname">
                         <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
                     </li>
