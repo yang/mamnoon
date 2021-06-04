@@ -2992,7 +2992,7 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-          this.$store.commit("orderCMR", { orderCMR });
+          // this.$store.commit("orderCMR", { orderCMR });
           this.$router.push("/orderconfirmation");
 
         }
@@ -3021,6 +3021,7 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
           self.checkAndSend(self.emailAddress,approvalData)
 
           self.clearOrderAndReRoute()
+          self.$router.push("/profile");
         })
         .catch((error) => {
           //on fail do something
@@ -3119,7 +3120,7 @@ console.log(email, approvalData)
 
 
         })
-        .catch((e) => {x
+        .catch((e) => {
           console.log("errors");
           console.log(e);
         });
@@ -4601,7 +4602,7 @@ self.decrementIfMatch(self.currentOrder);
       }
 
 
-// self.handleClickSignInForCard(self.emailAddress,approvalData)
+
 
     } else {
 
