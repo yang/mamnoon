@@ -25,18 +25,26 @@ time placed: {{order.orderInfo.time_placed}}
 <br>
 ${{order.orderInfo.charges.total | showToFixed}}
 <br>
-<h1 v-if="order.void">VOID</h1>
+
+
 <!-- <pre> -->
 <!-- {{order.payInfo}} -->
 <!-- </pre> -->
-
+<!--// {{order.void}}-->
 
 <template v-if="order.payInfo.data">
 <button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.data.uniqueTransId,true)">void</button>
+<h1 v-else>VOID</h1>
+
+
+
 </template>
 
 <template v-if="order.payInfo.uniqueTransId">
+<!-- {{order.void}} -->
 <button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.uniqueTransId,false)">void</button>
+<h1 v-else>VOID</h1>
+
 </template>
 
 
