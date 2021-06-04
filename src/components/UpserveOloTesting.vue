@@ -352,7 +352,7 @@
           <span id="value">{{currentItemQuanity}}</span>&nbsp;&nbsp;
           <button @click="incrementCurrentItem()">+</button>
           <div class="add-to-order-footer">
-            item total: <b>${{computedAddition * currentItemQuanity }}</b>
+            item total: <b>${{ formatExtraZero(computedAddition * currentItemQuanity) }}</b>
             
             <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
                 <template v-if="allOptionsSelected">
@@ -1571,7 +1571,9 @@ add
                   <b>{{order.quantity}}</b>
                   {{order.name}}
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  ${{order.price_cents.toFixed(2)/100 * order.quantity}}
+
+                 
+                  ${{formatExtraZero(order.price_cents.toFixed(2)/100 * order.quantity)}}
 <div v-if="order.modifiers.length > 0"> 
 <div class="small-message grey" v-for="mod in order.modifiers">
 {{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b>
@@ -2746,6 +2748,22 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+formatExtraZero(value){
+
+console.log(value.toString())
+console.log("value.split('')")
+console.log(value.toString().split('').length)
+
+  if(value.toString().split('')[value.toString().split('').length-2]=== '.'){
+return value + '0';
+  }{
+    return value;
+  }
+
+
+
+},
    formatPrice(value) {
         let val = (value/100).toFixed(2)
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(".00","");
