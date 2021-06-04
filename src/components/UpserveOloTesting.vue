@@ -717,7 +717,7 @@ add
 
 <div class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
 
-                                                                                                          <div class="name">{{serve.name}}</div>
+                                                                                                          <div class="name">{{checkIfGiftCard(serve.name)}}</div>
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
@@ -801,7 +801,7 @@ add
                                                                                                         <!--{{serve.id}}-->
                                                                                        
                                                                                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
-                                                                                                          <div class="name">{{serve.name}}</div>
+                                                                                                          <div class="name">{{checkIfGiftCard(serve.name)}}</div>
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
@@ -867,7 +867,7 @@ add
                               <!--{{serve.id}}-->
                  
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
-                              <div class="name">{{serve.name}}</div>
+                              <div class="name">{{checkIfGiftCard(serve.name)}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
@@ -1036,7 +1036,7 @@ add
                                                                                                          <!--{{serve.id}}-->
                                                                                                  
                                                                                                        <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
-                                                                                                          <div class="name">{{serve.name}}</div>
+                                                                                                          <div class="name">{{checkIfGiftCard(serve.name)}}</div>
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
@@ -1106,7 +1106,7 @@ add
                                <!--{{serve.id}}-->
                      
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
-                              <div class="name">{{serve.name}}</div>
+                              <div class="name">{{checkIfGiftCard(serve.name)}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
@@ -1168,7 +1168,7 @@ add
                                <!--{{serve.id}}-->
                      
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
-                              <div class="name">{{serve.name}}</div>
+                              <div class="name">{{checkIfGiftCard(serve.name)}}</div>
                               <div
                                 v-if="serve.description"
                                 class="food-description"
@@ -1569,7 +1569,9 @@ add
                   </button>
 <div class="mt5">
                   <b>{{order.quantity}}</b>
-                  {{order.name}}
+                  {{checkIfGiftCard(order.name)}}
+
+                  
                   &nbsp;&nbsp;&nbsp;&nbsp;
 
                  
@@ -2748,7 +2750,15 @@ showToFixed: function (value) {
 }
   },
   methods: {
+checkIfGiftCard(value){
 
+  if(value.includes("Gift Card")){
+    return 'gift card';
+  }else{
+    return value
+  }
+
+},
 formatExtraZero(value){
 
 console.log(value.toString())
