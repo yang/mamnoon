@@ -457,8 +457,6 @@ add
       </div>
       </div>
       <div class="half-width2right">
-
-
         <div class="backgroundImage"  v-if="item.images" v-bind:style="{ backgroundImage: 'url(' + item.images.online_ordering_menu.main + ')' }"></div>
          <div class="backgroundImage" v-else
                                                                                                     v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundColor: '#dddddd' }"
@@ -851,8 +849,8 @@ add
 
               <!-- {{item.timing_mask}} -->
                 <h2 class="menu-header">
-                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                  <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
+                  <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
@@ -879,18 +877,18 @@ add
                             </div>
                           </div>
                           <div class="half-width2right">
-                            <template v-if="serve.images">
-                              <div
-                                v-if="serve.images.online_ordering_menu"
-                                class="backgroundImage"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-                              <div
-                                v-else
-                                class="backgroundImage"
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >     <NadiIconSm /></div>
-                            </template>
+                               <template v-if="serve.images">
+                                                                                                  <div
+                                                                                                    v-if="serve.images.online_ordering_menu"
+                                                                                                    class="backgroundImage"
+                                                                                                    v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                                                                                                  ></div>
+                                                                                              </template>
+                                                                                                <template v-else>
+                                                                                                  <div class="backgroundImage"
+                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
+                                                                                                </template>
                           </div>
                         </div>
                       </template>
@@ -1019,8 +1017,8 @@ add
                                                   class="display-block row no-lr-margin"
                                                 >
                                                   <h2 class="menu-header">
-                                                    <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                                                    <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                                                    <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
+                                                    <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
@@ -1048,7 +1046,7 @@ add
                                                                                                         </div>
                                                                                             </div>
                                                                                               <div class="half-width2right">
-                                                                                                <template v-if="serve.images">
+                                                                                                     <template v-if="serve.images">
                                                                                                   <div
                                                                                                     v-if="serve.images.online_ordering_menu"
                                                                                                     class="backgroundImage"
@@ -1089,8 +1087,8 @@ add
                 class="display-block row no-lr-margin"
               >
                 <h2 class="menu-header">
-                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                  <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
+                  <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
                   {{item.timing_mask}}
                 </h2>
@@ -1119,17 +1117,17 @@ add
                           </div>
                           <div class="half-width2right">
                             <template v-if="serve.images">
-                              <div
-                                v-if="serve.images.online_ordering_menu"
-                                class="backgroundImage"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-                           </template>
-                            <template v-else>
-                              <div class="backgroundImage"
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >     <NadiIconSmX style="height:140px;" /></div>
-                            </template>
+                                                                                                  <div
+                                                                                                    v-if="serve.images.online_ordering_menu"
+                                                                                                    class="backgroundImage"
+                                                                                                    v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                                                                                                  ></div>
+                                                                                              </template>
+                                                                                                <template v-else>
+                                                                                                  <div class="backgroundImage"
+                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
+                                                                                                </template>
                           </div>
                         </div>
                       </template>
@@ -1152,8 +1150,8 @@ add
                 class="display-block row no-lr-margin"
               >
                 <h2 class="menu-header">
-                  <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span>
-                  <span :id="'minus-'+ item.id" class="expand-contract minus">-</span>
+                  <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
+                  <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
@@ -1180,18 +1178,18 @@ add
                             </div>
                           </div>
                           <div class="half-width2right">
-                            <template v-if="serve.images">
-                              <div
-                                v-if="serve.images.online_ordering_menu"
-                                class="backgroundImage"
-                                v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                              ></div>
-                              <div
-                                v-else
-                                class="backgroundImage"
-                                v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                              >     <NadiIconSm /></div>
-                            </template>
+                                  <template v-if="serve.images">
+                                                                                                  <div
+                                                                                                    v-if="serve.images.online_ordering_menu"
+                                                                                                    class="backgroundImage"
+                                                                                                    v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                                                                                                  ></div>
+                                                                                              </template>
+                                                                                                <template v-else>
+                                                                                                  <div class="backgroundImage"
+                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
+                                                                                                </template>
                           </div>
                         </div>
                       </template>
