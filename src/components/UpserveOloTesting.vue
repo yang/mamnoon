@@ -196,7 +196,7 @@
           <h4>{{currentItem.name}}</h4>
         </div>
         <div class="container modal-body order-modal-width order-modal-body">
-          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo'">
+          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
           <div
             class="item-image-container"
             v-if="currentItem.images"
@@ -232,7 +232,7 @@
                 <template v-if="modifieritem === modifier.id">
                   <div class="displayInlineBlock">
              
-                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
+                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
 
@@ -244,13 +244,13 @@
                                                 <template v-for="(m,i) in modifier.modifier_ids">
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
                                                   
-                                                  <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
-                                                  <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                  <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                                                  <div v-if="m === mod.id && mod.name !== 'None'" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
-                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'" class="hide-on-mob square">
+                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
-                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
+                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
                                                                         <div style="position: absolute;top:0;width:100%">
                                                                               <NadiIconxx />
                                                                         </div>
@@ -263,7 +263,7 @@
                                                                             <div class="content">.</div>
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
-                                                                          <span class="title-bolder"> {{mod.name}}</span>
+                                                                          <span class="title-bolder">{{mod.name}}</span>
                                                                           <br />
                                                                         <b v-if="mod.price > 0">+${{mod.price}}</b>
                                                                           </div>
@@ -354,7 +354,7 @@
           <div class="add-to-order-footer">
             item total: <b>${{ formatExtraZero(computedAddition * currentItemQuanity) }}</b>
             
-            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo'">
+            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
                 <template v-if="allOptionsSelected">
                   <button
                   class="float-right"
@@ -2044,7 +2044,7 @@ export default {
 // this.currentItem.name
 
 if(this.currentItem){
-if(this.currentItem.name === "mamnoon @ home"|| this.currentItem.name === "Street Combo"){
+if(this.currentItem.name === "mamnoon @ home"|| this.currentItem.name === "Street Combo" || this.currentItem.name === 'Lunch Combo Special'){
   return true
   }else{
     return false
@@ -4489,10 +4489,18 @@ items.forEach(function(x){
     confirmButtonText: `Login And Save`
   }).then((confirmed) => {
     if (confirmed) {
+console.log(confirmed)
+
+      if(confirmed.isConfirmed){
+  
+      self.handleClickSignInForCard(self.emailAddress,approvalData)
+
+      }
 
 
 
-                self.handleClickSignInForCard(self.emailAddress,approvalData)
+
+                
 
     } else {
 
@@ -4586,8 +4594,14 @@ self.decrementIfMatch(self.currentOrder);
   }).then((confirmed) => {
     if (confirmed) {
 
+            if(confirmed.isConfirmed){
+  
+      self.handleClickSignInForCard(self.emailAddress,approvalData)
 
-self.handleClickSignInForCard(self.emailAddress,approvalData)
+      }
+
+
+// self.handleClickSignInForCard(self.emailAddress,approvalData)
 
     } else {
 
