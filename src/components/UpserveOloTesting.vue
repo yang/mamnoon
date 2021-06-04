@@ -539,7 +539,7 @@ add
               </template>
               <template v-else>
               <div class="mb16"> 
-              Now accepting preorders for pick up.
+              now accepting preorders for pick up.
               </div> 
               </template>
 
@@ -1255,7 +1255,7 @@ add
               </template>
               <template v-else>
               <div class="mb16 if-mobile"> 
-              Now accepting preorders for pick up.
+              now accepting preorders for pick up.
               </div> 
               </template>
   <div class="if-mobile">

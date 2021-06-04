@@ -2085,9 +2085,18 @@ display: flow-root;
   display: block;
 }
 
+.vs__search, .vs__search:focus,
+.v-select,
+.leftDropdown > *,
+.vs__selected-options{
+  text-transform: lowercase !important;
+}
 
 
 
+#order-history{
+  text-transform: lowercase;
+  }
 </style>
 
 
