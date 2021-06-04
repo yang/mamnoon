@@ -216,7 +216,7 @@
                     <b>{{currentItem.name}}</b><br>
                      </template>
                      {{currentItem.description}}</p>
-        <b>${{currentItem.price_cents.toFixed(2)/100}}</b>
+        <b>${{ formatPrice(currentItem.price_cents) }}</b>
                     <hr />
 
 
@@ -417,7 +417,6 @@
 
 
 
-
 <!-- .storeCurrentOrder -->
 <!-- emptyReOrderObject -->
 <!-- reOrder -->
@@ -450,7 +449,7 @@
       <!-- {{item}} -->
       <div class="name">{{item.quantity}} x {{item.name}}</div>
       <!-- <div class="food-description">chickpeas, garlic, lemon, tahini (served with 4 pita)</div> -->
-      <div class="food-price"> $8 </div>
+      <div class="food-price"> ${{item.price | showToFixed }} </div>
 
   <button class="float-right mt40dt" @click="addToOrderFromReorder(item)">
 add
@@ -724,7 +723,11 @@ add
                                                                                                             class="food-description"
                                                                                                           >{{serve.description | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
-                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                                                                                            <!-- ${{ serve.price_cents.toFixed(2)/100}}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span>  -->
+
+                                                                                                            <!-- <br> -->
+   
+                                                                                                            ${{ formatPrice(serve.price_cents) }}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span>   
                                                                                                           </div>
                                                                                                           <br />
                                                                                                         </div>
@@ -2743,7 +2746,10 @@ showToFixed: function (value) {
 }
   },
   methods: {
-
+   formatPrice(value) {
+        let val = (value/100).toFixed(2)
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(".00","");
+    },
 
 decrementIfMatch(currentOrder){
 
