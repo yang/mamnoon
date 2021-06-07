@@ -1,39 +1,44 @@
 <template>
 <div>
-<div class="container pad-yellow-background module-header"> food order history</div>
+<div class="container pad-yellow-background module-header"> reservation history</div>
 <div class="container pad-yellow-background">
 
 <div id="order-history">
+
 <table class="w100">
     <th class="w100">
        <td class="hide-mob"><div>restaurant</div></td>
-        <td class="w-5 hide-mob"><div>date</div></td>
+        <td class="w-5 hide-mob"><div>date and time</div></td>
         <td class="w-20"><div>items</div></td>
-        <td><div class="text-right-mob"> price</div></td>
-        <td class="hide-mob"><div>pay method</div></td>
-        <!-- <td><div>delivery/pickup</div></td> -->
-       <td class="hide-mob w-5"><div style="text-align: right;">status</div></td>
 
-                <td><div style="text-align: right;">actions</div></td>
+
+       
 </th>   
 
-<template v-if="orderhistory">
-<tr class="w100" v-for="order in orderhistory.user.slice().reverse()" :key="order._id">
- <td class="hide-mob">
-    <div>
-    <b> {{order.orderInfo.restaurant.toLowerCase()}}</b>
-    </div>
-</td>
- <td class="w-5 hide-mob"><div>
-    <span class="smblk">
-{{order.orderInfo.time_placed | formatDate}}
-</span>
-</div></td>
- <td class="w-20"><div>
-    <b class="mobile orderDetail"> {{order.orderInfo.restaurant.toLowerCase()}}</b> <i class="small-message grey orderDetail">{{order.orderInfo.time_placed | formatDate}}</i>
-<ul class="order-items">
-<li v-for="item in order.orderInfo.charges.items" :key="item.cartId">
-    {{item.quantity}} x
+
+
+<template v-if="reservations">
+<tr class="w100" v-for="reservation in reservations" :key="reservation.date">
+   <td class="hide-mob"><div>mbar</div></td>
+        <td class="w-5 hide-mob"><div>{{reservation.date}}
+            
+            
+            <br>
+
+
+ {{reservation.reservationsList.roomsinfo.allInfo.arrival_time}}
+
+            </div></td>
+
+
+           <td class="hide-mob"><div>
+               
+               
+               
+               
+               <ul class="order-items">
+<li v-for="item in reservation.upserveInfo.upserveInfo.items" :key="item.cartId">
+    <!-- {{item.quantity}} x
 {{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
 
 
@@ -41,48 +46,22 @@
 <div class="small-message grey" v-for="mod in item.modifiers">
 {{mod.name}} +${{mod.price | showToFixed}}
 </div>
-</div>
+</div> -->
+{{item.name}}&nbsp;{{item.price}}
 </li>
 </ul>
-</div></td>
+               
+               
+                
+                </div></td>
+  
 
 
-
-<td>
-    <div class="text-right-mob">
-        <span class="smblk">
-<div class="small-message grey">subtotal: ${{ order.orderInfo.charges.preTotal/100 | toFixed}}</div>
-<div class="small-message grey">tax: ${{ order.orderInfo.charges.taxes/100 | toFixed}}</div>
-<div class="small-message grey">tip: ${{ order.orderInfo.charges.tip.amount/100 | toFixed}}</div>
-    <b>total: ${{ order.orderInfo.charges.total/100 | toFixed}}</b>
-    </span>
-    </div></td>
-<td class="hide-mob">
-    
-    <div  v-if="order.payInfo.TransmissionID">
-<!-- {{order.payInfo}} -->
-gift card
-   </div>
-       <div v-else>
-debit/credit
-   </div>
-   </td> 
-
-<!-- <td><div>
-{{order.orderInfo.fulfillment_info.type}}
-   </div></td>  -->
-<td class="hide-mob w-5"><div style="text-align: right;">
-{{order.status}}
-   </div></td> 
-
-    <td><div>
+<!-- <pre>
+{{reservation}}
+</pre> -->
 
 
-      <!-- {{order.orderInfo.restaurant}} -->
-
-<button v-if="order.orderInfo.restaurant === 'Mamnoon' || order.orderInfo.restaurant === 'Mamnoon Street'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order</button>
-<!-- <pre>{{order.orderInfo}}</pre> -->
-</div></td>
 </tr>
 </template>
 
@@ -100,46 +79,33 @@ import tz from 'moment-timezone'
 export default {
     data( ) {
     return {
-        orderhistory: null,
+        reservations: null,
         response: null
         }
     },
-    name: 'OrderHistory',
+    name: 'ReservationHistory',
     props: ['currentUser','emailAddress'],
     methods: {
-        reorder(order){
-
-            let storeCurrentOrder = order
-            this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-
-            // let drawerTrue = true
-
-// this.$store.commit("drawerTrue", { drawerTrue });
 
 
-if(order.restaurant === 'Mamnoon'){
-     this.$router.push("/mamnoon");
-            //    location.reload();
-}else{
-     this.$router.push("/mamnoonstreet");
-            //    location.reload();
-}
 
 
-        },
-    retrieveOrders() {
-        console.log('retriev orders frome end')
+    retrieveReservations() {
+        console.log('retrieve reservations')
     let self = this
-        this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
+        this.$http.get(`/reservation/retrieve/${this.currentUser.currentUserEmail}`).then(function (response) {
 // this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
 
 
 
+console.log(response.data.reservations)
 
-
-        self.orderhistory = response.data
+        self.reservations = response.data.reservations
     })
     },
+
+
+
         },
             filters: {
 toFixed(value){
@@ -165,8 +131,8 @@ showToFixed: function (value) {
 
     
     mounted(){
-        this.retrieveOrders()
-
+   
+        this.retrieveReservations()
     }
 
 }

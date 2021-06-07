@@ -10,7 +10,7 @@ upserve info
 <br>
 <br>
 <pre>
-{{up.reservationsList.roomsinfo.allInfo}}
+{{up}}
 </pre>
 <br>
 <br>
@@ -75,7 +75,7 @@ upserveProducts: null
       methods: {
           async upserves() {
 console.log('doing this')
-      let responseUpserve = await this.$http.get(`/dateoverlaplive`, {
+      let responseUpserve = await this.$http.get(`/reservation/dateoverlaplive`, {
            params: {
             date: '20210422'
             }

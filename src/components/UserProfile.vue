@@ -20,6 +20,10 @@
 
         <!-- <OrderHistory :currentUser="$store.state" :emailAddress="$auth._data.user.email" /> -->
                 <OrderHistory :currentUser="$store.state" />
+
+
+
+                              <ReservationHistory :currentUser="$store.state" />
         </div>
         <div>
         </div>
@@ -37,7 +41,7 @@ import GiftCardModule from "@/components/GiftCardModule";
 import ToggleVegetarian from "@/components/ToggleVegetarian";
 
 import OrderHistory from "@/components/OrderHistory";
-
+import ReservationHistory from "@/components/ReservationHistory";
 
 
 export default {
@@ -49,7 +53,8 @@ name: 'UserProfile',
     GiftCardModule,
     ToggleVegetarian,
     OrderHistory,
-    CreditSaveForm
+    CreditSaveForm,
+    ReservationHistory
   },
 methods: {
     hideUserModal () {
