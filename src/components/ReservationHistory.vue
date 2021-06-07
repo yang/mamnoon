@@ -10,43 +10,21 @@
        <td class="hide-mob"><div>restaurant</div></td>
         <td class="w-5 hide-mob"><div>date and time</div></td>
         <td class="w-20"><div>items</div></td>
-
-
-       
+ 
 </th>   
-
-
 
 <template v-if="reservations">
 <tr class="w100" v-for="reservation in reservations" :key="reservation.date">
    <td class="hide-mob"><div>mbar</div></td>
         <td class="w-5 hide-mob"><div>{{reservation.date}}
-            
-            
             <br>
-
-
  {{reservation.reservationsList.roomsinfo.allInfo.arrival_time}}
-
             </div></td>
-
-
-           <td class="hide-mob"><div>
-               
-               
-               
-               
+<td class="hide-mob"><div>
+            
                <ul class="order-items">
 <li v-for="item in reservation.upserveInfo.upserveInfo.items" :key="item.cartId">
-    <!-- {{item.quantity}} x
-{{item.name}} <span class="smblk">(${{item.price_cents.toFixed(2)/100}})</span>
 
-
-<div v-if="item.modifiers.length > 0"> 
-<div class="small-message grey" v-for="mod in item.modifiers">
-{{mod.name}} +${{mod.price | showToFixed}}
-</div>
-</div> -->
 {{item.name}}&nbsp;{{item.price}}
 </li>
 </ul>
@@ -54,15 +32,28 @@
                
                 
                 </div></td>
-  
+  </tr>
+</template>
+<template v-if="reservationsmamnoon">
+<tr class="w100" v-for="reservation in reservationsmamnoon" :key="reservation.date">
+   <td class="hide-mob"><div>mamnoon</div></td>
+        <td class="w-5 hide-mob"><div>{{reservation.date}}
+            <br>
+ {{reservation.reservationsList.roomsinfo.allInfo.arrival_time}}
+            </div></td>
+<td class="hide-mob"><div>
+            
+               <ul class="order-items">
+<li v-for="item in reservation.upserveInfo.upserveInfo.items" :key="item.cartId">
 
-
-<!-- <pre>
-{{reservation}}
-</pre> -->
-
-
-</tr>
+{{item.name}}&nbsp;{{item.price}}
+</li>
+</ul>
+               
+               
+                
+                </div></td>
+  </tr>
 </template>
 
 </table>
@@ -79,6 +70,7 @@ import tz from 'moment-timezone'
 export default {
     data( ) {
     return {
+        reservationsmamnoon: null,
         reservations: null,
         response: null
         }
@@ -87,7 +79,19 @@ export default {
     props: ['currentUser','emailAddress'],
     methods: {
 
+    retrieveReservationsMamnoon() {
+        console.log('retrieve reservations')
+    let self = this
+        this.$http.get(`/reservation/retrievemamnoon/${this.currentUser.currentUserEmail}`).then(function (response) {
+// this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
 
+
+
+console.log(response.data.reservations)
+
+        self.reservationsmamnoon = response.data.reservations
+    })
+    },
 
 
     retrieveReservations() {
