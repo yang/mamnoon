@@ -137,6 +137,8 @@ showToFixed: function (value) {
     mounted(){
    
         this.retrieveReservations()
+           
+        this.retrieveReservationsMamnoon()
     }
 
 }
