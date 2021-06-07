@@ -7,7 +7,13 @@ upserve info
 
 
 <!-- <b>{{up.reservationsList.roomsinfo.allInfo.first_name}} {{up.reservationsList.roomsinfo.allinfo.last_name}}</b> -->
-
+<br>
+<br>
+<pre>
+{{up.reservationsList.roomsinfo.allInfo}}
+</pre>
+<br>
+<br>
 
 
 <h1>{{up.reservationsList.roomsinfo.allInfo.first_name}} {{up.reservationsList.roomsinfo.last}}</h1>
