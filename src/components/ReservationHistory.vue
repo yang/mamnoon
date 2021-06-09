@@ -11,7 +11,7 @@
         <td class="w-5 hide-mob"><div>date and time</div></td>
         <td class="w-20"><div>items</div></td>
  
-</th>   
+</th> 
 
 <template v-if="reservations">
 <tr class="w100" v-for="reservation in reservations" :key="reservation.date">
@@ -19,14 +19,25 @@
         <td class="w-5 hide-mob"><div>{{reservation.date}}
             <br>
  {{reservation.reservationsList.roomsinfo.allInfo.arrival_time}}
+
+
+  {{reservation.reservationsList.roomsinfo.allInfo.max_guests}}
             </div></td>
 <td class="hide-mob"><div>
             
+                        
+
+
+                        <!-- {{reservation.upserveInfo.upserveInfo}} -->
                <ul class="order-items">
 <li v-for="item in reservation.upserveInfo.upserveInfo.items" :key="item.cartId">
 
 {{item.name}}&nbsp;{{item.price}}
 </li>
+<li><br>
+    <b>tip:</b> {{reservation.upserveInfo.upserveInfo.tip_amount}}</li>
+<li><b>total:</b> {{reservation.upserveInfo.upserveInfo.amount}}</li>
+
 </ul>
                
                
