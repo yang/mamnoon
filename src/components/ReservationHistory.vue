@@ -9,6 +9,7 @@
     <th class="w100">
        <td class="hide-mob"><div>restaurant</div></td>
         <td class="w-5 hide-mob"><div>date and time</div></td>
+                <td class="w-5 hide-mob"><div># of guests</div></td>
         <td class="w-20"><div>items</div></td>
  
 </th> 
@@ -20,6 +21,10 @@
             <br>
  {{reservation.reservationsList.roomsinfo.allInfo.arrival_time}}
 
+
+
+            </div></td>
+                    <td class="w-5 hide-mob"><div>
 
   {{reservation.reservationsList.roomsinfo.allInfo.max_guests}}
             </div></td>
