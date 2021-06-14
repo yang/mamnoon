@@ -517,7 +517,7 @@ transition: all .5s ease;
 .closeModal {
   position: absolute;
   top: 11px;
-  right: 15px;
+  right: 11px;
 }
 
 .box {
@@ -590,6 +590,7 @@ border-top: 0;
 
 .container.online-menu.order-modal-width {
   margin-top: 24px;
+      margin-top: 5px;
 }
 
 .float-right {
@@ -2121,6 +2122,13 @@ display: flow-root;
       border-radius: 0 0 4px 4px !important;
 }
 
+
+
+.orangeCircle{
+    width: 30px;
+    background:#f58e58;
+    border-radius: 15px;
+    }
 </style>
 
 

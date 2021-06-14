@@ -467,6 +467,7 @@ border-top: 0;
 
 .container.online-menu.order-modal-width {
   margin-top: 24px;
+      margin-top: 5px;
 }
 
 .float-right {

@@ -20,16 +20,19 @@ name: 'CloseModal'
 <style>
 
 .cls-1closeModalRedModal{fill: #ffffff;
-fill: #F05D5B;
+/* fill: #F05D5B; */
 }
 
 .cls-1{fill:#ffffff;
-fill: #F05D5B;}.cls-2{fill:#fff;
-fill: #F05D5B;}
+/* fill: #F05D5B; */
+}.cls-2{fill:#fff;
+/* fill: #F05D5B; */
+}
 
 
 svg#closemodalredBig{
-    width:30px;
+    /* width:30px; */
+    width: 10px;
     margin: 10px auto;
 }
 

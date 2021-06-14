@@ -190,7 +190,9 @@
 
       <div v-if="modalOpen" class="order-modal">
         <div class="container online-menu order-modal-width topCurves">
-          <div @click="closeModal()" class="close closeModal">
+
+
+          <div @click="closeModal()" class="close closeModal orangeCircle">
             <CloseModal />
           </div>
 
@@ -234,10 +236,10 @@
   
           <p class="item-description-p" :class="{noTopMarge: true === true}">
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
-                    <b>{{currentItem.name}}</b><br>
+                    <b>{{currentItem.name.toLowerCase().replace(" -- to go only", "")}}</b>   <b style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
                      {{currentItem.description}}</p>
-        <b>${{ formatPrice(currentItem.price_cents) }}</b>
+        
                     <hr />
 
 
