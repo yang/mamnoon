@@ -445,7 +445,8 @@
 
 <div class="yellow-bg-test">
   <div class="half-width2left">
-    <div class="content-box">
+        <div class="content-box">
+        <div class="showBox" v-if="item.images" v-bind:style="{ backgroundImage: 'url(' + item.images.online_ordering_menu.main + ')' }"></div>
       <!-- {{item}} -->
       <div class="name">{{item.quantity}} x {{item.name}}</div>
       <!-- <div class="food-description">chickpeas, garlic, lemon, tahini (served with 4 pita)</div> -->
@@ -705,7 +706,8 @@ add
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
-                                                                                                      <div class="content-box">
+                                                                                                          <div class="content-box">
+        <div class="showBox"  v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
 
 
 <!--{{serve.id}}-->
@@ -795,7 +797,8 @@ add
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
-                                                                                                      <div class="content-box">
+                                                                                                          <div class="content-box">
+        <div class="showBox" v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
                                                                                                         <!--{{serve.id}}-->
                                                                                        
                                                                                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
@@ -861,7 +864,8 @@ add
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
-                            <div class="content-box">
+                                <div class="content-box">
+        <div class="showBox" v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
                               <!--{{serve.id}}-->
                  
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
@@ -1030,7 +1034,8 @@ add
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                             <div class="half-width2left">
-                                                                                                      <div class="content-box">
+                                                                                                          <div class="content-box">
+        <div class="showBox" v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
                                                                                                          <!--{{serve.id}}-->
                                                                                                  
                                                                                                        <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
@@ -1100,7 +1105,8 @@ add
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
-                            <div class="content-box">
+                                <div class="content-box">
+        <div class="showBox" v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
                                <!--{{serve.id}}-->
                      
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
@@ -1162,7 +1168,8 @@ add
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                           <div class="half-width2left">
-                            <div class="content-box">
+                                <div class="content-box">
+        <div class="showBox" v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
                                <!--{{serve.id}}-->
                      
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
@@ -5032,6 +5039,18 @@ this.currentOrder.scheduled_time = null
 
 
 <style lang="scss">
+
+.showBox{
+    float: right;
+    width: 75px;
+    height: 75px;
+    border-radius: 4px;
+    background-size: cover;
+    background-position: center center;
+    margin-top: 2px;
+    border: 1px solid #ddd;
+    transform: translateX(3px);
+}
 
 .orderedOn{
   color: rgb(29, 174, 239);

@@ -842,7 +842,7 @@ transition: background-color .1s ease;
     height: 50px;
     border: 1px solid #fff;
 
-
+    bottom: 10px;
 // transition: all .5s ease;
 
     &:focus{
