@@ -2809,7 +2809,16 @@ showToFixed: function (value) {
 
     let img = new Image();
 img.src = imageSource;
+
+
+console.log(img);
+console.log(img);
+
 return  img.width/img.height;
+
+
+
+
 },
 checkIfGiftCard(value){
 
@@ -2822,9 +2831,9 @@ checkIfGiftCard(value){
 },
 formatExtraZero(value){
 
-console.log(value.toString())
-console.log("value.split('')")
-console.log(value.toString().split('').length)
+// console.log(value.toString())
+// console.log("value.split('')")
+// console.log(value.toString().split('').length)
 
   if(value.toString().split('')[value.toString().split('').length-2]=== '.'){
 return value + '0';

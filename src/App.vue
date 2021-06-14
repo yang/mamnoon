@@ -691,6 +691,7 @@ div{
 .item-description-p {
   margin-top: 15px;
   margin-bottom: 5px;
+      font-size: 14px;
 }
 
 textarea {
@@ -1685,6 +1686,7 @@ display: flow-root;
 #upserveolo .item-description-p.noTopMarge,
 .noTopMarge{
   margin-top: 0;
+      font-size: 14px;
 }
 
 

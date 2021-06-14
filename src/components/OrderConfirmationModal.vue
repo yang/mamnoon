@@ -535,6 +535,7 @@ div{
 .item-description-p {
   margin-top: 15px;
   margin-bottom: 5px;
+      font-size: 14px;
 }
 
 textarea {
