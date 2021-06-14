@@ -115,7 +115,7 @@
 
 
 
-<div class="halfwidthclass">
+<div class="halfwidthclass smalled">
 
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 324.07 113.99" style="enable-background:new 0 0 324.07 113.99;" xml:space="preserve">
@@ -448,7 +448,7 @@
 
 
 
-<div class="halfwidthclass">
+<div class="halfwidthclass smalled">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 282.05 114.97" style="enable-background:new 0 0 282.05 114.97;" xml:space="preserve">
 
@@ -851,6 +851,9 @@ div{
   width: 50%;
   margin-top: 50px;
       transform: translateX(-10px);
+	  &.smalled{
+		  width: 37.5%;
+	  }
 }
 
 
