@@ -451,9 +451,9 @@
 
 <div class="order-modal"> 
 
-        <div class="container online-menu order-modal-width topCurves">
+        <div class="container online-menu order-modal-width" style="padding: 20px 0 15px !important; margin-top: 24px;">
           <div @click="emptyReOrderObject()" class="close closeModal">
-            <CloseModal />
+            <CloseModalMed />
           </div>
           <h4>order again</h4>
         </div>
@@ -2015,6 +2015,7 @@ import vSelect from "vue-select";
 import carousel from "vue-owl-carousel";
 import GoogleValidate from "@/components/GoogleValidate";
 import CloseModal from "@/components/svgIcons/CloseModal";
+import CloseModalMed from "@/components/svgIcons/CloseModalMed";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
 
@@ -2058,6 +2059,7 @@ export default {
     OrderConfirmationModal,
     OnlineMenuCarousel,
     CloseModalSm2,
+      CloseModalMed,
     CloseModalRed,
     CloseModalSm,
     CloseModal,
