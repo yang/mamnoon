@@ -726,7 +726,7 @@ cursor: pointer;
 .info-modal{
     position: absolute;
     top: 10px;
-    width: 90%;
+    // width: 90%;
         // width: 80vh;
 
     background: white;
@@ -735,6 +735,8 @@ cursor: pointer;
     transform: translateX(-50%);
     padding: 10px;
         overflow: scroll;
+
+            height: 100vh;
 }
 
 // .navbar-expand-lg{
