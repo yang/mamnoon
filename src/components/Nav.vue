@@ -728,7 +728,7 @@ cursor: pointer;
     top: 10px;
     // width: 90%;
         // width: 80vh;
-    width: 90%;
+    // width: 90%;
     background: white;
     left: 50%;
     // height: 90vh;
@@ -736,7 +736,7 @@ cursor: pointer;
     padding: 10px;
         overflow: scroll;
 
-            height: 100vh;
+            // height: 100vh;
 }
 
 // .navbar-expand-lg{
