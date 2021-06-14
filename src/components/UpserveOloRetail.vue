@@ -241,10 +241,16 @@
 
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
             <div class="right-column">
-<button @click="toggleDrawer()" class="toggle">
-<span v-if="toggledDrawer">hide order</span>
-<span v-else>view order</span>
+
+
+<button v-if="toggledDrawer" @click="toggleDrawer()" class="toggle narrowed">
+<span><CloseModalSm2 /></span>
 </button>
+<button v-else @click="toggleDrawer()" class="toggle">
+<span><CartIcon /> {{cartItems}}</span>
+</button>
+
+
 
 <div class="container mb10"> 
 <div class="filehalf" style="pointer-events: none;width: 100%;background-color: rgb(240, 93, 91);color: rgb(255, 255, 255);padding: 10px 0 6px 0;">
@@ -683,7 +689,8 @@ import ErrorMessages from "@/components/subs/ErrorMessages";
 import vSelects from "@/components/subs/vSelects";
 import orderForm from "@/components/subs/orderForm";
 
-
+import CartIcon from "@/components/svgIcons/CartIcon";
+import CloseModalSm2 from "@/components/svgIcons/CloseModalSm2";
 
 export default {
   metaInfo: {
@@ -710,9 +717,17 @@ export default {
     Next,
     Prev,
     NadiIcon,
-    NadiIconSm
+    NadiIconSm,
+    CartIcon,
+    CloseModalSm2
   },
   computed: {	
+        cartItems(){
+
+          return this.$store.state.storeCurrentOrderUpdateRetail.charges.items.length;
+
+
+    },
     upserveListCategories(){
 if(this.upserveList){
       const catArray = this.upserveList.map(function(x){

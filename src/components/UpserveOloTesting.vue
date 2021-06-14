@@ -1213,14 +1213,22 @@ add
 
 
 
+
+
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
 
 
 <div class="right-column">
-<button @click="toggleDrawer()" class="toggle">
-<span v-if="toggledDrawer"><CloseModalSm2 /></span>
-<span v-else><CartIcon /></span>
+
+
+
+<button v-if="toggledDrawer" @click="toggleDrawer()" class="toggle narrowed">
+<span><CloseModalSm2 /></span>
 </button>
+<button v-else @click="toggleDrawer()" class="toggle">
+<span><CartIcon /> {{cartItems}}</span>
+</button>
+
 
 <div class="container mb10 hide-on-mob"> 
 <div @click="panelShowChoose('yourOrder')" class="filehalf" style="">
@@ -2039,6 +2047,21 @@ export default {
     CartIcon
   },
   computed: {	
+    cartItems(){
+
+if(this.title === "Mamnoon Street"){
+      return this.$store.state.storeCurrentOrderUpdateStreet.charges.items.length;
+}
+
+if(this.title === "Mamnoon"){
+      return this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length;
+}
+
+if(this.title === "Mbar"){
+      return this.$store.state.storeCurrentOrderUpdateMbar.charges.items.length;
+}
+
+    },
     returnCorrect(){
 
 // this.currentItem.name

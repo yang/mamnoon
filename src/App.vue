@@ -835,14 +835,26 @@ transition: background-color .1s ease;
     border-radius: 0;
     /* padding: 15px 10px; */
     width: 50px;
+        width: 80px;
     right: 10px;
     bottom: 70px;
     border-radius: 25px;
     height: 50px;
     border: 1px solid #fff;
 
+
+// transition: all .5s ease;
+
     &:focus{
       outline: none;
+    }
+
+
+    &.narrowed{
+      width: 50px;
+    }
+    span{
+      font-weight: 600;font-size:18px;
     }
     }
 
