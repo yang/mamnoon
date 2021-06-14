@@ -372,7 +372,7 @@
                 <template v-else>
                   <button
                   class="float-right"
-                  disabled>please select one option from each course</button>
+                  disabled>select 1 option from each course</button>
                 </template>
 
             </template>
