@@ -487,6 +487,7 @@ transition: all .5s ease;
 .online-menu {
   background-color: #f05d5b;
   padding: 20px 0 15px;
+  padding: 0 !important;
   text-align: center;
   position: relative;
   h4 {

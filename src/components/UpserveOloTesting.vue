@@ -193,28 +193,49 @@
           <div @click="closeModal()" class="close closeModal">
             <CloseModal />
           </div>
-          <h4>{{currentItem.name}}</h4>
-        </div>
-        <div class="container modal-body order-modal-width order-modal-body">
+
+
           <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
           <div
             class="item-image-container"
             v-if="currentItem.images"
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
-            <img :src="currentItem.images.online_ordering_menu.main" />
+          
+
+
+
+
+<div v-if="imageDimensions(currentItem.images.online_ordering_menu.main)>1">
+
+
+    <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
+</div>
+<div v-else>
+    <img :src="currentItem.images.online_ordering_menu.main" />
+  </div>
+ 
+
+        
           </div>
           <div class="item-image-container" v-else>
             <NadiIcon />
             </div>
           </template>
+
+
+
+
+        </div>
+        <div class="container modal-body order-modal-width order-modal-body">
+
    
 
   
-          <p class="item-description-p" :class="{noTopMarge: currentItem.name === 'mamnoon @ home'}">
-                            <template v-if="currentItem.name === 'mamnoon @ home'">
+          <p class="item-description-p" :class="{noTopMarge: true === true}">
+                            <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                     <b>{{currentItem.name}}</b><br>
-                     </template>
+                     <!-- </template> -->
                      {{currentItem.description}}</p>
         <b>${{ formatPrice(currentItem.price_cents) }}</b>
                     <hr />
@@ -1170,6 +1191,7 @@ add
                           <div class="half-width2left">
                                 <div class="content-box">
         <div class="showBox" v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
+        
                                <!--{{serve.id}}-->
                      
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
@@ -2054,6 +2076,7 @@ export default {
     CartIcon
   },
   computed: {	
+
     cartItems(){
 
 if(this.title === "Mamnoon Street"){
@@ -2778,6 +2801,14 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    imageDimensions(imageSource){
+
+
+
+    let img = new Image();
+img.src = imageSource;
+return  img.width/img.height;
+},
 checkIfGiftCard(value){
 
   if(value.includes("Gift Card")){
@@ -5041,6 +5072,12 @@ this.currentOrder.scheduled_time = null
 <style lang="scss">
 
 .showBox{
+  display: none;
+}
+
+@media only screen and (max-width: 992px) {
+.showBox{
+  display: block;
     float: right;
     width: 75px;
     height: 75px;
@@ -5051,7 +5088,7 @@ this.currentOrder.scheduled_time = null
     border: 1px solid #ddd;
     transform: translateX(3px);
 }
-
+}
 .orderedOn{
   color: rgb(29, 174, 239);
   font-weight: 600;
