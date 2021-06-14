@@ -803,7 +803,7 @@ cursor: pointer;
     padding: 10px;
         overflow: scroll;
 
-            height: 100vh;
+            // height: 100vh;
 }
 
 // .navbar-expand-lg{
