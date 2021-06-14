@@ -788,6 +788,31 @@ cursor: pointer;
     padding: .5rem 1rem .5rem 1rem !important;
 }
 
+
+
+@media only screen and (max-width: 640px) {
+
+.info-modal{
+    position: absolute;
+    top: 10px;
+    width: 90%;
+    background: white;
+    left: 50%;
+    // height: 90vh;
+    transform: translateX(-50%);
+    padding: 10px;
+        overflow: scroll;
+
+            height: 100vh;
+}
+
+// .navbar-expand-lg{
+//     display: none;
+// }
+
+}
+
+
 </style>
 
 
