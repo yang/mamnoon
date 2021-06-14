@@ -658,7 +658,7 @@ div{
 
 
 .item-image-container > div > svg {
-    height: 100px;
+    // height: 100px;
  
 }
 }
@@ -2110,6 +2110,17 @@ display: flow-root;
 #order-history{
   text-transform: lowercase;
   }
+
+
+.topCurves{
+      border-radius: 4px 4px 0 0 !important;
+}
+
+
+.bottomCurves{
+      border-radius: 0 0 4px 4px !important;
+}
+
 </style>
 
 

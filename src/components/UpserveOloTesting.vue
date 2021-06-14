@@ -189,7 +189,7 @@
 
 
       <div v-if="modalOpen" class="order-modal">
-        <div class="container online-menu order-modal-width">
+        <div class="container online-menu order-modal-width topCurves">
           <div @click="closeModal()" class="close closeModal">
             <CloseModal />
           </div>
@@ -197,7 +197,7 @@
 
           <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
           <div
-            class="item-image-container"
+            class="item-image-container topCurves"
             v-if="currentItem.images"
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
@@ -227,7 +227,7 @@
 
 
         </div>
-        <div class="container modal-body order-modal-width order-modal-body">
+        <div class="container modal-body order-modal-width order-modal-body bottomCurves">
 
    
 
@@ -449,14 +449,14 @@
 
 <div class="order-modal"> 
 
-        <div class="container online-menu order-modal-width">
+        <div class="container online-menu order-modal-width topCurves">
           <div @click="emptyReOrderObject()" class="close closeModal">
             <CloseModal />
           </div>
           <h4>order again</h4>
         </div>
 
-            <div class="container modal-body order-modal-width order-modal-body">
+            <div class="container modal-body order-modal-width order-modal-body bottomCurves">
 
 <div class=""> 
 
