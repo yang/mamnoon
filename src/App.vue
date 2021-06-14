@@ -578,6 +578,7 @@ transition: all .5s ease;
 .order-modal-body {
   // max-height: 70vh;
   max-height: 80vh;
+      max-height: 65vh;
   overflow-y: scroll;
 border-top: 0;
   textarea {
