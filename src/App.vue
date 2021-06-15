@@ -130,6 +130,7 @@ margin: 0 10px 0 0;
 .order-modal {
   position: fixed;
   z-index: 100;
+  z-index: 200;
   background: #ffffff99;
   height: 100vh;
   width: 100%;
@@ -577,8 +578,8 @@ transition: all .5s ease;
 
 .order-modal-body {
   // max-height: 70vh;
-  max-height: 80vh;
-      max-height: 65vh;
+  max-height: 85vh;
+    //  max-height: 65vh;
   overflow-y: scroll;
 border-top: 0;
   textarea {
@@ -636,14 +637,14 @@ div{
   background-position: 0;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 100px;
+  height: 200px;
   z-index: 1;
 
   background: #f0ecec;
 
   img, svg {
     width: auto !important;
-    height: 100px;
+    height: 200px;
   }
 
 
@@ -671,7 +672,7 @@ div{
 }
 
 #value {
-  margin: 10px;
+  margin: 5px;
   font-weight: 600;
 }
 
@@ -1605,7 +1606,7 @@ cursor: pointer;
 
 
 #upserveolo.smallerBoxes .box.selected > div {
-    width: 90%;
+   // width: 90%;
     // padding: 10px;  
     box-sizing: border-box;
     border: 1px solid #f05d5b;
@@ -1666,7 +1667,7 @@ display: flow-root;
 
 
 #upserveolo.smallerBoxes .box.selected > div {
-    width: 100%;
+    //width: 100%;
 
 
 

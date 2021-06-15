@@ -92,6 +92,7 @@ img.itemimage {
 .order-modal {
   position: fixed;
   z-index: 100;
+  z-index: 200;
   background: #ffffff99;
   height: 100vh;
   width: 100%;
@@ -453,8 +454,9 @@ form textarea,
 
 .order-modal-body {
   // max-height: 70vh;
-  max-height: 80vh;
-      max-height: 65vh;
+  max-height: 85vh;
+  //    max-height: 65vh;
+      max-height: 60vh;
   overflow-y: scroll;
 border-top: 0;
   textarea {
@@ -514,7 +516,7 @@ div{
 }
 
 #value {
-  margin: 10px;
+  margin: 5px;
   font-weight: 600;
 }
 

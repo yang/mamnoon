@@ -286,7 +286,7 @@
                                                                             <div class="content">.</div>
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
-                                                                          <span class="title-bolder">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price}}</b></span>
+                                                                          <span class="title-bolder">{{mod.name}} <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
                                                                           <br />
                                                                         
                                                                           </div>
@@ -2604,7 +2604,7 @@ if(newAddress){
     },
   data() {
   return {
-    sliderNavVisible: false,
+    sliderNavVisible: true,
     packages: null,
     disabledButton: false,
     fetchedDate: '',
@@ -4925,18 +4925,7 @@ this.setTip(0)
   mounted() {
 // console.log(this.returnCorrect);
 
-let self = this;
-    window.addEventListener('load', () => {
-         // run after everything is in-place
 
-
-            setTimeout(function () {
-       self.sliderNavVisible = true;
-      //  alert('done');
-            }, 1000);
-
-
-    })
 
 this.retrievePackages();
 
