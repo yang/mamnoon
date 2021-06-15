@@ -5092,8 +5092,8 @@ this.currentOrder.scheduled_time = null
 .showBox{
   display: block;
     float: right;
-    width: 75px;
-    height: 75px;
+    width: 125px;
+    height: 125px;
     border-radius: 4px;
     background-size: cover;
     background-position: center center;
@@ -5750,6 +5750,10 @@ font-weight: 300;
 }
 }
 
+.content-box .name{
+      font-size: .9rem;
+    font-weight: 600;
+}
 
 .content-box .name,
 .content-box .food-description,

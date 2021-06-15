@@ -1399,18 +1399,18 @@ svg#nadiIconSm{
 #upserveolo .half-width2left{
     width: 100% !important;
     float: left;
-    height: 90px!important;
+    // height: 90px!important;
     overflow: hidden;
 }
 
 
 .half-width2left .food-description{
-  display: none !important;
+  // display: none !important;
 }
 
 #upserveolo .filtree-full,
 #upserveolo .filtree-full-testing{
-    height: 90px!important;
+    height: 140px!important;
 }
 
 #upserveolo .content-box {
@@ -1425,11 +1425,11 @@ svg#nadiIconSm{
 
 #upserveolo .filtree-full,
 #upserveolo .filtree-full-testing{
-    height: 90px!important;
+    height: 140px!important;
 
 
 .yellow-bg-test{
-      height: 90px!important;
+      height: 140px!important;
 }
 
 }
