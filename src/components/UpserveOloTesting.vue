@@ -286,9 +286,9 @@
                                                                             <div class="content">.</div>
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
-                                                                          <span class="title-bolder">{{mod.name}}</span>
+                                                                          <span class="title-bolder">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price}}</b></span>
                                                                           <br />
-                                                                        <b v-if="mod.price > 0">+${{mod.price}}</b>
+                                                                        
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
                                                                                   <div v-for="(piece,i) in upserveList" :key="'E'+ i">
@@ -314,9 +314,9 @@
 
 
                                                                             <!-- {{mod.id}} -->
-                                                                          <span class="title-bolder">{{mod.name.replace('add ','')}}</span>
+                                                                          <span class="title-bolder">{{mod.name.replace('add ','')}} <span class="italicize" v-if="mod.price != 0.0"><span class="thin">+</span>${{mod.price}}</span></span>
                                                                           <br />
-                                                                        <b v-if="mod.price != 0.0"><span class="thin">+</span>${{mod.price}}</b>
+                                                                        
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
                                                                                   <div v-for="(piece,i) in upserveList" :key="'E'+ i">
@@ -635,10 +635,10 @@ add
 
 <div class="stickyPosition"> 
 <div class="relative"> 
-<MoreInfo :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :upserveList="upserveList" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
+<MoreInfo v-if="sliderNavVisible" :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :upserveList="upserveList" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
  
 
-<SliderNav :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
+<SliderNav v-if="sliderNavVisible" :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
 </div> 
 </div> 
 
@@ -2604,6 +2604,7 @@ if(newAddress){
     },
   data() {
   return {
+    sliderNavVisible: false,
     packages: null,
     disabledButton: false,
     fetchedDate: '',
@@ -4924,6 +4925,18 @@ this.setTip(0)
   mounted() {
 // console.log(this.returnCorrect);
 
+let self = this;
+    window.addEventListener('load', () => {
+         // run after everything is in-place
+
+
+            setTimeout(function () {
+       self.sliderNavVisible = true;
+      //  alert('done');
+            }, 1000);
+
+
+    })
 
 this.retrievePackages();
 
@@ -5431,16 +5444,55 @@ height: 560px;
 
 #upserveolo .box-inner{
       height: 100%;
+
+      .title-bolder{
+        text-transform: lowercase;
+      }
 }
 
 @media only screen and (max-width: 992px) {
 
+  .optionHeader{
+        margin-bottom: 5px;
+  }
+
 
 
 #upserveolo.smallerBoxes .box > div,
-#upserveolo.smallerBoxes .box{
+#upserveolo.smallerBoxes .box,
+#upserveolo.smallerBoxes .box.normal > div,
+#upserveolo.smallerBoxes .box.normal{
   width: 100%;
 }
+#upserveolo.smallerBoxes .box,
+#upserveolo.smallerBoxes .box.normal{
+  width: 50%;
+
+  .mt10{
+    display:none;
+  }
+}
+
+
+#upserveolo.smallerBoxes .box .box-inner,
+#upserveolo.smallerBoxes .box.normal .box-inner{
+  width: 98%;
+
+}
+
+#upserveolo.smallerBoxes .box:nth-child(odd) .box-inner,
+#upserveolo.smallerBoxes .box.normal:nth-child(odd) .box-inner{
+  float: left;
+
+}
+
+
+#upserveolo.smallerBoxes .box:nth-child(even) .box-inner,
+#upserveolo.smallerBoxes .box.normal:nth-child(even) .box-inner{
+  float: right;
+
+}
+
 #upserveolo .box-inner{
   margin: 0;
 }
@@ -5508,17 +5560,22 @@ height: 560px;
 
 @media only screen and (max-width: 992px) {
 
-  width: 100%;
+.mt10{
+  display:none;
+}
+  width: 50%;
 
-
-
+.leftmodbuttons{
+    width: 90%;
+    float: left;
+}
 }
 
 
 .box-inner{
   @media only screen and (max-width: 992px) {
 
-  width: 100%;
+  width: 98%;
 
 
 
@@ -5529,12 +5586,27 @@ height: 560px;
 }
 
 
+  @media only screen and (max-width: 992px) {
+#upserveolo .box.normal:nth-child(odd){
+  .box-inner{
+float: left;
+  }
+}
+
+#upserveolo .box.normal:nth-child(even){
+   .box-inner{
+float: right;
+}
+}
+
+}
 
   @media only screen and (max-width: 992px) {
 
     #upserveolo .box.normal{
+          margin-bottom: 6px;
         .leftmodbuttons{
-          width: 55%;
+          // width: 55%;
           float: left;
         }
 

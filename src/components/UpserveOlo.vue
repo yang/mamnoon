@@ -4779,7 +4779,7 @@ height: 560px;
 
 @media only screen and (max-width: 992px) {
 
-  width: 100%;
+  width: 50%;
 
 
 
@@ -4789,7 +4789,7 @@ height: 560px;
 .box-inner{
   @media only screen and (max-width: 992px) {
 
-  width: 100%;
+  width: 98%;
 
 
 

@@ -2132,6 +2132,19 @@ display: flow-root;
     background:#f58e58;
     border-radius: 15px;
     }
+
+
+    .leftDropdown > *,
+    .rightDropdown > *,
+    .vs__search, .vs__search:focus{
+    cursor: pointer !important;
+    }
+
+.italicize{
+  font-weight: 400;
+  font-style: italic;
+}
+
 </style>
 
 
