@@ -238,7 +238,10 @@
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                     <b>{{currentItem.name.toLowerCase().replace(" -- to go only", "")}}</b>   <b style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
-                     {{currentItem.description}}</p>
+                     {{currentItem.description}}
+               
+                                       
+                     </p>
         
                     <hr />
 
@@ -720,6 +723,7 @@ add
                                        <!-- <div >{{item.id}}</div> -->
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
+                                                    
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class="row no-lr-margin">
@@ -744,7 +748,7 @@ add
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description | truncate(60, '...')}}</div>
+                                                                                                          >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
                                                                                                             <!-- ${{ serve.price_cents.toFixed(2)/100}}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span>  -->
 
@@ -829,7 +833,7 @@ add
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description | truncate(60, '...')}}</div>
+                                                                                                          >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
                                                                                                             ${{ serve.price_cents.toFixed(2)/100}}            <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                                                                                                           </div>
@@ -896,7 +900,7 @@ add
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description | truncate(60, '...')}}</div>
+                              >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                               <div class="food-price">
                                 ${{ serve.price_cents.toFixed(2)/100}}            <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                               </div>
@@ -1035,9 +1039,12 @@ add
               <!-- <br />  -->
               <!-- no filtering -->
                   <!-- beggin 1 -->
-                                <template v-if="item.timing_mask === item.timing_mask">
+                               <template v-if="item.timing_mask === item.timing_mask">
+                                      <!-- <template v-if="!item.timing_mask"> -->
                                 <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="container menu-line-testing">
                                     
+<!-- v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime)" -->
+
                                                 <div
                                                   :id="'drawertop-'+ item.id"
                                                   @click="expandChild(item.id)"
@@ -1048,6 +1055,7 @@ add
                                                     <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
+vvv
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class=" row no-lr-margin">
@@ -1056,6 +1064,16 @@ add
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
+                                                                                <!-- <div class="yellow-bg-test" @click="openModal(serve,null)"> -->
+
+{{serve}}
+<!-- {{serve.description.replace('\r\n','sss')}} -->
+ <div v-html='computed3(serve.description)'></div>
+
+
+
+
+
                                                                                             <div class="half-width2left">
                                                                                                           <div class="content-box">
         <div class="showBox" v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
@@ -1066,7 +1084,7 @@ add
                                                                                                           <div
                                                                                                             v-if="serve.description"
                                                                                                             class="food-description"
-                                                                                                          >{{serve.description | truncate(60, '...')}}</div>
+                                                                                                          >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
                                                                                                             ${{ serve.price_cents.toFixed(2)/100}}      <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                                                                                                           </div>
@@ -1137,7 +1155,7 @@ add
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description | truncate(60, '...')}}</div>
+                              >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                               <div class="food-price">
                                 ${{ serve.price_cents.toFixed(2)/100}}       <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                               </div>
@@ -1201,7 +1219,7 @@ add
                               <div
                                 v-if="serve.description"
                                 class="food-description"
-                              >{{serve.description | truncate(60, '...')}}</div>
+                              >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                               <div class="food-price">
                                 ${{ serve.price_cents.toFixed(2)/100}}       <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
                               </div>
@@ -2080,7 +2098,6 @@ export default {
     CartIcon
   },
   computed: {	
-
     cartItems(){
 
 if(this.title === "Mamnoon Street"){
@@ -2806,6 +2823,10 @@ showToFixed: function (value) {
 }
   },
   methods: {
+     computed3(insert) {
+      // return insert.replace(/\\"/g, '"');
+            return insert;
+    },
     imageDimensions(imageSource){
 
 
@@ -4924,6 +4945,64 @@ this.setTip(0)
   },
   mounted() {
 // console.log(this.returnCorrect);
+
+const urlParams = new URLSearchParams(window.location.search);
+const product = urlParams.get('idSelection');
+console.log(product);
+
+
+if(product === "6bed4f99-0b7f-4215-a7b4-fed7314e9c8d"){
+
+this.openModal({
+  "id": "6bed4f99-0b7f-4215-a7b4-fed7314e9c8d",
+  "name": "4th of July BBQ Package - 7/3 pickup only",
+  "price": "125.0",
+  "price_cents": 12500,
+  "description": "Feeds 4\r\nMamnoon shish taouk: yogurt marinated chicken, garlic, za’atar (raw, 14oz)\r\nmamnoon kefta: ground beef and lamb, pistachio, baharat spice, caramelized onions (raw, 12oz)\r\nSmoked and pulled lamb shoulder, mamnoon BBQ (1#, fully cooked)\r\nHummus (8oz)\r\nLabneh (8oz)\r\nPita chips and fresh pita\r\nHouse pickles (12oz)\r\nLabneh toum (4oz)\r\nMarinated olives (8oz)\r\nCabbage slaw, pickled fresno pepper, carrot, herbs, black lime dressing (8oz)\r\nMelon & stone fruit salad, halloumi cheese, pistachio dressing, basil, mint (20oz)\r\nMama’s cookies (4ea.)",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "images": {
+    "online_ordering_menu": {
+      "main": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
+    }
+  },
+  "tax_rate_id": "47d234b1-3c4c-47cf-84cf-c558cd1013b6",
+  "item_images": [
+    {
+      "id": "6fb58514-b271-430d-8f6d-76d7c6ad4d32",
+      "metadata": {
+        "image_path": "v1623864367/mgbjlzt7x3b2wi0vttyu.jpg",
+        "curated": false,
+        "url": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
+      },
+      "url": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
+    }
+  ],
+  "modifier_group_ids": [],
+  "side_ids": [],
+  "tax_rate_ids": []
+},{
+  "id": "13d530ca-5dad-434d-b475-e6891f4090d3",
+  "start_time": "12:45",
+  "end_time": "21:00",
+  "rules": [
+    "sat"
+  ],
+  "status": "enabled",
+  "owner_id": "6b9aed6f-3dc0-4277-b746-4709c89b39aa"
+});
+}
+
+
+
+
+
+
+
+  
+
 
 
 

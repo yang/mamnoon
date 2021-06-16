@@ -14,8 +14,9 @@ order history:
   confirmation code: {{order.orderInfo.confirmation_code}}
 
 <!-- {{order.payInfo.externalTransactionId}} -->
+<br><br>
+preorder? {{order.orderInfo.preorder}}
 <br>
-<!-- preorder? {{order.orderInfo.preorder}} -->
 <template v-if="order.orderInfo.preorder">
 <br>
 scheduled time: {{order.orderInfo.scheduled_time}}
