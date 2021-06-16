@@ -62,7 +62,6 @@
 
 
 
-
 <template v-if="serve.item_images.length > 0">
 <img v-if="serve.item_images[0]" :src="serve.item_images[0].url" alt="" style="height: 329px;margin: 5px auto;position: absolute;z-index: 10;left: 50%;transform: translate(-50%, 0);top: 53px;">
 </template>
@@ -416,7 +415,7 @@ this.upserveSectionsRendered = true
   props: ["data","header","tag","descriptionbody","feature","visible"],
   methods: {
 goToLink(link){
-window.open(link, "_blank");
+window.open(link);
 },
 goToRestaurant(link){
 console.log('122')
