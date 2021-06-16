@@ -13,7 +13,7 @@
   <div v-for="item in pageData" :key="item.acf_fc_layout">
   <template v-if="!isMobile()">
     <TestimonialsMain :visible="visibility.testimonials" v-if="item.acf_fc_layout === 'testimonials'" :showHide="item.showhide" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
-    <!-- <CoverFlowCarousel :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" /> -->
+    <CoverFlowCarousel :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
     <Reservations :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />
     <OnlineShopUpserve :visible="visibility.onlineshop" v-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
    <FineFoods :visible="visibility.finefoods" v-if="item.acf_fc_layout === 'fine foods'" :header="item.header" :description="item.description" :data="item.fine_foods" :tag="item.tagname" />
