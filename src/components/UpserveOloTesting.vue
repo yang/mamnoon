@@ -1060,7 +1060,7 @@ add
                                                     <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
-vvv
+<!-- vvv -->
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class=" row no-lr-margin">
@@ -1071,7 +1071,7 @@ vvv
                                                                                 <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
                                                                                 <!-- <div class="yellow-bg-test" @click="openModal(serve,null)"> -->
 
-{{serve}}
+<!-- {{serve}} -->
 <!-- {{serve.description.replace('\r\n','sss')}} -->
  <div v-html='computed3(serve.description)'></div>
 
