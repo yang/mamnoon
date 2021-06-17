@@ -80,7 +80,22 @@ giftcard purchase
   <span>(returned)</span>
   </template>
   <template v-else>
+
+
+
+<template v-if="order.payInfo.data">
+<!-- {{order.payInfo.data.uniqueTransId}} -->
+
+<span class="line-link" v-if="!order.void" @click="issueTokenizedReturn(order.payInfo.data.uniqueTransId,item.price,order.orderInfo.charges.taxes/order.orderInfo.charges.preTotal,item.cartId,order._id)"><u>issue return</u></span>
+</template>
+
+<template v-if="order.payInfo.uniqueTransId">
+<!-- {{order.payInfo.uniqueTransId}} -->
+
 <span class="line-link" v-if="!order.void" @click="issueTokenizedReturn(order.payInfo.uniqueTransId,item.price,order.orderInfo.charges.taxes/order.orderInfo.charges.preTotal,item.cartId,order._id)"><u>issue return</u></span>
+
+</template>
+
   </template>
 
 </li>
