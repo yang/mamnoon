@@ -238,8 +238,13 @@
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                     <b>{{currentItem.name.toLowerCase().replace(" -- to go only", "")}}</b>   <b style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
-                     {{currentItem.description}}
-               
+                     <!-- {{currentItem.description}} -->
+
+
+
+
+
+               <div style="white-space: pre;overflow: hidden;" v-html="currentItem.description"></div>
                                        
                      </p>
         
@@ -1958,10 +1963,10 @@ cart empty
 
 
 
-              <button class="mt10 fw" style="margin-bottom: 20px;margin-top:10px;"
+              <button class="mt10 fw" :class="{ disabled: disabledGiftCardButton }" style="margin-bottom: 20px;margin-top:10px;"
                 v-if="validNumber && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
-                @click="useGiftCardBalance()"
+                @click="giftCardPreFlight()"
               >Pay With Giftcard</button>
               <button class="mt10 fw" style="margin-bottom: 20px;margin-top:10px;" 
                v-else disabled>Pay With Giftcard</button>
@@ -1975,10 +1980,10 @@ cart empty
 <div v-if="validNumber === false" class="small-message">invalid giftcard number</div>
 
 
-                <button class="mt0 fw" style="margin-top:10px;margin-bottom: 20px;" 
+                <button class="mt0 fw" :class="{ disabled: disabledGiftCardButton }" style="margin-top:10px;margin-bottom: 20px;" 
                 v-if="validNumber && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== ''"
                 id="cip-pay-btn"
-                @click="useGiftCardBalance()"
+                @click="giftCardPreFlight()"
               >Pay With Giftcard</button>
               <button class="mt0 fw" style="margin-bottom: 20px;margin-top:10px;" v-else disabled>Pay With Giftcard</button>
     </template>
@@ -2624,6 +2629,7 @@ if(newAddress){
     sliderNavVisible: true,
     packages: null,
     disabledButton: false,
+    disabledGiftCardButton: false,
     fetchedDate: '',
     reOrder: {},
     orderHistoryList: [],
@@ -2888,8 +2894,8 @@ if(self.packages){
  console.log(currentOrder.charges.items[i]);
 
 
-console.log('self.packages');
-console.log(self.packages);
+// console.log('self.packages');
+// console.log(self.packages);
 
 
 if(self.packages.length > 0){
@@ -2898,7 +2904,9 @@ if(self.packages.length > 0){
       });
 console.log('result');
 console.log(result);
+if(result && result.upserveId){
 self.decrementPackageByUpserveId(result.upserveId);
+}
    }
 }
 
@@ -3728,6 +3736,28 @@ if(self.currentOrder.billing && userInfo.user.billingAddress){
       this.currentBalance =
         giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
     },
+giftCardPreFlight(){
+
+let self = this;
+ this.$swal({ 
+    title: "confirm giftcard transaction?",
+    showDenyButton: true,
+    confirmButtonText: `Confirm`
+  }).then((confirmed) => {
+    if (confirmed) {
+    if(confirmed.isConfirmed){
+          this.disabledGiftCardButton = true;
+        self.useGiftCardBalance()
+
+      }
+
+    }
+    });
+
+
+
+
+},
     useGiftCardBalance() {
       let self = this;
       // first check if the balance is available
@@ -3815,27 +3845,6 @@ console.log(response)
     
     
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
               })
               .catch(function (error) {
                 console.log(error);
@@ -4958,7 +4967,7 @@ this.openModal({
   "name": "4th of July BBQ Package - 7/3 pickup only",
   "price": "125.0",
   "price_cents": 12500,
-  "description": "Feeds 4\r\nMamnoon shish taouk: yogurt marinated chicken, garlic, za’atar (raw, 14oz)\r\nmamnoon kefta: ground beef and lamb, pistachio, baharat spice, caramelized onions (raw, 12oz)\r\nSmoked and pulled lamb shoulder, mamnoon BBQ (1#, fully cooked)\r\nHummus (8oz)\r\nLabneh (8oz)\r\nPita chips and fresh pita\r\nHouse pickles (12oz)\r\nLabneh toum (4oz)\r\nMarinated olives (8oz)\r\nCabbage slaw, pickled fresno pepper, carrot, herbs, black lime dressing (8oz)\r\nMelon & stone fruit salad, halloumi cheese, pistachio dressing, basil, mint (20oz)\r\nMama’s cookies (4ea.)",
+  "description": "Feeds 4 Mamnoon shish taouk: yogurt marinated chicken, garlic, za’atar (raw, 14oz)\r\nmamnoon kefta: ground beef and lamb, pistachio, baharat spice, caramelized onions (raw, 12oz)\r\nSmoked and pulled lamb shoulder, mamnoon BBQ (1#, fully cooked)\r\nHummus (8oz)\r\nLabneh (8oz)\r\nPita chips and fresh pita\r\nHouse pickles (12oz)\r\nLabneh toum (4oz)\r\nMarinated olives (8oz)\r\nCabbage slaw, pickled fresno pepper, carrot, herbs, black lime dressing (8oz)\r\nMelon & stone fruit salad, halloumi cheese, pistachio dressing, basil, mint (20oz)\r\nMama’s cookies (4ea.)",
   "min_sides": 0,
   "max_sides": 0,
   "item_type": "normal",
