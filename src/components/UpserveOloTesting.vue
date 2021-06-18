@@ -200,7 +200,7 @@
           <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
           <div
             class="item-image-container topCurves"
-            v-if="currentItem.images"
+            v-if="currentItem.images && currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'"
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
           
@@ -220,8 +220,9 @@
 
         
           </div>
-          <div class="item-image-container" v-else>
-            <NadiIcon />
+          <div class="item-image-container" v-else style="height: 70px;">
+            <NadiIcon70 v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" />
+                 <NadiIcon v-else />
             </div>
           </template>
 
@@ -236,15 +237,14 @@
   
           <p class="item-description-p" :class="{noTopMarge: true === true}">
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
-                    <b>{{currentItem.name.toLowerCase().replace(" -- to go only", "")}}</b>   <b style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
+                    <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" -- to go only", "")}}</b>   <b v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'" style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
 
 
+<div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
 
-
-
-               <div style="white-space: pre;overflow: hidden;" v-html="currentItem.description"></div>
+<div style="white-space: pre;overflow:hidden;font-size: 12px;" v-html="currentItem.description"></div>
                                        
                      </p>
         
@@ -369,7 +369,8 @@
 
 
           </template>
-            <textarea
+            <textarea 
+            v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'"
             type="text"
             placeholder="special instructions"
             v-model="textdescription"
@@ -2056,6 +2057,7 @@ import Prev from "@/components/svgIcons/Prev";
 
 import NadiIconxx from "@/components/svgIcons/NadiIconxx";
 import NadiIcon from "@/components/svgIcons/NadiIcon";
+import NadiIcon70 from "@/components/svgIcons/NadiIcon70";
 import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 import NadiIconSmX from "@/components/svgIcons/NadiIconSmX";
 import  MoreInfo from "@/components/MoreInfo";
@@ -2093,6 +2095,7 @@ export default {
     Next,
     Prev,
     NadiIcon,
+        NadiIcon70,
     NadiIconxx,
     NadiIconSm,
     NadiIconSmX,
@@ -2344,6 +2347,10 @@ this.currentOrder.charges.tip.amount = this.customAmountAddition
 
  currentOrder: {
      handler(val){
+
+
+
+
       let preTotal = 0
 
 
@@ -2414,6 +2421,22 @@ if(this.user){
     }
     // console.log(curOr)
     
+
+let matches = this.currentOrder.charges.items.filter((obj) => {	
+  // return obj.item_id === "6bed4f99-0b7f-4215-a7b4-fed7314e9c8d";
+  return obj.item_id === "fe3f54dc-bc65-4842-97ab-06f0cfdea495";
+});	
+
+
+if(matches.length > 0 ){
+// add the string
+console.log(matches[0].name)
+
+}else{
+// dont add the string
+
+}
+
     },
     
     deep: true
