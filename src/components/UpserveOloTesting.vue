@@ -256,7 +256,7 @@
           <div v-if="currentItem.modifier_group_ids.length >= 1">
         
         <h4 v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Street Combo'" class="text-left">options</h4>
-            <h4 v-else class="text-left">add ons</h4>
+            <h4 v-else class="text-left" style="font-size:16px;">add ons</h4>
        
             <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
@@ -331,16 +331,7 @@
                                                                                     <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
                                                                                   </div>
                                                                                 </div>
-                                                                                <div v-else class="mt10 modbuttons">
-                                                                <div class="pad-10" style="padding-bottom: 10px;">
-                                                        <!-- <button @click="addAddOn(mod,modifieritem)" :id="'add-' + mod.id">+</button>&nbsp;&nbsp;
-                                                        <button
-                                                          @click="removeAddOn(mod,modifieritem)"
-                                                          :id="'remove-' + mod.id"
-                                                          disabled
-                                                        >-</button> -->
-                                                        </div>
-                                                      </div>
+                                                            
                                                     </div>
                                                   </div>
                                                 </template>
@@ -1074,7 +1065,7 @@ add
 
 <!-- {{serve}} -->
 <!-- {{serve.description.replace('\r\n','sss')}} -->
- <div v-html='computed3(serve.description)'></div>
+<!-- <div v-html='computed3(serve.description)'></div>-->
 
 
 
