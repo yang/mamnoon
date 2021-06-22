@@ -191,7 +191,7 @@
       <div v-if="modalOpen" class="order-modal">
 
         <div class="container modal-body order-modal-width order-modal-body bottomCurves" style="padding:0;">
-          <div @click="closeModal()" class="close closeModal orangeCircle" style="z-index:100;position: fixed;top: 16px;right: 16px;">
+          <div @click="closeModal()" class="close closeModal orangeCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
             <CloseModal />
           </div>
    
@@ -236,7 +236,7 @@
 
         
           </div>
-          <div class="item-image-container" v-else style="height: 70px;">
+          <div class="item-image-container" v-else style="height: 70px;background: #ffffff;">
             <!-- <NadiIcon70 v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" /> -->
                  <!-- <NadiIcon v-else /> -->
             </div>
@@ -400,7 +400,7 @@
 
            
 </div>
-
+        </div>
 <div class="orderModalFooter">
 <hr/>
 
@@ -445,7 +445,7 @@
 
 </div>
 
-        </div>
+
       </div>
 
 
@@ -5274,7 +5274,7 @@ this.currentOrder.scheduled_time = null
     background: white;
     position: fixed;
     bottom: 12px;
-    width: calc(100% - 15px);
+    width: calc(100% - 0px);
     padding: 0px 10px 10px 10px;
 
 
@@ -5283,7 +5283,42 @@ this.currentOrder.scheduled_time = null
     padding: 0;
     }
 
+
+
+    width: 696px;
+    margin: 0 auto;
+    left: 50%;
+    margin-left: -348px;
+
+
 }
+
+
+@media only screen and (max-width: 768px){
+
+
+  .orderModalFooter{
+
+
+
+
+    width: 94% !important;
+    max-width: 94% !important;
+    width: calc(100% - 0px);
+    padding: -13px 10px 10px 10px;
+    width: 696px;
+    margin: 0 auto;
+    left: 0;
+    /* margin-left: -47%; */
+    margin-left: 3%;
+
+  }
+
+
+}
+
+
+
 
 .showBox{
   display: none;

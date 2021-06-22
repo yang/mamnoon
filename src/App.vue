@@ -66,7 +66,8 @@ html, body{
 .section-pad{
   margin-top: 50px;
   margin-bottom: 50px;
-  border-bottom: 1px solid grey;
+
+  border-bottom: 1px solid rgba(0,0,0,.1) !important;
   padding-bottom: 40px;
 }
 h4.error{
@@ -139,7 +140,7 @@ margin: 0 10px 0 0;
 }
 
 li {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom:  1px solid #d4d0d0;
   position: relative;
 }
 
@@ -153,7 +154,8 @@ li button {
   background: white;
   padding: 15px;
   border-radius: 0px;
-  border: 1px solid grey;
+  border: 1px solid #d4d0d0;
+    // border-bottom: 1px solid rgba(0,0,0,.51) !important;
 }
 
 button {
@@ -605,32 +607,32 @@ border-top: 0;
   background-position: 0;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 200px;
+  height: 300px;
   z-index: 1;
 
   background: #f0ecec;
 
   img, svg {
     width: auto !important;
-    height: 200px;
+    height: 300px;
   }
 
 
 div{
   svg{
-    height: 200px;
+    height: 300px;
   }
 }
 
 }
 
 .item-image-container > div > svg {
-    height: 200px;
+    height: 300px;
  
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 640px) {
 .item-image-container {
   text-align: center;
 
@@ -648,11 +650,7 @@ div{
   }
 
 
-div{
-  svg{
-    height: 100px;
-  }
-}
+
 
 }
 
@@ -2126,6 +2124,13 @@ display: flow-root;
 
 .bottomCurves{
       border-radius: 0 0 4px 4px !important;
+
+      border-radius: 4px !important;
+    border-top: 1px solid rgba(0,0,0,.1) !important;
+
+
+
+
 }
 
 
