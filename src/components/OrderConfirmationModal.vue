@@ -455,7 +455,7 @@ form textarea,
 
 .order-modal-body {
   // max-height: 70vh;
-  max-height: 85vh;
+  // max-height: 85vh;
     //  max-height: 65vh;
         max-height: 60vh;
   overflow-y: scroll;
@@ -511,9 +511,12 @@ div{
  
 }
 
+
 .add-to-order-footer {
   padding: 15px 0 20px 0;
-  width: 100%;
+  padding: 8px 0 0px 0;
+    width: 100%;
+
 }
 
 #value {

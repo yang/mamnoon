@@ -189,18 +189,34 @@
 
 
       <div v-if="modalOpen" class="order-modal">
-        <div class="container online-menu order-modal-width topCurves">
 
-
-          <div @click="closeModal()" class="close closeModal orangeCircle">
+        <div class="container modal-body order-modal-width order-modal-body bottomCurves" style="padding:0;">
+          <div @click="closeModal()" class="close closeModal orangeCircle" style="z-index:100;position: fixed;top: 16px;right: 16px;">
             <CloseModal />
           </div>
+   
+
+
+
+   <!-- comment -->
+      <!-- comment -->
+         <!-- comment -->
+            <!-- comment -->
+               <!-- comment -->
+
+
+               <div style="overflow-y: scroll;">
+
+        <div class="container online-menu order-modal-width topCurves orderModalHeader" style="margin: 0;max-width: 100% !important;">
+
+
+
 
 
           <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
           <div
             class="item-image-container topCurves"
-            v-if="currentItem.images && currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'"
+            v-if="currentItem.images"
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
           
@@ -214,15 +230,15 @@
     <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
 </div>
 <div v-else>
-    <img :src="currentItem.images.online_ordering_menu.main" />
+    <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
   </div>
  
 
         
           </div>
           <div class="item-image-container" v-else style="height: 70px;">
-            <NadiIcon70 v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" />
-                 <NadiIcon v-else />
+            <!-- <NadiIcon70 v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" /> -->
+                 <!-- <NadiIcon v-else /> -->
             </div>
           </template>
 
@@ -230,9 +246,9 @@
 
 
         </div>
-        <div class="container modal-body order-modal-width order-modal-body bottomCurves">
 
-   
+    <div class="scrollItems">
+
 
   
           <p class="item-description-p" :class="{noTopMarge: true === true}">
@@ -244,8 +260,8 @@
 
 <div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
 
-<div style="white-space: pre;overflow:hidden;font-size: 12px;" v-html="currentItem.description"></div>
-                                       
+<div style="white-space: pre;overflow:hidden;font-size: 12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" v-html="currentItem.description"></div>
+    <div style="overflow:hidden;font-size: 12px;" v-else v-html="currentItem.description"></div>                                   
                      </p>
         
                     <hr />
@@ -367,38 +383,68 @@
             v-model="textdescription"
             style="margin-top: 10px;"
             />
+
+
+    </div>
+
+
           <!-- <hr /> -->
 
+
+   <!-- comment -->
+      <!-- comment -->
+         <!-- comment -->
+            <!-- comment -->
+               <!-- comment -->
+
+
+           
+</div>
+
+<div class="orderModalFooter">
+<hr/>
+
+          <div class="add-to-order-footer">
+            item total: <b>${{ formatExtraZero(computedAddition * currentItemQuanity) }}</b>
+            
+ 
+
+          </div>
+
+          <div class="add-to-order-footer">
           <button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
           <button v-else disabled>-</button>
           &nbsp;&nbsp;
           <span id="value">{{currentItemQuanity}}</span>&nbsp;&nbsp;
           <button @click="incrementCurrentItem()">+</button>
-          <div class="add-to-order-footer">
-            item total: <b>${{ formatExtraZero(computedAddition * currentItemQuanity) }}</b>
+
             
-            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
-                <template v-if="allOptionsSelected">
-                  <button
-                  class="float-right"
-                  @click="addToOrder(currentItem)"
-                  >add to order</button>
+                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                    <template v-if="allOptionsSelected">
+                      <button
+                      class="float-right"
+                      @click="addToOrder(currentItem)"
+                      >add to order</button>
+                    </template>
+                    <template v-else>
+                      <button
+                      class="float-right"
+                      disabled>select 1 option from each course</button>
+                    </template>
                 </template>
                 <template v-else>
                   <button
-                  class="float-right"
-                  disabled>select 1 option from each course</button>
+                    class="float-right"
+                    @click="addToOrder(currentItem)"
+                  >add to order</button>
                 </template>
 
-            </template>
-            <template v-else>
-              <button
-                class="float-right"
-                @click="addToOrder(currentItem)"
-              >add to order</button>
-            </template>
-
           </div>
+
+
+
+</div>
+
         </div>
       </div>
 
@@ -4304,6 +4350,9 @@ removeFromOrder(removal) {
       this.textdescription = "";
 
       this.currentItemModifierArray = [];
+
+
+      document.documentElement.style.overflow = 'auto'
     },
     closeConfirmationModal() {
       this.orderConfirmationModal = false;
@@ -4330,6 +4379,9 @@ removeFromOrder(removal) {
 
       this.modalOpen = true;
       this.currentItem = current;
+
+
+ document.documentElement.style.overflow = 'hidden'
 
     },
     expandChild(drawer) {
@@ -5187,6 +5239,51 @@ this.currentOrder.scheduled_time = null
 
 
 <style lang="scss">
+
+.scrollItems{
+  padding: 0 15px;
+  padding-bottom: 110px;
+  }
+
+.order-modal-body{
+  height: calc(100vh - 20px);
+    overflow-y: scroll;
+    border-top: 0;
+    top: 10px;
+}
+
+.orderModalHeader{
+  background: white;
+  position: absolute;
+  top: -20px;
+  width: calc(100% - 0px);
+  margin-left: -15px;
+  padding: 10px;
+}
+
+
+.orderModalFooter{
+
+
+
+    // -webkit-box-shadow: 0px 4px 15px 5px rgba(0,0,0,0.41); 
+// box-shadow: 0px 4px 15px 5px rgba(0,0,0,0.41);
+
+
+
+    background: white;
+    position: fixed;
+    bottom: 12px;
+    width: calc(100% - 15px);
+    padding: 0px 10px 10px 10px;
+
+
+    hr{
+          margin: 0;
+    padding: 0;
+    }
+
+}
 
 .showBox{
   display: none;

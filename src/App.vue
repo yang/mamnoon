@@ -578,7 +578,7 @@ transition: all .5s ease;
 
 .order-modal-body {
   // max-height: 70vh;
-  max-height: 85vh;
+  // max-height: 85vh;
     //  max-height: 65vh;
   overflow-y: scroll;
 border-top: 0;
@@ -668,7 +668,9 @@ div{
 
 .add-to-order-footer {
   padding: 15px 0 20px 0;
-  width: 100%;
+  padding: 8px 0 0px 0;
+    width: 100%;
+
 }
 
 #value {

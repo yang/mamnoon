@@ -34,6 +34,7 @@ svg#closemodalredBig21{
     /* width:30px; */
     width: 10px;
     margin: 10px auto;
+    transform: translate(97%);
 }
 
 </style>
