@@ -5358,6 +5358,21 @@ this.setTip(0)
     }
   },
   mounted() {
+
+        this.$nextTick(function () {
+            window.setInterval(() => {
+                // this.countDown();
+
+            this.emptyCart()
+            alert('cart expired')
+            // },10000);
+            },2700000);
+        })
+
+
+
+
+
 // console.log(this.returnCorrect);
 
 const urlParams = new URLSearchParams(window.location.search);
