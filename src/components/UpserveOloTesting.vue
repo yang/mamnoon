@@ -1661,6 +1661,14 @@ add
 <div class="container mt10">
               <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
                 <template v-if="currentOrder.charges">
+                 
+
+
+
+
+
+<!-- {{filteredValuesComputed}} -->
+
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
                     <button class="removeClose" @click="removeFromOrder(order)">
                         <CloseModalRedSm />           
@@ -2053,13 +2061,17 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items}}</pre>-->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
 
    <!--// ccc-->
 
+
+
+<!--
+<pre>{{filterDown(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items)}}</pre>-->
 
 
   </div>
@@ -2143,6 +2155,74 @@ export default {
     CartIcon
   },
   computed: {	
+filteredValuesComputed(){
+
+// let amount = []
+
+
+
+// for(var item in this.currentOrder.charges.items){
+//   if(amount.length>2){
+//   if(this.currentOrder.charges.items[item].name !== this.currentOrder.charges.items[item-1].name){
+//   amount.push(this.currentOrder.charges.items);
+//   }else{
+//     if(amount[item-1].quantity){
+//     amount[item-1].quantity++;
+//     }
+//   }
+//   }else{
+//       amount.push(this.currentOrder.charges.items);
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+// return amount;
+
+
+
+// let arrr = [];
+
+// let itemsCopy = this.currentOrder.charges.items.slice(0);
+
+
+// for(let i = 0; i < itemsCopy.length; i++){
+// console.log(this.findWithAttr(arrr, itemsCopy[i].name));
+  // if(this.findWithAttr(arrr, itemsCopy[i].name) === -1){
+        // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
+      //  console.log('there isnt one, so add it');
+    // arrr.push(itemsCopy[i]);
+  // }else{
+
+
+// arrr[this.findWithAttr(arrr, itemsCopy[i].name)].quantity++;
+  // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
+
+  // }
+
+  // else{
+    // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
+      //  console.log('there is one, so increase it by one');
+
+    // arrr[this.findWithAttr(arrr, itemsCopy[i].name)].quantity++;
+    // break;
+  // }
+    
+// }
+// console.log(arrr);
+// this.arrCounted = arrr;
+// return arrr;
+
+
+
+},
     cartItems(){
 
 if(this.title === "Mamnoon Street"){
@@ -2393,11 +2473,11 @@ this.currentOrder.charges.tip.amount = this.customAmountAddition
 
       let curOr = this.currentOrder
       curOr.restaurant = this.title
-  //  if(this.currentOrder.charges){
+      //  if(this.currentOrder.charges){
 
 if(this.user){
   // console.log('this.user')
-// console.log(this.user)
+  // console.log(this.user)
   // console.log(this.user.user.email)
 }
 
@@ -2473,6 +2553,17 @@ console.log(matches[0].name)
 // dont add the string
 
 }
+
+
+
+
+
+
+
+// this.filterDown(this.currentOrder.charges.items);
+
+
+
 
     },
     
@@ -2686,6 +2777,7 @@ if(newAddress){
     },
   data() {
   return {
+  filteredValues: [],
     sliderNavVisible: true,
     packages: null,
     disabledButton: false,
@@ -2889,6 +2981,136 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+
+
+// findWithInstructions(this.currentOrder.charges.items,this.textdescription) === -1 && this.findWithModifiers
+
+findWithInstructions(array, value) {
+
+// let ins = null;
+
+    for(var i = 0; i < array.length; i += 1) {
+        if(array[i].instructions === value) {
+          //  ins = i;
+            // console.log(i);
+return i;
+}
+    }
+
+
+// if(ins === null){
+  // console.log('finding with arrt no results');
+  return -1;
+// }else{
+  //  console.log(array, value);
+  // return ins;
+// }
+
+
+
+    
+},
+findWithModifiers(array, value) {
+
+
+function arraysEqual(a1,a2) {
+    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+    return JSON.stringify(a1)==JSON.stringify(a2);
+}
+
+// let ins = null;
+
+    for(var i = 0; i < array.length; i += 1) {
+        if(arraysEqual(array[i].modifiers, value)) {
+        // ins = i;
+            // console.log(i);
+            return i;
+        }
+    }
+   
+
+
+// if(ins === null){
+  // console.log('finding with arrt no results');
+  return -1;
+// }else{
+  //  console.log(array, value);
+  // return ins;
+// }
+
+
+    
+},
+findWithAttr(array, value) {
+
+// let ins = null;
+    for(var i = 0; i < array.length; i += 1) {
+        if(array[i].name === value) {
+            return i;
+            // ins = i;
+            // console.log(i);
+        }
+    }
+
+
+// if(ins === null){
+  // console.log('finding with arrt no results');
+  return -1;
+// }else{
+  //  console.log(array, value);
+  // return ins;
+// }
+
+
+    
+},
+filterDown(items){
+
+let arrr = [];
+
+let itemsCopy = items.slice(0);
+
+
+for(let i = 0; i < itemsCopy.length; i++){
+// console.log(this.findWithAttr(arrr, itemsCopy[i].name));
+  if(this.findWithAttr(arrr, itemsCopy[i].name) === -1){
+    console.log('there isnt one, so add it');
+    arrr.push(itemsCopy[i]);
+  }else{
+    console.log('there is one, so increase it by one');
+    arrr[this.findWithAttr(arrr, itemsCopy[i].name)].quantity++;
+  }
+    
+}
+console.log(arrr);
+// this.arrCounted = arrr;
+return arrr;
+
+},
+doACalculation(calculation){
+
+function findWithAttr(array, value) {
+
+    for(var i = 0; i < array.length; i += 1) {
+        if(array[i].name === value) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+    },
      computed3(insert) {
       // return insert.replace(/\\"/g, '"');
             return insert;
@@ -3471,7 +3693,11 @@ this.currentItemModifierArray = filteredCurrent
 
     },
     emptyCart(){
+console.log('empty the cart');
 
+console.log(this.currentOrder.charges.items);
+this.$store.state
+console.log(this.$store.state);
       this.currentOrder.charges.items = []
       
       if(this.$store.state.loggedIn){
@@ -3481,12 +3707,12 @@ this.currentItemModifierArray = filteredCurrent
       }
 
     if(this.title === 'Mamnoon'){
-        // let storeCurrentOrderUpdateMamnoon = this.currentOrder
-        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+        let storeCurrentOrderUpdateMamnoon = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
 
 
-        let storeCurrentOrderUpdateMamnoonTesting = this.currentOrder
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });	
+        // let storeCurrentOrderUpdateMamnoonTesting = this.currentOrder
+        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });	
 
     }else if(this.title === 'Mamnoon Street'){
         let storeCurrentOrderUpdateStreet = this.currentOrder
@@ -4476,11 +4702,10 @@ items.forEach(function(x){
           // this.closeModal();
 
     },
-
     addToOrder(item) {
 
 
-      console.log(item)
+      // console.log(item)
       let modifierPriceTotal = 0;
       for (let i = 0; i < this.currentItemModifierArray.length; i++) {
         modifierPriceTotal =
@@ -4506,8 +4731,30 @@ items.forEach(function(x){
         images: item.images ? item.images : ''
       };
 
-          // console.log(this.currentOrder)
-          this.currentOrder.charges.items.push(itemToAdd);
+
+
+// console.log(this.currentOrder.charges.items.length);
+
+
+
+
+
+
+// if(this.currentOrder.charges.items.length === 0){
+// // if(this.findWithAttr(this.currentOrder.charges.items, item.name) === -1 || this.findWithInstructions(this.currentOrder.charges.items, this.textdescription) === -1 || this.findWithModifiers(this.currentOrder.charges.items, this.currentItemModifierArray) === -1){
+//   // console.log('one attribute previously non existent. add to list.')
+//   this.currentOrder.charges.items.push(itemToAdd);
+// // }
+//     }else{
+// console.log(this.searchForItem(item.name,this.textdescription,this.currentItemModifierArray));
+// if(this.searchForItem(item.name,this.textdescription,this.currentItemModifierArray) === 'add'){
+//     this.currentOrder.charges.items.push(itemToAdd);
+// }
+// }
+
+
+
+  this.currentOrder.charges.items.push(itemToAdd);
 
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
@@ -4516,6 +4763,98 @@ items.forEach(function(x){
           this.currentItemModifierArray = [];
           this.allOptionsSelected = false
           this.closeModal();
+
+
+
+
+
+
+    },
+    searchForItem(name, instructions, currentItemModifierArray){
+
+
+
+let searchResult = {
+name: -1,
+instructions: -1,
+modifiers: -1,
+simple: false
+}
+
+    for(var i = 0; i < this.currentOrder.charges.items.length; i += 1) {
+        if(this.currentOrder.charges.items[i].name === name) {
+            // return i;
+            // ins = i;
+            // console.log('index of name '+ i);
+            searchResult.name = i;
+        }
+    }
+
+if(currentItemModifierArray.length === 0 && instructions === ''){
+searchResult.simple = true;
+console.log(searchResult);
+return searchResult;
+}else{
+console.log(this.currentOrder.charges.items);
+
+    for(var i = 0; i < this.currentOrder.charges.items.length; i += 1) {
+        if(this.currentOrder.charges.items[i].instructions === instructions) {
+            // return i;
+            // ins = i;
+
+            console.log('index of instructions '+ i);
+            searchResult.instructions = i;
+        }
+    }
+
+
+
+function arraysEqual(a1,a2) {
+    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+    return JSON.stringify(a1)==JSON.stringify(a2);
+}
+
+
+    for(var i = 0; i < this.currentOrder.charges.items.length; i += 1) {
+        if(arraysEqual(this.currentOrder.charges.items[i].modifiers, currentItemModifierArray)) {
+          // ins = i;
+          // console.log(i);
+          // return i;
+          console.log('modifiers '+ i);
+          searchResult.modifiers = i;
+        }
+    }
+
+
+
+
+
+
+if(searchResult.instructions === -1 ||searchResult.modifiers === -1){
+  console.log(searchResult);
+  console.log('add');
+  return 'add';
+}else{
+return searchResult;
+}
+
+// if(searchResult.name === searchResult.instructions && searchResult.instructions === searchResult.modifiers){
+// console.log('all three match so add to the index');
+// }else{
+//  console.log('all three dont match so add to the index'); 
+// }
+
+
+
+
+}
+
+
+
+
+
+// return searchResult;
+// console.log(searchResult);
 
     },
     addToOrderDontCloseModal(item) {
@@ -5128,7 +5467,7 @@ this.filterForNow()
 
 
       let ffAgo = Date.now() - 2700000
-      // let ffAgo = Date.now() - 10000
+// /      let ffAgo = Date.now() - 10000
 
     if(this.title === 'Mamnoon'){
 
