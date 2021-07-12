@@ -5363,8 +5363,8 @@ this.setTip(0)
             window.setInterval(() => {
                 // this.countDown();
 
-            this.emptyCart()
-            alert('cart expired')
+            this.emptyCart(); 
+            alert('cart expired');
             // },10000);
             },2700000);
         })
