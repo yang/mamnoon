@@ -9,8 +9,13 @@
     our site is in beta mode. we would appreciate your feedback if you encounter any bugs. <a :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile}%20%20%0D%0A%0D%0A${JSON.stringify($store.state)}`">submit feedback</a>
 </div>-->
 
-<div class="beta">
+<!-- <div class="beta">
     our site is in beta mode. if you encounter any bugs, please <a @click="sendState(randomId,$store.state,location,userAgent,isMobile)" :href="`mailto:${feedbackEmail}?subject=Nadi%20Mama%20Bug%20Submission&body=-----please submit any information you can about the bug you encountered.----%0D%0A%0D%0A%0D%0A-----below is some session information to help us diagnose your bug issue----%0D%0A%0D%0Apage%20link:%20${location}%0D%0A%0D%0Auser%20agent:%20${userAgent},%20mobile:%20${isMobile},%0D%0A%0D%0A%20bug%20id:%20${randomId}`"><u>submit feedback</u></a>!
+</div> -->
+
+
+<div class="beta">
+    our site is in beta mode. if you have a suggestion, please <a href="https://nadimama-feedback-zta0ansa.featureupvote.com/"><u>submit feedback</u></a>!
 </div>
 
 
