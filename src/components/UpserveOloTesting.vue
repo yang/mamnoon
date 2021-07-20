@@ -1861,6 +1861,7 @@ add
 <div class="roundSquareImageContainer" v-if="order.images" :style="{ backgroundImage: `url(${order.images.online_ordering_menu.main})` }">
 </div> 
 <div class="roundSquareImageContainer" v-else>
+  <NadiIconSmXSidebar/>
 </div> 
 </div>
 
@@ -2308,6 +2309,7 @@ import NadiIcon from "@/components/svgIcons/NadiIcon";
 import NadiIcon70 from "@/components/svgIcons/NadiIcon70";
 import NadiIconSm from "@/components/svgIcons/NadiIconSm";
 import NadiIconSmX from "@/components/svgIcons/NadiIconSmX";
+import NadiIconSmXSidebar from "@/components/svgIcons/NadiIconSmXSidebar";
 import  MoreInfo from "@/components/MoreInfo";
 
 import SliderNav from "@/components/SliderNav";
@@ -2355,6 +2357,7 @@ export default {
     NadiIconxx,
     NadiIconSm,
     NadiIconSmX,
+    NadiIconSmXSidebar,
     SavedCard,
     Swiper,
     SliderNav,
