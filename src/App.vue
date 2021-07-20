@@ -36,6 +36,10 @@ export default {
 <style lang="scss">
 
 
+  $nadi-red-color: #f05d5b;
+
+
+
 
 html, body{
     // overflow-x: hidden;
@@ -148,6 +152,8 @@ li button {
   position: absolute;
   right: 0;
   top: 20px;
+      top: 50%;
+    transform: translateY(-50%);
 }
 
 .modal-body {
@@ -159,6 +165,7 @@ li button {
 }
 
 button {
+
   border: 1px solid #f05d5b;
     border: 1px solid #f58e58;
   // background-color: #f05d5b;
@@ -203,11 +210,9 @@ div {
 .order-sidebar {
   padding-left: 0;
   li {
- 
-    font-size: .9rem;
+     font-size: .9rem;
     list-style-type: none;
-    padding: 18px 0 22px;
-    
+    padding: 10px 0;
   }
 }
 

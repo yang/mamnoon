@@ -185,31 +185,33 @@
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
 
 
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
+
 
 
       <div v-if="modalOpen" class="order-modal">
-        <!-- 1111111111111111 -->
+
         <div class="container modal-body order-modal-width order-modal-body bottomCurves" style="padding:0;">
           <div @click="closeModal()" class="close closeModal orangeCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
             <CloseModal />
           </div>
+   
+
+
+
    <!-- comment -->
       <!-- comment -->
          <!-- comment -->
             <!-- comment -->
                <!-- comment -->
+
+
                <div style="overflow-y: scroll;">
 
         <div class="container online-menu order-modal-width topCurves orderModalHeader" style="margin: 0;max-width: 100% !important;">
+
+
+
+
 
           <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
           <div
@@ -218,43 +220,69 @@
             :style="{'background-image': currentItem.images.online_ordering_menu.main}"
           >
           
+
+
+
+
 <div v-if="imageDimensions(currentItem.images.online_ordering_menu.main)>1">
+
+
     <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
 </div>
 <div v-else>
     <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
   </div>
-      </div>
+ 
+
+        
+          </div>
           <div class="item-image-container" v-else style="height: 70px;background: #ffffff;">
             <!-- <NadiIcon70 v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" /> -->
                  <!-- <NadiIcon v-else /> -->
             </div>
           </template>
-      </div>
-<div class="scrollItems">
-            <p class="item-description-p" :class="{noTopMarge: true === true}">
 
-              <!-- {{currentItem}} -->
+
+
+
+        </div>
+
+    <div class="scrollItems">
+
+
+  
+          <p class="item-description-p" :class="{noTopMarge: true === true}">
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                     <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" -- to go only", "")}}</b>   <b v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'" style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
+
+
 <div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
+
 <div style="white-space: pre;overflow:hidden;font-size: 12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" v-html="currentItem.description"></div>
     <div style="overflow:hidden;font-size: 12px;" v-else v-html="currentItem.description"></div>                                   
                      </p>
+        
                     <hr />
+
+
+
           <template v-if="currentItem.modifier_group_ids">
           <div v-if="currentItem.modifier_group_ids.length >= 1">
+        
         <h4 v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Street Combo'" class="text-left">options</h4>
             <h4 v-else class="text-left" style="font-size:16px;">add ons</h4>
+       
             <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
                 <template v-if="modifieritem === modifier.id">
                   <div class="displayInlineBlock">
+             
                 <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
+
                   <div class="fw">
                   <div class="option-choices row row-eq-height">
                                               <!-- <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div> -->
@@ -262,6 +290,7 @@
                                                 <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
                                                 <template v-for="(m,i) in modifier.modifier_ids">
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
+                                                  
                                                   <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
                                                   <div v-if="m === mod.id && mod.name !== 'None'" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
@@ -283,6 +312,7 @@
                                                                           <div class="pad-10">
                                                                           <span class="title-bolder">{{mod.name}} <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
                                                                           <br />
+                                                                        
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
                                                                                   <div v-for="(piece,i) in upserveList" :key="'E'+ i">
@@ -300,21 +330,40 @@
                                                 <template v-else>
                                                 <div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
+                                                     
+
+
+
                                                                           <div class="pad-10 leftmodbuttons">
+
+
                                                                             <!-- {{mod.id}} -->
                                                                           <span class="title-bolder">{{mod.name.replace('add ','')}} <span class="italicize" v-if="mod.price != 0.0"><span class="thin">+</span>${{mod.price}}</span></span>
                                                                           <br />
+                                                                        
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
                                                                                   <div v-for="(piece,i) in upserveList" :key="'E'+ i">
                                                                                     <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
                                                                                   </div>
                                                                                 </div>
+                                                            
                                                     </div>
                                                   </div>
                                                 </template>
+
+
+
+
+
+
+
+
                                                 </template>
                                               </template> 
+
+
+
 <!-- end container -->
 </div>
          </div>
@@ -323,6 +372,9 @@
               </div>
             </div>
           </div>
+
+
+
           </template>
             <textarea 
             v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'"
@@ -331,27 +383,42 @@
             v-model="textdescription"
             style="margin-top: 10px;"
             />
-          
+
+
     </div>
+
+
           <!-- <hr /> -->
+
+
    <!-- comment -->
       <!-- comment -->
          <!-- comment -->
             <!-- comment -->
                <!-- comment -->
-      </div>
+
+
+           
+</div>
         </div>
 <div class="orderModalFooter">
 <hr/>
+
           <div class="add-to-order-footer">
-            item total: <b>${{ formatExtraZero(computedAddition * currentItemQuantity) }}</b>
+            item total: <b>${{ formatExtraZero(computedAddition * currentItemQuanity) }}</b>
+            
+ 
+
           </div>
-         <div class="add-to-order-footer">
-          <button v-if="currentItemQuantity > 1" @click="decrementCurrentItem()">-</button>
+
+          <div class="add-to-order-footer">
+          <button v-if="currentItemQuanity > 1" @click="decrementCurrentItem()">-</button>
           <button v-else disabled>-</button>
           &nbsp;&nbsp;
-          <span id="value">{{currentItemQuantity}}</span>&nbsp;&nbsp;
+          <span id="value">{{currentItemQuanity}}</span>&nbsp;&nbsp;
           <button @click="incrementCurrentItem()">+</button>
+
+            
                 <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
                     <template v-if="allOptionsSelected">
                       <button
@@ -371,313 +438,80 @@
                     @click="addToOrder(currentItem)"
                   >add to order</button>
                 </template>
+
           </div>
+
+
+
 </div>
-</div>
-                <!-- 11111111111111111111 -->
 
 
-
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-
-
-
-
-
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-
-      <div v-if="modal2Open" class="order-modal">
-        <!-- 222222222222 -->
-        <div class="container modal-body order-modal-width order-modal-body bottomCurves" style="padding:0;">
-          <div @click="closeModal()" class="close closeModal orangeCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
-            <CloseModal />
-          </div>
-   <!-- comment -->
-      <!-- comment -->
-         <!-- comment -->
-            <!-- comment -->
-               <!-- comment -->
-               <div style="overflow-y: scroll;">
-
-        <div class="container online-menu order-modal-width topCurves orderModalHeader" style="margin: 0;max-width: 100% !important;">
-
-          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
-          <div
-            class="item-image-container topCurves"
-            v-if="currentItem.images"
-            :style="{'background-image': currentItem.images.online_ordering_menu.main}"
-          >
-          
-<div v-if="imageDimensions(currentItem.images.online_ordering_menu.main)>1">
-    <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
-</div>
-<div v-else>
-    <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
-  </div>
       </div>
-          <div class="item-image-container" v-else style="height: 70px;background: #ffffff;">
-            <!-- <NadiIcon70 v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" /> -->
-                 <!-- <NadiIcon v-else /> -->
-            </div>
-          </template>
-      </div>
-<div class="scrollItems">
-
-<!-- <pre>
-{{currentItem.item_object}}
-</pre> -->
-
-<!-- {{currentItem.item_object.modifier_group_ids}} -->
-
-            <p class="item-description-p" :class="{noTopMarge: true === true}">
-              <!-- <pre>{{currentItem}}</pre> -->
-                  <!-- <pre>{{currentItem.item_object.modifier_group_ids}}</pre> -->
-                            <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
-                    <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" -- to go only", "")}}</b>   <b v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'" style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
-                     <!-- </template> -->
-                     <!-- {{currentItem.description}} -->
-<div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
-<div style="white-space: pre;overflow:hidden;font-size: 12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" v-html="currentItem.description"></div>
-    <div style="overflow:hidden;font-size: 12px;" v-else v-html="currentItem.description"></div>                                   
-                     </p>
-                    <hr />
-          <template v-if="currentItem.modifier_group_ids">
-          <div v-if="currentItem.modifier_group_ids.length >= 1">
-        <h4 v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Street Combo'" class="text-left">options</h4>
-            <h4 v-else class="text-left" style="font-size:16px;">add ons</h4>
-            <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
-              <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
-                <template v-if="modifieritem === modifier.id">
-                  <div class="displayInlineBlock">
-                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
-                    <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
-                  </template>
-                  <div class="fw">
-                  <div class="option-choices row row-eq-height">
-                                              <!-- <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div> -->
-                                              <template v-for="(mod,i) in modifierItems">
-                                                <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
-                                                <template v-for="(m,i) in modifier.modifier_ids">
-                                                    <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
-                                                  <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
-
-                                                    
-                                                  <div v-if="m === mod.id && mod.name !== 'None'" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
-                                                    <div class="box-inner">
-                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
-                                                            <div class="content">
-                                                                      <div style="width:100%;position: relative;">
-                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
-                                                                        <div style="position: absolute;top:0;width:100%">
-                                                                              <NadiIconxx />
-                                                                        </div>
-                                                                        <div style="position: absolute;top:0;width:100%;">
-                                                                            <div>
-                                                                            <template v-for="(piece,i) in upserveList">
-                                                                            <template v-if="piece.name.toLowerCase().replace(' ','').replace('mamnoon','') === mod.name.toLowerCase().replace(' ','').replace('mamnoon','')">
-                                                                          <template v-if="piece.images">
-                                            <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
-                                                                            <div class="content">.</div>
-                                                                            </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
-                                                                          <div class="pad-10">
-                                                                          <span class="title-bolder">{{mod.name}} <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
-                                                                          <br />
-                                                                          </div>
-                                                                          <div v-if="modifier.name.includes(': choose 1')">
-                                                                                  <div v-for="(piece,i) in upserveList" :key="'E'+ i">
-                                                                                    <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
-                                                                                  </div>
-                                                                                </div>
-                                                                                <div v-else class="mt10">
-                                                                <div class="pad-10" style="padding-bottom: 10px;">
-            
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  </template>
-                                                <template v-else>
-                                                    
-
-
-
-                                                <!--<div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">-->
-      <div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal selected" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{'selected selectedAddOn': currentlyContains(currentItem.modifiers,m,mod.id) }">
-                                      <div class="box-inner">
-              
-                                                                          <div class="pad-10 leftmodbuttons">
-                                                                            <!-- {{mod.id}} -->
-                                                                          <span class="title-bolder">{{mod.name.replace('add ','')}} <span class="italicize" v-if="mod.price != 0.0"><span class="thin">+</span>${{mod.price}}</span></span>
-                                                                          <br />
-                                                                          </div>
-                                                                          <div v-if="modifier.name.includes(': choose 1')">
-                                                                                  <div v-for="(piece,i) in upserveList" :key="'E'+ i">
-                                                                                    <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
-                                                                                  </div>
-                                                                                </div>
-                                                    </div>
-                                                  </div>
-                                                </template>
-                                                </template>
-                                              </template> 
-<!-- end container -->
-</div>
-         </div>
-                  </div>
-                </template>
-              </div>
-            </div>
-          </div>
-          </template>
-            <textarea 
-            v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'"
-            type="text"
-            placeholder="special instructions"
-            v-model="textdescription"
-            style="margin-top: 10px;"
-            />
-          
-    </div>
-          <!-- <hr /> -->
-   <!-- comment -->
-      <!-- comment -->
-         <!-- comment -->
-            <!-- comment -->
-               <!-- comment -->
-      </div>
-        </div>
-<div class="orderModalFooter">
-<hr/>
-          <div class="add-to-order-footer">
-            item total: <b>${{ formatExtraZero(computedAddition * currentItemQuantity) }}</b>
-          </div>
-         <div class="add-to-order-footer">
-          <button v-if="currentItemQuantity > 1" @click="decrementCurrentItem()">-</button>
-          <button v-else disabled>-</button>
-          &nbsp;&nbsp;
-          <span id="value">{{currentItemQuantity}}</span>&nbsp;&nbsp;
-          <button @click="incrementCurrentItem()">+</button>
-                <template v-if="currentItem.item_object.name === 'mamnoon @ home' || currentItem.item_object.name === 'Street Combo' || currentItem.item_object.name === 'Lunch Combo Special'">
-                    <template v-if="allOptionsSelected">
-                      <button
-                      class="float-right"
-                      @click="updateOrderItem(currentItem)"
-                      >update</button>
-                    </template>
-                    <template v-else>
-                      <button
-                      class="float-right"
-                      disabled>select 1 option from each course</button>
-                    </template>
-                </template>
-                <template v-else>
-                  <button
-                    class="float-right"
-                    @click="updateOrderItem(currentItem)"
-                  >update</button>
-                </template>
-          </div>
-</div>
-</div>
-                <!-- 222222222222 -->
-
-
-
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       <div class="container pt20 no-bot-pad">
         <div class="row no-lr-margin">
           <div class="col-md-12 grey-text">
+
+
+            <!-- {{emailAddress}} -->
+             <!-- <h1 class="text-center">{{title}}</h1> -->
              <template v-if="openDays">
          <span v-if="currentRestaurantHours !== ''">{{title.toLowerCase()}}, {{openDays[0] }}-{{openDays[openDays.length-1]}}, <span v-for="(time,index) in currentRestaurantHours.information.open_time_range" :key="'F'+ index"><span v-if="index === 1">,</span>&nbsp;&nbsp;{{time.time_slot.open | formatAmPmFirst}}-{{time.time_slot.close | formatAmPm}}</span></span>
          </template><br>
+         
          <span v-if="dates_additional_information">{{dates_additional_information}}</span>
          <br v-if="dates_additional_information">
     <span v-if="this.title === 'Mamnoon'"><a class="weblink" href="https://mamnoonrestaurant.com/" target="_blank">mamnoon's website</a></span>
  <span v-if="this.title === 'Mamnoon Street'"><a class="weblink" href="https://mamnoonstreet.com/" target="_blank">mamnoon street's website</a></span>
 <span v-if="this.title === 'Mbar'"><a class="weblink" href="http://mbarseattle.com/" target="_blank">mbar's website</a></span>
+
+
+
         </div>
       </div>
       </div>
+
       <div class="container pt20">
         <div class="row no-lr-margin">
+        
 <div class="col-md-12 col-lg-8">
       <div class="container no-pad"> 
       <h4 class="text-left red">full menu</h4>
+
+
+
+<!-- {{packages}} -->
+<!-- {{this.currentOrder}} -->
+
+
+
+<!-- .storeCurrentOrder -->
+<!-- emptyReOrderObject -->
+<!-- reOrder -->
 <template v-if="reOrder && $store.state.storeCurrentOrder && reOrder.id && $store.state.storeCurrentOrder.id">
+
+
+
+
+
 <div class="order-modal"> 
+
         <div class="container online-menu order-modal-width" style="padding: 20px 0 15px !important; margin-top: 24px;">
           <div @click="emptyReOrderObject()" class="close closeModal">
             <CloseModalMed />
           </div>
           <h4>order again</h4>
         </div>
+
             <div class="container modal-body order-modal-width order-modal-body bottomCurves">
+
 <div class=""> 
+
 <div class="block mb20" v-for="item in reOrder.charges.items">
+
+
+
 <div class="yellow-bg-test">
   <div class="half-width2left">
         <div class="content-box">
@@ -694,14 +528,29 @@ add
       </div>
       <div class="half-width2right">
         <div class="backgroundImage"  v-if="item.images" v-bind:style="{ backgroundImage: 'url(' + item.images.online_ordering_menu.main + ')' }"></div>
-         <div class="backgroundImage" v-else v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundColor: '#dddddd' }">     <NadiIconSmX style="height:140px;" /></div>
+         <div class="backgroundImage" v-else
+                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', backgroundColor: '#dddddd' }"
+                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
+
         </div>
         </div>
+
+
+  
+
+
+
 <hr />  
 </div>
+
+
 </div>
+
+
           <div class="add-to-order-footer">
  <button  style="margin-right: 10px;" class="float-right" @click="emptyReOrderObject()">cancel  </button>  &nbsp;&nbsp;
+
+
  <button class="float-right" style="margin-right: 10px;" @click="addToAllItemsToOrder(reOrder.charges.items)">
    <template v-if="reOrder.charges.items.length > 1"> 
    add everything to order
@@ -709,33 +558,51 @@ add
     <template v-else> 
    add item to order
    </template>
-   </button>&nbsp;&nbsp;
+   </button>   &nbsp;&nbsp;
+
+
+
+
           </div>
+
+
 </div>
 </div>
 </template>
 
+
+
        </div>
-
-
           <div class="container no-lr-pad" style="margin-top: 16px;">
-          <!--          <template v-if="valid">
+
+<!-- {{selectedDate}} -->
+<!-- {{selectedTime}} -->
+
+
+<!--          <template v-if="valid">
           we are open
           </template>
           <template v-else>
           we are currently closed
           </template>-->
+
               <template v-if="valid">
               <div class="toggleLr">
                 <div>
  <button class="oloButton" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
                   <!-- <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button> -->
+
                   <!-- <h2 v-if="!preOrderToggleState">Get it now (or <u>preorder</u>)</h2> -->
                   <!-- <h2 v-if="preOrderToggleState">Preorder</h2> -->
+
+
+
                   </div> 
                 <div>
                   <button class="oloButton"  @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
                   <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button>  -->
+
+
                   <!-- <button v-if="preOrderToggleState" @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button> -->
                   </div> 
               </div>
@@ -745,6 +612,8 @@ add
               now accepting preorders for pick up.
               </div> 
               </template>
+
+
               <template v-if="valid">
                   <template v-if="preOrderToggleState">
                   <div class="leftDropdown">
@@ -764,20 +633,44 @@ add
                       </div>
                   </template>
             </template>
+
+
+
+
+
 </div>
-    <!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing"> -->
-    <!-- <div class="testPage">testpage, please use nadimama.com/mamnoon for an actual experience.</div> -->
-      <div class="container online-menu" style="display:none;">
-        <h4>featured</h4>
-      </div>
+
+
+<!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing"> -->
+<!-- <div class="testPage">testpage, please use nadimama.com/mamnoon for an actual experience.</div> -->
+
+<div class="container online-menu" style="display:none;">
+              <h4>featured</h4>
+            </div>
 <!-- <Swiper :upserveSesctions="upserveSections" :upserve="upserve"/>  -->
+
+
+
+
 <!--  
       <div class="container online-menu">
       <h4>order from the full menu</h4>
+
+
+
+
+
+
+
+       
+       
        </div> -->
       <!-- <div> -->
       <!-- </div> -->
+
+
       
+
           <template v-if="valid">
           <!-- we are openc  {{!preOrderToggleState}} -->
           </template>
@@ -1421,36 +1314,21 @@ add
 
 
 
-<!-- <button v-if="toggledDrawer" @click="toggleDrawer()" class="toggle narrowed">
+<button v-if="toggledDrawer" @click="toggleDrawer()" class="toggle narrowed">
 <span><CloseModalSm2 /></span>
-</button> -->
-<button v-if="!toggledDrawer"else @click="toggleDrawer()" class="toggle">
+</button>
+<button v-else @click="toggleDrawer()" class="toggle">
 <span><CartIcon /> {{cartItems}}</span>
 </button>
 
-<!-- {{valid}} -->
 
-<!-- X -->
-
-<div class="container mb6 hide-on-mob"> 
-
-<div class="pad-bot-20 hide-on-desktop-2" @click="toggleDrawer()">
-
-  <ExButton />
-</div>
-
-
-<div @click="panelShowChoose('yourOrder')" class="filehalf topPre" style="">
-      <template v-if="!preOrderToggleState">
-
-
-        your pick-up order from
-         <h4 class="text-left red">{{title.toLowerCase()}}
-           </h4>
+<div class="container mb10 hide-on-mob"> 
+<div @click="panelShowChoose('yourOrder')" class="filehalf" style="">
+      <template v-if="valid">
+         <h4 class="text-left red">your {{title.toLowerCase()}} order</h4>
   </template>
       <template v-else>
-        your pick-up pre order from
-          <h4 class="text-left red">{{title.toLowerCase()}}</h4>
+          <h4 class="text-left red">{{title.toLowerCase()}} pre order</h4>
   </template>
 
   
@@ -1781,120 +1659,38 @@ add
             </div>
             </div>
 <div class="container mt10">
-
-
-
-
-
-<div v-if="this.title === 'Mamnoon'">
-<div class="mb6" style="height:160px; width:100%; display:inline-block; overflow:hidden;">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.592120094785!2d-122.33530883409114!3d47.61462023625063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906acad96c413d%3A0xa59eabfc8c017e8b!2sMamnoon!5e0!3m2!1sen!2sus!4v1626129380040!5m2!1sen!2sus" width="100%" height="350" frameborder="0" style="position:relative; top:-70px; border:none;"></iframe>
-</div>
-</div>
-
-<div v-if="this.title === 'Mamnoon Street'">
-<div class="mb6" style="height:160px; width:100%; display:inline-block; overflow:hidden;">
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10758.32452141347!2d-122.3386493!3d47.6148339!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x352f82a23182d965!2sMamnoon%20Street!5e0!3m2!1sen!2sus!4v1626132059997!5m2!1sen!2sus" width="100%" height="350" frameborder="0" style="position:relative; top:-70px; border:none;"></iframe>
-
-</div>
-</div>
-
-
-<div class="mb16" v-if="this.title === 'Mamnoon'">
-
-<MapPin class="mr6" />
-
-1508 Melrose Ave, Seattle, WA 98122
-</div>
-
-<div class="mb16" v-if="this.title === 'Mamnoon Street'">
-
-<MapPin class="mr6" />
-
-2020 6th Ave, Seattle, WA 98121
-</div>
-
-
-<div class="mb16">
-
-<Clock class="mr6" /> <span v-if="valid">open</span><span v-else>closed</span>
-</div>
-
-<div class="mb16">
-
-    <span v-if="this.title === 'Mamnoon'"><Phone class="mr6" />&nbsp;&nbsp;<a class="weblink-black" href="tel:+12069069606" target="_blank">(206) 906-9606</a></span>
- <span v-if="this.title === 'Mamnoon Street'"><Phone class="mr6" />&nbsp;&nbsp;<a class="weblink-black" href="tel:+12063279121" target="_blank">(206) 327-9121</a></span>
-<span v-if="this.title === 'Mbar'"><Phone class="mr6" />&nbsp;&nbsp;<a class="weblink-black" href="tel:+12064578287" target="_blank">(206) 457-8287</a></span>
-
-  </div> 
-
-
-
-
               <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
                 <template v-if="currentOrder.charges">
-                 
 
-
-
-
-
-<!-- {{filteredValuesComputed}} -->
+{{filteredSidebar}}
 
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
-                    <button class="noStyleButton" @click="removeFromOrder(order)">
-                        <!-- <CloseModalRedSm />   -->
-                        <TrashCan />         
+                    <button class="removeClose" @click="removeFromOrder(order)">
+                        <CloseModalRedSm />           
                   </button>
-<div class="mt5 inline-flex" style="cursor:pointer;"  @click="openModal2(order)">
+<div class="mt5">
+                  <b>{{order.quantity}}</b>
+                  {{checkIfGiftCard(order.name)}}
 
+                  
+                  &nbsp;&nbsp;&nbsp;&nbsp;
 
-<div class="roundSquareBox">
-
-<div v-if="order.quantity<10" class="quantity">
-  x<div>{{order.quantity}}</div>
-  </div>
-  <div v-else class="quantity biggerNumber">
-  x<div>{{order.quantity}}</div>
-  </div>
-
-<div class="roundSquareImageContainer" v-if="order.images" :style="{ backgroundImage: `url(${order.images.online_ordering_menu.main})` }">
-</div> 
-<div class="roundSquareImageContainer" v-else>
-</div> 
-</div>
-
-<div class="textInfo">
-  <div class="itemTitle">
-    {{checkIfGiftCard(order.name)}}
-
+                 
+                  ${{formatExtraZero(order.price_cents.toFixed(2)/100 * order.quantity)}}
 <div v-if="order.modifiers.length > 0"> 
 <div class="small-message grey" v-for="mod in order.modifiers">
 {{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b>
 </div>
 </div>
             <div v-if="order.instructions !== ''" class="order-instructions">
-                    {{order.instructions}}
+          
+                    <i>{{order.instructions}}</i>
+            
                   </div>
-
-  <div class="itemPrice">
-
-                  ${{formatExtraZero(order.price_cents.toFixed(2)/100 * order.quantity)}}
-</div>
-
-
-  </div>
-
-
-
-
-
-
+                  <div v-else>
+          
                   </div>
-
-
-</div>
-
+                  </div>
                 </li>
                 </template>
               </ul>
@@ -1980,7 +1776,7 @@ cart empty
 
 <template v-if="panelShow === 'yourOrder'">
 <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;display:none;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">customer info</button>
- <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf red-checkout-button" v-else>checkout ({{itemsInCart(this.currentOrder.charges.items)}})</button>
+ <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf" v-else>checkout</button>
 </template>
 <template v-if="panelShow === 'customerInfo'">
 <template v-if="giftCardPanel ===  false">
@@ -2260,17 +2056,13 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items}}</pre>-->
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
 
    <!--// ccc-->
 
-
-
-<!--
-<pre>{{filterDown(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items)}}</pre>-->
 
 
   </div>
@@ -2318,14 +2110,6 @@ import tz from 'moment-timezone'
 import swal from "vue-sweetalert2";
 import CartIcon from "@/components/svgIcons/CartIcon";
 import CloseModalSm2 from "@/components/svgIcons/CloseModalSm2";
-
-
-import TrashCan from "@/components/svgIcons/TrashCan";
-import Phone from "@/components/svgIcons/Phone";
-import Clock from "@/components/svgIcons/Clock";
-import MapPin from "@/components/svgIcons/MapPin";
-import ExButton from "@/components/svgIcons/ExButton";
-
 export default {
       metaInfo: {
       name: 'UpserveOloTesting',
@@ -2359,82 +2143,10 @@ export default {
     Swiper,
     SliderNav,
     MoreInfo,
-    CartIcon,
-    TrashCan,
-    Phone,
-    Clock,
-    MapPin,
-    ExButton
+    CartIcon
   },
   computed: {	
-filteredValuesComputed(){
 
-// let amount = []
-
-
-
-// for(var item in this.currentOrder.charges.items){
-//   if(amount.length>2){
-//   if(this.currentOrder.charges.items[item].name !== this.currentOrder.charges.items[item-1].name){
-//   amount.push(this.currentOrder.charges.items);
-//   }else{
-//     if(amount[item-1].quantity){
-//     amount[item-1].quantity++;
-//     }
-//   }
-//   }else{
-//       amount.push(this.currentOrder.charges.items);
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-// return amount;
-
-
-
-// let arrr = [];
-
-// let itemsCopy = this.currentOrder.charges.items.slice(0);
-
-
-// for(let i = 0; i < itemsCopy.length; i++){
-// console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-  // if(this.findWithAttr(arrr, itemsCopy[i].name) === -1){
-        // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-      //  console.log('there isnt one, so add it');
-    // arrr.push(itemsCopy[i]);
-  // }else{
-
-
-// arrr[this.findWithAttr(arrr, itemsCopy[i].name)].quantity++;
-  // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-
-  // }
-
-  // else{
-    // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-      //  console.log('there is one, so increase it by one');
-
-    // arrr[this.findWithAttr(arrr, itemsCopy[i].name)].quantity++;
-    // break;
-  // }
-    
-// }
-// console.log(arrr);
-// this.arrCounted = arrr;
-// return arrr;
-
-
-
-},
     cartItems(){
 
 if(this.title === "Mamnoon Street"){
@@ -2685,11 +2397,11 @@ this.currentOrder.charges.tip.amount = this.customAmountAddition
 
       let curOr = this.currentOrder
       curOr.restaurant = this.title
-      //  if(this.currentOrder.charges){
+  //  if(this.currentOrder.charges){
 
 if(this.user){
   // console.log('this.user')
-  // console.log(this.user)
+// console.log(this.user)
   // console.log(this.user.user.email)
 }
 
@@ -2768,12 +2480,14 @@ console.log(matches[0].name)
 
 
 
+this.filteredSidebar = this.currentOrder.charges.items.filter((item, index, self) =>
+  index === self.findIndex((t) => (
+    t.sides === item.sides && t.name === item.name && t.modifiers === item.modifiers
+  ))
+)
 
 
-
-
-// this.filterDown(this.currentOrder.charges.items);
-
+console.log(this.filteredSidebar);
 
 
 
@@ -2989,7 +2703,7 @@ if(newAddress){
     },
   data() {
   return {
-  filteredValues: [],
+    filteredSidebar: [],
     sliderNavVisible: true,
     packages: null,
     disabledButton: false,
@@ -3081,9 +2795,8 @@ if(newAddress){
       modifierGroups: [],
       upserveTaxRate: 0.101,
       modalOpen: false,
-      modal2Open: false,
       currentItem: null,
-      currentItemQuantity: 1,
+      currentItemQuanity: 1,
       cartTotal: 0,
       textdescription: "",
       blockedBody: this.data,
@@ -3194,165 +2907,6 @@ showToFixed: function (value) {
 }
   },
   methods: {
-      currentlyContains(modifiers,m,modid){
-
-
-        // console.log(modifiers,m,modid);
-
-        // console.log(this.currentItem);
-
-
-if(m !== modid){
-        console.log('match');
-}
-
-
-        let filtered = modifiers.filter(x=>x.id === m);
-        // console.log(filtered);
-
-if(filtered.length>0){
-return true;
-}else{
-return false;
-}
-
-
-      },
-itemsInCart(items){
-
-let amountOfItems = 0
-
-  for(let i in items){
-amountOfItems = amountOfItems+ items[i].quantity;
-  }
-return amountOfItems;
-},
-// findWithInstructions(this.currentOrder.charges.items,this.textdescription) === -1 && this.findWithModifiers
-findWithInstructions(array, value) {
-
-// let ins = null;
-
-    for(var i = 0; i < array.length; i += 1) {
-        if(array[i].instructions === value) {
-          //  ins = i;
-            // console.log(i);
-return i;
-}
-    }
-
-
-// if(ins === null){
-  // console.log('finding with arrt no results');
-  return -1;
-// }else{
-  //  console.log(array, value);
-  // return ins;
-// }
-
-
-
-    
-},
-findWithModifiers(array, value) {
-
-
-function arraysEqual(a1,a2) {
-    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-    return JSON.stringify(a1)==JSON.stringify(a2);
-}
-
-// let ins = null;
-
-    for(var i = 0; i < array.length; i += 1) {
-        if(arraysEqual(array[i].modifiers, value)) {
-        // ins = i;
-            // console.log(i);
-            return i;
-        }
-    }
-   
-
-
-// if(ins === null){
-  // console.log('finding with arrt no results');
-  return -1;
-// }else{
-  //  console.log(array, value);
-  // return ins;
-// }
-
-
-    
-},
-findWithAttr(array, value) {
-
-// let ins = null;
-    for(var i = 0; i < array.length; i += 1) {
-        if(array[i].name === value) {
-            return i;
-            // ins = i;
-            // console.log(i);
-        }
-    }
-
-
-// if(ins === null){
-  // console.log('finding with arrt no results');
-  return -1;
-// }else{
-  //  console.log(array, value);
-  // return ins;
-// }
-
-
-    
-},
-filterDown(items){
-
-let arrr = [];
-
-let itemsCopy = items.slice(0);
-
-
-for(let i = 0; i < itemsCopy.length; i++){
-// console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-  if(this.findWithAttr(arrr, itemsCopy[i].name) === -1){
-    console.log('there isnt one, so add it');
-    arrr.push(itemsCopy[i]);
-  }else{
-    console.log('there is one, so increase it by one');
-    arrr[this.findWithAttr(arrr, itemsCopy[i].name)].quantity++;
-  }
-    
-}
-console.log(arrr);
-// this.arrCounted = arrr;
-return arrr;
-
-},
-doACalculation(calculation){
-
-function findWithAttr(array, value) {
-
-    for(var i = 0; i < array.length; i += 1) {
-        if(array[i].name === value) {
-            return i;
-        }
-    }
-    return -1;
-}
-
-
-
-
-
-
-
-
-
-
-
-    },
      computed3(insert) {
       // return insert.replace(/\\"/g, '"');
             return insert;
@@ -3365,8 +2919,8 @@ function findWithAttr(array, value) {
 img.src = imageSource;
 
 
-// console.log(img);
-// console.log(img);
+console.log(img);
+console.log(img);
 
 return  img.width/img.height;
 
@@ -3935,11 +3489,7 @@ this.currentItemModifierArray = filteredCurrent
 
     },
     emptyCart(){
-console.log('empty the cart');
 
-console.log(this.currentOrder.charges.items);
-this.$store.state
-console.log(this.$store.state);
       this.currentOrder.charges.items = []
       
       if(this.$store.state.loggedIn){
@@ -3949,12 +3499,12 @@ console.log(this.$store.state);
       }
 
     if(this.title === 'Mamnoon'){
-        let storeCurrentOrderUpdateMamnoon = this.currentOrder
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+        // let storeCurrentOrderUpdateMamnoon = this.currentOrder
+        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
 
 
-        // let storeCurrentOrderUpdateMamnoonTesting = this.currentOrder
-        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });	
+        let storeCurrentOrderUpdateMamnoonTesting = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });	
 
     }else if(this.title === 'Mamnoon Street'){
         let storeCurrentOrderUpdateStreet = this.currentOrder
@@ -4806,16 +4356,15 @@ removeFromOrder(removal) {
       // this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });
     },
     incrementCurrentItem() {
-      this.currentItemQuantity++;
+      this.currentItemQuanity++;
     },
     decrementCurrentItem() {
-      this.currentItemQuantity--;
+      this.currentItemQuanity--;
     },
     closeModal() {
       this.modalOpen = false;
-      this.modal2Open = false;
       this.currentItem = null;
-      this.currentItemQuantity = 1;
+      this.currentItemQuanity = 1;
       this.textdescription = "";
 
       this.currentItemModifierArray = [];
@@ -4837,55 +4386,18 @@ removeFromOrder(removal) {
 
 
 
-      // this.currentModifiers = current.modifier_group_ids.map(function(x){
-      //   return { name: x,
-      //           selected: false,
-      //           option: null,
-      //           price: 0
-      //         }
-      // })
+      this.currentModifiers = current.modifier_group_ids.map(function(x){
+        return { name: x,
+                selected: false,
+                option: null,
+                price: 0
+              }
+      })
 
 
       this.modalOpen = true;
       this.currentItem = current;
 
-
- document.documentElement.style.overflow = 'hidden'
-
-    },
-        openModal2(serve) {
-// console.log(serve);
-      let current = Object.assign({}, serve);
-      console.log(current);
-
-    this.currentItemModifierArray = current.modifiers;
-
-    let priceAdjustment = 0;
-    for(let i in current.modifiers){
-      priceAdjustment = priceAdjustment + current.modifiers[i].price;
-    };
-
-
-
-      // this.currentModifiers = current.item_object.modifiers.map(function(x){
-      //   return { name: x,
-      //           selected: false,
-      //           option: null,
-      //           price: 0
-      //         }
-      // })
-// console.log('priceAdjustment');
-// console.log(priceAdjustment);
-// console.log(current.price);
-current.price = current.price + priceAdjustment;
-// console.log(current.price);
-
-      this.modal2Open = true;
-      this.currentItem = current;
-this.textdescription = this.currentItem.instructions;
-
-
-this.currentItemQuantity = this.currentItem.quantity;
 
  document.documentElement.style.overflow = 'hidden'
 
@@ -4982,10 +4494,10 @@ items.forEach(function(x){
           // this.closeModal();
 
     },
+
     addToOrder(item) {
 
 
-
       // console.log(item)
       let modifierPriceTotal = 0;
       for (let i = 0; i < this.currentItemModifierArray.length; i++) {
@@ -5004,74 +4516,16 @@ items.forEach(function(x){
         item_id: item.id,
         price: item.price_cents,
         price_cents: item.price_cents,
-        quantity: this.currentItemQuantity,
+        quantity: this.currentItemQuanity,
         instructions: this.textdescription,
         modifiers: this.currentItemModifierArray,
-        modifier_group_ids: item.modifier_group_ids,
         sides: [],
         timing_mask: item.timing_mask,
-        images: item.images ? item.images : '',
-        item_object: item
+        images: item.images ? item.images : ''
       };
 
-
-
-// console.log(this.currentOrder.charges.items.length);
-
-
-
-
-
-
-// if(this.currentOrder.charges.items.length === 0){
-// // if(this.findWithAttr(this.currentOrder.charges.items, item.name) === -1 || this.findWithInstructions(this.currentOrder.charges.items, this.textdescription) === -1 || this.findWithModifiers(this.currentOrder.charges.items, this.currentItemModifierArray) === -1){
-//   // console.log('one attribute previously non existent. add to list.')
-//   this.currentOrder.charges.items.push(itemToAdd);
-// // }
-//     }else{
-// console.log(this.searchForItem(item.name,this.textdescription,this.currentItemModifierArray));
-// if(this.searchForItem(item.name,this.textdescription,this.currentItemModifierArray) === 'add'){
-//     this.currentOrder.charges.items.push(itemToAdd);
-// }
-// }
-
-
-console.log(item);
-
-
-function arraysEqual(a1,a2) {
-    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-    return JSON.stringify(a1)==JSON.stringify(a2);
-}
-
-// console.log(itemFilter.modifiers);
-console.log(this.currentItemModifierArray);
-// console.log(arraysEqual(itemFilter.modifiers, this.currentItemModifierArray));
-
-let result = this.currentOrder.charges.items.filter(itemFilter => itemFilter.name === item.name && itemFilter.instructions === this.textdescription && arraysEqual(itemFilter.modifiers, this.currentItemModifierArray));
-console.log(result[0]);
-
-
-
-
-if(result.length > 0){
-
-var elementPos = this.currentOrder.charges.items.map(function(x) {return x.cartId; }).indexOf(result[0].cartId);
-this.currentOrder.charges.items[elementPos].quantity = this.currentOrder.charges.items[elementPos].quantity + this.currentItemQuantity;
-
-  
-}else{
-this.currentOrder.charges.items.push(itemToAdd);
-}
-
-
-
-
-
-
-
-
-  
+          // console.log(this.currentOrder)
+          this.currentOrder.charges.items.push(itemToAdd);
 
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
@@ -5080,150 +4534,10 @@ this.currentOrder.charges.items.push(itemToAdd);
           this.currentItemModifierArray = [];
           this.allOptionsSelected = false
           this.closeModal();
-
-
-    },
-
-    updateOrderItem(item) {
-
-// console.log(item);
-
-      // console.log(item)
-      let modifierPriceTotal = 0;
-      for (let i = 0; i < this.currentItemModifierArray.length; i++) {
-        modifierPriceTotal =
-          modifierPriceTotal + this.currentItemModifierArray[i].price_cents;
-      }
-
-      let itemToAdd = {
-        name: item.name,
-        cartId:
-          Math.random().toString(36).substr(2, 29) +
-          "_" +
-          Math.random().toString(36).substr(2, 29) +
-          "_" +
-          Math.random().toString(36).substr(2, 29),
-        item_id: item.id,
-        price: item.price_cents,
-        price_cents: item.price_cents,
-        quantity: this.currentItemQuantity,
-        instructions: this.textdescription,
-        modifiers: this.currentItemModifierArray,
-        modifier_group_ids: item.modifier_group_ids,
-        sides: [],
-        timing_mask: item.timing_mask,
-        images: item.images ? item.images : '',
-        item_object: item
-      };
-
-
-
-var elementPos = this.currentOrder.charges.items.map(function(x) {return x.cartId; }).indexOf(item.cartId);
-var objectFound =this.currentOrder.charges.items[elementPos]
-
-
-// console.log(objectFound);
-  // this.currentOrder.charges.items.push(itemToAdd);
-
-
-this.currentOrder.charges.items[elementPos] = itemToAdd;
-
-  
-          let newDate = new Date();
-          this.currentOrder.time_placed = newDate;
-          this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
-          this.currentItemModifierArray = [];
-          this.allOptionsSelected = false
-          this.closeModal();
-    },
-    searchForItem(name, instructions, currentItemModifierArray){
-
-
-
-let searchResult = {
-name: -1,
-instructions: -1,
-modifiers: -1,
-simple: false
-}
-
-    for(var i = 0; i < this.currentOrder.charges.items.length; i += 1) {
-        if(this.currentOrder.charges.items[i].name === name) {
-            // return i;
-            // ins = i;
-            // console.log('index of name '+ i);
-            searchResult.name = i;
-        }
-    }
-
-if(currentItemModifierArray.length === 0 && instructions === ''){
-searchResult.simple = true;
-console.log(searchResult);
-return searchResult;
-}else{
-console.log(this.currentOrder.charges.items);
-
-    for(var i = 0; i < this.currentOrder.charges.items.length; i += 1) {
-        if(this.currentOrder.charges.items[i].instructions === instructions) {
-            // return i;
-            // ins = i;
-
-            console.log('index of instructions '+ i);
-            searchResult.instructions = i;
-        }
-    }
-
-
-
-function arraysEqual(a1,a2) {
-    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-    return JSON.stringify(a1)==JSON.stringify(a2);
-}
-
-
-    for(var i = 0; i < this.currentOrder.charges.items.length; i += 1) {
-        if(arraysEqual(this.currentOrder.charges.items[i].modifiers, currentItemModifierArray)) {
-          // ins = i;
-          // console.log(i);
-          // return i;
-          console.log('modifiers '+ i);
-          searchResult.modifiers = i;
-        }
-    }
-
-
-
-
-
-
-if(searchResult.instructions === -1 ||searchResult.modifiers === -1){
-  console.log(searchResult);
-  console.log('add');
-  return 'add';
-}else{
-return searchResult;
-}
-
-// if(searchResult.name === searchResult.instructions && searchResult.instructions === searchResult.modifiers){
-// console.log('all three match so add to the index');
-// }else{
-//  console.log('all three dont match so add to the index'); 
-// }
-
-
-
-
-}
-
-
-
-
-
-// return searchResult;
-// console.log(searchResult);
 
     },
     addToOrderDontCloseModal(item) {
+
 
       document.getElementById("add-" + item.id).disabled = true;
       document.getElementById("remove-" + item.id).disabled = false;
@@ -5245,18 +4559,17 @@ return searchResult;
         item_id: item.id,
         price: item.price_cents,
         price_cents: item.price_cents,
-        quantity: this.currentItemQuantity,
+        quantity: this.currentItemQuanity,
         instructions: this.textdescription,
         modifiers: this.currentItemModifierArray,
         sides: [],
-        timing_mask: item.timing_mask,
-        item_object: item
+        timing_mask: item.timing_mask
       };
 
         this.currentOrder.charges.items.push(itemToAdd);
 
           this.total =
-            Number(this.total) + Number(item.price_cents * this.currentItemQuantity);
+            Number(this.total) + Number(item.price_cents * this.currentItemQuanity);
 
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
@@ -5724,23 +5037,6 @@ this.setTip(0)
     }
   },
   mounted() {
-
-        this.$nextTick(function () {
-            window.setInterval(() => {
-                // this.countDown();
-            if(this.currentOrder.charges.items.length > 0){
-              this.emptyCart(); 
-              alert('Your Nadi Mama order has expired and your shopping bag is now empty. To place an order, please return to the current menu on this page.');
-            }
-
-            // },10000);
-            },2700000);
-        })
-
-
-
-
-
 // console.log(this.returnCorrect);
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -5850,7 +5146,7 @@ this.filterForNow()
 
 
       let ffAgo = Date.now() - 2700000
-// /      let ffAgo = Date.now() - 10000
+      // let ffAgo = Date.now() - 10000
 
     if(this.title === 'Mamnoon'){
 
@@ -5862,7 +5158,7 @@ this.filterForNow()
       let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateMamnoon.timeStamp
       let decider = cachedTimeStamp - ffAgo
       if(decider < 0){
-            console.log('Your Nadi Mama order has expired and your shopping bag is now empty. To place an order, please return to the current menu on this page.');
+        console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
         this.emptyCart()
       }else{
         // console.log('not empty yet')
@@ -5884,7 +5180,7 @@ if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
       let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateStreet.timeStamp
       let decider = cachedTimeStamp - ffAgo
       if(decider < 0){
-             console.log('Your Nadi Mama order has expired and your shopping bag is now empty. To place an order, please return to the current menu on this page.');
+        console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
           this.emptyCart()
       }else{
         console.log('not empty yet')
@@ -5961,126 +5257,6 @@ this.currentOrder.scheduled_time = null
 
 
 <style lang="scss">
-
-
-.mr6{
-  margin-right: 6px;
-}
-
-.red-checkout-button{
-  background-color: #F05D5B !important;
-  border: 1px solid #F05D5B !important;
-}
-
-.pad-bot-20{
-  padding-top: 10px;
-  padding-bottom: 15px;
-}
-
-.pad-left-15{
-  padding: 0 15px 15px;
-}
-
-.noStyleButton{
-  background-color: transparent !important;
-  border: 0 !important;
-  outline: none !important;
-  &:hover,
-  &:active,
-  &:focus{
-      outline: none !important;
-  }
-}
-
-
-.topPre{
-  color:#F05D5B;
-  font-weight: 500;
-}
-
-
-
-.inline-flex{
-  display: inline-flex;
-}
-
-.roundSquareBox{
-  width: 80px;
-  height: 80px;
-position: relative;
-display: inline-block;
-    // float: left;
-
-.roundSquareImageContainer{
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-  background-size:cover;
-  background-position: center center;
-
-}
-.quantity{
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  background-color: #F05D5B;
-  border-radius: 15px;
-  padding-top: 2.5px;
-  width: 30px;
-  height: 30px;
-  color: #fff;
-  text-align: center;
-font-size:10px;
-div {
-  font-size: 16px;
-  transform: translateY(-2px);
-  display: inline;
-          font-weight: 500;
-}
-  &.biggerNumber{
-      padding-top: 5px;
-    div  {
-    font-size:13px;
-      transform: translateY(-2px);
-        display: inline;
-                font-weight: 500;
-
-    }
-
-  }
-}
-
-}
-.textInfo{
-  // background: orange;
-  display: inline-block;
-  // height: 100px;
-  position: relative;
-  padding: 10px;
-    min-width: 200px;
-
-
-  .itemTitle{
-      position: absolute;
-      top: 0;
-      left: 5px;
-      font-size: 0.9rem;
-      font-weight: 600;
-  }
-
-  .itemPrice{
-      // position: absolute;
-      // bottom: 0;
-      left: 5px;
-      font-size: 0.9rem;
-      font-weight: 400;
-  }
-}
-
-.order-instructions{
-color: #999;
-font-weight: 400;
-}
 
 .scrollItems{
   padding: 0 15px;
@@ -6258,11 +5434,6 @@ position: relative;
   }
 }
 
-@media only screen and (min-width: 992px) {
-.hide-on-desktop-2{
-  display:none;
-}}
-
 // button.selected{
 //   box-sizing: border-box;
 // color: #666666 !important;
@@ -6270,12 +5441,8 @@ position: relative;
 
 
 
-.mb6{
-  margin-bottom: 6px;
-}
-
 .mb10{
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .mb16{
@@ -6618,13 +5785,6 @@ height: 560px;
   text-decoration: underline;
   &:hover{
     color: #666666;
-  }
-}
-.weblink-black{
-  color: #000000;
-  text-decoration: none;
-  &:hover{
-    color: #000000;
   }
 }
 

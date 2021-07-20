@@ -110,6 +110,8 @@ li button {
   position: absolute;
   right: 0;
   top: 20px;
+      top: 50%;
+    transform: translateY(-50%);
 }
 
 .modal-body {
