@@ -293,7 +293,7 @@
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
                                                                           <span class="title-bolder">
-                                                                          <span v-if="mod.name === 'None'">no add ons</span>
+                                                                          <span v-if="mod.name === 'None'">no add-ons</span>
                                                                           <span v-else>{{mod.name}}</span>
                                                                           <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
                                                                           <br />
@@ -513,7 +513,7 @@
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
                                                                           <span class="title-bolder">
-                                                                         <span v-if="mod.name === 'None'">no add ons</span>
+                                                                         <span v-if="mod.name === 'None'">no add-ons</span>
                                                                          <span v-else>{{mod.name}}</span>
                                                                             <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
                                                                           <br />
