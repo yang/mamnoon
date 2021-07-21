@@ -270,7 +270,10 @@
                                                 <template v-for="(m,i) in modifier.modifier_ids">
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
                                                   <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
-                                                  <div v-if="m === mod.id && mod.name !== 'None'" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                 
+                                                 
+                                               <!--  <div v-if="m === mod.id && mod.name !== 'None'"-->
+                                                  <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
            
                                                             <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
@@ -289,7 +292,10 @@
                                                                             <div class="content">.</div>
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
-                                                                          <span class="title-bolder">{{mod.name}}<span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
+                                                                          <span class="title-bolder">
+                                                                          <span v-if="mod.name === 'None'">no add ons</span>
+                                                                          <span v-else>{{mod.name}}</span>
+                                                                          <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
                                                                           <br />
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
@@ -487,7 +493,8 @@
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
                                                   <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
 
-              <div v-if="m === mod.id && mod.name !== 'None'" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+              <!--<div v-if="m === mod.id && mod.name !== 'None'"-->
+              <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
                                                             <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
                                                             <div class="content">
@@ -505,10 +512,9 @@
                                                                             <div class="content">.</div>
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
-                                                                          <span class="title-bolder">{{mod.name}}
-                                                                            
-                                                                    
-                                                                            
+                                                                          <span class="title-bolder">
+                                                                         <span v-if="mod.name === 'None'">no add ons</span>
+                                                                         <span v-else>{{mod.name}}</span>
                                                                             <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
                                                                           <br />
                                                                           </div>
@@ -1884,7 +1890,7 @@ add
 
 <div v-if="order.modifiers.length > 0"> 
 <div class="small-message grey" v-for="mod in order.modifiers">
-{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b>
+<span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b></span>
 </div>
 </div>
             <div v-if="order.instructions !== ''" class="order-instructions">
