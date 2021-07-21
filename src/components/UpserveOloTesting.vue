@@ -233,12 +233,15 @@
       </div>
 <div class="scrollItems">
             <p class="item-description-p" :class="{noTopMarge: true === true}">
-
-              <!-- {{currentItem}} -->
+   
+    
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                     <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" -- to go only", "")}}</b>   <b v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'" style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
+
+
+
 <div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
 <div style="white-space: pre;overflow:hidden;font-size: 12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" v-html="currentItem.description"></div>
     <div style="overflow:hidden;font-size: 12px;" v-else v-html="currentItem.description"></div>                                   
@@ -248,6 +251,10 @@
           <div v-if="currentItem.modifier_group_ids.length >= 1">
         <h4 v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Street Combo'" class="text-left">options</h4>
             <h4 v-else class="text-left" style="font-size:16px;">add ons</h4>
+
+  
+
+
             <div v-for="(modifieritem,i) in currentItem.modifier_group_ids" :key="'A'+ i">
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
                 <template v-if="modifieritem === modifier.id">
@@ -265,6 +272,7 @@
                                                   <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
                                                   <div v-if="m === mod.id && mod.name !== 'None'" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
+           
                                                             <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
@@ -281,7 +289,7 @@
                                                                             <div class="content">.</div>
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
-                                                                          <span class="title-bolder">{{mod.name}} <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
+                                                                          <span class="title-bolder">{{mod.name}}<span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
                                                                           <br />
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
@@ -469,6 +477,8 @@
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
                   <div class="fw">
+
+
                   <div class="option-choices row row-eq-height">
                                               <!-- <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div> -->
                                               <template v-for="(mod,i) in modifierItems">
@@ -477,8 +487,7 @@
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
                                                   <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
 
-                                                    
-                                                  <div v-if="m === mod.id && mod.name !== 'None'" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+              <div v-if="m === mod.id && mod.name !== 'None'" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
                                                             <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
                                                             <div class="content">
@@ -496,7 +505,11 @@
                                                                             <div class="content">.</div>
                                                                             </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
                                                                           <div class="pad-10">
-                                                                          <span class="title-bolder">{{mod.name}} <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
+                                                                          <span class="title-bolder">{{mod.name}}
+                                                                            
+                                                                    
+                                                                            
+                                                                            <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
                                                                           <br />
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
@@ -3900,14 +3913,13 @@ this.toggledDrawer = false
   },
     selectedOption(id, modifier, mod, modifieritem){
 
-// console.log(mod.price)
-      let index = this.currentModifiers.findIndex(p => p.option === id)
+    let index = this.currentModifiers.findIndex(p => p.option === id)
 
       if(index > -1){
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].option = null
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].selected = false
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].price = 0
-         this.removeAddOnOne(mod,modifieritem)
+        this.removeAddOnOne(mod,modifieritem)
       }else{
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].option = id
         this.currentModifiers[this.currentModifiers.findIndex(p => p.name === modifier.id)].selected = true
@@ -3916,9 +3928,8 @@ this.toggledDrawer = false
       }
 
 
-// currentModifiers
-//  {{currentItemModifierArray}}
-// remove it from currentMOdifier array if it doenst exist in top one (current modifiers)
+
+
 
 let self = this
 let filteredCurrent = this.currentItemModifierArray.filter(function(x){
@@ -3926,9 +3937,11 @@ let filteredCurrent = this.currentItemModifierArray.filter(function(x){
 
 });
 
+//console.log('filteredCurrent');
+//console.log(filteredCurrent);
+
 this.currentItemModifierArray = filteredCurrent
 
-// console.log(this.currentModifiers.every( (val, i, arr) => val.selected === true ))
       if(this.currentModifiers.every( (val, i, arr) => val.selected === true ) ){
           this.allOptionsSelected = true
         }else{
@@ -3938,11 +3951,11 @@ this.currentItemModifierArray = filteredCurrent
 
     },
     emptyCart(){
-console.log('empty the cart');
+//console.log('empty the cart');
 
-console.log(this.currentOrder.charges.items);
+//console.log(this.currentOrder.charges.items);
 this.$store.state
-console.log(this.$store.state);
+//console.log(this.$store.state);
       this.currentOrder.charges.items = []
       
       if(this.$store.state.loggedIn){
@@ -4657,9 +4670,10 @@ console.log('transasction success')
         name: mod.name
       };
 
-      this.currentItemModifierArray.push(modAddition)
+      this.currentItemModifierArray.push(modAddition);
       this.currentItem.price_cents = Number(this.currentItem.price_cents);
       // this.currentItem.price_cents = Number(this.currentItem.price_cents)
+
 
 
       if(document.getElementById("add-" + mod.id)){
@@ -4668,6 +4682,10 @@ console.log('transasction success')
       if(document.getElementById("remove-" + mod.id)){
         document.getElementById("remove-" + mod.id).disabled = false;
       }
+
+
+console.log(this.currentItemModifierArray);
+console.log(this.currentItem.price_cents);
 
     },
     removeAddOnOne(mod, modifieritem) {
@@ -4837,16 +4855,13 @@ removeFromOrder(removal) {
 
       // console.log(current.modifier_group_ids)
 
-
-
-
-      // this.currentModifiers = current.modifier_group_ids.map(function(x){
-      //   return { name: x,
-      //           selected: false,
-      //           option: null,
-      //           price: 0
-      //         }
-      // })
+      this.currentModifiers = current.modifier_group_ids.map(function(x){
+        return { name: x,
+                selected: false,
+                option: null,
+                price: 0
+              }
+      })
 
 
       this.modalOpen = true;
@@ -4857,31 +4872,52 @@ removeFromOrder(removal) {
 
     },
         openModal2(serve) {
-// console.log(serve);
+
       let current = Object.assign({}, serve);
-      console.log(current);
 
-    this.currentItemModifierArray = current.modifiers;
+  
+      this.currentModifiers = current.modifier_group_ids.map(function(x){
+        return { name: x,
+                selected: false,
+                option: null,
+                price: 0
+              }
+      })
 
+
+  
+for(let i = 0;i<current.modifiers.length;i++){
+console.log(i);
+        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === current.modifiers[i].modifier_group_id)].option = current.modifiers[i].id
+        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === current.modifiers[i].modifier_group_id)].selected = true
+        this.currentModifiers[this.currentModifiers.findIndex(p => p.name === current.modifiers[i].modifier_group_id)].price = current.modifiers[i].price
+
+
+};
+
+
+
+console.log('this.currentModifiers')
+this.currentItemModifierArray = current.modifiers;
+
+
+console.log('currentModifiers adjusted');
+console.log(this.currentModifiers);
     let priceAdjustment = 0;
     for(let i in current.modifiers){
       priceAdjustment = priceAdjustment + current.modifiers[i].price;
     };
 
 
+      if(this.currentModifiers.every( (val, i, arr) => val.selected === true ) ){
+          this.allOptionsSelected = true
+        }else{
+          this.allOptionsSelected = false
+        }
+   
 
-      // this.currentModifiers = current.item_object.modifiers.map(function(x){
-      //   return { name: x,
-      //           selected: false,
-      //           option: null,
-      //           price: 0
-      //         }
-      // })
-// console.log('priceAdjustment');
-// console.log(priceAdjustment);
-// console.log(current.price);
 current.price = current.price + priceAdjustment;
-// console.log(current.price);
+
 
       this.modal2Open = true;
       this.currentItem = current;
@@ -5097,6 +5133,14 @@ this.currentOrder.charges.items.push(itemToAdd);
         modifierPriceTotal =
           modifierPriceTotal + this.currentItemModifierArray[i].price_cents;
       }
+
+
+
+
+
+
+
+
 
       let itemToAdd = {
         name: item.name,
