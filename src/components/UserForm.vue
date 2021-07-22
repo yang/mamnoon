@@ -26,7 +26,7 @@
 
       <div class="address" v-if="!updateDelivery">
 <!-- <b>delivery address:</b><br> -->
-<b>customer info:</b><br>
+<b>guest info:</b><br>
 <template v-if="user && user.user.deliveryAddress">
 {{user.user.deliveryAddress.name}}<br>
 {{user.user.deliveryAddress.phone}}<br>
@@ -35,7 +35,7 @@
 <!-- {{user.user.deliveryAddress.city}}&nbsp;{{user.user.deliveryAddress.state}}&nbsp;{{user.user.deliveryAddress.zip}} -->
 </template>
 <br><br>
-<button class="sm-button" @click="updateDeliveryClick()">update customer info</button>
+<button class="sm-button" @click="updateDeliveryClick()">update guest info</button>
 <br><br>
 </div>
 
@@ -47,7 +47,7 @@
     </ul>
   </p> -->
 
-<b>customer info:</b>
+<b>guest info:</b>
  <br>
   <p>
     <input

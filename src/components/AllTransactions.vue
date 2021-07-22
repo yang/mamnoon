@@ -53,7 +53,7 @@ ${{order.orderInfo.charges.total | showToFixed}}
 <br>
 <b>{{order.email}}</b>
 &nbsp;&nbsp;
-<br>customer name: {{order.orderInfo.fulfillment_info.customer.first_name}}
+<br>guest name: {{order.orderInfo.fulfillment_info.customer.first_name}}
 <br>
 <br>
 <button @click="toggleOrder(order.orderInfo.id)">show/hide full order data</button>

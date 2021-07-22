@@ -23,13 +23,13 @@
 
 
       <div class="address" v-if="!updateCI">
-<b>customer info:</b> <br />
+<b>guest info:</b> <br />
 <template v-if="user && user.user && user.user.deliveryAddress">
 {{user.user.deliveryAddress.name}}<br>
 {{user.user.deliveryAddress.phone}}<br>
 </template>
 <br>
-<button class="sm-button" @click="updateCI = true">update customer info</button>
+<button class="sm-button" @click="updateCI = true">update guest info</button>
 <br>
 </div>
 
@@ -37,7 +37,7 @@
 
 <form class="infoForm" @submit.prevent="checkFormCustomerInfo" v-if="updateCI && user && user.user && user.user.deliveryAddress">
 
-<b>customer info:</b>
+<b>guest info:</b>
  <br>
   <p>
     <input
@@ -1701,9 +1701,9 @@ add
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
   <label class="smblk" for="cutlery">don't include disposable cutlery </label>
                   <br />
-                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">customer info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
-                <h4 v-else class="text-left mt10">customer info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <h4 v-else class="text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
 
 
 
@@ -2010,7 +2010,7 @@ cart empty
 </template>
 
 <template v-if="panelShow === 'yourOrder'">
-<button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;display:none;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">customer info</button>
+<button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;display:none;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">guest info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;padding: 12px 10px;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf red-checkout-button" v-else>
  <span class="float-left-checkout">checkout ({{itemsInCart(this.currentOrder.charges.items)}})</span> <span class="float-right-checkout">${{currentOrder.charges.total | showToFixed }}</span></button>
 </template>
@@ -2022,18 +2022,18 @@ cart empty
 
   <div class="small-message" v-if="selectedTime === null">please select a date and time at the top of this page</div>
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>
 <template v-if="this.$store.state.loggedIn">
 
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
 
 
 </template>
 <template v-else>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
 
 </template>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a guest phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
@@ -2111,20 +2111,20 @@ cart empty
 
 
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a customer name</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>
 
 <template v-if="this.$store.state.loggedIn">
 
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
 
 
 </template>
 <template v-else>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a customer email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
 
 </template>
 
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a customer phone number</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a guest phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
