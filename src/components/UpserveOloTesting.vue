@@ -1973,7 +1973,7 @@ scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br><br>
 
 
                 <span v-if="panelShow === 'customerInfo'">subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</span>
-              <span v-else><b>subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</b></span>
+              <span v-else>subtotal: ${{currentOrder.charges.preTotal | showToFixed}}<br>tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
 
               <br />
              <span  v-if="panelShow === 'customerInfo'">tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
@@ -2000,7 +2000,8 @@ cart empty
 
 <template v-if="panelShow === 'yourOrder'">
 <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;display:none;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">customer info</button>
- <button style="width: 100%;font-size: 24px;padding-top: 3px;width:100%;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf red-checkout-button" v-else>checkout ({{itemsInCart(this.currentOrder.charges.items)}})</button>
+ <button style="width: 100%;font-size: 24px;padding-top: 3px;padding: 12px 10px;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf red-checkout-button" v-else>
+ <span class="float-left-checkout">checkout ({{itemsInCart(this.currentOrder.charges.items)}})</span> <span class="float-right-checkout">${{currentOrder.charges.total | showToFixed }}</span></button>
 </template>
 <template v-if="panelShow === 'customerInfo'">
 <template v-if="giftCardPanel ===  false">
@@ -6016,6 +6017,18 @@ this.currentOrder.scheduled_time = null
 <style lang="scss">
 
 
+.float-left-checkout{
+  float: left;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.float-right-checkout{
+  float: right;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .mr6{
   margin-right: 6px;
 }
@@ -6116,7 +6129,8 @@ div {
   .itemTitle{
       position: absolute;
       top: 0;
-      left: 5px;
+      //left: 5px;
+      left: 8px;
       font-size: 0.9rem;
       font-weight: 600;
   }
@@ -6124,7 +6138,8 @@ div {
   .itemPrice{
       // position: absolute;
       // bottom: 0;
-      left: 5px;
+      // left: 5px;
+      left: 8px;
       font-size: 0.9rem;
       font-weight: 400;
   }
@@ -6424,7 +6439,8 @@ display:block;
  }
 
 .edit-link{
-      color: #f58e58;
+      //color: #f58e58;
+      color: #f05d5b;
       text-decoration: none;
     font-size: .9rem;
     float: right;
@@ -6904,24 +6920,34 @@ font-weight: 300;
       outline: none;
     }
 
-      box-sizing: border-box;
-      background-color: #f8e1d5;
-      color: #f58e58;
-      padding: 5px 10px;
-      border-radius: 4px;
-      border: 2px solid #f8e1d5;
-      font-weight: 600;
+      //box-sizing: border-box;
+      //background-color: #f8e1d5;
+      //color: #f58e58;
+      //padding: 5px 10px;
+      //border-radius: 4px;
+      //border: 2px solid #f8e1d5;
+     // font-weight: 600;
+
+
+   
+    box-sizing: border-box;
+    background-color: #f05d5b4a;
+    color: #F05D5B;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 2px solid #f05d5b00;
+    font-weight: 600;
 
 
 
       &.selected{
 
 
-      background-color: #f58e58;
+      background-color: #F05D5B;
       color: #ffffff;
       padding: 5px 10px;
       border-radius: 4px;
-      border: 2px solid #f58e58;
+      border: 2px solid #F05D5B;
 
 
 

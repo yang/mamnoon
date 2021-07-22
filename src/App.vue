@@ -168,26 +168,30 @@ button {
 
   border: 1px solid #f05d5b;
     border: 1px solid #f58e58;
-  // background-color: #f05d5b;
-   background-color: #f58e58;
+   background-color: #f05d5b;
+
   color: #ffffff;
   padding: 5px 10px;
   border-radius: 4px;
   // border: 2px solid #f05d5b !important;
   // border: 2px solid #f58e58 !important;
-    border: 2px solid #f58e58;
+    border: 2px solid transparent;
+
+//border: 2px solid #f05d5b;
+    
 
       &.deactivated{
              border: 2px solid #999999 !important;
       }
 }
-
+transition: all .5s ease;
 button:hover {
   // border: 1px solid #f05d5b;
   // border: 1px solid #f58e58;
   background-color: #f05d5b;
   background-color: #f58e58;
-  color: #fff367;
+  background-color: #f05d5b4a;
+  color: #f05d5b;
   padding: 5px 10px;
 }
 
@@ -298,9 +302,10 @@ button.filehalf {
 
     border-radius: 4px;
     border: 2px solid #f05d5b;
-     border: 2px solid #f58e58;
+     border: 2px solid #f05d5b;
     background: #fff;
-        background: #f58e58;
+        background: #f05d5b;
+        
     color: #f05d5b;
     color: #ffffff;
     padding-top: 5px;
@@ -314,14 +319,19 @@ button.filehalf {
   }
 
 &.deactivated{
-    border: 1px solid #999999;
+    border: 1px solid transparent;
     background-color: #cccccc;
     color: #666666;
 
 }
+  transition: background-color .1s ease;
+
 
 &:hover{
-  color: #fff367;
+  //  color: #fff367;
+  background-color: #f05d5b4a;
+  color: #F05D5B;
+ border: 2px solid transparent;
 }
 
 
@@ -758,9 +768,10 @@ textarea {
     margin-bottom: 5px;
     width: calc(33% - 2px);
     border: 2px solid #f05d5b;
-    border: 2px solid #f58e58;
+    border: 2px solid transparent;
     background-color: #ffffff;
     background-color: #f58e58;
+    background-color: #f05d5b;
     color: #f05d5b;
     color: #f58e58;
     color: #ffffff;
@@ -770,10 +781,19 @@ textarea {
 
 transition: background-color .1s ease;
     &:hover{
-        border: 2px solid #f05d5b;
-        border: 2px solid #f58e58;
-        color: #fff367;
+        border: 2px solid #f05d5b4a;
+        border: 2px solid #f05d5b4a;
+        
+
+
+background-color: #f05d5b4a;
+    color: #F05D5B;
+
+   border: 2px solid transparent;
     }
+
+
+
 
     &:disabled{
           &:hover{
@@ -967,7 +987,7 @@ ul.no-left-pad{
 
 .small-message{
     color: #f05d5b;
-    color: #f58e58;
+    //color: #f58e58;
     font-size: .9rem;
     font-style: italic;
 
@@ -1486,7 +1506,8 @@ input.custom-tip-button{
   }
 
 #upserveolo button.vs__clear{
-    background: #f58e58;
+  
+    background: #F05D5B;
     border-radius: 30px;
     padding: 0 1px;
     width: 26px;
