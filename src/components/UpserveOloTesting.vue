@@ -1891,7 +1891,14 @@ add
 <div class="" v-if="order.modifiers.length > 0"> 
 
 
-<div class="small-message grey">+{{order.modifiers.length}} add-ons</div>
+<!--{{order}}-->
+
+<div v-if="order.name === 'Lunch Combo Special'" class="small-message grey">+{{order.modifiers.length}} selections</div>
+<div v-else class="small-message grey">+{{order.modifiers.length}} add-ons</div>
+
+
+
+
 <!--<div class="small-message grey" v-for="(mod, i) in order.modifiers">
 <span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b> <span style="color:#F05D5B;font-weight:500;" v-if="i === 1 && order.modifiers.length>2">(+{{ order.modifiers.length - 2}} more)</span></span>
 </div>-->
