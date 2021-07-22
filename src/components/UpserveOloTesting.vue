@@ -2850,7 +2850,7 @@ if(itemsToRemove.length === 1){
 
 
         this.$swal({ 
-           title: removalItems + ' is not available at the new day you have selected and has been removed from your order.'
+           title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
           });
 
 
@@ -2859,7 +2859,7 @@ if(itemsToRemove.length === 1){
 
 
         this.$swal({ 
-           title: removalItems + ' are not available at the new day you have selected and have been removed from your order.'
+           title: removalItems + ' are not available at the selected pick-up time and have been removed from your shopping bag'
           });
 
 
@@ -2916,7 +2916,7 @@ if(itemsToRemove.length === 1){
 
 
         this.$swal({ 
-           title: removalItems + ' is not available at the new day you have selected and has been removed from your order.'
+           title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
           });
 
 
@@ -2924,7 +2924,7 @@ if(itemsToRemove.length === 1){
 }else if(itemsToRemove.length>1){
 
         this.$swal({ 
-           title: removalItems + ' are not available at the new day you have selected and have been removed from your order.'
+           title: removalItems + ' are not available at the selected pick-up time and have been removed from your shopping bag'
           });
 
 
