@@ -2161,9 +2161,9 @@ display: flow-root;
 
 
 
-.orangeCircle{
+.redXCircle{
     width: 30px;
-    background:#f58e58;
+    background:#f05d5b;
     border-radius: 15px;
     }
 

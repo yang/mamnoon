@@ -194,7 +194,7 @@
 
 
 
-          <div @click="closeModal()" class="close closeModal orangeCircle">
+          <div @click="closeModal()" class="close closeModal redXCircle">
             <CloseModal />
           </div>
 

@@ -199,7 +199,7 @@
       <div v-if="modalOpen" class="order-modal">
         <!-- 1111111111111111 -->
         <div class="container modal-body order-modal-width order-modal-body bottomCurves" style="padding:0;">
-          <div @click="closeModal()" class="close closeModal orangeCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
+          <div @click="closeModal()" class="close closeModal redXCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
             <CloseModal />
           </div>
    <!-- comment -->
@@ -419,7 +419,7 @@
       <div v-if="modal2Open" class="order-modal">
         <!-- 222222222222 -->
         <div class="container modal-body order-modal-width order-modal-body bottomCurves" style="padding:0;">
-          <div @click="closeModal()" class="close closeModal orangeCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
+          <div @click="closeModal()" class="close closeModal redXCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
             <CloseModal />
           </div>
    <!-- comment -->
@@ -1888,13 +1888,17 @@ add
   <div class="itemTitle">
     {{checkIfGiftCard(order.name)}}
 
-<div v-if="order.modifiers.length > 0"> 
-<div class="small-message grey" v-for="mod in order.modifiers">
-<span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b></span>
-</div>
+<div class="" v-if="order.modifiers.length > 0"> 
+
+
+<div class="small-message grey">+{{order.modifiers.length}} add-ons</div>
+<!--<div class="small-message grey" v-for="(mod, i) in order.modifiers">
+<span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b> <span style="color:#F05D5B;font-weight:500;" v-if="i === 1 && order.modifiers.length>2">(+{{ order.modifiers.length - 2}} more)</span></span>
+</div>-->
+
 </div>
             <div v-if="order.instructions !== ''" class="order-instructions">
-                    {{order.instructions}}
+                   {{order.instructions | truncate(16, '...')}}
                   </div>
 
   <div class="itemPrice">
@@ -6133,6 +6137,12 @@ div {
       left: 8px;
       font-size: 0.9rem;
       font-weight: 600;
+
+      .modifierSidebar{
+        height: 40px;
+        //background: gray;
+        overflow: hidden;
+      }
   }
 
   .itemPrice{

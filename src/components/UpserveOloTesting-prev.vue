@@ -191,7 +191,7 @@
       <div v-if="modalOpen" class="order-modal">
 
         <div class="container modal-body order-modal-width order-modal-body bottomCurves" style="padding:0;">
-          <div @click="closeModal()" class="close closeModal orangeCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
+          <div @click="closeModal()" class="close closeModal redXCircle" style="z-index:100;position: absolute;top: 11px;right: 11px;">
             <CloseModal />
           </div>
    
