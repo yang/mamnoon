@@ -26,7 +26,10 @@ time placed: {{order.orderInfo.time_placed}}
 <br>
 ${{order.orderInfo.charges.total | showToFixed}}
 <br>
-
+{{order.orderInfo.restaurant}}
+<br>
+item amount: {{order.orderInfo.charges.items.length}}
+<br>
 
 <!-- <pre> -->
 <!-- {{order.payInfo}} -->

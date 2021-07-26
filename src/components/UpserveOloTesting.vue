@@ -97,7 +97,6 @@
 </div>
 
 
-
 <form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling && user && user.user && user.user.billingAddress">
 <b>billing address:</b>
  <br />
@@ -1701,9 +1700,12 @@ add
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
   <label class="smblk" for="cutlery">don't include disposable cutlery </label>
                   <br />
-                <h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
-                <h4 v-else class="text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span></h4>
+                <!--<h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit 1</span>)</div></span></h4>
+                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit 2</span>)</div></span></h4>
+                <h4 v-else class="text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit 3</span>)</div></span></h4>-->
+
+<h4 v-if="currentOrder.fulfillment_info.type === '' || currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">guest info</h4>
+
 
 
 
@@ -1712,8 +1714,10 @@ add
                 <label class="smblk" for="name">name:</label>
                 <br />
 
-              <div v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.name}}</div>
-             <input v-else
+
+
+<!--              <input type="text" id="name" placeholder="name" v-model="user.user.deliveryAddress.name" v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">-->
+            <input
               type="text"
               id="name"
               name="name"
@@ -1722,33 +1726,36 @@ add
               />
                <label class="smblk" for="email">email:</label>
                 <br />
-                <div v-if="emailAddress" style="margin-bottom: 10px;">{{emailAddress}}</div>
                 <input
-                v-else
                   type="text"
                   id="email"
                   name="email"
                   placeholder="email"
-                  v-model="email"
+                  @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
+                v-model="currentOrder.fulfillment_info.customer.email"
                 />
+<div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid email</div>
+
 
                <label class="smblk" for="phone">phone:</label>
                 <br />
-                     <div v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.phone && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>
-                <input v-else
+                     <!--<div v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.phone && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>-->
+                <input
                   type="text"
                   id="phone"
                   name="phone"
                   placeholder="(555) 555-5555"
+                  @change="phoneErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
                   v-model="currentOrder.fulfillment_info.customer.phone"
                 />
+                <div class="small-message" v-if="phoneErrorVisibleTf && !validPhone(currentOrder.fulfillment_info.customer.phone)">please enter a valid phone number</div>
 
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);display:none;" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
   <label class="smblk" for="sms" style="display:none;">enable SMS order updates </label>
 <!-- billing info -->
           <h4 class="customer-info text-left mt10">billing info
           
-               <span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span>
+<!--               <span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit</span>)</div></span>-->
           
           </h4>         
          <template v-if="currentOrder.fulfillment_info.type === 'delivery'"> 
@@ -1767,8 +1774,8 @@ add
                 <label class="smblk" for="name">name:</label>
                 <br />
   
-   <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>
-                <input v-else
+<!--   <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.name !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.name}}</div>-->
+                <input
                   type="text"
                   id="name-billing"
                   name="name"
@@ -1777,8 +1784,8 @@ add
                 />
                 <label class="smblk" for="address">billing address:</label>
                 <br />
-     <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>
-                <input v-else
+ <!--    <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
+                <input
                   type="text"
                   id="address"
                   name="address"
@@ -1788,8 +1795,8 @@ add
 
                 <label class="smblk" for="postal_code">billing postal code:</label>
                 <br />
-                     <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>
-                <input v-else
+                    <!-- <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>-->
+                <input
                   type="text"
                   id="postal_code"
                   name="postal_code"
@@ -2025,7 +2032,14 @@ cart empty
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>
 <template v-if="this.$store.state.loggedIn">
 
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === '' || !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid guest email address</div>
+
+
+
+
+
+
+
 
 
 </template>
@@ -2033,7 +2047,7 @@ cart empty
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
 
 </template>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a guest phone number</div>
+  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === '' || !validPhone(currentOrder.fulfillment_info.customer.phone) ">please enter a valid guest phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
@@ -2042,27 +2056,33 @@ cart empty
 <template v-if="this.$store.state.loggedIn && panelShow === 'customerInfo'">
 
 <template v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone && currentOrder.fulfillment_info.customer.phone !== ''">
-<!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="false" :emailAddress="emailAddress" :title="title" /> -->
 
 
   <template v-if="$store.state.currentUserEmail">
-<template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled, disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
-</button> 
+<template v-if="1===1" v-for="savedCard in savedCards">
+      <button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+      </button> 
 </template>
+
+
+
+
 </template>
 </template>
 <template v-else>
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+
+<button v-if="savedCard.primary === true" class="mt10 fw disabled" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
+
+
 </template>
 </template>
 
 
-<!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="true" :emailAddress="emailAddress" :title="title" /> -->
+
 </template>
 
 
@@ -2145,7 +2165,9 @@ cart empty
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 
-<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled, disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+
+ 
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card red<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -2157,7 +2179,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card grey<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 
@@ -2292,7 +2314,7 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items}}</pre>-->
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
  <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -2685,6 +2707,15 @@ this.computedSections = this.upserveSections
         }
         }
       },
+
+email:{
+handler(val){
+
+
+if(this.emailAddress){
+this.email = this.emailAddress;
+}}
+},      
     user:{
 handler(val){
 
@@ -2693,8 +2724,33 @@ handler(val){
 // console.log(this.user.user.email)
 
 if(this.currentOrder.fulfillment_info.customer && this.user.user){
-this.currentOrder.fulfillment_info.customer.email = this.user.user.email
+
+  console.log('this.user.user.email');
+    console.log(this.user.user.email);
+this.currentOrder.fulfillment_info.customer.email = this.user.user.email;
+this.currentOrder.fulfillment_info.customer.first_name = user.user.deliveryAddress.name;
 }
+
+
+
+//if(user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name && user.user.deliveryAddress.name !== ''){
+
+//console.log(user);
+
+  //this.currentOrder.fulfillment_info.customer.first_name = user.user.deliveryAddress.name;
+
+//}
+
+
+
+
+
+
+
+
+
+
+
           }, deep: true
     },
 customAmountAddition: {
@@ -2807,6 +2863,8 @@ console.log(matches[0].name)
 
 
 // this.filterDown(this.currentOrder.charges.items);
+
+this.formsValid(this.currentOrder.fulfillment_info.customer.email,this.currentOrder.fulfillment_info.customer.phone);
 
 
 
@@ -3023,6 +3081,9 @@ if(newAddress){
     },
   data() {
   return {
+    formsValidClass: false,
+    emailErrorVisibleTf: false,
+    phoneErrorVisibleTf: false,
   filteredValues: [],
     sliderNavVisible: true,
     packages: null,
@@ -3228,7 +3289,34 @@ showToFixed: function (value) {
 }
   },
   methods: {
-      currentlyContains(modifiers,m,modid){
+
+
+
+emailErrorVisible(emailEntry,phoneEntry){
+
+
+this.emailErrorVisibleTf = true;
+
+ this.formsValid(emailEntry,phoneEntry);
+
+},
+
+phoneErrorVisible(emailEntry,phoneEntry){
+this.phoneErrorVisibletf = true;
+
+ this.formsValid(emailEntry,phoneEntry);
+},
+
+    formsValid(emailEntry,phoneEntry){
+if(this.validEmail(emailEntry) && this.validPhone(phoneEntry) && this.currentOrder.charges.items.length>0){
+  this.formsValidClass = true;
+  return true;
+}else{
+  this.formsValidClass = false;
+  return false;
+}
+    },
+currentlyContains(modifiers,m,modid){
 
 
         // console.log(modifiers,m,modid);
@@ -4511,6 +4599,10 @@ this.custom = false
       return re.test(email);
     },
 
+   validPhone: function (phone) {
+      var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+      return re.test(phone);
+    },
    validPostal: function (postal_code) {
       var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
       return re.test(postal_code);
@@ -5740,7 +5832,7 @@ dropDown(){
               timelabel: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)).toLocaleTimeString().replace(":00","")
               })
             } 
-              
+              console.log(timeslotsCreated);
             this.dropDownDays.push({
             dayLabel: days[tomorrow.getDay()] + ' (closed)',
             dayName: days[tomorrow.getDay()],
@@ -5789,6 +5881,21 @@ this.setTip(0)
     }
   },
   mounted() {
+
+
+// populate forms
+// populate forms
+
+//if(user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name && user.user.deliveryAddress.name !== ''){
+
+//console.log(user);
+
+  //this.currentOrder.fulfillment_info.customer.first_name = user.user.deliveryAddress.name;
+
+//}
+
+// populate forms
+// populate forms
 
         this.$nextTick(function () {
             window.setInterval(() => {

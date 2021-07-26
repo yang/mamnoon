@@ -1580,7 +1580,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -1589,7 +1589,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -1678,7 +1678,7 @@ cart empty
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 
-<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class="{disabled: disabled}" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -1690,7 +1690,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Used Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" style="margin-top:20px;" @click="tokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId)">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 
