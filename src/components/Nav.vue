@@ -15,7 +15,7 @@
 
 
 <div class="beta">
-    our site is in beta mode. if you have a suggestion, please <a href="https://nadimama-feedback-zta0ansa.featureupvote.com/" target="_blank"><u>submit feedback</u></a>!
+    our site is in beta mode. if you have a suggestion, please <a href="https://forms.gle/9d5kmR6PzZwmgUV78" target="_blank"><u>submit feedback</u></a>!
 </div>
 
 
