@@ -1,6 +1,13 @@
 <template>
 <div class="container pad-yellow-background pd50">
 <!-- {{currentUser.currentUserEmail}} -->
+<br>
+
+<br>
+<button @click="setCurrentView('Mamnoon')">mamnoon</button> <button @click="setCurrentView('Mamnoon Street')">mamnoon street</button> <button @click="setCurrentView('empty')">all</button>
+<br>
+
+
 
 <br>
 <!-- {{response}} -->
@@ -9,8 +16,13 @@
 <br>
 order history:
 <hr>
+
 <br>
 <div v-for="order in orderhistory.user.slice().reverse()" :key="order._id" class="position-relative">
+
+<template v-if="currentView === order.orderInfo.restaurant|| currentView === 'empty'">
+
+
   confirmation code: {{order.orderInfo.confirmation_code}}
 
 <!-- {{order.payInfo.externalTransactionId}} -->
@@ -106,6 +118,9 @@ giftcard purchase
 <br>
 
 <hr>
+
+
+</template>
 </div>
 
 
@@ -124,7 +139,8 @@ export default {
     data( ) {
     return {
         orderhistory: null,
-        response: null
+        response: null,
+            currentView: 'empty'
         }
     },
     name: 'OrderHistory',
@@ -145,6 +161,11 @@ export default {
 }
     },
     methods: {
+setCurrentView(param){
+
+  this.currentView = param;
+  
+},
 toggleOrder(id){
 
 

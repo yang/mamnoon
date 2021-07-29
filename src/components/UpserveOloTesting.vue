@@ -2314,8 +2314,8 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
- <!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre> -->
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}-->
+<!--<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
 
@@ -5887,9 +5887,9 @@ console.log("streetcheck")
 console.log(urlParamsStreetCheck);
 
 
-if(this.title === "Mamnoon Street"){
-window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
-}
+// if(this.title === "Mamnoon Street"){
+// window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
+// }
 
 
 // populate forms
