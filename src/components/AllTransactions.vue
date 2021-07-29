@@ -19,10 +19,10 @@ preorder? {{order.orderInfo.preorder}}
 <br>
 <template v-if="order.orderInfo.preorder">
 <br>
-scheduled time: {{order.orderInfo.scheduled_time}}
+scheduled time: {{order.orderInfo.scheduled_time | formatDate}}
 </template>
 <br>
-time placed: {{order.orderInfo.time_placed}}
+time placed: {{ order.orderInfo.time_placed | formatDate }}
 <br>
 ${{order.orderInfo.charges.total | showToFixed}}
 <br>
@@ -114,6 +114,12 @@ giftcard purchase
 
 <script>  
 
+
+import moment from 'moment'
+import tz from 'moment-timezone'
+
+
+
 export default {
     data( ) {
     return {
@@ -124,6 +130,14 @@ export default {
     name: 'OrderHistory',
     props: ['currentUser'],
     filters: {
+
+  formatDate(value) {
+  if (value) {
+        let order = moment(String(value));
+        return order.tz('America/Los_Angeles').format('LLLL');
+  }
+},
+
     showToFixed: function (value) {
     let decvalue = value/100
 
