@@ -12,11 +12,17 @@
                          <!-- mamnoon -->
                <Mamnoon1 :caviarLink="false" />
             </router-link>
-              <router-link to="/mamnoonstreet">
+
+
+            <a href="https://app.upserve.com/s/mamnoon-street-seattle" target="_blank">
+              <!--<router-link to="/mamnoonstreet">-->
     
   
             <MamnoonStreet1 :caviarLink="false" />
-                          </router-link>
+                     
+                     </a>
+                     
+<!--                          </router-link>-->
 
 
 

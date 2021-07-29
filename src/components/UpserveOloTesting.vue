@@ -5882,6 +5882,15 @@ this.setTip(0)
   },
   mounted() {
 
+console.log("streetcheck")
+    const urlParamsStreetCheck = new URLSearchParams(window.location.search);
+console.log(urlParamsStreetCheck);
+
+
+if(this.title === "Mamnoon Street"){
+window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
+}
+
 
 // populate forms
 // populate forms
