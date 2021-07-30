@@ -22,7 +22,7 @@
 <div class="row">
   <div class="col-md-12 temp-grid-cols">
 
-      <section id="temporary-grid" class="section hero is-primary is-fullheight position-relative mb-80">
+      <section id="ourrestaurants" class="section hero is-primary is-fullheight position-relative mb-80">
 <h4 data-v-5a4395df="" class="" style="margin-bottom:24px;">our restaurants</h4>
 <p></p>
 
@@ -1474,7 +1474,7 @@ width: 100%
 }
 
 
-#temporary-grid{
+#ourrestaurants{
 
 .halfwidth-yellow1{
       overflow: hidden;
@@ -1506,13 +1506,17 @@ width: 100%
 
 
   button{
-    border: 3px solid black;
+    border: 2px solid black;
     background-color: transparent;
     color: black;
     text-align: center;
     width: 70%;
-    padding: 7px 0 8px 0;
-    font-size: 22px;
+
+
+
+    padding: 4px 0 5px 0;
+    font-size: 20px;
+
     margin: 0 auto;
 
   }
@@ -1535,7 +1539,7 @@ padding-top: 2px;
 
 .infoIconLine{
 width: 100%;
-margin: 8px 6px 8px 10px;
+margin: 6px 6px 6px 10px;
 display: inline-block;
 }
 
@@ -1550,7 +1554,7 @@ margin:0 0;
     padding: 0 !important;
   }
 
-  #temporary-grid button {
+  #ourrestaurants button {
     width: 100%;
   }
 
@@ -1586,7 +1590,7 @@ button{
 }
 
 
-#temporary-grid{
+#ourrestaurants{
 
 
 .mamnoon-street{

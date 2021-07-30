@@ -102,8 +102,12 @@
         <div class="container">
           <scrollactive :offset="180" ref="scrollactive">   
              <ul id="menu">
+
+<div class="inline-link"><li><a href="#ourrestaurants" class="scrollactive-item nav-item">our restaurants</a></li></div>
+
+
                  <template v-for="item in pageData">
-                <div class="inline-link" v-if="item.tagname !== 'testimonials' && item.tagname !== 'planahead'">
+                <div class="inline-link" v-if="item.tagname !== 'testimonials' && item.tagname !== 'planahead'&& item.tagname !== 'fullonlinemenu'&& item.tagname !== 'reservations'">
                     <li v-if="item.tagname">
                         <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
                     </li>
@@ -128,48 +132,78 @@
         <nav class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
           <scrollactive :offset="100" ref="scrollactive">
-                          <ul id="menu" class="mobile-menu">
 
-                    <div  class="inline-link">
-                <li>
-                    <router-link to="/featured">
-                        featured
-                    </router-link>
-                </li>
+             <ul id="menu" class="mobile-menu">
 
-                <li>
-                    <router-link to="/onlinemenu">
-                        online menu
-                    </router-link>
-                </li>
+<div class="inline-link"><li><a href="#ourrestaurants" class="scrollactive-item nav-item">our restaurants</a></li></div>
 
-                <li>
-                    <router-link to="/reservations">
-                        reservations
-                    </router-link>
-                </li>
-          <li>
-                        <router-link to="/mamnoonff">
-                           fine foods
-                        </router-link>
+
+                 <template v-for="item in pageData">
+                <div class="inline-link" v-if="item.tagname !== 'testimonials' && item.tagname !== 'planahead'&& item.tagname !== 'fullonlinemenu'&& item.tagname !== 'reservations'">
+                    <li v-if="item.tagname">
+                     dd   <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
                     </li>
-                
-          <li>
-                        <router-link to="/retail">
-                          retail items
-                        </router-link>
-                    </li>
+                </div>  
+                </template> 
+           <div class="inline-link">
 
-                              <li>
-                        <router-link to="/newsletterarchive">
-                          newsletter archive
-                        </router-link>
-                    </li>
                     <li>
                         <router-link to="/about">
                             about
                         </router-link>
                     </li>
+
+                                   <li>
+                        <router-link to="/newsletterarchive">
+                          newsletter archive
+                        </router-link>
+                    </li>
+                </div>   
+
+
+
+
+
+
+
+                         <!-- <ul id="menu" class="mobile-menu">-->
+
+                    <div  class="inline-link">
+             <!--   <li>
+                    <router-link to="/featured">
+                        featured
+                    </router-link>
+                </li>-->
+
+               <!-- <li>
+                    <router-link to="/onlinemenu">
+                        online menu
+                    </router-link>
+                </li>-->
+
+               <!--<li>
+                    <router-link to="/reservations">
+                        reservations
+                    </router-link>
+                </li>-->
+         <!-- <li>
+                        <router-link to="/mamnoonff">
+                           fine foods
+                        </router-link>
+                    </li>-->
+                
+        <!--  <li>
+                        <router-link to="/retail">
+                          retail items
+                        </router-link>
+                    </li>-->
+
+               
+                 <!--   <li>
+                        <router-link to="/about">
+                            about
+                        </router-link>
+                    </li>-->
                 <li v-if="this.$store.state.loggedIn">
                     <router-link to="/profile">
                         profile
