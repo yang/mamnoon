@@ -15,7 +15,7 @@
 
 
 <div class="beta">
-    our site is in beta mode. if you have a suggestion, please <a href="https://forms.gle/9d5kmR6PzZwmgUV78" target="_blank"><u>submit feedback</u></a>!
+    we are in beta. feedback? <a href="https://forms.gle/9d5kmR6PzZwmgUV78" target="_blank"><u>submit here</u></a>!
 </div>
 
 
@@ -415,13 +415,13 @@ this.getUserAgent();
     
     @media only screen and (max-width: 1080px) {
             width: 100%;
-                font-size: 10px;
+                font-size: 14px;
     }
 
 
 text-align: center;
     @media only screen and (max-width: 640px) {
-        font-size: 8px;
+        font-size: 14px;
     }
     
 }
