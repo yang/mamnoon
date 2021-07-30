@@ -5887,9 +5887,14 @@ console.log("streetcheck")
 console.log(urlParamsStreetCheck);
 
 
-// if(this.title === "Mamnoon Street"){
-// window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
-// }
+if(this.title === "Mamnoon Street"){
+window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
+}
+
+
+if(this.title === "Mamnoon"){
+window.location.replace('https://app.upserve.com/s/mamnoon-llc-seattle');
+}
 
 
 // populate forms
