@@ -141,7 +141,7 @@
                  <template v-for="item in pageData">
                 <div class="inline-link" v-if="item.tagname !== 'testimonials' && item.tagname !== 'planahead'&& item.tagname !== 'fullonlinemenu'&& item.tagname !== 'reservations'">
                     <li v-if="item.tagname">
-                     dd   <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
+ <a :href="'#'+item.tagname" class="scrollactive-item nav-item">{{item.header}}</a>
                     </li>
                 </div>  
                 </template> 
