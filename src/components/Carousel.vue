@@ -129,8 +129,8 @@ info@mamnoonrestaurant.com
       <div style="width: 100%;margin:15px 0px;text-align: center;">
 
 
-<button @click="openLink('  https://uqr.to/jkuu')">
-view menus
+<button @click="openLink('https://www.nadimama.com/Lunch__Mamnoon.pdf')">
+lunch & patio menu
 </button>
 
 
@@ -138,7 +138,16 @@ view menus
       </div>
   
   
-  
+        <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('  https://uqr.to/jkuu')">
+dinner & drinks menu
+</button>
+
+
+
+      </div>
   
   
   
