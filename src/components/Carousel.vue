@@ -281,7 +281,7 @@ dinner & drinks menu
 </div>
 
 <div class="rightIcon">
-info@mamnoonrestaurant.com
+events@mbarseattle.com
 </div>
   </div>
 
@@ -1565,6 +1565,7 @@ margin:0 0;
 }
 
 
+
 .anar-pink{
 background-color: #f3dbec;
 }
@@ -1602,6 +1603,19 @@ button{
 
 
 } 
+
+
+@media only screen and (max-width: 768px) {
+  
+
+.halfwidth-yellow1{
+  &.temporary-grid{
+    height: auto;
+  }
+}
+
+
+}
 
 
 </style>
