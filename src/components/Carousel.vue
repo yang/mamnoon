@@ -458,7 +458,7 @@ view menus
 </div>
 
 <div class="rightIcon">
-info@mamnoonrestaurant.com
+info@mamnoonstreet.com
 </div>
   </div>
 
@@ -602,7 +602,7 @@ view menus
 </div>
 
 <div class="rightIcon">
-info@mamnoonrestaurant.com
+info@mamnoonstreet.com
 </div>
   </div>
 
