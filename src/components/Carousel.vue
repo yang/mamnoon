@@ -281,7 +281,7 @@ dinner & drinks menu
 </div>
 
 <div class="rightIcon">
-gen inquiries: info@mbarseattle.com
+inquiries: info@mbarseattle.com
 events: rez@mbarseattle.com
 </div>
   </div>
