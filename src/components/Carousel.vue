@@ -107,7 +107,8 @@
 </div>
 
 <div class="rightIcon">
-info@mamnoonrestaurant.com
+info@mamnoonrestaurant.com<br>
+catering@mamnoonrestaurant.com
 </div>
   </div>
 
@@ -281,7 +282,7 @@ dinner & drinks menu
 </div>
 
 <div class="rightIcon">
-inquiries: info@mbarseattle.com
+inquiries: info@mbarseattle.com<br>
 events: rez@mbarseattle.com
 </div>
   </div>
