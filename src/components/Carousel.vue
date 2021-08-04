@@ -277,8 +277,8 @@ dinner & drinks menu
 </div>
 
 <div class="rightIcon">
-inquiries: info@mbarseattle.com<br>
-events: rez@mbarseattle.com
+General Inquiries: info@mbarseattle.com<br>
+Reservations and Events: rez@mbarseattle.com
 </div>
   </div>
 
