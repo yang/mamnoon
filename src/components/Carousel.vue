@@ -654,7 +654,7 @@ view menu
   
   
 
-<div class="container home-page" v-if="item.acf_fc_layout === 'a_la_carte'" style="">
+<div class="container home-page" v-if="item.acf_fc_layout === 'a_la_carte'" style="display:none;">
 <div class="row">
   <div class="col-md-12 temp-grid-cols">
 
