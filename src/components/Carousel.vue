@@ -65,9 +65,15 @@
 </div>
 
 <div class="rightIcon">
-1508 Melrose Ave<br>Seattle, WA 98122
+
+
+<a class="linkBlack" href="https://g.page/mamnoonrestaurant?share" target="_blank">
+1508 Melrose Ave<br>Seattle, WA 98122</a>
 </div>
   </div>
+
+
+
 
 
 
@@ -89,7 +95,8 @@
 </div>
 
 <div class="rightIcon">
-(206) 906-9606
+<a class="linkBlack" href="tel:+12069069606" target="_blank">(206) 906-9606</a>
+
 </div>
   </div>
 
@@ -102,8 +109,9 @@
 </div>
 
 <div class="rightIcon">
-info@mamnoonrestaurant.com<br>
-catering@mamnoonrestaurant.com
+<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank">info@mamnoonrestaurant.com</a>
+<br>
+<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank">catering@mamnoonrestaurant.com</a>
 </div>
   </div>
 
@@ -241,7 +249,7 @@ dinner & drinks menu
 <MapPin style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 </div>
 <div class="rightIcon">
-400 Fairview Ave N 14th Floor<br>Seattle, WA 98109
+<a class="linkBlack" href="https://goo.gl/maps/XLSgoSpCXh3ZtDjj7" target="_blank">400 Fairview Ave N 14th Floor<br>Seattle, WA 98109</a>
 </div>
   </div>
 
@@ -265,7 +273,7 @@ dinner & drinks menu
 </div>
 
 <div class="rightIcon">
-(206) 457-8287
+<a class="linkBlack" href="tel:+12064578287" target="_blank">(206) 457-8287</a>
 </div>
   </div>
 
@@ -277,8 +285,8 @@ dinner & drinks menu
 </div>
 
 <div class="rightIcon">
-General Inquiries: info@mbarseattle.com<br>
-Reservations and Events: rez@mbarseattle.com
+General Inquiries: <a class="linkBlack" href="mailto:info@mbarseattle.com" target="_blank">info@mbarseattle.com</a><br>
+Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
 </div>
   </div>
 
@@ -421,7 +429,8 @@ view menus
 </div>
 
 <div class="rightIcon">
-2020 6th Ave<br>Seattle, WA 98121
+<a class="link" href="https://goo.gl/maps/zSXhTW7YZheVNDzv7" target="_blank">
+2020 6th Ave<br>Seattle, WA 98121</a>
 </div>
   </div>
 
@@ -445,7 +454,7 @@ view menus
 </div>
 
 <div class="rightIcon">
-(206) 327-9121
+<a class="link" href="tel:+12063279121" target="_blank">(206) 327-9121</a>
 </div>
   </div>
 
@@ -455,7 +464,7 @@ view menus
 </div>
 
 <div class="rightIcon">
-info@mamnoonstreet.com
+<a class="link" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
 </div>
   </div>
 
@@ -562,7 +571,8 @@ view menus
 </div>
 
 <div class="rightIcon">
-2040 6th Ave<br>Seattle, WA 98121
+<a class="linkBlack" href="https://goo.gl/maps/j2AqoDLaSJDshpAz8" target="_blank">
+2040 6th Ave<br>Seattle, WA 98121</a>
 </div>
   </div>
 
@@ -586,7 +596,12 @@ view menus
 </div>
 
 <div class="rightIcon">
-(206) 453-4654
+
+
+<a class="linkBlack" href="tel:+12064534654" target="_blank">(206) 453-4654</a>
+
+
+
 </div>
   </div>
 
@@ -599,7 +614,8 @@ view menus
 </div>
 
 <div class="rightIcon">
-info@mamnoonstreet.com
+<a class="linkBlack" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
+
 </div>
   </div>
 
@@ -654,7 +670,7 @@ view menu
   
   
 
-<div class="container home-page" v-if="item.acf_fc_layout === 'a_la_carte'" style="display:none;">
+<div class="container home-page" v-if="item.acf_fc_layout === 'a_la_carte'" style="">
 <div class="row">
   <div class="col-md-12 temp-grid-cols">
 
@@ -706,9 +722,15 @@ view menu
 </div>
 
 <div class="rightIcon">
-1508 Melrose Ave<br>Seattle, WA 98122
+
+
+<a class="linkBlack" href="https://g.page/mamnoonrestaurant?share" target="_blank">
+1508 Melrose Ave<br>Seattle, WA 98122</a>
 </div>
   </div>
+
+
+
 
 
 
@@ -730,7 +752,8 @@ view menu
 </div>
 
 <div class="rightIcon">
-(206) 906-9606
+<a class="linkBlack" href="tel:+12069069606" target="_blank">(206) 906-9606</a>
+
 </div>
   </div>
 
@@ -743,8 +766,9 @@ view menu
 </div>
 
 <div class="rightIcon">
-info@mamnoonrestaurant.com<br>
-catering@mamnoonrestaurant.com
+<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank">info@mamnoonrestaurant.com</a>
+<br>
+<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank">catering@mamnoonrestaurant.com</a>
 </div>
   </div>
 
@@ -882,7 +906,7 @@ dinner & drinks menu
 <MapPin style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 </div>
 <div class="rightIcon">
-400 Fairview Ave N 14th Floor<br>Seattle, WA 98109
+<a class="linkBlack" href="https://goo.gl/maps/XLSgoSpCXh3ZtDjj7" target="_blank">400 Fairview Ave N 14th Floor<br>Seattle, WA 98109</a>
 </div>
   </div>
 
@@ -906,7 +930,7 @@ dinner & drinks menu
 </div>
 
 <div class="rightIcon">
-(206) 457-8287
+<a class="linkBlack" href="tel:+12064578287" target="_blank">(206) 457-8287</a>
 </div>
   </div>
 
@@ -918,8 +942,8 @@ dinner & drinks menu
 </div>
 
 <div class="rightIcon">
-inquiries: info@mbarseattle.com<br>
-events: rez@mbarseattle.com
+General Inquiries: <a class="linkBlack" href="mailto:info@mbarseattle.com" target="_blank">info@mbarseattle.com</a><br>
+Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
 </div>
   </div>
 
@@ -1062,7 +1086,8 @@ view menus
 </div>
 
 <div class="rightIcon">
-2020 6th Ave<br>Seattle, WA 98121
+<a class="link" href="https://goo.gl/maps/zSXhTW7YZheVNDzv7" target="_blank">
+2020 6th Ave<br>Seattle, WA 98121</a>
 </div>
   </div>
 
@@ -1086,7 +1111,7 @@ view menus
 </div>
 
 <div class="rightIcon">
-(206) 327-9121
+<a class="link" href="tel:+12063279121" target="_blank">(206) 327-9121</a>
 </div>
   </div>
 
@@ -1096,7 +1121,7 @@ view menus
 </div>
 
 <div class="rightIcon">
-info@mamnoonstreet.com
+<a class="link" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
 </div>
   </div>
 
@@ -1203,7 +1228,8 @@ view menus
 </div>
 
 <div class="rightIcon">
-2040 6th Ave<br>Seattle, WA 98121
+<a class="linkBlack" href="https://goo.gl/maps/j2AqoDLaSJDshpAz8" target="_blank">
+2040 6th Ave<br>Seattle, WA 98121</a>
 </div>
   </div>
 
@@ -1227,7 +1253,12 @@ view menus
 </div>
 
 <div class="rightIcon">
-(206) 453-4654
+
+
+<a class="linkBlack" href="tel:+12064534654" target="_blank">(206) 453-4654</a>
+
+
+
 </div>
   </div>
 
@@ -1240,7 +1271,8 @@ view menus
 </div>
 
 <div class="rightIcon">
-info@mamnoonstreet.com
+<a class="linkBlack" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
+
 </div>
   </div>
 
@@ -1550,6 +1582,25 @@ this.visibility[entry.target.id] = entry.isIntersecting
 
 
 <style lang="scss">
+
+
+a.linkBlack{
+  color: #212529;
+  &:hover{
+     color: #212529; 
+  }
+}
+
+
+a.link{
+  color: #ffffff;
+  &:hover{
+     color: #ffffff; 
+  }
+}
+
+
+
 .reserved {
   background: red;
 }
