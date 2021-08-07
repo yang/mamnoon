@@ -11,9 +11,9 @@ export default {
     metaInfo: {
       name: 'App',
       // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'Nadi Mama',
+      title: 'nadi mama',
       // all titles will be injected into this template
-      titleTemplate: '%s | Mamnoon | Mbar | Mamnoon Street | Mbar',
+      titleTemplate: '%s | mamnoon | mbar | mamnoon street | anar',
                   meta: [
                 { name: 'Nadi Mama', content:  'Welcome to Nadi Mama, the home for all things the Mama Group has to offer. Swipe through to see some of our latest special offerings hand curated by our lead chef, browse the full menu and order items individually, peruse our new retail items, learn more about wholesale resale opportunities of our house made products, make reservations for a special night at one of our locations, or simply stay in touch with us!'},
                 { property: 'og:title', content: "Nadi Mama - Home for all things the Mama Group has to offer."},
