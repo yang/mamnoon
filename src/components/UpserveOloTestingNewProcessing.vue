@@ -687,7 +687,7 @@
         <div class="row no-lr-margin">
 <div class="col-md-12 col-lg-8">
       <div class="container no-pad"> 
-      <h4 class="text-left red">full menu</h4>
+      <h4 class="text-left red">full menu (new processing)</h4>
 <template v-if="reOrder && $store.state.storeCurrentOrder && reOrder.id && $store.state.storeCurrentOrder.id">
 <div class="order-modal"> 
         <div class="container online-menu order-modal-width" style="padding: 20px 0 15px !important; margin-top: 24px;">
@@ -2020,7 +2020,22 @@ scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br><br>
               <hr v-if="panelShow === 'customerInfo'" />
               <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total | showToFixed }}</b>
 
+<br v-if="panelShow === 'customerInfo'">
+<br v-if="panelShow === 'customerInfo'">
+ <!--<CreditSaveForm2 v-if="panelShow === 'customerInfo'" :emailAddress="$store.state.currentUserEmail" />-->
 
+
+    
+
+
+<button v-if="panelShow === 'customerInfo'"  class="sm-button full-width-button" @click="cippaybuttoncreditsave"> card testing
+
+<br>
+billing name: {{ currentOrder.billing.billing_name}}<br>
+        billing_address: {{currentOrder.billing.billing_address}}<br>
+        billing_postal_code: {{currentOrder.billing.billing_postal_code}}
+
+</button>
 
 
 
@@ -2069,6 +2084,12 @@ cart empty
   <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
 
 
+
+
+
+
+
+
 <template v-if="this.$store.state.loggedIn && panelShow === 'customerInfo'">
 
 <template v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone && currentOrder.fulfillment_info.customer.phone !== ''">
@@ -2103,13 +2124,6 @@ cart empty
 
 
 </template>
-
-
-
-
-
-
-
 
 
 
@@ -2414,17 +2428,22 @@ import Clock from "@/components/svgIcons/Clock";
 import MapPin from "@/components/svgIcons/MapPin";
 import ExButton from "@/components/svgIcons/ExButton";
 
+
+
+import CreditSaveForm2 from "@/components/CreditSaveForm2";
+
 export default {
       metaInfo: {
-      name: 'UpserveOloTesting',
+      name: 'UpserveOloTestingNewProcessing',
       // if no subcomponents specify a metaInfo.title, this title will be used
       title: 'Order Online',
       // all titles will be injected into this template
       titleTemplate: '%s | Nadi Mama'
     },
-  name: "UpserveOloTesting",
+  name: "UpserveOloTestingNewProcessing",
   props: ["data","emailAddress","oloEndpoint","menuEndpoint","title","userData"],
   components: {
+    CreditSaveForm2,
     OrderConfirmationModal,
     OnlineMenuCarousel,
     CloseModalSm2,
@@ -3324,8 +3343,100 @@ showToFixed: function (value) {
   },
   methods: {
 
+    cippaybuttoncreditsave() {
+
+      let self = this;
+      this.getCreditSaveToken().then(function (transactionToken) {
+        emergepay.open({
+          transactionToken: transactionToken,
+          onTransactionSuccess: function (approvalData) {
+            console.log("Approval Data", approvalData);
+            emergepay.close();
+            console.log('proceeed with order now you have a transaction');
 
 
+// credit save
+// credit save
+// credit save success
+
+
+
+console.log('transasction success')
+   if(self.title === 'Mamnoon'){
+
+              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              }
+              
+              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              }
+
+
+
+    }else if(self.title === 'Mamnoon Street'){
+      if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              }
+              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              }
+    }
+
+
+
+
+
+
+
+// credit save
+// credit save
+// credit save
+
+
+
+
+          },
+          onTransactionFailure: function (failureData) {
+            console.log("Failure Data", failureData);
+            console.log('proceeed with order now you have a transaction');
+            // console.log('transasction success')
+
+          },
+          onTransactionCancel: function () {
+            console.log("transaction cancelled!");
+          },
+        });
+      });
+    },
+    getCreditSaveToken() {
+      let self = this;
+      let dataToSend = {
+      billing:{
+        billing_name: this.currentOrder.billing.billing_name,
+        billing_address: this.currentOrder.billing.billing_address,
+        billing_postal_code: this.currentOrder.billing.billing_postal_code
+      }
+      }
+
+      return new Promise(function (resolve, reject) {
+        $.ajax({
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
+          // url: "http://localhost:4000/order/start-credit-save",
+          type: "POST",
+          dataType: "json",
+          contentType: "application/json",
+          data: JSON.stringify(dataToSend),
+        })
+          .done(function (data) {
+            if (data.transactionToken) resolve(data.transactionToken);
+            else reject("Error getting transaction token");
+          })
+          .fail(function (err) {
+            reject(err);
+          });
+      });
+    },
 emailErrorVisible(emailEntry,phoneEntry){
 
 
@@ -4780,8 +4891,10 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
           // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction",
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          //url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
           // url: "http://localhost:4000/order/start-transaction",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-auth",
+          //  url: "http://localhost:4000/order/start-auth",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -5912,9 +6025,34 @@ this.setTip(0)
 
 
 
+    },
+    checkOlo() {
+
+            let self = this
+                this.$http.get(`/order/acceptingOrdersBoolean/${this.title.replace(" ","")}`).then(function (response) {
+              // self.orderHistory = response.data
+              console.log("acceptingOrdersBooleanStreet");
+              console.log(response.data);
+
+if(response.data.result === "success"){
+  self.oloAvailable = true;
+
+}else{
+  self.oloAvailable = false;
+}
+
+
+
+
+            })
+  
     }
   },
   mounted() {
+
+
+    this.checkOlo();
+
 
 
 
@@ -5931,9 +6069,9 @@ window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
 }
 
 
-if(this.title === "Mamnoon"){
-  window.location.replace('https://app.upserve.com/s/mamnoon-llc-seattle');
-}
+//if(this.title === "Mamnoon"){
+//window.location.replace('https://app.upserve.com/s/mamnoon-llc-seattle');
+//}
 
 
 // populate forms

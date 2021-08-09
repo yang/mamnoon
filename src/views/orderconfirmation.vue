@@ -29,7 +29,7 @@ export default {
 //  this.$store.state.orderCMR = {};
 // console.log(this.$store.state.orderCMR)
         if(Object.entries(this.$store.state.orderCMR).length === 0){
-            this.$router.push("/mamnoon");
+            this.$router.push("/");
         }
     
   }
