@@ -6031,7 +6031,7 @@ this.setTip(0)
             let self = this
                 this.$http.get(`/order/acceptingOrdersBoolean/${this.title.replace(" ","")}`).then(function (response) {
               // self.orderHistory = response.data
-              console.log("acceptingOrdersBooleanStreet");
+              // console.log("acceptingOrdersBooleanStreet");
               console.log(response.data);
 
 if(response.data.result === "success"){
@@ -6064,9 +6064,9 @@ console.log("streetcheck")
 console.log(urlParamsStreetCheck);
 
 
-if(this.title === "Mamnoon Street"){
-window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
-}
+// if(this.title === "Mamnoon Street"){
+// window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
+// }
 
 
 //if(this.title === "Mamnoon"){
