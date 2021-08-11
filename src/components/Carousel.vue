@@ -24,146 +24,6 @@
 
 <div class="width-container">
   
-  
-  
-  
-  <div id="mamnoon-reserve" class="halfwidth-yellow1 wider temporary-grid">
-  
-  
-  
-  
-  
-
-
-
-
-
-
-  
-  
-  
-<div class="tempGridLogo">
-
-
-
-
-<!-- <Plus /> -->
-
-<!-- <Minus /> -->
-  <div class="halfwidthclass smalled" style="height: 80px;position: relative;">
-<svg class="fifty50" style="position: absolute; top: 50%; height: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05"><defs></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M93.38,7.52V7.46h0A7.38,7.38,0,0,0,81.83,1.65v0a2.19,2.19,0,0,0-4.29.49l1.08,1.24,0,4.13,0,9.74,1,.84a2.15,2.15,0,0,0,2.17-2V7.46A4.17,4.17,0,0,1,86,3.51a4.1,4.1,0,0,1,4.23,4.05V17.2l1,.84a2.15,2.15,0,0,0,2.16-2V7.73s0-.07,0-.1V7.52" class="cls-156"></path><path d="M146,7.52V7.46h0a7.39,7.39,0,0,0-11.55-5.81v0a2.19,2.19,0,0,0-4.29.49l1.09,1.24V7.46l0,9.74,1,.84a2.15,2.15,0,0,0,2.17-2V7.58a.49.49,0,0,1,0-.12,4.15,4.15,0,0,1,4.14-3.95,4.09,4.09,0,0,1,4.23,4.05V17.2l1,.84a2.15,2.15,0,0,0,2.16-2V7.73a.34.34,0,0,0,0-.1V7.52" class="cls-156"></path><path d="M45.83,18H37.65a9.18,9.18,0,0,1-6.86-3.83,8.28,8.28,0,0,1-1.59-5,8.87,8.87,0,0,1,9-8.79,9.76,9.76,0,0,1,5.16,1.51A2.59,2.59,0,0,1,45.67.37,2.56,2.56,0,0,1,48.3,2.91L47,4.26v9.65l1.26,1.56A2.56,2.56,0,0,1,45.83,18M43.92,7.23c-1.39-2.18-2.92-3.8-5.77-3.8A5.76,5.76,0,1,0,38.09,15h5.83Z" class="cls-156"></path><path d="M111.71,8.63a8.26,8.26,0,0,0-2.42-4.89,9,9,0,0,0-1.29-1,8.2,8.2,0,0,0-2.16-1A2.43,2.43,0,0,0,103.25,0l-1.31,1.33a8.43,8.43,0,0,0-5.55,3.18,8.13,8.13,0,0,0-1.76,5.08,8.64,8.64,0,0,0,.16,1.62,8.55,8.55,0,0,0,.8,2.26,8.45,8.45,0,0,0,2.5,2.88,8.19,8.19,0,0,0,2,1.09l.19.07.4.13a8.53,8.53,0,0,0,8.55-2.06,8.32,8.32,0,0,0,2.46-7m-14,1a5.5,5.5,0,1,1,5.5,5.41,5.45,5.45,0,0,1-5.5-5.41" class="cls-156"></path><path d="M129.93,8.63a8.26,8.26,0,0,0-2.42-4.89,8.45,8.45,0,0,0-1.29-1,8.2,8.2,0,0,0-2.16-1A2.43,2.43,0,0,0,121.47,0l-1.31,1.33a8.46,8.46,0,0,0-5.55,3.18,8.19,8.19,0,0,0-1.76,5.08,7.88,7.88,0,0,0,.17,1.62,8.19,8.19,0,0,0,.79,2.26,8.56,8.56,0,0,0,2.5,2.88,8.19,8.19,0,0,0,2,1.09l.19.07.4.13a8.53,8.53,0,0,0,8.55-2.06,8.32,8.32,0,0,0,2.46-7m-14,1a5.5,5.5,0,1,1,5.5,5.41,5.45,5.45,0,0,1-5.5-5.41" class="cls-156"></path><path d="M77,7.49v0h0C76.89,3.52,73.63.58,69.59.36a7.63,7.63,0,0,0-4.16,1.22,7.5,7.5,0,0,0-1.64,1.49A7.45,7.45,0,0,0,58,.36a7.32,7.32,0,0,0-4.15,1.29v0a2.18,2.18,0,0,0-4.28.49l1.08,1.24,0,13.87,1,.84a2.15,2.15,0,0,0,2.16-2V7.59A4.16,4.16,0,0,1,58,3.51a4.1,4.1,0,0,1,4.24,4.05s0,9.64,0,9.64l1,.84a2.15,2.15,0,0,0,2.17-2V7.59a4.17,4.17,0,0,1,8.34-.1l0,9.71,1,.84a2.15,2.15,0,0,0,2.17-2V7.49Z" class="cls-156"></path><path d="M27.41,7.49v0h0C27.32,3.52,24.06.58,20,.36a7.63,7.63,0,0,0-4.16,1.22,7.5,7.5,0,0,0-1.64,1.49A7.43,7.43,0,0,0,8.44.36,7.28,7.28,0,0,0,4.29,1.65v0a2.25,2.25,0,0,0-.62-1A2.17,2.17,0,0,0,2.17,0,2.14,2.14,0,0,0,0,2.09L1.08,3.33l0,13.87,1,.84a2.16,2.16,0,0,0,2.17-2V7.59A4.16,4.16,0,0,1,8.44,3.51a4.1,4.1,0,0,1,4.23,4.05s0,9.64,0,9.64l1,.84a2.15,2.15,0,0,0,2.16-2V7.59A4.16,4.16,0,0,1,20,3.51a4.12,4.12,0,0,1,4.19,4l0,9.71,1,.84a2.15,2.15,0,0,0,2.16-2V7.49Z" class="cls-156"></path></g></g></svg>
-</div>
-
-</div>
-
-
-
-
-<div class="infoIconLine">
-<div class="leftIcon">
-<MapPin style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
-</div>
-
-<div class="rightIcon">
-
-
-<a class="linkBlack" href="https://g.page/mamnoonrestaurant?share" target="_blank">
-1508 Melrose Ave<br>Seattle, WA 98122</a>
-</div>
-  </div>
-
-
-
-
-
-
-<div class="infoIconLine">
-<div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
-
-</div>
-<div class="rightIcon">
-<span>tue-sat, 11:30-2:30pm<br>4:00-9:00pm</span>
-</div>
-
-
-</div>
-
-<div class="infoIconLine">
-<div class="leftIcon">
-<Phone class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
-</div>
-
-<div class="rightIcon">
-<a class="linkBlack" href="tel:+12069069606" target="_blank">(206) 906-9606</a>
-
-</div>
-  </div>
-
-
-
-
-<div class="infoIconLine">
-<div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
-</div>
-
-<div class="rightIcon">
-<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank">info@mamnoonrestaurant.com</a>
-<br>
-<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank">catering@mamnoonrestaurant.com</a>
-</div>
-  </div>
-
-
-
-
-    <div style="width: 100%;margin:15px 0px;text-align: center;">
-<button @click="openLink('https://app.upserve.com/s/mamnoon-llc-seattle')">
-  order online
-</button>
-      </div>
-  
-    <div style="width: 100%;margin:15px 0px;text-align: center;">
-<button @click="openSevenRooms('reservemamnoonbutton')">
-  make a reservation
-</button>
-      </div>
-
-      <div style="width: 100%;margin:15px 0px;text-align: center;">
-
-
-<button @click="openLink('https://www.nadimama.com/Lunch__Mamnoon.pdf')">
-lunch & patio menu
-</button>
-
-
-
-      </div>
-  
-  
-        <div style="width: 100%;margin:15px 0px;text-align: center;">
-
-
-<button @click="openLink('  https://uqr.to/jkuu')">
-dinner & drinks menu
-</button>
-
-
-
-      </div>
-  
-  
-  
-  </div>
-
-
-
-
-
-
-
-
 
     <div id="mamnoon-reserve" class="halfwidth-yellow1 wider temporary-grid mbar-blue">
   
@@ -306,7 +166,16 @@ view menus
 </button>
       </div>
 
-  
+          <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d')">
+gift cards
+</button>
+
+
+
+      </div>
   
   
   
@@ -315,7 +184,144 @@ view menus
 
 
 
+  <div id="mamnoon-reserve" class="halfwidth-yellow1 wider temporary-grid">
+  
+  
+  
+  
+  
 
+
+
+
+
+
+  
+  
+  
+<div class="tempGridLogo">
+
+
+
+
+<!-- <Plus /> -->
+
+<!-- <Minus /> -->
+  <div class="halfwidthclass smalled" style="height: 80px;position: relative;">
+<svg class="fifty50" style="position: absolute; top: 50%; height: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 145.96 18.05"><defs></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M93.38,7.52V7.46h0A7.38,7.38,0,0,0,81.83,1.65v0a2.19,2.19,0,0,0-4.29.49l1.08,1.24,0,4.13,0,9.74,1,.84a2.15,2.15,0,0,0,2.17-2V7.46A4.17,4.17,0,0,1,86,3.51a4.1,4.1,0,0,1,4.23,4.05V17.2l1,.84a2.15,2.15,0,0,0,2.16-2V7.73s0-.07,0-.1V7.52" class="cls-156"></path><path d="M146,7.52V7.46h0a7.39,7.39,0,0,0-11.55-5.81v0a2.19,2.19,0,0,0-4.29.49l1.09,1.24V7.46l0,9.74,1,.84a2.15,2.15,0,0,0,2.17-2V7.58a.49.49,0,0,1,0-.12,4.15,4.15,0,0,1,4.14-3.95,4.09,4.09,0,0,1,4.23,4.05V17.2l1,.84a2.15,2.15,0,0,0,2.16-2V7.73a.34.34,0,0,0,0-.1V7.52" class="cls-156"></path><path d="M45.83,18H37.65a9.18,9.18,0,0,1-6.86-3.83,8.28,8.28,0,0,1-1.59-5,8.87,8.87,0,0,1,9-8.79,9.76,9.76,0,0,1,5.16,1.51A2.59,2.59,0,0,1,45.67.37,2.56,2.56,0,0,1,48.3,2.91L47,4.26v9.65l1.26,1.56A2.56,2.56,0,0,1,45.83,18M43.92,7.23c-1.39-2.18-2.92-3.8-5.77-3.8A5.76,5.76,0,1,0,38.09,15h5.83Z" class="cls-156"></path><path d="M111.71,8.63a8.26,8.26,0,0,0-2.42-4.89,9,9,0,0,0-1.29-1,8.2,8.2,0,0,0-2.16-1A2.43,2.43,0,0,0,103.25,0l-1.31,1.33a8.43,8.43,0,0,0-5.55,3.18,8.13,8.13,0,0,0-1.76,5.08,8.64,8.64,0,0,0,.16,1.62,8.55,8.55,0,0,0,.8,2.26,8.45,8.45,0,0,0,2.5,2.88,8.19,8.19,0,0,0,2,1.09l.19.07.4.13a8.53,8.53,0,0,0,8.55-2.06,8.32,8.32,0,0,0,2.46-7m-14,1a5.5,5.5,0,1,1,5.5,5.41,5.45,5.45,0,0,1-5.5-5.41" class="cls-156"></path><path d="M129.93,8.63a8.26,8.26,0,0,0-2.42-4.89,8.45,8.45,0,0,0-1.29-1,8.2,8.2,0,0,0-2.16-1A2.43,2.43,0,0,0,121.47,0l-1.31,1.33a8.46,8.46,0,0,0-5.55,3.18,8.19,8.19,0,0,0-1.76,5.08,7.88,7.88,0,0,0,.17,1.62,8.19,8.19,0,0,0,.79,2.26,8.56,8.56,0,0,0,2.5,2.88,8.19,8.19,0,0,0,2,1.09l.19.07.4.13a8.53,8.53,0,0,0,8.55-2.06,8.32,8.32,0,0,0,2.46-7m-14,1a5.5,5.5,0,1,1,5.5,5.41,5.45,5.45,0,0,1-5.5-5.41" class="cls-156"></path><path d="M77,7.49v0h0C76.89,3.52,73.63.58,69.59.36a7.63,7.63,0,0,0-4.16,1.22,7.5,7.5,0,0,0-1.64,1.49A7.45,7.45,0,0,0,58,.36a7.32,7.32,0,0,0-4.15,1.29v0a2.18,2.18,0,0,0-4.28.49l1.08,1.24,0,13.87,1,.84a2.15,2.15,0,0,0,2.16-2V7.59A4.16,4.16,0,0,1,58,3.51a4.1,4.1,0,0,1,4.24,4.05s0,9.64,0,9.64l1,.84a2.15,2.15,0,0,0,2.17-2V7.59a4.17,4.17,0,0,1,8.34-.1l0,9.71,1,.84a2.15,2.15,0,0,0,2.17-2V7.49Z" class="cls-156"></path><path d="M27.41,7.49v0h0C27.32,3.52,24.06.58,20,.36a7.63,7.63,0,0,0-4.16,1.22,7.5,7.5,0,0,0-1.64,1.49A7.43,7.43,0,0,0,8.44.36,7.28,7.28,0,0,0,4.29,1.65v0a2.25,2.25,0,0,0-.62-1A2.17,2.17,0,0,0,2.17,0,2.14,2.14,0,0,0,0,2.09L1.08,3.33l0,13.87,1,.84a2.16,2.16,0,0,0,2.17-2V7.59A4.16,4.16,0,0,1,8.44,3.51a4.1,4.1,0,0,1,4.23,4.05s0,9.64,0,9.64l1,.84a2.15,2.15,0,0,0,2.16-2V7.59A4.16,4.16,0,0,1,20,3.51a4.12,4.12,0,0,1,4.19,4l0,9.71,1,.84a2.15,2.15,0,0,0,2.16-2V7.49Z" class="cls-156"></path></g></g></svg>
+</div>
+
+</div>
+
+
+
+
+<div class="infoIconLine">
+<div class="leftIcon">
+<MapPin style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+</div>
+
+<div class="rightIcon">
+
+
+<a class="linkBlack" href="https://g.page/mamnoonrestaurant?share" target="_blank">
+1508 Melrose Ave<br>Seattle, WA 98122</a>
+</div>
+  </div>
+
+
+
+
+
+
+<div class="infoIconLine">
+<div class="leftIcon">
+<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+
+</div>
+<div class="rightIcon">
+<span>tue-sat, 11:30-2:30pm<br>4:00-9:00pm</span>
+</div>
+
+
+</div>
+
+<div class="infoIconLine">
+<div class="leftIcon">
+<Phone class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+</div>
+
+<div class="rightIcon">
+<a class="linkBlack" href="tel:+12069069606" target="_blank">(206) 906-9606</a>
+
+</div>
+  </div>
+
+
+
+
+<div class="infoIconLine">
+<div class="leftIcon">
+<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+</div>
+
+<div class="rightIcon">
+<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank">info@mamnoonrestaurant.com</a>
+<br>
+<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank">catering@mamnoonrestaurant.com</a>
+</div>
+  </div>
+
+
+
+
+    <div style="width: 100%;margin:15px 0px;text-align: center;">
+<button @click="openLink('https://app.upserve.com/s/mamnoon-llc-seattle')">
+  order online
+</button>
+      </div>
+  
+    <div style="width: 100%;margin:15px 0px;text-align: center;">
+<button @click="openSevenRooms('reservemamnoonbutton')">
+  make a reservation
+</button>
+      </div>
+
+      <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('https://www.nadimama.com/Lunch__Mamnoon.pdf')">
+lunch & patio menu
+</button>
+
+
+
+      </div>
+  
+  
+        <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('  https://uqr.to/jkuu')">
+dinner & drinks menu
+</button>
+
+
+
+      </div>
+  
+          <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d')">
+gift cards
+</button>
+
+
+
+      </div>
+  
+  </div>
 
 
 
@@ -489,7 +495,16 @@ view menus
 
       </div>
   
-  
+          <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d')">
+gift cards
+</button>
+
+
+
+      </div>
   
   
   
@@ -628,7 +643,16 @@ view menu
 </button>
       </div>
   
-  
+          <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d')">
+gift cards
+</button>
+
+
+
+      </div>
   
   
   
@@ -665,7 +689,7 @@ view menu
   <div v-for="item in pageData" :key="item.acf_fc_layout">
   <template v-if="!isMobile()">
     <TestimonialsMain :visible="visibility.testimonials" v-if="item.acf_fc_layout === 'testimonials'" :showHide="item.showhide" :header="item.header" :description="item.description" :data="item.testimonials" :tag="item.tagname" />
-  <!--  <CoverFlowCarousel :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />-->
+  <CoverFlowCarousel :visible="visibility.planahead" v-if="item.acf_fc_layout === 'meal_calendar'" :header="item.header" :feature="item.feature" :descriptionbody="item.description" :data="item.meal_calendar" :tag="item.tagname" />
    <!-- <Reservations :visible="visibility.reservations" v-if="item.acf_fc_layout === 'reservations'" :header="item.header" :description="item.description" :data="item.reservations" :tag="item.tagname" />-->
   
   
@@ -811,6 +835,18 @@ dinner & drinks menu
       </div>
   
   
+        <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d')">
+gift cards
+</button>
+
+
+
+      </div>
+
+
   
   </div>
 
@@ -962,7 +998,16 @@ Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" 
 view menus
 </button>
       </div>
+        <div style="width: 100%;margin:15px 0px;text-align: center;">
 
+
+<button @click="openLink('https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d')">
+gift cards
+</button>
+
+
+
+      </div>
   
   
   
@@ -1143,6 +1188,17 @@ view menus
 </button>
 
 
+        <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d')">
+gift cards
+</button>
+
+
+
+      </div>
+
 
       </div>
   
@@ -1285,7 +1341,16 @@ view menu
 </button>
       </div>
   
-  
+          <div style="width: 100%;margin:15px 0px;text-align: center;">
+
+
+<button @click="openLink('https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d')">
+gift cards
+</button>
+
+
+
+      </div>
   
   
   

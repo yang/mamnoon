@@ -122,6 +122,18 @@
                     </li>
                 </div>   
 
+
+           <div class="inline-link">
+
+                    <li>
+                        <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">
+                            giftcards
+</a>
+                    </li>
+                </div>   
+
+
+
             </ul>
             </scrollactive
           >
@@ -158,6 +170,19 @@
                           newsletter archive
                         </router-link>
                     </li>
+
+
+
+
+       
+
+                    <li>
+                        <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">
+                            giftcards
+</a>
+                    </li>
+               
+
                 </div>   
 
 
