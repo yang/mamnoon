@@ -2,13 +2,12 @@
   <li class="accordion__item">
     <div 
       class="accordion__trigger"
-      :class="{'accordion__trigger_active': visible}"
+      :class="{'accordion__trigger_active': visible|| trigger}"
       @click="open">
 
       <!-- This slot will handle the title/header of the accordion and is the part you click on -->
       <slot name="accordion-trigger"></slot>
     </div>
-{{background}}
     <transition 
       name="accordion"
       @enter="start"
@@ -17,8 +16,9 @@
       @after-leave="end">
 
       <div class="accordion__content"
-        v-show="visible">
+        v-show="visible||trigger">
         <ul>
+
           <!-- This slot will handle all the content that is passed to the accordion -->
           <slot name="accordion-content"></slot>
         </ul>
@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  props: ['background'],
+  props: ['trigger'],
   inject: ["Accordion"],
   data() {
     return {
@@ -59,6 +59,11 @@ export default {
   },
   created() {
     this.index = this.Accordion.count++;
+  },
+  mounted(){
+    if(this.trigger){
+      this.visible = true;
+    }
   }
 };
 </script>

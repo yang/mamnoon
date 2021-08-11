@@ -28,7 +28,7 @@
 
     <accordion>
       <div style="background: #c0def9;">
-        <accordion-item>
+        <accordion-item :trigger="mbarAccordion">
           <!-- This slot will handle the title/header of the accordion and is the part you click on -->
           <template slot="accordion-trigger">
       
@@ -183,7 +183,7 @@ gift cards
 </div>
 
       <div style="background: #fff367;">
-        <accordion-item>
+         <accordion-item :trigger="mamnoonAccordion">
           <!-- This slot will handle the title/header of the accordion and is the part you click on -->
           <template slot="accordion-trigger">
       <div class="accordion-plus"><PlusSm /></div>
@@ -324,7 +324,7 @@ gift cards
         </accordion-item>
 </div>
       <div style="background-color: #49494a;color: white;">
-        <accordion-item>
+  <accordion-item :trigger="mamnoonStreetAccordion">
           <!-- This slot will handle the title/header of the accordion and is the part you click on -->
           <template slot="accordion-trigger">
           
@@ -497,7 +497,7 @@ gift cards
 
 
       <div style="background: #f3dbec;">
-        <accordion-item>
+  <accordion-item :trigger="anarAccordion">
           <!-- This slot will handle the title/header of the accordion and is the part you click on -->
           <template slot="accordion-trigger">
 
@@ -2159,6 +2159,10 @@ export default {
   },
   data() {
     return {
+      anarAccordion: false,
+      mamnoonAccordion:false,
+      mbarAccordion:false,
+      mamnoonStreetAccordion:false,
       pageData: null,
       testimonials: null,
       inventory: this.$store.state.inventory,
@@ -2278,6 +2282,29 @@ this.visibility[entry.target.id] = entry.isIntersecting
   mounted(){
     this.individualRestaurant()
         // this.upserves()
+
+
+
+
+if(window.location.hash === "#mamnoon-street"){
+this.mamnoonStreetAccordion = true;
+}
+
+if(window.location.hash === "#mamnoon"){
+this.mamnoonAccordion = true;
+}
+
+
+if(window.location.hash === "#mbar"){
+this.mbarAccordion = true;
+}
+
+
+if(window.location.hash === "#anar"){
+this.anarAccordion = true;
+}
+
+
   }
 };
 
