@@ -2938,7 +2938,7 @@ width: 100%
 
 .halfwidth-yellow1{
   &.temporary-grid{
-    height: 660px;
+    height: 680px;
   }
 }
 
