@@ -150,7 +150,7 @@ Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" 
 
   
     <div style="width: 100%;margin:15px 0px;text-align: center;">
-<button @click="openSevenRooms('reservembarbutton')">
+<button @click="openLink('https://www.sevenrooms.com/reservations/mbarseattle')">
 
   
   make a reservation
@@ -272,7 +272,7 @@ Capitol Hill (near Melrose Market)<br>
       </div>
   
     <div style="width: 100%;margin:15px 0px;text-align: center;">
-<button @click="openSevenRooms('reservemamnoonbutton')">
+<button @click="openLink('https://www.sevenrooms.com/reservations/mamnoon')">
   make a reservation
 </button>
       </div>
@@ -769,7 +769,7 @@ Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" 
 
   
     <div style="width: 100%;margin:15px 0px;text-align: center;">
-<button @click="openSevenRooms('reservembarbutton')">
+<button @click="openLink('https://www.sevenrooms.com/reservations/mbarseattle')">
 
   
   make a reservation
@@ -898,7 +898,7 @@ Capitol Hill (near Melrose Market)<br>
       </div>
   
     <div style="width: 100%;margin:15px 0px;text-align: center;">
-<button @click="openSevenRooms('reservemamnoonbutton')">
+<button @click="openLink('https://www.sevenrooms.com/reservations/mamnoon')">
   make a reservation
 </button>
       </div>
@@ -1423,7 +1423,7 @@ Capitol Hill (near Melrose Market)<br>
       </div>
   
     <div style="width: 100%;margin:15px 0px;text-align: center;">
-<button @click="openSevenRooms('reservemamnoonbutton')">
+<button @click="openLink('https://www.sevenrooms.com/reservations/mamnoon')">
   make a reservation
 </button>
       </div>
@@ -1603,7 +1603,7 @@ Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" 
 
   
     <div style="width: 100%;margin:15px 0px;text-align: center;">
-<button @click="openSevenRooms('reservembarbutton')">
+<button @click="openLink('https://www.sevenrooms.com/reservations/mbarseattle')">
 
   
   make a reservation
@@ -2193,12 +2193,11 @@ openLink(url){
 window.open(url,'_blank');
 
 },
-        openSevenRooms(e){
-      document.getElementById(e).click();
-
-      console.log('console log mbar')
-      console.log(e)
-    },
+//  openSevenRooms(e){
+//  document.getElementById(e).click();
+//  console.log('console log mbar')
+//  console.log(e)
+//},
  isMobile() {
    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
      return false
