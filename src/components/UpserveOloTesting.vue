@@ -4780,8 +4780,8 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
           // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction",
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          // url: "http://localhost:4000/order/start-transaction",
+           url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          //url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -6207,6 +6207,14 @@ this.currentOrder.scheduled_time = null
 .red-checkout-button{
   background-color: #F05D5B !important;
   border: 1px solid #F05D5B !important;
+
+
+
+  &:hover{
+    background-color: #f05d5b4a !important;
+    color: #F05D5B !important;
+    border: 2px solid transparent !important;
+  }
 }
 
 .pad-bot-20{

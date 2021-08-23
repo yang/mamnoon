@@ -3483,7 +3483,7 @@ console.log('transasction success')
         $.ajax({
           // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction",
           url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          // url: "http://localhost:4000/order/start-transaction",
+           //url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
           contentType: "application/json",

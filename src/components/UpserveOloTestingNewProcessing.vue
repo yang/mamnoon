@@ -1740,6 +1740,7 @@ add
 <div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid email</div>
 
 
+
                <label class="smblk" for="phone">phone:</label>
                 <br />
                      <!--<div v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.phone && user.user.deliveryAddress.phone !== ''" style="margin-bottom: 10px;">{{user.user.deliveryAddress.phone}}</div>-->
@@ -1748,9 +1749,11 @@ add
                   id="phone"
                   name="phone"
                   placeholder="(555) 555-5555"
-                  @change="phoneErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
+                  @change="checkIfPhoneValid(currentOrder.fulfillment_info.customer.phone)"
                   v-model="currentOrder.fulfillment_info.customer.phone"
                 />
+
+                  <!--// @change="phoneErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"-->
                 <div class="small-message" v-if="phoneErrorVisibleTf && !validPhone(currentOrder.fulfillment_info.customer.phone)">please enter a valid phone number</div>
 
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);display:none;" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
@@ -2001,9 +2004,37 @@ add
               </template>
 
 
-<span v-if="panelShow === 'customerInfo'&& currentOrder.preorder === true && this.currentOrder.scheduled_time !== null">
-scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br><br>
-</span>
+<div style="margin-bottom: 20px;" v-if="panelShow === 'customerInfo'&& currentOrder.preorder === true && this.currentOrder.scheduled_time !== null">
+scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br>
+</div>
+
+
+<!--// here -->
+<button v-if="panelShow === 'customerInfo' && changePickupTime === false && this.currentOrder.scheduled_time !== null" class="mt10 fw" style="margin-top:0;margin-bottom: 20px;" @click="showPickupTime()">Change Pickup Time</button>
+<!--&& this.currentOrder.scheduled_time !== null-->
+
+
+              <template v-if="panelShow === 'customerInfo' && changePickupTime === true">
+                  <template v-if="preOrderToggleState">
+                  <div class="leftDropdown in-side-bar">
+                  <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+                  </div>
+                  <div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
+                  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                  </div>
+                </template>
+              </template>
+              <template v-else>
+                  <template>
+                      <!--<div class="leftDropdown in-side-bar">
+                      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
+                      <div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
+                      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                      </div>-->
+                  </template>
+            </template>
+
+<!--// here-->
 
 
                 <span v-if="panelShow === 'customerInfo'">subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</span>
@@ -2015,7 +2046,23 @@ scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br><br>
             <!-- custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }} -->
             <!-- </div> -->
             <div v-if="panelShow === 'customerInfo'">
-             tip: ${{currentOrder.charges.tip.amount | showToFixed }}
+            <span v-if="this.tipSelected === 1">
+              tip (18%): 
+            </span>
+            <span v-else-if="this.tipSelected === 2">
+              tip (22%): 
+            </span>
+            <span v-else-if="this.tipSelected === 3">
+              tip (25%): 
+            </span>
+            <span v-else-if="this.tipSelected === 4">
+              tip: 
+            </span>
+            <span v-else>
+              tip: 
+            </span>
+
+             ${{currentOrder.charges.tip.amount | showToFixed }}
             </div>
               <hr v-if="panelShow === 'customerInfo'" />
               <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total | showToFixed }}</b>
@@ -3133,6 +3180,7 @@ if(newAddress){
     },
   data() {
   return {
+    changePickupTime: false,
     oloAvailable: true,
     formsValidClass: false,
     emailErrorVisibleTf: false,
@@ -3342,7 +3390,13 @@ showToFixed: function (value) {
 }
   },
   methods: {
+showPickupTime(){
 
+
+  this.changePickupTime = true;
+
+
+},
     cippaybuttoncreditsave() {
 
       let self = this;
@@ -3421,8 +3475,8 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
-          // url: "http://localhost:4000/order/start-credit-save",
+          //url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
+           url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -3446,6 +3500,16 @@ this.emailErrorVisibleTf = true;
 
 },
 
+
+checkIfPhoneValid(phoneEntry){
+
+
+
+
+this.phoneErrorVisibleTf = true;
+
+
+},
 phoneErrorVisible(emailEntry,phoneEntry){
 this.phoneErrorVisibletf = true;
 
@@ -4891,10 +4955,10 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
           // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction",
-          //url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
           // url: "http://localhost:4000/order/start-transaction",
           url: "https://young-hamlet-03679.herokuapp.com/order/start-auth",
-          //  url: "http://localhost:4000/order/start-auth",
+          //url: "http://localhost:4000/order/start-auth",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -6345,6 +6409,13 @@ this.currentOrder.scheduled_time = null
 .red-checkout-button{
   background-color: #F05D5B !important;
   border: 1px solid #F05D5B !important;
+
+  &:hover{
+    background-color: #f05d5b4a !important;
+    color: #F05D5B !important;
+    border: 2px solid transparent !important;
+  }
+
 }
 
 .pad-bot-20{
@@ -6685,6 +6756,12 @@ position: relative;
   display: block;
   padding: 0 6px 15px 0;
   margin-top: 15px;
+
+&.in-side-bar{
+  width: 100%;
+  margin-top: 0;
+}
+
 }
 
 
@@ -6692,6 +6769,11 @@ position: relative;
 width: 50%;
 display: block;
 padding: 0 6px 15px 0;
+
+
+&.in-side-bar{
+  width: 100%;
+}
 }
 
 .show-on-mob{
