@@ -432,7 +432,7 @@ gift cards
 
 </div>
 <div class="rightIcon">
-<span>mon-sat, 11:00am-8:30pm</span>
+<span>mon-fri, 11:00am-8:30pm<br>sat, 1-8:30pm</span>
 </div>
 
 
@@ -1065,7 +1065,7 @@ gift cards
 
 </div>
 <div class="rightIcon">
-<span>mon-sat, 11:00am-8:30pm</span>
+<span>mon-fri, 11:00am-8:30pm<br>sat, 1-8:30pm</span>
 </div>
 
 
