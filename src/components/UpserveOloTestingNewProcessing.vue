@@ -1807,8 +1807,10 @@ add
                   id="postal_code"
                   name="postal_code"
                   placeholder="postal code"
+                  @change="checkIfPostalValid(currentOrder.billing.billing_postal_code)"
                   v-model="currentOrder.billing.billing_postal_code"
                 />
+                                <div class="small-message" v-if="postalErrorVisibleTf && !validPostal(currentOrder.billing.billing_postal_code)">please enter a valid postal code</div>
               </form>
             </div>
             </div>
@@ -3183,6 +3185,7 @@ if(newAddress){
     changePickupTime: false,
     oloAvailable: true,
     formsValidClass: false,
+    postalErrorVisibleTf: false,
     emailErrorVisibleTf: false,
     phoneErrorVisibleTf: false,
   filteredValues: [],
@@ -3509,6 +3512,9 @@ checkIfPhoneValid(phoneEntry){
 this.phoneErrorVisibleTf = true;
 
 
+},
+checkIfPostalValid(postalEntry){
+  this.postalErrorVisibleTf = true;
 },
 phoneErrorVisible(emailEntry,phoneEntry){
 this.phoneErrorVisibletf = true;
