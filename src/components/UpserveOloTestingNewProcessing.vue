@@ -1799,18 +1799,18 @@ add
                   v-model="currentOrder.billing.billing_address"
                 />
 
-                <label class="smblk" for="postal_code">billing postal code:</label>
+                <label class="smblk" for="postal_code">billing zip code:</label>
                 <br />
                     <!-- <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>-->
                 <input
                   type="text"
                   id="postal_code"
                   name="postal_code"
-                  placeholder="postal code"
+                  placeholder="zip code"
                   @change="checkIfPostalValid(currentOrder.billing.billing_postal_code)"
                   v-model="currentOrder.billing.billing_postal_code"
                 />
-                                <div class="small-message" v-if="postalErrorVisibleTf && !validPostal(currentOrder.billing.billing_postal_code)">please enter a valid postal code</div>
+                                <div class="small-message" v-if="postalErrorVisibleTf && !validPostal(currentOrder.billing.billing_postal_code)">please enter a valid zip code</div>
               </form>
             </div>
             </div>
@@ -2130,7 +2130,7 @@ cart empty
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === '' || !validPhone(currentOrder.fulfillment_info.customer.phone) ">please enter a valid guest phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>
 
 
 
@@ -2226,7 +2226,7 @@ cart empty
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a guest phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing postal code</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>
 
 
 
@@ -4790,16 +4790,16 @@ this.custom = false
       }
 
       if (!this.currentOrder.billing.billing_postal_code) {
-        this.errors.push('invalid postal code');
+        this.errors.push('invalid zip code');
     
        this.$swal({ 
-            title: "invalid postal code"
+            title: "invalid zip code"
           });
 
       } else if (!this.validPostal(this.currentOrder.billing.billing_postal_code)) {
-         this.errors.push('invalid postal code');
+         this.errors.push('invalid zip code');
       this.$swal({ 
-            title: "invalid postal code"
+            title: "invalid zip code"
           });
       }
 
