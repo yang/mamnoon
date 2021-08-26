@@ -3471,7 +3471,7 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
           url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
-          // url: "http://localhost:4000/order/start-credit-save",
+         //url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
           contentType: "application/json",

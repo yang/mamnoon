@@ -2011,7 +2011,7 @@ gift cards
 </div>
 
 
-    <OnlineShopUpserve :visible="visibility.onlineshop" v-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />
+<!--    <OnlineShopUpserve :visible="visibility.onlineshop" v-if="item.acf_fc_layout === 'online_shop'" :header="item.header" :description="item.description" :data="item.online_shop" :tag="item.tagname" />-->
   
   
   
