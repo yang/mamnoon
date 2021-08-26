@@ -230,8 +230,8 @@ Capitol Hill (near Melrose Market)<br>
 
 </div>
 <div class="rightIcon">
-<span>tue-thurs, 11:30-2:30pm<br>4:00-8:00pm</span><br/>
-<span>fri-sat, 11:30-2:30pm<br>4:00-8:30pm</span>
+<span>tue-thurs, 11:30-2:30pm, 4:00-8:00pm</span><br/>
+<span>fri-sat, 11:30-2:30pm, 4:00-8:30pm</span>
 
 
 
@@ -863,8 +863,8 @@ Capitol Hill (near Melrose Market)<br>
 
 </div>
 <div class="rightIcon">
-<span>tue-thurs, 11:30-2:30pm<br>4:00-8:00pm</span><br/>
-<span>fri-sat, 11:30-2:30pm<br>4:00-8:30pm</span>
+<span>tue-thurs, 11:30-2:30pm, 4:00-8:00pm</span><br/>
+<span>fri-sat, 11:30-2:30pm, 4:00-8:30pm</span>
 </div>
 
 
@@ -1389,8 +1389,8 @@ Capitol Hill (near Melrose Market)<br>
 
 </div>
 <div class="rightIcon">
-<span>tue-thurs, 11:30-2:30pm<br>4:00-8:00pm</span><br/>
-<span>fri-sat, 11:30-2:30pm<br>4:00-8:30pm</span>
+<span>tue-thurs, 11:30-2:30pm, 4:00-8:00pm</span><br/>
+<span>fri-sat, 11:30-2:30pm, 4:00-8:30pm</span>
 </div>
 
 
