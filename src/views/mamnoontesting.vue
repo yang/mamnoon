@@ -1,8 +1,12 @@
 <template>
   <div class="mamnoon">
     <Nav />
-<UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
+<!--<UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />-->
   
+
+<UpserveOloTestingNewProcessing :title="'Mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
+
+
   <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>

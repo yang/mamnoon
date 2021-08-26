@@ -2075,7 +2075,7 @@ scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br>
 
 
     
-
+{{orderConfirmationModal}}
 
 <button v-if="panelShow === 'customerInfo'"  class="sm-button full-width-button" @click="cippaybuttoncreditsave"> card testing
 
@@ -3416,8 +3416,6 @@ showPickupTime(){
 // credit save
 // credit save success
 
-
-
 console.log('transasction success')
    if(self.title === 'Mamnoon'){
 
@@ -3439,12 +3437,6 @@ console.log('transasction success')
                 self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
               }
     }
-
-
-
-
-
-
 
 // credit save
 // credit save
@@ -3478,8 +3470,8 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          //url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
-           url: "http://localhost:4000/order/start-credit-save",
+          url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
+          // url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -5783,7 +5775,8 @@ console.log(confirmed)
 
       console.log('do an order')
       let self = this;
-      // console.log(this.oloEndpoint)
+      console.log('this.oloEndpoint');
+      console.log(this.oloEndpoint);
       console.log(currentOrder)
       this.$http.post(this.oloEndpoint, currentOrder)
         .then((response) => {
@@ -6504,12 +6497,13 @@ div {
 
 }
 .textInfo{
+
   // background: orange;
   display: inline-block;
   // height: 100px;
   position: relative;
   padding: 10px;
-    min-width: 200px;
+  min-width: 200px;
 
 
   .itemTitle{
@@ -6535,6 +6529,15 @@ div {
       font-size: 0.9rem;
       font-weight: 400;
   }
+
+
+@media only screen and (max-width: 1280px){
+
+  min-width: auto;
+
+}
+
+
 }
 
 .order-instructions{
