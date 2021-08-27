@@ -4952,11 +4952,8 @@ console.log('transasction success')
 // added 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction",
-          // url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          // url: "http://localhost:4000/order/start-transaction",
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-auth",
-          //url: "http://localhost:4000/order/start-auth",
+          //url: "https://young-hamlet-03679.herokuapp.com/order/start-auth",
+          url: "http://localhost:4000/order/start-auth",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
