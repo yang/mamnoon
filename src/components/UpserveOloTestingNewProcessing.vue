@@ -1979,13 +1979,15 @@ ${{formatWithAddons(order)}}
 
 
 
-Tip the staff:
+
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
 <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
+
               <!-- <div class="mt10" v-if="total > 0"> -->
                 <template v-if="panelShow === 'customerInfo'">
+Tip the staff:
               <div class="mt10">
                 <button id="noTip" class="tipButton quarter" style="display:none;" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
                 <button
