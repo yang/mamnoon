@@ -2140,7 +2140,7 @@ cart empty
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === '' || !validPhone(currentOrder.fulfillment_info.customer.phone) ">please enter a valid guest phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>
+<!--  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>-->
 
 
 
@@ -2236,7 +2236,7 @@ cart empty
   <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a guest phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>
+<!--  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>-->
 
 
 
@@ -6518,7 +6518,8 @@ div {
 
 @media only screen and (max-width: 1280px){
 
-  min-width: auto;
+  // min-width: auto;
+      min-width: 130px;
 
 }
 
