@@ -161,6 +161,7 @@ const store = new Vuex.Store({
           email: "",
           phone: "",
           first_name: "",
+          last_name: ""
         },
         instructions: "",
         no_tableware: false,
@@ -226,7 +227,7 @@ const store = new Vuex.Store({
           email: "",
           phone: "",
           first_name: "",
-          last_name: "",
+          last_name: ""
         },
         instructions: "",
         no_tableware: false,
@@ -292,6 +293,7 @@ const store = new Vuex.Store({
           email: "",
           phone: "",
           first_name: "",
+          last_name: ""
         },
         instructions: "",
         no_tableware: false,
@@ -361,6 +363,7 @@ const store = new Vuex.Store({
           email: "",
           phone: "",
           first_name: "",
+          last_name: ""
         },
         instructions: "",
         no_tableware: false,
@@ -426,6 +429,7 @@ const store = new Vuex.Store({
           email: "",
           phone: "",
           first_name: "",
+          last_name: ""
         },
         instructions: "",
         no_tableware: false,
@@ -491,6 +495,7 @@ const store = new Vuex.Store({
           email: "",
           phone: "",
           first_name: "",
+          last_name: ""
         },
         instructions: "",
         no_tableware: false,
@@ -580,7 +585,8 @@ const store = new Vuex.Store({
       let customer = {
         email: "",
         phone: "",
-        first_name: ""
+        first_name: "",
+        last_name: ""
       }
 
       state.storeCurrentOrderUpdate.billing = billing
