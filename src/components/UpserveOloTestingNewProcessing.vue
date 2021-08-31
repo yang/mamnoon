@@ -1722,9 +1722,10 @@ add
               id="name"
               name="name"
               placeholder="first name"
+              @change="checkIfFirstNameValid(currentOrder.fulfillment_info.customer.first_name)"
               v-model="currentOrder.fulfillment_info.customer.first_name"
               />
-
+                        <div class="small-message" v-if="firstNameErrorVisibleTf && !validFirstName(currentOrder.fulfillment_info.customer.first_name)">please enter a valid first name</div>
              <label class="smblk" for="name">last name:</label>
                 <br />
 
@@ -1736,10 +1737,11 @@ add
               id="name"
               name="name"
               placeholder="last name"
+              @change="checkIfLastNameValid(currentOrder.fulfillment_info.customer.last_name)"
               v-model="currentOrder.fulfillment_info.customer.last_name"
               />
 
-
+                        <div class="small-message" v-if="lastNameErrorVisibleTf && !validLastName(currentOrder.fulfillment_info.customer.last_name)">please enter a valid last name</div>
                <label class="smblk" for="email">email:</label>
                 <br />
                 <input
@@ -1799,11 +1801,12 @@ add
                   id="name-billing"
                   name="name"
                   placeholder="name"
+                  @change="checkIfFullNameValid(currentOrder.billing.billing_name)"
                   v-model="currentOrder.billing.billing_name"
                 />
 
 
-
+                                <div class="small-message" v-if="fullNameErrorVisibleTf && !validFullName(currentOrder.billing.billing_name)">please enter a valid full name</div>
 
 
                 <label class="smblk" for="address">billing address:</label>
@@ -1814,9 +1817,10 @@ add
                   id="address"
                   name="address"
                   placeholder="address"
+                  @change="checkIfAddressValid(currentOrder.billing.billing_address)"
                   v-model="currentOrder.billing.billing_address"
                 />
-
+                                <div class="small-message" v-if="addressErrorVisibleTf && !validAddress(currentOrder.billing.billing_address)">please enter a valid address</div>
                 <label class="smblk" for="postal_code">billing zip code:</label>
                 <br />
                     <!-- <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>-->
@@ -3197,6 +3201,10 @@ if(newAddress){
     postalErrorVisibleTf: false,
     emailErrorVisibleTf: false,
     phoneErrorVisibleTf: false,
+    addressErrorVisibleTf: false,
+    fullNameErrorVisibleTf: false,
+    firstNameErrorVisibleTf: false,
+    lastNameErrorVisibleTf: false,
   filteredValues: [],
     sliderNavVisible: true,
     packages: null,
@@ -3505,19 +3513,33 @@ this.emailErrorVisibleTf = true;
 
 },
 
+checkIfFullNameValid(fullname){
+this.fullNameErrorVisibleTf = true;
+},
 
+checkIfFirstNameValid(firstname){
+this.firstNameErrorVisibleTf = true;
+},
+checkIfLastNameValid(lastname){
+this.lastNameErrorVisibleTf = true;
+},
 checkIfPhoneValid(phoneEntry){
 
-
-
-
 this.phoneErrorVisibleTf = true;
-
 
 },
 checkIfPostalValid(postalEntry){
   this.postalErrorVisibleTf = true;
 },
+
+checkIfAddressValid(addressEntry){
+  this.addressErrorVisibleTf = true;
+},
+
+
+
+
+
 phoneErrorVisible(emailEntry,phoneEntry){
 this.phoneErrorVisibletf = true;
 
@@ -4801,6 +4823,23 @@ this.custom = false
    validPostal: function (postal_code) {
       var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
       return re.test(postal_code);
+    },
+
+       validAddress: function (address) {
+      var re = /^(?:[Pp][Oo]\s[Bb][Oo][Xx]|[0-9]+)\s(?:[0-9A-Za-z\.'#]|[^\S\r\n])+/gm;
+      return re.test(address);
+    },
+      validFullName: function (fullname) {
+      var re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
+      return re.test(fullname);
+    },
+      validFirstName: function (firstname) {
+      var re = /^([ \u00c0-\u01ffa-zA-Z'\-])+$/g;
+      return re.test(firstname);
+    },
+      validLastName: function (lastname) {
+      var re = /^([ \u00c0-\u01ffa-zA-Z'\-])+$/g;
+      return re.test(lastname);
     },
 
 
