@@ -1934,7 +1934,11 @@ add
 
   <div class="itemPrice">
 
-                  ${{formatExtraZero(order.price_cents.toFixed(2)/100 * order.quantity)}}
+
+
+${{formatWithAddons(order)}}
+
+
 </div>
 
 
@@ -3695,6 +3699,17 @@ checkIfGiftCard(value){
   }else{
     return value
   }
+
+},
+formatWithAddons(order){
+
+let finishedPrice = order.price_cents;
+
+for(let i = 0;i<order.modifiers.length;i++){
+  finishedPrice = finishedPrice + order.modifiers[i].price;
+}
+
+return finishedPrice.toFixed(2)/100 * order.quantity;
 
 },
 formatExtraZero(value){
