@@ -2131,7 +2131,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-if="1===1" v-for="savedCard in savedCards">
-      <button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+      <button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
       </button> 
 </template>
 
@@ -2145,7 +2145,7 @@ cart empty
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 
-<button v-if="savedCard.primary === true" class="mt10 fw disabled" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary === true" class="mt10 fw disabled" style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 
 
@@ -2231,7 +2231,7 @@ cart empty
 
 
  
-<button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -2243,7 +2243,7 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPayment(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 
@@ -4087,7 +4087,7 @@ console.log(email, approvalData)
 
 
   },
-  confirmTokenizedPayment(orderTotal,transId,cardSuffix){
+  confirmTokenizedPreAuth(orderTotal,transId,cardSuffix){
 
     let decvalue = orderTotal/100
 
@@ -4113,18 +4113,9 @@ console.log(email, approvalData)
     }
   });
 
-
-
   },
             async tokenizedPayment(orderTotal,transId){
-
-
-
 ////////
-
-
-
-
       try {
         let response = await this.$http.post("/credit/tokenizedpayment/",{
             orderTotal,
@@ -4149,7 +4140,6 @@ console.log('transasction success')
 
     }else if(this.title === 'Mamnoon Street'){
 
-
               if(this.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
                 this.scheduleAnOrder(this.$store.state.storeCurrentOrderUpdateStreet,response.data,null);
               }
@@ -4158,10 +4148,7 @@ console.log('transasction success')
                 this.doAnOrder(this.$store.state.storeCurrentOrderUpdateStreet,response.data,null);
               }
 
-
-
     }else if(this.title === 'Mbar'){
-
 
               if(this.$store.state.storeCurrentOrderUpdateMbar.preorder === true){
                 this.scheduleAnOrder($store.state.storeCurrentOrderUpdateMbar,response.data,null);
@@ -4173,22 +4160,13 @@ console.log('transasction success')
 
     }
 
-
-
 this.toggledDrawer = false
-
-
-
  
          } catch (err) {
         console.log(err.response);
       }
             
 //////
-
-
-
-
 
         },
                 async getCreditCards() {
@@ -4226,17 +4204,11 @@ this.toggledDrawer = false
       }
 
 
-
-
-
 let self = this
 let filteredCurrent = this.currentItemModifierArray.filter(function(x){
  return self.currentModifiers.findIndex(p => p.option === x.id) > -1
 
 });
-
-//console.log('filteredCurrent');
-//console.log(filteredCurrent);
 
 this.currentItemModifierArray = filteredCurrent
 
@@ -4245,7 +4217,6 @@ this.currentItemModifierArray = filteredCurrent
         }else{
           this.allOptionsSelected = false
         }
-
 
     },
     emptyCart(){
