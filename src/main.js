@@ -226,6 +226,7 @@ const store = new Vuex.Store({
           email: "",
           phone: "",
           first_name: "",
+          last_name: "",
         },
         instructions: "",
         no_tableware: false,

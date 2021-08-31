@@ -1703,9 +1703,6 @@ add
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
   <label class="smblk" for="cutlery">don't include disposable cutlery </label>
                   <br />
-                <!--<h4 v-if="currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit 1</span>)</div></span></h4>
-                <h4 v-else-if="currentOrder.fulfillment_info.type === ''" class="customer-info text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit 2</span>)</div></span></h4>
-                <h4 v-else class="text-left mt10">guest info<span class="edit-link" v-if="user && user.user"><div @click="editInfo()">&nbsp;(<span class="edit">edit 3</span>)</div></span></h4>-->
 
 <h4 v-if="currentOrder.fulfillment_info.type === '' || currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">guest info</h4>
 
@@ -1714,7 +1711,7 @@ add
 
 
 
-                <label class="smblk" for="name">name:</label>
+                <label class="smblk" for="name">first name:</label>
                 <br />
 
 
@@ -1724,9 +1721,25 @@ add
               type="text"
               id="name"
               name="name"
-              placeholder="name"
+              placeholder="first name"
               v-model="currentOrder.fulfillment_info.customer.first_name"
               />
+
+             <label class="smblk" for="name">last name:</label>
+                <br />
+
+
+
+<!--              <input type="text" id="name" placeholder="name" v-model="user.user.deliveryAddress.name" v-if="user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name && user.user.deliveryAddress.name !== ''" style="margin-bottom: 10px;">-->
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="last name"
+              v-model="currentOrder.fulfillment_info.customer.last_name"
+              />
+
+
                <label class="smblk" for="email">email:</label>
                 <br />
                 <input
@@ -1788,6 +1801,11 @@ add
                   placeholder="name"
                   v-model="currentOrder.billing.billing_name"
                 />
+
+
+
+
+
                 <label class="smblk" for="address">billing address:</label>
                 <br />
  <!--    <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
@@ -1961,7 +1979,7 @@ ${{formatWithAddons(order)}}
 
 
 
-
+Tip the staff:
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
@@ -2894,7 +2912,6 @@ if(this.user){
       // console.log(Number(this.upserveTaxRate))
       // console.log('preTotal')
       // console.log(Number(preTotal))
-
       // console.log('currentTax')
       // console.log(currentTax)
 
@@ -3323,6 +3340,7 @@ if(newAddress){
             email: this.emailAddress,
             phone: "",
             first_name: "",
+            last_name: "",
           },
           instructions: "",
           no_tableware: false,
@@ -4012,10 +4030,6 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
     this.showAddCardFormVisible = false
 
       }else{
-
-
-
-
 
 
 
