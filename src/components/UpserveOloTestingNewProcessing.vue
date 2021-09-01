@@ -2040,19 +2040,54 @@ scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br>
 </div>
 
 
+<div style="margin-bottom: 20px;" v-if="panelShow === 'customerInfo'&& currentOrder.preorder === false">
+scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
+<span style="font-size: .9rem;font-style: italic;">(approximately 20 minutes from now)</span>
+<button class="mt10 fw" style="margin-top:10px;margin-bottom: 20px;" @click="changeToPreorderAndShowDropDown()">Schedule for later</button>
+
+
+
+
+</div>
+
+<div v-if="changedToDropdown === true">
+<div class="leftDropdown in-side-bar">
+  <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+</div>
+<div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
+  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+</div>
+
+
+<span @click="changedToDropdown = false">cancel</span>
+
+</div>
+
 <!--// here -->
 <button v-if="panelShow === 'customerInfo' && changePickupTime === false && this.currentOrder.scheduled_time !== null" class="mt10 fw" style="margin-top:0;margin-bottom: 20px;" @click="showPickupTime()">Change Pickup Time</button>
 <!--&& this.currentOrder.scheduled_time !== null-->
 
-
               <template v-if="panelShow === 'customerInfo' && changePickupTime === true">
+                  
                   <template v-if="preOrderToggleState">
+
                   <div class="leftDropdown in-side-bar">
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
                   </div>
                   <div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
                   <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
                   </div>
+                  
+                </template>
+                   <template v-else>
+
+                  <div class="leftDropdown in-side-bar">
+                  <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
+                  </div>
+                  <div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
+                  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                  </div>
+                  
                 </template>
               </template>
               <template v-else>
@@ -2072,7 +2107,7 @@ scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br>
               <span v-else>subtotal: ${{currentOrder.charges.preTotal | showToFixed}}<br>tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
 
               <br />
-             <span  v-if="panelShow === 'customerInfo'">tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
+  
             <!-- <div v-if="custom === true"> -->
             <!-- custom tip: ${{ Number(currentAmountToAdd).toFixed(2)/100  }} -->
             <!-- </div> -->
@@ -2095,6 +2130,7 @@ scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br>
 
              ${{currentOrder.charges.tip.amount | showToFixed }}
             </div>
+                       <span  v-if="panelShow === 'customerInfo'">tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
               <hr v-if="panelShow === 'customerInfo'" />
               <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total | showToFixed }}</b>
 
@@ -2123,10 +2159,10 @@ cart empty
 
   <div class="small-message" v-if="selectedTime === null">please select a date and time at the top of this page</div>
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>
+  <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>-->
 <template v-if="this.$store.state.loggedIn">
 
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === '' || !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid guest email address</div>
+  <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === '' || !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid guest email address</div>-->
 
 
 
@@ -2138,16 +2174,13 @@ cart empty
 
 </template>
 <template v-else>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
+  <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>-->
 
 </template>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === '' || !validPhone(currentOrder.fulfillment_info.customer.phone) ">please enter a valid guest phone number</div>
+ <!-- <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === '' || !validPhone(currentOrder.fulfillment_info.customer.phone) ">please enter a valid guest phone number</div>
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
+  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>-->
 <!--  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>-->
-
-
-
 
 
 
@@ -2164,9 +2197,6 @@ cart empty
       </button> 
 </template>
 
-
-
-
 </template>
 </template>
 <template v-else>
@@ -2177,31 +2207,10 @@ cart empty
 <button v-if="savedCard.primary === true" class="mt10 fw disabled" style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 
-
 </template>
 </template>
-
-
-
 </template>
-
-
 </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <template v-if="this.$store.state.loggedIn">
 
@@ -2224,22 +2233,22 @@ cart empty
 
 
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>
+  <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>-->
 
 <template v-if="this.$store.state.loggedIn">
 
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
+<!--  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>-->
 
 
 </template>
 <template v-else>
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>
+  <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>-->
 
 </template>
 
-  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a guest phone number</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
-  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>
+ <!-- <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a guest phone number</div>-->
+  <!-- <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>-->
+ <!--  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>-->
 <!--  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>-->
 
 
@@ -2538,6 +2547,14 @@ export default {
     ExButton
   },
   computed: {	
+
+
+thirtyMinutesFromNow(){
+
+
+
+  return moment().add(20, 'minutes').format("LLLL");
+},
 filteredValuesComputed(){
 
 // let amount = []
@@ -3195,6 +3212,7 @@ if(newAddress){
     },
   data() {
   return {
+    changedToDropdown: false,
     changePickupTime: false,
     oloAvailable: true,
     formsValidClass: false,
@@ -3411,6 +3429,12 @@ showToFixed: function (value) {
 }
   },
   methods: {
+    changeToPreorderAndShowDropDown(){
+      this.preOrderToggle(true);
+
+
+        this.changedToDropdown = true;
+    },
 showPickupTime(){
 
 
@@ -4354,8 +4378,10 @@ if(c === true){
       this.currentOrder.preorder = true
 
 }else{
-      this.currentOrder.preorder = false
-this.selectedTime, this.selectedDate = null
+
+  this.changedToDropdown = false;
+  this.currentOrder.preorder = false
+  this.selectedTime, this.selectedDate = null
 
 
 }
