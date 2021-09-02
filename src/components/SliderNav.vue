@@ -28,7 +28,6 @@
                   <swiper-slide :id="item.id">
                        <a :index="index" :indexId="item.id" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
 
-
                       </a>
           </swiper-slide>
         </template>
@@ -46,7 +45,6 @@
      {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
 
 
-
      </a>
      </swiper-slide>
   </template>
@@ -55,7 +53,6 @@
    <swiper-slide :id="item.id">
       <a :index="index" :indexId="item.id" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
     {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-
 
 
 
@@ -75,7 +72,7 @@
         <swiper-slide :id="item.id">
       <a :index="index" :indexId="item.id" :id="item.id"  :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
      {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-       
+
      </a>
      </swiper-slide>
   </template>
@@ -85,7 +82,7 @@
          <swiper-slide :id="item.id">
       <a :index="index" :indexId="item.id" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
      {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-       
+
      </a>
     </swiper-slide>
   </template>
@@ -94,7 +91,7 @@
         <swiper-slide :id="item.id">
         <a :index="index" :indexId="item.id" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
        {{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}
-         
+      
        </a>
       </swiper-slide>
       </template>

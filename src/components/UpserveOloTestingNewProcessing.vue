@@ -778,7 +778,7 @@ add
               </template>
               <template v-else>
                   <template>
-                      <div class="leftDropdown">
+                     <div class="leftDropdown">
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
                       <div class="rightDropdown" v-if="selectedDate !== null">
                       <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
@@ -786,12 +786,10 @@ add
                   </template>
             </template>
 </div>
-    <!-- <div v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing"> -->
+
     <!-- <div class="testPage">testpage, please use nadimama.com/mamnoon for an actual experience.</div> -->
-      <div class="container online-menu" style="display:none;">
-        <h4>featured</h4>
-      </div>
-<!-- <Swiper :upserveSesctions="upserveSections" :upserve="upserve"/>  -->
+ 
+
 <!--  
       <div class="container online-menu">
       <h4>order from the full menu</h4>
@@ -816,48 +814,132 @@ add
 </div> 
 </div> 
 
-<!-- list goes here -->
-<!-- BEGINNING OF ORIGINAL -->
-<!-- BEGINNING OF ORIGINAL -->
- <!--<template v-if="valid && !preOrderToggleState">1
-  <template v-for="item in upserveSections">2
-    <template v-if="noFiltering">3
-        <template v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) ||!item.timing_mask">4
-          {{ item.name }}<br><br>
-        </template>
-    </template>
-  </template>
-</template>
- <template v-if="!valid">5 not valid
-<template v-for="item in upserveSections">6
-  <template v-if="noFiltering">without filtering {{ item.name }}<br><br></template>
-  <template v-else>8 with filtering
-    <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">9
-      {{ item.name }}<br><br>
-    </template>
-  </template>
-</template>
-</template>
-<template v-if="preOrderToggleState">10
-    <template v-for="item in upserveSections">11
- <template v-if="noFiltering && item.name !== 'featured item'">12
-  <template v-if="item.timing_mask === item.timing_mask">13
-    {{ item.name }}<br><br>
-  </template>
-</template>
-<template v-else>14
-  <template v-if="item.timing_mask === null">15
-    {{ item.name }}<br><br>
-  </template>
-  <template v-else>16
-    <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">{{ item.name }}<br><br></template>17
-  </template>
-</template>
-         </template>
-            </template>-->
-<!-- END OF ORIGINAL -->
-<!-- END OF ORIGINAL -->
-<!-- end list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -876,14 +958,6 @@ add
   <template v-if="noFiltering">
     <!-- beggin 1 -->
       <template>
-         <!-- <div class="container menu-line-testing"> -->
-<!-- <template v-if="nowTime && nowDate"> 
-{{nowTime,nowDate}}
-</template>  -->
-
-<!-- <div :id="item.name.replace('- To Go', '').replace('To Go', '').replace(' ','')">
-  {{item.name.replace('- To Go', '').replace('To Go', '').replace(' ','')}}
-</div> -->  
               <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
                 
                                                 <div
@@ -906,11 +980,6 @@ add
                                                                                             <div class="half-width2left">
                                                                                                           <div class="content-box">
         <div class="showBox"  v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
-
-
-<!--{{serve.id}}-->
-
-
 
 
 <div class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
@@ -1214,7 +1283,7 @@ add
                                       <!-- <template v-if="!item.timing_mask"> -->
                                 <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="container menu-line-testing">
                                     
-<!-- v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime)" -->
+
 
                                                 <div
                                                   :id="'drawertop-'+ item.id"
@@ -2037,6 +2106,7 @@ Tip the staff:
 
 <div style="margin-bottom: 20px;" v-if="panelShow === 'customerInfo'&& currentOrder.preorder === true && this.currentOrder.scheduled_time !== null">
 scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br>
+<button class="mt10 fw" style="margin-top:10px;margin-bottom: 20px;" @click="selectADifferentTime()">Select a different time</button>
 </div>
 
 
@@ -2046,61 +2116,8 @@ scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
 <button class="mt10 fw" style="margin-top:10px;margin-bottom: 20px;" @click="changeToPreorderAndShowDropDown()">Schedule for later</button>
 
 
-
-
 </div>
 
-<div v-if="changedToDropdown === true">
-<div class="leftDropdown in-side-bar">
-  <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-</div>
-<div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
-  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-</div>
-
-
-<span @click="changedToDropdown = false">cancel</span>
-
-</div>
-
-<!--// here -->
-<button v-if="panelShow === 'customerInfo' && changePickupTime === false && this.currentOrder.scheduled_time !== null" class="mt10 fw" style="margin-top:0;margin-bottom: 20px;" @click="showPickupTime()">Change Pickup Time</button>
-<!--&& this.currentOrder.scheduled_time !== null-->
-
-              <template v-if="panelShow === 'customerInfo' && changePickupTime === true">
-                  
-                  <template v-if="preOrderToggleState">
-
-                  <div class="leftDropdown in-side-bar">
-                  <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-                  </div>
-                  <div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
-                  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                  </div>
-                  
-                </template>
-                   <template v-else>
-
-                  <div class="leftDropdown in-side-bar">
-                  <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-                  </div>
-                  <div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
-                  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                  </div>
-                  
-                </template>
-              </template>
-              <template v-else>
-                  <template>
-                      <!--<div class="leftDropdown in-side-bar">
-                      <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
-                      <div class="rightDropdown in-side-bar" v-if="selectedDate !== null">
-                      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                      </div>-->
-                  </template>
-            </template>
-
-<!--// here-->
 
 
                 <span v-if="panelShow === 'customerInfo'">subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</span>
@@ -2547,14 +2564,6 @@ export default {
     ExButton
   },
   computed: {	
-
-
-thirtyMinutesFromNow(){
-
-
-
-  return moment().add(20, 'minutes').format("LLLL");
-},
 filteredValuesComputed(){
 
 // let amount = []
@@ -3212,6 +3221,7 @@ if(newAddress){
     },
   data() {
   return {
+    thirtyMinutesFromNow: moment().add(20, 'minutes').format("LLLL"),
     changedToDropdown: false,
     changePickupTime: false,
     oloAvailable: true,
@@ -3430,10 +3440,70 @@ showToFixed: function (value) {
   },
   methods: {
     changeToPreorderAndShowDropDown(){
+
+
+//  this.$swal({ 
+//     title: "please select a preferred date and time at the top of the page."
+//   });
+
+
+//       this.preOrderToggle(true);
+//   window.scrollTo(0,0);
+// //  this.currentOrder.preorder = true;
+//         // this.changedToDropdown = true;
+
+
+
+
+
+
+
+  this.$swal({ 
+      title: "please select a preferred date and time at the top of the page.",
+    showDenyButton: true,
+    denyButtonText: `Cancel`,
+    confirmButtonText: `Confirm`
+  }).then((confirmed) => {
+    if (confirmed) {
+
+      if(confirmed.isConfirmed){
+  
       this.preOrderToggle(true);
+  window.scrollTo(0,0);
+
+      }
+
+    } else {
+
+    }
+  });
 
 
-        this.changedToDropdown = true;
+
+
+
+
+
+    },
+
+selectADifferentTime(){
+
+  this.$swal({ 
+      title: "select a different time at the top of the page",
+    showDenyButton: true,
+    denyButtonText: `Cancel`,
+    confirmButtonText: `Confirm`
+  }).then((confirmed) => {
+    if (confirmed) {
+
+      if(confirmed.isConfirmed){
+  
+
+      window.scrollTo(0,0);
+      }
+    } else {
+    }
+  });
     },
 showPickupTime(){
 
@@ -4844,6 +4914,8 @@ this.custom = false
 
    validPhone: function (phone) {
       var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+
       return re.test(phone);
     },
    validPostal: function (postal_code) {
@@ -6162,6 +6234,16 @@ if(response.data.result === "success"){
     }
   },
   mounted() {
+
+        this.$nextTick(function () {
+            window.setInterval(() => {
+              this.thirtyMinutesFromNow = moment().add(20, 'minutes').format("LLLL")
+
+            },1000);
+        })
+
+
+
 
 
     this.checkOlo();
