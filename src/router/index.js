@@ -176,7 +176,13 @@ const router = new VueRouter({
   mode: "history",
   // mode: "hash",
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior: function (to) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      }
+    }}
 });
 
 router.beforeEach((to, from, next) => {

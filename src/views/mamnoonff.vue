@@ -27,10 +27,10 @@
 
 <template v-for="item in ffdata.fine_foods">
 
+<!--<h2 :id="item.shop_item.name.replaceAll(' ','-')">{{item.shop_item.name}}</h2>-->
 
 
-
-<div class="row">
+<div :id="item.shop_item.name.replaceAll(' ','-')" class="row">
 <div class="col-md-8 offset-md-2 overflow-x-hidden">
  
  
@@ -115,12 +115,6 @@
 </template>
 </div>
 </div>
-
-
-
-
-
-
 </div>
 
     <!-- <img style="width: 100%;" src="@/assets/img/mamnoonFF_NADI_2-01.png"> -->
@@ -172,12 +166,29 @@ ffdata: null
     }
 
 
+   await this.getB() 
+
+},
+getB(){
+  console.log('done');
+
+// window.scrollTop(0,100);
+console.log(document);
 
 
 }
   },
+
   mounted(){
     this.individualRestaurant()
+
+
+
+
+
+
+
+
   }
 };
 
