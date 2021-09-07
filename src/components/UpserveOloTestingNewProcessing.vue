@@ -3585,7 +3585,7 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
          url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
-         //url: "http://localhost:4000/order/start-credit-save",
+        //  url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -4139,9 +4139,9 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
      if(response.data.user.length > 0){
 
 
- this.$swal({ 
-    title: "this card has already been saved to your account"
-  });
+//  this.$swal({ 
+//     title: "this card has already been saved to your account"
+//   });
 
 
                this.ccBillingPostalCode = null
@@ -5080,7 +5080,7 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
           url: "https://young-hamlet-03679.herokuapp.com/order/start-auth",
-          //url: "http://localhost:4000/order/start-auth",
+          // url: "http://localhost:4000/order/start-auth",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
