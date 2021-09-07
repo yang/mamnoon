@@ -1514,7 +1514,7 @@ add
 <!-- <button v-if="toggledDrawer" @click="toggleDrawer()" class="toggle narrowed">
 <span><CloseModalSm2 /></span>
 </button> -->
-<button v-if="!toggledDrawer"else @click="toggleDrawer()" class="toggle">
+<button v-if="!toggledDrawer" @click="toggleDrawer()" class="toggle">
 <span><CartIcon /> {{cartItems}}</span>
 </button>
 
@@ -3470,8 +3470,9 @@ showToFixed: function (value) {
 
       if(confirmed.isConfirmed){
   
-      this.preOrderToggle(true);
-  window.scrollTo(0,0);
+        this.preOrderToggle(true);
+        window.scrollTo(0,0);
+        this.toggledDrawer = false;
 
       }
 
@@ -3502,6 +3503,7 @@ selectADifferentTime(){
   
 
       window.scrollTo(0,0);
+      this.toggledDrawer = false;
       }
     } else {
     }
