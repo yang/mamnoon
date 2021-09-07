@@ -2122,8 +2122,8 @@ scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
 
 
 
-                <span v-if="panelShow === 'customerInfo'">subtotal: ${{currentOrder.charges.preTotal | showToFixed}}</span>
-              <span v-else>subtotal: ${{currentOrder.charges.preTotal | showToFixed}}<br>tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
+                <span v-if="panelShow === 'customerInfo'">subtotal: ${{currentOrder.charges.preTotal | showToFixed}}<!--<br>tax: ${{currentOrder.charges.taxes | showToFixed}}--></span>
+              <span v-else>subtotal: ${{currentOrder.charges.preTotal | showToFixed}}<!--<br>tax: ${{currentOrder.charges.taxes | showToFixed}}--></span>
 
               <br />
   
