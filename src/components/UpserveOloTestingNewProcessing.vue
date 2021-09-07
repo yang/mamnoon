@@ -2014,7 +2014,7 @@ add
 
 
 <template v-if="order.name !== 'Lunch Combo Special'" v-for="(item, index) in order.modifiers">
-<div class="small-message grey" v-if="index <= 1">+{{item.name.replace("add","")}} <span style="font-weight: 100" v-if="index === 1&& order.modifiers.length - 2 >0">(plus {{order.modifiers.length -2 }} more)</span></div>
+<div class="small-message grey" v-if="index <= 1">+{{item.name.replace("add","")}} <span style="font-weight: 100" v-if="index === 1&& order.modifiers.length - 2 >0">(+{{order.modifiers.length -2 }} more)</span></div>
 </template>
 
 <!--<div class="small-message grey" v-for="(mod, i) in order.modifiers">
@@ -6668,7 +6668,8 @@ div {
 @media only screen and (max-width: 1280px){
 
   // min-width: auto;
-      min-width: 130px;
+      // min-width: 130px;
+          min-width: 150px;
 
 }
 
