@@ -35,7 +35,52 @@ const routes = [
     component: () => import("../views/mamnoonff.vue")
   },
   {
-    path: "/finefoods/products",
+    path: "/finefoods/products/",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/zaatar",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/babaganoush",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/muhammara",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/pitachips",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/hummus",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/labneh",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/fattoush",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/harrasauce",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
+    path: "/finefoods/products/shorbatadas",
     name: "mamnoonff",
     component: () => import("../views/mamnoonff.vue")
   },
