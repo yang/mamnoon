@@ -94,11 +94,11 @@ const routes = [
     name: "mamnoonff",
     component: () => import("../views/mamnoonff.vue")
   },
-  {
-    path: "/shop",
-    name: "shop",
-    component: () => import("../views/retail.vue")
-  },
+  // {
+  //   path: "/shop",
+  //   name: "shop",
+  //   component: () => import("../views/retail.vue")
+  // },
   {
     path: "/retail",
     name: "retail",
