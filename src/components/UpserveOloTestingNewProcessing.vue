@@ -2216,8 +2216,8 @@ cart empty
 
 
 
-      <button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
-      </button> 
+      <!--<button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+      </button> -->
 </template>
 
 </template>
@@ -2226,9 +2226,9 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-
+<!--
 <button v-if="savedCard.primary === true" class="mt10 fw disabled" style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
-</button> 
+</button> -->
 
 </template>
 </template>
@@ -2291,9 +2291,9 @@ cart empty
 <template v-for="savedCard in savedCards">
 
 
- 
+ <!--
 <button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
-</button> 
+</button> -->
 </template>
 </template>
 
@@ -2304,9 +2304,9 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-
+<!--
 <button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
-</button> 
+</button> -->
 </template>
 
 </template>
@@ -4190,10 +4190,28 @@ console.log('send approval ')
 console.log(email, approvalData)
 
 
+
+
+
     let infoForPay = {
-          approvalData: approvalData,
-         email: email
+          payInfo: null,
+          email
         }
+
+
+
+
+        if(approvalData.data){
+          infoForPay.payInfo = approvalData.data;
+
+        }else{
+         infoForPay.payInfo = approvalData; 
+        }
+
+
+
+
+
     let infoForPayStringify = infoForPay      
      this.$http
         .post("/credit/creditsavemongo", infoForPayStringify)
@@ -4245,12 +4263,12 @@ console.log(email, approvalData)
 
   },
   confirmTokenizedPreAuth(approvalData,orderTotal,transId,cardSuffix){
-
+// for store card
     let decvalue = orderTotal/100
 
 
     
-
+console.log("Approval Data", approvalData);
   this.$swal({ 
     title: "confirm saved card ending in " + cardSuffix + " payment for $" + decvalue.toFixed(2).replace('.00', '') + " ?",
     showDenyButton: true,
@@ -4271,36 +4289,40 @@ console.log(email, approvalData)
   });
 
   },
+                async tokenizedPayment(approvalData1){
 
 
-                async tokenizedPayment(approvalData){
-    let self = this;
- 
-    console.log("Approval Data", approvalData);
-    console.log('proceeed with order now you have a transaction');
+      
+               let self = this;
+
+            console.log("Approval Data", approvalData1);
+      
+            console.log('proceeed with order now you have a transaction');
+
 
 // credit save
 // credit save
 // credit save success
 
+console.log('transasction success')
    if(self.title === 'Mamnoon'){
 
               if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData1,null);
               }
               
               if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData1,null);
               }
 
 
 
     }else if(self.title === 'Mamnoon Street'){
       if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData1,null);
               }
               if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData1,null);
               }
     }
 
@@ -4311,8 +4333,9 @@ console.log(email, approvalData)
 
 
 
-      
-         
+        
+  
+
         
       
 
@@ -5837,9 +5860,22 @@ return searchResult;
 
 
     let infoForPay = {
-          payInfo: approvalData,
+          payInfo: null,
           orderInfo: currentOrder
         }
+
+
+
+
+        if(approvalData.data){
+          infoForPay.payInfo = approvalData.data;
+
+        }else{
+         infoForPay.payInfo = approvalData; 
+        }
+
+console.log(infoForPay, " info for pay");
+
     let infoForPayStringify = infoForPay      
      this.$http
         .post("/order/addorder", infoForPayStringify)
@@ -5952,6 +5988,9 @@ console.log(confirmed)
       },
       doAnOrder(currentOrder,approvalData,giftcardbalance) {
 
+
+
+console.log("approval data" + approvalData);
       console.log('do an order')
       let self = this;
       console.log('this.oloEndpoint');
@@ -6043,10 +6082,27 @@ self.decrementIfMatch(self.currentOrder);
           console.log(e);
         });
   
+
+
+
     let infoForPay = {
-          payInfo: approvalData,
+          payInfo: null,
           orderInfo: currentOrder
         }
+
+
+
+
+        if(approvalData.data){
+          infoForPay.payInfo = approvalData.data;
+
+        }else{
+         infoForPay.payInfo = approvalData; 
+        }
+
+
+
+
     let infoForPayStringify = infoForPay      
      this.$http
         .post("/order/addorder", infoForPayStringify)
