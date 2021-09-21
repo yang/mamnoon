@@ -5980,7 +5980,7 @@ this.openModal({
   "name": "4th of July BBQ Package - 7/3 pickup only",
   "price": "125.0",
   "price_cents": 12500,
-  "description": "Feeds 4\r\nMamnoon shish taouk: yogurt marinated chicken, garlic, za’atar (raw, 14oz)\r\nmamnoon kefta: ground beef & lamb, pistachio, baharat spice, caramelized onions (raw, 12oz)\r\nSmoked and pulled lamb shoulder, mamnoon BBQ (1#, fully cooked)\r\nHummus (8oz)\r\nLabneh (8oz)\r\nPita chips and fresh pita\r\nHouse pickles (12oz)\r\nLabneh toum (4oz)\r\nMarinated olives (8oz)\r\nCabbage slaw, pickled fresno pepper, carrot, herbs, black lime dressing (8oz)\r\nMelon & stone fruit salad, halloumi cheese, pistachio dressing, basil, mint (20oz)\r\nMama’s cookies (4ea.)",
+  "description": "Feeds 4\r\nMamnoon shish taouk: yogurt marinated chicken, garlic, za’atar (raw, 14oz)\r\nmamnoon kefta: ground beef & lamb, pistachio, baharat spice, caramelized onions (raw, 12oz)\r\nSmoked and pulled lamb shoulder, mamnoon BBQ (1#, fully cooked)\r\nHummus (8oz)\r\nLabneh (8oz)\r\nmama chips and fresh pita\r\nHouse pickles (12oz)\r\nLabneh toum (4oz)\r\nMarinated olives (8oz)\r\nCabbage slaw, pickled fresno pepper, carrot, herbs, black lime dressing (8oz)\r\nMelon & stone fruit salad, halloumi cheese, pistachio dressing, basil, mint (20oz)\r\nMama’s cookies (4ea.)",
   "min_sides": 0,
   "max_sides": 0,
   "item_type": "normal",

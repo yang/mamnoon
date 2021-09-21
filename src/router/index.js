@@ -60,6 +60,11 @@ const routes = [
     component: () => import("../views/mamnoonff.vue")
   },
   {
+    path: "/finefoods/products/mamachips",
+    name: "mamnoonff",
+    component: () => import("../views/mamnoonff.vue")
+  },
+  {
     path: "/finefoods/products/hummus",
     name: "mamnoonff",
     component: () => import("../views/mamnoonff.vue")
