@@ -1784,11 +1784,13 @@ this.attention = true
     },
     getToken() {
       let self = this;
+
+      console.log(self.$store.state.storeCurrentOrderUpdateRetail);
       return new Promise(function (resolve, reject) {
         $.ajax({
           // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction-retail",
-           url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
-          //url: "http://localhost:4000/order/start-transaction-retail",
+           url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction-retail",
+          // url: "http://localhost:4000/order/start-transaction-retail",
           type: "POST",
           dataType: "json",
           contentType: "application/json",

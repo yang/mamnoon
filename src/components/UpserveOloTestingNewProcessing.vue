@@ -763,7 +763,7 @@ add
               </template>
               <template v-else>
               <div class="mb16"> 
-       we are currently closed. now accepting preoders for future pickup.
+       we are currently closed. now accepting preorders for future pickup.
               </div> 
               </template>
               <template v-if="valid">
@@ -3586,8 +3586,8 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-         url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
-        //  url: "http://localhost:4000/order/start-credit-save",
+        //  url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
+         url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -6113,7 +6113,7 @@ dayName: days[tomorrow.getDay()],
 closed: false,
 dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
 dateFormatted: tomorrow.toISOString().slice(0,10),
-timeslots: timeslotsCreated,
+timeslots: timeslotsCreated.slice(2),
 time: {
 // time: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)),
 time: new Date(),
@@ -6175,7 +6175,7 @@ dropDown(){
             closed: true,
             dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
             dateFormatted: tomorrow.toISOString().slice(0,10),
-            timeslots: timeslotsCreated
+            timeslots: timeslotsCreated.slice(2)
             })
                             
             }else{
@@ -6194,7 +6194,7 @@ dropDown(){
             closed: false,
             dateData: days[tomorrow.getDay()] + moment(String(tomorrow)).format(' MMM Do'),
             dateFormatted: tomorrow.toISOString().slice(0,10),
-            timeslots: timeslotsCreated
+            timeslots: timeslotsCreated.slice(2)
             })
             }
         }
