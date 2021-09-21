@@ -2212,7 +2212,11 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-if="1===1" v-for="savedCard in savedCards">
-      <button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+
+
+
+
+      <button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
       </button> 
 </template>
 
@@ -2223,7 +2227,7 @@ cart empty
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
 
-<button v-if="savedCard.primary === true" class="mt10 fw disabled" style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary === true" class="mt10 fw disabled" style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 
 </template>
@@ -2288,7 +2292,7 @@ cart empty
 
 
  
-<button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+<button v-if="savedCard.primary ===  true" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 </template>
@@ -2300,7 +2304,8 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPreAuth(currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+
+<button v-if="savedCard.primary ===  true" class="mt10 fw disabled" :class="{disabled: disabledButton}" style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button> 
 </template>
 
@@ -3586,8 +3591,8 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-        //  url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
-         url: "http://localhost:4000/order/start-credit-save",
+         url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
+        //  url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -4239,7 +4244,7 @@ console.log(email, approvalData)
 
 
   },
-  confirmTokenizedPreAuth(orderTotal,transId,cardSuffix){
+  confirmTokenizedPreAuth(approvalData,orderTotal,transId,cardSuffix){
 
     let decvalue = orderTotal/100
 
@@ -4256,7 +4261,7 @@ console.log(email, approvalData)
       if(confirmed.isConfirmed){
   
         this.disabledButton = true;
-        this.tokenizedPayment(orderTotal,transId);
+        this.tokenizedPayment(approvalData);
 
       }
 
@@ -4266,7 +4271,55 @@ console.log(email, approvalData)
   });
 
   },
-            async tokenizedPayment(orderTotal,transId){
+
+
+                async tokenizedPayment(approvalData){
+    let self = this;
+ 
+    console.log("Approval Data", approvalData);
+    console.log('proceeed with order now you have a transaction');
+
+// credit save
+// credit save
+// credit save success
+
+   if(self.title === 'Mamnoon'){
+
+              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              }
+              
+              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              }
+
+
+
+    }else if(self.title === 'Mamnoon Street'){
+      if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              }
+              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              }
+    }
+
+// credit save
+// credit save
+// credit save
+
+
+
+
+      
+         
+        
+      
+
+        },
+
+
+            async xtokenizedPayment(orderTotal,transId){
 ////////
       try {
         let response = await this.$http.post("/credit/tokenizedpayment/",{

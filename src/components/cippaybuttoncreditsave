@@ -1,0 +1,58 @@
+    cippaybuttoncreditsave() {
+
+      let self = this;
+      this.getCreditSaveToken().then(function (transactionToken) {
+        emergepay.open({
+          transactionToken: transactionToken,
+          onTransactionSuccess: function (approvalData) {
+            console.log("Approval Data", approvalData);
+            emergepay.close();
+            console.log('proceeed with order now you have a transaction');
+
+
+// credit save
+// credit save
+// credit save success
+
+console.log('transasction success')
+   if(self.title === 'Mamnoon'){
+
+              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              }
+              
+              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              }
+
+
+
+    }else if(self.title === 'Mamnoon Street'){
+      if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              }
+              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              }
+    }
+
+// credit save
+// credit save
+// credit save
+
+
+
+
+          },
+          onTransactionFailure: function (failureData) {
+            console.log("Failure Data", failureData);
+            console.log('proceeed with order now you have a transaction');
+            // console.log('transasction success')
+
+          },
+          onTransactionCancel: function () {
+            console.log("transaction cancelled!");
+          },
+        });
+      });
+    },

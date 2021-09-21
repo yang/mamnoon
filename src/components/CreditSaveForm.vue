@@ -83,7 +83,6 @@
 <span v-else-if="card.approvalData.accountCardType === 'DN'" class="dinersclub-xs"></span>
 <span v-else-if="card.approvalData.accountCardType === 'DC'" class="discover-xs"></span>
 <span v-else-if="card.approvalData.accountCardType === 'AX'" class="amex-xs"></span>
-
 <span class="desktop">ends in</span>  {{card.approvalData.maskedAccount.replace('************','')}}
 
 <br>
