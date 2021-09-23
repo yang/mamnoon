@@ -1898,7 +1898,7 @@ add
                   id="postal_code"
                   name="postal_code"
                   placeholder="zip code"
-                  style="width:200px;"
+                  style="width:100px;"
                   @change="checkIfPostalValid(currentOrder.billing.billing_postal_code)"
                   v-model="currentOrder.billing.billing_postal_code"
                 />
