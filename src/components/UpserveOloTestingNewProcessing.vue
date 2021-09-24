@@ -98,7 +98,7 @@
 
 
 <form class="infoForm" @submit.prevent="checkFormBilling" v-if="updateBilling && user && user.user && user.user.billingAddress">
-<b>billing address:</b>
+<b>street address:</b>
  <br />
 
   <p>
@@ -1878,7 +1878,7 @@ add
                                 <div class="small-message" v-if="fullNameErrorVisibleTf && !validFullName(currentOrder.billing.billing_name)">please enter a valid full name</div>
 
 
-                <label class="smblk" for="address">billing address:</label>
+                <label class="smblk" for="address">street address:</label>
                 <br />
  <!--    <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
                 <input
@@ -1889,8 +1889,90 @@ add
                   @change="checkIfAddressValid(currentOrder.billing.billing_address)"
                   v-model="currentOrder.billing.billing_address"
                 />
+
+
+                <label class="smblk" for="city">city:</label>
+                <br />
+ <!--    <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  placeholder="city"
+                  @change="checkIfCityValid(currentOrder.billing.billing_address_city)"
+                  v-model="currentOrder.billing.billing_address_city"
+                />
+
+            <div style="">
+<div style="width: 50%;display: inline-block;">
+                <label class="smblk" for="state">state:</label>
+                <br />
+ <!--    <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
+
+
+<select class="selectState" v-model="currentOrder.billing.billing_address_state">
+	<option value=""></option>
+  <option value="AL">AL</option>
+	<option value="AK">AK</option>
+	<option value="AR">AR</option>	
+	<option value="AZ">AZ</option>
+	<option value="CA">CA</option>
+	<option value="CO">CO</option>
+	<option value="CT">CT</option>
+	<option value="DC">DC</option>
+	<option value="DE">DE</option>
+	<option value="FL">FL</option>
+	<option value="GA">GA</option>
+	<option value="HI">HI</option>
+	<option value="IA">IA</option>	
+	<option value="ID">ID</option>
+	<option value="IL">IL</option>
+	<option value="IN">IN</option>
+	<option value="KS">KS</option>
+	<option value="KY">KY</option>
+	<option value="LA">LA</option>
+	<option value="MA">MA</option>
+	<option value="MD">MD</option>
+	<option value="ME">ME</option>
+	<option value="MI">MI</option>
+	<option value="MN">MN</option>
+	<option value="MO">MO</option>	
+	<option value="MS">MS</option>
+	<option value="MT">MT</option>
+	<option value="NC">NC</option>	
+	<option value="NE">NE</option>
+	<option value="NH">NH</option>
+	<option value="NJ">NJ</option>
+	<option value="NM">NM</option>			
+	<option value="NV">NV</option>
+	<option value="NY">NY</option>
+	<option value="ND">ND</option>
+	<option value="OH">OH</option>
+	<option value="OK">OK</option>
+	<option value="OR">OR</option>
+	<option value="PA">PA</option>
+	<option value="RI">RI</option>
+	<option value="SC">SC</option>
+	<option value="SD">SD</option>
+	<option value="TN">TN</option>
+	<option value="TX">TX</option>
+	<option value="UT">UT</option>
+	<option value="VT">VT</option>
+	<option value="VA">VA</option>
+	<option value="WA">WA</option>
+	<option value="WI">WI</option>	
+	<option value="WV">WV</option>
+	<option value="WY">WY</option>
+</select>
+
+
+</div>
+
+<div style="width: 50%;display: inline-block;">
+
+
                                 <div class="small-message" v-if="addressErrorVisibleTf && !validAddress(currentOrder.billing.billing_address)">please enter a valid address</div>
-                <label class="smblk" for="postal_code">billing zip code:</label>
+                <label class="smblk" for="postal_code">zip code:</label>
                 <br />
                     <!-- <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.zip !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.zip}}</div>-->
                 <input
@@ -1898,12 +1980,31 @@ add
                   id="postal_code"
                   name="postal_code"
                   placeholder="zip code"
-                  style="width:100px;"
+                  class="inputZip"
                   @change="checkIfPostalValid(currentOrder.billing.billing_postal_code)"
                   v-model="currentOrder.billing.billing_postal_code"
                 />
                                 <div class="small-message" v-if="postalErrorVisibleTf && !validPostal(currentOrder.billing.billing_postal_code)">please enter a valid zip code</div>
+            
+            
+            
+            
+</div>
+
+
+            
+            </div>
+            
+            
+            
+            
+            
+            
               </form>
+
+
+
+
             </div>
             </div>
 <div class="container mt10">
@@ -2457,8 +2558,8 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
-<!--<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
 
@@ -3352,6 +3453,8 @@ if(newAddress){
         billing:{
           billing_name: '',
           billing_address: '',
+          billing_address_city: '',
+          billing_address_state:'',
           billing_postal_code: ''
         },
         id:
@@ -7646,5 +7749,18 @@ font-weight: 300;
 text-transform: lowercase;
 }
 
+
+.selectState{
+      width: 90%;
+    padding: 7px 9px;
+    border-radius: 4px;
+    border: 1px solid #b7b7b7;
+    margin-bottom: 6px;
+}
+
+
+.inputZip{
+  width: 90%
+}
 
 </style>
