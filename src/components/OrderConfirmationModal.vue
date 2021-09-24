@@ -1,13 +1,13 @@
 <template>
       <div v-if="orderConfirmationModal" class="order-confirmation-modal">
-        <div class="container online-menu order-modal-width">
+        <div class="container online-menu order-modal-width" style="padding: 10px;">
           <!-- <div @click="closeConfirmationModal()" class="close closeModal"> -->
-          <div class="close closeModal">
+          <div class="close closeModal closeModalConfirmation">
                  <router-link to="/">  
-            <CloseModal />
+            <CloseModal2 />
                  </router-link>
           </div>
-          <h4>order confirmation</h4>
+          <h4 class="order-conf-header">order confirmation</h4>
         </div>
         <div class="container modal-body order-modal-width order-modal-body">
           <h2 v-if="orderCMR.preorder">your order has been scheduled.</h2>
@@ -54,7 +54,7 @@ current giftcard balance: ${{orderCMR.giftcardBalance}}
 
 <script>
 
-import CloseModal from "@/components/svgIcons/CloseModal";
+import CloseModal2 from "@/components/svgIcons/CloseModal2";
 import moment from 'moment'
 import tz from 'moment-timezone'
 export default {
@@ -62,7 +62,7 @@ export default {
 props: ['orderConfirmationModal','orderCMR','retail'],
 components: {
 
-    CloseModal
+    CloseModal2
 },
 methods:{
         closeConfirmationModal() {
@@ -1052,6 +1052,23 @@ div{
 }
 }
 
+
+
+.order-conf-header{
+      padding: 10px;
+    margin-bottom: 0;
+}
+
+
+.order-modal-body{
+      margin-top: -10px;
+}
+
+.closeModalConfirmation{
+position: absolute;
+    top: 4px !important;
+    right: 32px !important; 
+}
 
 </style>
 

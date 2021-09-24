@@ -28,9 +28,9 @@ export default {
   mounted () {
 //  this.$store.state.orderCMR = {};
 // console.log(this.$store.state.orderCMR)
-        if(Object.entries(this.$store.state.orderCMR).length === 0){
-            this.$router.push("/");
-        }
+        // if(Object.entries(this.$store.state.orderCMR).length === 0){
+        //     this.$router.push("/");
+        // }
     
   }
 };

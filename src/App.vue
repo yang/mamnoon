@@ -345,7 +345,8 @@ form textarea,
   border-radius: 4px;
   border: 1px solid #b7b7b7;
   // margin-bottom: 10px;
-      margin-bottom: 6px;
+      // margin-bottom: 6px;
+          margin-bottom: 4px;
 }
 
 .backgroundImage {
@@ -1182,7 +1183,8 @@ font-size: 1.2rem
 
 label {
     display: inline-block;
-    margin-bottom: 0.5rem;
+    // margin-bottom: 0.5rem;
+        margin-bottom: 0.2rem;
 }
 
 
@@ -1441,6 +1443,7 @@ svg#nadiIconSm{
 
 #upserveolo .content-box {
     padding: 5px 9px;
+    padding: 3px 9px;
 }
 
 }
