@@ -237,7 +237,7 @@
 
 
 <!-- <h1>mbar</h1> -->
-<span><a href="http://mbarseattle.com" target="_blank">mbarseattle.com</a></span>
+<!--<span><a href="http://mbarseattle.com" target="_blank">mbarseattle.com</a></span>-->
 <p>mbar fuses the best indoor & outdoor setting with the ultimate highly social evolution of Levantine hospitality, superlative cuisine and beverage experiences to create and enrich relationships with people from a broad spectrum of backgrounds in all seasons and weather.  mbar represents a viable modern alternative to traditional high-end fine dining by allowing guests to reach the heights of experience they wish without compunction – while sharing the space with others charting their own path in a common setting.</p>
 
 
@@ -321,7 +321,7 @@
 
 
 <!-- <h1>mamnoon</h1> -->
-<span><a href="http://mamnoonrestaurant.com" target="_blank">mamnoonrestaurant.com</a></span>
+<!--<span><a href="http://mamnoonrestaurant.com" target="_blank">mamnoonrestaurant.com</a></span>-->
 <p>mamnoon creates and enriches relationships with people from a broad spectrum of backgrounds through exemplary hospitality, beverage and food experiences rooted in refined Levantine traditions with an emphasis on creating shared social experiences through authenticity and intelligent evolution of Levantine and Persian cuisines.</p>
 
 
@@ -443,7 +443,7 @@
 </div>
 
 <!-- <h1>mamnoon street</h1> -->
-<span><a href="http://mamnoonstreet.com" target="_blank">mamnoonstreet.com</a></span>
+<!--<span><a href="http://mamnoonstreet.com" target="_blank">mamnoonstreet.com</a></span>-->
 <p>mamnoon street brings the full spectrum of popular Levantine street foods to people from a broad spectrum of backgrounds through delicious,  fast, bespoke and high energy food and beverage experiences adapted to modern diverse urban settings.</p>
 
 
@@ -520,7 +520,7 @@
 
 
 <!-- <h1>anar</h1> -->
-<span><a href="https://anar.life/" target="_blank">anar.life</a></span>
+<!--<span><a href="https://anar.life/" target="_blank">anar.life</a></span>-->
 <p>anar creates and enriches relationships with people who are seeking fast, beautiful & delicious,bites snacks and meals through spaces that escape the hustle of modern life without compromising health or moral food values.  anar instances the future of food by following time tested and proven traditions in Levantine and Persian cuisines while observing modern evidence-based research without compromising on flavor or warmth/intimacy of the experience.</p>
 </div>
 
