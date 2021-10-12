@@ -144,7 +144,7 @@
 
 <div class="rightIcon">
 <!--General Inquiries: <a class="linkBlack" href="mailto:info@mbarseattle.com" target="_blank">info@mbarseattle.com</a><br>-->
-For parties of 11 or more or for events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
+For parties of 11 or more or for events: <br/><a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank"><u>rez@mbarseattle.com</u></a>
 </div>
   </div>
 
@@ -264,9 +264,9 @@ Capitol Hill (near Melrose Market)<br>
 </div>
 
 <div class="rightIcon">
-<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank">info@mamnoonrestaurant.com</a>
+<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank"><u>info@mamnoonrestaurant.com</u></a>
 <br>
-<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank">catering@mamnoonrestaurant.com</a>
+<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank"><u>catering@mamnoonrestaurant.com</u></a>
 </div>
   </div>
 
@@ -462,7 +462,7 @@ gift cards
 </div>
 
 <div class="rightIcon">
-<a class="link" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
+<a class="link" href="mailto:info@mamnoonstreet.com" target="_blank"><u>info@mamnoonstreet.com</u></a>
 </div>
   </div>
 
@@ -606,7 +606,7 @@ gift cards
 </div>
 
 <div class="rightIcon">
-<a class="linkBlack" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
+<a class="linkBlack" href="mailto:info@mamnoonstreet.com" target="_blank"><u>info@mamnoonstreet.com</u></a>
 
 </div>
   </div>
@@ -771,7 +771,7 @@ gift cards
 
 <div class="rightIcon">
 <!--General Inquiries: <a class="linkBlack" href="mailto:info@mbarseattle.com" target="_blank">info@mbarseattle.com</a><br>-->
-For parties of 11 or more or for events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
+For parties of 11 or more or for events: <br/><a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank"><u>rez@mbarseattle.com</u></a>
 </div>
   </div>
 
@@ -892,9 +892,9 @@ Capitol Hill (near Melrose Market)<br>
 </div>
 
 <div class="rightIcon">
-<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank">info@mamnoonrestaurant.com</a>
+<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank"><u>info@mamnoonrestaurant.com</u></a>
 <br>
-<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank">catering@mamnoonrestaurant.com</a>
+<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank"><u>catering@mamnoonrestaurant.com</u></a>
 </div>
   </div>
 
@@ -1097,7 +1097,7 @@ gift cards
 </div>
 
 <div class="rightIcon">
-<a class="link" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
+<a class="link" href="mailto:info@mamnoonstreet.com" target="_blank"><u>info@mamnoonstreet.com</u></a>
 </div>
   </div>
 
@@ -1256,7 +1256,7 @@ gift cards
 </div>
 
 <div class="rightIcon">
-<a class="linkBlack" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
+<a class="linkBlack" href="mailto:info@mamnoonstreet.com" target="_blank"><u>info@mamnoonstreet.com</u></a>
 
 </div>
   </div>
@@ -1418,9 +1418,9 @@ Capitol Hill (near Melrose Market)<br>
 </div>
 
 <div class="rightIcon">
-<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank">info@mamnoonrestaurant.com</a>
+<a class="linkBlack" href="mailto:info@mamnoonrestaurant.com" target="_blank"><u>info@mamnoonrestaurant.com</u></a>
 <br>
-<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank">catering@mamnoonrestaurant.com</a>
+<a class="linkBlack" href="mailto:catering@mamnoonrestaurant.com" target="_blank"><u>catering@mamnoonrestaurant.com</u></a>
 </div>
   </div>
 
@@ -1608,7 +1608,7 @@ gift cards
 
 <div class="rightIcon">
 <!--General Inquiries: <a class="linkBlack" href="mailto:info@mbarseattle.com" target="_blank">info@mbarseattle.com</a><br>-->
-For parties of 11 or more or for events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
+For parties of 11 or more or for events: <br/><a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank"><u>rez@mbarseattle.com</u></a>
 </div>
   </div>
 
@@ -1796,7 +1796,7 @@ gift cards
 </div>
 
 <div class="rightIcon">
-<a class="link" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
+<a class="link" href="mailto:info@mamnoonstreet.com" target="_blank"><u>info@mamnoonstreet.com</u></a>
 </div>
   </div>
 
@@ -1957,7 +1957,7 @@ gift cards
 </div>
 
 <div class="rightIcon">
-<a class="linkBlack" href="mailto:info@mamnoonstreet.com" target="_blank">info@mamnoonstreet.com</a>
+<a class="linkBlack" href="mailto:info@mamnoonstreet.com" target="_blank"><u>info@mamnoonstreet.com</u></a>
 
 </div>
   </div>
