@@ -144,7 +144,7 @@
 
 <div class="rightIcon">
 <!--General Inquiries: <a class="linkBlack" href="mailto:info@mbarseattle.com" target="_blank">info@mbarseattle.com</a><br>-->
-Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
+For parties of 11 or more or for events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
 </div>
   </div>
 
@@ -771,7 +771,7 @@ gift cards
 
 <div class="rightIcon">
 <!--General Inquiries: <a class="linkBlack" href="mailto:info@mbarseattle.com" target="_blank">info@mbarseattle.com</a><br>-->
-Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
+For parties of 11 or more or for events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
 </div>
   </div>
 
@@ -1608,7 +1608,7 @@ gift cards
 
 <div class="rightIcon">
 <!--General Inquiries: <a class="linkBlack" href="mailto:info@mbarseattle.com" target="_blank">info@mbarseattle.com</a><br>-->
-Reservations and Events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
+For parties of 11 or more or for events: <a class="linkBlack" href="mailto:rez@mbarseattle.com" target="_blank">rez@mbarseattle.com</a>
 </div>
   </div>
 
