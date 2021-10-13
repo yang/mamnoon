@@ -30,68 +30,88 @@ const routes = [
     component: () => import("../views/mamnoonff.vue")
   },
   {
+    path: "/anar",
+    name: "anar",
+    component: () => import("../components/VirtualRestaurant.vue")
+  },
+  {
+    path: "/mbar",
+    name: "mbar",
+    component: () => import("../components/VirtualRestaurant.vue")
+  },
+  {
+    path: "/mamnoon",
+    name: "mamnoon",
+    component: () => import("../components/VirtualRestaurant.vue")
+  },
+  {
+    path: "/mbar",
+    name: "mbar",
+    component: () => import("../components/VirtualRestaurant.vue")
+  },
+  {
     path: "/finefoods",
-    name: "mamnoonff",
+    name: "finefoods",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/",
-    name: "mamnoonff",
+    name: "products",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/zaatar",
-    name: "mamnoonff",
+    name: "zaatar",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/babaganoush",
-    name: "mamnoonff",
+    name: "babaganoush",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/muhammara",
-    name: "mamnoonff",
+    name: "muhammara",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/pitachips",
-    name: "mamnoonff",
+    name: "pitachips",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/mamachips",
-    name: "mamnoonff",
+    name: "mamachips",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/hummus",
-    name: "mamnoonff",
+    name: "hummus",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/labneh",
-    name: "mamnoonff",
+    name: "labneh",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/fattoush",
-    name: "mamnoonff",
+    name: "fattoush",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/harrasauce",
-    name: "mamnoonff",
+    name: "harrasauce",
     component: () => import("../views/mamnoonff.vue")
   },
   {
     path: "/finefoods/products/shorbatadas",
-    name: "mamnoonff",
+    name: "shorbatadas",
     component: () => import("../views/mamnoonff.vue")
   },
     {
     path: "/finefoods/products/shorabatadas",
-    name: "mamnoonff",
+    name: "shorabatadas",
     component: () => import("../views/mamnoonff.vue")
   },
   // {
