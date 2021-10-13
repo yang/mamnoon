@@ -50,6 +50,11 @@ const routes = [
     component: () => import("../components/VirtualRestaurant.vue")
   },
   {
+    path: "/mamnoonstreet",
+    name: "mamnoonstreet",
+    component: () => import("../components/VirtualRestaurant.vue")
+  },
+  {
     path: "/finefoods",
     name: "finefoods",
     component: () => import("../views/mamnoonff.vue")
