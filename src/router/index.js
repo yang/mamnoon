@@ -30,29 +30,8 @@ const routes = [
     component: () => import("../views/mamnoonff.vue")
   },
   {
-    path: "/anar",
-    name: "anar",
-    component: () => import("../components/VirtualRestaurant.vue")
-  },
-  {
-    path: "/mbar",
-    name: "mbar",
-    component: () => import("../components/VirtualRestaurant.vue")
-  },
-  {
-    path: "/mamnoon",
-    name: "mamnoon",
-    component: () => import("../components/VirtualRestaurant.vue")
-  },
-  {
-    path: "/mbar",
-    name: "mbar",
-    component: () => import("../components/VirtualRestaurant.vue")
-  },
-  {
-    path: "/mamnoonstreet",
-    name: "mamnoonstreet",
-    component: () => import("../components/VirtualRestaurant.vue")
+    path: "/:id",
+    component: () => import("../components/VirtualRestaurantTemplate.vue")
   },
   {
     path: "/finefoods",
