@@ -159,10 +159,7 @@ let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/v
     // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
 
 
-    let responseAcf2 = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
-// console.log(responseAcf2);
 
-    // console.log(responseAcf);
     let AcfBlock = responseAcf
     this.pageData = AcfBlock.data.acf.content_fields
     this.pageData = AcfBlock.data.acf.restaurants

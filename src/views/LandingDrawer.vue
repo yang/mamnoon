@@ -3,26 +3,30 @@
 <Nav />
 
 
-sss
-      <!-- <div class="container mt-5 nav-acc-header"> -->
-      <!-- <div class="container mt-5 home-page">
-        <div class="row">
-          <div class="col-md-12">
-dddd
 
-<SlideShowNewHome />
-          </div>
-        </div>
-      </div> -->
-<SlideShowNewHome />
+  <div class="container mobilePage">
+
+    <h1>Hello Fatima!</h1>
+
+                  <div v-for="item in pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
+                      
+
+                   <router-link :to="item.name.replaceAll(' ','')">
+                   {{item.name}}
+                   </router-link>
+
+
+
+      </div>
+
+    </div>
+
+
   </div>
 </template>
 <script>
 
 
-import SlideShowNewHome from "@/components/SlideShowNewHome";
-
-import Nav from "@/components/Nav";
 
 
 
@@ -30,9 +34,33 @@ import Nav from "@/components/Nav";
 
 export default {
     components: {
-    SlideShowNewHome,
-    Nav
+
   },
+  data() {
+    return {
+      pageData: null
+      }},
+  methods:{
+        async individualRestaurant(){
+   
+
+
+
+
+let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/virtual_restaurant/412`)
+    // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+
+
+
+    let AcfBlock = responseAcf
+    this.pageData = AcfBlock.data.acf.content_fields
+    this.pageData = AcfBlock.data.acf.restaurants
+},
+  },
+  mounted(){
+      this.individualRestaurant()
+  }
+
 
 };
 </script>

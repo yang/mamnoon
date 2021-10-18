@@ -240,6 +240,16 @@ const routes = [
     }
   },
   {
+    path: '/landingdrawer',
+    name: "landingdrawer",
+    component: () => import("../views/LandingDrawer.vue"),
+    meta: {
+      requiresAuth: false
+    }
+  },
+
+
+  {
     path: "/:id",
     component: () => import("../components/VirtualRestaurantTemplate.vue")
   }
