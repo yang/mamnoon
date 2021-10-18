@@ -30,10 +30,6 @@ const routes = [
     component: () => import("../views/mamnoonff.vue")
   },
   {
-    path: "/:id",
-    component: () => import("../components/VirtualRestaurantTemplate.vue")
-  },
-  {
     path: "/finefoods",
     name: "finefoods",
     component: () => import("../views/mamnoonff.vue")
@@ -243,6 +239,10 @@ const routes = [
       requiresAuth: false
     }
   },
+  {
+    path: "/:id",
+    component: () => import("../components/VirtualRestaurantTemplate.vue")
+  }
 ];
 
 
