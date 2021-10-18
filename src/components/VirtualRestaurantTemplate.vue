@@ -23,21 +23,27 @@
                       <section class="fh" v-bind:style="{ 'background-color': item.background_color }">
                                               <div class="container mobilePage">
 
-                <p>{{item.description}}</p>
+                <p class="header-p" v-bind:style="{ 'color': item.text_color }">{{item.description}}</p>
 
 
-                     <br>
-   
 
-                      <div :style="{ backgroundColor: item.button_color }">
+
+
+
+                      <!--<div :style="{ backgroundColor: item.button_color }">
                       button color
                       </div>
                       <br>
                       <div :style="{ backgroundColor: item.text_color }">
                       text color
-                      </div>
+                      </div>-->
 
 
+                        <template v-for="button in item.buttons">
+
+                        <a :style="{'padding':'10px', 'display':'block', 'border-radius': '5px', 'width': '300px', 'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color, 'margin': '10px 0', 'text-align': 'center' }" :href="button.link">{{button.text}}</a>
+                        
+                        </template>
 
                               </div>
                       </section>
@@ -798,5 +804,13 @@ width: 100%
     }
 }
 
+.header-p{
+    font-size: 28px;
+    line-height: 40px;
+    width: 300px;
+    padding: 30px 0;
+    font-weight: 600;
+    margin-bottom: 0;
+    }
 
 </style>
