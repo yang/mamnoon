@@ -12,10 +12,10 @@
                   <div v-for="item in pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
                       
                       <template v-if="item.name.replace(' ', '') === restaurantName">
-                      <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')' }">
+                      <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center' }">
                         <div class="container mobilePage">
                
-                    <img :src="item.logo_image.url" style="width: 200px;margin: 0 auto;text-align: center;">
+                    <img :src="item.logo_image.url" style="width: 200px;margin: 0 auto;text-align: center;background-position: top center;">
 
                       <br>
                         </div>
