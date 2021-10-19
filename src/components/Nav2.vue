@@ -41,12 +41,17 @@
 
 
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header2">
-        <div v-if="showCartDropdown" class="hello logButton googleInHeader" style="right: 100px;">
-            <CartDropdown />
-         </div>
 
-          <GoogleAuth class="logButton googleInHeader" />
 
+   
+<div class="profile-button">
+profile
+</div>
+
+
+<button class="order-button2">
+order <div class="arrow-right"></div>
+</button>
 
           <!-- <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" class="logButton googleInheader" /> -->
     <div class="container">
@@ -232,17 +237,8 @@ nadi mama
                 
             </div>
     
-<div class="inline-link">   
-           <li class="cursor-pointer" @click="toggleMenu()">
-                        <GoogleAuth />
-                      <!-- <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" /> -->
-                    </li>
-                </div>
-  <div v-if="showCartDropdown" class="inline-link">
-        <li class="cursor-pointer">
-<CartDropdown />
-            </li>
-    </div>
+
+
 
             </ul>            
             </scrollactive>
@@ -885,6 +881,42 @@ cursor: pointer;
 
 }
 
+
+.profile-button{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: black;
+        position: absolute;
+    right: 120px;
+color: transparent;
+font-size: 0;
+}
+
+.order-button2{
+    background: white;
+    color: #EE5E68;
+    border: 2.5px solid #EE5E68;
+    border-radius: 7px;
+    width: 90px;
+    float: right;
+    height: 36px;
+    transform: translateY(-4px);
+    position: absolute;
+    right: 20px;
+
+}
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  
+  border-left: 10px solid #EE5E68;
+  display: inline-block;
+  transform: translateY(1px);
+  margin-left: 4px;
+}
 
 </style>
 
