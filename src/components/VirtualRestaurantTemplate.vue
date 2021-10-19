@@ -821,7 +821,7 @@ width: 100%
 
 
 .restaurantLogo{
-width: 50%;
+width: 300px;
 margin: 0 auto;
 text-align: center;
 }

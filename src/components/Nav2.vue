@@ -43,7 +43,7 @@ order <div class="arrow-right"></div>
 
           <!-- <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" class="logButton googleInheader" /> -->
     <div class="container">
-<div class="full-width-logo" style="width: 200px;">
+<div class="full-width-logo">
 <template v-if="$mq === 'sm'">
 
 <!-- ss -->
@@ -750,13 +750,7 @@ ul#menu li.active{
 
 }
 
-@media only screen and (max-width: 768px) {
-.full-width-logo{
 
-
-
-}
-}
 
 
 @media only screen and (max-width: 1080px) {
@@ -798,7 +792,7 @@ ul#menu li.active{
 
     // text-align: left;
     /* width: 60%; */
-    width: 100%;
+    width: 200px;;
 }
 }
 
