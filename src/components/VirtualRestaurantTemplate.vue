@@ -2,7 +2,7 @@
 <div>
   
 
-
+<Nav2 />
 
 
 
@@ -13,9 +13,9 @@
                       
                       <template v-if="item.name.replace(' ', '') === restaurantName">
                       <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center' }">
-                        <div class="container mobilePage">
+                        <div class="container mobilePage pt132">
                
-                    <div v-html="item.logo_svg" style="width: 200px;margin: 0 auto;text-align: center;"></div>
+                    <div v-html="item.logo_svg" class="restaurantLogo"></div>
 
 
                       <br>
@@ -71,10 +71,12 @@
 <script type="text/javascript">
 
 import ALaCarte from "@/components/ALaCarte";
+import Nav2 from "@/components/Nav2";
 
 export default {
   components: {
-    ALaCarte
+    ALaCarte,
+    Nav2
   },
   computed: {
 
@@ -239,7 +241,7 @@ this.restaurantName = this.$route.params.id;
 
 .topSection{
   background-size: cover;
-// height: 100vh;
+    margin-top: 92px;
 }
 
 .fh{
@@ -811,4 +813,16 @@ width: 100%
     margin-bottom: 0;
     }
 
+
+
+.pt132{
+  padding-top: 132px;
+}
+
+
+.restaurantLogo{
+width: 50%;
+margin: 0 auto;
+text-align: center;
+}
 </style>

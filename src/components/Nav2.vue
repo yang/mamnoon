@@ -45,11 +45,17 @@
 
    
 <div class="profile-button">
-profile
+<svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M47 24.5C47 37.4787 36.4787 48 23.5 48C10.5213 48 0 37.4787 0 24.5C0 11.5213 10.5213 1 23.5 1C36.4787 1 47 11.5213 47 24.5Z" fill="white"/>
+<circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
+<circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
+<path d="M23.5 22C27.0899 22 30 18.866 30 15H17C17 18.866 19.9101 22 23.5 22Z" fill="white"/>
+</svg>
 </div>
 
 
-<button class="order-button2">
+<button @click="toggleFullScreen" class="order-button2">
 order <div class="arrow-right"></div>
 </button>
 
@@ -70,7 +76,7 @@ order <div class="arrow-right"></div>
 
 
     </template>
-    <router-link to="/">
+    <router-link to="/landingdrawer">
 nadi mama
 
         </router-link>
@@ -193,44 +199,16 @@ nadi mama
                          <!-- <ul id="menu" class="mobile-menu">-->
 
                     <div  class="inline-link">
-             <!--   <li>
-                    <router-link to="/featured">
-                        featured
-                    </router-link>
-                </li>-->
 
-               <!-- <li>
-                    <router-link to="/onlinemenu">
-                        online menu
-                    </router-link>
-                </li>-->
-
-               <!--<li>
-                    <router-link to="/reservations">
-                        reservations
-                    </router-link>
-                </li>-->
-         <!-- <li>
-                        <router-link to="/mamnoonff">
-                           fine foods
-                        </router-link>
-                    </li>-->
-                
-        <!--  <li>
-                        <router-link to="/retail">
-                          retail items
-                        </router-link>
-                    </li>-->
-
-               
-                 <!--   <li>
-                        <router-link to="/about">
-                            about
-                        </router-link>
-                    </li>-->
                 <li v-if="this.$store.state.loggedIn">
                     <router-link to="/profile">
-                        profile
+                  <svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M47 24.5C47 37.4787 36.4787 48 23.5 48C10.5213 48 0 37.4787 0 24.5C0 11.5213 10.5213 1 23.5 1C36.4787 1 47 11.5213 47 24.5Z" fill="white"/>
+<circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
+<circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
+<path d="M23.5 22C27.0899 22 30 18.866 30 15H17C17 18.866 19.9101 22 23.5 22Z" fill="white"/>
+</svg>
                     </router-link>
                 </li>
 
@@ -246,6 +224,53 @@ nadi mama
     </nav>
 
     </template>
+
+
+
+
+<template v-if="fullScreen">
+<div class="cover">
+  <div class="container mobilePage white-text">
+
+ 
+
+<h1>good evening, Fatima!</h1>
+
+Not you? Click here to sign in 
+or create an account.
+
+<br>
+start your order:
+
+
+
+<div class="select-dropdown" @click="toggleDropDown">choose a location &nbsp;<div class="arrow-down"></div></div>
+   
+   
+   
+   
+   
+   <transition name="slide">
+    
+
+
+
+<div class="dropdownDrawer" v-if="dropdown">
+                  <div  v-for="item in pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
+                   <router-link :to="item.name.replaceAll(' ','')">
+                   {{item.name}}
+                   </router-link>
+                    </div>
+</div>
+
+   </transition>
+
+
+
+    </div>
+</div>
+</template>
+
 
 </div>
 </template>
@@ -264,6 +289,9 @@ import NadiIntro from "@/components/NadiIntro";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 
 
+
+
+
 export default {
     components: {
     CloseModalRed,
@@ -278,6 +306,9 @@ export default {
   },
   data () {
       return {
+          dropdown: false,
+             pageData: null,
+          fullScreen: false,
           informationalWindowOpen: false,
           betaMode: true,
           isMobile: false,
@@ -329,6 +360,35 @@ if(this.$route.name === 'home' ||
           }
       },
 methods: {
+
+
+    toggleDropDown(){
+
+
+this.dropdown = !this.dropdown;
+    },
+            async individualRestaurant(){
+   
+
+
+
+
+let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/virtual_restaurant/412`)
+    // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+
+
+
+    let AcfBlock = responseAcf
+    this.pageData = AcfBlock.data.acf.content_fields
+    this.pageData = AcfBlock.data.acf.restaurants
+},
+toggleFullScreen(){
+
+
+    this.fullScreen = !this.fullScreen
+
+
+},
  isMobileUserAgent() {
    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
      return true
@@ -365,16 +425,16 @@ this.informationalWindow = false
 this.$store.commit('endFirstTime')
 
 },
-       async individualRestaurant(){
+//        async individualRestaurant(){
         
-        let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+//         let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
 
 
 
-        let AcfBlock = responseAcf
-        this.pageData = AcfBlock.data.acf.content_fields
+//         let AcfBlock = responseAcf
+//         this.pageData = AcfBlock.data.acf.content_fields
 
-},
+// },
     showUserModal () {
     this.$store.commit('showUserModal')
     },
@@ -886,7 +946,7 @@ cursor: pointer;
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    background: black;
+    // background: black;
         position: absolute;
     right: 120px;
 color: transparent;
@@ -905,6 +965,27 @@ font-size: 0;
     position: absolute;
     right: 20px;
 
+
+    &:hover{
+    background: #EE5E68;
+    color: white;
+
+
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  
+  border-left: 10px solid white;
+  display: inline-block;
+  transform: translateY(1px);
+  margin-left: 4px;
+}
+
+
+    }
+
 }
 .arrow-right {
   width: 0; 
@@ -917,6 +998,59 @@ font-size: 0;
   transform: translateY(1px);
   margin-left: 4px;
 }
+
+
+.arrow-down {
+
+  display: inline-block;
+  transform: translateY(1px);
+
+  width: 0; 
+  height: 0; 
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  
+  border-top: 10px solid #000;
+
+}
+
+
+
+
+.cover{
+    background: #EE5E68;
+    height: 100vh;
+}
+
+
+.select-dropdown{
+background: white;
+border: 2px solid black;
+border-top-left-radius: 6px;
+border-top-right-radius: 6px;
+color: black;
+padding: 6px 10px;
+font-weight: 500;
+width: 200px;
+margin: 20px 0 0;
+cursor: pointer;
+
+}
+
+
+.dropdownDrawer{
+    background: white;
+    width: 200px;
+border: 2px solid black;
+border-top: 0;
+padding: 6px 10px;
+
+a{
+    color: black;
+    cursor: pointer;
+}
+}
+
 
 </style>
 
