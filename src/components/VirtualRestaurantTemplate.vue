@@ -15,7 +15,8 @@
                       <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center' }">
                         <div class="container mobilePage">
                
-                    <img :src="item.logo_image.url" style="width: 200px;margin: 0 auto;text-align: center;background-position: top center;">
+                    <div v-html="item.logo_svg" style="width: 200px;margin: 0 auto;text-align: center;"></div>
+
 
                       <br>
                         </div>
