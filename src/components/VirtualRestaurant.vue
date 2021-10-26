@@ -11,8 +11,10 @@
 
 
 
+<!--// {{this.$store.state.pageData}}-->
 
-  <div v-for="item in pageData[0].name" :key="item.acf_fc_layout">
+
+  <div v-for="item in this.$store.state.pageData[0].name" :key="item.acf_fc_layout">
 
 
 
@@ -214,7 +216,7 @@ console.log(responseAcf2);
 
 this.restaurantName = this.$route.name;
 
-        console.log(this.$route.name);
+        // console.log(this.$route.name);
   }
 };
 
