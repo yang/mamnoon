@@ -7,9 +7,9 @@
 
 
 
-        <div v-if="pageData[0].restaurant_repeater.map(x=>x.name.replace(' ', '')).includes($route.params.id)">
+        <div v-if="this.$store.state.pageData[0].restaurant_repeater.map(x=>x.name.replace(' ', '')).includes($route.params.id)">
 
-                  <div v-for="item in pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
+                  <div v-for="item in this.$store.state.pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
                       
                       <template v-if="item.name.replace(' ', '') === restaurantName">
                       <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center' }">
@@ -42,9 +42,55 @@
 
                         <template v-for="button in item.buttons">
 
-                        <a :style="{'padding':'10px', 'display':'block', 'border-radius': '5px', 'width': '300px', 'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color, 'margin': '10px 0', 'text-align': 'center' }" :href="button.link">{{button.text}}</a>
+                        <a target="_blank" :style="{'padding':'10px', 'display':'block', 'border-radius': '5px', 'width': '300px', 'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color, 'margin': '10px 0', 'text-align': 'center' }" :href="button.link">{{button.text}}</a>
                         
                         </template>
+
+
+
+
+<br>
+
+              <div :style="{'color' : item.text_color}">
+              <Phone :color="item.text_color" class="mr6" />
+<template v-if="item.phone_number">
+
+{{item.phone_number}}<br>
+
+</template>
+<br>
+
+
+<template v-if="item.contact">
+<Envelope :color="item.text_color" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<template v-for="line in item.contact.contact_lines">
+
+{{line.line}}<br>
+</template>
+<br>
+</template>
+
+<template v-if="item.address">
+<MapPin :color="item.text_color" class="mr6" />
+<template v-for="line in item.address.address_lines">
+
+{{line.line}}<br>
+</template>
+<br>
+</template>
+
+
+
+<template v-if="item.hours">
+<Clock :color="item.text_color" class="mr6" />
+<template v-for="line in item.hours.hours_lines">
+
+{{line.line}}<br>
+</template>
+<br>
+</template>
+              </div>
+
 
                               </div>
                       </section>
@@ -73,19 +119,32 @@
 import ALaCarte from "@/components/ALaCarte";
 import Nav2 from "@/components/Nav2";
 
+
+
+import Phone from "@/components/svgIcons/Phone";
+import Clock from "@/components/svgIcons/Clock";
+import MapPin from "@/components/svgIcons/MapPin";
+import Envelope from "@/components/svgIcons/Envelope";
+
+
+
 export default {
   components: {
     ALaCarte,
-    Nav2
+    Nav2,
+    Phone,
+    Clock,
+    Envelope,
+    MapPin
   },
   computed: {
 
     containsYN(){
 
 
-    // let arrRest = this.pageData[0].restaurant_repeater.map(x=>x.name.replace(" ", ""));
+    // let arrRest = this.this.$store.state.pageData[0].restaurant_repeater.map(x=>x.name.replace(" ", ""));
 
-    let arrRest = this.pageData[0];
+    let arrRest = this.$store.state.pageData[0];
 
 console.log(arrRest);
 
@@ -229,7 +288,7 @@ let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/v
 
 this.restaurantName = this.$route.params.id;
 
-        console.log(this.$route.name);
+        // console.log(this.$route.name);
   }
 };
 
@@ -245,7 +304,7 @@ this.restaurantName = this.$route.params.id;
 }
 
 .fh{
-height: 80vh;
+min-height: 80vh;
 
 }
 
