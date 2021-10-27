@@ -27,27 +27,13 @@ Nav2
   },
   data() {
     return {
-      pageData: null
+
       }},
   methods:{
-        async individualRestaurant(){
-   
 
-
-
-
-let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/virtual_restaurant/412`)
-    // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
-
-
-
-    let AcfBlock = responseAcf
-    this.pageData = AcfBlock.data.acf.content_fields
-    this.pageData = AcfBlock.data.acf.restaurants
-},
   },
   mounted(){
-      this.individualRestaurant()
+
   }
 
 

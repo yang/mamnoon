@@ -114,6 +114,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    pageData: null,
     isFirstTime: true,
     openDrawerOnLoad: false,
     orderConfirmation: {},
@@ -731,7 +732,15 @@ const store = new Vuex.Store({
     },
     showUserModal (state) {
       state.userProfileModalVisible = true
-    }
+    },
+async setPageData(state){
+
+    let responseAcf = await base.get(`https://mamnoontogo.net/wp-json/acf/v3/virtual_restaurant/412`)
+    let AcfBlock = responseAcf
+    state.pageData = AcfBlock.data.acf.restaurants
+
+  }
+
    
   }
 })
@@ -749,6 +758,15 @@ new Vue({
   store: store,
   render: h => h(App),
   async mounted () {
+
+
+      // this.$store.dispatch('myAxiosFetchFunction');
+
+
+      this.$store.commit('setPageData')
+
+
+
 }
 }).$mount("#app");
 

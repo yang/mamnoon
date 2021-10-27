@@ -8,7 +8,11 @@
 
     <h1>Hello Fatima!</h1>
 
-                  <div v-for="item in pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
+
+
+
+
+                  <div v-for="item in this.$store.state.pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
                       
 
                    <router-link :to="item.name.replaceAll(' ','')">
@@ -41,24 +45,10 @@ Nav2
       pageData: null
       }},
   methods:{
-        async individualRestaurant(){
-   
 
-
-
-
-let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/virtual_restaurant/412`)
-    // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
-
-console.log(responseAcf)
-
-    let AcfBlock = responseAcf
-    this.pageData = AcfBlock.data.acf.content_fields
-    this.pageData = AcfBlock.data.acf.restaurants
-},
   },
   mounted(){
-      this.individualRestaurant()
+
   }
 
 

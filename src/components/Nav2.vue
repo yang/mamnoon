@@ -192,7 +192,7 @@ order <div class="arrow-right"></div>
                 <li v-if="this.$store.state.loggedIn">
                     <router-link to="/profile">
                   <svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M47 24.5C47 37.4787 36.4787 48 23.5 48C10.5213 48 0 37.4787 0 24.5C0 11.5213 10.5213 1 23.5 1C36.4787 1 47 11.5213 47 24.5Z" fill="white"/>
+
 <circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
 <circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
@@ -225,8 +225,8 @@ order <div class="arrow-right"></div>
 
 
 <div class="profile-button">
-<svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M47 24.5C47 37.4787 36.4787 48 23.5 48C10.5213 48 0 37.4787 0 24.5C0 11.5213 10.5213 1 23.5 1C36.4787 1 47 11.5213 47 24.5Z" fill="white"/>
+<svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: translateY(-1px)">
+
 <circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
 <circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
@@ -349,10 +349,18 @@ order <div class="arrow-right"></div>
 
 
                             <div class="dropdownDrawer" v-if="dropdown">
-                            <div  v-for="item in pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
-                            <router-link :to="item.name.replaceAll(' ','')">
-                            {{item.name}}
-                            </router-link>
+                            <div v-for="item in this.$store.state.pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
+                          
+
+
+<div @click="goToPage(item.name.replaceAll(' ',''))">
+   <span style="color: black;">{{item.name}}</span>
+   </div>
+
+
+<router-link :to="'/'+item.name.replaceAll(' ','')">{{item.name}}</router-link>
+
+
                             </div>
                             </div>
 
@@ -473,27 +481,17 @@ if(this.$route.name === 'home' ||
       },
 methods: {
 
+goToPage(destination){
 
+this.$router.push('/'+destination);
+this.$forceUpdate();
+},
     toggleDropDown(){
 
 
 this.dropdown = !this.dropdown;
     },
-            async individualRestaurant(){
-   
 
-
-
-
-let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/virtual_restaurant/412`)
-    // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
-
-
-
-    let AcfBlock = responseAcf
-    this.pageData = AcfBlock.data.acf.content_fields
-    this.pageData = AcfBlock.data.acf.restaurants
-},
 toggleFullScreen(){
 
 
@@ -603,7 +601,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
   },
     mounted() {
-      this.individualRestaurant();
+
 
 
 this.getUserAgent();
@@ -1049,10 +1047,11 @@ cursor: pointer;
 
 
 .profile-button{
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    // background: black;
+    width: 47px;
+    height: 48px;
+
+    border-radius: 24px;
+    background: white;
         position: absolute;
     right: 120px;
 color: transparent;
