@@ -21,7 +21,7 @@
                       <!--<br>-->
                        <!-- </div>-->
                       </section>
-                      <section class="fh" v-bind:style="{ 'background-color': item.background_color }">
+                      <section v-bind:style="{ 'background-color': item.background_color }">
 
          <!--begin container-->
     <div class="container mobilePage secPad">
@@ -46,37 +46,60 @@
 
 
               <div :style="{'color' : item.text_color}">
-              <Phone :color="item.text_color" class="mr6" />
+
+<div style="display: inline-block;width: 100%;">
+              <div style="width: 40px;float: left;height: 60px;display: inline-block;">
+              <Phone :color="item.text_color" class="mr6" /></div>
 <template v-if="item.phone_number">
 {{item.phone_number}}<br>
 </template>
+
+
+</div>
+
+
 <br>
 <template v-if="item.contact">
+<div style="display: inline-block;width: 100%;">
+<div style="width: 40px;float: left;height: 60px;display: inline-block;">
 <Envelope :color="item.text_color" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+</div>
+
+
 <template v-for="line in item.contact.contact_lines">
 {{line.line}}<br>
 </template>
 <br>
+</div>
 </template>
 
 <template v-if="item.address">
+<div style="display: inline-block;width: 100%;">
+<div style="width: 40px;float: left;height: 60px;display: inline-block;">
 <MapPin :color="item.text_color" class="mr6" />
+</div>
 <template v-for="line in item.address.address_lines">
 
 {{line.line}}<br>
 </template>
 <br>
+
+</div>
 </template>
 
 
 
 <template v-if="item.hours">
+<div style="display: inline-block;width: 100%;">
+<div style="width: 40px;float: left;height: 60px;display: inline-block;">
 <Clock :color="item.text_color" class="mr6" />
+</div>
 <template v-for="line in item.hours.hours_lines">
 
 {{line.line}}<br>
 </template>
 <br>
+</div>
 </template>
               </div>
 
@@ -107,7 +130,7 @@
 <div class="row">
              
                                           
-<div class="col-sm-6">
+<div class="col-sm-6" style="text-align: right;">
 
 <h3>  
 follow us
@@ -156,7 +179,7 @@ follow us
 <div class="row">
              
                                           
-<div class="col-sm-12">
+<div class="col-sm-8 offset-2">
 
 
 <h3>  
