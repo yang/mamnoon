@@ -2,14 +2,14 @@
   <div class="">
       <!-- v-if="!isSignIn" -->
 <a class="hide-on-desktop"
-  v-if="!authAuthenticated ">
-  <span @click="login">sign in</span>
+  v-if="!$store.state.loggedIn">
+  <span @click="handleClickSignIn">sign in</span>
 </a>
 <a class="hide-on-desktop"
-  v-if="authAuthenticated"
-@click="logout"
+  v-if="$store.state.loggedIn"
+@click="handleClickSignOut"
 :disabled="!isInit">
-  sign out of {{authEmail.user.email.replace('@gmail.com','')}}
+  sign out of {{$store.state.currentUserEmail.replace('@gmail.com','')}}
 </a>
 
 
@@ -37,58 +37,45 @@
       :disabled="!isInit"
     > -->
 
-    <div class="navbar-end" style="display:none;position: fixed;width:200px;height:92px;top:40px;right: 0; text-align: center;z-index:10000;background: #f58e58;color: white;">
-      <div class="navbar-item">
-        <div class="buttons">
-
-
-          <!-- Check that the SDK client is not currently loading before accessing is methods -->
-          <div v-if="!$auth.loading">
-            <!-- show login when not authenticated -->
-            <a v-if="!authAuthenticated" @click="login" class="button is-dark"><strong>sign in</strong></a>
-            <!-- show logout when authenticated -->
-            <a v-if="authAuthenticated" @click="logout" class="button is-dark"><strong>
-                
-                
-                     {{authEmail.user.email}}
-                </strong></a>
-
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    
-
     <a
     class="hide-on-mobile"
       type="primary"
       icon="fas fa-edit"
-      @click="login"
+      @click="handleClickSignIn"
       :disabled="!isInit"
-       v-if="!authAuthenticated"
+       v-if="!$store.state.loggedIn"
     >
       sign in
-
-  
-
-
     </a>
     <a
       class="hide-on-mobile"
       type="primary"
       icon="fas fa-edit"
       @click="toggleDropdown2()"
-      v-if="authAuthenticated"
+      v-if="$store.state.loggedIn"
       :disabled="!isInit"
     >
 
 
-    <div class="character-icon">
-      {{authEmail.user.email.charAt(0).toUpperCase()}}
-    </div>
+<!--    <div class="character-icon">-->
+    
+
+
+
+<div class="profile-button">
+<svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: translateY(-22px);">
+
+<circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
+<circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
+<path d="M23.5 22C27.0899 22 30 18.866 30 15H17C17 18.866 19.9101 22 23.5 22Z" fill="white"/>
+</svg>
+
+
+</div>
+
+<!--      {{$store.state.currentUserEmail.charAt(0).toUpperCase()}}-->
+    <!--</div>-->
     <div class="dropdown" v-if="dropdown">
       <ul>
       <li>
@@ -97,7 +84,7 @@
         </router-link>
       </li>
       <li>
-        <span @click="logout">
+        <span @click="handleClickSignOut">
           sign out
         </span>
       </li>
@@ -114,7 +101,9 @@
 /* eslint-disable */
 export default {
   name: "GoogleAuth",
-  props: ['authEmail','authAuthenticated'],
+  props: {
+    msg: String,
+  },
   data() {
     return {
       isInit: false,
@@ -123,20 +112,6 @@ export default {
     };
   },
   methods: {
-      // Log the user in
-    login() {
-    this.$auth.loginWithRedirect();
-           this.$store.commit("logIn");
-  },
-  // Log the user out
-  logout() {
-    this.$auth.logout({
-      returnTo: 'https://nadimama.com'
-    });
-
-
-         this.$store.commit("logOut");
-  },
     toggleDropdown2(){
 
         this.dropdown = !this.dropdown
@@ -269,8 +244,7 @@ h3 {
     width: 190px;
     top: 92px;
     left: 0px;
-    left: -42px;
-
+left: -42px;
 
 
 ul{
@@ -297,17 +271,32 @@ margin-bottom: 0;
 
 }
 
+
+.profile-button{
+    width: 47px;
+    height: 48px;
+    border-radius: 24px;
+    background: white;
+    position: absolute;
+    color: transparent;
+    font-size: 0;
+right: 20px;
+    top: 20px;
+
+
+}
+
 </style>
 
 
 
 <style lang="scss">
       .dropdown{
-      background: #fff;
+      background: white;
       position: absolute;
       width: 190px;
       top: 92px;
-      left: 0px;
+      left: -48px;
       left: -42px;
 
 
@@ -347,8 +336,7 @@ margin-bottom: 0;
     position: fixed;
     width: 100%;
     top: 92px;
-    left: 0px;
-    left: -42px;
+left: -42px;
 
 
 ul{

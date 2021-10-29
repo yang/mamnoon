@@ -2237,6 +2237,43 @@ display: flow-root;
   background: orange !important;
 }
 
+
+
+
+
+
+#nadiWhiteDesk,
+#nadiDesk{
+  display: block;
+    margin: 0 auto;
+}
+
+
+#nadiWhiteMob,
+#nadiMob{
+  display: none;
+  height: 64px;
+}
+
+	.st0white{fill:#FFFFFF;}
+
+
+
+
+@media only screen and (max-width: 768px) {
+
+#nadiWhiteMob,
+#nadiMob{
+  display: block;
+}
+
+#nadiWhiteDesk,
+#nadiDesk{
+  display: none;
+}
+}
+
+
 </style>
 
 

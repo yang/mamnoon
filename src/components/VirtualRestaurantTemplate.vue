@@ -12,59 +12,48 @@
                   <div v-for="item in this.$store.state.pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
                       
                       <template v-if="item.name.replace(' ', '') === restaurantName">
-                      <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center' }">
-                        <div class="container mobilePage pt132">
+                      <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center', 'position': 'relative' }">
+                        <!--<div class="container mobilePage pt132">-->
                
                     <div v-html="item.logo_svg" class="restaurantLogo"></div>
 
 
-                      <br>
-                        </div>
+                      <!--<br>-->
+                       <!-- </div>-->
                       </section>
                       <section class="fh" v-bind:style="{ 'background-color': item.background_color }">
-                                              <div class="container mobilePage">
 
+         <!--begin container-->
+    <div class="container mobilePage secPad">
+
+     <!--begin row-->
+<div class="row">
+             
+                                          
+<div class="col-sm-6">
                 <p class="header-p" v-bind:style="{ 'color': item.text_color }">{{item.description}}</p>
 
-
-
-
-
-
-                      <!--<div :style="{ backgroundColor: item.button_color }">
-                      button color
-                      </div>
-                      <br>
-                      <div :style="{ backgroundColor: item.text_color }">
-                      text color
-                      </div>-->
-
-
                         <template v-for="button in item.buttons">
-
                         <a target="_blank" :style="{'padding':'10px', 'display':'block', 'border-radius': '5px', 'width': '300px', 'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color, 'margin': '10px 0', 'text-align': 'center' }" :href="button.link">{{button.text}}</a>
-                        
-                        </template>
+                                                </template>
+                                                <br>
 
 
 
 
-<br>
+</div>
+<div class="col-sm-6">
+
 
               <div :style="{'color' : item.text_color}">
               <Phone :color="item.text_color" class="mr6" />
 <template v-if="item.phone_number">
-
 {{item.phone_number}}<br>
-
 </template>
 <br>
-
-
 <template v-if="item.contact">
 <Envelope :color="item.text_color" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 <template v-for="line in item.contact.contact_lines">
-
 {{line.line}}<br>
 </template>
 <br>
@@ -93,9 +82,224 @@
 
 
                               </div>
+                     
+                      </div>
+                                          <!--end row-->
+</div>
+                     <!--end container-->
+
                       </section>
 
+
+
+
+<!--social section-->
+<template v-if="item.social">
+
+<section class="secPad" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }">
+
+
+
+
+    <div class="container mobilePage">
+
+     <!--begin row-->
+<div class="row">
+             
+                                          
+<div class="col-sm-6">
+
+<h3>  
+follow us
+</h3>
+</div>
+
+<div class="col-sm-6">
+<template v-for="social in item.social">
+
+<div class="socialLink">
+<a :href="social.link" :title="social.title">
+      <div v-html="social.svg"></div>
+</a>
+</div>
+
+
+
+</template>
+
+</div>
+</div>
+</div>
+
+</section>
+</template>
+
+
+<!--end social section-->
+
+
+
+
+
+<!--notification section-->
+<template v-if="item.notification">
+
+  
+
+
+<section class="secPad" v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color }">
+
+
+    <div class="container mobilePage">
+
+     <!--begin row-->
+<div class="row">
+             
+                                          
+<div class="col-sm-12">
+
+
+<h3>  
+{{item.notification}}
+</h3>
+
+
+</div></div></div>
+</section>
+</template>
+
+<!--end notification section-->
+
+
+
+ <!--map section-->
+<template v-if="item.map">
+
+<section class="secPad" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }">
+
+
+
+    <div class="container mobilePage">
+
+     <!--begin row-->
+<div class="row">
+
+
+<div class="col-sm-6">
+
+      <div class="map" v-html="item.map.map_embed"></div>
+</div>
+
+<div class="col-sm-6" style="position:relative">
+
+
+
+<div style="position: absolute;bottom: 0;">
+
+
+
+<template v-if="item.address">
+<template v-for="line in item.address.address_lines">
+
+{{line.line}}<br>
+</template>
+
+</template>
+
+</div>
+
+</div></div></div>
+
+
+</section>
+</template>
+
+ <!--end map section-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--lr mod repeater-->
+
+<template v-if="item.lr_mod_repeater">
+<template v-for="repeat in item.lr_mod_repeater">
+
+<section v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color, 'margin-bottom': '12px', 'width': '100%', 'display': 'inline-block' }">
+
+<div class="half-panel with-background" v-bind:style="{ 'background-image': 'url(' + repeat.image + ')', 'height': '100vh' }">_</div>
+
+<div class="half-panel" :style="{'background-color': item.background_color, 'position': 'relative','height':'100vh'}">
+  <div :style="{'background-color': item.background_color, 'position': 'absolute', 'bottom': '60px'}">
+  
+
+      <div>
+      <h3>  
+        {{repeat.text}}
+      </h3>
+      <br>
+    <a target="_blank" :style="{'padding':'10px', 'display':'block', 'border-radius': '5px', 'width': '300px', 'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color, 'margin': '10px 0', 'text-align': 'center' }" :href="repeat.button_link">{{repeat.button_text}}</a>
+      </div>
+
+  </div>
+</div>
+
+
+
+</section>
+
+</template>
+
+
+
+</template>
+
+
+<!--end lr mod repeater-->
+
+
+
+
+
+
+<!--full width image-->
+<template  v-if="item.full_width">
+
+<section class="secPad fh" v-bind:style="{ 'background-size': 'cover', 'background-image': 'url(' + item.full_width + ')', 'height': '100vh' }">
+
+
+</section>
+
+</template>
+
+<!--end full width image-->
+
+
+
+
+
+
                           </template>
+
+
+
+
+
 
 
               </div><!--end big loop-->
@@ -880,8 +1084,68 @@ width: 100%
 
 
 .restaurantLogo{
+
+
 width: 300px;
-margin: 0 auto;
-text-align: center;
+    margin: 0 auto;
+    text-align: center;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+
+svg{
+
+      width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
+
+}
+
+
+
+.half-panel{
+  width: 50%;
+float: left;
+padding: 50px;
+    &.with-background{
+          background-size: cover;
+    background-position: center center;
+    
+    }
+
+}
+
+
+
+.secPad{
+  padding: 60px 0;
+}
+
+
+.map iframe{
+  width: 280px;
+  height: 280px;
+  border: 1px solid;
+  border-radius: 10px;
+  float: right;
+}
+
+h3{
+ font-size: 1.6rem;
+}
+
+h4{
+ font-size: 1.2rem;
+}
+
+
+.socialLink{
+  display: inline-block;
+  margin: 0 30px;
+}
+
 </style>

@@ -58,6 +58,7 @@
 
 
     <div class="character-icon">
+
       {{$store.state.currentUserEmail.charAt(0).toUpperCase()}}
     </div>
     <div class="dropdown" v-if="dropdown">
@@ -223,12 +224,12 @@ h3 {
 
 
 .dropdown{
-    background: #fff367;
+    background: #fff;
     position: absolute;
     width: 190px;
     top: 92px;
     left: 0px;
-
+left: -42px;
 
 
 ul{
@@ -261,12 +262,12 @@ margin-bottom: 0;
 
 <style lang="scss">
       .dropdown{
-      background: #fff367;
+      background: #fff;
       position: absolute;
       width: 190px;
       top: 92px;
       left: 0px;
-
+left: -42px;
 
       ul{
       list-style-type: none;
@@ -300,12 +301,12 @@ margin-bottom: 0;
 
 
 .dropdown{
-    background: #fff367;
+    background: #fff;
     position: fixed;
     width: 100%;
     top: 92px;
     left: 0px;
-
+left: -42px;
 
 ul{
 list-style-type: none;

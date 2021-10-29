@@ -31,12 +31,12 @@
 
 
    
+ <GoogleAuth2 class="logButton googleInHeader" />
 
 
 
 
-
-<button @click="toggleFullScreen" class="order-button2">
+<button @click="toggleFullScreen" class="order-button2" style="display:none;">
 order <div class="arrow-right"></div>
 </button>
 
@@ -49,9 +49,9 @@ order <div class="arrow-right"></div>
 <!-- ss -->
 <!-- {{$route.name}} -->
 
-<!--        <div v-if="!correctPages" class="burger" @click="toggleMenu()" style="width: 60px;text-align: right;height: 80px;">
+  <div v-if="!correctPages" class="burger" @click="toggleMenu()" style="width: 60px;text-align: right;height: 80px;">
         <Burger2 />
-    </div>-->
+    </div>
 
 
 
@@ -59,7 +59,7 @@ order <div class="arrow-right"></div>
 
     </template>
     <router-link to="/landingdrawer">
-<svg width="209" height="44" viewBox="0 0 209 44" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="nadiDesk" width="209" height="44" viewBox="0 0 209 44" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="209" height="44" fill="url(#pattern0)"/>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -68,6 +68,64 @@ order <div class="arrow-right"></div>
 <image id="image0_1918:29" width="500" height="105" xlink:href="data:image/png;base64,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"/>
 </defs>
 </svg>
+
+
+
+
+
+<svg id="nadiMob" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 82.89 50.52" style="enable-background:new 0 0 82.89 50.52;" xml:space="preserve">
+<g>
+	<path d="M11.73,10.44c-1.3,0-2.51,0.42-3.49,1.13L5.77,11.1l0,5.28c0,0.01,0,0.01,0,0.02v7.49h2.49l0-7.53
+		c0.02-1.9,1.57-3.43,3.47-3.43c1.92,0,3.47,1.56,3.47,3.47v7.49h2.49V16.4C17.7,13.11,15.02,10.44,11.73,10.44z"/>
+	<g>
+		<g>
+			<g>
+				<polygon points="51.37,23.89 53.86,23.89 53.87,11.86 51.37,12.33 				"/>
+			</g>
+		</g>
+	</g>
+	<path d="M47.99,7.03l-2.5,0.47v4.47c-1.15-0.93-2.62-1.49-4.21-1.49c-3.7,0-6.7,3.01-6.7,6.7s3.01,6.7,6.7,6.7
+		c1.59,0,3.06-0.56,4.21-1.49v1.02l2.5,0.47l0-8.41L47.99,7.03z M41.28,21.4c-2.32,0-4.21-1.89-4.21-4.21
+		c0-2.32,1.89-4.21,4.21-4.21c2.32,0,4.21,1.89,4.21,4.21C45.49,19.51,43.6,21.4,41.28,21.4z"/>
+	<g>
+		<g>
+			<path class="st0nadiSm" d="M54.15,8.14L54.15,8.14l0-0.9l-0.9,0l-0.63-0.64l-0.63,0.63l-0.9,0l0,0.9l0,0l-0.64,0.63l0.63,0.64l0,0
+				l0,0.9l0.9,0l0.63,0.64l0.64-0.63l0,0l0,0v0l0.9,0l0-0.9l0.64-0.63L54.15,8.14z M51.98,10.3L51.98,10.3L51.98,10.3L51.98,10.3z"
+				/>
+		</g>
+	</g>
+	<path d="M33.19,23.89l-0.43-2.49l0.01-9.9l-2.5,0.48c-1.15-0.93-2.62-1.49-4.21-1.49c-3.63,0-6.7,3.07-6.7,6.7
+		c0,3.7,3.01,6.7,6.7,6.7C26.06,23.89,33.19,23.89,33.19,23.89z M21.84,17.19c0-1.07,0.45-2.14,1.24-2.94
+		c0.81-0.82,1.86-1.27,2.97-1.27c2.32,0,4.2,1.88,4.21,4.2l0,4.23h-4.19c-0.01,0-0.01,0-0.02,0C23.73,21.4,21.84,19.51,21.84,17.19z
+		"/>
+</g>
+<g>
+	<path d="M19.41,28.44c-1.66,0-3.14,0.75-4.13,1.94c-0.99-1.18-2.47-1.94-4.13-1.94c-1.09,0-2.11,0.33-2.96,0.89l-2.42-0.46l0,12.92
+		h2.49l0-8.05c0.04-1.56,1.32-2.81,2.88-2.81c1.58,0,2.86,1.27,2.88,2.85c0,0.01,0,0.03,0,0.04l0,7.98h2.49v-7.98
+		c0-0.01,0-0.03,0-0.04c0.02-1.57,1.31-2.85,2.88-2.85c1.59,0,2.89,1.29,2.89,2.89v7.98h2.49v-7.98
+		C24.78,30.86,22.37,28.44,19.41,28.44z"/>
+	<path d="M55.7,28.44c-1.66,0-3.14,0.75-4.13,1.94c-0.99-1.18-2.47-1.94-4.13-1.94c-1.09,0-2.11,0.33-2.96,0.89l-2.42-0.46l0,12.87
+		h2.49l0-8c0.04-1.56,1.32-2.81,2.88-2.81c1.58,0,2.86,1.27,2.88,2.85c0,0.01,0,0.03,0,0.04v7.93h0v0.05h2.49v-7.98
+		c0-0.01,0-0.03,0-0.04c0.02-1.57,1.31-2.85,2.88-2.85c1.59,0,2.89,1.29,2.89,2.89v7.98h2.49v-7.98
+		C61.08,30.86,58.67,28.44,55.7,28.44z"/>
+	<path d="M40.26,41.78l-0.43-2.49l0.01-9.9l-2.5,0.48c-1.15-0.93-2.62-1.49-4.21-1.49c-3.63,0-6.7,3.07-6.7,6.7
+		c0,3.7,3.01,6.7,6.7,6.7C33.13,41.78,40.26,41.78,40.26,41.78z M28.91,35.08c0-1.07,0.45-2.14,1.24-2.94
+		c0.81-0.82,1.86-1.27,2.97-1.27c2.32,0,4.2,1.88,4.21,4.2l0,4.23h-4.19c-0.01,0-0.01,0-0.02,0C30.8,39.29,28.91,37.4,28.91,35.08z"
+		/>
+	<path d="M76.58,41.78l-0.43-2.49l0.01-9.9l-2.5,0.48c-1.15-0.93-2.62-1.49-4.21-1.49c-3.63,0-6.7,3.07-6.7,6.7
+		c0,3.7,3.01,6.7,6.7,6.7C69.45,41.78,76.58,41.78,76.58,41.78z M65.23,35.08c0-1.07,0.45-2.14,1.24-2.94
+		c0.81-0.82,1.86-1.27,2.97-1.27c2.32,0,4.2,1.88,4.21,4.2l0,4.23h-4.19c-0.01,0-0.01,0-0.02,0C67.12,39.29,65.23,37.4,65.23,35.08z
+		"/>
+</g>
+</svg>
+
+
+
+
+
+
+
         </router-link>
 
 
@@ -191,13 +249,7 @@ order <div class="arrow-right"></div>
 
                 <li v-if="this.$store.state.loggedIn">
                     <router-link to="/profile">
-                  <svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-<circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
-<circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
-<path d="M23.5 22C27.0899 22 30 18.866 30 15H17C17 18.866 19.9101 22 23.5 22Z" fill="white"/>
-</svg>
+                    profile
                     </router-link>
                 </li>
 
@@ -224,20 +276,18 @@ order <div class="arrow-right"></div>
 <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header2 red-background">
 
 
-<div class="profile-button">
-<svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: translateY(-1px)">
-
-<circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
-<circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
-<path d="M23.5 22C27.0899 22 30 18.866 30 15H17C17 18.866 19.9101 22 23.5 22Z" fill="white"/>
-</svg>
 
 
-</div>
+
+<!--here-->
+ <GoogleAuth2 class="logButton googleInHeader" />
 
 
-<div class="cartContainer">
+
+<!--here-->
+
+
+<div class="cartContainer" style="display:none;">
 
 <div class="cartBackground">
 <svg width="35" height="43" viewBox="0 0 35 43" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -268,7 +318,7 @@ order <div class="arrow-right"></div>
 <div class="container"><div class="full-width-logo"><!----><a href="/landingdrawer" aria-current="page" class="router-link-exact-active router-link-active">
 
 
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" id="nadiWhiteDesk"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 137.62 29.19" style="enable-background:new 0 0 137.62 29.19;width:209px;" xml:space="preserve">
 
 <g>
@@ -317,6 +367,52 @@ order <div class="arrow-right"></div>
 
 
 
+<svg version="1.1" id="nadiWhiteMob" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 82.89 50.52" style="enable-background:new 0 0 82.89 50.52;" xml:space="preserve">
+<g>
+	<path class="st0white" d="M11.73,9.93c-1.3,0-2.51,0.42-3.49,1.13l-2.48-0.47l0,5.28c0,0.01,0,0.01,0,0.02v7.49h2.49l0-7.53
+		c0.02-1.9,1.57-3.43,3.47-3.43c1.92,0,3.47,1.56,3.47,3.47v7.49h2.49V15.9C17.7,12.61,15.02,9.93,11.73,9.93z"/>
+	<g>
+		<g>
+			<g>
+				<polygon class="st0white" points="51.37,23.39 53.86,23.39 53.87,11.36 51.37,11.83 				"/>
+			</g>
+		</g>
+	</g>
+	<path class="st0white" d="M47.99,6.53L45.49,7v4.47c-1.15-0.93-2.62-1.49-4.21-1.49c-3.7,0-6.7,3.01-6.7,6.7s3.01,6.7,6.7,6.7
+		c1.59,0,3.06-0.56,4.21-1.49v1.02l2.5,0.47l0-8.41L47.99,6.53z M41.28,20.9c-2.32,0-4.21-1.89-4.21-4.21
+		c0-2.32,1.89-4.21,4.21-4.21c2.32,0,4.21,1.89,4.21,4.21C45.49,19.01,43.6,20.9,41.28,20.9z"/>
+	<g>
+		<g>
+			<path d="M54.15,7.63L54.15,7.63l0-0.9l-0.9,0L52.62,6.1l-0.63,0.63l-0.9,0l0,0.9l0,0l-0.64,0.63l0.63,0.64l0,0l0,0.9l0.9,0
+				l0.63,0.64l0.64-0.63l0,0l0,0v0l0.9,0l0-0.9l0.64-0.63L54.15,7.63z M51.98,9.79L51.98,9.79L51.98,9.79L51.98,9.79z"/>
+		</g>
+	</g>
+	<path class="st0white" d="M33.19,23.39l-0.43-2.49l0.01-9.9l-2.5,0.48c-1.15-0.93-2.62-1.49-4.21-1.49c-3.63,0-6.7,3.07-6.7,6.7
+		c0,3.7,3.01,6.7,6.7,6.7C26.06,23.39,33.19,23.39,33.19,23.39z M21.84,16.69c0-1.07,0.45-2.14,1.24-2.94
+		c0.81-0.82,1.86-1.27,2.97-1.27c2.32,0,4.2,1.88,4.21,4.2l0,4.23h-4.19c-0.01,0-0.01,0-0.02,0C23.73,20.9,21.84,19.01,21.84,16.69z
+		"/>
+</g>
+<g>
+	<path class="st0white" d="M19.41,27.94c-1.66,0-3.14,0.75-4.13,1.94c-0.99-1.18-2.47-1.94-4.13-1.94c-1.09,0-2.11,0.33-2.96,0.89
+		l-2.42-0.46l0,12.92h2.49l0-8.05c0.04-1.56,1.32-2.81,2.88-2.81c1.58,0,2.86,1.27,2.88,2.85c0,0.01,0,0.03,0,0.04l0,7.98h2.49
+		v-7.98c0-0.01,0-0.03,0-0.04c0.02-1.57,1.31-2.85,2.88-2.85c1.59,0,2.89,1.29,2.89,2.89v7.98h2.49v-7.98
+		C24.78,30.35,22.37,27.94,19.41,27.94z"/>
+	<path class="st0white" d="M55.7,27.94c-1.66,0-3.14,0.75-4.13,1.94c-0.99-1.18-2.47-1.94-4.13-1.94c-1.09,0-2.11,0.33-2.96,0.89
+		l-2.42-0.46l0,12.87h2.49l0-8c0.04-1.56,1.32-2.81,2.88-2.81c1.58,0,2.86,1.27,2.88,2.85c0,0.01,0,0.03,0,0.04v7.93h0v0.05h2.49
+		v-7.98c0-0.01,0-0.03,0-0.04c0.02-1.57,1.31-2.85,2.88-2.85c1.59,0,2.89,1.29,2.89,2.89v7.98h2.49v-7.98
+		C61.08,30.35,58.67,27.94,55.7,27.94z"/>
+	<path class="st0white" d="M40.26,41.28l-0.43-2.49l0.01-9.9l-2.5,0.48c-1.15-0.93-2.62-1.49-4.21-1.49c-3.63,0-6.7,3.07-6.7,6.7
+		c0,3.7,3.01,6.7,6.7,6.7C33.13,41.28,40.26,41.28,40.26,41.28z M28.91,34.57c0-1.07,0.45-2.14,1.24-2.94
+		c0.81-0.82,1.86-1.27,2.97-1.27c2.32,0,4.2,1.88,4.21,4.2l0,4.23h-4.19c-0.01,0-0.01,0-0.02,0C30.8,38.79,28.91,36.9,28.91,34.57z"
+		/>
+	<path class="st0white" d="M76.58,41.28l-0.43-2.49l0.01-9.9l-2.5,0.48c-1.15-0.93-2.62-1.49-4.21-1.49c-3.63,0-6.7,3.07-6.7,6.7
+		c0,3.7,3.01,6.7,6.7,6.7C69.45,41.28,76.58,41.28,76.58,41.28z M65.23,34.57c0-1.07,0.45-2.14,1.24-2.94
+		c0.81-0.82,1.86-1.27,2.97-1.27c2.32,0,4.2,1.88,4.21,4.2l0,4.23h-4.19c-0.01,0-0.01,0-0.02,0C67.12,38.79,65.23,36.9,65.23,34.57z
+		"/>
+</g>
+</svg>
+
 
 
 </a></div></div></div>
@@ -353,9 +449,6 @@ order <div class="arrow-right"></div>
                           
 
 
-<div @click="goToPage(item.name.replaceAll(' ',''))">
-   <span style="color: black;">{{item.name}}</span>
-   </div>
 
 
 <router-link :to="'/'+item.name.replaceAll(' ','')">{{item.name}}</router-link>
@@ -382,7 +475,7 @@ import Logo from "@/components/Logo";
 import LogoMamnoon from "@/components/LogoMamnoon";
 import Burger2 from "@/components/svgIcons/Burger2";
 import Star from "@/components/svgIcons/Star";
-import GoogleAuth from "@/components/GoogleAuth";
+import GoogleAuth2 from "@/components/GoogleAuth2";
 // import NewAuth from "@/components/NewAuth";
 
 import CartDropdown from "@/components/CartDropdown";
@@ -401,7 +494,7 @@ export default {
     Star,
     LogoMamnoon,
     Burger2,
-    GoogleAuth,
+    GoogleAuth2,
     // NewAuth,
     NadiIntro
   },
@@ -666,6 +759,7 @@ height: 50px;
 ul#menu{
     margin: -4px auto 0;
     padding-left: 0;
+    
 }
 
 ul#menu li {
@@ -674,7 +768,7 @@ font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 font-weight: bold;
 // font-size: 20px;
 font-size: 16px;
-text-align: center;
+text-align: left;
 padding: 0 10px;
 color: #ffffff;
 }
@@ -809,14 +903,29 @@ right: 0;
     width: 100%;
     /* top: -154px; */
     // top: -194px;
-    top: -224px;
-    top: -240px;
-    transition: all .5s ease;
-}
+    // top: -224px;
+    // top: -240px;
 
+left:-100%;
+
+    transition: all .5s ease;
+        // height: 100vh;
+                height: auto;
+
+
+top: 92px;
+// left: 0;
+z-index: 100;
+padding-top: 15px !important;
+// height: 100vh;
+height: 100vh;
+
+
+}
 
 .mobile-nav.expanded{
     top: 92px;
+    left: 0;
     // top: 112px;
     z-index: 100;
     padding-top: 15px !important;
@@ -824,6 +933,7 @@ right: 0;
 
     // background: pink;
     height: 100vh;
+        // height: auto;
 
 }
 
@@ -868,7 +978,7 @@ right: 0;
     right: 0;
     height: 100%;
     border: 0;
-    background: #f58e58;
+    background: transparent;
     color: white;
     font-weight: 700;
     font-size: 18px;
@@ -884,7 +994,7 @@ right: 0;
     right: 120px;
     height: 100%;
     border: 0;
-    background: #f58e58;
+    background: transparent;
     color: white;
     font-weight: 700;
     font-size: 18px;
@@ -1006,7 +1116,7 @@ cursor: pointer;
     bottom: 10px;
     right: 5px;
     z-index: 102;
-    // background: #f58e58;
+    // background: transparent;
     color: #fff;
     font-weight: 500;
     font-size: 24px;
@@ -1046,17 +1156,6 @@ cursor: pointer;
 }
 
 
-.profile-button{
-    width: 47px;
-    height: 48px;
-
-    border-radius: 24px;
-    background: white;
-        position: absolute;
-    right: 120px;
-color: transparent;
-font-size: 0;
-}
 
 .order-button2{
     background: white;
@@ -1195,6 +1294,58 @@ left: 0;
 text-align: center;
 font-weight: 600;
 padding-top: 12px;
+}
+
+
+
+.st0nadiSm{
+    fill:#F15D58;
+}
+
+
+.character-icon{
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background: white;
+    color: black;
+    margin-top: 22px;
+    line-height: 52px;
+}
+
+
+.dropdown{
+    background: #ffffff;
+    position: absolute;
+    width: 190px;
+    top: 92px;
+    left: -42px;
+
+
+
+ul{
+list-style-type: none;
+    padding: 10px 25px;
+margin-bottom: 0;
+
+    li{
+        height: 40px;
+        line-height: 40px;
+         a{
+        color: #F05D5B !important;
+        height: 40px;
+        line-height: 40px;
+        font-size: .8rem;
+        font-weight: 400;
+        &:hover{
+         color: #F05D5B;
+         text-decoration: underline;   
+        }
+    }}
+}
+
+
 }
 
 
