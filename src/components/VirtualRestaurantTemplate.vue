@@ -141,7 +141,7 @@ follow us
 <template v-for="social in item.social">
 
 <div class="socialLink">
-<a :href="social.link" :title="social.title">
+<a :href="social.link" :title="social.title" target="_blank">
       <div v-html="social.svg"></div>
 </a>
 </div>
