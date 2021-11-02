@@ -88,7 +88,7 @@
                       <template v-if="item.name.replace(' ', '') === restaurantName">
                       <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center', 'position': 'relative' }">
                         <!--<div class="container mobilePage pt132">-->
-               
+  
                     <div v-html="item.logo_svg" class="restaurantLogo"></div>
 
 
@@ -121,7 +121,18 @@
                 <p class="header-p" v-bind:style="{ 'color': item.text_color }">{{item.description}}</p>
 
                         <template v-for="button in item.buttons">
-            <a class="ctaLink" target="_blank" :style="{'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color }" :href="button.link">{{button.text}}</a>
+
+
+
+
+
+
+
+            <a class="ctaLink" target="_blank" :style="styleObject" :href="button.link">{{button.text}}</a>
+
+
+
+
                                                 </template>
                                                 <br>
 
@@ -141,7 +152,7 @@
               <div style="width: 40px;float: left;height: 60px;display: inline-block;">
               <Phone :color="item.text_color" class="mr6" /></div>
 <template v-if="item.phone_number">
-{{item.phone_number}}<br>
+{{item.phone_number}}<br>             {{button.color}}
 </template>
 
 
@@ -373,8 +384,10 @@ _</div>
 
 
 
-      
-                        <a class="ctaLink" target="_blank" :style="{'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color }" :href="repeat.button_link">{{repeat.button_text}}</a>
+
+
+       <a class="ctaLink" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
+
       </div>
   </div>
 </div>
@@ -394,7 +407,8 @@ _</div>
         {{repeat.text}}
       </h3>
       <br>
-                        <a class="ctaLink" target="_blank" :style="{'border': `2px solid ${item.background_color}`, 'color' : item.text_color, 'background-color': item.button_color }" :href="repeat.button_link">{{repeat.button_text}}</a>
+
+                              <a class="ctaLinkOpposite" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
       </div>
   </div>
 </div>
@@ -490,6 +504,29 @@ export default {
 
 computed: {
 
+    styleObject() {
+      return {
+        '--button-color': this.button.color,
+        '--button-background-color': this.button.colorBackd,
+        '--button-border-color': this.button.borderColor,
+        
+        '--button-color--hover': this.button.colorHover,
+        '--button-background-color--hover': this.button.colorBackdHover,
+        '--button-border-color': this.button.borderColorHover
+      };
+    },
+
+
+
+
+
+
+
+
+
+
+
+
     containsYN(){
 
 
@@ -514,6 +551,14 @@ return arrRest;
   },
   data() {
     return {
+      button:{
+        colorBackd: '',
+        colorBackdHover: '',
+        color: '',
+        colorHover: '',
+        borderColor: '',
+        borderColorHover: ''
+    },
 notificationVisible: true,
       restaurantName: 'fff',
       pageData: null,
@@ -579,6 +624,43 @@ let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/v
     let AcfBlock = responseAcf
     this.pageData = AcfBlock.data.acf.content_fields
     this.pageData = AcfBlock.data.acf.restaurants
+
+
+
+
+
+
+
+for(var i in this.$store.state.pageData[0].restaurant_repeater){
+
+
+
+if(this.restaurantName === this.$store.state.pageData[0].restaurant_repeater[i].name){
+console.log(this.$store.state.pageData[0].restaurant_repeater[i])
+
+
+
+this.button.color = this.$store.state.pageData[0].restaurant_repeater[i].button_text_color
+this.button.colorHover = this.$store.state.pageData[0].restaurant_repeater[i].button_color
+this.button.colorBackd = this.$store.state.pageData[0].restaurant_repeater[i].button_color
+this.button.colorBackdHover = this.$store.state.pageData[0].restaurant_repeater[i].button_text_color
+
+
+console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_text_color);
+console.log(this.$store.state.pageData[0].restaurant_repeater[i].background_color);
+console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_color);
+console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_text_color);
+
+
+
+
+
+}
+
+}
+
+
+
 },
     filterByCat(cat){
       this.currentlyFiltered = []
@@ -1411,7 +1493,8 @@ height: 300px;
 }
 
 
-a.ctaLink{
+a.ctaLink,
+a.ctaLinkOpposite{
 display: block;
 border-radius: 5px;
 width: 300px;
@@ -1492,6 +1575,55 @@ text-align: center;
 }
 
 
+
+a.ctaLink {
+  color: var(--button-color);
+  background-color: var(--button-background-color);
+ 
+
+border: 2px solid;
+border-color: var(--button-color);
+
+  transition: all .5s ease;
+
+
+  text-decoration: none;
+&:hover {
+  color: var(--button-color--hover);
+  background-color: var(--button-background-color--hover);
+  border-color: var(--button-border-color--hover);
+}
+}
+
+
+a.ctaLinkOpposite {
+  color: var(--button-color);
+  background-color: var(--button-background-color);
+ 
+
+border: 2px solid;
+
+
+
+  color: var(--button-color--hover);
+  background-color: var(--button-background-color--hover);
+  border-color: var(--button-border-color--hover);
+
+
+
+  transition: all .5s ease;
+
+
+  text-decoration: none;
+&:hover {
+  color: var(--button-color);
+  background-color: var(--button-background-color);
+ 
+
+
+border-color: var(--button-color);
+}
+}
 
 
 </style>
