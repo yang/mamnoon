@@ -11,11 +11,98 @@
 
                   <div v-for="item in this.$store.state.pageData[0].restaurant_repeater" :key="item.acf_fc_layout"><!--begin big loop-->
                       
+
+
+
+
+
+
+
+
+
+<!--notification section-->
+<template v-if="item.header_notification && notificationVisible && item.name.replace(' ', '') === restaurantName">
+
+  
+
+
+
+
+
+<section class="header-notification" v-bind:style="{ 'background-color': item.header_notification_background_color, 'color': item.header_notification_text_color }">
+
+<div class="dismissNotification" @click="dismissNotification">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.36426" width="35" height="9" transform="rotate(45 6.36426 0)" fill="white"/>
+<rect x="31.1128" y="6.36401" width="35" height="9" transform="rotate(135 31.1128 6.36401)" fill="white"/>
+</svg>
+</div>
+    <div class="container mobilePage">
+
+     <!--begin row-->
+<div class="row">
+             
+                                          
+<div class="col-sm-8 offset-2">
+
+
+<h3>  
+{{item.header_notification}}
+</h3>
+
+
+
+
+</div></div></div>
+</section>
+</template>
+
+<!--end notification section-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                       <template v-if="item.name.replace(' ', '') === restaurantName">
                       <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center', 'position': 'relative' }">
                         <!--<div class="container mobilePage pt132">-->
                
                     <div v-html="item.logo_svg" class="restaurantLogo"></div>
+
+
+
+<!--// {{item.background_video}}-->
+
+<!-- <VideoComponent :src="item.background_video" />-->
+
+
+
+
+
+
+
 
 
                       <!--<br>-->
@@ -30,19 +117,22 @@
 <div class="row">
              
                                           
-<div class="col-sm-6">
+<div class="col-md-6">
                 <p class="header-p" v-bind:style="{ 'color': item.text_color }">{{item.description}}</p>
 
                         <template v-for="button in item.buttons">
-                        <a target="_blank" :style="{'padding':'10px', 'display':'block', 'border-radius': '5px', 'width': '300px', 'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color, 'margin': '10px 0', 'text-align': 'center' }" :href="button.link">{{button.text}}</a>
+            <a class="ctaLink" target="_blank" :style="{'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color }" :href="button.link">{{button.text}}</a>
                                                 </template>
                                                 <br>
 
 
 
 
+
+
+
 </div>
-<div class="col-sm-6">
+<div class="col-md-6">
 
 
               <div :style="{'color' : item.text_color}">
@@ -119,7 +209,7 @@
 <!--social section-->
 <template v-if="item.social">
 
-<section class="secPad" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }">
+<section class="secPadMed social" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }">
 
 
 
@@ -130,14 +220,14 @@
 <div class="row">
              
                                           
-<div class="col-sm-6" style="text-align: right;">
+<div class="col-sm-6 social-text">
 
 <h3>  
 follow us
 </h3>
 </div>
 
-<div class="col-sm-6">
+<div class="col-sm-6 social-icons">
 <template v-for="social in item.social">
 
 <div class="socialLink">
@@ -202,7 +292,7 @@ follow us
 
 
 
-    <div class="container mobilePage">
+    <div class="container mobilePage noPadMob">
 
      <!--begin row-->
 <div class="row">
@@ -261,30 +351,60 @@ follow us
 <!--lr mod repeater-->
 
 <template v-if="item.lr_mod_repeater">
-<template v-for="repeat in item.lr_mod_repeater">
+<template v-for="(repeat,index) in item.lr_mod_repeater">
 
-<section v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color, 'margin-bottom': '12px', 'width': '100%', 'display': 'inline-block' }">
 
-<div class="half-panel with-background" v-bind:style="{ 'background-image': 'url(' + repeat.image + ')', 'height': '100vh' }">_</div>
 
-<div class="half-panel" :style="{'background-color': item.background_color, 'position': 'relative','height':'100vh'}">
+<template v-if="index % 2 === 0">
+<section class="flexSection" v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color, 'width': '100%' }">
+<div class="half-panel with-background" v-bind:style="{ 'background-color': item.background_color}">
+<div class="imagePanel" v-bind:style="{ 'background-image': 'url(' + repeat.image + ')' }">
+_</div>
+
+</div>
+<div class="half-panel right" :style="{'background-color': item.background_color, 'position': 'relative','height':'100vh', 'padding':0}">
   <div :style="{'background-color': item.background_color, 'position': 'absolute', 'bottom': '60px'}">
-  
-
       <div>
       <h3>  
         {{repeat.text}}
       </h3>
       <br>
-    <a target="_blank" :style="{'padding':'10px', 'display':'block', 'border-radius': '5px', 'width': '300px', 'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color, 'margin': '10px 0', 'text-align': 'center' }" :href="repeat.button_link">{{repeat.button_text}}</a>
-      </div>
 
+
+
+
+      
+                        <a class="ctaLink" target="_blank" :style="{'border': `2px solid ${item.text_color}`, 'color' : item.text_color, 'background-color': item.button_color }" :href="repeat.button_link">{{repeat.button_text}}</a>
+      </div>
   </div>
 </div>
-
-
-
 </section>
+</template>
+<template v-else>
+<section class="flexSection" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color, 'width': '100%'}">
+<div class="half-panel with-background" v-bind:style="{ 'background-color': item.text_color}">
+<div class="imagePanel" v-bind:style="{ 'background-image': 'url(' + repeat.image + ')' }">
+_</div>
+
+</div>
+<div class="half-panel right" :style="{'background-color': item.text_color, 'position': 'relative','height':'100vh', 'padding':0}">
+  <div :style="{'background-color': item.text_color, 'position': 'absolute', 'bottom': '60px'}">
+      <div>
+      <h3>  
+        {{repeat.text}}
+      </h3>
+      <br>
+                        <a class="ctaLink" target="_blank" :style="{'border': `2px solid ${item.background_color}`, 'color' : item.text_color, 'background-color': item.button_color }" :href="repeat.button_link">{{repeat.button_text}}</a>
+      </div>
+  </div>
+</div>
+</section>
+</template>
+
+
+
+
+
 
 </template>
 
@@ -355,6 +475,8 @@ import Envelope from "@/components/svgIcons/Envelope";
 
 
 
+import VideoComponent from "@/components/VideoComponent";
+
 export default {
   components: {
     ALaCarte,
@@ -362,9 +484,11 @@ export default {
     Phone,
     Clock,
     Envelope,
-    MapPin
+    MapPin,
+    VideoComponent
   },
-  computed: {
+
+computed: {
 
     containsYN(){
 
@@ -390,7 +514,7 @@ return arrRest;
   },
   data() {
     return {
-
+notificationVisible: true,
       restaurantName: 'fff',
       pageData: null,
       testimonials: null,
@@ -414,6 +538,9 @@ return arrRest;
   },
   props: ['apiData', 'blok'],
   methods: {
+dismissNotification(){
+  this.notificationVisible = false;
+},
       pushHome(){
           this.$router.push("/")
         },
@@ -1137,16 +1264,80 @@ padding: 50px;
     &.with-background{
           background-size: cover;
     background-position: center center;
+    padding: 36px;
     
     }
+h3{
+  width: 300px;
+}
+
+
+&.right{
+  height: 100vh;
+  padding: 0px;
+}
+
+ @media only screen and (max-width: 768px) {
+
+  width: 100%;
+float: left;
+padding: 50px;
+    &.with-background{
+          background-size: cover;
+    background-position: center center;
+   padding: 16px;
+    
+    }
+h3{
+  width: 300px;
+}
+
+&.right{
+  min-height: 250px !important;
+  padding: 16px !important;
+  height: auto !important;
+
+    
+}
+
+&.right > div{
+bottom: 16px !important;
+
+
+width: calc(100% - 32px);
+
+    
+}
+
+
+ }
+
+
+
+
 
 }
+
+
+
 
 
 
 .secPad{
   padding: 60px 0;
+
+
+ @media only screen and (max-width: 768px) {
+padding: 20px 16px; 
+ }
+
 }
+
+
+.secPadMed{
+  padding: 34px 0;
+}
+
 
 
 .map iframe{
@@ -1155,6 +1346,15 @@ padding: 50px;
   border: 1px solid;
   border-radius: 10px;
   float: right;
+
+
+ @media only screen and (max-width: 768px) {
+width: 100%;
+float: none;
+ }
+
+
+
 }
 
 h3{
@@ -1170,5 +1370,128 @@ h4{
   display: inline-block;
   margin: 0 30px;
 }
+
+
+.header-notification{
+    background-color: #000582;
+    color: #ffffff;
+    position: absolute;
+    top: 90px;
+    z-index: 99;
+    width: 100%;
+    padding: 30px 0;
+}
+
+
+.imagePanel{
+background: red;
+color: transparent;
+width: calc(100%-72px);
+height: 100%;
+
+          background-size: cover;
+    background-position: center center;
+ height:100vh;
+
+
+ @media only screen and (max-width: 768px) {
+
+height: 300px;
+ }
+
+
+
+}
+
+.dismissNotification{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+
+a.ctaLink{
+display: block;
+border-radius: 5px;
+width: 300px;
+margin: 10px 0;
+text-align: center;
+padding: 3px 10px 5px;
+font-size: 22px;
+font-weight: 500;
+
+
+ @media only screen and (max-width: 768px) {
+    width: 100%;
+ }
+
+}
+
+
+
+
+
+
+
+
+
+.flexSection{
+
+
+display: inline-flex;
+
+
+ @media only screen and (max-width: 768px) {
+
+display: block;
+ }
+
+
+}
+
+
+section{
+  overflow-x: hidden;
+}
+
+
+.social-text{
+
+text-align: right;
+ @media only screen and (max-width: 768px) {
+
+text-align: center;
+margin-bottom: 12px;
+ }
+
+
+}
+
+
+.social-icons{
+
+
+ @media only screen and (max-width: 768px) {
+
+text-align: center;
+ }
+
+}
+
+
+.noPadMob{
+
+   @media only screen and (max-width: 768px) {
+
+
+     padding-left: 0;
+     padding-right: 0;
+   }
+
+}
+
+
+
 
 </style>

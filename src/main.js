@@ -17,6 +17,9 @@ import VueMeta from 'vue-meta'
 import VueObserveVisibility from 'vue-observe-visibility'
 import VueSweetalert2 from 'vue-sweetalert2';
 // If you don't need the styles, do not connect
+
+
+
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 
@@ -50,6 +53,7 @@ Vue.use(VueObserveVisibility)
 Vue.use(VueMeta)
 Vue.use(VueCurrencyInput)
 Vue.component('v-select', vSelect)
+
 Vue.use(VueSweetalert2);
 
 const base = axios.create({
