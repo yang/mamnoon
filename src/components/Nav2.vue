@@ -36,7 +36,7 @@
 
 
 
-<button @click="toggleFullScreen" class="order-button2" style="display:none;">
+<button @click="toggleFullScreen" class="order-button2" style="">
 order <div class="arrow-right"></div>
 </button>
 
@@ -450,9 +450,10 @@ order <div class="arrow-right"></div>
 
 
 
+<!--<router-link :to="'/'+item.name.replaceAll(' ','')">{{item.name}}</router-link>-->
 
-<router-link :to="'/'+item.name.replaceAll(' ','')">{{item.name}}</router-link>
 
+<a :href="'/'+item.name.replaceAll(' ','')">{{item.name}}</a>
 
                             </div>
                             </div>

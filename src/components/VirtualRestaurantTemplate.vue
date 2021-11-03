@@ -158,8 +158,6 @@
 
 
 
-<a href="/about">aboiut</a>
- 
 
 
 
@@ -1634,10 +1632,10 @@ border-color: var(--button-color);
 
 
 
- -webkit-transition: background-color .5s ease;
-  -moz-transition: background-color .5s ease;
-  -o-transition: background-color .5s ease;
-  transition: background-color .5s ease;
+//  -webkit-transition: background-color .5s ease;
+//   -moz-transition: background-color .5s ease;
+//   -o-transition: background-color .5s ease;
+//   transition: background-color .5s ease;
 
 
 
