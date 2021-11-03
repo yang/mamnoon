@@ -43,7 +43,7 @@
 <div class="row">
              
                                           
-<div class="col-sm-8 offset-2">
+<div class="col-8 offset-2 offset-2">
 
 
 <h3>  
@@ -152,8 +152,17 @@
               <div style="width: 40px;float: left;height: 60px;display: inline-block;">
               <Phone :color="item.text_color" class="mr6" /></div>
 <template v-if="item.phone_number">
-{{item.phone_number}}<br>             {{button.color}}
+{{item.phone_number}}<br>            
 </template>
+
+
+
+
+
+ 
+
+
+
 
 
 </div>
@@ -373,8 +382,8 @@ follow us
 _</div>
 
 </div>
-<div class="half-panel right" :style="{'background-color': item.background_color, 'position': 'relative','height':'100vh', 'padding':0}">
-  <div :style="{'background-color': item.background_color, 'position': 'absolute', 'bottom': '60px'}">
+<div class="half-panel right" :style="{'background-color': item.background_color, 'position': 'relative','height':'100vh', 'padding':0, 'margin-top': '46px'}">
+  <div :style="{'background-color': item.background_color, 'position': 'absolute', 'bottom': '0px'}">
       <div>
       <h3>  
         {{repeat.text}}
@@ -400,8 +409,8 @@ _</div>
 _</div>
 
 </div>
-<div class="half-panel right" :style="{'background-color': item.text_color, 'position': 'relative','height':'100vh', 'padding':0}">
-  <div :style="{'background-color': item.text_color, 'position': 'absolute', 'bottom': '60px'}">
+<div class="half-panel right" :style="{'background-color': item.text_color, 'position': 'relative','height':'100vh', 'padding':0, 'margin-top': '46px'}">
+  <div :style="{'background-color': item.text_color, 'position': 'absolute', 'bottom': '0px'}">
       <div>
       <h3>  
         {{repeat.text}}
@@ -505,15 +514,34 @@ export default {
 computed: {
 
     styleObject() {
+      for(var i in this.buttonColors){
+
+
+        console.log(this.buttonColors[i].name);
+        console.log(this.restaurantName);
+        if(this.buttonColors[i].name.replace(" ", "") === this.restaurantName.replace(" ", "")){
+
+
+
+
+
+
       return {
-        '--button-color': this.button.color,
-        '--button-background-color': this.button.colorBackd,
-        '--button-border-color': this.button.borderColor,
+        '--button-color': this.buttonColors[i].buttonColor,
+        '--button-background-color': this.buttonColors[i].buttonColorHover,
+        '--button-border-color': this.buttonColors[i].buttonColor,
         
-        '--button-color--hover': this.button.colorHover,
-        '--button-background-color--hover': this.button.colorBackdHover,
-        '--button-border-color': this.button.borderColorHover
+        '--button-color--hover': this.buttonColors[i].buttonColorHover,
+        '--button-background-color--hover': this.buttonColors[i].buttonColor,
+        '--button-border-color': this.buttonColors[i].borderColorHover
       };
+
+
+        }
+      }
+
+
+
     },
 
 
@@ -559,6 +587,7 @@ return arrRest;
         borderColor: '',
         borderColorHover: ''
     },
+buttonColors:[],
 notificationVisible: true,
       restaurantName: 'fff',
       pageData: null,
@@ -635,8 +664,8 @@ for(var i in this.$store.state.pageData[0].restaurant_repeater){
 
 
 
-if(this.restaurantName === this.$store.state.pageData[0].restaurant_repeater[i].name){
-console.log(this.$store.state.pageData[0].restaurant_repeater[i])
+// if(this.restaurantName === this.$store.state.pageData[0].restaurant_repeater[i].name){
+
 
 
 
@@ -646,16 +675,27 @@ this.button.colorBackd = this.$store.state.pageData[0].restaurant_repeater[i].bu
 this.button.colorBackdHover = this.$store.state.pageData[0].restaurant_repeater[i].button_text_color
 
 
-console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_text_color);
-console.log(this.$store.state.pageData[0].restaurant_repeater[i].background_color);
-console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_color);
-console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_text_color);
+
+
+this.buttonColors.push({
+name: this.$store.state.pageData[0].restaurant_repeater[i].name,
+buttonColor: this.$store.state.pageData[0].restaurant_repeater[i].button_text_color,
+buttonColorHover: this.$store.state.pageData[0].restaurant_repeater[i].button_color,
+buttonColorBg: this.$store.state.pageData[0].restaurant_repeater[i].button_color,
+buttonColorBgHover: this.$store.state.pageData[0].restaurant_repeater[i].button_text_color
+});
+
+
+// console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_text_color);
+// console.log(this.$store.state.pageData[0].restaurant_repeater[i].background_color);
+// console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_color);
+// console.log(this.$store.state.pageData[0].restaurant_repeater[i].button_text_color);
 
 
 
 
 
-}
+// }
 
 }
 
@@ -1451,7 +1491,15 @@ h4{
 .socialLink{
   display: inline-block;
   margin: 0 30px;
+
+ @media only screen and (max-width: 768px) {
+  margin: 0 20px;
+ }
+
 }
+
+
+
 
 
 .header-notification{
@@ -1584,7 +1632,14 @@ a.ctaLink {
 border: 2px solid;
 border-color: var(--button-color);
 
-  transition: all .5s ease;
+
+
+ -webkit-transition: background-color .5s ease;
+  -moz-transition: background-color .5s ease;
+  -o-transition: background-color .5s ease;
+  transition: background-color .5s ease;
+
+
 
 
   text-decoration: none;
