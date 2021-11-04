@@ -1,6 +1,6 @@
 <template>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"  :style="{'width': this.width ? this.width :'20px'}">>
   <title>
     map pin
   </title>
@@ -9,12 +9,17 @@
 
 
 
+
+
+
+
+
 </template>
 
 
 <script>
 export default{
-  props: ['color']
+  props: ['color', 'width']
 }
 
 </script>

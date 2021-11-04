@@ -144,7 +144,7 @@ order <div class="arrow-right"></div>
     <template v-if="$mq === 'lg'">
     <nav v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header2">
         <div class="container">
-          <scrollactive :offset="180" ref="scrollactive">   
+
              <ul id="menu">
 
 <div class="inline-link"><li>
@@ -187,15 +187,14 @@ order <div class="arrow-right"></div>
 
 
             </ul>
-            </scrollactive
-          >
+           
         </div>
     </nav>
 </template>
 <template v-if="$mq === 'sm'">
         <nav class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header2 mobile-nav" :class="{ expanded: mobNavExpanded }">
         <div class="container">
-          <scrollactive :offset="100" ref="scrollactive">
+
 
              <ul id="menu" class="mobile-menu">
 
@@ -260,7 +259,7 @@ order <div class="arrow-right"></div>
 
 
             </ul>            
-            </scrollactive>
+     
         </div>
     </nav>
 
@@ -307,7 +306,7 @@ order <div class="arrow-right"></div>
 
 
 
-<div @click="toggleFullScreen">
+<div class="closeToggle" @click="toggleFullScreen">
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="6.36426" width="35" height="9" transform="rotate(45 6.36426 0)" fill="white"/>
 <rect x="31.1128" y="6.36401" width="35" height="9" transform="rotate(135 31.1128 6.36401)" fill="white"/>
@@ -420,16 +419,12 @@ order <div class="arrow-right"></div>
 
 
             <div class="container mobilePage white-text">
+<br>
 
 
+            <h1>Choose a location!</h1>
 
-            <h1>good evening, Fatima!</h1>
-
-            Not you? Click here to sign in 
-            or create an account.
-
-            <br>
-            start your order:
+          <br>
 
 
 
@@ -1158,6 +1153,8 @@ cursor: pointer;
 
 
 
+
+
 .order-button2{
     background: white;
     color: #EE5E68;
@@ -1168,7 +1165,8 @@ cursor: pointer;
     height: 36px;
     transform: translateY(-4px);
     position: absolute;
-    right: 20px;
+    right: 80px;
+
 
 
     &:hover{
@@ -1350,7 +1348,27 @@ margin-bottom: 0;
 }
 
 
+.closeToggle{
 
+    position: absolute;
+    left: 20px;
+    right: auto;
+    top: 20px;
+
+
+@media only screen and (max-width: 768px){
+    position: absolute;
+    right: 20px;
+    left: auto;
+    top: 20px;
+
+}
+
+
+
+
+
+}
 </style>
 
 

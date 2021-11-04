@@ -1,9 +1,6 @@
 <template>
 
 <svg
-
- :style="{'width': this.width ? this.width :'20px'}"
-
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -68,13 +65,18 @@
 
 <script>
 export default{
-  props: ['color', 'width']
+  props: ['color']
 }
 
 </script>
 
 
 <style>
+
+
+#svg2{
+  width: 20px !important;
+  }
 </style>
 
 

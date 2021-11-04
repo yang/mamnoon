@@ -139,7 +139,7 @@
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -260,7 +260,7 @@ Capitol Hill (near Melrose Market)<br>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -458,7 +458,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -602,7 +602,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -770,7 +770,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -892,7 +892,7 @@ Capitol Hill (near Melrose Market)<br>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -1097,7 +1097,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -1256,7 +1256,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -1422,7 +1422,7 @@ Capitol Hill (near Melrose Market)<br>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -1611,7 +1611,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -1800,7 +1800,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -1961,7 +1961,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -2132,7 +2132,7 @@ import PlusSmWhite from "@/components/svgIcons/PlusSmWhite";
 
 import MinusSmWhite from "@/components/svgIcons/MinusSmWhite";
 
-import Envelope from "@/components/svgIcons/Envelope";
+import Envelope2 from "@/components/svgIcons/Envelope";
 
 
 
@@ -2149,7 +2149,7 @@ export default {
     MinusSm,
     PlusSmWhite,
     MinusSmWhite,
-    Envelope,
+    Envelope2,
     Phone,
     Clock,
     MapPin,

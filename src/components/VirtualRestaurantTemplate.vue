@@ -43,15 +43,11 @@
 <div class="row">
              
                                           
-<div class="col-8 offset-2 offset-2">
+<div class="col-6 offset-3 offset-2">
 
-
-<h3>  
+<h3 class="headerNotification">  
 {{item.header_notification}}
 </h3>
-
-
-
 
 </div></div></div>
 </section>
@@ -111,13 +107,16 @@
                       <section v-bind:style="{ 'background-color': item.background_color }">
 
          <!--begin container-->
-    <div class="container mobilePage secPad">
+    <div class="container mobilePage secPadSmall">
 
      <!--begin row-->
 <div class="row">
              
                                           
-<div class="col-md-6">
+<div class="col-md-7">
+<div class="header-p-box">
+
+
                 <p class="header-p" v-bind:style="{ 'color': item.text_color }">{{item.description}}</p>
 
                         <template v-for="button in item.buttons">
@@ -134,6 +133,11 @@
 
 
                                                 </template>
+
+
+
+</div>
+
                                                 <br>
 
 
@@ -143,54 +147,72 @@
 
 
 </div>
-<div class="col-md-6">
+<div class="col-md-5">
 
 
               <div :style="{'color' : item.text_color}">
 
-<div style="display: inline-block;width: 100%;">
-              <div style="width: 40px;float: left;height: 60px;display: inline-block;">
-              <Phone :color="item.text_color" class="mr6" /></div>
 <template v-if="item.phone_number">
-{{item.phone_number}}<br>            
+
+<div class="infoPoints">
+<div class="iconPoint">
+              <Phone :color="item.text_color" :width="40" class="mr6" />
+              </div>
+<div style="padding-top: 10px;">
+ <a :style="{'color':item.text_color}" :href="`tel:+1${item.phone_number.replace(/[^0-9.]/g, '')}`">{{item.phone_number}}</a><br>            
+
+
+
+
+
+
+
+</div></div>
+
 </template>
-
-
-
-
-
-
-
-
-
-</div>
 
 
 <br>
 <template v-if="item.contact">
-<div style="display: inline-block;width: 100%;">
-<div style="width: 40px;float: left;height: 60px;display: inline-block;">
-<Envelope :color="item.text_color" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<div class="infoPoints">
+<div class="iconPoint">
+<Envelope :width="40" :color="item.text_color" class="mr6 centeredSvg" style="position: initial;margin-right: 10px;" />
 </div>
 
+<div style="padding-top: 2px;">
 
 <template v-for="line in item.contact.contact_lines">
-{{line.line}}<br>
-</template>
-<br>
-</div>
+  <template v-if="line.line_group.link !== ''">
+    <a :style="{'color':item.text_color}" :href="line.line_group.link" target="_blank">{{line.line_group.text}}</a><br>
+    </template>
+    <template v-else>
+      {{line.line_group.text}}<br>
+    </template>
 </template>
 
+
+</div>
+
+
+</div>
+</template>
+<br>
 <template v-if="item.address">
-<div style="display: inline-block;width: 100%;">
-<div style="width: 40px;float: left;height: 60px;display: inline-block;">
-<MapPin :color="item.text_color" class="mr6" />
+<div class="infoPoints">
+<div class="iconPoint">
+<MapPin  :width="40" :color="item.text_color" class="mr6" />
 </div>
 <template v-for="line in item.address.address_lines">
 
-{{line.line}}<br>
+<template v-if="line.line_group.url !== ''">
+ <a :style="{'color':item.text_color}" :href="line.line_group.url" target="_blank">{{line.line_group.text}}</a><br>
 </template>
-<br>
+<template v-else>
+  {{line.line_group.text}}<br>
+</template>
+
+</template>
+
 
 </div>
 </template>
@@ -198,14 +220,21 @@
 
 
 <template v-if="item.hours">
-<div style="display: inline-block;width: 100%;">
-<div style="width: 40px;float: left;height: 60px;display: inline-block;">
-<Clock :color="item.text_color" class="mr6" />
-</div>
+<div class="infoPoints">
+<div class="iconPoint">
+<Clock  :width="40" :color="item.text_color" class="mr6" />
+</div> 
+
+
+<div style="padding-top: 5px;">
+
 <template v-for="line in item.hours.hours_lines">
 
 {{line.line}}<br>
 </template>
+</div>
+
+
 <br>
 </div>
 </template>
@@ -306,7 +335,7 @@ follow us
  <!--map section-->
 <template v-if="item.map">
 
-<section class="secPad" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }">
+<section class="secPad" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }" style="display:none;">
 
 
 
@@ -330,9 +359,9 @@ follow us
 
 
 <template v-if="item.address">
-<template v-for="line in item.address.address_lines">
+<template v-for="line,index in item.address.address_lines">
 
-{{line.line}}<br>
+{{line.line}}<br>{{index}}f
 </template>
 
 </template>
@@ -373,14 +402,91 @@ follow us
 
 
 
-<template v-if="index % 2 === 0">
+<template v-if="index % 2 === 1">
 <section class="flexSection" v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color, 'width': '100%' }">
-<div class="half-panel with-background" v-bind:style="{ 'background-color': item.background_color}">
+
+
+<div class="container">
+
+<div class="row">
+<div class="col-6"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
+<div class="col-6" style="position: relative">
+
+<div class="sidebox right" :style="{'background-color': item.background_color}">
+
+
+      <h3>  
+        {{repeat.text}}
+      </h3>
+      <br>
+       <a class="ctaLink" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="half-panel with-background" v-bind:style="{ 'background-color': item.background_color, 'display':'none'}">
 <div class="imagePanel" v-bind:style="{ 'background-image': 'url(' + repeat.image + ')' }">
 _</div>
 
 </div>
-<div class="half-panel right" :style="{'background-color': item.background_color, 'position': 'relative','height':'100vh', 'padding':0, 'margin-top': '46px'}">
+<div class="half-panel right" :style="{'background-color': item.background_color, 'position': 'relative','height':'100vh', 'padding':0, 'margin-top': '46px', 'display':'none'}">
+  <div :style="{'background-color': item.background_color, 'position': 'absolute', 'bottom': '0px'}">
+      <div>
+      <h3>  
+        {{repeat.text}}
+      </h3>
+      <br>
+
+
+
+
+
+
+       <a class="ctaLinkOpposite" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
+
+      </div>
+  </div>
+</div>
+</section>
+</template>
+<template v-else>
+<section class="flexSection" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color, 'width': '100%' }">
+
+
+<div class="container">
+
+<div class="row">
+<div class="col-6"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
+<div class="col-6" style="position: relative">
+
+<div class="sidebox right" :style="{'background-color': item.text_color}">
+
+
+      <h3>  
+        {{repeat.text}}
+      </h3>
+      <br>
+       <a class="ctaLinkOpposite" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="half-panel with-background" v-bind:style="{ 'background-color': item.text_color, 'display':'none'}">
+<div class="imagePanel" v-bind:style="{ 'background-image': 'url(' + repeat.image + ')' }">
+_</div>
+
+</div>
+<div class="half-panel right" :style="{'background-color': item.background_color, 'position': 'relative','height':'100vh', 'padding':0, 'margin-top': '46px', 'display':'none'}">
   <div :style="{'background-color': item.background_color, 'position': 'absolute', 'bottom': '0px'}">
       <div>
       <h3>  
@@ -395,27 +501,6 @@ _</div>
 
        <a class="ctaLink" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
 
-      </div>
-  </div>
-</div>
-</section>
-</template>
-<template v-else>
-<section class="flexSection" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color, 'width': '100%'}">
-<div class="half-panel with-background" v-bind:style="{ 'background-color': item.text_color}">
-<div class="imagePanel" v-bind:style="{ 'background-image': 'url(' + repeat.image + ')' }">
-_</div>
-
-</div>
-<div class="half-panel right" :style="{'background-color': item.text_color, 'position': 'relative','height':'100vh', 'padding':0, 'margin-top': '46px'}">
-  <div :style="{'background-color': item.text_color, 'position': 'absolute', 'bottom': '0px'}">
-      <div>
-      <h3>  
-        {{repeat.text}}
-      </h3>
-      <br>
-
-                              <a class="ctaLinkOpposite" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
       </div>
   </div>
 </div>
@@ -1340,12 +1425,17 @@ width: 100%
 .header-p{
     font-size: 28px;
     line-height: 40px;
-    width: 300px;
-    padding: 30px 0;
+    width: 100%;
+    padding: 0 0 30px;
     font-weight: 600;
     margin-bottom: 0;
     }
 
+
+.header-p-box{
+  width: 300px;
+
+}
 
 
 .pt132{
@@ -1356,7 +1446,7 @@ width: 100%
 .restaurantLogo{
 
 
-width: 300px;
+width: 500px;
     margin: 0 auto;
     text-align: center;
     height: 100%;
@@ -1366,7 +1456,7 @@ width: 300px;
 
 svg{
 
-      width: 300px;
+      width: 500px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1447,12 +1537,18 @@ width: calc(100% - 32px);
   padding: 60px 0;
 
 
+    // padding: 46px 0 0;
+
  @media only screen and (max-width: 768px) {
 padding: 20px 16px; 
  }
 
 }
 
+
+.secPadSmall{
+      padding: 46px 0;
+}
 
 .secPadMed{
   padding: 34px 0;
@@ -1533,7 +1629,7 @@ height: 300px;
 
 .dismissNotification{
   position: absolute;
-  top: 15px;
+  top: 20px;
   right: 15px;
   cursor: pointer;
 }
@@ -1543,8 +1639,8 @@ a.ctaLink,
 a.ctaLinkOpposite{
 display: block;
 border-radius: 5px;
-width: 300px;
-margin: 10px 0;
+width: 100%;
+margin: 10px 0 0;
 text-align: center;
 padding: 3px 10px 5px;
 font-size: 22px;
@@ -1568,7 +1664,7 @@ font-weight: 500;
 .flexSection{
 
 
-display: inline-flex;
+// display: inline-flex;
 
 
  @media only screen and (max-width: 768px) {
@@ -1644,7 +1740,7 @@ border-color: var(--button-color);
 &:hover {
   color: var(--button-color--hover);
   background-color: var(--button-background-color--hover);
-  border-color: var(--button-border-color--hover);
+  // border-color: var(--button-border-color--hover);
 }
 }
 
@@ -1664,7 +1760,7 @@ border: 2px solid;
 
 
 
-  transition: all .5s ease;
+  // transition: all .5s ease;
 
 
   text-decoration: none;
@@ -1674,9 +1770,48 @@ border: 2px solid;
  
 
 
-border-color: var(--button-color);
+// border-color: var(--button-color);
 }
 }
+
+.sidebox{
+  width: 300px;
+  position: absolute; 
+  bottom: 0px;
+  margin: 30px 0;
+
+  &.right{
+    right:0;
+  }
+
+}
+
+
+.infoPoints{
+  display: inline-block;
+  width: 100%;
+
+      font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  }
+
+
+.iconPoint{
+  width: 40px;
+  float: left;
+  height: 60px;
+  display: inline-block;
+
+      margin-right: 20px;
+  }
+
+.headerNotification{
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+
+    }
 
 
 </style>
