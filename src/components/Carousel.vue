@@ -611,7 +611,11 @@ gift cards
 </div>
   </div>
 
-
+   <div style="width: 100%;margin:15px 0px;text-align: center;">
+<button @click="openLink('https://app.upserve.com/s/anar-seattle')">
+  order online
+</button>
+      </div>
   
 
       <div style="width: 100%;margin:15px 0px;text-align: center;">
@@ -1261,7 +1265,11 @@ gift cards
 </div>
   </div>
 
-
+   <div style="width: 100%;margin:15px 0px;text-align: center;">
+<button @click="openLink('https://app.upserve.com/s/anar-seattle')">
+  order online
+</button>
+      </div>
   
 
       <div style="width: 100%;margin:15px 0px;text-align: center;">
@@ -1963,7 +1971,11 @@ gift cards
   </div>
 
 
-  
+     <div style="width: 100%;margin:15px 0px;text-align: center;">
+<button @click="openLink('https://app.upserve.com/s/anar-seattle')">
+  order online
+</button>
+      </div>
 
       <div style="width: 100%;margin:15px 0px;text-align: center;">
 <button @click="openLink('https://uqr.to/tkkq')">
