@@ -43,7 +43,7 @@
 <div class="row">
              
                                           
-<div class="col-6 offset-3 offset-2">
+<div class="col-md-6 offset-md-3 col-12 offset-0">
 
 <h3 class="headerNotification">  
 {{item.header_notification}}
@@ -157,7 +157,7 @@
 <div class="col-md-5">
 
 
-              <div :style="{'color' : item.text_color}">
+              <div class="rightContactCol" :style="{'color' : item.text_color}">
 
 <template v-if="item.phone_number">
 
@@ -323,7 +323,7 @@ follow us
 <div class="row">
              
                                           
-<div class="col-sm-8 offset-2">
+<div class="col-12 offset-0 col-md-8 offset-md-2">
 
 
 <h3>  
@@ -416,8 +416,8 @@ follow us
 <div class="container">
 
 <div class="row">
-<div class="col-6"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
-<div class="col-6" style="position: relative">
+<div class="col-md-6 col-12"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
+<div class="col-md-6 col-12" style="position: relative">
 
 <div class="sidebox right" :style="{'background-color': item.background_color}">
 
@@ -468,8 +468,8 @@ _</div>
 <div class="container">
 
 <div class="row">
-<div class="col-6"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
-<div class="col-6" style="position: relative">
+<div class="col-md-6 col-12"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
+<div class="col-md-6 col-12" style="position: relative">
 
 <div class="sidebox right" :style="{'background-color': item.text_color}">
 
@@ -536,7 +536,7 @@ _</div>
 <!--full width image-->
 <template  v-if="item.full_width">
 
-<section class="secPad fh" v-bind:style="{ 'background-size': 'cover', 'background-image': 'url(' + item.full_width + ')', 'height': '100vh' }">
+<section class="secPad fh full-width-background" v-bind:style="{ 'background-size': 'cover', 'background-image': 'url(' + item.full_width + ')' }">
 
 
 </section>
@@ -1441,6 +1441,12 @@ width: 100%
 
 .header-p-box{
   width: 300px;
+    margin: 0 15px;
+
+    @media only screen and (max-width: 768px) {
+    // width: 100%;
+    }
+
 
 }
 
@@ -1791,6 +1797,15 @@ border: 2px solid;
     right:0;
   }
 
+
+  @media only screen and (max-width: 768px) {
+
+
+position: initial;
+width: 100%;
+   }
+
+
 }
 
 
@@ -1820,7 +1835,9 @@ border: 2px solid;
     font-weight: 500;
     text-align: center;
     line-height: 1.6;
-  
+          @media only screen and (max-width: 768px) {
+          font-size: 18px;
+        }
     }
 
 
@@ -1832,7 +1849,52 @@ border: 2px solid;
     font-weight: 500;
     text-align: center;
     line-height: 1.6;
+
+        @media only screen and (max-width: 768px) {
+          font-size: 18px;
+        }
   }
 }
+
+
+
+
+
+
+.full-width-background{
+      height: 100vh;
+    @media only screen and (max-width: 768px) {
+  height: 500px;
+  min-height: 500px;
+    }
+}
+
+
+.topSection{
+    @media only screen and (max-width: 768px) {
+  height: 500px;
+  min-height: 500px;
+    }
+}
+
+
+.restaurantLogo{
+      @media only screen and (max-width: 768px) {
+  height: 500px;
+  min-height: 500px;
+
+
+    svg{
+      width: 50%
+    }
+    }
+}
+
+.rightContactCol{
+        @media only screen and (max-width: 768px) {
+     margin: 0 15px;
+    }
+}
+
 
 </style>
