@@ -82,16 +82,18 @@
 
 
                       <template v-if="item.name.replace(' ', '') === restaurantName">
-                      <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center', 'position': 'relative' }">
+                     
+                     
+                      <section v-if="!item.background_video" class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + item.background_image.url + ')', 'background-position': 'top center', 'position': 'relative' }">
                         <!--<div class="container mobilePage pt132">-->
   
                     <div v-html="item.logo_svg" class="restaurantLogo"></div>
 
 
 
-<!--// {{item.background_video}}-->
 
-<!-- <VideoComponent :src="item.background_video" />-->
+
+
 
 
 
@@ -104,6 +106,11 @@
                       <!--<br>-->
                        <!-- </div>-->
                       </section>
+<VideoComponent v-else :src="item.background_video" :logo="item.logo_svg" />
+
+
+
+
                       <section v-bind:style="{ 'background-color': item.background_color }">
 
          <!--begin container-->

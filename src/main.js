@@ -32,6 +32,12 @@ import { Auth0Plugin } from "./auth";
 
 
 
+import VideoBg from 'vue-videobg'
+
+Vue.component('video-bg', VideoBg)
+
+
+
 
 
 Vue.use(Auth0Plugin, {

@@ -6,13 +6,21 @@
 
 <div>
 
+<video-bg :sources="[`${src}`]">
+  <!-- If you want to add content here, a slot is waiting! -->
 
 
-<video width="320" height="240" controls>
- <source :src="src" type="video/mp4">
 
-Your browser does not support the video tag.
-</video>
+</video-bg>
+
+
+
+<div class="logoVideo">
+
+ <div v-html="logo" class="restaurantLogo2"></div>
+
+</div>
+
 
 </div>
 </template>
@@ -21,7 +29,46 @@ Your browser does not support the video tag.
 <script>
 export default{
     name: 'VideoComponent',
-props:['src']
+props:['src', 'logo']
 
 }
 </script>
+
+
+<style lang="scss">
+.logoVideo{
+
+    position: absolute;
+    top: 50%;
+    z-index: 98;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+.restaurantLogo2{
+
+
+width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    height: 100%;
+
+    width: 100%;
+
+svg{
+
+      width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+}
+
+
+
+</style>
