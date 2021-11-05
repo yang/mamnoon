@@ -863,8 +863,8 @@ this.restaurantName = this.$route.params.id;
 }
 
 .fh{
-min-height: 80vh;
-
+// min-height: 80vh;
+min-height: 90vh;
 }
 
 
