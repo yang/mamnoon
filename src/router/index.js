@@ -113,9 +113,9 @@ const routes = [
     }
   },
   {
-    path: "/mamnoon",
+    path: "/mamnoon-order",
     name: "mamnoon",
-    component: () => import("../views/mamnoon.vue")
+    component: () => import("../views/mamnoonOlo.vue")
   },
   {
     path: "/packages",
@@ -136,9 +136,9 @@ const routes = [
     component: () => import("../views/mamnoonstreettesting.vue")
   },
   {
-    path: "/mamnoonstreet",
+    path: "/mamnoonstreet-order",
     name: "mamnoonstreet",
-    component: () => import("../views/mamnoonstreet.vue")
+    component: () => import("../views/mamnoonstreetOlo.vue")
   },
   // {
   //   path: "/mbar",

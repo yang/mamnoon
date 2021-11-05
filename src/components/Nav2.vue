@@ -58,7 +58,7 @@ order <div class="arrow-right"></div>
 
 
     </template>
-    <router-link to="/landingdrawer">
+    <router-link to="/">
 <svg id="nadiDesk" width="209" height="44" viewBox="0 0 209 44" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="209" height="44" fill="url(#pattern0)"/>
 <defs>
