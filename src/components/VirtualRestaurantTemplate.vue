@@ -307,7 +307,7 @@ follow us
   
 
 
-<section class="secPad" v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color }">
+<section class="secPadMed notificationModule" v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color }">
 
 
     <div class="container mobilePage">
@@ -1807,11 +1807,25 @@ border: 2px solid;
   }
 
 .headerNotification{
-  font-size: 24px;
-  font-weight: 300;
-  text-align: center;
 
+ 
+      font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.6;
+  
     }
 
+
+.notificationModule{
+ 
+ h3{
+ 
+      font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.6;
+  }
+}
 
 </style>
