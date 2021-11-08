@@ -754,7 +754,6 @@ async setPageData(state){
     state.pageData = AcfBlock.data.acf.restaurants
     state.footer = AcfBlock.data.acf.restaurants[0].footer
 
-    console.log(state.footer)
   }
 
    
