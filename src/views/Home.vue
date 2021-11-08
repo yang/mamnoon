@@ -112,9 +112,11 @@
   </ul>
 
 <SlideShow />
+
           </div>
         </div>
       </div>
+<GlobalFooter />
 
   </div>
 </template>
@@ -127,6 +129,9 @@ import Products from "@/components/Products";
 import Nav from "@/components/Nav";
 
 
+
+
+import GlobalFooter from "@/components/GlobalFooter";
 import Stars from "@/components/Stars";
 import StarsLeft from "@/components/StarsLeft";
 
@@ -139,6 +144,7 @@ export default {
     Nav,
     Stars,
     StarsLeft,
+    GlobalFooter
   },
   data() {
     return {

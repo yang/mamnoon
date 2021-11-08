@@ -609,9 +609,7 @@ _</div>
 
 <GlobalFooter />
 
-
   </div>
-
 
 
 
@@ -634,8 +632,8 @@ import Envelope from "@/components/svgIcons/Envelope";
 
 import VideoComponent from "@/components/VideoComponent";
 
-
 import GlobalFooter from "@/components/GlobalFooter";
+
 
 export default {
   components: {

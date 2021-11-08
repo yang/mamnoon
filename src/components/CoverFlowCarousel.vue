@@ -1,5 +1,6 @@
 <template>
     <section :id="tag" class="coverflowsection" :if="visible">
+
 <div class="is-fullheight less-left-right no-top-pad" id="cover-carousel">
 <h4 class="noselect">{{header}}</h4>
     <p class="description-para hide-mobile" style="text-align:left;margin-top: 20px;">{{descriptionbody}}</p>
@@ -401,6 +402,9 @@ this.upserveSectionsRendered = true
     }
   },
   mounted() {
+
+
+    console.log(1234);
     this.dumpAcf()
     // this.upserves();
     // this.streetupserves();

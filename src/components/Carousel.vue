@@ -2147,6 +2147,9 @@ import Envelope2 from "@/components/svgIcons/Envelope";
 import Accordion from "@/components/accordion";
 import AccordionItem from "@/components/accordion-item";
 
+
+
+
 export default {
   components: {
     Accordion,

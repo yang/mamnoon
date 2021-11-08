@@ -1,7 +1,7 @@
 <template>
   <div>
 
-  gekki
+
     <input v-model="emailAddress" type="email" placeholder="enter your email" class="lap-right-pad noselect" />
     <button class="no-button-style w-80-button" @click="submitForm">
         <Send :sendText="subscribeText" />ddd

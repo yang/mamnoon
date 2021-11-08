@@ -2298,6 +2298,10 @@ padding: 5px 20px;
 }
 
 
+.secPadMed{
+  padding: 34px 0;
+}
+
 </style>
 
 

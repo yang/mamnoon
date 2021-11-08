@@ -1,6 +1,6 @@
 <template>
 
-  <section id="newsletter" class="section hero is-primary is-fullheight position-relative mb-80 black-background" :if="visible">
+  <section id="newsletter" class="section hero is-primary is-fullheight position-relative mb-80 black-background" :if="visible" style="display:none;">
         <h4 class="mob-bottom-margin">{{header}}</h4>
        <p class="description-para noselect hide-mobile">{{body}}</p>
 
