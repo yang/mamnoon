@@ -2274,6 +2274,30 @@ display: flow-root;
 }
 
 
+
+.nadi-button{
+
+background-color: #fff;
+
+border: 2px solid #F15D58;
+border-radius: 5px;
+color: #F15D58;
+padding: 5px 20px;
+
+&:hover{
+  background-color: transparent;
+}
+&.dark{
+
+}
+
+&.ml20{
+  margin-left: 10px;
+}
+
+}
+
+
 </style>
 
 

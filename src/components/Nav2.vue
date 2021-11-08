@@ -30,7 +30,6 @@
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header2">
 
 
-   
  <GoogleAuth2 class="logButton googleInHeader" />
 
 
@@ -142,7 +141,8 @@ order <div class="arrow-right"></div>
 
 
     <template v-if="$mq === 'lg'">
-    <nav v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header2">
+<!--    <nav v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header2">-->
+        <nav v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" >
         <div class="container">
 
              <ul id="menu">
@@ -192,7 +192,12 @@ order <div class="arrow-right"></div>
     </nav>
 </template>
 <template v-if="$mq === 'sm'">
-        <nav class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header2 mobile-nav" :class="{ expanded: mobNavExpanded }">
+<!--        <nav class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header2 mobile-nav" :class="{ expanded: mobNavExpanded }">-->
+
+    <nav class="newNav" :class="{ expanded: mobNavExpanded }">
+
+
+        
         <div class="container">
 
 
@@ -1350,18 +1355,18 @@ margin-bottom: 0;
 
 .closeToggle{
 
-    position: absolute;
+position: absolute;
     left: 20px;
     right: auto;
-    top: 20px;
-
+    top: 50%;
+    transform: translateY(-50%);
 
 @media only screen and (max-width: 768px){
     position: absolute;
     right: 20px;
     left: auto;
-    top: 20px;
-
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 
@@ -1369,6 +1374,28 @@ margin-bottom: 0;
 
 
 }
+
+
+.newNav{
+    height: 100vh;
+    background: white;
+    position: absolute;
+    width: 100%;
+    transform: translateX(-100%);
+    
+    ul#menu{
+        margin-top: 20px;
+    }
+
+    a{
+        font-size: 36px;
+    }
+transition: transform .25s ease;
+    &.expanded{
+         transform: translateX(0%);   
+    }
+}
+
 </style>
 
 

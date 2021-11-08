@@ -125,6 +125,7 @@ const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
     pageData: null,
+    footer: null,
     isFirstTime: true,
     openDrawerOnLoad: false,
     orderConfirmation: {},
@@ -746,9 +747,14 @@ const store = new Vuex.Store({
 async setPageData(state){
 
     let responseAcf = await base.get(`https://mamnoontogo.net/wp-json/acf/v3/virtual_restaurant/412`)
+
+
+
     let AcfBlock = responseAcf
     state.pageData = AcfBlock.data.acf.restaurants
+    state.footer = AcfBlock.data.acf.restaurants[0].footer
 
+    console.log(state.footer)
   }
 
    
