@@ -1,12 +1,9 @@
 <template>
-
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" :style="{'width': this.width ? this.width :'20px'}">
-<title>clock</title>
-<path :fill="color" d="M12.727 4.477h-1.5v8.349l5.419 2.576 0.644-1.355-4.563-2.169v-7.401z"></path>
-<path :fill="color" d="M12 0.75c-6.213 0-11.25 5.037-11.25 11.25s5.037 11.25 11.25 11.25 11.25-5.037 11.25-11.25-5.037-11.25-11.25-11.25zM12 21.75c-5.385 0-9.75-4.365-9.75-9.75s4.365-9.75 9.75-9.75 9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"></path>
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" :style="{'width': this.width ? this.width :'20px'}">
+<circle cx="19.6522" cy="19.6522" r="17.6522" fill="transparent" :stroke="color" stroke-width="4"/>
+<rect x="17.8652" y="7.14624" width="3.57312" height="14.2925" rx="1.78656" :fill="color"/>
+<path d="M27.7475 25.2208C28.4451 25.9185 28.4451 27.0497 27.7475 27.7474C27.0498 28.4451 25.9186 28.4451 25.2209 27.7474L18.3958 20.9223L20.9223 18.3957L27.7475 25.2208Z" :fill="color"/>
 </svg>
-
-
 </template>
 
 

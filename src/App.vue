@@ -2302,6 +2302,16 @@ padding: 5px 20px;
   padding: 34px 0;
 }
 
+
+
+.mb20{
+  margin-bottom: 20px;
+}
+
+
+.m15Mob{
+    margin: 0 15px;
+    }
 </style>
 
 
