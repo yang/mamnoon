@@ -119,7 +119,8 @@
 </div>
 <div class="rightIcon">
 <!--<span><b>mbar will be closed october 4th and 5th for a staff holiday and maintenance.</b></span><br/>-->
- 
+ <span> fri-sat, 4:00-10:00pm<br>
+sun-thur, 4:00-9:00pm</span>
 </div>
 
 </div>
@@ -751,7 +752,13 @@ gift cards
 </div>
 <div class="rightIcon">
 <!--<span><b>mbar will be closed october 4th and 5th for a staff holiday and maintenance.</b></span><br/>-->
- 
+
+
+
+<span> fri-sat, 4:00-10:00pm<br>
+sun-thur, 4:00-9:00pm</span>
+
+
 </div>
 
 </div>
@@ -1599,7 +1606,8 @@ gift cards
 </div>
 <div class="rightIcon">
 <!--<span><b>mbar will be closed october 4th and 5th for a staff holiday and maintenance.</b></span><br/>-->
- 
+ <span> fri-sat, 4:00-10:00pm<br>
+sun-thur, 4:00-9:00pm</span>
 </div>
 
 </div>
