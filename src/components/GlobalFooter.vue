@@ -28,7 +28,7 @@
 <EmailSignup />
 </div>
 
-<div v-if="footer.footer_links" v-for="linkgroup in footer.footer_links"class="col-md-3 col-12" style="display:none;">
+<div v-if="footer.footer_links" v-for="linkgroup in footer.footer_links"class="col-md-3 col-12">
 <ul>
 <li>
 

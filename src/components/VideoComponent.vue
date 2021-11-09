@@ -50,7 +50,7 @@ props:['src', 'logo']
 .restaurantLogo2{
 
 
-width: 500px;
+width: 300px;
     margin: 0 auto;
     text-align: center;
     height: 100%;
@@ -60,6 +60,7 @@ width: 500px;
 svg{
 
       width: 500px;
+      width: 300px;
     position: absolute;
     top: 50%;
     left: 50%;

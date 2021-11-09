@@ -120,7 +120,7 @@
 <div class="row">
              
                                           
-<div class="col-md-7">
+<div class="col-md-4">
 <div class="header-p-box">
 
 
@@ -154,19 +154,86 @@
 
 
 </div>
-<div class="col-md-5">
+
+                     
+                      </div>
+                                          <!--end row-->
+</div>
+                     <!--end container-->
+
+                      </section>
 
 
-              <div class="rightContactCol" :style="{'color' : item.text_color}">
+
+
+
+<!--second contact section-->
+
+            <section v-bind:style="{ 'background-color': item.text_color }">
+
+         <!--begin container-->
+    <div class="container mobilePage secPadSmall">
+
+     <!--begin row-->
+<div class="row">
+             
+                                          
+<div class="col-md-4">
+
+
+                
+   <div class="map" v-html="item.map.map_embed"></div>
+
+
+
+
+
+
+
+
+
+
+                                                <br>
+
+
+
+
+
+
+
+</div>
+<div class="col-md-2" style="padding-left: 0;position:relative;">
+
+<div style="position: absolute;bottom: 0;">
+
+
+<template v-if="item.address">
+<template v-for="line in item.address.address_lines">
+
+<template v-if="line.line_group.url !== ''">
+ <a :style="{'color':item.background_color}" :href="line.line_group.url" target="_blank">{{line.line_group.text}}</a><br>
+</template>
+<template v-else>
+  {{line.line_group.text}}<br>
+</template>
+
+</template>
+</template>
+</div>
+</div>
+<div class="col-md-5 offset-md-1 offset-0">
+
+
+              <div class="rightContactCol" :style="{'color' : item.background_color}">
 
 <template v-if="item.phone_number">
 
 <div class="infoPoints">
 <div class="iconPoint">
-              <Phone :color="item.text_color" :width="40" class="mr6" />
+              <Phone :color="item.background_color" :width="40" class="mr6" />
               </div>
 <div style="padding-top: 10px;">
- <a :style="{'color':item.text_color}" :href="`tel:+1${item.phone_number.replace(/[^0-9.]/g, '')}`">{{item.phone_number}}</a><br>            
+ <a :style="{'color':item.background_color}" :href="`tel:+1${item.phone_number.replace(/[^0-9.]/g, '')}`">{{item.phone_number}}</a><br>            
 
 
 
@@ -183,14 +250,14 @@
 <template v-if="item.contact">
 <div class="infoPoints">
 <div class="iconPoint">
-<Envelope :width="40" :color="item.text_color" class="mr6 centeredSvg" style="position: initial;margin-right: 10px;" />
+<Envelope :width="40" :color="item.background_color" class="mr6 centeredSvg" style="position: initial;margin-right: 10px;" />
 </div>
 
 <div style="padding-top: 2px;">
 
 <template v-for="line in item.contact.contact_lines">
   <template v-if="line.line_group.link !== ''">
-    <a :style="{'color':item.text_color}" :href="line.line_group.link" target="_blank">{{line.line_group.text}}</a><br>
+    <a :style="{'color':item.background_color}" :href="line.line_group.link" target="_blank">{{line.line_group.text}}</a><br>
     </template>
     <template v-else>
       {{line.line_group.text}}<br>
@@ -204,32 +271,13 @@
 </div>
 </template>
 <br>
-<template v-if="item.address">
-<div class="infoPoints">
-<div class="iconPoint">
-<MapPin  :width="40" :color="item.text_color" class="mr6" />
-</div>
-<template v-for="line in item.address.address_lines">
-
-<template v-if="line.line_group.url !== ''">
- <a :style="{'color':item.text_color}" :href="line.line_group.url" target="_blank">{{line.line_group.text}}</a><br>
-</template>
-<template v-else>
-  {{line.line_group.text}}<br>
-</template>
-
-</template>
-
-
-</div>
-</template>
 
 
 
 <template v-if="item.hours">
 <div class="infoPoints">
 <div class="iconPoint">
-<Clock  :width="40" :color="item.text_color" class="mr6" />
+<Clock  :width="40" :color="item.background_color" class="mr6" />
 </div> 
 
 
@@ -257,6 +305,9 @@
 
                       </section>
 
+
+
+<!--second contact section-->
 
 
 
@@ -454,10 +505,10 @@ follow us
 <div class="container">
 
 <div class="row">
-<div class="col-md-6 col-12"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
-<div class="col-md-6 col-12" style="position: relative">
+<div class="col-md-8 col-12"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
+<div class="col-md-4 col-12" style="position: relative">
 
-<div class="sidebox right" :style="{'background-color': item.background_color}">
+<div class="sidebox" :style="{'background-color': item.background_color}">
 
 
       <h3>  
@@ -506,10 +557,10 @@ _</div>
 <div class="container">
 
 <div class="row">
-<div class="col-md-6 col-12"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
-<div class="col-md-6 col-12" style="position: relative">
+<div class="col-md-8 col-12"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
+<div class="col-md-4 col-12" style="position: relative">
 
-<div class="sidebox right" :style="{'background-color': item.text_color}">
+<div class="sidebox" :style="{'background-color': item.text_color}">
 
 
       <h3>  
@@ -666,10 +717,11 @@ computed: {
         '--button-color': this.buttonColors[i].buttonColor,
         '--button-background-color': this.buttonColors[i].buttonColorHover,
         '--button-border-color': this.buttonColors[i].buttonColor,
-        
         '--button-color--hover': this.buttonColors[i].buttonColorHover,
         '--button-background-color--hover': this.buttonColors[i].buttonColor,
-        '--button-border-color': this.buttonColors[i].borderColorHover
+        '--button-border-color': this.buttonColors[i].borderColorHover,
+        '--alternate-color': this.buttonColors[i].alternateColor
+
       };
 
 
@@ -719,6 +771,7 @@ return arrRest;
         colorBackd: '',
         colorBackdHover: '',
         color: '',
+        alternateColor: '',
         colorHover: '',
         borderColor: '',
         borderColorHover: ''
@@ -818,7 +871,9 @@ name: this.$store.state.pageData[0].restaurant_repeater[i].name,
 buttonColor: this.$store.state.pageData[0].restaurant_repeater[i].button_text_color,
 buttonColorHover: this.$store.state.pageData[0].restaurant_repeater[i].button_color,
 buttonColorBg: this.$store.state.pageData[0].restaurant_repeater[i].button_color,
-buttonColorBgHover: this.$store.state.pageData[0].restaurant_repeater[i].button_text_color
+buttonColorBgHover: this.$store.state.pageData[0].restaurant_repeater[i].button_text_color,
+alternateColor: this.$store.state.pageData[0].restaurant_repeater[i].background_color
+
 });
 
 
@@ -1505,7 +1560,7 @@ width: 100%
 .restaurantLogo{
 
 
-width: 500px;
+    width: 300px;
     margin: 0 auto;
     text-align: center;
     height: 100%;
@@ -1515,7 +1570,8 @@ width: 500px;
 
 svg{
 
-      width: 500px;
+      // width: 500px;
+          width: 300px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1616,7 +1672,7 @@ padding: 20px 16px;
 
 
 .map iframe{
-  width: 280px;
+  width: 100%;
   height: 280px;
   border: 1px solid;
   border-radius: 10px;
@@ -1779,26 +1835,23 @@ text-align: center;
 
 a.ctaLink {
   color: var(--button-color);
-  background-color: var(--button-background-color);
+
+  background-color: #fff;
  
 
 border: 2px solid;
+
+
 border-color: var(--button-color);
-
-
-
-//  -webkit-transition: background-color .5s ease;
-//   -moz-transition: background-color .5s ease;
-//   -o-transition: background-color .5s ease;
-//   transition: background-color .5s ease;
 
 
 
 
   text-decoration: none;
 &:hover {
-  color: var(--button-color--hover);
-  background-color: var(--button-background-color--hover);
+ background-color: var(--button-color);
+
+ color: #fff;
   // border-color: var(--button-border-color--hover);
 }
 }
@@ -1806,16 +1859,15 @@ border-color: var(--button-color);
 
 a.ctaLinkOpposite {
   color: var(--button-color);
-  background-color: var(--button-background-color);
+ background-color: #fff;
  
 
 border: 2px solid;
 
 
 
-  color: var(--button-color--hover);
-  background-color: var(--button-background-color--hover);
-  border-color: var(--button-border-color--hover);
+
+  border-color: var(--alternate-color);
 
 
 
@@ -1824,8 +1876,8 @@ border: 2px solid;
 
   text-decoration: none;
 &:hover {
-  color: var(--button-color);
-  background-color: var(--button-background-color);
+  color: #fff;
+  background-color: var(--button-color);
  
 
 
@@ -1893,7 +1945,7 @@ width: 100%;
  
       font-size: 24px;
     font-weight: 500;
-    text-align: center;
+    text-align: left;
     line-height: 1.6;
 
         @media only screen and (max-width: 768px) {
