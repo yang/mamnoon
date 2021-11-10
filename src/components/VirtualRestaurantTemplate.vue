@@ -1873,7 +1873,7 @@ a.ctaLink {
   background-color: #fff;
  
 
-border: 2.5px solid;
+border: 0 solid;
 
 
 border-color: var(--button-color);
@@ -1896,7 +1896,7 @@ a.ctaLinkOpposite {
  background-color: #fff;
  
 
-border: 2.5px solid;
+border: 0 solid;
 
 
 
@@ -1910,8 +1910,8 @@ border: 2.5px solid;
 
   text-decoration: none;
 &:hover {
-  color: #fff;
-  background-color: var(--button-color);
+  // color: #fff;
+  background-color: var(--alternate-color);
  
 
 
