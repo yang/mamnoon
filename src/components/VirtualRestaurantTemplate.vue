@@ -178,7 +178,7 @@
 <div class="row">
              
                                           
-<div class="col-md-6">
+<div class="col-lg-6 col-6">
     
    <div class="map m15Mob mapBox" v-html="item.map.map_embed"></div>
 
@@ -1869,19 +1869,9 @@ text-align: center;
 
 a.ctaLink {
   color: var(--button-color);
-
   background-color: #fff;
- 
-
-border: 0 solid;
-
-
-border-color: var(--button-color);
-
-
-
-
   text-decoration: none;
+
 &:hover {
  background-color: var(--button-color);
 
@@ -1893,22 +1883,9 @@ border-color: var(--button-color);
 
 a.ctaLinkOpposite {
   color: var(--button-color);
- background-color: #fff;
-  // background-color: var(--alternate-color);
-
-border: 0 solid;
-
-
-
-
-  border-color: var(--alternate-color);
-
-
-
-  // transition: all .5s ease;
-
-
+  background-color: #fff;
   text-decoration: none;
+
 &:hover {
   // color: #fff;
    background-color: var(--alternate-color);
