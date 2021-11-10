@@ -178,7 +178,7 @@
 <div class="row">
              
                                           
-<div class="col-lg-6 col-6">
+<div class="col-lg-6 col-md-12">
     
    <div class="map m15Mob mapBox" v-html="item.map.map_embed"></div>
 
@@ -312,7 +312,7 @@
 <!--social section-->
 <template v-if="item.social">
 
-<section class="secPadMed social" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }">
+<section class="secPadMed social noTopPad" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }">
 
 
 
@@ -1568,7 +1568,7 @@ width: 100%
     font-size: 28px;
     line-height: 40px;
     width: 100%;
-    padding: 0 0 30px;
+    padding: 0 0 10px;
     font-weight: 600;
     margin-bottom: 0;
     }
@@ -1789,7 +1789,7 @@ a.ctaLinkOpposite{
 display: block;
 border-radius: 5px;
 width: 100%;
-margin: 10px 0 0;
+margin: 23px 0 0;
 text-align: center;
 padding: 3px 10px 5px;
 font-size: 22px;
@@ -1926,7 +1926,7 @@ width: 100%;
   font-weight: 600;
   margin-bottom: 24px;
 
-
+    margin-bottom: 45px;
   &.mb0{
     margin-bottom: 0;
   }
@@ -2041,6 +2041,14 @@ width: 100%;
     position: relative;
     display: inline-block;
     width: 200px;
+
+
+
+       @media only screen and (max-width: 768px) {
+         width: 100%;
+       }
+
+
 }
 
 .mapAddressBox{
@@ -2061,6 +2069,14 @@ width: 100%;
 
  .mapBox{
 display: inline-block;
+
+
+       @media only screen and (max-width: 768px) {
+
+         width: calc(100% - 30px);
+       }
+
+
  }
 
 </style>
