@@ -178,53 +178,69 @@
 <div class="row">
              
                                           
-<div class="col-md-4">
-
-
-                
-   <div class="map m15Mob" v-html="item.map.map_embed"></div>
-
+<div class="col-md-6">
+    
+   <div class="map m15Mob mapBox" v-html="item.map.map_embed"></div>
 
 
 
+<div class="mapAddress">
 
 
-
-
-
-
-                                                <br>
-
-
-
-
-
-
-
-</div>
-<div class="col-md-2 mapAddress">
-
-<div class="mapAddressBox">
-
+<div class="mapAddressBox infoPoints mb0">
 
 <template v-if="item.address">
 <template v-for="line in item.address.address_lines">
-
 <template v-if="line.line_group.url !== ''">
  <a :style="{'color':item.background_color}" :href="line.line_group.url" target="_blank">{{line.line_group.text}}</a><br>
 </template>
 <template v-else>
   {{line.line_group.text}}<br>
 </template>
+</template>
+</template>
+</div>
+</div>
 
-</template>
-</template>
+
+                                            
+
+
+
+
+
+
+
 </div>
-</div>
+
 <div class="col-md-5 offset-md-1 offset-0">
 
 
               <div class="rightContactCol" :style="{'color' : item.background_color}">
+
+
+<template v-if="item.hours">
+<div class="infoPoints">
+<div class="iconPoint">
+<Clock  :width="40" :color="item.background_color" class="mr6" />
+</div> 
+
+
+<div>
+
+<template v-for="line in item.hours.hours_lines">
+
+{{line.line}}<br>
+</template>
+</div>
+
+
+<br>
+</div>
+</template>
+
+
+
 
 <template v-if="item.phone_number">
 
@@ -232,7 +248,7 @@
 <div class="iconPoint">
               <Phone :color="item.background_color" :width="40" class="mr6" />
               </div>
-<div style="padding-top: 10px;">
+<div style="padding-top: 6px;">
  <a :style="{'color':item.background_color}" :href="`tel:+1${item.phone_number.replace(/[^0-9.]/g, '')}`">{{item.phone_number}}</a><br>            
 
 
@@ -253,7 +269,7 @@
 <Envelope :width="40" :color="item.background_color" class="mr6 centeredSvg" style="position: initial;margin-right: 10px;" />
 </div>
 
-<div style="padding-top: 2px;">
+<div>
 
 <template v-for="line in item.contact.contact_lines">
   <template v-if="line.line_group.link !== ''">
@@ -274,25 +290,7 @@
 
 
 
-<template v-if="item.hours">
-<div class="infoPoints">
-<div class="iconPoint">
-<Clock  :width="40" :color="item.background_color" class="mr6" />
-</div> 
 
-
-<div style="padding-top: 5px;">
-
-<template v-for="line in item.hours.hours_lines">
-
-{{line.line}}<br>
-</template>
-</div>
-
-
-<br>
-</div>
-</template>
               </div>
 
 
@@ -318,10 +316,9 @@
 
 
 
-
     <div class="container mobilePage">
 
-<div class="row">
+<div class="row" style="display:none;">
 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 offset-0">
 
 
@@ -402,18 +399,18 @@
 
 
      <!--begin row-->
-<div class="row" style="display:none;">
+<div class="row">
              
                                           
 
 
-<div class="social-icons">
+<div class="social-icons" style="width: 100%;text-align: center;">
 
-ff
+<!--
 <div class="socialLink">
 <h3>  
 follow us
-</h3></div>
+</h3></div>-->
 <template v-for="social in item.social">
 
 <div class="socialLink">
@@ -508,50 +505,6 @@ follow us
 <!--end notification section-->
 
 
-
- <!--map section-->
-<template v-if="item.map">
-
-<section class="secPad" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color }" style="display:none;">
-
-
-
-    <div class="container mobilePage noPadMob">
-
-     <!--begin row-->
-<div class="row">
-
-
-<div class="col-sm-6">
-
-      <div class="map m15Mob" v-html="item.map.map_embed"></div>
-</div>
-
-<div class="col-sm-6" style="position:relative">
-
-
-
-<div style="position: absolute;bottom: 0;">
-
-
-
-<template v-if="item.address">
-<template v-for="line,index in item.address.address_lines">
-
-{{line.line}}<br>{{index}}f
-</template>
-
-</template>
-
-</div>
-
-</div></div></div>
-
-
-</section>
-</template>
-
- <!--end map section-->
 
 
 
@@ -1753,11 +1706,11 @@ padding: 20px 16px;
 
 
 .map iframe{
-  width: 100%;
+  width: 300px;
   height: 280px;
   border: 1px solid;
   border-radius: 10px;
-  float: right;
+  // float: right;
 
 
  @media only screen and (max-width: 768px) {
@@ -1920,7 +1873,7 @@ a.ctaLink {
   background-color: #fff;
  
 
-border: 2px solid;
+border: 2.5px solid;
 
 
 border-color: var(--button-color);
@@ -1943,7 +1896,7 @@ a.ctaLinkOpposite {
  background-color: #fff;
  
 
-border: 2px solid;
+border: 2.5px solid;
 
 
 
@@ -1995,6 +1948,11 @@ width: 100%;
       font-size: 18px;
   font-weight: 600;
   margin-bottom: 24px;
+
+
+  &.mb0{
+    margin-bottom: 0;
+  }
   }
 
 
@@ -2103,12 +2061,13 @@ width: 100%;
 
 
 .mapAddress{
-padding-left: 0;
-position:relative;
+    position: relative;
+    display: inline-block;
+    width: 200px;
 }
 
 .mapAddressBox{
-  
+  width: 100%;
   position: absolute;bottom: 0;
 
 
@@ -2121,5 +2080,10 @@ position:relative;
 
 
 }
+
+
+ .mapBox{
+display: inline-block;
+ }
 
 </style>

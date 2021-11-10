@@ -54,7 +54,7 @@
        fill="none"
        width="32"
        height="32"
-       id="rect3037" /></g><path :fill="color"
+       id="rect3037" /></g><path :fill="'transparent'"
      id="path3040"
      d="M 0,4 V 28 H 32 V 4 H 0 z M 28.149,6 15.998,15.719 3.851,6 H 28.149 z M 2,25.999 V 7.081 L 15.998,18.278 29.999,7.081 V 25.999 H 2 z" /></svg>
 

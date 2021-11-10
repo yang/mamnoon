@@ -114,7 +114,7 @@
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+<Clock :color="'black'" style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 
 </div>
 <div class="rightIcon">
@@ -140,7 +140,7 @@ sun-thur, 4:00-9:00pm</span>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 :color="'black'" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -228,7 +228,7 @@ Capitol Hill (near Melrose Market)<br>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+<Clock :color="'black'" style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 
 </div>
 <div class="rightIcon">
@@ -261,7 +261,7 @@ Capitol Hill (near Melrose Market)<br>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 :color="'black'" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -437,7 +437,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+<Clock :color="'white'" style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 
 </div>
 <div class="rightIcon">
@@ -459,7 +459,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 :color="'white'" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -573,7 +573,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+<Clock :color="'black'" style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 
 </div>
 <div class="rightIcon">
@@ -603,7 +603,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 :color="'black'" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -747,7 +747,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+<Clock  :color="'black'"  style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 
 </div>
 <div class="rightIcon">
@@ -778,7 +778,7 @@ sun-thur, 4:00-9:00pm</span>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2  :color="'black'" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -876,7 +876,7 @@ Capitol Hill (near Melrose Market)<br>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+<Clock  :color="'black'" style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 
 </div>
 <div class="rightIcon">
@@ -903,7 +903,7 @@ Capitol Hill (near Melrose Market)<br>
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2   :color="'black'" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -1088,7 +1088,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+<Clock :color="'white'" style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 
 </div>
 <div class="rightIcon">
@@ -1110,7 +1110,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 :color="'white'" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
@@ -1241,7 +1241,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Clock style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
+<Clock :color="'black'" style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
 
 </div>
 <div class="rightIcon">
@@ -1271,7 +1271,7 @@ gift cards
 
 <div class="infoIconLine">
 <div class="leftIcon">
-<Envelope2 class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
+<Envelope2 :color="'black'" class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
 </div>
 
 <div class="rightIcon">
