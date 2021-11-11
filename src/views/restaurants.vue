@@ -128,17 +128,18 @@
 <template v-for="link in restaurant.buttons">
 
 
-<a v-if="link.text.includes('menu')" :href="link.link">view menu</a><br>
+<a style="display:none;" class="linkBlack" v-if="link.text.includes('menu')" :href="link.link">view menu</a><br>
 
 
 </template>
 
-  <router-link :to="restaurant.name.replace(' ','')">
+<div style="display:none;">
+  <router-link class="linkBlack" :to="restaurant.name.replace(' ','')">
 location details
 </router-link><br>
 
 
-
+</div>
 
 
 
