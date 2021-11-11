@@ -1263,6 +1263,10 @@ margin-top: 5px;
   margin-bottom: 40px;
 }
 
+.mb60{
+  margin-bottom: 60px;
+}
+
 .pt20{
   padding: 20px 0;
 }
@@ -2324,6 +2328,10 @@ padding: 5px 20px;
   padding-top: 0;
 }
 
+
+*{
+  text-transform: lowercase;
+}
 
 </style>
 

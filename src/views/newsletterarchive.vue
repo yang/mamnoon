@@ -18,9 +18,9 @@ import Nav from "@/components/Nav";
 export default {
         metaInfo: {
       // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'Newsletter Archive',
+      title: 'newsletter archive',
       // all titles will be injected into this template
-      titleTemplate: '%s | Nadi Mama'
+      titleTemplate: '%s | nadi mama'
   },
   components: {
     NewsletterArchive,

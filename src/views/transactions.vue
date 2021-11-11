@@ -12,9 +12,9 @@ import Transactions from "@/components/Transactions";
 export default {
           metaInfo: {
       // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'Transactions',
+      title: 'transactions',
       // all titles will be injected into this template
-      titleTemplate: '%s | Nadi Mama'
+      titleTemplate: '%s | nadi mama'
   },
   components: {
 

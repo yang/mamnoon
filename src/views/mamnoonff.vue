@@ -130,9 +130,9 @@ import Borderline from "@/components/svgIcons/Borderline";
 export default {
     metaInfo: {
       // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'Fine Foods',
+      title: 'fine foods',
       // all titles will be injected into this template
-      titleTemplate: '%s | Nadi Mama'
+      titleTemplate: '%s | nadi mama'
   },
   props: ['data'],
   data(){

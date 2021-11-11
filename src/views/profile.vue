@@ -12,9 +12,9 @@ import UserProfile from "@/components/UserProfile";
 export default {
       metaInfo: {
       // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'Profile',
+      title: 'profile',
       // all titles will be injected into this template
-      titleTemplate: '%s | Nadi Mama'
+      titleTemplate: '%s | nadi mama'
   },
   components: {
 

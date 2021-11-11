@@ -2116,7 +2116,7 @@ export default {
       // if no subcomponents specify a metaInfo.title, this title will be used
       title: 'Order Online',
       // all titles will be injected into this template
-      titleTemplate: '%s | Nadi Mama'
+      titleTemplate: '%s | nadi mama'
     },
   name: "UpserveOloTesting",
   props: ["data","emailAddress","oloEndpoint","menuEndpoint","title","userData"],

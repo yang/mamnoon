@@ -178,10 +178,27 @@
 <div class="row">
              
                                           
-<div class="col-lg-6 col-md-12">
+<div class="col-lg-6 col-md-12 mapBoxOuter">
     
    <div class="map m15Mob mapBox" v-html="item.map.map_embed"></div>
 
+
+
+
+
+
+
+<div v-for="button in buttonColors" style="display:none;">
+
+{{button.name}}
+
+<div :style="{'background-color':button.buttonColor}">button.buttonColor</div>
+<div :style="{'background-color':button.buttonColorHover}">button.buttonColorHover</div>
+<div :style="{'background-color':button.buttonColorBgHover}">button.buttonColorBgHover</div>
+<div :style="{'background-color':button.buttonColorBg}">button.buttonColorBg</div>
+<div :style="{'background-color':button.alternateColor}">button.alternateColor</div>
+
+</div>
 
 
 <div class="mapAddress">
@@ -213,7 +230,7 @@
 
 </div>
 
-<div class="col-md-5 offset-md-1 offset-0">
+<div class="col-lg-5 offset-lg-1 col-md-12 offset-0">
 
 
               <div class="rightContactCol" :style="{'color' : item.background_color}">
@@ -1924,12 +1941,23 @@ width: 100%;
 
       font-size: 18px;
   font-weight: 600;
-  margin-bottom: 24px;
+  // margin-bottom: 24px;
 
     margin-bottom: 45px;
   &.mb0{
     margin-bottom: 0;
+
+
+           @media only screen and (max-width: 768px) {
+    margin-bottom: 24px;
+        }
   }
+         @media only screen and (max-width: 768px) {
+    margin-bottom: 24px;
+        }
+
+
+
   }
 
 
@@ -2054,12 +2082,17 @@ width: 100%;
 .mapAddressBox{
   width: 100%;
   position: absolute;bottom: 0;
+       @media only screen and (max-width: 1200px) {
+         position: initial;
 
+       }
 
 
        @media only screen and (max-width: 992px) {
          position: initial;
-  padding: 0px 30px 15px;
+  padding: 20px 30px 15px;
+    padding: 20px 15px 15px;
+    // margin-bottom:240px;
     }
 
 
@@ -2078,5 +2111,15 @@ display: inline-block;
 
 
  }
+
+
+
+ .mapBoxOuter{
+   margin-bottom: 40px;
+
+     @media only screen and (max-width: 768px) {
+          margin-bottom: 0px;
+     }
+   }
 
 </style>

@@ -247,7 +247,11 @@ const routes = [
       requiresAuth: false
     }
   },
-
+  {
+    path: "/restaurants",
+    name: "restaurants",
+    component: () => import("../views/restaurants.vue")
+  },
 
   {
     path: "/:id",
