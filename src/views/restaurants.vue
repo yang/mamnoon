@@ -193,10 +193,16 @@ location details
     <!-- <img style="width: 100%;" src="@/assets/img/mamnoonFF_NADI_2-01.png"> -->
 </div>
   <!-- {{$store.state.currentUserEmail}} -->
+
+  <GlobalFooter />
   </div>
 </template>
 <script>
 import Nav2 from "@/components/Nav2";
+
+
+
+import GlobalFooter from "@/components/GlobalFooter";
 import Borderline from "@/components/svgIcons/Borderline";
 
 
@@ -228,6 +234,7 @@ ffdata: null
   },
   components: {
     Nav2,
+    GlobalFooter, 
     Borderline,
     MamnoonLogo,
     StreetLogo,
