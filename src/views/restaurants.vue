@@ -540,8 +540,9 @@ background-position: center center;
 }
 
 .restaurantName{
-  display: 
-  block;
+  display: block;
+  height: 100px;
+  
 }
 
 
