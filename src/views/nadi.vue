@@ -58,7 +58,7 @@ https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4
                       </section>
 <VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />
 
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'https://mamnoontogo.net/wp-content/uploads/2021/10/MBar_food_finals125-scaled.jpg' + ')',
+         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/123.jpeg' + ')',
  'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
                         <!--<div class="container mobilePage pt132">-->
   
