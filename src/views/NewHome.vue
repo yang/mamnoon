@@ -1,28 +1,16 @@
 <template>
 <div class="pt180" style="overflow-x:hidden;">
-<Nav />
+eee
 
 
-sss
-      <!-- <div class="container mt-5 nav-acc-header"> -->
-      <!-- <div class="container mt-5 home-page">
-        <div class="row">
-          <div class="col-md-12">
-dddd
-
-<SlideShowNewHome />
-          </div>
-        </div>
-      </div> -->
-<SlideShowNewHome />
+<Nav2 />
   </div>
 </template>
 <script>
 
 
-import SlideShowNewHome from "@/components/SlideShowNewHome";
 
-import Nav from "@/components/Nav";
+import Nav2 from "@/components/Nav2";
 
 
 
@@ -30,8 +18,7 @@ import Nav from "@/components/Nav";
 
 export default {
     components: {
-    SlideShowNewHome,
-    Nav
+    Nav2
   },
 
 };

@@ -521,7 +521,7 @@
 
 <!-- <h1>anar</h1> -->
 <!--<span><a href="https://anar.life/" target="_blank">anar.life</a></span>-->
-<p>anar creates and enriches relationships with people who are seeking fast, beautiful & delicious,bites snacks and meals through spaces that escape the hustle of modern life without compromising health or moral food values.  anar instances the future of food by following time tested and proven traditions in Levantine and Persian cuisines while observing modern evidence-based research without compromising on flavor or warmth/intimacy of the experience.</p>
+<p>anar creates and enriches relationships with people who are seeking fast, beautiful & delicious, bites snacks and meals through spaces that escape the hustle of modern life without compromising health or moral food values.  anar instances the future of food by following time tested and proven traditions in Levantine and Persian cuisines while observing modern evidence-based research without compromising on flavor or warmth/intimacy of the experience.</p>
 </div>
 
 </div>

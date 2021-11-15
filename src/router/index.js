@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import NewHome from "../views/NewHome.vue";
+
 import AxiosPlugin from 'vue-axios-cors';
 
 import Datepicker from 'vuejs-datepicker';
@@ -20,9 +20,9 @@ const routes = [
     component: Home
   },
   {
-    path: "/newhome",
-    name: "newhome",
-    component: NewHome
+    path: "/nadi",
+    name: "nadi",
+    component: () => import("../views/nadi.vue")
   },
   {
     path: "/mamnoonff",

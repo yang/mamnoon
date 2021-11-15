@@ -1,8 +1,16 @@
 <template>
-<svg  :style="{'width': this.width ? this.width :'20px'}" width="43" height="33" viewBox="0 0 43 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="2" y="2" width="38.8775" height="28.1581" rx="3" fill="transparent" :stroke="color" stroke-width="4"/>
-<path d="M2.68033 8.57317L19.046 22.457C20.5387 23.7233 22.7286 23.7233 24.2213 22.457L40.5869 8.57317" :stroke="color" stroke-width="4"/>
+
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="42.9px"
+	 height="32.2px" :style="{'width': this.width ? this.width :'20px'}"  viewBox="0 0 42.9 32.2" style="enable-background:new 0 0 42.9 32.2;" xml:space="preserve">
+
+<defs>
+</defs>
+<path fill="none" :stroke="color" :stroke-width="4" d="M5,2h32.9c1.7,0,3,1.3,3,3v22.2c0,1.7-1.3,3-3,3H5c-1.7,0-3-1.3-3-3V5C2,3.3,3.3,2,5,2z"/>
+<path fill="none" :stroke="color" :stroke-width="4"  d="M2.7,4.6L19,18.5c1.5,1.3,3.7,1.3,5.2,0L40.6,4.6"/>
 </svg>
+
+
 </template>
 
 

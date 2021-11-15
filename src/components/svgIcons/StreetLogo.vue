@@ -75,7 +75,5 @@
 
             <style>
 
-            .st4,.st4streetLogo{
-                fill: black;
-            }
+
                         </style>

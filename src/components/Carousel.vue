@@ -3188,10 +3188,10 @@ ul.accordion{
 
 .anar{
   .st3{
-    fill: #49494a !important;
+    // fill: #49494a;
   }
   .st4{
-  fill: #f15d58 !important;
+  // fill: #f15d58;
   }
 }
 

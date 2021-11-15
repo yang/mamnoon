@@ -1,6 +1,6 @@
 <template>
     <div>
-    <CarouselNewHome />
+    <NewHome />
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 // 1. Require the Storyblok client
 
 
-import CarouselNewHome from '@/components/CarouselNewHome'
+import CarouselNewHome from '@/components/NewHome'
 // 2. Set your token - you will be able to create a new space later.
 
 
@@ -16,7 +16,7 @@ import CarouselNewHome from '@/components/CarouselNewHome'
 export default {
 name: 'SlideShowNewHome',
 components: {
-CarouselNewHome
+NewHome
 },
 data () {
     return {
