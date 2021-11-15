@@ -564,6 +564,7 @@ display: inline-block;
   width: 100%;
   &.black{
     background: black; 
+    background: #F15D58;
   }
 }
 
@@ -616,7 +617,7 @@ background: white;
     font-weight: 500;
 cursor:pointer;
     &:hover{
-background: #F15D58;
+background: black;
 color: white;
 text-decoration: none;
     }

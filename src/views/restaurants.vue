@@ -125,45 +125,33 @@
 
 
 
-<template v-for="link in restaurant.buttons">
 
 
-<a style="display:none;" class="linkBlack" v-if="link.text.includes('menu')" :href="link.link">view menu</a><br>
 
 
-</template>
 
-<div style="display:none;">
-  <router-link class="linkBlack" :to="restaurant.name.replace(' ','')">
-location details
-</router-link><br>
+<div style="">
 
+
+<template v-for="link in restaurant.tile_list_links">
+
+<div class="listLinks">
+<a class="listLink" :href="link.link">{{link.title}} &#x203A;</a>
 
 </div>
-
-
-
-
-<div style="display:none;">
-
-<template v-for="link in restaurant.buttons">
-
-
-<a v-if="link.text.includes('order')" :href="link.link">order</a><br>
-
-
 </template>
 
 
 
-<template v-for="link in restaurant.buttons">
+<div class="bottomLinks">
+<template v-for="link in restaurant.tile_bottom_buttons">
 
 
-<a v-if="link.text.includes('reservation')" :href="link.link">reservation</a><br>
+<a class="bottomButton" :href="link.link">{{link.title}}</a>
 
 
 </template>
-
+</div>
 </div>
 
 
@@ -523,7 +511,7 @@ div{
 .restaurantBox{
   background: white;
 margin-bottom: 50px;
-    height: 680px;
+    height: 800px;
   .imgBox{
     width: 100%;
     height:300px;
@@ -569,5 +557,49 @@ width: 100%;
 margin: 6px 0;
 display: inline-block;
 }
+
+.listLinks{
+  padding-left: 10px;
+}
+
+
+.listLink{
+  display: block;
+  color: black;
+  font-weight: 500;
+
+&:hover{
+  color: black;
+}
+
+
+}
+
+.bottomLinks{
+  padding-left: 10px;
+}
+
+.bottomButton{    display: inline-block;
+    border-radius: 5px;
+    // width: 100%;
+    margin: 23px 10px 0 0;
+    text-align: center;
+    padding: 5px 8px 5px;
+    font-size: 16px;
+    font-weight: 500;
+    background: #F15D58;
+    color: white;
+    &:hover{
+         color: #fff;
+     background: black;
+     text-decoration: none;
+    }
+
+}
+
+
+
+
+
 
 </style>
