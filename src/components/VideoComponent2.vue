@@ -127,7 +127,7 @@ svg{
     left: 0;
     width: 100%;
     height: 100%;
-   background-color: #290000;
+   background-color: #000;
 //   mix-blend-mode: difference;
         opacity: .8;
 }
