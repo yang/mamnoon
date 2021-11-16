@@ -34,10 +34,13 @@
 
                                     <div class="row text-center">
                                 <div style="width: 100%">
-<MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />         
-    <MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" />
-<StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" />
- <AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" /></div>
+ <router-link :to="'mamnoon'"> <MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />     </router-link>     
+    <router-link :to="'mbar'"><MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
+<router-link :to="'mamnoonstreet'"><StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
+ <router-link :to="'anar'"><AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" />
+ </router-link>
+ 
+ </div>
                                     </div>
                                 </div>
 
