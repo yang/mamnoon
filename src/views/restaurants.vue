@@ -38,26 +38,26 @@
 
 <div class="restaurantName">
 <template v-if="restaurant.name === 'mbar'">
-<MbarLogo />
+<MbarLogo :height="90" :marginLeft="6"/>
 </template>
 <template v-else-if="restaurant.name === 'mamnoon street'">
 
 
-<StreetLogo />
+<StreetLogo :height="90" :marginLeft="6"/>
 </template>
 <template v-else-if="restaurant.name === 'mamnoon'">
-<MamnoonLogo />
+<MamnoonLogo :height="90" :marginLeft="6"/>
 </template>
 <template v-else-if="restaurant.name === 'anar'">
 
-<AnarLogo />
+<AnarLogo :height="90" :marginLeft="6"/>
 </template>
 <template v-else>
 {{restaurant.name}}
 </template>
 </div>
 
-<div class="infoIconLine2"><div class="leftIcon">
+<div class="infoIconLine2 top"><div class="leftIcon">
 
 
 
@@ -524,12 +524,12 @@ background-position: center center;
 
 
 .restaurantContent{
-  padding: 40px 20px 20px;
+  padding: 20px 20px 20px;
 }
 
 .restaurantName{
   display: block;
-  height: 100px;
+  // height: 100px;
   
 }
 
@@ -553,9 +553,15 @@ background-position: center center;
 
 
 .infoIconLine2{
+
+ 
 width: 100%;
 margin: 6px 0;
 display: inline-block;
+
+ &.top{
+    margin-top: 0;
+  }
 }
 
 .listLinks{

@@ -27,17 +27,17 @@
 
                                     <div class="row text-center">
 
-                                    <div class="col-10 offset-1">
-                                    <h1 class="subpage-header white-text mb60 text-left">
+                                    <div class="col-7 offset-2">
+                                    <h1 class="subpage-header white-text mb100 text-left">
                                     welcome to nadi mama: the online home for the mama family of restaurants</h1>
                                     </div></div>
 
                                     <div class="row text-center">
-                                    <div class="col-3">
-    <MbarLogo :fill="'white'" /></div>
-    <div class="col-3"><AnarLogo :fill="'white'" /></div>
-  <div class="col-3">  <StreetLogo :fill="'white'" /></div>
-   <div class="col-3"> <MamnoonLogo :fill="'white'" /></div>
+                                <div style="width: 100%">
+<MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />         
+    <MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" />
+<StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" />
+ <AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" /></div>
                                     </div>
                                 </div>
 

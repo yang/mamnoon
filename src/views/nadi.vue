@@ -30,11 +30,11 @@ https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4
 <div class="row text-center">
 
 
-<div class="col-3">
-    <MbarLogo :fill="'white'" /></div>
-    <div class="col-3"><AnarLogo :fill="'white'" /></div>
-  <div class="col-3">  <StreetLogo :fill="'white'" /></div>
-   <div class="col-3"> <MamnoonLogo :fill="'white'" /></div>
+
+    <MbarLogo :fill="'white'" />
+  <AnarLogo :fill="'white'" />
+ <StreetLogo :fill="'white'" />
+<MamnoonLogo :fill="'white'" />
 
 
 

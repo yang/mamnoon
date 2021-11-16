@@ -263,7 +263,7 @@
 
 <div class="infoPoints">
 <div class="iconPoint">
-              <Phone :color="item.background_color" :width="40" class="mr6" />
+              <Phone :color="item.background_color" :width="30" class="mr6" />
               </div>
 <div style="padding-top: 6px;">
  <a :style="{'color':item.background_color}" :href="`tel:+1${item.phone_number.replace(/[^0-9.]/g, '')}`">{{item.phone_number}}</a><br>            

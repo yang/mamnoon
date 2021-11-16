@@ -1,11 +1,11 @@
 <template>
 
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<!--<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 48 48" :style="{'enable-background':'new 0 0 48 48', 'width': this.width ? this.width :'20px'}" xml:space="preserve">
 <path :fill="color" d="M43.8,1.7h-4.9C21.6,2,1.8,24.1,1.7,39v4.9c0,1.3,1,2.5,2.5,2.5l9.8-0.1c1.3,0,2.5-1.2,2.5-2.5l0.3-10.8l-6.2-5.2
 	c0-3.4,13.8-17.2,17.3-17.3l5.6,6.2l10.4-0.3c1.3,0,2.5-1.2,2.5-2.5l-0.1-9.6C46.3,2.8,45.2,1.7,43.8,1.7z"/>
 </svg>
-
+-->
 
 <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.88 56.16"><title>Asset 1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path fill="#fff350" d="M19,50.45a.14.14,0,0,0-.14.14c0,.16.28.15.28,0A.14.14,0,0,0,19,50.45Z"/><path fill="#fff350" d="M32.88,0H5A5,5,0,0,0,0,5V51.16a5,5,0,0,0,5,5H32.88a5,5,0,0,0,5-5V5A5,5,0,0,0,32.88,0ZM16,2.42h6.16a1.09,1.09,0,0,1,1,1.17,1.09,1.09,0,0,1-1,1.17H16a1.09,1.09,0,0,1-1-1.17A1.09,1.09,0,0,1,16,2.42ZM19,52.93a2.34,2.34,0,1,1,2.34-2.34A2.34,2.34,0,0,1,19,52.93Zm14.84-7.84H4V7.51H33.88Z"/></g></g></svg>-->
 <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.88 56.16"><defs></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path fill="#fff350" d="M30.88,0H5A5,5,0,0,0,0,5V51.16a5,5,0,0,0,5,5H30.88a5,5,0,0,0,5-5V5A5,5,0,0,0,30.88,0ZM15.17,1.7h5.54a1,1,0,0,1,.89,1.05,1,1,0,0,1-.89,1.06H15.17a1,1,0,0,1-.9-1.06A1,1,0,0,1,15.17,1.7Zm2.77,53a2.57,2.57,0,1,1,2.57-2.57A2.57,2.57,0,0,1,17.94,54.66Zm13.94-6.57H4V5.51H31.88Z"/></g></g></svg>-->
@@ -54,6 +54,18 @@
 </svg>-->
 
 
+
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 34 58" :style="{'enable-background':'new 0 0 34 58', 'width': this.width ? this.width :'20px'}"  xml:space="preserve">
+<g>
+	<path :fill="color" d="M29,0H5C2.2,0,0,2.2,0,5v48c0,2.8,2.2,5,5,5h24c2.8,0,5-2.2,5-5V5C34,2.2,31.8,0,29,0z M12.5,4h9C21.8,4,22,4.2,22,4.5
+		S21.8,5,21.5,5h-9C12.2,5,12,4.8,12,4.5S12.2,4,12.5,4z M17,56c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3S18.7,56,17,56z M30,47
+		c0,0.6-0.4,1-1,1H5c-0.6,0-1-0.4-1-1V9c0-0.6,0.4-1,1-1h24c0.6,0,1,0.4,1,1V47z"/>
+	<path fill="transparent"  d="M29,8H5C4.4,8,4,8.4,4,9v38c0,0.6,0.4,1,1,1h24c0.6,0,1-0.4,1-1V9C30,8.4,29.6,8,29,8z"/>
+	<circle fill="transparent" cx="17" cy="53" r="3"/>
+	<path fill="transparent"  d="M12.5,5h9C21.8,5,22,4.8,22,4.5S21.8,4,21.5,4h-9C12.2,4,12,4.2,12,4.5S12.2,5,12.5,5z"/>
+</g>
+</svg>
 
 
 
