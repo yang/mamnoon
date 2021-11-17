@@ -3,7 +3,7 @@
 
 
     <input v-model="emailAddress" type="email" placeholder="enter your email" class="lap-right-pad noselect formInput" />
-    <button class="nadi-button dark ml20" @click="submitForm">
+    <button class="nadi-button2 dark ml20" @click="submitForm">
         {{subscribeText}}
     </button>
   </div>

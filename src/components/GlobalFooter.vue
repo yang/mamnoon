@@ -6,7 +6,7 @@
 
 
 
-<footer class="secPadMed">
+<footer class="secPadFooter">
 
 <div class="container">
 
@@ -15,7 +15,7 @@
 
 
 
-<div v-if="footer.newsletter" class="col-md-6 col-12 mb40">
+<div v-if="footer.newsletter" class="col-md-4 col-12">
 
 
 
@@ -98,8 +98,10 @@ this.globalFooter();
 
 
 footer h4{
+    font-size: 32px;
     text-align: left;
     color: #fff;
+    margin-bottom: 22px;
 }
 
 
@@ -110,7 +112,12 @@ footer ul{
 
 footer{
     background: black;
+    p{
+        margin-bottom: 26px;
+    }
 }
+
+
 
 footer p,
 footer ul li h4,
@@ -119,7 +126,8 @@ footer ul li a{
 }
 
 footer p{
-    font-size: 12px;
+    font-size: 16px;
+    line-height: 24px;
 }
 
 footer ul li{
@@ -132,5 +140,11 @@ footer ul li{
 .mb40{
     margin-bottom: 40px;
 }
+
+
+.secPadFooter{
+    padding: 70px 0 110px;
+}
+
 </style>
 

@@ -539,7 +539,10 @@ background-position: center center;
 }
 
 
-.subpage-header{font-size: 36px;}
+.subpage-header{
+  font-size: 32px;
+  line-height: 46px;
+  }
 
 .pb100{
   padding-bottom: 100px;

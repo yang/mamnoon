@@ -336,7 +336,7 @@
     <div class="container mobilePage">
 
 <div class="row" style="display:none;">
-<div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 offset-0">
+<div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12 offset-0">
 
 
 
@@ -507,9 +507,9 @@ follow us
 <div class="row">
              
                                           
-<div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 offset-0">
 
 
+<div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12 offset-0">
 <h3>  
 {{item.notification}}
 </h3>
@@ -1714,10 +1714,6 @@ padding: 20px 16px;
       padding: 46px 0;
 }
 
-.secPadMed{
-  padding: 34px 0;
-}
-
 
 
 .map iframe{
@@ -1985,10 +1981,10 @@ width: 100%;
  
  h3{
  
-      font-size: 24px;
-    font-weight: 500;
+      font-size: 26px;
+    font-weight: 600;
     text-align: left;
-    line-height: 1.6;
+    line-height: 37px;
 
         @media only screen and (max-width: 768px) {
           font-size: 18px;

@@ -2300,8 +2300,46 @@ padding: 5px 20px;
 }
 
 
+
+
+
+
+
+.nadi-button2{
+
+background-color: #F15D58;
+
+border: 0;
+border-radius: 5px;
+color: #FFF;
+padding: 1px 20px 3px;
+font-size: 22px;
+font-weight: 500;
+&:hover{
+  background-color: transparent;
+}
+&.dark{
+
+}
+
+&.ml20{
+  margin-left: 20px;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 .secPadMed{
-  padding: 34px 0;
+  padding: 28px 0;
 }
 
 

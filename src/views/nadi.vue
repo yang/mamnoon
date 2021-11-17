@@ -65,7 +65,7 @@ https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4
 
 
 
-<div class="bottomAttach black secPadMed">
+<div class="bottomAttach black secPadMedAlt">
 <div class="container">
 
 <div class="row text-center">
@@ -110,7 +110,7 @@ you handle the turkey, we'll take care of the rest!
 
 
 
-<div class="bottomAttach secPadMed">
+<div class="bottomAttach secPadMedAlt">
 <div class="container">
 
 <div class="row text-center">
@@ -162,7 +162,7 @@ available in fine retailers across the puget sound
 
 
 
-<div class="bottomAttach black secPadMed">
+<div class="bottomAttach black secPadMedAlt">
 <div class="container">
 
 <div class="row text-center">
@@ -289,12 +289,7 @@ ffdata: null
   // padding-bottom: 100px;
 }
 
-@media only screen and (max-width: 992px) {
-  .nadi{
-    padding-top: 112px;
-}
 
-}
 
 h1{
  color: #F05D5B;
@@ -531,7 +526,11 @@ background-position: center center;
 }
 
 
-.subpage-header{font-size: 36px;}
+.subpage-header{
+  font-size: 32px;
+  line-height: 46px;
+  }
+
 
 .pb100{
   padding-bottom: 100px;
@@ -541,8 +540,12 @@ background-position: center center;
 .mb100{
   margin-bottom: 100px;
 }
-
-
+.mb120{
+  margin-bottom: 120px;
+}
+.mt0{
+margin-top: 0;
+}
 
 .infoIconLine2{
 width: 100%;
@@ -575,9 +578,12 @@ text-align: left;
 width: 300px;
 color: white;
 &.whitebg{
+
+
   background: white;
-  padding: 20px;
+    padding: 22px 26px 28px;
   color: black;
+  border-radius: 5px;
 }
 
 .blockHeader{
@@ -589,6 +595,7 @@ font-weight:bold;
 font-size: 16px;
 
 font-weight:medium;
+margin-bottom: 26px;
 }
 a.blockButton{
 
@@ -610,7 +617,7 @@ background: white;
     display: block;
     border-radius: 5px;
     width: 100%;
-    margin: 23px 0 0;
+    margin: 0 0;
     text-align: center;
     padding: 3px 10px 5px;
     font-size: 22px;
@@ -624,6 +631,21 @@ text-decoration: none;
 
 }
 
+
+
+    @media only screen and (max-width: 640px) {
+
+
+width: 100%;
+      
+    }
+
+
+}
+
+
+.secPadMedAlt{
+  padding: 32px 0 38px;
 }
 
 </style>

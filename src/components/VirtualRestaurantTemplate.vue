@@ -336,7 +336,7 @@
     <div class="container mobilePage">
 
 <div class="row" style="display:none;">
-<div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 offset-0">
+<div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12 offset-0">
 
 
 
@@ -507,7 +507,7 @@ follow us
 <div class="row">
              
                                           
-<div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 offset-0">
+<div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12 offset-0">
 
 
 <h3>  
@@ -556,7 +556,7 @@ follow us
 <div class="container">
 
 <div class="row">
-<div class="col-md-8 col-12"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
+<div class="col-md-8 col-12"><img :src="repeat.image" style="width: 100%;margin: 34px 0;"></div>
 <div class="col-md-4 col-12" style="position: relative">
 
 <div class="sidebox" :style="{'background-color': item.background_color}">
@@ -608,7 +608,7 @@ _</div>
 <div class="container">
 
 <div class="row">
-<div class="col-md-8 col-12"><img :src="repeat.image" style="width: 100%;margin: 30px 0;"></div>
+<div class="col-md-8 col-12"><img :src="repeat.image" style="width: 100%;margin: 34px 0;"></div>
 <div class="col-md-4 col-12" style="position: relative">
 
 <div class="sidebox" :style="{'background-color': item.text_color}">
@@ -1716,9 +1716,6 @@ padding: 20px 16px;
       padding: 46px 0;
 }
 
-.secPadMed{
-  padding: 34px 0;
-}
 
 
 
@@ -1917,7 +1914,7 @@ a.ctaLinkOpposite {
   width: 300px;
   position: absolute; 
   bottom: 0px;
-  margin: 30px 0;
+  margin: 34px 0;
 
   &.right{
     right:0;
@@ -1987,10 +1984,10 @@ width: 100%;
  
  h3{
  
-      font-size: 24px;
-    font-weight: 500;
+      font-size: 26px;
+    font-weight: 600;
     text-align: left;
-    line-height: 1.6;
+    line-height: 37px;
 
         @media only screen and (max-width: 768px) {
           font-size: 18px;

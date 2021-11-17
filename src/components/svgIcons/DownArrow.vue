@@ -10,6 +10,7 @@
 #downArrow{
     position: absolute;
     bottom: 100px;
+    bottom: 130px;
     left: 50%;
     cursor: pointer;
     transform: translateX(-50%);
