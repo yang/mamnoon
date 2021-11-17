@@ -2367,6 +2367,7 @@ font-weight: 500;
 
 *{
   text-transform: lowercase;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
 }
 
 </style>
