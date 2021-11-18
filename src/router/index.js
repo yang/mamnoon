@@ -252,6 +252,10 @@ const routes = [
     name: "restaurants",
     component: () => import("../views/restaurants.vue")
   },
+  {
+    path: "/:id/menu",
+    component: () => import("../components/MenuTemplate.vue")
+  },
 
   {
     path: "/:id",

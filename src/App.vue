@@ -2236,9 +2236,11 @@ display: flow-root;
 
 
 .imp-wrapper-match2 .imp-description{
-  background: orange !important;
+  // background: orange !important;
 }
-
+.imp-wrapper-match2{
+  display: none;
+}
 
 
 
