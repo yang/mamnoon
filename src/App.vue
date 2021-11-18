@@ -2379,6 +2379,11 @@ font-weight: 500;
 .pt180{
   padding-top: 180px;
 }
+
+
+.xhcd-fpimp-price{
+  float: right;
+}
 </style>
 
 

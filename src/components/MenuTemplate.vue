@@ -14,6 +14,15 @@
 <div v-html="menuArray[1].innerHTML">
 </div>
 
+<div v-html="menuArray[2].innerHTML">
+</div>
+
+<div v-html="menuArray[3].innerHTML">
+</div>
+
+<div v-html="menuArray[4].innerHTML">
+</div>
+
 </template>
 
 
