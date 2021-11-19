@@ -5,7 +5,9 @@
 
 <div id="menus" class="container pt180">
 <h1>{{this.$route.params.id}} menu</h1>
-
+categories: <pre>{{categories}}</pre>
+menus: <pre>{{menus}}</pre>
+<!--
 <template v-if="$route.params.id == 'mamnoon'">
 
 <div v-html="menuArray[0].innerHTML">
@@ -29,11 +31,11 @@
 
 <template v-if="$route.params.id == 'mbar'">
 
-<div v-html="menuArray[2].innerHTML">
+<div v-html="menuArray[5].innerHTML">
 </div>
 
 
-</template>
+</template>-->
 
 </div>
 
@@ -51,28 +53,49 @@ Nav2
     },
     data(){
         return {
-     menuArray: []
+
+     categories: [],
+     menus: []
+
         }
     },
     mounted(){
-        this.showMenus()
+        // this.showMenus()
+             this.showMenus2()
+             this.showCategories()
+
+
+for(let i in this.$store.state.pageData[0].restaurant_repeater){
+
+    if(this.$route.params.id.replace(' ','') === this.$store.state.pageData[0].restaurant_repeater[i].name.replace(' ','')){
+ this.showMenus2(this.$route.params.id.replace(' ',''))
+this.showCategories(this.$route.params.id.replace(' ',''))
+
+
+    }
+}
+
+
     },
     methods:{
-        showMenus(){
-        this.menuArray = document.getElementsByClassName('imp-wrapper-match2')
 
-console.log(this.menuArray);
-// for(let i = 0;i<menus.length;i++){
-//     console.log(menus[i])
-// }
+        async showMenus2(restName){
+      let responseUpserve = await this.$http.get(`/product/menu${restName}`);
+//    console.log(responseUpserve);
+this.menus = responseUpserve.data.body.objects;
+    },
+            async showCategories(restName){
+  
+      let responseUpserve = await this.$http.get(`/product/menu${restName}categories`);
+   console.log(responseUpserve);
+this.categories = responseUpserve.data.body.objects;
 
-// this.menuArray = menus;
 
 
-
+    },
 
         }
-    }
+    
 }
 
 

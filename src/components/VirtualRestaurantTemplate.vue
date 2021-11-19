@@ -189,7 +189,7 @@
 <template v-if="item.hours">
 <div class="infoPoints">
 <div class="iconPoint">
-<Clock  :width="40" :color="item.background_color" class="mr6" />
+<Clock  :width="40" :color="'#ffffff'" class="mr6" />
 </div> 
 
 
@@ -214,7 +214,7 @@
 <div class="infoPoints">
 <div class="iconPoint">
 
-              <Phone :color="item.background_color" :width="30" class="mr6" />
+              <Phone :color="'#ffffff'" :width="30" class="mr6" />
               </div>
 <div style="padding-top: 6px;">
  <a :style="{'color':item.background_color}" :href="`tel:+1${item.phone_number.replace(/[^0-9.]/g, '')}`">{{item.phone_number}}</a><br>            
@@ -234,7 +234,7 @@
 <template v-if="item.contact">
 <div class="infoPoints">
 <div class="iconPoint">
-<Envelope :width="40" :color="item.background_color" class="mr6 centeredSvg" style="position: initial;margin-right: 10px;" />
+<Envelope :width="40" :color="'#ffffff'" class="mr6 centeredSvg" style="position: initial;margin-right: 10px;" />
 </div>
 
 <div>
