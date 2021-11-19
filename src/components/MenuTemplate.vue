@@ -5,37 +5,29 @@
 
 <div id="menus" class="container pt180">
 <h1>{{this.$route.params.id}} menu</h1>
-categories: <pre>{{categories}}</pre>
-menus: <pre>{{menus}}</pre>
-<!--
-<template v-if="$route.params.id == 'mamnoon'">
+categories:
 
-<div v-html="menuArray[0].innerHTML">
-</div>
 
-<div v-html="menuArray[1].innerHTML">
-</div>
 
-<div v-html="menuArray[2].innerHTML">
-</div>
 
-<div v-html="menuArray[3].innerHTML">
-</div>
-
-<div v-html="menuArray[4].innerHTML">
-</div>
-
+<template v-for="category in categories">
+<div class="category" @click="filterCategories(category.id)">{{category.name}}</div>
 </template>
 
 
 
-<template v-if="$route.params.id == 'mbar'">
+<template v-for="item in menus">
 
-<div v-html="menuArray[5].innerHTML">
+<div v-if="item.category_id === currentCategory">
+
+{{item.name}}<br>
+
 </div>
+</template>
 
 
-</template>-->
+menus: <pre>{{menus}}</pre>
+
 
 </div>
 
@@ -53,7 +45,7 @@ Nav2
     },
     data(){
         return {
-
+currentCategory: '',
      categories: [],
      menus: []
 
@@ -78,7 +70,9 @@ this.showCategories(this.$route.params.id.replace(' ',''))
 
     },
     methods:{
-
+        filterCategories(id){
+            this.currentCategory = id
+        },
         async showMenus2(restName){
       let responseUpserve = await this.$http.get(`/product/menu${restName}`);
 //    console.log(responseUpserve);
@@ -107,5 +101,11 @@ this.categories = responseUpserve.data.body.objects;
 
 .imp-description.xhcd-9kimp-description{
     // color: green !important;
+}
+
+
+.category{
+    cursor: pointer;
+    font-weight: bold;
 }
 </style>
