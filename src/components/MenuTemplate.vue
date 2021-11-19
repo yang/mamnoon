@@ -21,7 +21,7 @@
 <div v-if="currentCategory === ''">
 
 <template>
-
+{{item.status}}
 {{item.name}}<br>
 {{item.price}}<br>
 {{item.description}}<br>
@@ -30,10 +30,8 @@
 
 
 <div v-if="item.category_id === currentCategory">
-
 <b>{{item.name}}</b><br>
 <b>{{item.price}}</b><br>
-des
 {{item.description}}<br>
 </div>
 </template>

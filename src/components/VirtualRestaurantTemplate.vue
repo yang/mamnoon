@@ -2,7 +2,7 @@
 <div>
   
 
-<Nav2 />
+<Nav3 />
 
 
 
@@ -747,7 +747,7 @@ _</div>
 <script type="text/javascript">
 
 import ALaCarte from "@/components/ALaCarte";
-import Nav2 from "@/components/Nav2";
+import Nav3 from "@/components/Nav3";
 
 
 
@@ -775,7 +775,7 @@ import GlobalFooter from "@/components/GlobalFooter";
 export default {
   components: {
     ALaCarte,
-    Nav2,
+    Nav3,
     Phone,
     Clock,
     Envelope,

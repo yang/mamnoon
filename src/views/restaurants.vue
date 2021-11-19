@@ -27,23 +27,28 @@
 
 <div class="restaurantBox">
 
+<router-link :to="restaurant.name.replace(' ','')">
 <div class="imgBox" :style="{'background-image': `url(${restaurant.background_image.sizes.medium_large})`}">
 
 
 .
 
 </div>
+</router-link>
 <div class="restaurantContent">
 
 
 <div class="restaurantName">
+<router-link :to="restaurant.name.replace(' ','')">
 <template v-if="restaurant.name === 'mbar'">
+
 <MbarLogo :height="90" :marginLeft="6"/>
+
 </template>
 <template v-else-if="restaurant.name === 'mamnoon street'">
 
 
-<StreetLogo :height="90" :marginLeft="6"/>
+<StreetLogo :height="80" :marginLeft="6" :marginBottom="10"/>
 </template>
 <template v-else-if="restaurant.name === 'mamnoon'">
 <MamnoonLogo :height="90" :marginLeft="6"/>
@@ -55,19 +60,17 @@
 <template v-else>
 {{restaurant.name}}
 </template>
+</router-link>
 </div>
 
-<div class="infoIconLine2 top"><div class="leftIcon">
+<div class="infoIconLine2 top">
+<div class="rightIcon">
 
 
+<div class="right-icon-text">
 
-
-<MapPin style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
-
-</div><div class="rightIcon">
-
-
-
+<MapPin class="mr6 centeredSvg" />
+<span>
 <template v-for="address in restaurant.address">
 
 <template v-for="line in address">
@@ -77,7 +80,8 @@
 
 </template>
 </template>
-
+</span>
+</div>
 
 
 
@@ -86,15 +90,11 @@
 </div></div>
 
 
-<div class="infoIconLine2"><div class="leftIcon">
+<div class="infoIconLine2"><div class="rightIcon">
 
-
-<Clock :color="'black'" style="position: initial;margin-right: 10px;" class="mr6 centeredSvg" />
-
-
-
-
-</div><div class="rightIcon"><span>
+<div class="right-icon-text">
+<Clock :color="'black'" class="mr6 centeredSvg" />
+<span>
 
 <template v-for="hour in restaurant.hours">
 <template v-for="line in hour">
@@ -105,14 +105,24 @@
 
 
 
-</span></div></div>
+</span>
+</div>
+
+
+</div></div>
 
 
 
-<div class="infoIconLine2"><div class="leftIcon">
+<div class="infoIconLine2">
 
-<Phone class="mr6 centeredSvg" style="position: initial;width: 20px;margin-right: 10px;" />
-</div><div class="rightIcon"><a :href="`tel:+1${restaurant.phone_number.replace(/[^0-9.]/g, '')}`" target="_blank" class="linkBlack">{{restaurant.phone_number}}</a></div></div>
+<div class="rightIcon">
+<div class="right-icon-text">
+<Phone :width="20" class="mr6 centeredSvg" />
+<span>
+<a :href="`tel:+1${restaurant.phone_number.replace(/[^0-9.]/g, '')}`" target="_blank" class="linkBlack">{{restaurant.phone_number}}</a>
+</span>
+</div>
+</div></div>
 
 
 
@@ -133,9 +143,10 @@
 <div style="">
 
 
-<template v-for="link in restaurant.tile_list_links">
+<template v-for="(link,i) in restaurant.tile_list_links">
 
-<div class="listLinks">
+<div v-if="i!==0" class="listLinks">
+
 <a class="listLink" :href="link.link">{{link.title}} &#x203A;</a>
 
 </div>
@@ -511,7 +522,7 @@ div{
 .restaurantBox{
   background: white;
 margin-bottom: 50px;
-    height: 800px;
+        height: 750px;
     border-radius: 10px;
   .imgBox{
     width: 100%;
@@ -608,7 +619,27 @@ display: inline-block;
 
 }
 
+.right-icon-text{
 
+      padding-left: 50px;
+    position: relative;
+    min-height: 50px;
+
+    span{
+      position: absolute;
+    top: 50%;
+    transform: translateY(-44%);
+    }
+  svg{
+    width: 20px;
+    position: initial;
+    margin-right: 10px;
+    position: absolute;
+    height: 100%;
+    // background: pink;
+    left: 10px;
+  }
+}
 
 
 

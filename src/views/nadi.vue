@@ -1,6 +1,6 @@
 <template>
   <div class="nadi">
-  <Nav2 />
+  <Nav3 />
 
 
 
@@ -25,30 +25,53 @@ welcome to nadi mama: the online home for the mama family of restaurants</h1>
 https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4
 
 </div>
-
-
 <div class="row text-center">
-
-
 
     <MbarLogo :fill="'white'" />
   <AnarLogo :fill="'white'" />
  <StreetLogo :fill="'white'" />
 <MamnoonLogo :fill="'white'" />
 
+</div>
+</div>                      <!--<br>-->
+                       <!-- </div>-->
+                      </section>
+
+                               <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/123.jpeg' + ')',
+ 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
+                        <!--<div class="container mobilePage pt132">-->
+  
+
+
+
+<div class="bottomAttach black secPadMedAlt">
+<div class="container">
+
+<div class="row text-center">
+
+</div>
+
+<div class="block">
+<div class="blockHeader">
+thanksgiving mezze packs
+</div>
+<div class="blockDescription">
+you handle the turkey, we'll take care of the rest!
+</div>
+
+<a class="blockButton" href="https://www.exploretock.com/mamnoonrestaurant?tock_source=tock&tock_medium=search_nav" target="_blank">order now</a>
+</div>
 
 
 </div>
+
+
+
+
+
+
+
 </div>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -56,7 +79,7 @@ https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4
                       <!--<br>-->
                        <!-- </div>-->
                       </section>
-<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />
+<!--<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />-->
 
          <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/123.jpeg' + ')',
  'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
@@ -211,7 +234,7 @@ now open monday-friday for lunch
   </div>
 </template>
 <script>
-import Nav2 from "@/components/Nav2";
+import Nav3 from "@/components/Nav3";
 
 import VideoComponent2 from "@/components/VideoComponent2";
 
@@ -244,7 +267,7 @@ ffdata: null
 }
   },
   components: {
-    Nav2,
+    Nav3,
     VideoComponent2,
     MbarLogo,
     AnarLogo,
