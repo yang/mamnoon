@@ -2,15 +2,16 @@
 <div>
 <Nav2 />
 
-
-<div id="menus" class="container pt180">
+<div id="menus" class="container pt180" :style="{'background-color':background_color,'color': text_color}">
 <h1>{{this.$route.params.id}} menu</h1>
 
 
 
-<div class="category" @click="filterCategories(category.id)">all</div>
+
+
+<div class="category" @click="filterCategories(category.id)" :style="{'background-color':button_color,'color': button_text_color}">all</div>
 <template v-for="category in categories">
-<div class="category" @click="filterCategories(category.id)">{{category.name}}</div>
+<div class="category" :style="{'background-color':button_color,'color': button_text_color}" @click="filterCategories(category.id)">{{category.name}}</div>
 </template>
 
 
@@ -27,8 +28,9 @@
 
 <div v-if="item.category_id === currentCategory">
 
-{{item.name}}<br>
-{{item.price}}<br>
+<b>{{item.name}}</b><br>
+<b>{{item.price}}</b><br>
+des
 {{item.description}}<br>
 </div>
 </template>
@@ -55,14 +57,19 @@ Nav2
         return {
 currentCategory: '',
      categories: [],
-     menus: []
-
+     menus: [],
+buttonColors:[],
+background_color: '',
+button_text_color: '',
+background_color: '',
+button_color: '',
+text_color: ''
         }
     },
     mounted(){
         // this.showMenus()
-             this.showMenus2()
-             this.showCategories()
+            //  this.showMenus2()
+            //  this.showCategories()
 
 
 for(let i in this.$store.state.pageData[0].restaurant_repeater){
@@ -74,7 +81,7 @@ this.showCategories(this.$route.params.id.replace(' ',''))
 
     }
 }
-
+    this.individualRestaurant()
 
     },
     methods:{
@@ -89,17 +96,54 @@ this.menus = responseUpserve.data.body.objects;
             async showCategories(restName){
   
       let responseUpserve = await this.$http.get(`/product/menu${restName}categories`);
-   console.log(responseUpserve);
+//    console.log(responseUpserve);
 this.categories = responseUpserve.data.body.objects;
 
 
 
     },
+      async individualRestaurant(){
 
-        }
+for(let i = 0; i<this.$store.state.pageData[0].restaurant_repeater.length;i++){
+// if(this.$store.state.pageData[0].restaurant_repeater[i].name.replace(' ', '') === this.$route.params.id.replace(' ','')){
+//     console.log(this.$store.state.pageData[0].restaurant_repeater.name.replace(' ', ''))
+// }
+
+if(this.$store.state.pageData[0].restaurant_repeater[i].name.replace(' ', '') === this.$route.params.id.replace(' ','')){
+    console.log(this.$store.state.pageData[0].restaurant_repeater[i].name);
+
+
     
+
+
+
+this.background_color = this.$store.state.pageData[0].restaurant_repeater[i].background_color;
+this.button_text_color = this.$store.state.pageData[0].restaurant_repeater[i].button_text_color;
+this.background_color = this.$store.state.pageData[0].restaurant_repeater[i].background_color;
+this.button_color = this.$store.state.pageData[0].restaurant_repeater[i].button_color;
+this.text_color = this.$store.state.pageData[0].restaurant_repeater[i].text_color
+
+
+
+
+
+
+
+
+
 }
 
+}
+
+
+
+
+
+}
+
+        },
+
+}
 
 
 </script>
@@ -113,12 +157,13 @@ this.categories = responseUpserve.data.body.objects;
 
 
 .category{
+    padding: 4px;
     cursor: pointer;
     font-weight: bold;
         display: inline-block;
         margin: 10px;
     &:hover{
-        color: red;
+      opacity: .5;
     }
 }
 </style>

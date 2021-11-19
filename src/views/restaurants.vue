@@ -512,11 +512,13 @@ div{
   background: white;
 margin-bottom: 50px;
     height: 800px;
+    border-radius: 10px;
   .imgBox{
     width: 100%;
     height:300px;
     background-size: cover;
 background-position: center center;
+    border-radius: 10px 10px 0 0;
   }
 
 
