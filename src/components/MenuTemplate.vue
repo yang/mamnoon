@@ -8,7 +8,7 @@
 
 
 
-
+<div class="category" @click="filterCategories(category.id)">all</div>
 <template v-for="category in categories">
 <div class="category" @click="filterCategories(category.id)">{{category.name}}</div>
 </template>
@@ -17,10 +17,19 @@
 
 <template v-for="item in menus">
 
+<div v-if="currentCategory === ''">
+
+{{item.name}}<br>
+{{item.price}}<br>
+{{item.description}}<br>
+</div>
+
+
 <div v-if="item.category_id === currentCategory">
 
 {{item.name}}<br>
-
+{{item.price}}<br>
+{{item.description}}<br>
 </div>
 </template>
 
