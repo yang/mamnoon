@@ -49,7 +49,7 @@ order <div class="arrow-right"></div>
 <!-- ss -->
 <!-- {{$route.name}} -->
 
-  <div v-if="!correctPages" class="burger" @click="toggleMenu()" style="width: 60px;text-align: right;height: 80px;">
+  <div v-if="" class="burger" @click="toggleMenu()" style="width: 60px;text-align: right;height: 80px;">
         <Burger2 />
     </div>
 
