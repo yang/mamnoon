@@ -47,7 +47,7 @@ order <div class="arrow-right"></div>
 <template v-if="$mq === 'sm'">
 
 <!-- ss -->
-<!-- {{$route.name}} -->
+<!-- {{$route.name}} -->    
 
   <div v-if="" class="burger" @click="toggleMenu()" style="width: 60px;text-align: right;height: 80px;">
         <Burger2 />
@@ -922,7 +922,8 @@ ul#menu li.active{
 
     text-align: left;
     /* width: 60%; */
-    width: 200px;;
+    width: 200px;
+    width: 100%;
 }
 }
 
