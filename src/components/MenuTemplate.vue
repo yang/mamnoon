@@ -5,7 +5,6 @@
 
 <div id="menus" class="container pt180">
 <h1>{{this.$route.params.id}} menu</h1>
-categories:
 
 
 
@@ -25,8 +24,8 @@ categories:
 </div>
 </template>
 
-
-menus: <pre>{{menus}}</pre>
+<br>
+<!--menus: <pre>{{menus}}</pre>-->
 
 
 </div>
@@ -107,6 +106,8 @@ this.categories = responseUpserve.data.body.objects;
 .category{
     cursor: pointer;
     font-weight: bold;
+        display: inline-block;
+        margin: 10px;
     &:hover{
         color: red;
     }
