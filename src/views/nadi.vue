@@ -7,64 +7,40 @@
 
 
 
-
-                      <section class="topSection fh" v-bind:style="{ 'display': 'none', 'text-align':'center', 'background-position': 'center', 'position': 'relative' }">
-                        <!--<div class="container mobilePage pt132">-->
-  
-
-
-
-
-<div class="container">
-
-<div class="row text-center">
-<h1 class="subpage-header white-text mb60 text-left">
-welcome to nadi mama: the online home for the mama family of restaurants</h1>
-
-
-https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4
-
-</div>
-<div class="row text-center">
-
-    <MbarLogo :fill="'white'" />
-  <AnarLogo :fill="'white'" />
- <StreetLogo :fill="'white'" />
-<MamnoonLogo :fill="'white'" />
-
-</div>
-</div>                      <!--<br>-->
-                       <!-- </div>-->
-                      </section>
-
-                               <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/123.jpeg' + ')',
- 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
+                               <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg' + ')',
+ 'background-position': 'center', 'position': 'relative', 'height': '100vh', 'background-size': 'cover'}">
                         <!--<div class="container mobilePage pt132">-->
   
 
 
 
 <div class="bottomAttach black secPadMedAlt">
-<div class="container">
+                      <div class="container">
 
-<div class="row text-center">
+                                            <div class="row text-center">
 
-</div>
+                                            <div class="col-md-8 offset-md-2 col-10 offset-1">
+                                                <h1 class="subpage-header white-text mt0 text-left">
+                                                    welcome to nadi mama: the online home for the mama family of restaurants
+                                                    </h1>
+                                                </div>
+                                            </div>
 
-<div class="block">
-<div class="blockHeader">
-thanksgiving mezze packs
-</div>
-<div class="blockDescription">
-you handle the turkey, we'll take care of the rest!
-</div>
+                                    <div class="row text-center">
+                                        <div style="width: 100%">
+                                            <router-link :to="'mediamamnoon'"> <MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />     </router-link>     
+                                            <router-link :to="'mbar'"><MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
+                                            <router-link :to="'mamnoonstreet'"><StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
+                                            <router-link :to="'anar'"><AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" />
+                                            </router-link>
+                                        </div>
+                                    </div>
 
-<a class="blockButton" href="https://www.exploretock.com/mamnoonrestaurant?tock_source=tock&tock_medium=search_nav" target="_blank">order now</a>
-</div>
+                                </div>
 
-
-</div>
-
+<div @click="scrollDown">
+                                <DownArrow />
+                                </div>  
 
 
 
