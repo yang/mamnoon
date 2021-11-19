@@ -20,9 +20,12 @@
 
 <div v-if="currentCategory === ''">
 
+<template>
+
 {{item.name}}<br>
 {{item.price}}<br>
 {{item.description}}<br>
+</template>
 </div>
 
 
