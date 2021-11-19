@@ -107,5 +107,8 @@ this.categories = responseUpserve.data.body.objects;
 .category{
     cursor: pointer;
     font-weight: bold;
+    &:hover{
+        color: red;
+    }
 }
 </style>
