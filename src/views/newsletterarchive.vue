@@ -7,14 +7,14 @@
 
 
   <div class="mamnoon">
-    <Nav />
+    <Nav3 />
 
 <NewsletterArchive />
   </div>
 </template>
 <script>
 import NewsletterArchive from "@/components/NewsletterArchive";
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 export default {
         metaInfo: {
       // if no subcomponents specify a metaInfo.title, this title will be used
@@ -24,7 +24,7 @@ export default {
   },
   components: {
     NewsletterArchive,
-    Nav
+    Nav3
   }
 };
 </script>

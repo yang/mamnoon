@@ -1,6 +1,6 @@
 <template>
   <div class="restaurants">
-    <Nav2 />
+    <Nav3 />
 
 <div>
 
@@ -197,7 +197,7 @@
   </div>
 </template>
 <script>
-import Nav2 from "@/components/Nav2";
+import Nav3 from "@/components/Nav3";
 
 
 
@@ -232,7 +232,7 @@ ffdata: null
 }
   },
   components: {
-    Nav2,
+    Nav3,
     GlobalFooter, 
     Borderline,
     MamnoonLogo,

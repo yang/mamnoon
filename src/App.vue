@@ -2379,6 +2379,14 @@ font-weight: 500;
 .pt180{
   padding-top: 180px;
 }
+.pt140{
+  padding-top: 140px;
+}
+
+
+.pt100{
+  padding-top: 100px;
+}
 
 
 .xhcd-fpimp-price{

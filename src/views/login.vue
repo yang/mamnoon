@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <Nav />
+    <Nav3 />
     <login />
   </div>
 </template>
@@ -8,7 +8,7 @@
 import SlideShow from "@/components/SlideShow";
 import login from "@/components/auth/login";
 import Products from "@/components/Products";
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 export default {
         metaInfo: {
       // if no subcomponents specify a metaInfo.title, this title will be used
@@ -20,7 +20,7 @@ export default {
     login,
     Products,
     SlideShow,
-    Nav
+    Nav3
   }
 };
 </script>

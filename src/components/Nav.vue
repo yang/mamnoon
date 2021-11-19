@@ -534,7 +534,7 @@ color: #ffffff;
 }
 
 ul#menu li a:hover{
-color: #FFF367;
+color: #000;
 text-decoration: none;
 }
 

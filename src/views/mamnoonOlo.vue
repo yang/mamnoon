@@ -1,6 +1,6 @@
 <template>
   <div class="mamnoon">
-    <Nav />
+    <Nav3 />
 <UpserveOloTesting :title="'Mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
   
   <!-- {{$store.state.currentUserEmail}} -->
@@ -8,7 +8,7 @@
 </template>
 <script>
 import UpserveOloTesting from "@/components/UpserveOloTesting";
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 export default {
   data(){
 return {
@@ -16,7 +16,7 @@ user: null
 }
   },
   components: {
-    Nav,
+    Nav3,
     UpserveOloTesting
   },
   methods:{

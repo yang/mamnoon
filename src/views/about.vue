@@ -1,6 +1,6 @@
 <template>
   <div class="mamnoon">
-    <Nav />
+    <Nav3 />
 
 <div>
 
@@ -10,7 +10,7 @@
 
 
 
-<div v-if="ffdata" class="container pad ff">
+<div v-if="ffdata" class="container ff">
 
 <div class="row lower-margin">
 
@@ -549,15 +549,16 @@
 </div>
 
     <!-- <img style="width: 100%;" src="@/assets/img/mamnoonFF_NADI_2-01.png"> -->
+  <GlobalFooter />
 </div>
   <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>
 <script>
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 import AboutAlt from "@/components/AboutAlt";
 import Borderline from "@/components/svgIcons/Borderline";
-
+import GlobalFooter from "@/components/GlobalFooter";
 
 
 export default {
@@ -576,9 +577,10 @@ ffdata: null
 }
   },
   components: {
-    Nav,
+    Nav3,
     Borderline,
-    AboutAlt
+    AboutAlt,
+	GlobalFooter
   },
   methods:{
       async individualRestaurant(){

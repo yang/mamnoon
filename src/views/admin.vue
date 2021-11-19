@@ -1,15 +1,15 @@
 <template>
   <div class="mamnoon">
-    <Nav />
+    <Nav3 />
 <Admin :title="'Mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :emailAddress="$store.state.currentUserEmail" />
   </div>
 </template>
 <script>
 import Admin from "@/components/Admin";
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 export default {
   components: {
-    Nav,
+    Nav3,
     Admin
   }
 };

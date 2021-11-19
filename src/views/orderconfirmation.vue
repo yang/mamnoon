@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <Nav />
+    <Nav3 />
 <!-- {{this.$store.state.orderCMR}} -->
 
 
@@ -14,7 +14,7 @@
 </template>
 <script>
 import OrderConfirmationModal from "@/components/OrderConfirmationModal";
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 export default {
     data(){
         return {
@@ -22,7 +22,7 @@ export default {
         }
     },
   components: {
-    Nav,
+    Nav3,
     OrderConfirmationModal
   },
   mounted () {

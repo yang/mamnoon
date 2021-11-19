@@ -1,6 +1,6 @@
 <template>
   <div class="mamnoon">
-    <Nav />
+    <Nav3 />
 
 <div>
 
@@ -120,12 +120,13 @@
     <!-- <img style="width: 100%;" src="@/assets/img/mamnoonFF_NADI_2-01.png"> -->
 </div>
   <!-- {{$store.state.currentUserEmail}} -->
+  <GlobalFooter />
   </div>
 </template>
 <script>
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 import Borderline from "@/components/svgIcons/Borderline";
-
+import GlobalFooter from "@/components/GlobalFooter";
 
 export default {
     metaInfo: {
@@ -143,8 +144,9 @@ ffdata: null
 }
   },
   components: {
-    Nav,
-    Borderline
+    Nav3,
+    Borderline,
+    GlobalFooter
   },
   methods:{
       async individualRestaurant(){

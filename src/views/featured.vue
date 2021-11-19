@@ -1,6 +1,6 @@
 <template>
     <div class="mamnoon">
-      <Nav />
+      <Nav3 />
     <FeaturedMobile />
     </div>
 </template>
@@ -8,7 +8,7 @@
 <script type="text/javascript">
 // 1. Require the Storyblok client
 
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 import FeaturedMobile from '@/components/FeaturedMobile'
 // 2. Set your token - you will be able to create a new space later.
 
@@ -18,7 +18,7 @@ export default {
 name: 'SlideShow',
 components: {
 FeaturedMobile,
-Nav
+Nav3
 },
 data () {
     return {

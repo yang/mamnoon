@@ -1161,6 +1161,7 @@ cursor: pointer;
 
 
 .order-button2{
+    display:none;
     background: white;
     color: #EE5E68;
     border: 2.5px solid #EE5E68;

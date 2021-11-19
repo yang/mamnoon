@@ -1,6 +1,6 @@
 <template>
   <div class="mamnoon">
-    <Nav />
+    <Nav3 />
 
 <div>
 
@@ -123,7 +123,7 @@
   </div>
 </template>
 <script>
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 import Borderline from "@/components/svgIcons/Borderline";
 
 
@@ -143,7 +143,7 @@ ffdata: null
 }
   },
   components: {
-    Nav,
+    Nav3,
     Borderline
   },
   methods:{

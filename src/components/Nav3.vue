@@ -30,7 +30,7 @@
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header2">
 
 
- <GoogleAuth2 class="logButton googleInHeader" />
+
 
 
 
@@ -42,7 +42,8 @@ order <div class="arrow-right"></div>
 
           <!-- <NewAuth :authEmail="$auth._data" :authAuthenticated="$auth.isAuthenticated" class="logButton googleInheader" /> -->
     <div class="container">
-<div class="full-width-logo">
+
+<div class="full-width-logo left">
 <template v-if="$mq === 'sm'">
 
 <!-- ss -->
@@ -57,6 +58,7 @@ order <div class="arrow-right"></div>
 
 
     </template>
+    <div class="logo-box">
     <router-link to="/">
 <svg id="nadiDesk" width="209" height="44" viewBox="0 0 209 44" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect width="209" height="44" fill="url(#pattern0)"/>
@@ -126,10 +128,45 @@ order <div class="arrow-right"></div>
 
 
         </router-link>
+</div>
+    <div class="menu-box">
+             <ul id="menu">
+
+<div class="inline-link"><li><router-link to="restaurants" class="scrollactive-item nav-item">our restaurants</router-link></li></div>
+
+
+  
+           <div class="inline-link">
+
+                    <li>
+                        <router-link to="/about">
+                            about
+                        </router-link>
+                    </li>
+                </div>   
+           <div class="inline-link">
+
+                    <li>
+                        <a href="mamnoonff">
+                           fine foods
+</a>
+                    </li>
+                </div>   
+
+           <div class="inline-link">
+
+                    <li>
+                        <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">
+                            giftcards
+</a>
+                    </li>
+                </div>   
 
 
 
- 
+            </ul>
+</div>
+      <GoogleAuth2 class="logButton googleInHeader" />
  
   </div>
 </div>
@@ -142,7 +179,7 @@ order <div class="arrow-right"></div>
 
     <template v-if="$mq === 'lg'">
 <!--    <nav v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header2">-->
-        <nav v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" >
+        <nav style="display:none;" v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" >
         <div class="container">
 
              <ul id="menu">
@@ -319,7 +356,7 @@ order <div class="arrow-right"></div>
 </div>
 
 
-<div class="container"><div class="full-width-logo"><!----><a href="/landingdrawer" aria-current="page" class="router-link-exact-active router-link-active">
+<div class="container"><div class="full-width-logo left"><!----><a href="/landingdrawer" aria-current="page" class="router-link-exact-active router-link-active">
 
 
 <svg version="1.1" id="nadiWhiteDesk"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -795,7 +832,7 @@ ul#menu li a{
 }
 
 ul#menu li a:hover{
-color: #FFF367;
+color: #000000;
 text-decoration: none;
 }
 
@@ -833,10 +870,10 @@ ul#menu li.active{
     margin: 0 auto;
 }
 
-.full-width-logo{
+.full-width-logo.left{
     width: 100%;
     position: relative;
-    text-align: center;
+    text-align: left;
 
 
 
@@ -881,9 +918,9 @@ ul#menu li.active{
 
 
 
-.full-width-logo{
+.full-width-logo.left{
 
-    // text-align: left;
+    text-align: left;
     /* width: 60%; */
     width: 200px;;
 }
@@ -1161,6 +1198,7 @@ cursor: pointer;
 
 
 .order-button2{
+        display:none;
     background: white;
     color: #EE5E68;
     border: 2.5px solid #EE5E68;
@@ -1319,11 +1357,12 @@ padding-top: 12px;
 }
 
 
-.dropdown{
+.dropdown3{
     background: #ffffff;
     position: absolute;
     width: 190px;
     top: 92px;
+    top: 67px;
     left: -42px;
 
 
@@ -1396,6 +1435,24 @@ transition: transform .25s ease;
     }
 }
 
+
+.logo-box,
+.menu-box{
+    display: inline-block;
+    float: left;
+}
+
+
+.menu-box{
+    ul{
+        margin-top: 12px !important;
+        margin-left: 30px !important;
+    }
+
+    @media only screen and (max-width: 1080px){
+        display:none;
+    }
+}
 </style>
 
 

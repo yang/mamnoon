@@ -1,13 +1,13 @@
 <template>
   <div class="profile">
-    <Nav />
+    <Nav3 />
        <UserProfile />
  
   </div>
 </template>
 <script>
 
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 import UserProfile from "@/components/UserProfile";
 export default {
       metaInfo: {
@@ -18,7 +18,7 @@ export default {
   },
   components: {
 
-    Nav,
+    Nav3,
     UserProfile
 
   },

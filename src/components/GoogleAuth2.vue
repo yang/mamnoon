@@ -3,7 +3,25 @@
       <!-- v-if="!isSignIn" -->
 <a class="hide-on-desktop"
   v-if="!$store.state.loggedIn">
-  <span @click="handleClickSignIn">sign in</span>
+  <span @click="handleClickSignIn">
+  
+  <!--sign in
+ --> 
+  
+  
+  <div class="profile-button">
+<svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.4;transform: translateY(-22px);">
+
+<circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
+<circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
+<path d="M23.5 22C27.0899 22 30 18.866 30 15H17C17 18.866 19.9101 22 23.5 22Z" fill="white"/>
+</svg>
+
+
+</div>
+  
+  </span>
 </a>
 <a class="hide-on-desktop"
   v-if="$store.state.loggedIn"
@@ -45,7 +63,20 @@
       :disabled="!isInit"
        v-if="!$store.state.loggedIn"
     >
-      sign in
+     <!-- // sign in-->
+
+<div class="profile-button">
+<svg width="47" height="48" viewBox="0 0 47 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.4;transform: translateY(-22px);">
+
+<circle cx="23.5" cy="15.6875" r="8.8125" fill="#050000"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.8125 41.8156V35.25C8.8125 29.8422 13.1964 25.4583 18.6042 25.4583H27.4167C32.8244 25.4583 37.2083 29.8422 37.2083 35.25V41.8156C33.3739 45.0504 28.4198 47 23.0104 47C17.601 47 12.6469 45.0504 8.8125 41.8156Z" fill="#060000"/>
+<circle cx="23.5" cy="25.5" r="21.5" stroke="black" stroke-width="2"/>
+<path d="M23.5 22C27.0899 22 30 18.866 30 15H17C17 18.866 19.9101 22 23.5 22Z" fill="white"/>
+</svg>
+
+
+</div>
+
     </a>
     <a
       class="hide-on-mobile"
@@ -76,7 +107,7 @@
 
 <!--      {{$store.state.currentUserEmail.charAt(0).toUpperCase()}}-->
     <!--</div>-->
-    <div class="dropdown" v-if="dropdown">
+    <div class="dropdown" style="top:67px;" v-if="dropdown">
       <ul>
       <li>
         <router-link to="/profile">
@@ -243,6 +274,7 @@ h3 {
     position: absolute;
     width: 190px;
     top: 92px;
+    top: 67px;
     left: 0px;
 left: -42px;
 
@@ -280,9 +312,9 @@ margin-bottom: 0;
     position: absolute;
     color: transparent;
     font-size: 0;
-right: 20px;
-    top: 20px;
-
+/*// right: 20px;*?
+    // top: 20px;
+*/
 
 }
 
@@ -295,7 +327,7 @@ right: 20px;
       background: white;
       position: absolute;
       width: 190px;
-      top: 92px;
+      top: 66px;
       left: -48px;
       left: -42px;
 

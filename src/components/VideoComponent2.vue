@@ -25,23 +25,25 @@
 
                                 <div class="container">
 
-                                    <div class="row text-center">
+                                            <div class="row text-center">
 
-                                    <div class="col-md-8 offset-md-2 col-10 offset-1">
-                                    <h1 class="subpage-header white-text mb120 mt0 text-left">
-                                    welcome to nadi mama: the online home for the mama family of restaurants</h1>
-                                    </div></div>
+                                            <div class="col-md-8 offset-md-2 col-10 offset-1">
+                                                <h1 class="subpage-header white-text mb120 mt0 text-left">
+                                                    welcome to nadi mama: the online home for the mama family of restaurants
+                                                    </h1>
+                                                </div>
+                                            </div>
 
                                     <div class="row text-center">
-                                <div style="width: 100%">
- <router-link :to="'mediamamnoon'"> <MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />     </router-link>     
-    <router-link :to="'mbar'"><MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
-<router-link :to="'mamnoonstreet'"><StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
- <router-link :to="'anar'"><AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" />
- </router-link>
- 
- </div>
+                                        <div style="width: 100%">
+                                            <router-link :to="'mediamamnoon'"> <MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />     </router-link>     
+                                            <router-link :to="'mbar'"><MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
+                                            <router-link :to="'mamnoonstreet'"><StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
+                                            <router-link :to="'anar'"><AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" />
+                                            </router-link>
+                                        </div>
                                     </div>
+
                                 </div>
 
 <div @click="scrollDown">

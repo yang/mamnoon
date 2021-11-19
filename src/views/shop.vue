@@ -1,19 +1,19 @@
 <template>
   <div class="shop">
-    <Nav />
+    <Nav3 />
   </div>
 </template>
 <script>
 import SlideShow from "@/components/SlideShow";
 import login from "@/components/auth/login";
 import Products from "@/components/Products";
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 export default {
   components: {
     login,
     Products,
     SlideShow,
-    Nav
+    Nav3
   }
 };
 </script>

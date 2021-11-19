@@ -1,6 +1,6 @@
 <template>
 <div class="pt180" style="overflow-x:hidden;">
-<Nav2 />
+<Nav3 />
 
 
 
@@ -33,12 +33,12 @@
 
 
 
-import Nav2 from "@/components/Nav2";
+import Nav3 from "@/components/Nav3";
 
 
 export default {
     components: {
-Nav2
+Nav3
   },
   data() {
     return {

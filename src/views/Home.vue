@@ -1,6 +1,6 @@
 <template>
-<div class="pt180" style="overflow-x:hidden;">
-<Nav />
+<div class="pt100" style="overflow-x:hidden;">
+<Nav3 />
 
 <div class="rotating-letters-container" style="display:none;">
   <!-- cff -->
@@ -126,7 +126,7 @@ import VueJwtDecode from "vue-jwt-decode";
 import SlideShow from "@/components/SlideShow";
 import UserProfile from "@/components/UserProfile";
 import Products from "@/components/Products";
-import Nav from "@/components/Nav";
+import Nav3 from "@/components/Nav3";
 
 
 
@@ -141,7 +141,7 @@ export default {
     SlideShow,
     Products,
     UserProfile,
-    Nav,
+    Nav3,
     Stars,
     StarsLeft,
     GlobalFooter

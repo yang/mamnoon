@@ -3,14 +3,14 @@
 eee
 
 
-<Nav2 />
+<Nav3 />
   </div>
 </template>
 <script>
 
 
 
-import Nav2 from "@/components/Nav2";
+import Nav3 from "@/components/Nav3";
 
 
 
@@ -18,7 +18,7 @@ import Nav2 from "@/components/Nav2";
 
 export default {
     components: {
-    Nav2
+    Nav3
   },
 
 };

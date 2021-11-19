@@ -1,6 +1,6 @@
 <template>
 <div>
-<Nav2 />
+<Nav3 />
 
 <div id="menus" class="container pt180" :style="{'background-color':background_color,'color': text_color}">
 <h1>{{this.$route.params.id}} menu</h1>
@@ -48,11 +48,11 @@
 
 <script>  
 
-import Nav2 from "@/components/Nav2";
+import Nav3 from "@/components/Nav3";
 
 export default{
     components:{
-Nav2
+Nav3
     },
     data(){
         return {
