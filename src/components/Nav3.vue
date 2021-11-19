@@ -147,9 +147,9 @@ order <div class="arrow-right"></div>
            <div class="inline-link">
 
                     <li>
-                        <a href="mamnoonff">
+                            <router-link to="/mamnoonff">
                            fine foods
-</a>
+</router-link>
                     </li>
                 </div>   
 
