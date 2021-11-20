@@ -340,7 +340,7 @@
 
 
 <div class="mapAddressBox infoPoints mb0">
-<MapPin2 :color="white"/>
+<MapPin2 :color="'white'"/>
 <template v-if="item.address">
 <template v-for="line in item.address.address_lines">
 <template v-if="line.line_group.url !== ''">

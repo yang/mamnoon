@@ -102,7 +102,7 @@ you handle the turkey, we'll take care of the rest!
 
 
 
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/mamnoon_ALL_WEB_1_.jpg' + ')',
+         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/mamnoon_ff_NOV_21_9-1.png' + ')',
  'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
                         <!--<div class="container mobilePage pt132">-->
   
@@ -154,7 +154,7 @@ available in fine retailers across the puget sound
 
 
 
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/Anar_Summer_Shoot66-scaled.jpg' + ')',
+         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/Anar-Case-8408-scaled.jpg' + ')',
  'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
                         <!--<div class="container mobilePage pt132">-->
   
