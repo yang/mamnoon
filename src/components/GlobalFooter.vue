@@ -13,20 +13,19 @@
 
 
 
-<div v-if="footer.newsletter" class="col-md-5 col-12">
+<div class="col-md-5 col-12">
 
 
 
-
-<h4>{{footer.newsletter.header}}
+<h4>{{$store.state.footer.newsletter.header}}
 </h4>
 <p>  
-{{footer.newsletter.description}}
+{{$store.state.footer.newsletter.description}}
 </p>
 <EmailSignup />
 </div>
 
-<div v-if="footer.footer_links" v-for="linkgroup in footer.footer_links"class="col-md-3 col-12" style="display:none;">
+<div v-if="$store.state.footer.footer_links" v-for="linkgroup in $store.state.footer.footer_links"class="col-md-3 col-12" style="display:none;">
 <ul>
 <li>
 
