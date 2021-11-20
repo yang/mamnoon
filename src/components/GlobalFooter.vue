@@ -7,15 +7,13 @@
 
 
 <footer class="secPadFooter">
-
 <div class="container">
-
 
 <div class="row">
 
 
 
-<div v-if="footer.newsletter" class="col-md-4 col-12">
+<div v-if="footer.newsletter" class="col-md-5 col-12">
 
 
 

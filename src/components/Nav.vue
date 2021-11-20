@@ -103,7 +103,7 @@
           <scrollactive :offset="180" ref="scrollactive">   
              <ul id="menu">
 
-<div class="inline-link"><li><router-link :to="/restaurants" class="scrollactive-item nav-item">our restaurants</router-link></li></div>
+<div class="inline-link"><li><router-link to="/restaurants" class="scrollactive-item nav-item">our restaurants</router-link></li></div>
 
 
                  <template v-for="item in pageData">

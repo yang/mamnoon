@@ -187,7 +187,7 @@ order <div class="arrow-right"></div>
 <div class="inline-link"><li>
 
 
-<router-link :to="/restaurants" class="scrollactive-item nav-item">our restaurants</router-link>
+<router-link to="/restaurants" class="scrollactive-item nav-item">our restaurants</router-link>
 </li></div>
 
 
@@ -240,7 +240,7 @@ order <div class="arrow-right"></div>
 
              <ul id="menu" class="mobile-menu">
 
-<div class="inline-link"><li><router-link :to="/restaurants" class="scrollactive-item nav-item">our restaurants</router-link></li></div>
+<div class="inline-link"><li><router-link to="/restaurants" class="scrollactive-item nav-item">our restaurants</router-link></li></div>
 
 
                  <template v-for="item in pageData">
