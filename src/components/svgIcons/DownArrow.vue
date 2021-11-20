@@ -9,15 +9,20 @@
 <style lang="scss">
 #downArrow{
     position: absolute;
-    bottom: 100px;
-    bottom: 130px;
+ 
+        bottom: 20px;
     left: 50%;
     cursor: pointer;
     transform: translateX(-50%);
 
 
         @media only screen and (max-width: 640px) {
-            bottom: 30px;
+
+
+
+
+            width: 20px;
+            bottom: 5px;
         }
 }
 </style>

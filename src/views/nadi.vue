@@ -14,14 +14,15 @@
 
 
 
-<div class="bottomAttach black secPadMedAlt">
+<div class="bottomAttach header black secPadMedAlt">
+<img src="http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg" class="responsiveBannerImage">
                       <div class="container">
 
                                             <div class="row text-center">
 
-                                            <div class="col-md-8 offset-md-2 col-10 offset-1">
+                                            <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-12 offset-0">
                                                 <h1 class="subpage-header white-text mt0 text-left">
-                                                    welcome to nadi mama: the online home for the mama family of restaurants
+                                                    welcome to nadi mama: the online home for the mama family of restaurants.
                                                     </h1>
                                                 </div>
                                             </div>
@@ -219,7 +220,7 @@ import MbarLogo from "@/components/svgIcons/MbarLogo"
 import AnarLogo from "@/components/svgIcons/AnarLogo"
 import StreetLogo from "@/components/svgIcons/StreetLogo"
 import MamnoonLogo from "@/components/svgIcons/MamnoonLogo"
-
+import DownArrow from "@/components/svgIcons/DownArrow"
 
 import GlobalFooter from "@/components/GlobalFooter"
 
@@ -243,6 +244,7 @@ ffdata: null
 }
   },
   components: {
+    DownArrow,
     Nav3,
     VideoComponent2,
     MbarLogo,
@@ -253,7 +255,11 @@ ffdata: null
 
   },
   methods:{
+    scrollDown(){
 
+window.scrollTo(0, this.$el.clientHeight);
+// console.log(pageHeight);
+    }
   },
 
   mounted(){
@@ -528,6 +534,21 @@ background-position: center center;
 .subpage-header{
   font-size: 32px;
   line-height: 46px;
+
+     @media only screen and (max-width: 992px) {
+font-size: 18px;
+line-height: 24px;
+     }
+
+      @media only screen and (max-width: 640px) {
+margin-bottom: 10px !important;
+
+margin-top: 10px !important;
+      
+    }
+
+
+
   }
 
 
@@ -568,6 +589,19 @@ display: inline-block;
     background: black; 
     background: #F15D58;
   }
+
+
+
+&.header{
+      @media only screen and (max-width: 640px) {
+
+
+height: calc(100vh - 62px);
+padding-top: 0 !important;
+      
+    }
+}
+
 }
 
 
@@ -644,7 +678,20 @@ width: 100%;
 
 
 .secPadMedAlt{
-  padding: 32px 0 38px;
+  // padding: 32px 0 38px;
+    padding: 32px 0 78px;
+}
+
+
+
+.responsiveBannerImage{
+  display:none;
+   @media only screen and (max-width: 640px) {
+// margin-top:92px;
+display:block;
+width: 100%;
+      
+    }
 }
 
 </style>
