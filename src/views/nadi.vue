@@ -103,7 +103,7 @@ you handle the turkey, we'll take care of the rest!
 
 
 
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/mamnoon_ff_NOV_21_9-1.png' + ')',
+         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/mamnoon_ff_NOV_21_9.jpg' + ')',
  'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
                         <!--<div class="container mobilePage pt132">-->
   
