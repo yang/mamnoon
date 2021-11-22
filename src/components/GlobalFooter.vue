@@ -7,7 +7,13 @@
 
 
 <footer class="secPadFooter">
+
+<div class="beta">
+    we are in beta. feedback? <a href="https://forms.gle/9d5kmR6PzZwmgUV78" target="_blank"><u>submit here</u></a>!
+</div>
+
 <div class="container">
+
 
 <div class="row">
 
@@ -141,6 +147,33 @@ footer ul li{
 
 .secPadFooter{
     padding: 70px 0 110px;
+        padding: 100px 0 110px;
+}
+
+
+.beta{
+    position: absolute;
+    width: 100%;
+    background: white;
+    color:#F05D5B;
+    top: 0;
+    z-index: 1000;
+    padding: 5px;
+
+    font-size: 20px;
+    
+    
+    @media only screen and (max-width: 1080px) {
+            width: 100%;
+                font-size: 14px;
+    }
+
+
+text-align: center;
+    @media only screen and (max-width: 640px) {
+        font-size: 14px;
+    }
+    
 }
 
 </style>
