@@ -14,13 +14,13 @@ Vue.use(Datepicker)
 
 
 const routes = [
+  // {
+  //   path: "/",
+  //   name: "home",
+  //   component: Home
+  // },
   {
     path: "/",
-    name: "home",
-    component: Home
-  },
-  {
-    path: "/nadi",
     name: "nadi",
     component: () => import("../views/nadi.vue")
   },
