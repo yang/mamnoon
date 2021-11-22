@@ -146,6 +146,7 @@ footer ul li{
 
 
 .secPadFooter{
+        position: relative;
     padding: 70px 0 110px;
         padding: 100px 0 110px;
 }
