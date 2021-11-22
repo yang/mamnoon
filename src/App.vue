@@ -2323,6 +2323,8 @@ font-size: 22px;
 font-weight: 500;
 &:hover{
   background-color: transparent;
+  background-color: white;
+  color: #F15D58;
 }
 &.dark{
 

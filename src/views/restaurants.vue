@@ -612,13 +612,19 @@ display: inline-block;
 .bottomButton{    display: inline-block;
     border-radius: 5px;
     // width: 100%;
-    margin: 23px 10px 0 0;
+    margin: 23px 24px 0 0;
+    
     text-align: center;
     padding: 5px 8px 5px;
+        padding: 1px 20px 3px;
     font-size: 16px;
     font-weight: 500;
     background: #F15D58;
     color: white;
+
+        font-size: 22px;
+    font-weight: 500;
+
     &:hover{
          color: #fff;
      background: black;
