@@ -582,8 +582,8 @@ follow us
 <div class="container">
 
 <div class="row">
-<div class="col-md-8 col-12"><img :src="repeat.image" style="width: 100%;margin: 34px 0;"></div>
-<div class="col-md-4 col-12" style="position: relative">
+<div class="col-md-6 col-12"><img :src="repeat.image" style="width: 100%;margin: 34px 0;"></div>
+<div class="col-md-4 offset-md-1 col-12 offset-0" style="position: relative">
 
 <div class="sidebox" :style="{'background-color': item.background_color}">
 
@@ -634,8 +634,11 @@ _</div>
 <div class="container">
 
 <div class="row">
-<div class="col-md-8 col-12"><img :src="repeat.image" style="width: 100%;margin: 34px 0;"></div>
-<div class="col-md-4 col-12" style="position: relative">
+<div class="col-md-6 col-12"><img :src="repeat.image" style="width: 100%;margin: 34px 0;"></div>
+<div class="col-md-4 offset-md-1 col-12 offset-0"  style="position: relative">
+
+
+
 
 <div class="sidebox" :style="{'background-color': item.text_color}">
 
