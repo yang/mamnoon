@@ -155,7 +155,7 @@ available in fine retailers across the puget sound
 
 
 
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/Anar-Case-8408-scaled.jpg' + ')',
+         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/Anar-Case-8406-scaled.jpg' + ')',
  'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
                         <!--<div class="container mobilePage pt132">-->
   
@@ -224,7 +224,6 @@ import DownArrow from "@/components/svgIcons/DownArrow"
 
 import GlobalFooter from "@/components/GlobalFooter"
 
-// import NewTemplate from "@/components/NewTemplate";
 
 
 

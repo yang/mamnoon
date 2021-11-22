@@ -17,7 +17,7 @@
 
 <div class="row">
 
-<template v-for="restaurant in this.$store.state.pageData[0].restaurant_repeater">
+<template v-if="$store && $store.state" v-for="restaurant in this.$store.state.pageData[0].restaurant_repeater">
 
 
 
@@ -27,9 +27,17 @@
 
 <div class="restaurantBox">
 
-<router-link :to="restaurant.name.replace(' ','')">
+<router-link v-if="restaurant.background_image.sizes" :to="restaurant.name.replace(' ','')">
 <div class="imgBox" :style="{'background-image': `url(${restaurant.background_image.sizes.medium_large})`}">
+<!--<div class="imgBox">->>-->
 
+.
+
+</div>
+</router-link>
+<router-link v-else :to="restaurant.name.replace(' ','')">
+<!--<div class="imgBox" :style="{'background-image': `url(${restaurant.background_image.sizes.medium_large})`}">-->
+<div class="imgBox">
 
 .
 
