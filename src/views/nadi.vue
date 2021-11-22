@@ -641,8 +641,8 @@ color: white;
 font-size: 18px;
 
 &:hover{
-  color: #F15D58;
-background: white;
+  color: #FFFFFF;
+background: black;
 }
 }
 
