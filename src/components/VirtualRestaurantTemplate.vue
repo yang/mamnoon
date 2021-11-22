@@ -895,12 +895,6 @@ notificationVisible: true,
   },
   props: ['apiData', 'blok'],
   methods: {
-        async importMenus(){
-      let responseAcf = await this.$http.get(`http://imenupro.com/!hcd-9k`)
-      console.log(responseAcf)    
-
-
-      },
 dismissNotification(){
   this.notificationVisible = false;
 },
@@ -1055,7 +1049,7 @@ alternateColor: this.$store.state.pageData[0].restaurant_repeater[i].background_
 
 this.restaurantName = this.$route.params.id;
 
-       this.importMenus()
+
 
 
 let menu = document.getElementsByClassName('imp-wrapper-match2')
