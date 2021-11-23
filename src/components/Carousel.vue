@@ -3054,7 +3054,7 @@ text-align: center;
 }
 
 .rightIcon{
-width: 80%;
+width: 90%;
 float: left;
 padding-top: 2px;
     font-size: 14px;
