@@ -1793,6 +1793,26 @@ display: flow-root;
 }
 
 
+
+
+//large screen fix
+
+// body{
+
+@media only screen and (min-width: 1600px) {
+  body{
+    width: 1600px;
+    margin: 0 auto !important;
+  }
+
+  .fixed-nav{
+ width: 1600px !important;
+  }
+}
+
+
+// }
+
 </style>
 
 
