@@ -1,7 +1,14 @@
 <template>
-<svg id="downArrow" width="45" height="39" viewBox="0 0 45 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M22.5 39L4.05209e-07 1.19327e-07L45 -3.8147e-06L22.5 39Z" fill="white"/>
+
+<svg id="downArrow" width="55" height="55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 55 55" style="enable-background:new 0 0 55 55;" xml:space="preserve">
+
+<path fill="white" d="M27.5,0C12.3,0,0,12.3,0,27.5S12.3,55,27.5,55S55,42.7,55,27.5S42.7,0,27.5,0z M27.5,42.6L13.2,17.9h28.6
+	L27.5,42.6z"/>
 </svg>
+
+
+
 </template>
 
 
@@ -10,11 +17,14 @@
 #downArrow{
     position: absolute;
  
-        bottom: 20px;
-    left: 50%;
+        // bottom: 20px;
+    // left: 50%;
     cursor: pointer;
-    transform: translateX(-50%);
+    transform: translateY(-50%);
 
+
+top: 50%;
+right: 20px;
 
         @media only screen and (max-width: 640px) {
 

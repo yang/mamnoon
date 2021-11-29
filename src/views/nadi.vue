@@ -16,18 +16,18 @@
 
 <div class="bottomAttach header black secPadMedAlt">
 <img src="http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg" class="responsiveBannerImage">
-                      <div class="container">
+                      <div class="container" style="position: relative;">
 
                                             <div class="row text-center">
 
-                                            <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-12 offset-0">
+                                            <div class="col-12 offset-0">
                                                 <h1 class="subpage-header white-text mt0 text-left">
                                                     welcome to nadi mama: the online home for the mama family of restaurants.
                                                     </h1>
                                                 </div>
                                             </div>
 
-                                    <div class="row text-center">
+                                    <div class="row text-center" >
                                         <div style="width: 100%">
                                             <router-link :to="'mamnoon'"> <MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />     </router-link>     
                                             <router-link :to="'mbar'"><MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
@@ -35,13 +35,15 @@
                                             <router-link :to="'anar'"><AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" />
                                             </router-link>
                                         </div>
-                                    </div>
+                           
 
+                                    </div>
+       <div @click="scrollDown">
+                                    <DownArrow />
+                                  </div>  
                                 </div>
 
-<div @click="scrollDown">
-                                <DownArrow />
-                                </div>  
+
 
 
 
@@ -104,10 +106,9 @@ you handle the turkey, we'll take care of the rest!
 
 
          <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/mamnoon_ff_NOV_21_9.jpg' + ')',
- 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
-                        <!--<div class="container mobilePage pt132">-->
-  
-
+ 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover','background-size': '80%',
+    'background-repeat': 'no-repeat',
+    'background-color': '#000'}">
 
 
 <div class="bottomAttach secPadMedAlt">
@@ -548,6 +549,15 @@ margin-top: 10px !important;
 
 
 
+
+    line-height: 46px;
+    width: 840px;
+    font-size: 23.9px;
+    margin: 0 auto 20px auto;
+
+     @media only screen and (max-width: 992px) {
+width: 100%
+     }
   }
 
 
@@ -600,22 +610,32 @@ padding-top: 0 !important;
       
     }
 }
-
 }
-
 
 
 .block{
 text-align: left;
-width: 300px;
+width: 400px;
 color: white;
 &.whitebg{
 
-
+    width: min-content;
   background: white;
-    padding: 22px 26px 28px;
+    padding: 21px 21px 26px;
   color: black;
   border-radius: 5px;
+
+  .blockHeader{
+    color: #F15D58;
+    margin-bottom: 10px;
+  }
+
+
+.blockButton{
+      padding: 5px 10px 7px;
+}
+
+
 }
 
 .blockHeader{
@@ -628,6 +648,9 @@ font-size: 16px;
 
 font-weight:medium;
 margin-bottom: 26px;
+    margin-bottom: 20px;
+        margin-bottom: 50px;
+
 }
 a.blockButton{
 
@@ -649,6 +672,7 @@ background: black;
     display: block;
     border-radius: 5px;
     width: 100%;
+    width: 300px;
     margin: 0 0;
     text-align: center;
     padding: 3px 10px 5px;
@@ -679,6 +703,8 @@ width: 100%;
 .secPadMedAlt{
   // padding: 32px 0 38px;
     padding: 32px 0 78px;
+
+    padding: 28px 0 40px; 
 }
 
 
