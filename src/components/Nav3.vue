@@ -147,7 +147,7 @@ order <div class="arrow-right"></div>
            <div class="inline-link">
 
                     <li>
-                            <router-link to="/mamnoonff">
+                            <router-link to="/finefoods">
                            fine foods
 </router-link>
                     </li>
@@ -586,6 +586,7 @@ if(this.$route.name === 'home' ||
     this.$route.name === 'onlinemenu' ||
     this.$route.name === 'reservations' ||
     this.$route.name === 'mamnoonff' ||
+    this.$route.name === 'finefoods' ||
     this.$route.name === 'about' ||
     this.$route.name === 'newsletterarchive'){
         return true

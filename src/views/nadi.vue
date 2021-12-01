@@ -61,7 +61,7 @@
 <!--<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />-->
 
          <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/123.jpeg' + ')',
- 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
+ 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover', 'display': 'none'}">
                         <!--<div class="container mobilePage pt132">-->
   
 
