@@ -225,12 +225,22 @@ import MamnoonLogo from "@/components/svgIcons/MamnoonLogo"
 
 
 export default {
-    metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'our restaurants',
-      // all titles will be injected into this template
-      titleTemplate: '%s | nadi mama'
-  },
+
+
+    metaInfo() {
+        return {
+            title: `mama group restaurants`,
+            meta: [
+                { name: 'description', content: `a mama location for every occasion`},
+                { property: 'og:title', content: `mama group restaurants`},
+                { property: 'og:site_name', content: 'nadi mama'},
+                { property: 'og:description', content: `a mama location for every occasion`},
+                {property: 'og:url', content: 'https://nadimama.com/'},
+                // {property: 'og:image', content: this.aws_url + '/users/' + this.userData.profileurl + '-main.jpg' }    
+            ]
+        }},
+
+
   props: ['data'],
   data(){
 return {
@@ -271,7 +281,7 @@ ffdata: null
     }
 
 
-   await this.getB() 
+  //  await this.getB() 
 
 },
 getB(){

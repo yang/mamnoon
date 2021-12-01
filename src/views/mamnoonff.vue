@@ -129,12 +129,21 @@ import Borderline from "@/components/svgIcons/Borderline";
 import GlobalFooter from "@/components/GlobalFooter";
 
 export default {
-    metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'fine foods',
-      // all titles will be injected into this template
-      titleTemplate: '%s | nadi mama'
-  },
+
+
+    metaInfo() {
+        return {
+            title: `mamnoon fine foods`,
+            meta: [
+                { name: 'description', content: `mamnoon fine foods: available in fine retailers across the puget sound`},
+                { property: 'og:title', content: `mamnoon fine foods`},
+                { property: 'og:site_name', content: 'nadi mama'},
+                { property: 'og:description', content: `mamnoon fine foods: available in fine retailers across the puget sound`},
+                {property: 'og:url', content: 'https://nadimama.com/'},
+                // {property: 'og:image', content: this.aws_url + '/users/' + this.userData.profileurl + '-main.jpg' }    
+            ]
+        }},
+
   props: ['data'],
   data(){
 return {
