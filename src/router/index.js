@@ -257,10 +257,17 @@ const routes = [
     component: () => import("../components/MenuTemplate.vue")
   },
 
+  // {
+  //   path: "/:id",
+  //   component: () => import("../components/VirtualRestaurantTemplate.vue")
+  // },
+
+
   {
     path: "/:id",
-    component: () => import("../components/VirtualRestaurantTemplate.vue")
+    component: () => import("../views/restauranttemplate.vue")
   }
+
 ];
 
 

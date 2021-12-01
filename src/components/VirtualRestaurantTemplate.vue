@@ -259,7 +259,7 @@
 
 <div class="infoPoints">
 <div class="iconPoint">
-<Heart :color="white"/>
+<Heart :color="'white'"/>
            
               </div>
 <div style="padding-top: 0px;">
@@ -792,33 +792,50 @@ export default {
     Instagram,
     Twitter
   },
-      metaInfo: {
-// title: (titleChunk) => {
-//   // If undefined or blank then we don't need the hyphen
-//   return titleChunk ? `${titleChunk} - Site Title` : 'Site Title';
-// },
-
-//     titleTemplate: '%s | nadi mama'
-
-titleTemplate: () => {
-
-  console.log(window.location);
-  return window.location.pathname.substring(1).replace("street", " street") + ' | nadi mama';
-}
 
 
 
 
-  },
+
+
+    metaInfo() {
+        return {
+            title: `${this.generateRestaurantTitle}`,
+            meta: [
+                { name: 'description', content: `${this.generateRestaurantDescription}`},
+                { property: 'og:title', content: `${this.generateRestaurantTitle}`},
+                { property: 'og:site_name', content: 'nadi mama'},
+                { property: 'og:description', content: `${this.generateRestaurantDescription}`},
+                {property: 'og:url', content: 'https://nadimama.com/'},
+                // {property: 'og:image', content: this.aws_url + '/users/' + this.userData.profileurl + '-main.jpg' }    
+            ]
+        }},
 
 computed: {
+generateRestaurantTitle(){
 
+for(let i in this.$store.state.pageData[0].restaurant_repeater){
+if(this.$store.state.pageData[0].restaurant_repeater[i].name.replace(' ', '') === this.$route.params.id){
+
+return this.$store.state.pageData[0].restaurant_repeater[i].name;
+}
+}
+},
+generateRestaurantDescription(){
+
+for(let i in this.$store.state.pageData[0].restaurant_repeater){
+if(this.$store.state.pageData[0].restaurant_repeater[i].name.replace(' ', '') === this.$route.params.id){
+
+return this.$store.state.pageData[0].restaurant_repeater[i].description;
+}
+}
+},
     styleObject() {
       for(var i in this.buttonColors){
 
 
-        console.log(this.buttonColors[i].name);
-        console.log(this.restaurantName);
+        // console.log(this.buttonColors[i].name);
+        // console.log(this.restaurantName);
         if(this.buttonColors[i].name.replace(" ", "") === this.restaurantName.replace(" ", "")){
 
 
@@ -881,6 +898,10 @@ return arrRest;
   data() {
     
     return {
+
+
+
+
       name: this.$route.params.id,
       button:{
         colorBackd: '',
