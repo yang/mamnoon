@@ -2259,6 +2259,13 @@ scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
               <hr v-if="panelShow === 'customerInfo'" />
               <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total | showToFixed }}</b>
 
+
+<h1>button</h1>
+        <button class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay credit auth</button> 
+<h1>button</h1>
+
+
+
 <!--<br v-if="panelShow === 'customerInfo'">-->
 <br v-if="panelShow === 'customerInfo'">
  <!--<CreditSaveForm2 v-if="panelShow === 'customerInfo'" :emailAddress="$store.state.currentUserEmail" />-->
@@ -2306,8 +2313,6 @@ cart empty
   <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>
   <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>-->
 <!--  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>-->
-
-
 
 
 
@@ -3634,6 +3639,46 @@ showPickupTime(){
 
 
 },
+cippaybuttoncreditauth() {
+      let self = this;
+      this.getCreditAuthToken().then(function (transactionToken) {
+        emergepay.open({
+          transactionToken: transactionToken,
+          onTransactionSuccess: function (approvalData) {
+            console.log("Approval Data", approvalData);
+            emergepay.close();
+            console.log('authorized');
+
+
+
+
+
+
+
+
+
+
+// credit save
+// credit save
+// credit save
+
+
+
+
+          },
+          onTransactionFailure: function (failureData) {
+            console.log("Failure Data", failureData);
+            console.log('proceeed with order now you have a transaction');
+            // console.log('transasction success')
+
+          },
+          onTransactionCancel: function () {
+            console.log("transaction cancelled!");
+          },
+        });
+      });
+
+},
     cippaybuttoncreditsave() {
 
       let self = this;
@@ -3720,6 +3765,39 @@ console.log('transasction success')
           });
       });
     },
+
+   getCreditAuthToken() {
+      let self = this;
+      let dataToSend = {
+      billing:{
+        billing_name: this.currentOrder.billing.billing_name,
+        billing_address: this.currentOrder.billing.billing_address,
+        billing_postal_code: this.currentOrder.billing.billing_postal_code
+      }
+      }
+
+      return new Promise(function (resolve, reject) {
+        $.ajax({
+        //  url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-auth",
+         url: "http://localhost:4000/order/start-credit-auth",
+          type: "POST",
+          dataType: "json",
+          contentType: "application/json",
+          data: JSON.stringify(dataToSend),
+        })
+          .done(function (data) {
+            if (data.transactionToken) resolve(data.transactionToken);
+            else reject("Error getting transaction token");
+          })
+          .fail(function (err) {
+            reject(err);
+          });
+      });
+    },
+
+
+
+
 emailErrorVisible(emailEntry,phoneEntry){
 
 

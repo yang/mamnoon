@@ -776,6 +776,7 @@ import GlobalFooter from "@/components/GlobalFooter";
 
 
 export default {
+
   components: {
     ALaCarte,
     Nav3,
@@ -860,7 +861,9 @@ return arrRest;
     },
   },
   data() {
+    
     return {
+      name: this.$route.params.id,
       button:{
         colorBackd: '',
         colorBackdHover: '',
@@ -1054,6 +1057,12 @@ this.restaurantName = this.$route.params.id;
 
 let menu = document.getElementsByClassName('imp-wrapper-match2')
 console.log(menu);
+  },
+            metaInfo: {
+      // if no subcomponents specify a metaInfo.title, this title will be used
+      title: 'restaurants',
+      // all titles will be injected into this template
+      titleTemplate: '%s | nadi mama'
   }
 };
 
