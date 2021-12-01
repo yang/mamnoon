@@ -792,6 +792,24 @@ export default {
     Instagram,
     Twitter
   },
+      metaInfo: {
+// title: (titleChunk) => {
+//   // If undefined or blank then we don't need the hyphen
+//   return titleChunk ? `${titleChunk} - Site Title` : 'Site Title';
+// },
+
+//     titleTemplate: '%s | nadi mama'
+
+titleTemplate: () => {
+
+  console.log(window.location);
+  return window.location.pathname.substring(1).replace("street", " street") + ' | nadi mama';
+}
+
+
+
+
+  },
 
 computed: {
 
@@ -1057,13 +1075,8 @@ this.restaurantName = this.$route.params.id;
 
 let menu = document.getElementsByClassName('imp-wrapper-match2')
 console.log(menu);
-  },
-            metaInfo: {
-      // if no subcomponents specify a metaInfo.title, this title will be used
-      title: 'restaurants',
-      // all titles will be injected into this template
-      titleTemplate: '%s | nadi mama'
   }
+
 };
 
 </script>
