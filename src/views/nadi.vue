@@ -6,7 +6,6 @@
 
 
 
-
                                <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg' + ')',
  'background-position': 'center', 'position': 'relative', 'height': '100vh', 'background-size': 'cover'}">
                         <!--<div class="container mobilePage pt132">-->
@@ -24,6 +23,10 @@
                                                 <h1 class="subpage-header white-text mt0 text-left">
                                                     welcome to nadi mama: the online home for the mama family of restaurants.
                                                     </h1>
+
+
+
+                                                    
                                                 </div>
                                             </div>
 
@@ -60,10 +63,13 @@
                       </section>
 <!--<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />-->
 
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/123.jpeg' + ')',
- 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover', 'display': 'none'}">
+         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_la_dive_SQUARE.png' + ')',
+ 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover', 'background-size': '20%', 'background-color': 'rgb(0, 0, 0)'}">
                         <!--<div class="container mobilePage pt132">-->
   
+
+
+
 
 
 
@@ -76,10 +82,10 @@
 
 <div class="block">
 <div class="blockHeader">
-thanksgiving mezze packs
+pop-up at la dive!
 </div>
 <div class="blockDescription">
-you handle the turkey, we'll take care of the rest!
+One day only! 721 e pike st, sunday december 12th noon to 4pm
 </div>
 
 <a class="blockButton" href="https://www.exploretock.com/mamnoonrestaurant?tock_source=tock&tock_medium=search_nav" target="_blank">order now</a>
@@ -253,7 +259,8 @@ export default {
 return {
 user: null,
 pageData: null,
-ffdata: null
+ffdata: null,
+loaded: false
 }
   },
   components: {
@@ -279,7 +286,12 @@ window.scrollTo(0, this.$el.clientHeight);
 
 
 
+   window.addEventListener('load', () => {
+         // run after everything is in-place
 
+this.loaded = true;
+
+    })
 
 
 
