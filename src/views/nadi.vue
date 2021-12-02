@@ -63,8 +63,7 @@
                       </section>
 <!--<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />-->
 
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_la_dive_SQUARE.png' + ')',
- 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover', 'background-size': '20%', 'background-color': 'rgb(0, 0, 0)'}">
+         <section class="topSection fh popup-background" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_la_dive_SQUARE.png' + ')'}">
                         <!--<div class="container mobilePage pt132">-->
   
 
@@ -743,5 +742,35 @@ width: 100%;
       
     }
 }
+
+
+
+
+
+  
+
+.popup-background{
+
+ background-position: top center;
+ position: relative; 
+ height: 90vh; 
+ background-size: cover;
+ background-size: 30%;
+ background-color: rgb(0, 0, 0);
+ background-repeat: 'no-repeat'
+
+
+
+
+
+}
+
+   @media only screen and (max-width: 992px) {
+     .popup-background{
+ background-position:top center;
+ background-size: 70%;      
+     }
+    }
+
 
 </style>
