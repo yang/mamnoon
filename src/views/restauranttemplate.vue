@@ -43,7 +43,10 @@ export default {
       // if no subcomponents specify a metaInfo.title, this title will be used
       title: `our restaurant`,
       // all titles will be injected into this template
-      titleTemplate: '%s | nadi mama'
+      titleTemplate: '%s | nadi mama',
+        meta: [
+              { vmid: 'description', name: 'description', content: 'barbar' }
+              ]
   },
   props: ['data'],
   data(){

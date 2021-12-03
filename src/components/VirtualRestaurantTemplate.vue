@@ -802,6 +802,7 @@ export default {
         return {
             title: `${this.generateRestaurantTitle}`,
             meta: [
+              { vmid: 'description', name: 'description', content: 'barbar' },
                 { name: 'description', content: `${this.generateRestaurantDescription}`},
                 { property: 'og:title', content: `${this.generateRestaurantTitle}`},
                 { property: 'og:site_name', content: 'nadi mama'},

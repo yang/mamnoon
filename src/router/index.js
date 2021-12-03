@@ -265,7 +265,10 @@ const routes = [
 
   {
     path: "/:id",
-    component: () => import("../views/restauranttemplate.vue")
+    component: () => import("../views/restauranttemplate.vue"),
+    meta: {
+      title: 'facebook'
+    }
   }
 
 ];

@@ -13,7 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "vue-select/src/scss/vue-select.scss";
 import 'document-register-element/build/document-register-element'
 import Sticky from 'vue-sticky-directive'
-import VueMeta from 'vue-meta'
+import Meta from 'vue-meta'
 import VueObserveVisibility from 'vue-observe-visibility'
 import VueSweetalert2 from 'vue-sweetalert2';
 // If you don't need the styles, do not connect
@@ -56,7 +56,17 @@ Vue.use(Auth0Plugin, {
 
 
 Vue.use(VueObserveVisibility)
-Vue.use(VueMeta)
+// Vue.use(VueMeta)
+
+Vue.use(Meta, {
+  keyName: 'metaInfo',
+  attribute: 'data-vue-meta',
+  ssrAttribute: 'data-vue-meta-server-rendered',
+  tagIDKeyName: 'vmid',
+  refreshOnceOnNavigation: true
+})
+
+
 Vue.use(VueCurrencyInput)
 Vue.component('v-select', vSelect)
 
