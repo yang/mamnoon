@@ -4780,7 +4780,7 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
           // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction",
-           url: "https://young-hamlet-03679.herokuapp.com/order/start-transaction",
+           url: "https://nadi-mama-backend.herokuapp.com/order/start-transaction",
           //url: "http://localhost:4000/order/start-transaction",
           type: "POST",
           dataType: "json",
@@ -6458,7 +6458,7 @@ font-weight: 400;
 .stickyPosition{
   background: #fff;
   position:sticky;
-  top: 132px;
+    top: 90px;
   // z-index: 1000;
   z-index: 80;
 

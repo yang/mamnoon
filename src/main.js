@@ -1,3 +1,7 @@
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 import Vue from "vue";
 import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
@@ -33,6 +37,10 @@ import { Auth0Plugin } from "./auth";
 
 
 import VideoBg from 'vue-videobg'
+
+
+
+
 
 Vue.component('video-bg', VideoBg)
 
@@ -72,16 +80,19 @@ Vue.component('v-select', vSelect)
 
 Vue.use(VueSweetalert2);
 
+
+console.log(process.env.VUE_APP_BASE_URL);
+console.log(process.env);
+
 const base = axios.create({
-baseURL: "https://young-hamlet-03679.herokuapp.com"
-//  baseURL: "http://localhost:4000"
+// baseURL: process.env.VUE_APP_BASE_URL
+  baseURL: process.env.VUE_APP_LOCAL_URL
 }); 
 
 
 
 
-
-
+console.log(process.env.VUE_APP_LOCAL_URL);
 
 
 

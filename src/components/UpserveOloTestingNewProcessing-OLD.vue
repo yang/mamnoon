@@ -3749,7 +3749,7 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-         url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-save",
+         url: "https://nadi-mama-backend.herokuapp.com/order/start-credit-save",
         //  url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
@@ -3778,7 +3778,7 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-        //  url: "https://young-hamlet-03679.herokuapp.com/order/start-credit-auth",
+        //  url: "https://nadi-mama-backend.herokuapp.com/order/start-credit-auth",
          url: "http://localhost:4000/order/start-credit-auth",
           type: "POST",
           dataType: "json",
@@ -5390,7 +5390,7 @@ console.log('transasction success')
 // added 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: "https://young-hamlet-03679.herokuapp.com/order/start-auth",
+          url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
           // url: "http://localhost:4000/order/start-auth",
           type: "POST",
           dataType: "json",
@@ -7153,7 +7153,7 @@ font-weight: 400;
 .stickyPosition{
   background: #fff;
   position:sticky;
-  top: 132px;
+    top: 90px;
   // z-index: 1000;
   z-index: 80;
 
