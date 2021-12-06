@@ -99,11 +99,11 @@ const routes = [
   //   name: "shop",
   //   component: () => import("../views/retail.vue")
   // },
-  {
-    path: "/retail",
-    name: "retail",
-    component: () => import("../views/retail.vue")
-  },
+  // {
+  //   path: "/retail",
+  //   name: "retail",
+  //   component: () => import("../views/retail.vue")
+  // },
   {
     path: "/admin",
     name: "admin",
