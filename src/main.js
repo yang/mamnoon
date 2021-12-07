@@ -85,8 +85,8 @@ console.log(process.env.VUE_APP_BASE_URL);
 console.log(process.env);
 
 const base = axios.create({
-// baseURL: process.env.VUE_APP_BASE_URL
-  baseURL: process.env.VUE_APP_LOCAL_URL
+baseURL: process.env.VUE_APP_BASE_URL
+  // baseURL: process.env.VUE_APP_LOCAL_URL
 }); 
 
 
