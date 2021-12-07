@@ -22,12 +22,43 @@ order history:
 
 <template v-if="currentView === order.orderInfo.restaurant|| currentView === 'empty'">
 
+<template v-if="hasTransmissionId(order.payInfo)">
+  <b>gift card transaction</b>
+</template>
+<template v-else>
+<b>credit debit transaction</b>
+</template>
+<br>
+
+
+
+
+
 
   confirmation code: {{order.orderInfo.confirmation_code}}
 
 <!-- {{order.payInfo.externalTransactionId}} -->
 <br><br>
-preorder? {{order.orderInfo.preorder}}
+<template v-if="order.orderInfo.preorder">
+<b>preorder</b>
+</template>
+<template v-else>
+  <b>regular order</b>
+</template>
+
+
+<template v-if="order.void">
+  <h1>VOID</h1>
+</template>
+<template v-else-if="voidValid(order) && !hasTransmissionId(order.payInfo)">
+  <button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.uniqueTransId,true)">void</button>
+  <h1 v-else>VOID</h1>
+</template>
+<template v-else>
+ <i>(void unavailable)</i>
+</template>
+
+
 <br>
 <template v-if="order.orderInfo.preorder">
 <br>
@@ -36,6 +67,11 @@ scheduled time: {{order.orderInfo.scheduled_time | formatDate}}
 <br>
 time placed: {{ order.orderInfo.time_placed | formatDate }}
 <br>
+
+<template v-if="order.timeClosed">
+time closed:  {{timeClosedMoment(order.timeClosed)}}
+</template>
+<br><br>
 ${{order.orderInfo.charges.total | showToFixed}}
 <br>
 {{order.orderInfo.restaurant}}
@@ -43,25 +79,7 @@ ${{order.orderInfo.charges.total | showToFixed}}
 item amount: {{order.orderInfo.charges.items.length}}
 <br>
 
-<!-- <pre> -->
-<!-- {{order.payInfo}} -->
-<!-- </pre> -->
-<!--// {{order.void}}-->
 
-<template v-if="order.payInfo.data">
-<button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.data.uniqueTransId,true)">void</button>
-<h1 v-else>VOID</h1>
-
-
-
-</template>
-
-<template v-if="order.payInfo.uniqueTransId">
-<!-- {{order.void}} -->
-<button class="fl-right" v-if="!order.void" @click="issueVoid(order.payInfo.uniqueTransId,false)">void</button>
-<h1 v-else>VOID</h1>
-
-</template>
 
 
 
@@ -78,12 +96,6 @@ item amount: {{order.orderInfo.charges.items.length}}
 </pre>
 <br>
 
-<!-- <template v-if="order.payInfo.externalTransactionId">
-debit/credit purchase (id: {{order.payInfo.externalTransactionId}})
-</template>
-<template v-else>
-giftcard purchase
-</template> -->
 <br>  
 <ul class="no-left-pad">
 <li v-for="item in order.orderInfo.charges.items" :key="item.cartId" style="margin-bottom:30px;">
@@ -96,19 +108,9 @@ giftcard purchase
   </template>
   <template v-else>
 
-
-
-<template v-if="order.payInfo.data">
-<!-- {{order.payInfo.data.uniqueTransId}} -->
-
-<span class="line-link" v-if="!order.void" @click="issueTokenizedReturn(order.payInfo.data.uniqueTransId,item.price,order.orderInfo.charges.taxes/order.orderInfo.charges.preTotal,item.cartId,order._id)"><u>issue return</u></span>
-</template>
-
 <template v-if="order.payInfo.uniqueTransId">
-<!-- {{order.payInfo.uniqueTransId}} -->
 
 <span class="line-link" v-if="!order.void" @click="issueTokenizedReturn(order.payInfo.uniqueTransId,item.price,order.orderInfo.charges.taxes/order.orderInfo.charges.preTotal,item.cartId,order._id)"><u>issue return</u></span>
-
 </template>
 
   </template>
@@ -136,8 +138,12 @@ import tz from 'moment-timezone'
 
 
 export default {
+
+
+
     data( ) {
     return {
+      dateNow: Date.now(),
         orderhistory: null,
         response: null,
             currentView: 'empty'
@@ -161,6 +167,42 @@ export default {
 }
     },
     methods: {
+
+hasTransmissionId(order){
+
+
+if(order.TransmissionID !== undefined){
+  console.log(order.TransmissionID)
+
+  return true
+}else{
+  return false
+}
+
+},
+timeClosedMoment(timeClosed){
+// return moment.unix(timeClosed).format('MMMM Do YYYY HH:mm A');
+
+return moment(timeClosed).format('MMMM Do YYYY HH:mm A');
+ },
+
+
+voidValid(order){
+
+
+
+
+// 1400000 is about 24 minutes
+if(Date.now() > (order.timeClosed + 1400000) || order.timeClosed === undefined){
+  return false
+}else{
+  return true
+}
+
+
+},
+
+
 setCurrentView(param){
 
   this.currentView = param;
@@ -193,22 +235,16 @@ if (drawer.classList.contains('hidden')) {
     },
         issueTokenizedReturn(uniqueTransIdString,amount,taxRate,cartId,orderId) {
 
-// console.log(taxRate);
+          let tax = amount * taxRate
+          let amountToCalcWithTax = amount + tax
 
+          console.log(amountToCalcWithTax);
 
-let tax = amount * taxRate
+          let amountDiv100 = amountToCalcWithTax/100
+          let amountToSend = amountDiv100.toFixed(2).toString()
 
-let amountToCalcWithTax = amount + tax
-
-
-console.log(amountToCalcWithTax);
-
-let amountDiv100 = amountToCalcWithTax/100
-let amountToSend = amountDiv100.toFixed(2).toString()
-
-console.log(amountDiv100.toFixed(2).toString())
-
-console.log(amountToSend)
+          console.log(amountDiv100.toFixed(2).toString())
+          console.log(amountToSend)
 
       this.$http
         .post("/order/issue-tokenized-return", {
@@ -220,7 +256,7 @@ console.log(amountToSend)
             console.log(response)
 
                 this.$http
-                  .post("/order/update-refunded-items", {
+                  .post("/order/update-refunded-items-mongo", {
                       cartId: cartId,
                       orderId: orderId
                     }
@@ -270,7 +306,7 @@ console.log(amountToSend)
 
       console.log(uniqueTransIdString)
       this.$http
-        .post("/order/void-transid", {
+        .post("/order/void-transid-mongo", {
             uniqueTransId: uniqueTransIdString,
             data
           }
@@ -294,6 +330,11 @@ this.retrieveOrders()
     }
     },
     mounted(){
+
+console.log('moment');
+console.log(moment().valueOf());
+moment().valueOf()
+
         this.retrieveOrders()
     }
 

@@ -184,6 +184,9 @@
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
 
 
+
+<UnableToProcessModal :unableToProcessModal="unableToProcessModal" />
+
 <!--end??-->
 <!--end??-->
 <!--end??-->
@@ -2626,7 +2629,7 @@ cart empty
       
       </div>
       </section>
-<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
 <!--<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
@@ -2661,6 +2664,10 @@ import Swiper from "@/components/Swiper";
 
 
 import OrderConfirmationModal from "@/components/OrderConfirmationModal"
+
+import UnableToProcessModal from "@/components/UnableToProcessModal"
+
+
 import OnlineMenuCarousel from "@/components/OnlineMenuCarousel";
 import SavedCard from "@/components/SavedCard";
 import CloseModalRedSm from "@/components/svgIcons/CloseModalRedSm";
@@ -2737,7 +2744,8 @@ export default {
     Phone,
     Clock,
     MapPin,
-    ExButton
+    ExButton,
+    UnableToProcessModal
   },
   computed: {	
 filteredValuesComputed(){
@@ -3398,6 +3406,7 @@ if(newAddress){
     },
   data() {
   return {
+    unableToProcessModal: false,
     thirtyMinutesFromNow: moment().add(20, 'minutes').format("LLLL"),
     changedToDropdown: false,
     changePickupTime: false,
@@ -3816,8 +3825,8 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
          // url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
-          // url: "http://localhost:4000/order/start-auth",
           url: "https://nadi-mama-backend.herokuapp.com/order/start-credit-save",
+          //url: "http://localhost:4000/order/start-credit-save",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -3842,8 +3851,8 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
           // url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
-          // url: "http://localhost:4000/order/start-auth",
-          url: "https://nadi-mama-backend.herokuapp.com/credit/start-credit-auth",
+        //  url: "http://localhost:4000/credit/start-credit-auth",
+         url: "https://nadi-mama-backend.herokuapp.com/credit/start-credit-auth",
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -5445,7 +5454,7 @@ console.log('transasction success')
       return new Promise(function (resolve, reject) {
         $.ajax({
           // url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
-          // url: "http://localhost:4000/order/start-auth",
+          //url: "http://localhost:4000/order/start-auth",
           url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
           type: "POST",
           dataType: "json",
@@ -6240,13 +6249,26 @@ console.log(giftcardbalance);
         console.log("approval data" + approvalData);
       console.log('do an order')
       let self = this;
-      console.log('this.oloEndpoint');
-      console.log(this.oloEndpoint);
-      console.log(currentOrder)
-      this.$http.post(this.oloEndpoint, currentOrder)
-        .then((response) => {
+      // console.log('this.oloEndpoint');
+      // console.log(this.oloEndpoint);
+      // console.log(currentOrder)
+      this.$http.post(this.oloEndpoint, currentOrder).then((response) => {
 
-          console.log('response happen');
+
+    console.log(response);
+
+
+        if(response.data.error?.status === 400){
+             self.unableToProcessModal = true;
+  console.log(response);
+      }else{
+
+
+   
+
+
+
+    console.log('response happen');
           console.log(response);
           self.orderConfirmationModal = true;
           self.giftcardbalance = giftcardbalance
@@ -6293,14 +6315,25 @@ console.log(giftcardbalance);
                             console.log(e);
                           });
 
-
                   //end add to mongo
 
 
-        })
-        .catch((e) => {
+      }
+
+   
+
+        }).catch((e) => {
           console.log("errors");
           console.log(e);
+
+          console.log('unabeltoprocess modal now')
+          console.log('unabeltoprocess modal now')
+          console.log('unabeltoprocess modal now')
+          console.log('unabeltoprocess modal now')
+
+
+self.unableToProcessModal = true;
+
         });
   
 
