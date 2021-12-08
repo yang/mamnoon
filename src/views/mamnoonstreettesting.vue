@@ -2,7 +2,7 @@
   <div class="mamnoon">
     <Nav3 />
 <!-- <UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" /> -->
-    <UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
+    <UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/order/oloorderstreet'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
 
 
   <!-- {{$store.state.currentUserEmail}} -->

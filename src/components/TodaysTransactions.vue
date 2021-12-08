@@ -4,9 +4,16 @@
     <br />
 
     <br />
-    <button @click="setCurrentView('Mamnoon')">mamnoon</button>
-    <button @click="setCurrentView('Mamnoon Street')">mamnoon street</button>
-    <button @click="setCurrentView('empty')">all</button>
+    <button @click="setCurrentView('Mamnoon')">mamnoon</button>&nbsp;&nbsp;
+    <button @click="setCurrentView('Mamnoon Street')">mamnoon street</button>&nbsp;&nbsp;
+    <button @click="setCurrentView('empty')">all</button>&nbsp;&nbsp;
+
+
+
+    <button @click="showAllOrders()">show all</button>&nbsp;&nbsp;
+
+ <button @click="showTodaysOrders()">show todays orders</button>&nbsp;&nbsp;
+  
     <br />
 
     <br />
@@ -24,7 +31,7 @@
       class="position-relative"
     >
       <!-- {{order.orderino}} -->
-    <template v-if="isToday(order.orderInfo.timeStamp) === true ">
+<!--    <template v-if="isToday(order.orderInfo.timeStamp) === true ">-->
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
         {{ isToday(order.orderInfo.timeStamp) }}
 
@@ -139,7 +146,7 @@
         <br />
 
         <hr />
-      </template>
+<!--      </template>-->
       </template>
     </div>
   </div>
@@ -225,11 +232,25 @@ export default {
         drawer.classList.add("hidden");
       }
     },
-    retrieveOrders() {
+    retrieveTodaysOrders() {
+      let self = this;
+      this.$http.get(`/order/todaysorderhistory/`).then(function(response) {
+        self.orderhistory = response.data;
+      });
+    },
+        retrieveOrders() {
       let self = this;
       this.$http.get(`/order/orderhistory/`).then(function(response) {
         self.orderhistory = response.data;
       });
+    },
+
+    showAllOrders(){
+this.retrieveOrders();
+    },
+
+        showTodaysOrders(){
+this.retrieveTodaysOrders();
     },
     issueTokenizedReturn(
       uniqueTransIdString,
@@ -265,7 +286,7 @@ export default {
             .then((response) => {
               console.log(response);
 
-              this.retrieveOrders();
+              this.retrieveTodaysOrders();
             })
             .catch((e) => {
               // this.errors.push(e);
@@ -308,7 +329,7 @@ export default {
           console.log(response);
 
           // location.reload();
-          this.retrieveOrders();
+          this.retrieveTodaysOrders();
         })
         .catch((e) => {
           // this.errors.push(e);
@@ -322,7 +343,7 @@ export default {
     // console.log(moment().valueOf());
     moment().valueOf();
 
-    this.retrieveOrders();
+    this.retrieveTodaysOrders();
   },
 };
 </script>

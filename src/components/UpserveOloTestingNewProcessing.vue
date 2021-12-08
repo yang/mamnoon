@@ -3850,9 +3850,8 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
-        //  url: "http://localhost:4000/credit/start-credit-auth",
-         url: "https://nadi-mama-backend.herokuapp.com/credit/start-credit-auth",
+         url: "http://localhost:4000/credit/start-credit-auth",
+        //  url: "https://nadi-mama-backend.herokuapp.com/credit/start-credit-auth",
           type: "POST",
           dataType: "json",
           contentType: "application/json",

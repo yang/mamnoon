@@ -192,6 +192,14 @@ const routes = [
     }
   },
   {
+    path: '/todaystransactions',
+    name: "todaystransactions",
+    component: () => import("../views/todaystransactions.vue"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/newsletterarchive',
     name: "newsletterarchive",
     component: () => import("../views/newsletterarchive.vue"),
