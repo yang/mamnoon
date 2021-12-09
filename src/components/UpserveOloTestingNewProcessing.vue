@@ -3824,9 +3824,7 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-         // url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
-          url: "https://nadi-mama-backend.herokuapp.com/order/start-credit-save",
-          //url: "http://localhost:4000/order/start-credit-save",
+          url: `${self.$http.defaults.baseURL}order/start-credit-save`,
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -3850,8 +3848,7 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-        //  url: "http://localhost:4000/credit/start-credit-auth",
-         url: "https://nadi-mama-backend.herokuapp.com/credit/start-credit-auth",
+         url: `${self.$http.defaults.baseURL}credit/start-credit-auth`,
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -5452,9 +5449,7 @@ console.log('transasction success')
 // added 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          // url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
-          //url: "http://localhost:4000/order/start-auth",
-          url: "https://nadi-mama-backend.herokuapp.com/order/start-auth",
+          url: `${self.$http.defaults.baseURL}order/start-auth`,
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -6569,6 +6564,7 @@ if(response.data.result === "success"){
     }
   },
   mounted() {
+
 
         this.$nextTick(function () {
             window.setInterval(() => {
