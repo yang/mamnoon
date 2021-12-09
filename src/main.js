@@ -83,16 +83,7 @@ const base = axios.create({
 
 
 
-console.log(checkURL());
 
-console.log(checkURL());
-
-console.log(checkURL());
-
-console.log(checkURL());
-console.log(checkURL());
-console.log(checkURL());
-console.log(checkURL());
 
 
 Vue.use(Sticky);
@@ -101,18 +92,6 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
 Vue.prototype.$http = base;
 
-Vue.mixin({
-  methods: {
-    // capitalizeFirstLetter: str => str.charAt(0).toUpperCase() + str.slice(1);
- checkURL(){
-      if (process.env.NODE_ENV === "development") {
-        return process.env.VUE_APP_LOCAL_URL;
-      } else if (process.env.NODE_ENV === "production") {
-         return process.env.VUE_APP_BASE_URL;
-      }
-    }
-  }
-})
 
 
 Vue.config.productionTip = false;

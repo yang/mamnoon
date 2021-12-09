@@ -70,6 +70,98 @@
 
 
 
+<!--notification group section-->
+<template v-if="item.header_notification_group && notificationVisible && item.name.replace(' ', '') === restaurantName">
+
+  
+
+
+
+
+
+<section class="header-notification" v-bind:style="{ 'background-color': item.header_notification_background_color, 'color': item.header_notification_text_color }">
+
+<div class="dismissNotification" @click="dismissNotification">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.36426" width="35" height="9" transform="rotate(45 6.36426 0)" fill="white"/>
+<rect x="31.1128" y="6.36401" width="35" height="9" transform="rotate(135 31.1128 6.36401)" fill="white"/>
+</svg>
+</div>
+    <div class="container mobilePage">
+
+     <!--begin row-->
+<div class="row">
+             
+                                          
+<div class="col-md-6 offset-md-3 col-10 offset-1">
+
+<!--<h3 class="headerNotification">  
+{{item.header_notification}}
+</h3>-->
+
+
+
+<div class="header-notification-wrapper">
+
+<!-- <div class="header-notification-image">
+
+<img :src="item.header_notification_group.image" />
+
+
+  </div> -->
+
+<div class="header-notification-text">
+
+{{item.header_notification_group.text}}<br>
+<a class="ctaLink" target="_blank" :style="styleObject" :href="item.header_notification_group.cta_link">{{item.header_notification_group.cta_text}}</a>
+
+<div class="ctaDiv">
+
+
+
+  </div>
+  </div>
+
+
+</div>
+
+
+
+</div></div></div>
+</section>
+</template>
+
+<!--end notification group section-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1858,6 +1950,11 @@ h4{
     z-index: 99;
     width: 100%;
     padding: 30px 0;
+
+ @media only screen and (max-width: 768px) {
+padding: 10px 0;
+}
+
 }
 
 
@@ -2216,4 +2313,81 @@ display: inline-block;
   display: inline-block;
   margin-right: 30px;
 }
+
+
+
+.header-notification-image{
+  display: inline;
+}
+
+
+.header-notification-image img{
+  width: 100px;
+  // float: left;
+
+
+      @media only screen and (max-width: 768px) {
+        width: 50px;
+     }
+
+}
+
+
+.header-notification-wrapper{
+  // height: 100px;
+}
+
+.header-notification-image{
+display: inline-block;
+margin-right: 10px;
+height:100px;
+width:100px;
+
+img{
+      width: 100%;
+}
+}
+
+
+.header-notification-text{
+// display: inline-block;
+margin: 0 10px;
+// height:100px;
+font-size: 24px;
+text-align: center;
+
+  a{
+    background: white;
+    padding: 3px 10px;
+
+margin: 10px auto 0;
+    color: black;
+    border-radius: 5px;
+width: fit-content !important;
+    &:hover{
+      text-decoration: none;
+      background: rgb(241, 93, 88);
+    }
+  }
+
+.ctaDiv{
+  display: block;
+  padding-top: 5px;
+
+}
+
+ @media only screen and (max-width: 768px) {
+font-size: 16px;
+
+
+ a{
+font-size: 16px;
+  }
+
+
+}
+
+
+}
+
 </style>

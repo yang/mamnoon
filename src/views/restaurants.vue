@@ -540,8 +540,13 @@ div{
 .restaurantBox{
   background: white;
 margin-bottom: 50px;
-        height: 780px;
+        height: 800px;
     border-radius: 10px;
+
+   @media only screen and (max-width: 1080px) {
+     height: 900px;
+   }
+
   .imgBox{
     width: 100%;
     height:300px;
