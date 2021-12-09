@@ -540,7 +540,7 @@ div{
 .restaurantBox{
   background: white;
 margin-bottom: 50px;
-        height: 750px;
+        height: 780px;
     border-radius: 10px;
   .imgBox{
     width: 100%;

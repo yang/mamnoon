@@ -2629,8 +2629,8 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
-<!--<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
 
@@ -3525,7 +3525,7 @@ if(newAddress){
       upserveCategories: [],
       currentlyFiltered: [],
       currentOrder: { 
-        timeStamp: null,
+        timeStamp: Date.now(),
         tipSelected: 0,
         currentAmountToAddCustom: 0,
         sms: false,
@@ -3824,7 +3824,7 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: `${self.$http.defaults.baseURL}order/start-credit-save`,
+          url: `${self.$http.defaults.baseURL}/order/start-credit-save`,
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -3848,7 +3848,7 @@ console.log('transasction success')
 
       return new Promise(function (resolve, reject) {
         $.ajax({
-         url: `${self.$http.defaults.baseURL}credit/start-credit-auth`,
+         url: `${self.$http.defaults.baseURL}/credit/start-credit-auth`,
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -5449,7 +5449,7 @@ console.log('transasction success')
 // added 
       return new Promise(function (resolve, reject) {
         $.ajax({
-          url: `${self.$http.defaults.baseURL}order/start-auth`,
+          url: `${self.$http.defaults.baseURL}/order/start-auth`,
           type: "POST",
           dataType: "json",
           contentType: "application/json",
@@ -6243,8 +6243,8 @@ console.log(giftcardbalance);
         console.log("approval data" + approvalData);
       console.log('do an order')
       let self = this;
-      // console.log('this.oloEndpoint');
-      // console.log(this.oloEndpoint);
+      console.log('this.oloEndpoint');
+      console.log(this.oloEndpoint);
       // console.log(currentOrder)
       this.$http.post(this.oloEndpoint, currentOrder).then((response) => {
 
@@ -6561,18 +6561,41 @@ if(response.data.result === "success"){
 
             })
   
+    },
+    updateTimeStamp(){
+    
+
+    
+          this.currentOrder.timeStamp = Date.now();
+ 
+
+   
+
+
+   
     }
   },
   mounted() {
 
 
+    
+
+
         this.$nextTick(function () {
             window.setInterval(() => {
-              this.thirtyMinutesFromNow = moment().add(20, 'minutes').format("LLLL")
+              this.thirtyMinutesFromNow = moment().add(20, 'minutes').format("LLLL");
 
             },1000);
+
+
+            window.setInterval(() => {
+              this.updateTimeStamp();
+            },30000);
+
         })
 
+
+    
 
 
 

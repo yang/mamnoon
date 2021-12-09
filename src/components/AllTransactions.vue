@@ -24,7 +24,7 @@
       class="position-relative"
     >
       <!-- {{order.orderino}} -->
-    <template v-if="isToday(order.orderInfo.timeStamp) === true ">
+    <!-- <template v-if="isToday(order.orderInfo.timeStamp) === true "> -->
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
         {{ isToday(order.orderInfo.timeStamp) }}
 
@@ -140,7 +140,7 @@
 
         <hr />
       </template>
-      </template>
+      <!-- </template> -->
     </div>
   </div>
 </template>

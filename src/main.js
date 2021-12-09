@@ -76,11 +76,23 @@ const checkURL = () => {
 
 
 const base = axios.create({
-  baseURL: checkURL(),
+  baseURL: checkURL()
+  // baseURL: process.env.VUE_APP_BASE_URL
   // baseURL: process.env.VUE_APP_LOCAL_URL
 });
 
-console.log(process.env.VUE_APP_LOCAL_URL);
+
+
+console.log(checkURL());
+
+console.log(checkURL());
+
+console.log(checkURL());
+
+console.log(checkURL());
+console.log(checkURL());
+console.log(checkURL());
+console.log(checkURL());
 
 
 Vue.use(Sticky);
