@@ -63,6 +63,58 @@
                       </section>
 <!--<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />-->
 
+
+         <section class="topSection fh popup-background2" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'https://mamnoontogo.net/wp-content/uploads/2021/10/mamnoon_holiday_1.jpg' + ')'}">
+                        <!--<div class="container mobilePage pt132">-->
+  
+
+
+
+
+
+
+<div class="bottomAttach black secPadMedAlt">
+<div class="container">
+
+<div class="row text-center">
+
+</div>
+
+<div class="block">
+<div class="blockHeader">
+celebrate your holiday mamnoon style!
+</div>
+<div class="blockDescription">
+<!-- One day only! 721 e pike st, sunday december 12th noon to 4pm -->
+</div>
+
+<a class="blockButton" href="https://www.exploretock.com/mamnoonrestaurant/" target="_blank">order now</a>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+                      <!--<br>-->
+                       <!-- </div>-->
+                      </section>
+
+
+
+
+
+
+
          <section class="topSection fh popup-background" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_la_dive_SQUARE.png' + ')'}">
                         <!--<div class="container mobilePage pt132">-->
   
@@ -618,6 +670,7 @@ display: inline-block;
   position: absolute;
   bottom: 0;
   width: 100%;
+     background: black; 
   &.black{
     background: black; 
     background: #F15D58;
@@ -771,6 +824,33 @@ width: 100%;
  background-size: 70%;      
      }
     }
+
+
+
+
+    .popup-background2{
+
+ background-position: center center;
+ position: relative; 
+ height: 90vh; 
+ background-size: cover;
+ background-size: 30%;
+ background-color: rgb(0, 0, 0);
+ background-repeat: 'no-repeat'
+
+
+
+
+
+}
+
+   @media only screen and (max-width: 992px) {
+     .popup-background2{
+ background-position:top center;
+ background-size: 70%;      
+     }
+    }
+
 
 
 </style>
