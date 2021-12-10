@@ -115,7 +115,7 @@ One day only! 721 e pike st, sunday december 12th noon to 4pm
 <!--<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />-->
 
 
-         <section class="topSection fh popup-background2" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'https://mamnoontogo.net/wp-content/uploads/2021/10/mamnoon_holiday_1.jpg' + ')'}">
+         <section class="topSection fh popup-background2" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_xmas_INVERT.jpg' + ')'}">
                         <!--<div class="container mobilePage pt132">-->
   
 
