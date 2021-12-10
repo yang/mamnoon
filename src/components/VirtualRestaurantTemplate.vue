@@ -2353,7 +2353,7 @@ img{
 // display: inline-block;
 margin: 0 10px;
 // height:100px;
-font-size: 24px;
+font-size: 18px;
 text-align: center;
 
   a{

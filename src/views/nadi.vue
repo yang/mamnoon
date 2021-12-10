@@ -61,6 +61,57 @@
                       <!--<br>-->
                        <!-- </div>-->
                       </section>
+
+
+
+
+
+
+      <section class="topSection fh popup-background" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_la_dive_SQUARE.png' + ')'}">
+                        <!--<div class="container mobilePage pt132">-->
+  
+
+
+
+
+
+
+<div class="bottomAttach black secPadMedAlt">
+<div class="container">
+
+<div class="row text-center">
+
+</div>
+
+<div class="block">
+<div class="blockHeader">
+pop-up at la dive!
+</div>
+<div class="blockDescription">
+One day only! 721 e pike st, sunday december 12th noon to 4pm
+</div>
+
+<a class="blockButton" href="https://www.exploretock.com/mamnoonrestaurant?tock_source=tock&tock_medium=search_nav" target="_blank">order now</a>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+                      <!--<br>-->
+                       <!-- </div>-->
+                      </section>
+
 <!--<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />-->
 
 
@@ -115,50 +166,7 @@ celebrate your holiday mamnoon style!
 
 
 
-         <section class="topSection fh popup-background" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_la_dive_SQUARE.png' + ')'}">
-                        <!--<div class="container mobilePage pt132">-->
-  
-
-
-
-
-
-
-<div class="bottomAttach black secPadMedAlt">
-<div class="container">
-
-<div class="row text-center">
-
-</div>
-
-<div class="block">
-<div class="blockHeader">
-pop-up at la dive!
-</div>
-<div class="blockDescription">
-One day only! 721 e pike st, sunday december 12th noon to 4pm
-</div>
-
-<a class="blockButton" href="https://www.exploretock.com/mamnoonrestaurant?tock_source=tock&tock_medium=search_nav" target="_blank">order now</a>
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-                      <!--<br>-->
-                       <!-- </div>-->
-                      </section>
+   
 
 
 
