@@ -838,11 +838,11 @@ width: 100%;
 
     .popup-background2{
 
- background-position: center center;
+ background-position: top center;
  position: relative; 
  height: 90vh; 
  background-size: cover;
- background-size: 30%;
+ background-size: 15%;
  background-color: rgb(0, 0, 0);
  background-repeat: 'no-repeat'
 
@@ -855,7 +855,7 @@ width: 100%;
    @media only screen and (max-width: 992px) {
      .popup-background2{
  background-position:top center;
- background-size: 70%;      
+ background-size: 10%;      
      }
     }
 
