@@ -79,7 +79,7 @@
 
 
 
-<section class="header-notification" v-bind:style="{ 'background-color': item.header_notification_background_color, 'color': item.header_notification_text_color }">
+<section v-if="item.header_notification_group.text != ''" class="header-notification" v-bind:style="{ 'background-color': item.header_notification_background_color, 'color': item.header_notification_text_color }">
 
 <div class="dismissNotification" @click="dismissNotification">
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
