@@ -113,11 +113,6 @@ const routes = [
     }
   },
   {
-    path: "/mamnoon-order",
-    name: "mamnoon",
-    component: () => import("../views/mamnoonOlo.vue")
-  },
-  {
     path: "/packages",
     name: "packages",
     component: () => import("../views/packages.vue"),
@@ -135,16 +130,6 @@ const routes = [
     name: "mamnoonstreettesting",
     component: () => import("../views/mamnoonstreettesting.vue")
   },
-  {
-    path: "/mamnoonstreet-order",
-    name: "mamnoonstreet",
-    component: () => import("../views/mamnoonstreetOlo.vue")
-  },
-  // {
-  //   path: "/mbar",
-  //   name: "mbar",
-  //   component: () => import("../views/mbar.vue")
-  // },
   {
     path: "/orderconfirmation",
     name: "orderconfirmation",
@@ -168,11 +153,6 @@ const routes = [
     name: "login",
     component: () => import("../views/login.vue")
   },
-  // {
-  //   path: "/register",
-  //   name: "register",
-  //   component: () => import("../views/register.vue")
-  // },
   {
     path: "/loginauth",
     name: "loginauth",
@@ -200,57 +180,9 @@ const routes = [
     }
   },
   {
-    path: '/newsletterarchive',
-    name: "newsletterarchive",
-    component: () => import("../views/newsletterarchive.vue"),
-    meta: {
-      requiresAuth: false
-    }
-  },
-  {
-    path: '/featured',
-    name: "featured",
-    component: () => import("../views/featured.vue"),
-    meta: {
-      requiresAuth: false
-    }
-  },
-  {
-    path: '/reservations',
-    name: "reservations",
-    component: () => import("../views/reservations.vue"),
-    meta: {
-      requiresAuth: false
-    }
-  },
-  {
-    path: '/onlinemenu',
-    name: "onlinemenu",
-    component: () => import("../views/onlinemenu.vue"),
-    meta: {
-      requiresAuth: false
-    }
-  },
-  {
-    path: '/newsletter',
-    name: "newsletter",
-    component: () => import("../views/newsletterarchive.vue"),
-    meta: {
-      requiresAuth: false
-    }
-  },
-  {
     path: '/about',
     name: "about",
     component: () => import("../views/about.vue"),
-    meta: {
-      requiresAuth: false
-    }
-  },
-  {
-    path: '/landingdrawer',
-    name: "landingdrawer",
-    component: () => import("../views/LandingDrawer.vue"),
     meta: {
       requiresAuth: false
     }
@@ -264,13 +196,6 @@ const routes = [
     path: "/:id/menu",
     component: () => import("../components/MenuTemplate.vue")
   },
-
-  // {
-  //   path: "/:id",
-  //   component: () => import("../components/VirtualRestaurantTemplate.vue")
-  // },
-
-
   {
     path: "/:id",
     component: () => import("../views/restauranttemplate.vue"),
