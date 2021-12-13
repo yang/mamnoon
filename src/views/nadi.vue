@@ -25,7 +25,6 @@
                                                     </h1>
 
 
-
                                                     
                                                 </div>
                                             </div>
@@ -67,57 +66,29 @@
 
 
 
-      <section class="topSection fh popup-background" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_la_dive_SQUARE.png' + ')'}">
-                        <!--<div class="container mobilePage pt132">-->
-  
 
 
 
 
 
-
-<div class="bottomAttach black secPadMedAlt">
-<div class="container">
-
-<div class="row text-center">
-
-</div>
-
-<div class="block">
-<div class="blockHeader">
-pop-up at la dive!
-</div>
-<div class="blockDescription">
-One day only! 721 e pike st, sunday december 12th noon to 4pm
-</div>
-
-<a class="blockButton" href="https://www.exploretock.com/mamnoonrestaurant?tock_source=tock&tock_medium=search_nav" target="_blank">order now</a>
-</div>
+<!--sub module loop-->
+<!--sub module loop-->
+<!--sub module loop-->
+<!--sub module loop-->
+<!--sub module loop-->
 
 
-</div>
+<template v-for="mod in subModules">
+
+
+
+
+         <section v-if="getTimeStamp(mod.date_range_end)" class="topSection fh moduleStyling" v-bind:style="{ 'height': '100vh', 'text-align':'center', 'background-image': 'url(' + mod.background_image + ')'}">
 
 
 
 
 
-
-
-</div>
-
-
-
-
-                      <!--<br>-->
-                       <!-- </div>-->
-                      </section>
-
-<!--<VideoComponent2 :src="'https://mamnoontogo.net/wp-content/uploads/2021/10/smaller-v1.mp4'" />-->
-
-
-         <section class="topSection fh popup-background2" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/12/mamnoon_xmas_INVERT.jpg' + ')'}">
-                        <!--<div class="container mobilePage pt132">-->
-  
 
 
 
@@ -133,65 +104,18 @@ One day only! 721 e pike st, sunday december 12th noon to 4pm
 
 <div class="block">
 <div class="blockHeader">
-celebrate your holiday mamnoon style!
+{{mod.header}}
+
+
+
+
+
 </div>
 <div class="blockDescription">
-<!-- One day only! 721 e pike st, sunday december 12th noon to 4pm -->
+{{mod.subheader}}
 </div>
 
-<a class="blockButton" href="https://www.exploretock.com/mamnoonrestaurant/" target="_blank">order now</a>
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-                      <!--<br>-->
-                       <!-- </div>-->
-                      </section>
-
-
-
-
-
-
-
-   
-
-
-
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/mamnoon_ff_NOV_21_9.jpg' + ')',
- 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover','background-size': '80%',
-    'background-repeat': 'no-repeat',
-    'background-color': '#000'}">
-
-
-<div class="bottomAttach secPadMedAlt">
-<div class="container">
-
-<div class="row text-center">
-
-</div>
-
-<div class="block whitebg">
-<div class="blockHeader">
-mamnoon fine foods
-</div>
-<div class="blockDescription">
-available in fine retailers across the puget sound
-</div>
-
-<a class="blockButton inverse" href="anar">explore our products</a>
+<a class="blockButton" :href="mod.cta_url" target="_blank">{{mod.cta_text}}</a>
 </div>
 
 
@@ -212,51 +136,10 @@ available in fine retailers across the puget sound
 
 
 
+         </section>
 
 
-
-                      <!--<br>-->
-                       <!-- </div>-->
-                      </section>
-
-
-
-         <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/Anar-Case-8406-scaled.jpg' + ')',
- 'background-position': 'center', 'position': 'relative', 'height': '90vh', 'background-size': 'cover'}">
-                        <!--<div class="container mobilePage pt132">-->
-  
-
-
-
-<div class="bottomAttach black secPadMedAlt">
-<div class="container">
-
-<div class="row text-center">
-
-</div>
-
-<div class="block">
-<div class="blockHeader">
-Anar is back
-</div>
-<div class="blockDescription">
-check it out
-now open monday-friday for lunch
-</div>
-
-<a class="blockButton" href="anar">order now</a>
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-</div>
+  </template>
 
 
 
@@ -265,12 +148,18 @@ now open monday-friday for lunch
 
 
 
+<!--sub module loop-->
+<!--sub module loop-->
+<!--sub module loop-->
+<!--sub module loop-->
+<!--sub module loop-->
 
 
 
-                      <!--<br>-->
-                       <!-- </div>-->
-                      </section>
+
+
+
+
 
 <GlobalFooter />
   <!-- {{$store.state.currentUserEmail}} -->
@@ -291,7 +180,8 @@ import DownArrow from "@/components/svgIcons/DownArrow"
 import GlobalFooter from "@/components/GlobalFooter"
 
 
-
+import moment from "moment";
+import tz from "moment-timezone";
 
 export default {
     metaInfo() {
@@ -318,7 +208,7 @@ export default {
 return {
 user: null,
 pageData: null,
-ffdata: null,
+subModules: null,
 loaded: false
 }
   },
@@ -334,6 +224,51 @@ loaded: false
 
   },
   methods:{
+getTimeStamp(date){
+
+if(date === null){
+return true
+}else{
+let date2 = moment(date);
+console.log(date2.utc().valueOf());
+if(date2.utc().valueOf()<Date.now().valueOf()){
+  return false;
+}else{
+  return true
+}
+}
+
+},
+currentlyVisible(end){
+
+
+if(end === null){
+return true
+
+}
+},
+
+
+    async loadHomePage(){
+
+
+   console.log(this.$store.state.homePageData);
+
+
+let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/home/614`)
+    // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+
+
+
+    let AcfBlock = responseAcf
+
+    this.pageData = AcfBlock.data.acf.home
+
+this.subModules = AcfBlock.data.acf.home[0].sub_modules
+
+// this.pageData = this.$store.state.homePageData;
+
+    },
     scrollDown(){
 
 window.scrollTo(0, this.$el.clientHeight);
@@ -342,6 +277,11 @@ window.scrollTo(0, this.$el.clientHeight);
   },
 
   mounted(){
+
+
+
+
+    this.loadHomePage()
 
 
 
@@ -858,6 +798,15 @@ width: 100%;
  background-size: 10%;      
      }
     }
+
+
+
+
+.moduleStyling{
+      position: relative;
+        background-size: cover;
+        background-position: center;
+}
 
 
 

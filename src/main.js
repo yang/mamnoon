@@ -144,6 +144,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    homePageData: null,
     pageData: null,
     footer: null,
     isFirstTime: true,
@@ -865,6 +866,15 @@ const store = new Vuex.Store({
       state.pageData = AcfBlock.data.acf.restaurants;
       state.footer = AcfBlock.data.acf.restaurants[0].footer;
     },
+    async setHomePageData(state) {
+      let responseAcf = await base.get(
+        `https://mamnoontogo.net/wp-json/acf/v3/home/614`
+      );
+
+      let AcfBlock = responseAcf;
+      state.homePageData = AcfBlock.data.acf.home;
+
+    },
   },
 });
 
@@ -898,6 +908,7 @@ new Vue({
     // this.$store.dispatch('myAxiosFetchFunction');
 
     this.$store.commit("setPageData");
+
   },
 }).$mount("#app");
 

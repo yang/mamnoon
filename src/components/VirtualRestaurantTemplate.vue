@@ -20,40 +20,7 @@
 
 
 
-<!--notification section-->
-<template v-if="item.header_notification && notificationVisible && item.name.replace(' ', '') === restaurantName">
 
-  
-
-
-
-
-
-<section class="header-notification" v-bind:style="{ 'background-color': item.header_notification_background_color, 'color': item.header_notification_text_color }">
-
-<div class="dismissNotification" @click="dismissNotification">
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="6.36426" width="35" height="9" transform="rotate(45 6.36426 0)" fill="white"/>
-<rect x="31.1128" y="6.36401" width="35" height="9" transform="rotate(135 31.1128 6.36401)" fill="white"/>
-</svg>
-</div>
-    <div class="container mobilePage">
-
-     <!--begin row-->
-<div class="row">
-             
-                                          
-<div class="col-md-6 offset-md-3 col-12 offset-0">
-
-<h3 class="headerNotification">  
-{{item.header_notification}}
-</h3>
-
-</div></div></div>
-</section>
-</template>
-
-<!--end notification section-->
 
 
 
@@ -79,7 +46,7 @@
 
 
 
-<section v-if="item.header_notification_group.text != ''" class="header-notification" v-bind:style="{ 'background-color': item.header_notification_background_color, 'color': item.header_notification_text_color }">
+<section v-if="getTimeStamp(item.header_notification_group.date_range_end) && item.header_notification_group.text != ''" class="header-notification" v-bind:style="{ 'background-color': item.header_notification_background_color, 'color': item.header_notification_text_color }">
 
 <div class="dismissNotification" @click="dismissNotification">
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -668,7 +635,7 @@ follow us
 
 
 <template v-if="index % 2 === 1">
-<section class="flexSection" v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color, 'width': '100%' }">
+<section v-if="getTimeStamp(repeat.date_range_end)" class="flexSection" v-bind:style="{ 'background-color': item.background_color, 'color': item.text_color, 'width': '100%' }">
 
 
 <div class="container">
@@ -678,7 +645,7 @@ follow us
 <div class="col-md-4 offset-md-1 col-12 offset-0" style="position: relative">
 
 <div class="sidebox" :style="{'background-color': item.background_color}">
-
+{{repeat}}
 
       <h3>  
         {{repeat.text}}
@@ -720,7 +687,7 @@ _</div>
 </section>
 </template>
 <template v-else>
-<section class="flexSection" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color, 'width': '100%' }">
+<section v-if="getTimeStamp(repeat.date_range_end)" class="flexSection" v-bind:style="{ 'background-color': item.text_color, 'color': item.background_color, 'width': '100%' }">
 
 
 <div class="container">
@@ -865,7 +832,8 @@ import Envelope from "@/components/svgIcons/Envelope";
 import VideoComponent from "@/components/VideoComponent";
 
 import GlobalFooter from "@/components/GlobalFooter";
-
+import moment from "moment";
+import tz from "moment-timezone";
 
 export default {
 
@@ -1030,6 +998,24 @@ notificationVisible: true,
   },
   props: ['apiData', 'blok'],
   methods: {
+   getTimeStamp(date){
+
+if(date === null){
+return true
+}else{
+let date2 = moment(date);
+
+console.log(date2);
+console.log(date2.utc().valueOf());
+
+if(date2.utc().valueOf()<Date.now().valueOf()){
+  return false;
+}else{
+  return true
+}
+}
+
+},
 dismissNotification(){
   this.notificationVisible = false;
 },
