@@ -645,7 +645,7 @@ follow us
 <div class="col-md-4 offset-md-1 col-12 offset-0" style="position: relative">
 
 <div class="sidebox" :style="{'background-color': item.background_color}">
-{{repeat}}
+
 
       <h3>  
         {{repeat.text}}
