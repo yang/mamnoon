@@ -1824,7 +1824,7 @@ add
                   @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
                 v-model="currentOrder.fulfillment_info.customer.email"
                 />
-<div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid email<span v-if="!dnsCheck">, invalid email domain</span></div>
+<div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid email</div>
 <div class="small-message" v-if="emailErrorVisibleTf && !dnsCheck">invalid email domain</div>
 
 
