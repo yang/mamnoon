@@ -1824,8 +1824,8 @@ add
                   @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
                 v-model="currentOrder.fulfillment_info.customer.email"
                 />
-<div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid email</div>
-
+<div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid email<span v-if="!dnsCheck">, invalid email domain</span></div>
+<div class="small-message" v-if="emailErrorVisibleTf && !dnsCheck">invalid email domain</div>
 
 
                <label class="smblk" for="phone">phone:</label>
@@ -2343,7 +2343,7 @@ cart empty
 
 
 <template v-if="savedCard.primary ===  true">
-   <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+   <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
       </button>
         <button v-else class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))" disabled>Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
       </button>
@@ -2365,7 +2365,7 @@ cart empty
 
 
 
-<template v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)">
+<template v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)">
 
 <button v-if="savedCard.primary === true" class="mt10 fw disabled" style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button>
@@ -2394,12 +2394,12 @@ cart empty
 
 
 
-        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
+        <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
             <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 </template>
 <template v-else>
-        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
+        <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
             <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 </template>
 
@@ -2455,7 +2455,7 @@ cart empty
 
 
 <template v-if="savedCard.primary">
-<template v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" >
+<template v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" >
 <button class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button>
 </template>
@@ -2494,7 +2494,7 @@ cart empty
 
 <template v-if="this.$store.state.loggedIn">
 <!-- you are logged in -->
-<button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
+<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
@@ -2502,7 +2502,7 @@ cart empty
 <template v-else>
 <!-- you are not logged in -->
 
-<button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
+<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
@@ -2525,14 +2525,14 @@ cart empty
       <!--////-->
       <template v-if="currentOrder.preorder === true">
       <button 
-      v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
+      v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
       @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
       <button 
       v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
       </template>
       <template v-else>
       <button 
-      v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
+      v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
       @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
       <button 
       v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
@@ -3406,6 +3406,7 @@ if(newAddress){
     },
   data() {
   return {
+    dnsCheck: false,
     unableToProcessModal: false,
     thirtyMinutesFromNow: moment().add(20, 'minutes').format("LLLL"),
     changedToDropdown: false,
@@ -3629,6 +3630,34 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+    emailValidFromServer(email){
+console.log('valid from server')
+console.log('valid from server')
+console.log('valid from server')
+console.log('valid from server')
+
+
+
+if(this.validEmail(email)){
+            let self = this
+                this.$http.get(`/emailverified/${email}`).then(function (response) {
+                  console.log(response.data.data);
+
+                    if(response.data.data.dnsCheck === 'true'){
+                        self.dnsCheck = true;
+                    }else{
+                        self.dnsCheck = false;
+                    }
+
+            })
+  
+
+
+    }
+
+
+    },
     changeToPreorderAndShowDropDown(){
 
 
@@ -3706,6 +3735,18 @@ showPickupTime(){
 },
 cippaybuttoncreditauth() {
 
+
+
+
+
+cippaybuttoncreditauth
+
+
+
+
+
+
+
       let self = this;
       this.getCreditAuthToken().then(function (transactionToken) {
         emergepay.open({
@@ -3752,6 +3793,19 @@ cippaybuttoncreditauth() {
           },
         });
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 },
     cippaybuttoncreditsave() {
@@ -3873,6 +3927,17 @@ emailErrorVisible(emailEntry,phoneEntry){
 this.emailErrorVisibleTf = true;
 
  this.formsValid(emailEntry,phoneEntry);
+
+
+
+this.emailValidFromServer(emailEntry);
+
+
+
+
+
+
+
 
 },
 
@@ -6855,6 +6920,8 @@ this.currentOrder.scheduled_time = null
 
 
   
+this.oloAvailable = false;
+
 
 
   },
