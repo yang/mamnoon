@@ -31,11 +31,18 @@
 
                                     <div class="row text-center" >
                                         <div class="logosInline">
+      <div class="displayInline">
                                             <router-link :to="'mamnoon'"> <MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />     </router-link>     
+                                              </div>
+                                                  <div class="displayInline">
                                             <router-link :to="'mbar'"><MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
+                                              </div>      <div class="displayInline">
                                             <router-link :to="'mamnoonstreet'"><StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
+                                                </div>
+                                             <div class="displayInline">
                                             <router-link :to="'anar'"><AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" />
                                             </router-link>
+                                            </div>
                                         </div>
                            
 
@@ -83,12 +90,15 @@
 
 
 
-         <section v-if="getTimeStamp(mod.date_range_end)" class="topSection fh moduleStyling" v-bind:style="{ 'height': '100vh', 'text-align':'center', 'background-image': 'url(' + mod.background_image + ')'}">
+         <section v-if="getTimeStamp(mod.date_range_end)" class="topSection fh moduleStyling" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + mod.background_image + ')'}" :class="`background-${mod.image_style}`">
 
 
 
+<img class="mobileImage" :src="mod.background_image">
 
 
+<!--// <img v-if="mod.image_style === 'centered'" :src="mod.background_image">
+-->
 
 
 
@@ -101,7 +111,6 @@
 <div class="row text-center">
 
 </div>
-
 <div class="block">
 <div class="blockHeader">
 {{mod.header}}
@@ -230,7 +239,7 @@ if(date === null){
 return true
 }else{
 let date2 = moment(date);
-console.log(date2.utc().valueOf());
+// console.log(date2.utc().valueOf());
 if(date2.utc().valueOf()<Date.now().valueOf()){
   return false;
 }else{
@@ -252,7 +261,7 @@ return true
     async loadHomePage(){
 
 
-   console.log(this.$store.state.homePageData);
+  //  console.log(this.$store.state.homePageData);
 
 
 let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/home/614`)
@@ -278,7 +287,7 @@ window.scrollTo(0, this.$el.clientHeight);
 
   mounted(){
 
-
+// console.log(this.$refs)
 
 
     this.loadHomePage()
@@ -559,6 +568,8 @@ background-position: center center;
   font-size: 32px;
   line-height: 46px;
 
+      text-align: center !important;
+
      @media only screen and (max-width: 992px) {
 font-size: 18px;
 line-height: 24px;
@@ -639,7 +650,23 @@ padding-top: 0 !important;
       
     }
 }
+
+
+
 }
+
+
+
+.moduleStyling{
+  height: 100vh;
+  .bottomAttach{
+   @media only screen and (max-width: 768px) {
+
+    position: initial;
+   }
+  }
+}
+
 
 
 .block{
@@ -888,6 +915,68 @@ margin: 0 auto;
 
 }
 
+      .displayInline{
+        display: inline-block;
+
+   @media only screen and (max-width: 768px) {
+        display: block;
+
+   }
+
+      }
+
+
+
+
+.background-cover{
+
+}
+
+
+.background-centered{
+
+
+background-image: none !important;
+
+
+// img{
+//       transform: translate(-50%,-50%);
+//     /* margin-top: 0; */
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     width: 50%;
+
+// }
+
+}
+
+.background-tile{
+  background-repeat: repeat !important;
+  background-size: 30% !important;
+  background-position: top center !important;
+}
+
+
+
+
+.moduleStyling{
+
+    .mobileImage{
+      display: none;
+      width: 100%;
+    }
+
+   @media only screen and (max-width: 768px) {
+      height: auto !important;
+
+      .mobileImage{
+        display: block;
+      }
+
+   }
+
+}
 
 
 
