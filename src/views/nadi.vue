@@ -30,7 +30,7 @@
                                             </div>
 
                                     <div class="row text-center" >
-                                        <div style="width: 100%">
+                                        <div class="logosInline">
                                             <router-link :to="'mamnoon'"> <MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />     </router-link>     
                                             <router-link :to="'mbar'"><MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
                                             <router-link :to="'mamnoonstreet'"><StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
@@ -873,6 +873,21 @@ width: 100%;
         background-size: cover;
         background-position: center;
 }
+
+
+
+.logosInline{
+width:100%;
+
+
+   @media only screen and (max-width: 1080px) {
+width: 80%;
+margin: 0 auto;
+    }
+
+
+}
+
 
 
 
