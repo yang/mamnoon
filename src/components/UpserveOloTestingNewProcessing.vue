@@ -5365,8 +5365,9 @@ return state.length === 2;
       return re.test(address);
     },
       validFullName: function (fullname) {
+      let name = fullname.trim();
       var re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
-      return re.test(fullname);
+      return re.test(name);
     },
       validFirstName: function (firstname) {
       var re = /^([ \u00c0-\u01ffa-zA-Z'\-])+$/g;
