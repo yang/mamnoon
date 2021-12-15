@@ -7234,7 +7234,7 @@ position: relative;
     border-bottom: 1px solid #ddd;
 @media only screen and (max-width: 1080px) {
 
-    top: 112px;
+    top: 92px;
 }
 
 } 
