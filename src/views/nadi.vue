@@ -95,7 +95,7 @@
 
 
 
-<div class="bottomAttach black secPadMedAlt">
+<div class="bottomAttach black sub secPadMedAlt">
 <div class="container">
 
 <div class="row text-center">
@@ -622,6 +622,10 @@ display: inline-block;
   &.black{
     background: black; 
     background: #F15D58;
+
+    &.sub{
+    background: #fff;
+    }
   }
 
 
@@ -723,6 +727,68 @@ width: 100%;
 
 
 }
+
+
+
+
+
+.sub{
+  a.blockButton{
+
+color: white;
+ background: #F15D58;
+
+&.inverse{
+  background: #F15D58;
+color: white;
+font-size: 18px;
+
+&:hover{
+  color: #FFFFFF;
+background: black;
+}
+}
+
+    display: block;
+    border-radius: 5px;
+    width: 100%;
+    width: 300px;
+    margin: 0 0;
+    text-align: center;
+    padding: 3px 10px 5px;
+    font-size: 22px;
+    font-weight: 500;
+cursor:pointer;
+    &:hover{
+background: black;
+color: white;
+text-decoration: none;
+    }
+
+}
+
+
+
+    @media only screen and (max-width: 640px) {
+
+
+width: 100%;
+      
+    }
+
+
+.blockDescription{
+  color: #000;
+}
+  .blockHeader{
+    color: #F15D58;
+
+  }
+
+
+
+}
+
 
 
 .secPadMedAlt{

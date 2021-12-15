@@ -753,6 +753,7 @@ this.getUserAgent();
 
 
 .beta{
+    border-top: 1px solid #eee;
     position: fixed;
     width: 100%;
     background: white;
