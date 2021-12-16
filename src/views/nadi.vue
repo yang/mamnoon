@@ -5,6 +5,48 @@
 
 
 
+<div class="announcementBar" v-if="getTimeStamp(notificationHeader.expiration) &&notificationVisible && notificationHeader.visible">
+
+
+<div class="dismissNotification" @click="dismissNotification">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.36426" width="35" height="9" transform="rotate(45 6.36426 0)" fill="white"/>
+<rect x="31.1128" y="6.36401" width="35" height="9" transform="rotate(135 31.1128 6.36401)" fill="white"/>
+</svg>
+</div>
+
+
+
+
+
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-4 col-10">
+<div class="blockHeader"> 
+
+
+{{notificationHeader.header}}
+
+</div>
+
+<a :href="notificationHeader.cta_url" target="_blank" class="blockButton">
+{{notificationHeader.cta_text}}</a>
+</div>
+<div class="hideOnMob col-md-4 offset-md-4">
+
+
+
+<img class="anouncement-image" :src="notificationHeader.image">
+
+</div>
+</div></div>
+</div>
+
+
+
+
 
                                <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg' + ')',
  'background-position': 'center', 'position': 'relative', 'height': '100vh', 'background-size': 'cover'}">
@@ -90,7 +132,7 @@
 
 
 
-         <section v-if="getTimeStamp(mod.date_range_end)" class="topSection fh moduleStyling" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + mod.background_image + ')'}" :class="`background-${mod.image_style}`">
+         <section v-if="getTimeStamp(mod.date_range_end)" class="topSection fh moduleStyling" v-bind:style="{ 'text-align':'center', 'background-color': `${mod.background_color}`, 'background-image': 'url(' + mod.background_image + ')'}" :class="`background-${mod.image_style}`">
 
 
 
@@ -113,7 +155,6 @@
 <div class="block">
 <div class="blockHeader">
 {{mod.header}}
-
 
 
 
@@ -216,8 +257,10 @@ export default {
 return {
 user: null,
 pageData: null,
+notificationHeader: null,
 subModules: null,
-loaded: false
+loaded: false,
+notificationVisible: true
 }
   },
   components: {
@@ -232,6 +275,10 @@ loaded: false
 
   },
   methods:{
+
+    dismissNotification(){
+  this.notificationVisible = false;
+},
 getTimeStamp(date){
 
 if(date === null){
@@ -273,6 +320,12 @@ let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/h
     this.pageData = AcfBlock.data.acf.home
 
 this.subModules = AcfBlock.data.acf.home[0].sub_modules
+
+
+
+
+this.notificationHeader = AcfBlock.data.acf.home[0].notification_header
+
 
 // this.pageData = this.$store.state.homePageData;
 
@@ -711,12 +764,12 @@ font-size: 24px;
 font-weight:bold;
 }
 .blockDescription{
-font-size: 16px;
 
-font-weight:medium;
-margin-bottom: 26px;
-    margin-bottom: 20px;
-        margin-bottom: 50px;
+  font-size: 16px;
+  font-weight:medium;
+  margin-bottom: 26px;
+  margin-bottom: 20px;
+  margin-bottom: 50px;
 
 
          @media only screen and (max-width: 1080px) {
@@ -983,7 +1036,7 @@ background-image: none !important;
 
 
 .moduleStyling{
-background-color: black;
+// background-color: black;
 
 &.background-centered{
       height: auto !important;
@@ -1016,6 +1069,78 @@ background-color: black;
 
 }
 
+.announcementBar{
+  position: absolute;
+  top: 92px;
+  background: pink;
+  width: 100%;
+  // height: 500px;
+  z-index: 1000;
+
+  padding: 28px 0px 40px;
+  background: black;
 
 
+  .blockHeader{
+        color: #F15D58;
+
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 50px;
+  pointer-events: none;
+
+    @media only screen and (max-width: 992px) {
+     margin-bottom: 20px;
+         font-size: 18px;
+    line-height: 24px;
+    }
+
+  }
+
+  a.blockButton {
+    color: black;
+    background: #FFF;
+    display: block;
+    border-radius: 5px;
+    width: 100%;
+    width: 300px;
+    margin: 0 0;
+    text-align: center;
+    padding: 3px 10px 5px;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+
+
+    &:hover{
+      text-decoration: none;
+      background-color: #F15D58;
+    }
+}
+
+
+.anouncement-image{
+height: 200px;
+float: right;
+}
+
+.dismissNotification{
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  cursor: pointer;
+}
+
+
+
+}
+
+
+
+.hideOnMob {
+
+    @media only screen and (max-width: 768px) {
+  display:none;
+    }
+}
 </style>
