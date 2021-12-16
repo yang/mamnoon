@@ -97,8 +97,7 @@
 <img class="mobileImage" :src="mod.background_image">
 
 
-<!--// <img v-if="mod.image_style === 'centered'" :src="mod.background_image">
--->
+<img class="imageStyleCentered" v-if="mod.image_style === 'centered'" :src="mod.background_image">
 
 
 
@@ -668,6 +667,18 @@ padding-top: 0 !important;
 }
 
 
+.moduleStyling.background-centered{
+  height: 100vh;
+  .bottomAttach{
+       position: initial;
+   @media only screen and (max-width: 768px) {
+
+ 
+   }
+  }
+}
+
+
 
 .block{
 text-align: left;
@@ -706,6 +717,12 @@ font-weight:medium;
 margin-bottom: 26px;
     margin-bottom: 20px;
         margin-bottom: 50px;
+
+
+         @media only screen and (max-width: 1080px) {
+
+       margin-bottom: 30px;
+ }
 
 }
 a.blockButton{
@@ -823,6 +840,11 @@ width: 100%;
     padding: 32px 0 78px;
 
     padding: 28px 0 40px; 
+
+ @media only screen and (max-width: 1080px) {
+
+        padding: 18px 0 34px;
+ }
 }
 
 
@@ -953,14 +975,26 @@ background-image: none !important;
 
 .background-tile{
   background-repeat: repeat !important;
-  background-size: 30% !important;
-  background-position: top center !important;
+  background-size: 20% !important;
+  background-position: bottom center !important;
 }
 
 
 
 
 .moduleStyling{
+background-color: black;
+
+&.background-centered{
+      height: auto !important;
+}
+
+
+    .imageStyleCentered{
+        display: block;
+            height: 70vh;
+            margin: 0 auto;
+      }
 
     .mobileImage{
       display: none;
@@ -969,6 +1003,10 @@ background-image: none !important;
 
    @media only screen and (max-width: 768px) {
       height: auto !important;
+
+      .imageStyleCentered{
+        display: none;
+      }
 
       .mobileImage{
         display: block;
