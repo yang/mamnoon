@@ -1805,7 +1805,7 @@ display: flow-root;
     margin: 0 auto !important;
   }
 
-
+.announcementBar,
 .header-notification,
   .fixed-nav{
  width: 1600px !important;
