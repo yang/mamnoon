@@ -14,11 +14,6 @@ Vue.use(Datepicker)
 
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "home",
-  //   component: Home
-  // },
   {
     path: "/",
     name: "nadi",
@@ -104,6 +99,14 @@ const routes = [
   //   name: "retail",
   //   component: () => import("../views/retail.vue")
   // },
+  {
+    path: "/reports",
+    name: "reports",
+    component: () => import('../views/reports.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
   {
     path: "/admin",
     name: "admin",

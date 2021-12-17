@@ -3422,7 +3422,7 @@ if(newAddress){
     lastNameErrorVisibleTf: false,
     cityErrorVisibleTf: false,
     stateErrorVisibleTf: false,
-  filteredValues: [],
+    filteredValues: [],
     sliderNavVisible: true,
     packages: null,
     disabledButton: false,
@@ -6269,37 +6269,10 @@ console.log(giftcardbalance);
 
 // end add to mongo
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       }).catch((e) => {
           console.log("errors");
           console.log(e);
         });
-
-
-
-
-
-
-
-
 
       },
       doAnOrder(currentOrder,approvalData,giftcardbalance) {
@@ -6606,10 +6579,12 @@ this.setTip(0)
 
 
 
+
     },
     checkOlo() {
 console.log('check olod')
             let self = this
+            console.log(`this.title is: ${this.title}`)
                 this.$http.get(`/order/acceptingOrdersBoolean/${this.title.replace(" ","")}`).then(function (response) {
               // self.orderHistory = response.data
               // console.log("acceptingOrdersBooleanStreet");
@@ -6624,9 +6599,32 @@ if(response.data.result === "success"){
 
 
 
+// pulling online ordering availability from WP in each restaurant's template
+//################################################
+
+let pageData = self.$store.state.pageData[0]
+
+for(var i in pageData.restaurant_repeater){
+
+if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.title.toLowerCase().replace(" ","")){
+console.log('match')
+console.log(pageData.restaurant_repeater[i].online_ordering)
+
+
+ self.oloAvailable = pageData.restaurant_repeater[i].online_ordering;
+
+}
+
+//################################################
+
+
+}
+
+
+
 
             })
-  
+
     },
     updateTimeStamp(){
     
@@ -6643,8 +6641,15 @@ if(response.data.result === "success"){
   },
   mounted() {
 
+console.log('this.$store.state');
+console.log('this.$store.state');
+console.log('this.$store.state');
+// console.log(this.$store.state.pageData[0].restaurant_repeater);
 
-    
+// console.log(this.title.toLowerCase().replace(" ",""));
+
+
+
 
 
         this.$nextTick(function () {
