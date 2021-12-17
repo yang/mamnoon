@@ -32,10 +32,15 @@ export default {
   margin-left: var(--margin-left);
   margin-right: var(--margin-right);
 
-
+      @media only screen and (max-width: 1080px) {
+          margin-left: 20px;
+          margin-right: 20px;
+      }
 
       @media only screen and (max-width: 640px) {
 height: calc(var(--height)/1.75);
+
+    height: 6vh;
       
     }
 

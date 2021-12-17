@@ -69,6 +69,7 @@ console.log(process.env);
 const checkURL = () => {
   if (process.env.NODE_ENV === "development") {
     return process.env.VUE_APP_LOCAL_URL;
+
   } else if (process.env.NODE_ENV === "production") {
      return process.env.VUE_APP_BASE_URL;
   }

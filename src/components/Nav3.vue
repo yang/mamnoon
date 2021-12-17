@@ -991,6 +991,7 @@ height: 100vh;
     z-index: 100;
     position: fixed;
     z-index: 100;
+        z-index: 10000;
     width: 100%;
     // top: 92px;
         // top: 112px;
