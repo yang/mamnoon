@@ -80,7 +80,7 @@
 <div class="header-notification-text">
 
 {{item.header_notification_group.text}}<br>
-<a class="ctaLink" target="_blank" :style="styleObject" :href="item.header_notification_group.cta_link">{{item.header_notification_group.cta_text}}</a>
+<a v-if="item.header_notification_group.cta_link !=''" class="ctaLink" target="_blank" :style="styleObject" :href="item.header_notification_group.cta_link">{{item.header_notification_group.cta_text}}</a>
 
 <div class="ctaDiv">
 
@@ -648,10 +648,12 @@ follow us
 
 
       <h3>  
-        {{repeat.text}}
+        {{repeat.text}}rr
       </h3>
       <br>
-       <a class="ctaLink" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
+
+      {{repeat.button_link}}fff
+       <a v-if="repeat.button_link !== ''" class="ctaLink" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
 </div>
 </div>
 
@@ -670,7 +672,7 @@ _</div>
   <div :style="{'background-color': item.background_color, 'position': 'absolute', 'bottom': '0px'}">
       <div>
       <h3>  
-        {{repeat.text}}
+        {{repeat.text}}rr
       </h3>
       <br>
 

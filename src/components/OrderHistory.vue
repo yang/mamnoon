@@ -138,6 +138,30 @@ if(order.restaurant === 'Mamnoon'){
 
 
         self.orderhistory = response.data
+
+        console.log(response.data)
+
+
+
+// array1.map(x => x * 2);
+
+
+let array2 = response.data.user.map(items => items.orderInfo.charges.items)
+let array3 = array2.flat();
+console.log(array3.filter(x=>x.price>500));
+
+
+
+
+
+
+
+
+
+
+
+
+
     })
     },
         },

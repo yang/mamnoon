@@ -2416,6 +2416,24 @@ font-weight: 500;
 .xhcd-fpimp-price{
   float: right;
 }
+
+
+.pointer{
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+
+
+  .fifth{
+    display: flex;
+  }
+}
+
+
+
+
+
 </style>
 
 

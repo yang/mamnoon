@@ -1,73 +1,9 @@
 <template>
-  <div class="container pad-yellow-background pd50">
-    <!-- {{currentUser.currentUserEmail}} -->
-    <br />
 
-
-
-
-<div v-if="modalVisible" class="modalTransaction">
-
-
-<div class="container">
-
-<div class="fl-right" @click="hideTransactionModal()">
-
-
-
-
-<CloseModalRed />
-
-
-
-</div>
-
-
-
-<TransactionModal :order="modalContent" />
-
-</div>
-</div>
-
-
-    <br />
-    <button @click="setCurrentView('Mamnoon')">mamnoon</button>&nbsp;&nbsp;
-    <button @click="setCurrentView('Mamnoon Street')">mamnoon street</button>&nbsp;&nbsp;
-    <button @click="setCurrentView('empty')">all</button>&nbsp;&nbsp;
-
-
-
-    <button @click="showAllOrders()">show all</button>&nbsp;&nbsp;
-
- <button @click="showTodaysOrders()">show todays orders</button>&nbsp;&nbsp;
-  
-    <br />
-
-    <br />
-    <!-- {{response}} -->
-    <h1>number of orders: {{ orderhistory.user.length }}</h1>
-    <br />
-    <br />
-    order history:
-    <hr />
-    <br />
-
-
-
-    <div
-      v-for="order in orderhistory.user.slice().reverse()"
-      :key="order._id"
-      class="position-relative"
-    >
-
-
-
+<div class="">
+<div class="">
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
-    <div class="pointer" @click="viewModal(order)">
-      
-
-<div class="fifth">
-
+        {{ isToday(order.orderInfo.timeStamp) }}
 
         <template v-if="hasTransmissionId(order.payInfo)">
           <b>gift card transaction</b>
@@ -78,14 +14,34 @@
             <span v-if="order.sandbox">(sandbox)</span></b
           >
         </template>
-
-
-
+        <br />
+        confirmation code: {{ order.orderInfo.confirmation_code }} <br /><br />
+        <template v-if="order.orderInfo.preorder">
+          <b>preorder</b>
+        </template>
+        <template v-else>
+          <b>regular order</b>
+        </template>
 
         <template v-if="order.void">
           <h1>VOID</h1>
         </template>
-  
+        <template
+          v-else-if="voidValid(order) && !hasTransmissionId(order.payInfo)"
+        >
+          <button
+            class="fl-right"
+            v-if="!order.void"
+            @click="issueVoid(order.payInfo.uniqueTransId, true)"
+          >
+            void
+          </button>
+          <h1 v-else>VOID</h1>
+        </template>
+        <template v-else>
+          <i>(void unavailable)</i>
+        </template>
+
         <br />
         <template v-if="order.orderInfo.preorder">
           <br />
@@ -112,76 +68,72 @@
         <br />guest name:
         {{ order.orderInfo.fulfillment_info.customer.first_name }}
         <br />
+        <br />
+        <button @click="toggleOrder(order.orderInfo.id)">
+          show/hide full order data
+        </button>
+
+        <pre :id="'order-' + order.orderInfo.id" class="hidden">{{ order }}</pre
+        >
+        <br />
+
+        <br />
+        <ul class="no-left-pad">
+          <li
+            v-for="item in order.orderInfo.charges.items"
+            :key="item.cartId"
+            style="margin-bottom:30px;"
+          >
+            <b>{{ item.quantity }} x</b> {{ item.name }}&nbsp;&nbsp;&nbsp;<b
+              >${{ item.price.toFixed() / 100 }}</b
+            >&nbsp;&nbsp;&nbsp;
+            <br />
+            &nbsp;&nbsp; &nbsp;&nbsp;
+            <template v-if="item.returned">
+              <span>(returned)</span>
+            </template>
+            <template v-else>
+              <template v-if="order.payInfo.uniqueTransId">
+                <span
+                  class="line-link"
+                  v-if="!order.void"
+                  @click.once="
+                    issueTokenizedReturn(
+                      order.payInfo.uniqueTransId,
+                      item.price,
+                      order.orderInfo.charges.taxes /
+                        order.orderInfo.charges.preTotal,
+                      item.cartId,
+                      order._id
+                    )
+                  "
+                  ><u>issue return</u></span
+                >
+              </template>
+            </template>
+          </li>
+        </ul>
+        <br />
+
+        <hr />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </template>
 
 
 </div>
-<div class="fifth">
-        <template v-if="order.orderInfo.preorder">
-          <b>preorder</b>
-        </template>
-        <template v-else>
-          <b>regular order</b>
-        </template>
-</div>
-
-<div class="fifth">
 
 </div>
 
-<div class="fifth">
-
-</div>
-
-<div class="fifth">
-
-</div>
-
-
-
-
-
-</div>
-      </template>
-    </div>
-  </div>
 </template>
 
+
 <script>
+
+
 import moment from "moment";
 import tz from "moment-timezone";
 
-import CloseModal from "@/components/svgIcons/CloseModal";
-import CloseModalMed from "@/components/svgIcons/CloseModalMed";
-import CloseModalRed from "@/components/svgIcons/CloseModalRed";
-import CloseModalSm from "@/components/svgIcons/CloseModalSm";
-
-
-
-
-
-
-
-
-import TransactionModal from "@/components/TransactionModal";
 
 export default {
   data() {
@@ -194,15 +146,8 @@ export default {
       currentView: "empty",
     };
   },
-  components:{
-    TransactionModal,
- CloseModal,
-CloseModalMed,
-CloseModalRed,
-CloseModalSm
-  },
   name: "OrderHistory",
-  props: ["currentUser"],
+  props: ["order"],
   filters: {
     formatDate(value) {
       if (value) {
@@ -218,9 +163,19 @@ CloseModalSm
     },
   },
   methods: {
-hideTransactionModal(){
-this.modalVisible = false;
-},
+    toggleOrder(id) {
+      let drawer = document.getElementById("order-" + id);
+
+      // console.log(document.getElementById('order-'+id))
+
+      if (drawer.classList.contains("hidden")) {
+        // do some stuff
+
+        drawer.classList.remove("hidden");
+      } else {
+        drawer.classList.add("hidden");
+      }
+    },
 viewModal(order){
 
 
@@ -261,43 +216,6 @@ this.modalContent = order;
       } else {
         return true;
       }
-    },
-
-    setCurrentView(param) {
-      this.currentView = param;
-    },
-    toggleOrder(id) {
-      let drawer = document.getElementById("order-" + id);
-
-      // console.log(document.getElementById('order-'+id))
-
-      if (drawer.classList.contains("hidden")) {
-        // do some stuff
-
-        drawer.classList.remove("hidden");
-      } else {
-        drawer.classList.add("hidden");
-      }
-    },
-    retrieveTodaysOrders() {
-      let self = this;
-      this.$http.get(`/order/todaysorderhistory/`).then(function(response) {
-        self.orderhistory = response.data;
-      });
-    },
-        retrieveOrders() {
-      let self = this;
-      this.$http.get(`/order/orderhistory/`).then(function(response) {
-        self.orderhistory = response.data;
-      });
-    },
-
-    showAllOrders(){
-this.retrieveOrders();
-    },
-
-        showTodaysOrders(){
-this.retrieveTodaysOrders();
     },
     issueTokenizedReturn(
       uniqueTransIdString,
@@ -383,50 +301,19 @@ this.retrieveTodaysOrders();
           console.log("errors");
           console.log(e);
         });
-    },
+    }
   },
-  mounted() {
-    // console.log('moment');
-    // console.log(moment().valueOf());
-    moment().valueOf();
 
-    this.retrieveTodaysOrders();
-  },
 };
+
+
+
+
+
 </script>
 
-<style lang="scss">
-.position-relative {
-  h1 {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-}
+<style>
 
-.no-left-pad {
-  padding-left: 0;
-}
-
-pre.hidden {
-  display: none;
-}
-.line-link {
-  cursor: pointer;
-}
-
-.modalTransaction{
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: green;
-    top: 92px;
-    left: 0;
-    z-index: 1000;
-    overflow: scroll;
-    padding-bottom: 200px;
-    padding-top: 40px;
-}
 
 
 </style>

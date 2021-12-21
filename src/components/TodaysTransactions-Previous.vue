@@ -50,10 +50,8 @@
     <br />
     order history:
     <hr />
+
     <br />
-
-
-
     <div
       v-for="order in orderhistory.user.slice().reverse()"
       :key="order._id"
@@ -62,12 +60,12 @@
 
 
 
+      <button @click="viewModal(order)">modal</button>
+
+      <!-- {{order.orderino}} -->
+<!--    <template v-if="isToday(order.orderInfo.timeStamp) === true ">-->
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
-    <div class="pointer" @click="viewModal(order)">
-      
-
-<div class="fifth">
-
+        {{ isToday(order.orderInfo.timeStamp) }}
 
         <template v-if="hasTransmissionId(order.payInfo)">
           <b>gift card transaction</b>
@@ -78,14 +76,34 @@
             <span v-if="order.sandbox">(sandbox)</span></b
           >
         </template>
-
-
-
+        <br />
+        confirmation code: {{ order.orderInfo.confirmation_code }} <br /><br />
+        <template v-if="order.orderInfo.preorder">
+          <b>preorder</b>
+        </template>
+        <template v-else>
+          <b>regular order</b>
+        </template>
 
         <template v-if="order.void">
           <h1>VOID</h1>
         </template>
-  
+        <template
+          v-else-if="voidValid(order) && !hasTransmissionId(order.payInfo)"
+        >
+          <button
+            class="fl-right"
+            v-if="!order.void"
+            @click="issueVoid(order.payInfo.uniqueTransId, true)"
+          >
+            void
+          </button>
+          <h1 v-else>VOID</h1>
+        </template>
+        <template v-else>
+          <i>(void unavailable)</i>
+        </template>
+
         <br />
         <template v-if="order.orderInfo.preorder">
           <br />
@@ -112,54 +130,55 @@
         <br />guest name:
         {{ order.orderInfo.fulfillment_info.customer.first_name }}
         <br />
+        <br />
+        <button @click="toggleOrder(order.orderInfo.id)">
+          show/hide full order data
+        </button>
 
+        <pre :id="'order-' + order.orderInfo.id" class="hidden">{{ order }}</pre
+        >
+        <br />
 
+        <br />
+        <ul class="no-left-pad">
+          <li
+            v-for="item in order.orderInfo.charges.items"
+            :key="item.cartId"
+            style="margin-bottom:30px;"
+          >
+            <b>{{ item.quantity }} x</b> {{ item.name }}&nbsp;&nbsp;&nbsp;<b
+              >${{ item.price.toFixed() / 100 }}</b
+            >&nbsp;&nbsp;&nbsp;
+            <br />
+            &nbsp;&nbsp; &nbsp;&nbsp;
+            <template v-if="item.returned">
+              <span>(returned)</span>
+            </template>
+            <template v-else>
+              <template v-if="order.payInfo.uniqueTransId">
+                <span
+                  class="line-link"
+                  v-if="!order.void"
+                  @click.once="
+                    issueTokenizedReturn(
+                      order.payInfo.uniqueTransId,
+                      item.price,
+                      order.orderInfo.charges.taxes /
+                        order.orderInfo.charges.preTotal,
+                      item.cartId,
+                      order._id
+                    )
+                  "
+                  ><u>issue return</u></span
+                >
+              </template>
+            </template>
+          </li>
+        </ul>
+        <br />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-<div class="fifth">
-        <template v-if="order.orderInfo.preorder">
-          <b>preorder</b>
-        </template>
-        <template v-else>
-          <b>regular order</b>
-        </template>
-</div>
-
-<div class="fifth">
-
-</div>
-
-<div class="fifth">
-
-</div>
-
-<div class="fifth">
-
-</div>
-
-
-
-
-
-</div>
+        <hr />
+<!--      </template>-->
       </template>
     </div>
   </div>

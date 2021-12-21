@@ -77,8 +77,8 @@ const checkURL = () => {
 
 
 const base = axios.create({
-  baseURL: checkURL()
-  // baseURL: process.env.VUE_APP_BASE_URL
+  // baseURL: checkURL()
+  baseURL: process.env.VUE_APP_BASE_URL
   // baseURL: process.env.VUE_APP_LOCAL_URL
 });
 

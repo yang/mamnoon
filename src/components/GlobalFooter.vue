@@ -9,7 +9,7 @@
 <footer class="secPadFooter">
 
 <div class="beta">
-    we are in beta. feedback? <a href="https://forms.gle/9d5kmR6PzZwmgUV78" target="_blank"><u>submit here</u></a>!
+    this site is in beta. feedback? <a href="https://forms.gle/9d5kmR6PzZwmgUV78" target="_blank"><u>submit here</u></a>!
 </div>
 
 <div class="container">
