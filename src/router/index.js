@@ -89,6 +89,11 @@ const routes = [
     name: "shorabatadas",
     component: () => import("../views/mamnoonff.vue")
   },
+  {
+    path: "/finefoods/products/basallabneh",
+    name: "basallabneh",
+    component: () => import("../views/mamnoonff.vue")
+  },
   // {
   //   path: "/shop",
   //   name: "shop",
