@@ -13,24 +13,7 @@
             </li>
           </ul>
         <TodaysTransactions />
-          <div>
 
-polling:
-
-<input type="text" v-model="externalTransactionId" />
-<button @click="retrievePoll(externalTransactionId)">
-retrieve
-</button>
-<br>
-<div v-if="pollResults === '{}'
-">
-
-</div>
-<pre>
-  {{pollResults}}
-</pre>
-
-          </div>
     </div>
         </div>
       

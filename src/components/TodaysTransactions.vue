@@ -47,10 +47,7 @@
     <!-- {{response}} -->
     <h1>number of orders: {{ orderhistory.user.length }}</h1>
     <br />
-    <br />
-    order history:
-    <hr />
-    <br />
+
 
 
 
@@ -66,63 +63,17 @@
     <div class="pointer" @click="viewModal(order)">
       
 
-<div class="fifth">
+<div class="third">
 
 
-        <template v-if="hasTransmissionId(order.payInfo)">
-          <b>gift card transaction</b>
-        </template>
-        <template v-else>
-          <b
-            >credit debit transaction
-            <span v-if="order.sandbox">(sandbox)</span></b
-          >
-        </template>
+       <h1 style="position:initial;font-weight: 600;"> {{firstLast(order.orderInfo.fulfillment_info.customer) | truncate(16, '...')}}</h1>
 
 
 
 
-        <template v-if="order.void">
-          <h1>VOID</h1>
-        </template>
+
+
   
-        <br />
-        <template v-if="order.orderInfo.preorder">
-          <br />
-          scheduled time: {{ order.orderInfo.scheduled_time | formatDate }}
-        </template>
-        <br />
-        time placed: {{ order.orderInfo.time_placed | formatDate }}
-        <br />
-
-        <template v-if="order.timeClosed">
-          time closed: {{ timeClosedMoment(order.timeClosed) }}
-        </template>
-        <br /><br />
-        ${{ order.orderInfo.charges.total | showToFixed }}
-        <br />
-        {{ order.orderInfo.restaurant }}
-        <br />
-        item amount: {{ order.orderInfo.charges.items.length }}
-        <br />
-
-        <br />
-        <b>{{ order.email }}</b>
-        &nbsp;&nbsp;
-        <br />guest name:
-        {{ order.orderInfo.fulfillment_info.customer.first_name }}
-        <br />
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -134,28 +85,46 @@
 
 
 </div>
-<div class="fifth">
-        <template v-if="order.orderInfo.preorder">
-          <b>preorder</b>
+<div class="third">
+        <template v-if="order.timeClosed">
+         <b>Closed</b>
+          <!--{{ timeClosedMoment(order.timeClosed) }}-->
         </template>
         <template v-else>
-          <b>regular order</b>
+        <b>Open</b>
         </template>
+
+
+        <template v-if="order.orderInfo.preorder">
+<br>
+          scheduled: {{ order.orderInfo.scheduled_time | formatDate2 }}
+        </template>
+        <br />
+
+        Order Placed: {{ order.orderInfo.time_placed | formatDate2 }}
+        <br />
+        <template v-if="order.void">
+          VOID
+        </template>
+
+        <br /><br />
+
+
+
 </div>
 
 <div class="fifth">
+<h1 style="position:initial;font-weight: 600;">
+        ${{ order.orderInfo.charges.total | showToFixed }}</h1>
+
+   
+   <span class="itemAmount">{{ order.orderInfo.charges.items.length }} item<span v-if="order.orderInfo.charges.items.length>1">s</span></span>
+        <br />
+
+
+
 
 </div>
-
-<div class="fifth">
-
-</div>
-
-<div class="fifth">
-
-</div>
-
-
 
 
 
@@ -204,7 +173,13 @@ CloseModalSm
   name: "OrderHistory",
   props: ["currentUser"],
   filters: {
-    formatDate(value) {
+    formatDate2(value) {
+      if (value) {
+        let order = moment(String(value));
+        return order.tz("America/Los_Angeles").format("lll");
+      }
+    },
+        formatDate(value) {
       if (value) {
         let order = moment(String(value));
         return order.tz("America/Los_Angeles").format("LLLL");
@@ -218,6 +193,9 @@ CloseModalSm
     },
   },
   methods: {
+    firstLast(name){
+        return name.first_name + ' ' + name.last_name;
+    },
 hideTransactionModal(){
 this.modalVisible = false;
 },
@@ -419,7 +397,8 @@ pre.hidden {
     position: fixed;
     width: 100%;
     height: 100vh;
-    background: green;
+    // background: green;
+    background: white;
     top: 92px;
     left: 0;
     z-index: 1000;
@@ -428,5 +407,9 @@ pre.hidden {
     padding-top: 40px;
 }
 
+
+.itemAmount{
+      font-size: 2.2rem;
+}
 
 </style>

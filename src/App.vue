@@ -2420,13 +2420,19 @@ font-weight: 500;
 
 .pointer{
   cursor: pointer;
-  padding: 10px;
+  padding: 10px 20px;
   border: 1px solid black;
   margin-bottom: 10px;
 
-
   .fifth{
-    display: flex;
+    width: 20%;
+    display: inline-block;
+  }
+
+
+    .third{
+    width: 40%;
+    display: inline-block;
   }
 }
 
