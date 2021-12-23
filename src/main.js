@@ -22,7 +22,7 @@ import VueObserveVisibility from "vue-observe-visibility";
 import VueSweetalert2 from "vue-sweetalert2";
 // If you don't need the styles, do not connect
 import "sweetalert2/dist/sweetalert2.min.css";
-
+import _ from 'lodash';
 // auth
 import { domain, clientId } from "../auth_config.json";
 import { Auth0Plugin } from "./auth";

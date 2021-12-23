@@ -9,7 +9,7 @@
               <router-link to="/upserveinfo">upserve info</router-link>
             </li>-->
             <li class="nav-item active">
-              <button class="nav-link" @click="logUserOut"> Logout</button>
+              <button class="btn-nadi fl-right" @click="logUserOut"> Logout</button>
             </li>
           </ul>
         <TodaysTransactions />

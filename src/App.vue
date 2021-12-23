@@ -2439,6 +2439,18 @@ font-weight: 500;
 
 
 
+.btn-nadi{
+  border-radius: 5px;
+  background-color: #F05D5B;
+  color: #FFF;
+  box-shadow: none;
+  outline: none;
+      -webkit-appearance: none;
+    -moz-appearance: none;
+     border: none;
+     padding: 5px 10px;
+}
+
 
 </style>
 

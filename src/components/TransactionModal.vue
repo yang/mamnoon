@@ -1,18 +1,23 @@
 <template>
 
-<div class="">
-<div class="">
+<div class="container">
+<div class="row">
+<div class="col-6">
+
+       <h1>{{ order.orderInfo.fulfillment_info.customer.first_name }} {{ order.orderInfo.fulfillment_info.customer.last_name }}</h1>
+        <b>{{ order.email }}</b>
+        <br><br>
+        {{ order.orderInfo.restaurant }}
+        <br /><br />
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
-        {{ isToday(order.orderInfo.timeStamp) }}
+ 
 
         <template v-if="hasTransmissionId(order.payInfo)">
-          <b>gift card transaction</b>
+          gift card transaction
         </template>
         <template v-else>
-          <b
-            >credit debit transaction
-            <span v-if="order.sandbox">(sandbox)</span></b
-          >
+          credit debit transaction
+            <span v-if="order.sandbox">(sandbox)</span>
         </template>
         <br />
         confirmation code: {{ order.orderInfo.confirmation_code }} <br /><br />
@@ -30,7 +35,7 @@
           v-else-if="voidValid(order) && !hasTransmissionId(order.payInfo)"
         >
           <button
-            class="fl-right"
+            class="fl-right btn-nadi"
             v-if="!order.void"
             @click="issueVoid(order.payInfo.uniqueTransId, true)"
           >
@@ -39,7 +44,7 @@
           <h1 v-else>VOID</h1>
         </template>
         <template v-else>
-          <i>(void unavailable)</i>
+          <i>&nbsp;(void unavailable)</i>
         </template>
 
         <br />
@@ -55,29 +60,28 @@
           time closed: {{ timeClosedMoment(order.timeClosed) }}
         </template>
         <br /><br />
-        ${{ order.orderInfo.charges.total | showToFixed }}
+        <h2>${{ order.orderInfo.charges.total | showToFixed }}</h2>
         <br />
-        {{ order.orderInfo.restaurant }}
-        <br />
-        item amount: {{ order.orderInfo.charges.items.length }}
-        <br />
+      
+  
 
-        <br />
-        <b>{{ order.email }}</b>
-        &nbsp;&nbsp;
-        <br />guest name:
-        {{ order.orderInfo.fulfillment_info.customer.first_name }}
-        <br />
-        <br />
-        <button @click="toggleOrder(order.orderInfo.id)">
-          show/hide full order data
-        </button>
+      
 
-        <pre :id="'order-' + order.orderInfo.id" class="hidden">{{ order }}</pre
-        >
-        <br />
 
-        <br />
+    </template>
+
+</div>
+
+
+
+
+<div class="col-6">
+
+
+
+<br>
+<!--// items: {{ order.orderInfo.charges.items.length }}
+// <br><br>-->
         <ul class="no-left-pad">
           <li
             v-for="item in order.orderInfo.charges.items"
@@ -115,10 +119,21 @@
         </ul>
         <br />
 
-        <hr />
 
 
-    </template>
+
+
+</div>
+<div class="col-12">
+
+    <button class="btn-nadi" @click="toggleOrder(order.orderInfo.id)">
+          show/hide full order data
+        </button>
+<br>
+        <pre :id="'order-' + order.orderInfo.id" class="hidden">{{ order }}</pre
+        >
+
+</div>
 
 
 </div>
