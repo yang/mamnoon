@@ -26,6 +26,7 @@ import _ from 'lodash';
 // auth
 import { domain, clientId } from "../auth_config.json";
 import { Auth0Plugin } from "./auth";
+import VueGoogleAutocomplete from 'vue-google-autocomplete'
 
 import VideoBg from "vue-videobg";
 
@@ -44,6 +45,9 @@ Vue.use(Auth0Plugin, {
 });
 
 // auth
+
+Vue.use(VueGoogleAutocomplete);
+
 
 Vue.use(VueObserveVisibility);
 // Vue.use(VueMeta)
@@ -76,7 +80,6 @@ const checkURL = () => {
 
 
 const base = axios.create({
-  // baseURL: checkURL()
   baseURL: process.env.VUE_APP_BASE_URL
   // baseURL: process.env.VUE_APP_LOCAL_URL
 });

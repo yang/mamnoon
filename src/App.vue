@@ -136,6 +136,7 @@ margin: 0 10px 0 0;
   position: fixed;
   z-index: 100;
   z-index: 200;
+      z-index: 10000;
   background: #ffffff99;
   height: 100vh;
   width: 100%;

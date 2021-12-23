@@ -2335,14 +2335,10 @@ cart empty
 
 
 
- 
-
-
-
-
 
 
 <template v-if="savedCard.primary ===  true">
+
    <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
       </button>
         <button v-else class="mt10 fw" :class='{disabled: !formsValidClass }' style="margin-top:20px;" @click="confirmTokenizedPreAuth(savedCard.approvalData,currentOrder.charges.total,savedCard.approvalData.uniqueTransId,savedCard.approvalData.maskedAccount.replace('************',''))" disabled>Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
@@ -2359,7 +2355,6 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-
 
 
 
@@ -2446,12 +2441,6 @@ cart empty
 
   <template v-if="$store.state.currentUserEmail">
 <template v-for="savedCard in savedCards">
-
-
-
-
-
-
 
 
 <template v-if="savedCard.primary">
@@ -2629,8 +2618,8 @@ cart empty
       
       </div>
       </section>
-<!-- <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>-->
-<!-- <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
 <!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
 
@@ -5253,6 +5242,55 @@ this.panelShow = 'customerInfo'
 }else{
 
 }
+
+
+
+
+   if(this.title === 'Mamnoon'){
+
+       if(this.$store.state.storeCurrentOrderUpdateMamnoon.fulfillment_info.customer.email !== ''){
+         this.emailValidFromServer(this.$store.state.storeCurrentOrderUpdateMamnoon.fulfillment_info.customer.email)
+       }
+     
+
+
+    }
+    if(this.title === 'Mamnoon Street'){
+
+
+
+
+
+           if(this.$store.state.storeCurrentOrderUpdateStreet.fulfillment_info.customer.email !== ''){
+         this.emailValidFromServer(this.$store.state.storeCurrentOrderUpdateStreet.fulfillment_info.customer.email)
+       }   
+              
+      
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 },
     showingCustom(e){

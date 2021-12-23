@@ -131,36 +131,44 @@ if(order.restaurant === 'Mamnoon'){
         console.log('retriev orders frome end')
     let self = this
         this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
-// this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
-
-
 
 
 
         self.orderhistory = response.data
 
-        console.log(response.data)
-
-
-
-// array1.map(x => x * 2);
 
 
 let array2 = response.data.user.map(items => items.orderInfo.charges.items)
 let array3 = array2.flat();
-console.log(array3.filter(x=>x.price>500));
+
+for(let i in array3){
+    array3[i].cartId = null;
+}
+
+let filteredArray = array3.filter(x=>x.price>500);
+
+let inputArray = filteredArray;
+
+    const uniqueArrayWithCounts = inputArray.reduce((accum, val) => {
+        // const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
 
 
+    const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
 
+        if (dupeIndex === -1) {
+          // Not found, so initialize.
+          accum.push({
+            qty: 1,
+            ...val
+          });
+        } else {
+          // Found, so increment counter.
+          accum[dupeIndex].qty++;
+        }
+        return accum;
+    }, []);
 
-
-
-
-
-
-
-
-
+    console.log(uniqueArrayWithCounts);
 
     })
     },
