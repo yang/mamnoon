@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profilef">
     <Nav3 />
        <Transactions2 />
  
