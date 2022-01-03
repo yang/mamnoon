@@ -1,5 +1,5 @@
 <template>
-  <div class="profilef">
+  <div class="todaystransactions">
     <Nav3 />
        <Transactions2 />
  
@@ -31,9 +31,8 @@ export default {
 </script>
 
 <style>
-.profile{
+.todaystransactions{
     padding-top: 120px;
-        padding-top: 150px;
     padding-bottom: 120px;
 }
 </style>
