@@ -273,7 +273,7 @@
 <div class="infoPoints">
 <div class="iconPoint">
 
-              <Phone :color="'#ffffff'" :width="30" class="mr6" />
+              <Phone style="margin-left: 4px;" :color="'#ffffff'" :width="30" class="mr6" />
               </div>
 <div style="padding-top: 6px;">
  <a :style="{'color':item.background_color}" :href="`tel:+1${item.phone_number.replace(/[^0-9.]/g, '')}`">{{item.phone_number}}</a><br>            
@@ -2239,11 +2239,19 @@ width: 100%;
 
 
 .mapAddress{
+
+  padding-left: 15px;
+  padding-top: 15px;
     position: relative;
     display: inline-block;
     width: 200px;
 
 
+
+       @media only screen and (max-width: 992px) {
+  padding-left: 0;
+   padding-top: 0;
+       }
 
        @media only screen and (max-width: 768px) {
          width: 100%;

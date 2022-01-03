@@ -1738,7 +1738,7 @@ add
                       v-model="currentOrder.fulfillment_info.delivery_info.address.city"
                     />
                     <br />
-
+          
                     <label class="smblk" for="state">state:</label>
                     <br />
                     <input
@@ -1905,8 +1905,7 @@ add
                   @change="checkIfCityValid(currentOrder.billing.billing_address_city)"
                   v-model="currentOrder.billing.billing_address_city"
                 />
-
-       
+  
    <div class="small-message" v-if="cityErrorVisibleTf && !validCity(currentOrder.billing.billing_address_city)">
       please enter a valid city</div>
             <div style="">
@@ -2291,6 +2290,14 @@ cart empty
 
 
   <div class="small-message" v-if="selectedTime === null">please select a date and time at the top of this page</div>
+
+
+  <div class="small-message" v-if="currentOrder.billing.billing_address_city === ''">please enter a billing city</div>
+
+  <div class="small-message" v-if="currentOrder.billing.billing_address_state === ''">please select a billing state</div>
+
+
+
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
   <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>-->
 <template v-if="this.$store.state.loggedIn">
