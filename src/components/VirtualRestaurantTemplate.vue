@@ -648,11 +648,11 @@ follow us
 
 
       <h3>  
-        {{repeat.text}}rr
+        {{repeat.text}}
       </h3>
       <br>
 
-      {{repeat.button_link}}fff
+   
        <a v-if="repeat.button_link !== ''" class="ctaLink" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
 </div>
 </div>
