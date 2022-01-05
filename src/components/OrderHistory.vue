@@ -1,5 +1,51 @@
 <template>
-<div>
+    <div id="upserveolo">
+      <div class="container pad-yellow-background module-header">favorite orders</div>
+        <div class="container pad-yellow-background">
+          <div class="row no-lr-margin" id="order-history" >
+          <template v-for="item in result">
+                  <div class="filtree-full-testing-favorites" >
+                    <div class="yellow-bg-test" >
+                      <div class="half-width2left">
+                        <div class="content-box">
+                          <!-- <div class="showBox"  v-if="item.item_object.images" v-bind:style="{ backgroundImage: 'url(' + item.item_object.images.online_ordering_menu.main + ')' }"></div> -->
+                            <div class="name">{{item.name}}</div>
+                              <div
+                                  v-if="item.item_object.description"
+                                  class="food-description"
+                                >{{item.item_object.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
+                            <div class="food-price">
+                              ${{ formatPrice(item.price_cents) }}<span class="checkIfPackage" ></span>   
+                            </div>
+                    <br />
+                      </div>
+                    </div>
+                    <div class="half-width2right">
+                      <div
+                          v-if="item.item_object.images.online_ordering_menu"
+                          class="backgroundImage"
+                          v-bind:style="{ backgroundImage: item.item_object.images.online_ordering_menu.main}"
+                        ></div>
+                      <template v-if="item.item_object.images">
+                        <div
+                          v-if="item.item_object.images.online_ordering_menu"
+                          class="backgroundImage"
+                          v-bind:style="{ backgroundImage: item.item_object.images.online_ordering_menu.main}"
+                        ></div>
+                    </template>
+                      <template v-else>
+                        <div class="backgroundImage"
+                          v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                        >     <NadiIconSmX style="height:140px;" /></div>
+                      </template>
+                      </div>
+                  </div>
+                </div>
+        </template>
+        </div>
+    </div>
+
+
 <div class="container pad-yellow-background module-header"> food order history</div>
 <div class="container pad-yellow-background">
 
@@ -101,7 +147,9 @@ export default {
     data( ) {
     return {
         orderhistory: null,
-        response: null
+        response: null,
+        result: [],
+
         }
     },
     name: 'OrderHistory',
@@ -109,68 +157,62 @@ export default {
     methods: {
         reorder(order){
 
-            let storeCurrentOrder = order
-            this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-
-            // let drawerTrue = true
-
-// this.$store.commit("drawerTrue", { drawerTrue });
-
-
-if(order.restaurant === 'Mamnoon'){
-     this.$router.push("/mamnoon");
-            //    location.reload();
-}else{
-     this.$router.push("/mamnoonstreet");
-            //    location.reload();
-}
-
-
+          let storeCurrentOrder = order
+          this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+          if(order.restaurant === 'Mamnoon'){
+              this.$router.push("/mamnoon");
+                      //    location.reload();
+          }else{
+              this.$router.push("/mamnoonstreet");
+                      //    location.reload();
+          }
         },
-    retrieveOrders() {
-        console.log('retriev orders frome end')
-    let self = this
-        this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
 
+        formatPrice(value) {
+        let val = (value/100).toFixed(2)
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(".00","");
+    },
 
+      retrieveOrders() {
+          console.log('retrieve orders from end')
+        let self = this
+          this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
 
         self.orderhistory = response.data
-
-
-
-let array2 = response.data.user.map(items => items.orderInfo.charges.items)
-let array3 = array2.flat();
-
-for(let i in array3){
-    array3[i].cartId = null;
-}
-
-let filteredArray = array3.filter(x=>x.price>500);
-
-let inputArray = filteredArray;
-
-    const uniqueArrayWithCounts = inputArray.reduce((accum, val) => {
-        // const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
-
-
-    const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
-
-        if (dupeIndex === -1) {
-          // Not found, so initialize.
-          accum.push({
-            qty: 1,
-            ...val
-          });
-        } else {
-          // Found, so increment counter.
-          accum[dupeIndex].qty++;
+        let array2 = response.data.user.map(items => items.orderInfo.charges.items)
+        let array3 = array2.flat();
+        for(let i in array3){
+            array3[i].cartId = null;
         }
-        return accum;
-    }, []);
 
-    console.log(uniqueArrayWithCounts);
+        let filteredArray = array3.filter(x=>x.price>299);
+        let inputArray = filteredArray;
 
-    })
+        const uniqueArrayWithCounts = inputArray.reduce((accum, val) => {
+          // const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
+
+
+        const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
+          if (dupeIndex === -1) {
+            // Not found, so initialize.
+            accum.push({
+              qty: 1,
+              ...val
+            });
+          } else {
+            // Found, so increment counter.
+            accum[dupeIndex].qty++;
+          }
+          return accum;
+        }, []);
+
+
+        console.log(uniqueArrayWithCounts);
+        
+        self.result = filteredArray.sort((a,b) => (a.qty > b.qty) ? 1 : ((b.qty > a.qty) ? -1 : 0)).slice(filteredArray.length-3, filteredArray.length).reverse();
+        return self.result;
+
+      })
     },
         },
             filters: {
@@ -194,11 +236,10 @@ showToFixed: function (value) {
 }
   },
 
-
     
     mounted(){
         this.retrieveOrders()
-
+        
     }
 
 }
@@ -210,6 +251,12 @@ showToFixed: function (value) {
 <style lang="scss">
 .fl-right{
     float: right;
+}
+
+.menu-line-testing {
+  border-bottom: 0 solid #ddd;
+  padding: 10px 0 6px;
+  margin: 6px 0;
 }
 
 
@@ -225,12 +272,61 @@ table th,table tr{
     vertical-align:top;
 }
 
+.yellow-bg-test{
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: calc(100% - 5px);
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  .content-box{
+      background: transparent;
+  }
+}
+.half-width2left {
+  width: 65%;
+  float: left;
+  height: 140px;
+  overflow: hidden;
+}
 
+.half-width2right {
+  width: 35%;
+  float: left;
+  height: 140px;
+  overflow: hidden;
+}
+
+
+.content-box .name,
+.content-box .food-description,
+.menu-header{
+text-transform: lowercase;
+}
 
 table td{
     display:table-cell;
     vertical-align:top;
 }
+
+li {
+  border-bottom:  0 !important;
+  position: relative;
+}
+
+.content{
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    color: transparent;
+    background-size: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    // top: 30px;
+    top: 20px;
+  }
+
 
 table td div{
     height:100%;
@@ -239,6 +335,17 @@ table td div{
 .w100{
   width: 100%;
     display: inline-table;
+}
+
+.filtree-full-testing-favorites {
+  width: calc(33% - 0px);
+  float: left;
+  height: 140px;
+  background: transparent;
+  padding: 0px;
+  overflow: hidden;
+  margin: 1px;
+  padding-bottom: 5px;
 }
 
 .w100{
@@ -260,6 +367,22 @@ table td div{
   }
 }
 
+.content-box .name{
+      font-size: .9rem;
+    font-weight: 600;
+}
+
+.content-box .name,
+.content-box .food-description,
+.menu-header{
+text-transform: lowercase;
+}
+
+.name{
+      font-size: .9rem;
+    font-weight: 600;
+}
+
 tr{
         border-bottom: 1px solid #cacaca;
 }
@@ -279,8 +402,6 @@ tr td{
 &:last-child{
 padding-right: 0;
 
-
-
 }
 
 }
@@ -297,6 +418,7 @@ ul.order-items{
     color: #000;
     font-size: .9rem;
     list-style: none;
+    border-bottom: 0;
 }
 
 .mr-0{
@@ -311,6 +433,17 @@ display: none !important;
 
 }
 
+
+.filtree-full-testing-favorites {
+  width: 100%;
+  float: left;
+  height: 140px;
+  background: transparent;
+  padding: 0px;
+  overflow: hidden;
+  margin: 1px;
+  padding-bottom: 5px;
+}
 
 .text-right-mob{
   text-align: right !important;
@@ -390,7 +523,10 @@ display: none !important;
     }
 }
 
+.backgroundImage {
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+}
 
 </style>
-
-

@@ -298,7 +298,7 @@ button.delivery-option {
   }
 }
 
-button.filehalf {
+button.file {
     width: 49%;
 
     border-radius: 4px;

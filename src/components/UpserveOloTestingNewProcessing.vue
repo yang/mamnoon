@@ -822,131 +822,6 @@ add
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- BEGINNING OF ORIGINAL -->
 <!-- BEGINNING OF ORIGINAL -->
 <!-- BEGINNING OF ORIGINAL -->
@@ -960,68 +835,70 @@ add
   <!-- beggin 0 -->
   <template v-if="noFiltering">
     <!-- beggin 1 -->
+    
       <template>
               <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
                 
-                                                <div
-                                                  :id="'drawertop-'+ item.id"
-                                                  class="display-block row no-lr-margin"
-                                                >
-                                                  <h2 class="menu-header">
-                                       <!-- <div >{{item.id}}</div> -->
-                                                    {{item.name.replace('- To Go', '').replace('To Go', '')}}
-                                                    <!-- {{item.timing_mask}} -->
-                                                    
-                                                  </h2>
-                                                </div>
-                                        <div :data="'drawer' + item.id" class="row no-lr-margin">
-                                            <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
-                                         
-                                                    <template v-for="serve in upserveList" class="grey-bg">
-                                                                  <template v-if="serve.id === piece" class="inline-block">
-                                                                                <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
-                                                                                            <div class="half-width2left">
-                                                                                                          <div class="content-box">
+                <div
+                  :id="'drawertop-'+ item.id"
+                  class="display-block row no-lr-margin"
+                >
+                    <h2 class="menu-header">
+            <!-- <div >{{item.id}}</div> -->
+                        {{item.name.replace('- To Go', '').replace('To Go', '')}}
+                        <!-- {{item.timing_mask}} -->
+                        
+                    </h2>
+                </div>
+            <div :data="'drawer' + item.id" class="row no-lr-margin">
+                <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
+              
+              <template v-for="serve in upserveList" class="grey-bg">
+                <template v-if="serve.id === piece" class="inline-block">
+                      <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
+                            <div class="half-width2left">
+                                <div class="content-box">
         <div class="showBox"  v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
 
 
 <div class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
 
-                                                                                                          <div class="name">{{checkIfGiftCard(serve.name)}}</div>
-                                                                                                          <div
-                                                                                                            v-if="serve.description"
-                                                                                                            class="food-description"
-                                                                                                          >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
-                                                                                                          <div class="food-price">
-                                                                                                            <!-- ${{ serve.price_cents.toFixed(2)/100}}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span>  -->
+                <div class="name">{{checkIfGiftCard(serve.name)}}</div>
+                  <div
+                      v-if="serve.description"
+                      class="food-description"
+                    >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
+                    <div class="food-price">
+                      <!-- ${{ serve.price_cents.toFixed(2)/100}}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span>  -->
 
-                                                                                                            <!-- <br> -->
-   
-                                                                                                            ${{ formatPrice(serve.price_cents) }}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span>   
-                                                                                                          </div>
-                                                                                                          <br />
-                                                                                                        </div>
-                                                                                            </div>
-                                                                                              <div class="half-width2right">
-                                                                                                <template v-if="serve.images">
-                                                                                                  <div
-                                                                                                    v-if="serve.images.online_ordering_menu"
-                                                                                                    class="backgroundImage"
-                                                                                                    v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                                                                                                  ></div>
-                                                                                              </template>
-                                                                                                <template v-else>
-                                                                                                  <div class="backgroundImage"
-                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
-                                                                                                </template>
-                                                                                              </div>
-                                                                                </div>
-                                                                  </template>
-                                                    </template>
-                                            </div>
-                                      </div>
-                                    </div>
+                      <!-- <br> -->
+                      
+                      ${{ formatPrice(serve.price_cents) }}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span>   
+                    </div>
+                    <br />
+                  </div>
+                  </div>
+                    <div class="half-width2right">
+                      <template v-if="serve.images">
+                        <div
+                          v-if="serve.images.online_ordering_menu"
+                          class="backgroundImage"
+                          v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                        ></div>
+                    </template>
+                      <template v-else>
+                        <div class="backgroundImage"
+                          v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                        >     <NadiIconSmX style="height:140px;" /></div>
+                      </template>
+                      </div>
+                  </div>
+          </template>
+        </template>
+        
+          </div>
+        </div>
+      </div>
       </template>
       <!-- end 1 -->
   </template>
@@ -1055,10 +932,11 @@ add
                                                   class="display-block row no-lr-margin"
                                                 >
                                                   <h2 class="menu-header">
-       
+                                                        
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
+
                                                 </div>
                                         <div :data="'drawer' + item.id" class=" row no-lr-margin">
                                             <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
@@ -4946,12 +4824,7 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 
 },
 currentlyAvailable(startTime,endTime,rules,futureDay,futureTime){
-
-
-
-
     let weekday = ['mon','tue','wed','thu','fri','sat','sun']
-
             if(!futureDay && !futureTime){
                 let currentDate = new Date();   
                 let startDate = new Date(currentDate.getTime());
