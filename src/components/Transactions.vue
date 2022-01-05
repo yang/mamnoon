@@ -118,6 +118,7 @@ this.$http.get('/order/polling-request', {
 .container.pad-yellow-background{
   padding-left: 0 !important;
   padding-right: 0 !important;
+    padding-top: 0 !important;
 }
 
 

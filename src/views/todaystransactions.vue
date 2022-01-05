@@ -1,13 +1,13 @@
 <template>
-  <div class="profile">
-    <Nav3 />
+  <div class="todaystransactions">
+    <Nav4 />
        <Transactions2 />
  
   </div>
 </template>
 <script>
 
-import Nav3 from "@/components/Nav3";
+import Nav4 from "@/components/Nav4";
 import Transactions2 from "@/components/Transactions2";
 export default {
           metaInfo: {
@@ -18,7 +18,7 @@ export default {
   },
   components: {
 
-    Nav3,
+    Nav4,
     Transactions2
 
   },
@@ -31,9 +31,8 @@ export default {
 </script>
 
 <style>
-.profile{
+.todaystransactions{
     padding-top: 120px;
-        padding-top: 150px;
     padding-bottom: 120px;
 }
 </style>

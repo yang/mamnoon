@@ -1,6 +1,6 @@
 <template>
 
-<div>
+<div class="mapPin">
 
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 33 42" style="enable-background:new 0 0 33 42;margin-bottom: 10px;" xml:space="preserve" :width="this.width ? this.width :'20px'">
@@ -23,7 +23,16 @@ export default{
 </script>
 
 
-<style>
+<style lang="scss">
+
+.mapPin{
+   @media only screen and (max-width: 768px) {
+	display: inline-block;
+	margin-right: 10px;
+    }
+}
+
+
 </style>
 
 

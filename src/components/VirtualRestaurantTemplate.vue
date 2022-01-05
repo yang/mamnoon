@@ -273,7 +273,7 @@
 <div class="infoPoints">
 <div class="iconPoint">
 
-              <Phone :color="'#ffffff'" :width="30" class="mr6" />
+              <Phone style="margin-left: 4px;" :color="'#ffffff'" :width="30" class="mr6" />
               </div>
 <div style="padding-top: 6px;">
  <a :style="{'color':item.background_color}" :href="`tel:+1${item.phone_number.replace(/[^0-9.]/g, '')}`">{{item.phone_number}}</a><br>            
@@ -648,11 +648,11 @@ follow us
 
 
       <h3>  
-        {{repeat.text}}rr
+        {{repeat.text}}
       </h3>
       <br>
 
-      {{repeat.button_link}}fff
+   
        <a v-if="repeat.button_link !== ''" class="ctaLink" target="_blank" :style="styleObject" :href="repeat.button_link">{{repeat.button_text}}</a>
 </div>
 </div>
@@ -2239,11 +2239,19 @@ width: 100%;
 
 
 .mapAddress{
+
+  padding-left: 15px;
+  padding-top: 15px;
     position: relative;
     display: inline-block;
     width: 200px;
 
 
+
+       @media only screen and (max-width: 992px) {
+  padding-left: 0;
+   padding-top: 0;
+       }
 
        @media only screen and (max-width: 768px) {
          width: 100%;
