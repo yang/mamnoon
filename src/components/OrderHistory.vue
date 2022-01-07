@@ -20,8 +20,10 @@
                     <br />
                       </div>
                     </div>
-                    <div class="half-width2right">
-                      <div
+                    
+                    <div class="half-width2right" v-if="item">
+                      <img :src="item.item_object.images.online_ordering_menu.main" class="backgroundImage"/>
+                      <!-- <div
                           v-if="item.item_object.images.online_ordering_menu"
                           class="backgroundImage"
                           v-bind:style="{ backgroundImage: item.item_object.images.online_ordering_menu.main}"
@@ -37,8 +39,8 @@
                         <div class="backgroundImage"
                           v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
                         >     <NadiIconSmX style="height:140px;" /></div>
-                      </template>
-                      </div>
+                      </template> -->
+                      </div> 
                   </div>
                 </div>
         </template>
@@ -145,11 +147,12 @@ import tz from 'moment-timezone'
 
 export default {
     data( ) {
+      let image = "item.item_object.images.online_ordering_menu.main"
     return {
         orderhistory: null,
         response: null,
         result: [],
-
+        image: image
         }
     },
     name: 'OrderHistory',
