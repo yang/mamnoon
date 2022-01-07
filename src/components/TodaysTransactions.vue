@@ -29,34 +29,34 @@
 </div>
 
 
-    <br />
     <button class="btn-nadi" @click="setCurrentView('Mamnoon')">mamnoon</button>&nbsp;&nbsp;
     <button class="btn-nadi" @click="setCurrentView('Mamnoon Street')">mamnoon street</button>&nbsp;&nbsp;
     <button class="btn-nadi" @click="setCurrentView('empty')">all</button>&nbsp;&nbsp;
 
-
+           <button class="btn-nadi fl-right" @click="logUserOut" style="margin-left:5px;"> Logout</button>  &nbsp;&nbsp;
 
     <button class="btn-nadi fl-right" @click="showAllOrders()">show all</button>&nbsp;&nbsp;&nbsp;
 
- <button class="btn-nadi fl-right" @click="showTodaysOrders()" style="margin-right: 5px;">show todays orders</button>&nbsp;&nbsp;&nbsp;  
+ <button class="btn-nadi fl-right" @click="showTodaysOrders()" style="margin-right: 5px;">show todays orders</button>&nbsp;&nbsp;&nbsp;   
   
     <br />
 
     <br />
     <!-- {{response}} -->
-    <h1>number of orders: {{ orderhistory.user.length }}</h1>
+    <h1><span class="fl-right">number of orders: {{ orderhistory.user.length }}</span>&nbsp;    
+
+
+<input type="text" v-model="search" placeholder="search by name"/></h1>
     <br />
 
 
 
-
     <div
+    v-if="containsFirstName(order.orderInfo.fulfillment_info.customer) || containsLastName(order.orderInfo.fulfillment_info.customer)"
       v-for="order in orderhistory.user.slice().reverse()"
       :key="order._id"
       class="position-relative"
     >
-
-
 
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
     <div class="pointer" @click="viewModal(order)">
@@ -156,6 +156,7 @@ import TransactionModal from "@/components/TransactionModal";
 export default {
   data() {
     return {
+      search: '',
       modalVisible: false,
       modalContent: {},
       dateNow: Date.now(),
@@ -194,6 +195,39 @@ CloseModalSm
     },
   },
   methods: {
+            logUserOut() {
+      localStorage.removeItem("jwt");
+      this.$router.push("/");
+    },
+containsLastName(params){
+if(this.search===''){
+  return true
+}else{
+
+  if(params.last_name){
+
+
+if(params.last_name.includes(this.search)){
+  return true
+}else{
+  return false
+}
+  }
+}
+},
+containsFirstName(params){
+if(this.search===''){
+  return true
+}else{
+  if(params.first_name){
+if(params.first_name.includes(this.search)){
+  return true
+}else{
+  return false
+}
+  }
+}
+},
     firstLast(name){
         return name.first_name + ' ' + name.last_name;
     },

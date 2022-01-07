@@ -340,7 +340,7 @@ table td div{
 .filtree-full-testing-favorites {
   width: calc(33% - 0px);
   float: left;
-  height: 140px;
+  height: 168px;
   background: transparent;
   padding: 0px;
   overflow: hidden;

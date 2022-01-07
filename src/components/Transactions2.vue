@@ -3,15 +3,7 @@
     <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <div class="container nav-acc-header pad-yellow-background">
-          <ul class="navbar-nav">
     
-                <!-- <li>
-              <router-link to="/upserveinfo">upserve info</router-link>
-            </li>-->
-            <li class="nav-item active">
-              <button class="btn-nadi fl-right" @click="logUserOut"> Logout</button>
-            </li>
-          </ul>
         <TodaysTransactions />
 
     </div>
