@@ -33,6 +33,11 @@
     <button class="btn-nadi" @click="setCurrentView('Mamnoon Street')">mamnoon street</button>&nbsp;&nbsp;
     <button class="btn-nadi" @click="setCurrentView('empty')">all</button>&nbsp;&nbsp;
 
+
+ <button class="btn-nadi fl-right" @click="showTotals()" style="margin-left: 5px;"><span v-if="showDailyTotals">hide</span><span v-else>view</span> totals</button>
+
+
+
            <button class="btn-nadi fl-right" @click="logUserOut" style="margin-left:5px;"> Logout</button>  &nbsp;&nbsp;
 
     <button class="btn-nadi fl-right" @click="showAllOrders()">show all</button>&nbsp;&nbsp;&nbsp;
@@ -44,11 +49,23 @@
     <!-- {{response}} -->
     <h1><span class="fl-right">number of orders: {{ orderhistory.user.length }}</span>&nbsp;    
 
-{{ dailyTotal(orderhistory)}}
+<input type="text" v-model="search" placeholder="search by name"/>  </h1>
+<div v-if="showDailyTotals === true" class="dailyTotal">
+<b>mamnoon street totals:</b><br>pretotal: ${{ dailyTotal(orderhistory).street.pretotal | showToFixed}}<br>
+tips: ${{ dailyTotal(orderhistory).street.tips | showToFixed}}<br>
+<b>mamnoon totals:</b><br>pretotal: ${{ dailyTotal(orderhistory).mamnoon.pretotal | showToFixed}}<br>
+tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 
-<input type="text" v-model="search" placeholder="search by name"/></h1>
-    <br />
-    <div
+
+<input style="padding: 2px 10px;margin: 10px 0;" v-model="sendEmail" placeholder="email" />
+<button style="margin-left:5px;" class="btn-nadi" v-if="validEmail(sendEmail)" @click="sendTotals(dailyTotal(orderhistory),sendEmail)">send</button><button style="background-color: #ddd;color:#bbb;margin-left:5px;" class="btn-nadi" v-else disabled>send</button>
+</div>
+
+
+
+
+
+      <div
     v-if="containsFirstName(order.orderInfo.fulfillment_info.customer) || containsLastName(order.orderInfo.fulfillment_info.customer)"
       v-for="order in orderhistory.user.slice().reverse()"
       :key="order._id"
@@ -129,6 +146,8 @@ import TransactionModal from "@/components/TransactionModal";
 export default {
   data() {
     return {
+      sendEmail: '',
+      showDailyTotals: false,
       search: '',
       modalVisible: false,
       modalContent: {},
@@ -140,10 +159,10 @@ export default {
   },
   components:{
     TransactionModal,
- CloseModal,
-CloseModalMed,
-CloseModalRed,
-CloseModalSm
+    CloseModal,
+    CloseModalMed,
+    CloseModalRed,
+    CloseModalSm
   },
   name: "OrderHistory",
   props: ["currentUser"],
@@ -168,11 +187,66 @@ CloseModalSm
     },
   },
   methods: {
-
-    dailyTotal(orders){
-      console.log(orders)
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     },
-            logUserOut() {
+    sendTotals(dailyTotal,sendEmail){
+
+
+    this.$http
+            .post("/order/sendtotals", {
+              email: sendEmail,
+              dailyTotal
+            })
+            .then((response) => {
+              console.log(response);
+
+            })
+            .catch((e) => {
+              // this.errors.push(e);
+              console.log("errors");
+              console.log(e);
+            });
+
+
+
+    },
+    showTotals(){
+      this.showDailyTotals = !this.showDailyTotals
+    },
+    dailyTotal(orders){
+
+
+      let totals = {
+          street: {
+            pretotal: 0,
+            tips: 0
+          },
+          mamnoon: {
+            pretotal: 0,
+            tips: 0
+          }
+      };
+
+
+      for(let i = 0; i < orders.user.length; i++){
+
+        if(orders.user[i].orderInfo.restaurant === 'Mamnoon Street'){
+
+        totals.street.pretotal = totals.street.pretotal + orders.user[i].orderInfo.charges.preTotal;
+        totals.street.tips =  totals.street.tips + orders.user[i].orderInfo.charges.tip.amount;
+
+        }else{
+        totals.mamnoon.pretotal = totals.street.pretotal + orders.user[i].orderInfo.charges.preTotal;
+        totals.mamnoon.tips =  totals.street.tips + orders.user[i].orderInfo.charges.tip.amount;
+
+        }
+      }
+      return totals;
+
+    },
+    logUserOut() {
       localStorage.removeItem("jwt");
       this.$router.push("/");
     },
@@ -457,5 +531,10 @@ pre.hidden {
   cursor: pointer;
 }
 
+
+.dailyTotal{
+  text-align: right;
+  margin: 10px;
+}
 
 </style>

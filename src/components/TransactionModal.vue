@@ -4,40 +4,40 @@
 <div class="row">
 <div class="col-6">
 
-       <h1>{{ loadedorder.orderInfo.fulfillment_info.customer.first_name }} {{ loadedorder.orderInfo.fulfillment_info.customer.last_name }}</h1>
-        <b>{{ loadedorder.email }}</b>
+       <h1>{{ loadedorderRendered.orderInfo.fulfillment_info.customer.first_name }} {{ loadedorderRendered.orderInfo.fulfillment_info.customer.last_name }}</h1>
+        <b>{{ loadedorderRendered.email }}</b>
         <br><br>
-        {{ loadedorder.orderInfo.restaurant }}
+        {{ loadedorderRendered.orderInfo.restaurant }}
         <br /><br />
-      <template v-if="currentView === loadedorder.orderInfo.restaurant || currentView === 'empty'">
+      <template v-if="currentView === loadedorderRendered.orderInfo.restaurant || currentView === 'empty'">
  
 
-        <template v-if="hasTransmissionId(loadedorder.payInfo)">
+        <template v-if="hasTransmissionId(loadedorderRendered.payInfo)">
           gift card transaction
         </template>
         <template v-else>
           credit debit transaction
-            <span v-if="loadedorder.sandbox">(sandbox)</span>
+            <span v-if="loadedorderRendered.sandbox">(sandbox)</span>
         </template>
         <br />
-        confirmation code: {{ loadedorder.orderInfo.confirmation_code }} <br /><br />
-        <template v-if="loadedorder.orderInfo.preorder">
+        confirmation code: {{ loadedorderRendered.orderInfo.confirmation_code }} <br /><br />
+        <template v-if="loadedorderRendered.orderInfo.preorder">
           <b>preorder</b>
         </template>
         <template v-else>
           <b>regular order</b>
         </template>
 
-        <template v-if="loadedorder.void">
+        <template v-if="loadedorderRendered.void">
           <h1>VOID</h1>
         </template>
         <template
-          v-else-if="voidValid(order) && !hasTransmissionId(loadedorder.payInfo)"
+          v-else-if="voidValid(order) && !hasTransmissionId(loadedorderRendered.payInfo)"
         >
           <button
             class="fl-right btn-nadi"
-            v-if="!loadedorder.void"
-            @click="issueVoid(loadedorder.payInfo.uniqueTransId, true)"
+            v-if="!loadedorderRendered.void"
+            @click="issueVoid(loadedorderRendered.payInfo.uniqueTransId, true)"
           >
             void
           </button>
@@ -48,19 +48,19 @@
         </template>
 
         <br />
-        <template v-if="loadedorder.orderInfo.preorder">
+        <template v-if="loadedorderRendered.orderInfo.preorder">
           <br />
-          scheduled time: {{ loadedorder.orderInfo.scheduled_time | formatDate }}
+          scheduled time: {{ loadedorderRendered.orderInfo.scheduled_time | formatDate }}
         </template>
         <br />
-        time placed: {{ loadedorder.orderInfo.time_placed | formatDate }}
+        time placed: {{ loadedorderRendered.orderInfo.time_placed | formatDate }}
         <br />
 
-        <template v-if="loadedorder.timeClosed">
-          time closed: {{ timeClosedMoment(loadedorder.timeClosed) }}
+        <template v-if="loadedorderRendered.timeClosed">
+          time closed: {{ timeClosedMoment(loadedorderRendered.timeClosed) }}
         </template>
         <br /><br />
-        <h2>${{ loadedorder.orderInfo.charges.total | showToFixed }}</h2>
+        <h2>${{ loadedorderRendered.orderInfo.charges.total | showToFixed }}</h2>
         <br />
       
   
@@ -76,15 +76,11 @@
 
 
 <div class="col-6">
-
-
-
 <br>
-<!--// items: {{ loadedorder.orderInfo.charges.items.length }}
-// <br><br>-->
+
         <ul class="no-left-pad">
           <li
-            v-for="item in loadedorder.orderInfo.charges.items"
+            v-for="item in loadedorderRendered.orderInfo.charges.items"
             :key="item.cartId"
             style="margin-bottom:30px;"
           >
@@ -93,22 +89,22 @@
             >&nbsp;&nbsp;&nbsp;
             <br />
             &nbsp;&nbsp; &nbsp;&nbsp;
-            <template v-if="item.returned">
+            <template v-if="item.returned === true">
               <span>(returned)</span>
             </template>
             <template v-else>
-              <template v-if="loadedorder.payInfo.uniqueTransId">
+              <template v-if="loadedorderRendered.payInfo.uniqueTransId">
                 <span
                   class="line-link"
-                  v-if="!loadedorder.void"
+                  v-if="!loadedorderRendered.void"
                   @click.once="
                     issueTokenizedReturn(
-                      loadedorder.payInfo.uniqueTransId,
+                      loadedorderRendered.payInfo.uniqueTransId,
                       item.price,
-                      loadedorder.orderInfo.charges.taxes /
-                        loadedorder.orderInfo.charges.preTotal,
+                      loadedorderRendered.orderInfo.charges.taxes /
+                        loadedorderRendered.orderInfo.charges.preTotal,
                       item.cartId,
-                      loadedorder._id
+                      loadedorderRendered._id
                     )
                   "
                   ><u :id="'not-'+item.cartId">issue return</u>
@@ -129,11 +125,11 @@
 </div>
 <div class="col-12">
 
-    <button class="btn-nadi" @click="toggleOrder(loadedorder.orderInfo.id)">
+    <button class="btn-nadi" @click="toggleOrder(loadedorderRendered.orderInfo.id)">
           show/hide full order data
         </button>
 <br>
-        <pre :id="'order-' + loadedorder.orderInfo.id" class="hidden">{{ order }}</pre
+        <pre :id="'order-' + loadedorderRendered.orderInfo.id" class="hidden">{{ order }}</pre
         >
 
 </div>
@@ -156,6 +152,7 @@ import tz from "moment-timezone";
 export default {
   data() {
     return {
+      loadedorderRendered: null,
       loadedorder: null,
       modalVisible: false,
       modalContent: {},
@@ -183,6 +180,28 @@ export default {
   },
 
   methods: {
+updateLoadedOrder(id){
+let self = this;
+    this.$http
+            .get(`/order/loadorderbyid/${id}`)
+            .then((response) => {
+                self.loadedorder = response.data.user;
+
+
+
+
+            })
+            .catch((e) => {
+              // this.errors.push(e);
+              console.log("errors");
+              console.log(e);
+            });
+
+
+
+},
+
+
     toggleOrder(id) {
       let drawer = document.getElementById("order-" + id);
 
@@ -326,8 +345,6 @@ this.modalContent = order;
         .then((response) => {
           console.log(response);
 
-          // location.reload();
-          // this.retrieveTodaysOrders();
           self.updateLoadedOrder(self.order._id);
 
         })
@@ -339,21 +356,18 @@ this.modalContent = order;
     }
   },
   created(){
-
-console.log(this.order._id);
-this.loadedorder = this.order;
-
-// this.order = null;
-// console.log(this.order)
-
-
-
+    this.loadedorder = this.order;
+    this.loadedorderRendered = this.order;
+  },
+  watch: {
+    loadedorder: {
+      handler(val){
+        this.loadedorderRendered = this.loadedorder
+      },
+      deep: true
+    } 
   }
 };
-
-
-
-
 
 </script>
 

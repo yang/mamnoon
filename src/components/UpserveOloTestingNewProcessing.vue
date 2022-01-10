@@ -2931,25 +2931,6 @@ this.currentOrder.fulfillment_info.customer.first_name = user.user.deliveryAddre
 }
 
 
-
-//if(user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name && user.user.deliveryAddress.name !== ''){
-
-//console.log(user);
-
-  //this.currentOrder.fulfillment_info.customer.first_name = user.user.deliveryAddress.name;
-
-//}
-
-
-
-
-
-
-
-
-
-
-
           }, deep: true
     },
 customAmountAddition: {
@@ -4957,11 +4938,7 @@ if(self.currentOrder.billing && userInfo.user.billingAddress){
               self.currentOrder.fulfillment_info.delivery_info.address.zip_code = userInfo.user.deliveryAddress.zip
               self.currentOrder.fulfillment_info.delivery_info.address.address_line1 = userInfo.user.deliveryAddress.addressLine1
               self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInfo.user.deliveryAddress.addressLine2
-
-               
-                
               }
-
               })
               .catch(function (error) {
               console.log(error);
@@ -4970,7 +4947,7 @@ if(self.currentOrder.billing && userInfo.user.billingAddress){
     }
     },
      async lookupBalance() {
-console.log('lookup balance');
+
       let giftcardLookup = await this.$http.post("/user/lookupgiftcard", {
         cardNumber: this.cardNumberInput,
       });
@@ -4985,7 +4962,7 @@ console.log('lookup balance');
       this.currentBalance =
         giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0];
 
-console.log(giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0]);
+// console.log(giftcardResponse.resSendData.Responses[0].SvInquiry[0].CurrentBalance[0]);
 
     },
 giftCardPreFlight(){
@@ -4999,16 +4976,10 @@ let self = this;
     if (confirmed) {
     if(confirmed.isConfirmed){
           this.disabledGiftCardButton = true;
-        self.useGiftCardBalance()
-
+          self.useGiftCardBalance()
       }
-
     }
     });
-
-
-
-
 },
     useGiftCardBalance() {
       let self = this;
