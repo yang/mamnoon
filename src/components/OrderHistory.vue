@@ -4,42 +4,25 @@
         <div class="container pad-yellow-background">
           <div class="row no-lr-margin" id="order-history" >
           <template v-for="item in result">
-                  <div class="filtree-full-testing-favorites" >
+                  <div class="filtree-full-testing-favorites" @click="reorder(item)">
                     <div class="yellow-bg-test" >
                       <div class="half-width2left">
                         <div class="content-box">
                           <!-- <div class="showBox"  v-if="item.item_object.images" v-bind:style="{ backgroundImage: 'url(' + item.item_object.images.online_ordering_menu.main + ')' }"></div> -->
-                            <div class="name">{{item.name}}</div>
+                            <div class="name">{{item.charges.items[0].name}}</div>
                               <div
-                                  v-if="item.item_object.description"
+                                  v-if="item.charges.items[0].item_object.description"
                                   class="food-description"
-                                >{{item.item_object.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
+                                >{{item.charges.items[0].item_object.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                             <div class="food-price">
-                              ${{ formatPrice(item.price_cents) }}<span class="checkIfPackage" ></span>   
+                              ${{ formatPrice(item.charges.items[0].price_cents) }}<span class="checkIfPackage" ></span>   
                             </div>
+                            <div>{{item.restaurant}}</div>
                     <br />
                       </div>
                     </div>
-                    
                     <div class="half-width2right" v-if="item">
-                      <img :src="item.item_object.images.online_ordering_menu.main" class="backgroundImage"/>
-                      <!-- <div
-                          v-if="item.item_object.images.online_ordering_menu"
-                          class="backgroundImage"
-                          v-bind:style="{ backgroundImage: item.item_object.images.online_ordering_menu.main}"
-                        ></div>
-                      <template v-if="item.item_object.images">
-                        <div
-                          v-if="item.item_object.images.online_ordering_menu"
-                          class="backgroundImage"
-                          v-bind:style="{ backgroundImage: item.item_object.images.online_ordering_menu.main}"
-                        ></div>
-                    </template>
-                      <template v-else>
-                        <div class="backgroundImage"
-                          v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                        >     <NadiIconSmX style="height:140px;" /></div>
-                      </template> -->
+                      <img :src="item.charges.items[0].item_object.images.online_ordering_menu.main" class="backgroundImage"/>
                       </div> 
                   </div>
                 </div>
@@ -175,27 +158,25 @@ export default {
         let val = (value/100).toFixed(2)
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(".00","");
     },
-
       retrieveOrders() {
           console.log('retrieve orders from end')
         let self = this
           this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
 
         self.orderhistory = response.data
-        let array2 = response.data.user.map(items => items.orderInfo.charges.items)
+        let array2 = response.data.user.map(items => items.orderInfo)
         let array3 = array2.flat();
+
         for(let i in array3){
-            array3[i].cartId = null;
+            array3[i].charges.items.cartId = null;
         }
 
-        let filteredArray = array3.filter(x=>x.price>299);
+        let filteredArray = array3.filter(x=>x.charges.items[0].price>299);
         let inputArray = filteredArray;
-
+        console.log(`inputArray`, inputArray)
         const uniqueArrayWithCounts = inputArray.reduce((accum, val) => {
           // const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
-
-
-        const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
+        const dupeIndex = accum.findIndex(arrayItem => arrayItem.charges.items[0].name === val.name);
           if (dupeIndex === -1) {
             // Not found, so initialize.
             accum.push({
@@ -208,13 +189,10 @@ export default {
           }
           return accum;
         }, []);
-
-
-        console.log(uniqueArrayWithCounts);
         
         self.result = filteredArray.sort((a,b) => (a.qty > b.qty) ? 1 : ((b.qty > a.qty) ? -1 : 0)).slice(filteredArray.length-3, filteredArray.length).reverse();
+        console.log(`self.result`, self.result)
         return self.result;
-
       })
     },
         },
