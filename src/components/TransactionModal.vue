@@ -4,40 +4,40 @@
 <div class="row">
 <div class="col-6">
 
-       <h1>{{ order.orderInfo.fulfillment_info.customer.first_name }} {{ order.orderInfo.fulfillment_info.customer.last_name }}</h1>
-        <b>{{ order.email }}</b>
+       <h1>{{ loadedorder.orderInfo.fulfillment_info.customer.first_name }} {{ loadedorder.orderInfo.fulfillment_info.customer.last_name }}</h1>
+        <b>{{ loadedorder.email }}</b>
         <br><br>
-        {{ order.orderInfo.restaurant }}
+        {{ loadedorder.orderInfo.restaurant }}
         <br /><br />
-      <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
+      <template v-if="currentView === loadedorder.orderInfo.restaurant || currentView === 'empty'">
  
 
-        <template v-if="hasTransmissionId(order.payInfo)">
+        <template v-if="hasTransmissionId(loadedorder.payInfo)">
           gift card transaction
         </template>
         <template v-else>
           credit debit transaction
-            <span v-if="order.sandbox">(sandbox)</span>
+            <span v-if="loadedorder.sandbox">(sandbox)</span>
         </template>
         <br />
-        confirmation code: {{ order.orderInfo.confirmation_code }} <br /><br />
-        <template v-if="order.orderInfo.preorder">
+        confirmation code: {{ loadedorder.orderInfo.confirmation_code }} <br /><br />
+        <template v-if="loadedorder.orderInfo.preorder">
           <b>preorder</b>
         </template>
         <template v-else>
           <b>regular order</b>
         </template>
 
-        <template v-if="order.void">
+        <template v-if="loadedorder.void">
           <h1>VOID</h1>
         </template>
         <template
-          v-else-if="voidValid(order) && !hasTransmissionId(order.payInfo)"
+          v-else-if="voidValid(order) && !hasTransmissionId(loadedorder.payInfo)"
         >
           <button
             class="fl-right btn-nadi"
-            v-if="!order.void"
-            @click="issueVoid(order.payInfo.uniqueTransId, true)"
+            v-if="!loadedorder.void"
+            @click="issueVoid(loadedorder.payInfo.uniqueTransId, true)"
           >
             void
           </button>
@@ -48,19 +48,19 @@
         </template>
 
         <br />
-        <template v-if="order.orderInfo.preorder">
+        <template v-if="loadedorder.orderInfo.preorder">
           <br />
-          scheduled time: {{ order.orderInfo.scheduled_time | formatDate }}
+          scheduled time: {{ loadedorder.orderInfo.scheduled_time | formatDate }}
         </template>
         <br />
-        time placed: {{ order.orderInfo.time_placed | formatDate }}
+        time placed: {{ loadedorder.orderInfo.time_placed | formatDate }}
         <br />
 
-        <template v-if="order.timeClosed">
-          time closed: {{ timeClosedMoment(order.timeClosed) }}
+        <template v-if="loadedorder.timeClosed">
+          time closed: {{ timeClosedMoment(loadedorder.timeClosed) }}
         </template>
         <br /><br />
-        <h2>${{ order.orderInfo.charges.total | showToFixed }}</h2>
+        <h2>${{ loadedorder.orderInfo.charges.total | showToFixed }}</h2>
         <br />
       
   
@@ -80,11 +80,11 @@
 
 
 <br>
-<!--// items: {{ order.orderInfo.charges.items.length }}
+<!--// items: {{ loadedorder.orderInfo.charges.items.length }}
 // <br><br>-->
         <ul class="no-left-pad">
           <li
-            v-for="item in order.orderInfo.charges.items"
+            v-for="item in loadedorder.orderInfo.charges.items"
             :key="item.cartId"
             style="margin-bottom:30px;"
           >
@@ -97,21 +97,24 @@
               <span>(returned)</span>
             </template>
             <template v-else>
-              <template v-if="order.payInfo.uniqueTransId">
+              <template v-if="loadedorder.payInfo.uniqueTransId">
                 <span
                   class="line-link"
-                  v-if="!order.void"
+                  v-if="!loadedorder.void"
                   @click.once="
                     issueTokenizedReturn(
-                      order.payInfo.uniqueTransId,
+                      loadedorder.payInfo.uniqueTransId,
                       item.price,
-                      order.orderInfo.charges.taxes /
-                        order.orderInfo.charges.preTotal,
+                      loadedorder.orderInfo.charges.taxes /
+                        loadedorder.orderInfo.charges.preTotal,
                       item.cartId,
-                      order._id
+                      loadedorder._id
                     )
                   "
-                  ><u>issue return</u></span
+                  ><u :id="'not-'+item.cartId">issue return</u>
+                  <span style="display:none;" :id="'is-'+item.cartId">(returned)</span>
+       
+                  </span
                 >
               </template>
             </template>
@@ -126,11 +129,11 @@
 </div>
 <div class="col-12">
 
-    <button class="btn-nadi" @click="toggleOrder(order.orderInfo.id)">
+    <button class="btn-nadi" @click="toggleOrder(loadedorder.orderInfo.id)">
           show/hide full order data
         </button>
 <br>
-        <pre :id="'order-' + order.orderInfo.id" class="hidden">{{ order }}</pre
+        <pre :id="'order-' + loadedorder.orderInfo.id" class="hidden">{{ order }}</pre
         >
 
 </div>
@@ -153,6 +156,7 @@ import tz from "moment-timezone";
 export default {
   data() {
     return {
+      loadedorder: null,
       modalVisible: false,
       modalContent: {},
       dateNow: Date.now(),
@@ -177,6 +181,7 @@ export default {
       return decvalue.toFixed(2);
     },
   },
+
   methods: {
     toggleOrder(id) {
       let drawer = document.getElementById("order-" + id);
@@ -239,6 +244,13 @@ this.modalContent = order;
       cartId,
       orderId
     ) {
+
+
+          document.getElementById('not-' + cartId).style.display = 'none';   
+          document.getElementById('is-' + cartId).style.display = 'block';
+
+
+
       let tax = amount * taxRate;
       let amountToCalcWithTax = amount + tax;
 
@@ -249,7 +261,7 @@ this.modalContent = order;
 
       console.log(amountDiv100.toFixed(2).toString());
       console.log(amountToSend);
-
+      let self = this;
       this.$http
         .post("/order/issue-tokenized-return", {
           uniqueTransId: uniqueTransIdString,
@@ -266,7 +278,10 @@ this.modalContent = order;
             .then((response) => {
               console.log(response);
 
-              this.retrieveTodaysOrders();
+              // this.retrieveTodaysOrders();
+              // this.updateLoadedOrder(this.order._id);
+              self.updateLoadedOrder(self.order._id);
+
             })
             .catch((e) => {
               // this.errors.push(e);
@@ -299,7 +314,10 @@ this.modalContent = order;
         });
     },
     voidByTransId(uniqueTransIdString, data) {
+
+      let self = this;
       console.log(uniqueTransIdString);
+      
       this.$http
         .post("/order/void-transid-mongo", {
           uniqueTransId: uniqueTransIdString,
@@ -309,7 +327,9 @@ this.modalContent = order;
           console.log(response);
 
           // location.reload();
-          this.retrieveTodaysOrders();
+          // this.retrieveTodaysOrders();
+          self.updateLoadedOrder(self.order._id);
+
         })
         .catch((e) => {
           // this.errors.push(e);
@@ -318,7 +338,17 @@ this.modalContent = order;
         });
     }
   },
+  created(){
 
+console.log(this.order._id);
+this.loadedorder = this.order;
+
+// this.order = null;
+// console.log(this.order)
+
+
+
+  }
 };
 
 
@@ -328,6 +358,10 @@ this.modalContent = order;
 </script>
 
 <style>
+
+.not-returned span{
+  display:none;
+}
 
 
 

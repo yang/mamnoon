@@ -71,7 +71,7 @@ export default {
         localStorage.setItem("jwt", token);
         if (token) {
           // swal("Success", "Login Successful", "Error");
-          this.$router.push("/transactions");
+          this.$router.push("/todaystransactions");
         }
       } catch (err) {
         swal("Error", "Something Went Wrong", "error");

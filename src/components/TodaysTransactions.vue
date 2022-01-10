@@ -40,17 +40,14 @@
  <button class="btn-nadi fl-right" @click="showTodaysOrders()" style="margin-right: 5px;">show todays orders</button>&nbsp;&nbsp;&nbsp;   
   
     <br />
-
     <br />
     <!-- {{response}} -->
     <h1><span class="fl-right">number of orders: {{ orderhistory.user.length }}</span>&nbsp;    
 
+{{ dailyTotal(orderhistory)}}
 
 <input type="text" v-model="search" placeholder="search by name"/></h1>
     <br />
-
-
-
     <div
     v-if="containsFirstName(order.orderInfo.fulfillment_info.customer) || containsLastName(order.orderInfo.fulfillment_info.customer)"
       v-for="order in orderhistory.user.slice().reverse()"
@@ -63,25 +60,7 @@
       
 
 <div class="third">
-
-
        <h2 style="position:initial;font-weight: 600;"> {{firstLast(order.orderInfo.fulfillment_info.customer) | truncate(16, '...')}}</h2>
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
 
 </div>
 <div class="third">
@@ -107,18 +86,12 @@
         <template v-if="order.void">
           VOID
         </template>
-
         <br /><br />
-
-
-
 </div>
-
 <div class="fifth">
 <h1 style="position:initial;font-weight: 600;">
         ${{ order.orderInfo.charges.total | showToFixed }}</h1>
 
-   
    <span class="itemAmount">{{ order.orderInfo.charges.items.length }} item<span v-if="order.orderInfo.charges.items.length>1">s</span></span>
         <br />
 
@@ -195,6 +168,10 @@ CloseModalSm
     },
   },
   methods: {
+
+    dailyTotal(orders){
+      console.log(orders)
+    },
             logUserOut() {
       localStorage.removeItem("jwt");
       this.$router.push("/");
@@ -207,7 +184,7 @@ if(this.search===''){
   if(params.last_name){
 
 
-if(params.last_name.includes(this.search)){
+if(params.last_name.replaceAll(" ","").includes(this.search.replaceAll(" ",""))){
   return true
 }else{
   return false
@@ -220,7 +197,7 @@ if(this.search===''){
   return true
 }else{
   if(params.first_name){
-if(params.first_name.includes(this.search)){
+if(params.first_name.replaceAll(" ","").includes(this.search.replaceAll(" ",""))){
   return true
 }else{
   return false

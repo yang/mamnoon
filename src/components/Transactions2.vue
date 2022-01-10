@@ -1,11 +1,8 @@
 <template>
-
     <div>    <div>
         <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <div class="container nav-acc-header pad-yellow-background">
-    
         <TodaysTransactions />
-
     </div>
         </div>
       
