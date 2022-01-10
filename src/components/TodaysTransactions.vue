@@ -210,7 +210,7 @@ export default {
             });
 
 
-
+this.sendEmail = '';
     },
     showTotals(){
       this.showDailyTotals = !this.showDailyTotals
