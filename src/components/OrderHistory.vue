@@ -142,7 +142,6 @@ export default {
     props: ['currentUser','emailAddress'],
     methods: {
         reorder(order){
-
           let storeCurrentOrder = order
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
           if(order.restaurant === 'Mamnoon'){
