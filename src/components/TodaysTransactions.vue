@@ -141,7 +141,7 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 <div v-if="showFilter(order.timeClosed)" class="position-relative">
 <!--here-->
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
-    <div class="pointer" @click="viewModal(order)"> 
+    <div class="pointer"> 
 <div class="third">
        <h2 style="position:initial;font-weight: 600;"> {{firstLast(order.orderInfo.fulfillment_info.customer) | truncate(16, '...')}}</h2>
 </div>
@@ -164,7 +164,23 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
         <template v-if="order.void">
           VOID
         </template>
-        <br /><br />
+     
+<template v-if="order.orderInfo.preorder">
+
+
+<b>preorder</b> 
+
+<template v-if="order.orderInfo.cancelled">
+(cancelled)
+</template>
+<template v-else>
+<a @click="cancelPreorder(order._id)">&nbsp;<u>cancel</u></a>
+</template>
+
+
+</template>
+<br><br>
+<a class="btn-nadi" @click="viewModal(order)">view</a>
 </div>
 <div class="fifth">
 <h1 style="position:initial;font-weight: 600;">
@@ -262,7 +278,29 @@ export default {
     },
   },
   methods: {
+cancelPreorder(id){
 
+
+
+
+    this.$http
+            .post(`/order/cancelpreorder/${id}`)
+            .then((response) => {
+              console.log(response);
+
+            })
+            .catch((e) => {
+              // this.errors.push(e);
+              console.log("errors");
+              console.log(e);
+            });
+
+
+
+this.retrieveTodaysOrders();
+// this.retrieveOrders();
+
+},
 showFilter(f){
 
 
