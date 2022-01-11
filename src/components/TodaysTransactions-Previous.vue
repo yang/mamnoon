@@ -441,7 +441,7 @@ pre.hidden {
     background: green;
     top: 92px;
     left: 0;
-    z-index: 1000;
+    z-index: 10000;
     overflow: scroll;
     padding-bottom: 200px;
     padding-top: 40px;

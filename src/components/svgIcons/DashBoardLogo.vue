@@ -1,0 +1,22 @@
+<template>
+
+    <div class="logo-box">
+    <router-link to="/">
+<svg id="nadiDesk" width="209" height="44" viewBox="0 0 209 44" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="209" height="44" fill="url(#pattern0)"/>
+<defs>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_1918:29" transform="translate(-0.00125313) scale(0.00200501 0.00952381)"/>
+</pattern>
+<image id="image0_1918:29" width="500" height="105" xlink:href="data:image/png;base64,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"/>
+</defs>
+</svg>
+</router-link>
+</div>
+</template>
+
+<script>
+export default{
+    name: 'DashBoardLogo'
+}
+</script>

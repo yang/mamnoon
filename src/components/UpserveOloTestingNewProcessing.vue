@@ -2503,9 +2503,9 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
-<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>-->
-<!-- <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> 
 
 
    <!--// ccc-->
@@ -3591,19 +3591,9 @@ showPickupTime(){
 cippaybuttoncreditauth() {
 
 
-
-
-
-// cippaybuttoncreditauth
-
-
-
-
-
-
-
       let self = this;
       this.getCreditAuthToken().then(function (transactionToken) {
+        console.log(transactionToken);
         emergepay.open({
           transactionToken: transactionToken,
           onTransactionSuccess: function (approvalData) {
@@ -6422,7 +6412,7 @@ dropDown(){
               timelabel: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)).toLocaleTimeString().replace(":00","")
               })
             } 
-              console.log(timeslotsCreated);
+              // console.log(timeslotsCreated);
             this.dropDownDays.push({
             dayLabel: days[tomorrow.getDay()] + ' (closed)',
             dayName: days[tomorrow.getDay()],
@@ -7861,6 +7851,11 @@ text-transform: lowercase;
 
 .inputZip{
   width: 90%
+}
+
+
+.container.online-menu.order-modal-width .block{
+  width:100%;
 }
 
 </style>

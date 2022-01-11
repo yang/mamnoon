@@ -737,6 +737,7 @@ padding-top: 0 !important;
 text-align: left;
 width: 400px;
 color: white;
+color: black;
 &.whitebg{
 
     width: min-content;
