@@ -29,7 +29,7 @@ TodaysTransactions
 
 <style>
 .todaystransactions{
-    padding-top: 80px;
+    padding-top: 130px;
     padding-bottom: 120px;
 }
 </style>

@@ -3,24 +3,23 @@
 <!--here-->
 <div class="nav-wrap2">
 
-<div class="fixed-nav" style="background:red">
+<div class="fixed-nav">
+
     <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header2">
     <div class="container">
-<!--
-      // <div style="text-align: center;">
 
-      // </div>-->
+<!--here-->
       <DashBoardLogo v-if="currentView === 'empty'" />
       <MamnoonLogo :height="80" v-if="currentView === 'Mamnoon'" />
   <StreetLogo :height="80" v-if="currentView === 'Mamnoon Street'" />
-<!--here-->
+
 
     <a v-if="currentView === 'Mamnoon Street'|| currentView === 'empty'" @click="setCurrentView('Mamnoon')"><u>mamnoon</u></a>&nbsp;&nbsp;
     <a v-if="currentView === 'Mamnoon'|| currentView === 'empty'" @click="setCurrentView('Mamnoon Street')"><u>mamnoon street</u></a>&nbsp;&nbsp;
     <a v-if="currentView === 'Mamnoon Street'|| currentView === 'Mamnoon'" @click="setCurrentView('empty')"><u>both</u></a>&nbsp;&nbsp;
 
 
- <a @click="showTotals()" style="margin-left: 5px;"><u><span v-if="showDailyTotals">hide</span><span v-else>view</span> totals</u></a>
+ <a @click="showTotals()" style="margin-left: 5px;"><u><span v-if="showDailyTotals">hide</span><span v-else>show</span> daily sales</u></a>
 
 
 
@@ -33,9 +32,35 @@
 
 <!---here-->
 
+
 </div>
 
+
+
+
     </div>
+<div class="container">
+<div class="row">
+
+
+
+<div class="thirds" @click="orderFilter('open')">
+
+open orders
+
+</div>
+<div class="thirds" @click="orderFilter('closed')">
+closed orders
+
+
+
+</div>
+<div class="thirds" @click="orderFilter('')">
+all orders
+</div>
+
+</div>
+</div>
     </div>
 
 
@@ -59,18 +84,9 @@
 
 
 
-
-
 <div v-if="modalVisible" class="modalTransaction">
-
-
 <div class="container">
-
 <div class="fl-right pointerClose" @click="hideTransactionModal()">
-
-
-
-
 <CloseModalRed />
 
 
@@ -102,24 +118,30 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 
 
 
+
+
+
+
+
+
+
       <div
     v-if="containsFirstName(order.orderInfo.fulfillment_info.customer) || containsLastName(order.orderInfo.fulfillment_info.customer)"
       v-for="order in orderhistory.user.slice().reverse()"
       :key="order._id"
-      class="position-relative"
     >
 
+<!--here-->
+<!--// start filter-->
+<div v-if="showFilter(order.timeClosed)" class="position-relative">
+<!--here-->
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
-    <div class="pointer" @click="viewModal(order)">
-      
-
+    <div class="pointer" @click="viewModal(order)"> 
 <div class="third">
        <h2 style="position:initial;font-weight: 600;"> {{firstLast(order.orderInfo.fulfillment_info.customer) | truncate(16, '...')}}</h2>
-
 </div>
 <div class="third">
         {{ order.orderInfo.restaurant }}<br>
-
         <template v-if="order.timeClosed">
          <b>Closed</b>
           <!--{{ timeClosedMoment(order.timeClosed) }}-->
@@ -127,14 +149,11 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
         <template v-else>
         <b>Open</b>
         </template>
-
-
         <template v-if="order.orderInfo.preorder">
-<br>
+          <br>
           scheduled: {{ order.orderInfo.scheduled_time | formatDate2 }}
         </template>
         <br />
-
         Order Placed: {{ order.orderInfo.time_placed | formatDate2 }}
         <br />
         <template v-if="order.void">
@@ -148,19 +167,22 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 
    <span class="itemAmount">{{ order.orderInfo.charges.items.length }} item<span v-if="order.orderInfo.charges.items.length>1">s</span></span>
         <br />
-
-
-
-
+</div>
 </div>
 
-
-
-</div>
       </template>
-    </div>
-  </div>
 
+<!--here-->
+<!--// end filter-->
+</div>
+<!--here-->
+
+    </div>
+
+
+
+
+  </div>
   </div>
   </div>
 </template>
@@ -189,6 +211,7 @@ import StreetLogo from "@/components/svgIcons/StreetLogo"
 export default {
   data() {
     return {
+      orderfilter: '',
       sendEmail: '',
       showDailyTotals: false,
       search: '',
@@ -234,6 +257,27 @@ export default {
     },
   },
   methods: {
+
+showFilter(f){
+
+
+
+
+if(f && this.orderfilter === 'closed'){
+return true;
+}else if(!f && this.orderfilter === 'open'){
+  return true;
+}else if(this.orderfilter === ''){
+  return true;
+}else{
+  return false;
+}
+
+
+},
+    orderFilter(param){
+this.orderfilter = param;
+    },
     validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
@@ -562,7 +606,7 @@ pre.hidden {
     background: white;
     top: 92px;
     left: 0;
-    z-index: 1000;
+    z-index: 10000;
     overflow: scroll;
     padding-bottom: 200px;
     padding-top: 40px;
@@ -595,4 +639,27 @@ pre.hidden {
 a{
   cursor:pointer;
 }
+
+
+.row .thirds{
+  width: 33.33%;
+  text-align: center;
+  padding: 10px 0;
+  // height: 40px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  background-color: white;
+border-top: 0;
+font-weight: bold;
+font-size: 18px;
+&:hover{
+  background-color: yellow;
+}
+cursor:pointer;
+  &:first-child,
+    &:nth-child(2){
+    border-right: 0;
+  }
+}
+
 </style>
