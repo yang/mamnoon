@@ -100,15 +100,20 @@ all orders
 </div>
 </div>
 
-    <h1><span class="fl-right">number of orders: {{ orderhistory.user.length }}</span>&nbsp;    
+    <h1><span class="fl-right">orders: {{ orderhistory.user.length }}</span>&nbsp;    
 
 <input type="text" v-model="search" placeholder="search by name"/>  </h1>
 <div v-if="showDailyTotals === true" class="dailyTotal">
+
+
+<template v-if="currentView === 'Mamnoon Street'|| currentView ==='empty'">
 <b>mamnoon street totals:</b><br>pretotal: ${{ dailyTotal(orderhistory).street.pretotal | showToFixed}}<br>
 tips: ${{ dailyTotal(orderhistory).street.tips | showToFixed}}<br>
+</template>
+<template v-if="currentView === 'Mamnoon'|| currentView ==='empty'">
 <b>mamnoon totals:</b><br>pretotal: ${{ dailyTotal(orderhistory).mamnoon.pretotal | showToFixed}}<br>
 tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
-
+</template>
 
 <input style="padding: 2px 10px;margin: 10px 0;" v-model="sendEmail" placeholder="email" />
 <button style="margin-left:5px;"  v-if="validEmail(sendEmail)" @click="sendTotals(dailyTotal(orderhistory),sendEmail)">send</button><button style="background-color: #ddd;color:#bbb;margin-left:5px;"  v-else disabled>send</button>
