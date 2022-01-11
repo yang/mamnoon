@@ -19,15 +19,15 @@
     <a v-if="currentView === 'Mamnoon Street'|| currentView === 'Mamnoon'" @click="setCurrentView('empty')"><u>both</u></a>&nbsp;&nbsp;
 
 
- <a @click="showTotals()" style="margin-left: 5px;"><u><span v-if="showDailyTotals">hide</span><span v-else>show</span> daily sales</u></a>
+ <a @click="showTotals()"><u><span v-if="showDailyTotals">hide</span><span v-else>show</span> daily sales</u></a>
 
 
 
-           <a  @click="logUserOut" style="margin-left:5px;"><u>Logout</u></a>  &nbsp;&nbsp;
+           <a  @click="logUserOut"><u>Logout</u></a>  &nbsp;&nbsp;
 
-    <a  @click="showAllOrders()"><u>show all</u></a>&nbsp;&nbsp;&nbsp;
+    <a  @click="showAllOrders()"><u>all orders</u></a>&nbsp;&nbsp;&nbsp;
 
- <a  @click="showTodaysOrders()" style="margin-right: 5px;"><u>show todays orders</u></a>&nbsp;&nbsp;&nbsp;
+ <a  @click="showTodaysOrders()"><u>todays orders</u></a>&nbsp;&nbsp;&nbsp;
 
 
 <!---here-->
