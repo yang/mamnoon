@@ -1,14 +1,14 @@
 <template>
   <div class="todaystransactions">
-    <Nav4 />
-       <Transactions2 />
- 
+
+ <TodaysTransactions />
   </div>
 </template>
 <script>
 
-import Nav4 from "@/components/Nav4";
-import Transactions2 from "@/components/Transactions2";
+
+// import Transactions2 from "@/components/Transactions2";
+import TodaysTransactions from "@/components/TodaysTransactions";
 export default {
           metaInfo: {
       // if no subcomponents specify a metaInfo.title, this title will be used
@@ -17,10 +17,7 @@ export default {
       titleTemplate: '%s | nadi mama'
   },
   components: {
-
-    Nav4,
-    Transactions2
-
+TodaysTransactions
   },
 //     mounted () {
 // if(!this.$store.state.loggedIn){
@@ -32,7 +29,7 @@ export default {
 
 <style>
 .todaystransactions{
-    padding-top: 120px;
+    padding-top: 80px;
     padding-bottom: 120px;
 }
 </style>

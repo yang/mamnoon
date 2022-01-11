@@ -1,4 +1,60 @@
 <template>
+<div>
+<!--here-->
+<div class="nav-wrap2">
+
+<div class="fixed-nav" style="background:red">
+    <div class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-header2">
+    <div class="container">
+<!--
+      // <div style="text-align: center;">
+
+      // </div>-->
+      <DashBoardLogo v-if="currentView === 'empty'" />
+      <MamnoonLogo :height="80" v-if="currentView === 'Mamnoon'" />
+  <StreetLogo :height="80" v-if="currentView === 'Mamnoon Street'" />
+<!--here-->
+
+    <a v-if="currentView === 'Mamnoon Street'|| currentView === 'empty'" @click="setCurrentView('Mamnoon')"><u>mamnoon</u></a>&nbsp;&nbsp;
+    <a v-if="currentView === 'Mamnoon'|| currentView === 'empty'" @click="setCurrentView('Mamnoon Street')"><u>mamnoon street</u></a>&nbsp;&nbsp;
+    <a v-if="currentView === 'Mamnoon Street'|| currentView === 'Mamnoon'" @click="setCurrentView('empty')"><u>both</u></a>&nbsp;&nbsp;
+
+
+ <a @click="showTotals()" style="margin-left: 5px;"><u><span v-if="showDailyTotals">hide</span><span v-else>view</span> totals</u></a>
+
+
+
+           <a  @click="logUserOut" style="margin-left:5px;"><u>Logout</u></a>  &nbsp;&nbsp;
+
+    <a  @click="showAllOrders()"><u>show all</u></a>&nbsp;&nbsp;&nbsp;
+
+ <a  @click="showTodaysOrders()" style="margin-right: 5px;"><u>show todays orders</u></a>&nbsp;&nbsp;&nbsp;
+
+
+<!---here-->
+
+</div>
+
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<!--here-->
+
+
+
+      <div class="container nav-acc-header pad-yellow-background">
   <div class="container pad-yellow-background">
 
 
@@ -28,25 +84,6 @@
 </div>
 </div>
 
-
-    <button class="btn-nadi" @click="setCurrentView('Mamnoon')">mamnoon</button>&nbsp;&nbsp;
-    <button class="btn-nadi" @click="setCurrentView('Mamnoon Street')">mamnoon street</button>&nbsp;&nbsp;
-    <button class="btn-nadi" @click="setCurrentView('empty')">all</button>&nbsp;&nbsp;
-
-
- <button class="btn-nadi fl-right" @click="showTotals()" style="margin-left: 5px;"><span v-if="showDailyTotals">hide</span><span v-else>view</span> totals</button>
-
-
-
-           <button class="btn-nadi fl-right" @click="logUserOut" style="margin-left:5px;"> Logout</button>  &nbsp;&nbsp;
-
-    <button class="btn-nadi fl-right" @click="showAllOrders()">show all</button>&nbsp;&nbsp;&nbsp;
-
- <button class="btn-nadi fl-right" @click="showTodaysOrders()" style="margin-right: 5px;">show todays orders</button>&nbsp;&nbsp;&nbsp;   
-  
-    <br />
-    <br />
-    <!-- {{response}} -->
     <h1><span class="fl-right">number of orders: {{ orderhistory.user.length }}</span>&nbsp;    
 
 <input type="text" v-model="search" placeholder="search by name"/>  </h1>
@@ -58,7 +95,7 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 
 
 <input style="padding: 2px 10px;margin: 10px 0;" v-model="sendEmail" placeholder="email" />
-<button style="margin-left:5px;" class="btn-nadi" v-if="validEmail(sendEmail)" @click="sendTotals(dailyTotal(orderhistory),sendEmail)">send</button><button style="background-color: #ddd;color:#bbb;margin-left:5px;" class="btn-nadi" v-else disabled>send</button>
+<button style="margin-left:5px;"  v-if="validEmail(sendEmail)" @click="sendTotals(dailyTotal(orderhistory),sendEmail)">send</button><button style="background-color: #ddd;color:#bbb;margin-left:5px;"  v-else disabled>send</button>
 </div>
 
 
@@ -123,6 +160,9 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
       </template>
     </div>
   </div>
+
+  </div>
+  </div>
 </template>
 
 <script>
@@ -135,13 +175,16 @@ import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 import CloseModalSm from "@/components/svgIcons/CloseModalSm";
 
 
+import DashBoardLogo from "@/components/svgIcons/DashBoardLogo";
 
 
 
-
-
+import Nav4 from "@/components/Nav4";
 
 import TransactionModal from "@/components/TransactionModal";
+import MamnoonLogo from "@/components/svgIcons/MamnoonLogo"
+
+import StreetLogo from "@/components/svgIcons/StreetLogo"
 
 export default {
   data() {
@@ -158,11 +201,15 @@ export default {
     };
   },
   components:{
+    DashBoardLogo,
+        Nav4,
     TransactionModal,
     CloseModal,
     CloseModalMed,
     CloseModalRed,
-    CloseModalSm
+    CloseModalSm,
+    MamnoonLogo,
+    StreetLogo
   },
   name: "OrderHistory",
   props: ["currentUser"],
@@ -537,4 +584,15 @@ pre.hidden {
   margin: 10px;
 }
 
+
+
+.btn-nadi.flex{
+  display:flex;
+  width: 200px;
+}
+
+
+a{
+  cursor:pointer;
+}
 </style>
