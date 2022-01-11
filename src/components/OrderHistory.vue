@@ -146,10 +146,10 @@ export default {
           let storeCurrentOrder = order
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
           if(order.restaurant === 'Mamnoon'){
-              this.$router.push("/mamnoon");
+              this.$router.push("/mamnoontesting");
                       //    location.reload();
           }else{
-              this.$router.push("/mamnoonstreet");
+              this.$router.push("/mamnoonstreettesting");
                       //    location.reload();
           }
         },
