@@ -44,18 +44,18 @@
 
 
 
-<div class="thirds" @click="orderFilter('open')">
+<div class="thirds" v-bind:class="{ yellow: orderfilter === 'open' }" @click="orderFilter('open')">
 
 open orders
 
 </div>
-<div class="thirds" @click="orderFilter('closed')">
+<div class="thirds" v-bind:class="{ yellow: orderfilter === 'closed' }" @click="orderFilter('closed')">
 closed orders
 
 
 
 </div>
-<div class="thirds" @click="orderFilter('')">
+<div class="thirds" v-bind:class="{ yellow: orderfilter === '' }" @click="orderFilter('')">
 all orders
 </div>
 
@@ -652,9 +652,15 @@ a{
 border-top: 0;
 font-weight: bold;
 font-size: 18px;
+&.yellow,
 &:hover{
   background-color: yellow;
+
+
 }
+
+
+
 cursor:pointer;
   &:first-child,
     &:nth-child(2){
