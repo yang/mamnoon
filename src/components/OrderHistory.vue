@@ -1,6 +1,6 @@
 <template>
     <div id="upserveolo">
-      <div class="container pad-yellow-background module-header">favorite orders</div>
+      <div class="container pad-yellow-background module-header">favorite items</div>
         <div class="container pad-yellow-background">
           <div class="row no-lr-margin" id="order-history" >
           <template v-for="item in result">
@@ -17,7 +17,6 @@
                             <div class="food-price">
                               ${{ formatPrice(item.charges.items[0].price_cents) }}<span class="checkIfPackage" ></span>   
                             </div>
-                            <div>{{item.restaurant}}</div>
                     <br />
                       </div>
                     </div>
@@ -111,7 +110,7 @@ debit/credit
 
       <!-- {{order.orderInfo.restaurant}} -->
 
-<button v-if="order.orderInfo.restaurant === 'Mamnoon' || order.orderInfo.restaurant === 'Mamnoon Street'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order</button>
+<button v-if="order.orderInfo.restaurant === 'Mamnoon' || order.orderInfo.restaurant === 'Mamnoon Street'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order again</button>
 <!-- <pre>{{order.orderInfo}}</pre> -->
 </div></td>
 </tr>
