@@ -80,8 +80,8 @@ const checkURL = () => {
 
 
 const base = axios.create({
-  // baseURL: process.env.VUE_APP_BASE_URL,
-  baseURL: process.env.VUE_APP_LOCAL_URL
+  baseURL: process.env.VUE_APP_BASE_URL,
+  // baseURL: process.env.VUE_APP_LOCAL_URL
 });
 
 
@@ -147,6 +147,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    reorderTrue: false,
     homePageData: null,
     pageData: null,
     footer: null,
@@ -675,6 +676,12 @@ const store = new Vuex.Store({
     },
     upserveOrderCurrentOrder(state, { storeCurrentOrder }) {
       state.storeCurrentOrder = storeCurrentOrder;
+    },
+    reordertrue(state){
+      state.reorderTrue = true
+    },
+    reorderfalse(state){
+      state.reorderTrue = false
     },
     removeUserInfo(state) {
       let billing = {

@@ -1,5 +1,5 @@
 <template>
-  <div id="upserveolo" :class='{smallerBoxes: currentItem && returnCorrect }'>
+  <div :key="componentKey" id="upserveolo" :class='{smallerBoxes: currentItem && returnCorrect }'>
       <!-- <div id="upserveolo"> -->
     <section>
 
@@ -2503,9 +2503,9 @@ cart empty
       
       </div>
       </section>
-<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> 
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
 
 
    <!--// ccc-->
@@ -2877,7 +2877,7 @@ console.log('reorder changes')
 //   console.log('valid - changed')
 
 
-//   this.forceRerender()
+//   
 // }
 //     },
     upserveSections:{
@@ -4243,11 +4243,11 @@ if(result !== undefined){
     })
     },
 
-    //  forceRerender() {
-    //   this.componentKey += 1;
+     forceRerender() {
+      this.componentKey += 1;
 
-    //   console.log('force rerender happened')
-    // },
+      console.log('force rerender happened')
+    },
     async checkFormBilling() {
           this.updateBilling = false
         try {
@@ -6599,6 +6599,23 @@ console.log(urlParamsStreetCheck);
             },2700000);
         })
 
+        let self = this;
+
+        this.$nextTick(function () {
+            window.setInterval(() => {
+        
+            if(self.$store.state.reorderTrue === true){
+              self.$store.commit("reorderfalse");
+              location.reload();
+            }
+
+          },100);
+      
+        })
+
+
+
+
 
 
 
@@ -6666,12 +6683,6 @@ this.openModal({
 
 
 this.retrievePackages();
-
-
-// if(this.$store.state.upserveOrderCurrentOrder !== {}){
-//   console.log(this.$store.state.upserveOrderCurrentOrder)
-// }
-
  
 this.reOrder = this.$store.state.storeCurrentOrder
 
