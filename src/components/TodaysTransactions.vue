@@ -19,7 +19,7 @@
     <a v-if="currentView === 'Mamnoon Street'|| currentView === 'Mamnoon'" @click="setCurrentView('empty')"><u>both</u></a>&nbsp;&nbsp;
 
 
- <a @click="showTotals()"><u><span v-if="showDailyTotals">hide</span><span v-else>show</span> daily sales</u></a>
+ <a @click="showTotals()"><u><span v-if="showDailyTotals">hide</span><span v-else>show</span> sales</u></a>
 
 
 
@@ -170,11 +170,17 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 
 <b>preorder</b> 
 
-<template v-if="order.orderInfo.cancelled">
+
+
+
+<template v-if="order.cancelled">
 (cancelled)
 </template>
 <template v-else>
+
+<template v-if="cancellable(order.orderInfo.scheduled_time)">
 <a @click="cancelPreorder(order._id)">&nbsp;<u>cancel</u></a>
+</template>
 </template>
 
 
@@ -278,16 +284,41 @@ export default {
     },
   },
   methods: {
+
+    cancellable(scheduled_time){
+
+if(moment(scheduled_time).valueOf() - moment().valueOf() < 2700000){
+  return false
+}else{
+  return true
+}
+
+
+
+
+
+
+    },
 cancelPreorder(id){
 
 
+let self = this;
 
+  this.$swal({ 
+      title: "cancel this order?",
+    showDenyButton: true,
+    denyButtonText: `Cancel`,
+    confirmButtonText: `Confirm`
+  }).then((confirmed) => {
+    if (confirmed) {
 
-    this.$http
+      if(confirmed.isConfirmed){
+  
+
+    self.$http
             .post(`/order/cancelpreorder/${id}`)
             .then((response) => {
               console.log(response);
-
             })
             .catch((e) => {
               // this.errors.push(e);
@@ -295,10 +326,28 @@ cancelPreorder(id){
               console.log(e);
             });
 
+    self.retrieveTodaysOrders();
 
 
-this.retrieveTodaysOrders();
-// this.retrieveOrders();
+
+
+
+
+
+
+
+      }
+    } else {
+    }
+  });
+
+
+
+
+
+
+
+
 
 },
 showFilter(f){
@@ -478,6 +527,7 @@ this.modalContent = order;
       }
     },
     retrieveTodaysOrders() {
+      console.log('retrieve todays orders');
       let self = this;
       this.$http.get(`/order/todaysorderhistory/`).then(function(response) {
         self.orderhistory = response.data;
