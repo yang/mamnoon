@@ -1,5 +1,5 @@
 <template>
-  <div :key="componentKey" id="upserveolo" :class='{smallerBoxes: currentItem && returnCorrect }'>
+  <div :key="componentKey" v-if="!$store.state.reorderTrue" id="upserveolo" :class='{smallerBoxes: currentItem && returnCorrect }'>
       <!-- <div id="upserveolo"> -->
     <section>
 
@@ -6589,13 +6589,12 @@ console.log(urlParamsStreetCheck);
 
         this.$nextTick(function () {
             window.setInterval(() => {
-                // this.countDown();
+
             if(this.currentOrder.charges.items.length > 0){
               this.emptyCart(); 
               alert('Your Nadi Mama order has expired and your shopping bag is now empty. To place an order, please return to the current menu on this page.');
             }
 
-            // },10000);
             },2700000);
         })
 
