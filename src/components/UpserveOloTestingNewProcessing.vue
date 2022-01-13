@@ -2277,10 +2277,27 @@ cart empty
         <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
             <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
+
+
+        <template v-if="employeeCheckout">
+        <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+            <button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button> 
+        </template>
+
+
 </template>
 <template v-else>
+
         <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
             <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
+
+
+  <template v-if="employeeCheckout">
+        <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+            <button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button>
+    </template>
+
+
 </template>
 
 </template>
@@ -2372,12 +2389,27 @@ cart empty
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
+
+<template v-if="employeeCheckout">
+<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+<button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button> 
+</template>
+
+
+
 </template>
 <template v-else>
 <!-- you are not logged in -->
 
 <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
+
+
+
+<template v-if="employeeCheckout">
+<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+<button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button> 
+</template>
 
 
 </template>
@@ -3261,6 +3293,7 @@ if(newAddress){
     },
   data() {
   return {
+    employeeCheckout: false,
     dnsCheck: false,
     unableToProcessModal: false,
     thirtyMinutesFromNow: moment().add(20, 'minutes').format("LLLL"),
@@ -3585,6 +3618,64 @@ showPickupTime(){
 
 
   this.changePickupTime = true;s
+
+
+},
+employeeCheckoutButton(){
+
+
+let approvalData = {
+accountCardType:"VS",
+accountEntryMethod:"Keyed",
+accountExpiryDate:"0625",
+amount:"99.99",
+amountBalance:"",
+amountProcessed:"99.99",
+amountTaxed:"0.00",
+amountTipped:"99.99",
+approvalNumberResult:"03157G",
+avsResponseCode:"N",
+avsResponseText:"Street: No match & Postal code: No match",
+batchNumber:"0",
+billingName:"Employee Transaction",
+cashier:"",
+cvvResponseCode:"M",
+cvvResponseText:"Match",
+externalTransactionId:"000-000-000-000",
+isPartialApproval:false,
+maskedAccount:"************0000",
+resultMessage:"Approved",
+resultStatus:"true",
+transactionReference:"",
+transactionType:"CreditSale",
+uniqueTransId:"830ae8cd0cbe4e779e29c0236891bc5a-11e3183c90064c508d3244597d324d32464fd6d6"}
+
+
+
+
+ let self = this;
+
+
+            if(self.title === 'Mamnoon'){
+
+              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              }
+              
+              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              }
+
+            }else if(self.title === 'Mamnoon Street'){
+
+                if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              }
+              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              }
+    }
+
 
 
 },
@@ -6519,6 +6610,14 @@ console.log(pageData.restaurant_repeater[i].online_ordering)
     }
   },
   mounted() {
+
+
+
+if(window.location.hash === '#mamnoonEmployee'){
+this.employeeCheckout = true
+}
+
+
 
 console.log('this.$store.state');
 console.log('this.$store.state');
