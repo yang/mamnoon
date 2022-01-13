@@ -186,7 +186,7 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 
 </template>
 <br><br>
-<a class="btn-nadi" @click="viewModal(order)">view</a>
+<a class="btn-nadi text-white" @click="viewModal(order)">view</a>
 </div>
 <div class="fifth">
 <h1 style="position:initial;font-weight: 600;">
@@ -759,6 +759,11 @@ cursor:pointer;
     &:nth-child(2){
     border-right: 0;
   }
+}
+
+
+.text-white{
+  color: #ffffff;
 }
 
 </style>
