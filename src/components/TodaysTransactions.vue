@@ -307,7 +307,7 @@ clearTheDate(){
 
 this.$refs.myDatePicker.clearDate()
 this.dateSelected = false;
-
+  this.retrieveTodaysOrders();
 },
 selectTransactionDate(r){
 console.log(r);
@@ -564,7 +564,7 @@ this.modalContent = order;
 
       console.log('retrieve todays orders');
       let self = this;
-      this.$http.get(`/order/retrieveordersbydate/${moment(date).toISOString()}`).then(function(response) {
+      this.$http.get(`/order/retrieveordersbydate/${moment(date).tz("America/Los_Angeles").toISOString()}`).then(function(response) {
         self.orderhistory = response.data;
       });
 
