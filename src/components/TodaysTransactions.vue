@@ -562,7 +562,7 @@ this.modalContent = order;
     retrieveOrdersByDate(date){
 
 
-      console.log('retrieve todays orders');
+   
       let self = this;
       this.$http.get(`/order/retrieveordersbydate/${moment(date).tz("America/Los_Angeles").toISOString()}`).then(function(response) {
         self.orderhistory = response.data;
@@ -571,7 +571,7 @@ this.modalContent = order;
 
     },
     retrieveTodaysOrders() {
-      console.log('retrieve todays orders');
+   
       let self = this;
       this.$http.get(`/order/todaysorderhistory/`).then(function(response) {
         self.orderhistory = response.data;
@@ -629,13 +629,13 @@ this.retrieveTodaysOrders();
       let tax = amount * taxRate;
       let amountToCalcWithTax = amount + tax;
 
-      console.log(amountToCalcWithTax);
+      // console.log(amountToCalcWithTax);
 
       let amountDiv100 = amountToCalcWithTax / 100;
       let amountToSend = amountDiv100.toFixed(2).toString();
 
-      console.log(amountDiv100.toFixed(2).toString());
-      console.log(amountToSend);
+      // console.log(amountDiv100.toFixed(2).toString());
+      // console.log(amountToSend);
 
       this.$http
         .post("/order/issue-tokenized-return", {
@@ -643,7 +643,7 @@ this.retrieveTodaysOrders();
           amount: amountToSend,
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           this.$http
             .post("/order/update-refunded-items-mongo", {
@@ -651,7 +651,7 @@ this.retrieveTodaysOrders();
               orderId: orderId,
             })
             .then((response) => {
-              console.log(response);
+              // console.log(response);
 
               this.retrieveTodaysOrders();
             })
@@ -668,7 +668,7 @@ this.retrieveTodaysOrders();
         });
     },
     issueVoid(uniqueTransIdString, data) {
-      console.log(uniqueTransIdString);
+      // console.log(uniqueTransIdString);
       this.$http
         .post("/order/issue-void", {
           uniqueTransId: uniqueTransIdString,
@@ -686,7 +686,7 @@ this.retrieveTodaysOrders();
         });
     },
     voidByTransId(uniqueTransIdString, data) {
-      console.log(uniqueTransIdString);
+      // console.log(uniqueTransIdString);
       this.$http
         .post("/order/void-transid-mongo", {
           uniqueTransId: uniqueTransIdString,
@@ -707,11 +707,7 @@ this.retrieveTodaysOrders();
   },
   mounted() {
 
-console.log(this.$refs);
 
-
-    // console.log('moment');
-    // console.log(moment().valueOf());
     moment().valueOf();
 
     this.retrieveTodaysOrders();
