@@ -564,7 +564,7 @@ this.modalContent = order;
 
       console.log('retrieve todays orders');
       let self = this;
-      this.$http.get(`/order/retrieveordersbydate/${moment(date).subtract(8, 'h').toISOString()}`).then(function(response) {
+      this.$http.get(`/order/retrieveordersbydate/${moment(date).tz("America/Los_Angeles").toISOString()}`).then(function(response) {
         self.orderhistory = response.data;
       });
 
