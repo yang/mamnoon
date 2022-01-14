@@ -10,8 +10,8 @@
 
 <!--here-->
       <DashBoardLogo v-if="currentView === 'empty'" />
-      <MamnoonLogo :height="80" v-if="currentView === 'Mamnoon'" />
-  <StreetLogo :height="80" v-if="currentView === 'Mamnoon Street'" />
+      <MamnoonLogo :height="40" :marginTop="6" v-if="currentView === 'Mamnoon'" />
+  <StreetLogo :height="40" :marginTop="6" v-if="currentView === 'Mamnoon Street'" />
 
 
     <a v-if="currentView === 'Mamnoon Street'|| currentView === 'empty'" @click="setCurrentView('Mamnoon')"><u>mamnoon</u></a>&nbsp;&nbsp;

@@ -16,7 +16,7 @@ export default {
     return {
         }
     },
-   props: ['fill','height','marginLeft', 'marginRight'],
+   props: ['fill','height','marginLeft', 'marginRight','marginTop'],
    computed:{
            styleObject() {
 
@@ -28,8 +28,8 @@ export default {
       return {
         '--height':this.height+'px',
         '--margin-left': this.marginLeft+'px',
-        '--margin-right': this.marginRight+'px'
-
+        '--margin-right': this.marginRight+'px',
+        '--margin-top': this.marginTop+'px'
 
       };
 
@@ -52,7 +52,7 @@ export default {
 height: calc(var(--height));
   margin-left: var(--margin-left);
   margin-right: var(--margin-right);
-
+  margin-top: var(--margin-top);
 
       @media only screen and (max-width: 1080px) {
           margin-left: 20px;
