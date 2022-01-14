@@ -100,9 +100,21 @@ all orders
 </div>
 </div>
 
+
+<div class="datepicker fl-right" style="position:relative;">
+<button class="btn-nadi fl-right clearDateButton" v-if="dateSelected" @click="clearTheDate()">x</button>
+<datepicker ref="myDatePicker" :clearable="true" @selected="selectTransactionDate" :placeholder="'click here to select date'">
+</datepicker> </div>
+
+
     <h1><span class="fl-right">orders: {{ orderhistory.user.length }}</span>&nbsp;    
 
 <input type="text" v-model="search" placeholder="search by name"/>  </h1>
+
+
+
+
+
 <div v-if="showDailyTotals === true" class="dailyTotal">
 
 
@@ -215,6 +227,8 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
+
 import moment from "moment";
 import tz from "moment-timezone";
 
@@ -238,6 +252,7 @@ import StreetLogo from "@/components/svgIcons/StreetLogo"
 export default {
   data() {
     return {
+      dateSelected: false,
       orderfilter: '',
       sendEmail: '',
       showDailyTotals: false,
@@ -251,8 +266,9 @@ export default {
     };
   },
   components:{
+    Datepicker,
     DashBoardLogo,
-        Nav4,
+    Nav4,
     TransactionModal,
     CloseModal,
     CloseModalMed,
@@ -284,7 +300,24 @@ export default {
     },
   },
   methods: {
+clearTheDate(){
 
+
+
+
+this.$refs.myDatePicker.clearDate()
+this.dateSelected = false;
+
+},
+selectTransactionDate(r){
+console.log(r);
+
+this.retrieveOrdersByDate(r);
+// this.$refs.myDatePicker.clearDate()
+this.dateSelected = true;
+
+
+},
     cancellable(scheduled_time){
 
 if(moment(scheduled_time).valueOf() - moment().valueOf() < 2700000){
@@ -526,6 +559,17 @@ this.modalContent = order;
         drawer.classList.add("hidden");
       }
     },
+    retrieveOrdersByDate(date){
+
+
+      console.log('retrieve todays orders');
+      let self = this;
+      this.$http.get(`/order/retrieveordersbydate/${moment(date).toISOString()}`).then(function(response) {
+        self.orderhistory = response.data;
+      });
+
+
+    },
     retrieveTodaysOrders() {
       console.log('retrieve todays orders');
       let self = this;
@@ -662,6 +706,10 @@ this.retrieveTodaysOrders();
     },
   },
   mounted() {
+
+console.log(this.$refs);
+
+
     // console.log('moment');
     // console.log(moment().valueOf());
     moment().valueOf();
@@ -765,5 +813,22 @@ cursor:pointer;
 .text-white{
   color: #ffffff;
 }
+
+.datepicker input{
+  padding: 10px;
+  margin-left: 10px;
+  position: relative;
+}
+
+.clearDateButton{
+  position: absolute;
+  right: 5px;
+  z-index: 10;
+  top: 6px;
+  }
+
+
+
+
 
 </style>
