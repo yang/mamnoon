@@ -1,8 +1,12 @@
 <template>
-  <div class="container pad-yellow-background pd50">
-    <button @click="toggleMamnoonMenu()">toggle mamnoon menu</button>
+  <div class="container">
+
+  <h1 class="red">Mamnoon Packages</h1>
+  <hr>
+  <br>
+    <button class="btn-nadi" @click="toggleMamnoonMenu()">toggle mamnoon menu</button>
     <br />
-    <div class="col-4 mt-3 mr-2">
+    <div class="col-4 mt-3 mr-2" style="display:none;">
       <span class=" mr-2 mt-3"><b>Mamnoon: </b></span>
       <div class="row mt-1">
         <button
@@ -44,31 +48,68 @@
     </div>
     <br />
     <div v-if="mamnoonmenuexpanded">
-      <ul>
-        <li v-for="up in upserve">
-          {{ up.name }} &nbsp; {{ up.id }}
-          <button @click="useForPackage(up)">use for package</button>
-        </li>
-      </ul>
+      <div class="container">
+      <div class="packageList">
+        <template v-for="up in upserve">
+
+
+<div class="packageTile">
+<div class="inside">
+<h2>{{up.name}}</h2>
+<p>{{up.description}}</p>
+<template v-if="up.images.online_ordering_menu && up.images.online_ordering_menu.main">
+<img class="packageImage" :src="up.images.online_ordering_menu.main" />
+</template>
+<br>
+<br>
+          <button class="btn-nadi" @click="useForPackage(up)">use for package</button>
+</div>
+</div>
+
+      
+        </template>
+      </div>
+          </div>
     </div>
     <br />
-    <div v-for="pa in packages">
-      {{ pa }}
-      <br /><br />
+    <div class="container">
+        <div class="row">
+    <template v-for="pa in packages">
+ <div class="packageTile">
+<div class="inside">
 
+<h2>{{pa.name}}</h2>
+<p>amount remaining: {{pa.number}}</p>
+<template v-if="pa.object.images.online_ordering_menu && pa.object.images.online_ordering_menu.main">
+<img class="packageImage" :src="pa.object.images.online_ordering_menu.main" />
+</template><br>
+
+
+
+link for marketing: <a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
+https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
+</a>
+<br>
+ 
+<br>
       <h1 v-if="pa.number === 0">sold out</h1>
 
-      <button @click="decrementPackage(pa._id)" v-if="pa.number > 0">
+      <button class="btn-nadi" @click="decrementPackage(pa._id)" v-if="pa.number > 0">
         decrement</button
       >&nbsp;
-      <button @click="deletePackage(pa._id)">delete package</button>
+      <button class="btn-nadi" @click="deletePackage(pa._id)">delete package</button>
       <br /><br />
     </div>
+        </div>
 
-    <div>
-      add a package:
-      <br />
-      <br />
+
+    </template>
+</div></div>
+    <div class="container">
+    <br>
+      <h2 class="red">add a package:</h2>
+      <hr />
+
 
       <br />
       <input
@@ -104,18 +145,26 @@
       <br />
       <br />
 
-      <button @click="addPackage()">
+
+      <button class="btn-nadi" @click="addPackage()">
         Add Package
       </button>
-
-      <button @click="clearPackage()">
+&nbsp;
+      <button class="btn-nadi" @click="clearPackage()">
         Clear Package
       </button>
+
+      <br><br>
     </div>
   </div>
 </template>
 <script>
 import Datepicker from "vuejs-datepicker";
+
+
+import moment from 'moment'
+import tz from 'moment-timezone'
+
 export default {
   components: {
     Datepicker,
@@ -133,17 +182,23 @@ export default {
         orderData: null,
         number: null,
         soldOut: false,
+        object: {}
       },
       mamnoonToggled: false,
       streetToggled: false,
     };
   },
   methods: {
+
+    formattedLinkDate(date){
+return moment(date).format('YYYY-MM-DD');
+    },
     clearPackage() {
       this.packageAdd.name = null;
       this.packageAdd.upserveId = null;
       this.packageAdd.orderDate = null;
       this.packageAdd.number = null;
+      this.packageAdd.object = {};
     },
     toggleMamnoonMenu() {
       this.mamnoonmenuexpanded = !this.mamnoonmenuexpanded;
@@ -175,6 +230,7 @@ export default {
     useForPackage(up) {
       this.packageAdd.name = up.name;
       this.packageAdd.upserveId = up.id;
+       this.packageAdd.object = up;
       // this.packageAdd.orderDate = null;
       // this.packageAdd.number = null;
 
@@ -213,6 +269,7 @@ export default {
         this.packageAdd.upserveId = null;
         this.packageAdd.orderDate = null;
         this.packageAdd.number = null;
+        this.packageAdd.object = {};
         return true;
       } else {
         return false;
@@ -236,6 +293,7 @@ export default {
         this.packageAdd.upserveId = null;
         this.packageAdd.orderDate = null;
         this.packageAdd.number = null;
+        this.packageAdd.object = {};
       }
     },
     async decrementPackage(id) {
@@ -270,3 +328,65 @@ export default {
   },
 };
 </script>
+
+
+<style lang="scss">
+
+
+.packageList{
+list-style-type: none;
+li{width: 50%;}
+}
+.packageImage{
+width:100%;
+margin-top: 10px;
+   height: 200px;
+    width: auto;
+ @media only screen and (max-width: 1280px){
+    height: 200px;
+    width: auto;
+  }
+
+}
+
+.packageTile{
+
+
+
+  width: 33%;
+  float:left;
+
+
+  @media only screen and (max-width: 1280px){
+     width: 100%;
+  }
+
+
+.inside{  border-radius: 4px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  width: calc(100%-20px);
+  height: 450px;
+
+
+  @media only screen and (max-width: 1280px){
+height: auto;
+padding-bottom: 20px;
+  }
+
+  overflow:scroll;
+  // position: relative;
+
+  // button{
+  //       position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+  // }
+}
+
+
+}
+
+
+</style>

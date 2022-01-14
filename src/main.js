@@ -146,6 +146,7 @@ const vuexLocalStorage = new VuexPersist({
 const store = new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   state: {
+    dashboard: 'empty',
     reorderTrue: false,
     homePageData: null,
     pageData: null,
@@ -644,6 +645,9 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
+    dashboardChoose(state, { dashboardChoose }){
+      state.dashboard = dashboardChoose
+    },
     increment: (state) => state.count++,
     decrement: (state) => state.count--,
     increment2(state, { name }) {

@@ -172,16 +172,16 @@ const routes = [
     component: () => import("../views/addproduct.vue")
   },
   {
-    path: '/transactions',
-    name: "transactions",
+    path: '/todaystransactions',
+    name: "todaystransactions",
     component: () => import("../views/transactions.vue"),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: '/todaystransactions',
-    name: "todaystransactions",
+    path: '/transactions',
+    name: "transactions",
     component: () => import("../views/todaystransactions.vue"),
     meta: {
       requiresAuth: true

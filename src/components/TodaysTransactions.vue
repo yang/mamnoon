@@ -14,6 +14,8 @@
   <StreetLogo :height="40" :marginTop="6" v-if="currentView === 'Mamnoon Street'" />
 
 
+
+
     <a v-if="currentView === 'Mamnoon Street'|| currentView === 'empty'" @click="setCurrentView('Mamnoon')"><u>mamnoon</u></a>&nbsp;&nbsp;
     <a v-if="currentView === 'Mamnoon'|| currentView === 'empty'" @click="setCurrentView('Mamnoon Street')"><u>mamnoon street</u></a>&nbsp;&nbsp;
     <a v-if="currentView === 'Mamnoon Street'|| currentView === 'Mamnoon'" @click="setCurrentView('empty')"><u>both</u></a>&nbsp;&nbsp;
@@ -79,8 +81,8 @@ all orders ({{orderAmount}})
 
 
 
-      <div class="container nav-acc-header pad-yellow-background">
-  <div class="container pad-yellow-background">
+      <div class="container nav-acc-header dashboard">
+  <div>
 
 
 
@@ -107,9 +109,43 @@ all orders ({{orderAmount}})
 </datepicker> </div>
 
 
-    <h1><span class="fl-right">orders: <template v-if="orderhistory">{{ orderhistory.user.length }}</template></span>&nbsp;    
+    <h1 class="dashboardHeader">
+    <span class="fl-right">
+    
+    
 
-<input type="text" v-model="search" placeholder="search by name"/>  </h1>
+
+
+
+
+<template v-if="this.orderfilter === 'open'">
+open orders ({{openOrders}})
+</template>
+
+<template v-if="this.orderfilter === 'closed'">
+closed orders ({{closedOrders}})
+</template>
+
+<template v-if="this.orderfilter === ''">
+all orders ({{orderAmount}})
+</template>
+    
+    
+
+    
+    
+    
+
+
+
+    
+    
+    
+    
+    </span>&nbsp;    
+</h1>
+  <h1 class="dashboardHeader">
+<input type="text" v-model="search" class="nameSearch" placeholder="search by name"/>  </h1>
 
 
 
@@ -119,16 +155,16 @@ all orders ({{orderAmount}})
 
 
 <template v-if="currentView === 'Mamnoon Street'|| currentView ==='empty'">
-<b>mamnoon street totals:</b><br>pretotal: ${{ dailyTotal(orderhistory).street.pretotal | showToFixed}}<br>
-tips: ${{ dailyTotal(orderhistory).street.tips | showToFixed}}<br>
+<b>mamnoon street totals:</b><br>pretotal: ${{ totals.street.pretotal | showToFixed}}<br>
+tips: ${{ totals.street.tips | showToFixed}}<br>
 </template>
 <template v-if="currentView === 'Mamnoon'|| currentView ==='empty'">
-<b>mamnoon totals:</b><br>pretotal: ${{ dailyTotal(orderhistory).mamnoon.pretotal | showToFixed}}<br>
-tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
+<b>mamnoon totals:</b><br>pretotal: ${{ totals.mamnoon.pretotal | showToFixed}}<br>
+tips: ${{ totals.mamnoon.tips | showToFixed}}<br>
 </template>
 
 <input style="padding: 2px 10px;margin: 10px 0;" v-model="sendEmail" placeholder="email" />
-<button style="margin-left:5px;"  v-if="validEmail(sendEmail)" @click="sendTotals(dailyTotal(orderhistory),sendEmail)">send</button><button style="background-color: #ddd;color:#bbb;margin-left:5px;"  v-else disabled>send</button>
+<button style="margin-left:5px;"  v-if="validEmail(sendEmail)" @click="sendTotals(totals,sendEmail)">send</button><button style="background-color: #ddd;color:#bbb;margin-left:5px;"  v-else disabled>send</button>
 </div>
 
 
@@ -153,12 +189,13 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 <div v-if="showFilter(order.timeClosed)" class="position-relative">
 <!--here-->
       <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
-    <div class="pointer"> 
+    <div class="pointer" @click="viewModal(order)"> 
 <div class="third">
-       <h2 style="position:initial;font-weight: 600;"> {{firstLast(order.orderInfo.fulfillment_info.customer) | truncate(16, '...')}}</h2>
+       <h2 class="dashboardName"> {{firstLast(order.orderInfo.fulfillment_info.customer) | truncate(16, '...')}}</h2>
 </div>
 <div class="third">
-        {{ order.orderInfo.restaurant }}<br>
+       <h2 class="dashboardName mob"> {{firstLast(order.orderInfo.fulfillment_info.customer) | truncate(16, '...')}}</h2>
+       <template v-if="currentView === 'empty'"> {{ order.orderInfo.restaurant }}, </template>
         <template v-if="order.timeClosed">
          <b>Closed</b>
           <!--{{ timeClosedMoment(order.timeClosed) }}-->
@@ -180,25 +217,13 @@ tips: ${{ dailyTotal(orderhistory).mamnoon.tips | showToFixed}}<br>
 <template v-if="order.orderInfo.preorder">
 
 
-<b>preorder</b> 
-
-
-
-
+<b>preorder</b> &nbsp;
 <template v-if="order.cancelled">
 (cancelled)
 </template>
-<template v-else>
-
-<template v-if="cancellable(order.orderInfo.scheduled_time)">
-<a @click="cancelPreorder(order._id)">&nbsp;<u>cancel</u></a>
-</template>
-</template>
-
 
 </template>
-<br><br>
-<a class="btn-nadi text-white" @click="viewModal(order)">view</a>
+<br>
 </div>
 <div class="fifth">
 <h1 style="position:initial;font-weight: 600;">
@@ -252,6 +277,16 @@ import StreetLogo from "@/components/svgIcons/StreetLogo"
 export default {
   data() {
     return {
+      totals: {
+          street: {
+            pretotal: 0,
+            tips: 0
+          },
+          mamnoon: {
+            pretotal: 0,
+            tips: 0
+          }
+      },
       orderAmount:0,
       openOrders:0,
       closedOrders: 0,
@@ -302,35 +337,136 @@ export default {
       return decvalue.toFixed(2);
     },
   },
+// watch:{
+//     orderhistory:{
+// handler(val){
+// console.log(this.$store.state.dashboard);
+// if(this.$store.state.dashboard === 'empty'){
+// this.openOrders = this.orderhistory.user.filter(order => order.status === "Open").length;
+// this.closedOrders = this.orderhistory.user.filter(order => order.status === "Closed").length;
+// this.orderAmount = this.orderhistory.user.length;
 
+// }else{
 
-watch:{
-    orderhistory:{
-handler(val){
-console.log('12');
+// this.openOrders = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).filter(order => order.status === "Open").length;
+// this.closedOrders = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).filter(order => order.status === "Closed").length;
+// this.orderAmount = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).length;
 
+// }
+//           }, deep: true
+//     }
 
+// },
+  methods: {
+    renderPanels(){
+if(this.orderhistory && this.orderhistory.user){
 
-
-
-
-
+if(this.$store.state.dashboard === 'empty'){
 
 this.openOrders = this.orderhistory.user.filter(order => order.status === "Open").length;
 this.closedOrders = this.orderhistory.user.filter(order => order.status === "Closed").length;
-
-
-console.log(this.orderhistory.user.filter(order => order.status === "Open").length);
-console.log(this.orderhistory.user.filter(order => order.status === "Closed").length);
 this.orderAmount = this.orderhistory.user.length;
 
-          }, deep: true
+}else{
+
+this.openOrders = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).filter(order => order.status === "Open").length;
+this.closedOrders = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).filter(order => order.status === "Closed").length;
+this.orderAmount = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).length;
+
+
+}
+    }
+
+    },
+   calculateTotals(){
+
+
+
+if(this.orderhistory && this.orderhistory.user){
+
+
+this.totals =  {
+          street: {
+            pretotal: 0,
+            tips: 0
+          },
+          mamnoon: {
+            pretotal: 0,
+            tips: 0
+          }
+      };
+
+
+
+
+
+
+
+
+
+
+
+let closedOutOrders = this.orderhistory.user.filter(order => order.status === "Closed")
+
+ 
+
+let mamnoonpretotal = 0;
+let mamnoontips = 0;
+let streetpretotal = 0;
+let streettips = 0;
+
+
+   for(let i = 0; i < closedOutOrders.length; i++){
+
+        if(closedOutOrders[i].orderInfo.restaurant === 'Mamnoon Street'){
+console.log(closedOutOrders[i].orderInfo.charges.preTotal);
+        streetpretotal = streetpretotal + closedOutOrders[i].orderInfo.charges.preTotal;
+        streettips =  streettips + closedOutOrders[i].orderInfo.charges.tip.amount;
+
+        }else{
+          console.log(closedOutOrders[i].orderInfo.charges.preTotal);
+        mamnoonpretotal = mamnoonpretotal + closedOutOrders[i].orderInfo.charges.preTotal;
+        mamnoontips = mamnoontips + closedOutOrders[i].orderInfo.charges.tip.amount;
+
+        }
+      }
+
+
+
+console.log(mamnoonpretotal);
+console.log(mamnoontips);
+console.log(streetpretotal);
+console.log(streettips);
+
+this.totals.mamnoon.pretotal = mamnoonpretotal;
+this.totals.mamnoon.tips = mamnoontips;
+
+
+this.totals.street.pretotal = streetpretotal;
+this.totals.street.tips = streettips;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
 
-},
-  methods: {
+    },
 clearTheDate(){
 
 this.$refs.myDatePicker.clearDate()
@@ -343,6 +479,8 @@ selectTransactionDate(r){
 this.retrieveOrdersByDate(r);
 // this.$refs.myDatePicker.clearDate()
 this.dateSelected = true;
+
+
 
 
 },
@@ -430,6 +568,10 @@ return true;
 },
     orderFilter(param){
 this.orderfilter = param;
+
+
+
+
     },
     validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -458,7 +600,11 @@ this.sendEmail = '';
     },
     showTotals(){
       this.showDailyTotals = !this.showDailyTotals
-    },
+
+
+        this.calculateTotals();
+ 
+   },
     dailyTotal(orders){
 
 
@@ -572,7 +718,17 @@ this.modalContent = order;
     },
 
     setCurrentView(param) {
+
       this.currentView = param;
+
+      let dashboardChoose = param;
+
+      this.$store.commit("dashboardChoose", { dashboardChoose });	
+
+
+
+      this.renderPanels();
+
     },
     toggleOrder(id) {
       let drawer = document.getElementById("order-" + id);
@@ -594,6 +750,8 @@ this.modalContent = order;
       let self = this;
       this.$http.get(`/order/retrieveordersbydate/${moment(date).tz("America/Los_Angeles").toISOString()}`).then(function(response) {
         self.orderhistory = response.data;
+   self.calculateTotals();
+
       });
 
 
@@ -603,6 +761,8 @@ this.modalContent = order;
       let self = this;
       this.$http.get(`/order/todaysorderhistory/`).then(function(response) {
         self.orderhistory = response.data;
+   self.calculateTotals();
+
 
       });
 
@@ -611,14 +771,9 @@ this.modalContent = order;
       let self = this;
       this.$http.get(`/order/orderhistory/`).then(function(response) {
         self.orderhistory = response.data;
+      self.calculateTotals();
 
-
-
-
-
-
-
-
+    
       });
 
 
@@ -631,7 +786,7 @@ this.modalContent = order;
 
     showAllOrders(){
 this.retrieveOrders();
-
+this.setCurrentView('empty');
     },
 
         showTodaysOrders(){
@@ -724,11 +879,28 @@ this.retrieveTodaysOrders();
     },
   },
   mounted() {
-
-
-    moment().valueOf();
-
+    this.setCurrentView(this.$store.state.dashboard);
     this.retrieveTodaysOrders();
+
+
+
+       let self = this;
+
+        this.$nextTick(function () {
+            window.setInterval(() => {
+        
+            if(self.orderhistory){
+            self.renderPanels();
+
+            }
+
+          },1000);
+      
+        })
+
+
+
+
   },
 };
 </script>
@@ -761,7 +933,8 @@ pre.hidden {
     background: white;
     top: 92px;
     left: 0;
-    z-index: 10000;
+    // z-index: 10000;
+    z-index: 1000;
     overflow: scroll;
     padding-bottom: 200px;
     padding-top: 40px;
@@ -809,7 +982,7 @@ font-weight: bold;
 font-size: 18px;
 &.yellow,
 &:hover{
-  background-color: yellow;
+  background-color: #ffff49;
 
 
 }
@@ -844,5 +1017,92 @@ cursor:pointer;
 
 
 
+.dashboardHeader{
+
+
+}
+
+.dashboardName{
+position:initial;
+font-weight: 600;
+&.mob{display:none;}
+}
+
+
+.nameSearch{
+  padding: 0 10px;
+}
+
+
+.pointer{
+transition: all .5s ease;
+&:hover{
+  background-color: #ffff49;
+}
+}
+@media only screen and (max-width: 992px){
+
+ .container.nav-acc-header.dashboard{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.pointer{
+  .third:first-child{
+    display:none;
+  }
+  .third:nth-child(2){
+    width: 70%;
+  }
+  .fifth{
+    width: 30%;
+  }
+}
+
+.dashboardName{
+  display:none;
+    &.mob{display:block;}
+}
+
+.dashboardHeader{
+  width: 100%;
+  margin-top: 5px;
+  display: block;
+    input{
+      width: 100%;
+    }
+    .fl-right{
+      float: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px){
+
+  .container.nav-acc-header.dashboard{
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
+
+
+@media only screen and (max-width: 640px){
+
+  .container.nav-acc-header.dashboard{
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
+
+@media only screen and (max-width: 320px){
+
+  .container.nav-acc-header.dashboard{
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
 
 </style>

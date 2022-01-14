@@ -2453,6 +2453,10 @@ font-weight: 500;
 }
 
 
+.red{
+      color: #EE5E68;
+}
+
 </style>
 
 

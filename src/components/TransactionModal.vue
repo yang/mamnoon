@@ -7,7 +7,24 @@
        <h1>{{ loadedorderRendered.orderInfo.fulfillment_info.customer.first_name }} {{ loadedorderRendered.orderInfo.fulfillment_info.customer.last_name }}</h1>
         <b>{{ loadedorderRendered.email }}</b>
         <br><br>
-        {{ loadedorderRendered.orderInfo.restaurant }}
+       location: {{ loadedorderRendered.orderInfo.restaurant }}
+     <br>
+
+<template v-if="loadedorderRendered.timeClosed">
+status: <b>ticket closed</b>
+</template>
+
+
+<template v-if="loadedorderRendered.cancelled">
+&nbsp;<b>(cancelled)</b>
+</template>
+<template v-else>
+
+<template v-if="cancellable(loadedorderRendered.orderInfo.scheduled_time)">
+<a @click="cancelPreorder(loadedorderRendered._id)">&nbsp;<u>cancel</u></a>
+</template>
+</template>
+
         <br /><br />
       <template v-if="currentView === loadedorderRendered.orderInfo.restaurant || currentView === 'empty'">
  
@@ -84,16 +101,21 @@
             :key="item.cartId"
             style="margin-bottom:30px;"
           >
+
             <b>{{ item.quantity }} x</b> {{ item.name }}&nbsp;&nbsp;&nbsp;<b
               >${{ item.price.toFixed() / 100 }}</b
             >&nbsp;&nbsp;&nbsp;
             <br />
             &nbsp;&nbsp; &nbsp;&nbsp;
+            <template v-if="loadedorderRendered.orderPosted">
             <template v-if="item.returned === true">
+            <template v-if="!loadedorderRendered.cancelled">
               <span>(returned)</span>
+              </template>
             </template>
             <template v-else>
-              <template v-if="loadedorderRendered.payInfo.uniqueTransId">
+              <template v-if="loadedorderRendered.payInfo.uniqueTransId && !loadedorderRendered.cancelled">
+
                 <span
                   class="line-link"
                   v-if="!loadedorderRendered.void"
@@ -112,11 +134,23 @@
        
                   </span
                 >
+
+
               </template>
             </template>
+            </template>
+
           </li>
         </ul>
         <br />
+    <template v-if="loadedorderRendered.orderInfo.preorder">
+    <span class="small-message grey">
+<template v-if="!loadedorderRendered.orderPosted">
+this preorder has not been posted yet. items cannot be voided or refunded until order is posted.
+</template>
+    </span>
+</template>
+        <br/>
 
 
 
@@ -126,12 +160,20 @@
 <div class="col-12">
 
     <button class="btn-nadi" @click="toggleOrder(loadedorderRendered.orderInfo.id)">
-          show/hide full order data
+          <template v-if="toggleOrderState">hide</template><template v-else>show</template> full order data
         </button>
 <br>
-        <pre :id="'order-' + loadedorderRendered.orderInfo.id" class="hidden">{{ order }}</pre
-        >
 
+
+
+
+
+<div v-if="toggleOrderState" class="codeBox">
+        <pre :id="'order-' + loadedorderRendered.orderInfo.id">{{ order }}</pre
+        >
+        </div>
+
+</div>
 </div>
 
 
@@ -152,6 +194,7 @@ import tz from "moment-timezone";
 export default {
   data() {
     return {
+      toggleOrderState: false,
       loadedorderRendered: null,
       loadedorder: null,
       modalVisible: false,
@@ -180,6 +223,77 @@ export default {
   },
 
   methods: {
+
+    cancellable(scheduled_time){
+
+if(moment(scheduled_time).valueOf() - moment().valueOf() < 2700000){
+  return false
+}else{
+  return true
+}
+
+
+
+
+
+
+    },
+cancelPreorder(id){
+
+
+let self = this;
+
+  this.$swal({ 
+      title: "cancel this order?",
+    showDenyButton: true,
+    denyButtonText: `Cancel`,
+    confirmButtonText: `Confirm`
+  }).then((confirmed) => {
+    if (confirmed) {
+
+      if(confirmed.isConfirmed){
+  
+
+    self.$http
+            .post(`/order/cancelpreorder/${id}`)
+            .then((response) => {
+
+
+  location.reload()
+
+              console.log(response);
+            })
+            .catch((e) => {
+              // this.errors.push(e);
+              console.log("errors");
+              console.log(e);
+            });
+
+    // self.retrieveTodaysOrders();
+
+
+
+
+
+
+
+
+
+      }
+    } else {
+    }
+  });
+
+
+
+
+
+
+
+
+
+},
+
 updateLoadedOrder(id){
 let self = this;
     this.$http
@@ -200,9 +314,14 @@ let self = this;
 
 
 },
-
+hidetoggleOrder(){
+this.toggleOrderState = false;
+},
 
     toggleOrder(id) {
+
+this.toggleOrderState = !this.toggleOrderState;
+
       let drawer = document.getElementById("order-" + id);
 
       // console.log(document.getElementById('order-'+id))
@@ -246,15 +365,28 @@ this.modalContent = order;
     },
 
     voidValid(order) {
+
+
+
+if(order.cancelled){
+  return false
+}else{
+
+      // console.log('checking if valid order');
+      // console.log(order.timeClosed === undefined);
+      // console.log(order.timeClosed === null);
+
       // 1400000 is about 24 minutes
       if (
         Date.now() > order.timeClosed + 1400000 ||
-        order.timeClosed === undefined
+        order.timeClosed === null
       ) {
         return false;
       } else {
         return true;
       }
+    }
+
     },
     issueTokenizedReturn(
       uniqueTransIdString,
@@ -371,12 +503,33 @@ this.modalContent = order;
 
 </script>
 
-<style>
+<style lang="scss">
 
 .not-returned span{
   display:none;
 }
 
+
+
+.fullOrderModal{
+      position: fixed;
+    z-index: 10000;
+    top: 100px;
+    background: white;
+    width: 100%;
+    overflow: scroll;
+    left: 0;
+}
+
+.codeBox{
+
+  height: 200px;
+  overflow:scroll;
+  background: #ddd;
+  margin-top:20px;
+  padding: 20px;
+
+}
 
 
 </style>

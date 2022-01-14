@@ -27,9 +27,14 @@ TodaysTransactions
 };
 </script>
 
-<style>
+<style lang="scss">
 .todaystransactions{
-    padding-top: 130px;
+    padding-top: 140px;
     padding-bottom: 120px;
+
+    .container.dashboard{
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
 }
 </style>

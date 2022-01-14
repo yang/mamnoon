@@ -5969,7 +5969,7 @@ if(this.title === "Mamnoon"){
 // console.log(this.returnCorrect);
 
 const urlParams = new URLSearchParams(window.location.search);
-const product = urlParams.get('idSelection');
+const product = urlParams.get('packageId');
 console.log(product);
 
 

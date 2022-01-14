@@ -2585,9 +2585,9 @@ cart empty
       
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>-->
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
 
 
    <!--// ccc-->
@@ -3348,6 +3348,7 @@ googleAddressObject.state;
     },
   data() {
   return {
+    forPackageModal: {},
     employeeCheckout: false,
     dnsCheck: false,
     unableToProcessModal: false,
@@ -4249,8 +4250,11 @@ if(self.packages.length > 0){
       });
 console.log('result');
 console.log(result);
+
+
+
 if(result && result.upserveId){
-self.decrementPackageByUpserveId(result.upserveId);
+self.decrementPackageByUpserveId(result.upserveId,currentOrder.charges.items[i].quantity);
 }
    }
 }
@@ -4259,12 +4263,13 @@ self.decrementPackageByUpserveId(result.upserveId);
 }
 
 },
-      async decrementPackageByUpserveId(id) {
+      async decrementPackageByUpserveId(id,amount) {
             console.log('retriev orders frome')
             console.log(id);
                  console.log('end id')
             let decrementPack = await this.$http.post(`/package/decrementpackagebyupserveid`, {
-                upserveId: id
+                upserveId: id,
+                amount
               });
 
         let decrementPackResponse = decrementPack.data;
@@ -4277,6 +4282,22 @@ self.decrementPackageByUpserveId(result.upserveId);
     this.packages = responseUpserve.data.packs;
 
     },
+    async retrieveOnePackage(upserveId) {
+let self = this;
+    console.log('retriev orders frome')
+    let responseUpserve = await this.$http.get(`/package/retrieveone/${upserveId}`);
+ console.log(responseUpserve.data.package.object);
+
+
+  // this.forPackageModal = responseUpserve.data.package.object;
+
+
+self.openModal(responseUpserve.data.package.object);
+
+    },
+
+
+
 emptyReOrderObject(){
 
 this.$store.commit('upserveOrderCurrentOrder', {});
@@ -6777,52 +6798,67 @@ console.log(urlParamsStreetCheck);
 // console.log(this.returnCorrect);
 
 const urlParams = new URLSearchParams(window.location.search);
-const product = urlParams.get('idSelection');
+const product = urlParams.get('packageid');
+console.log(product);
+console.log(product);
+console.log(product);
 console.log(product);
 
 
-if(product === "6bed4f99-0b7f-4215-a7b4-fed7314e9c8d"){
 
-this.openModal({
-  "id": "6bed4f99-0b7f-4215-a7b4-fed7314e9c8d",
-  "name": "4th of July BBQ Package - 7/3 pickup only",
-  "price": "125.0",
-  "price_cents": 12500,
-  "description": "Feeds 4\r\nMamnoon shish taouk: yogurt marinated chicken, garlic, za’atar (raw, 14oz)\r\nmamnoon kefta: ground beef & lamb, pistachio, baharat spice, caramelized onions (raw, 12oz)\r\nSmoked and pulled lamb shoulder, mamnoon BBQ (1#, fully cooked)\r\nHummus (8oz)\r\nLabneh (8oz)\r\nmama chips and fresh pita\r\nHouse pickles (12oz)\r\nLabneh toum (4oz)\r\nMarinated olives (8oz)\r\nCabbage slaw, pickled fresno pepper, carrot, herbs, black lime dressing (8oz)\r\nMelon & stone fruit salad, halloumi cheese, pistachio dressing, basil, mint (20oz)\r\nMama’s cookies (4ea.)",
-  "min_sides": 0,
-  "max_sides": 0,
-  "item_type": "normal",
-  "tax_inclusive": false,
-  "images": {
-    "online_ordering_menu": {
-      "main": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
-    }
-  },
-  "tax_rate_id": "47d234b1-3c4c-47cf-84cf-c558cd1013b6",
-  "item_images": [
-    {
-      "id": "6fb58514-b271-430d-8f6d-76d7c6ad4d32",
-      "metadata": {
-        "image_path": "v1623864367/mgbjlzt7x3b2wi0vttyu.jpg",
-        "curated": false,
-        "url": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
-      },
-      "url": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
-    }
-  ],
-  "modifier_group_ids": [],
-  "side_ids": [],
-  "tax_rate_ids": []
-},{
-  "id": "13d530ca-5dad-434d-b475-e6891f4090d3",
-  "start_time": "12:45",
-  "end_time": "21:00",
-  "rules": [
-    "sat"
-  ],
-  "status": "enabled",
-  "owner_id": "6b9aed6f-3dc0-4277-b746-4709c89b39aa"
-});
+
+if(product !== ""){
+
+
+this.retrieveOnePackage(product)
+
+console.log(this.forPackageModal);
+// this.openModal(this.forPackageModal);
+
+// this.openModal({
+//   "id": "6bed4f99-0b7f-4215-a7b4-fed7314e9c8d",
+//   "name": "4th of July BBQ Package - 7/3 pickup only",
+//   "price": "125.0",
+//   "price_cents": 12500,
+//   "description": "Feeds 4\r\nMamnoon shish taouk: yogurt marinated chicken, garlic, za’atar (raw, 14oz)\r\nmamnoon kefta: ground beef & lamb, pistachio, baharat spice, caramelized onions (raw, 12oz)\r\nSmoked and pulled lamb shoulder, mamnoon BBQ (1#, fully cooked)\r\nHummus (8oz)\r\nLabneh (8oz)\r\nmama chips and fresh pita\r\nHouse pickles (12oz)\r\nLabneh toum (4oz)\r\nMarinated olives (8oz)\r\nCabbage slaw, pickled fresno pepper, carrot, herbs, black lime dressing (8oz)\r\nMelon & stone fruit salad, halloumi cheese, pistachio dressing, basil, mint (20oz)\r\nMama’s cookies (4ea.)",
+//   "min_sides": 0,
+//   "max_sides": 0,
+//   "item_type": "normal",
+//   "tax_inclusive": false,
+//   "images": {
+//     "online_ordering_menu": {
+//       "main": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
+//     }
+//   },
+//   "tax_rate_id": "47d234b1-3c4c-47cf-84cf-c558cd1013b6",
+//   "item_images": [
+//     {
+//       "id": "6fb58514-b271-430d-8f6d-76d7c6ad4d32",
+//       "metadata": {
+//         "image_path": "v1623864367/mgbjlzt7x3b2wi0vttyu.jpg",
+//         "curated": false,
+//         "url": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
+//       },
+//       "url": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
+//     }
+//   ],
+//   "modifier_group_ids": [],
+//   "side_ids": [],
+//   "tax_rate_ids": []
+// },{
+//   "id": "13d530ca-5dad-434d-b475-e6891f4090d3",
+//   "start_time": "12:45",
+//   "end_time": "21:00",
+//   "rules": [
+//     "sat"
+//   ],
+//   "status": "enabled",
+//   "owner_id": "6b9aed6f-3dc0-4277-b746-4709c89b39aa"
+// });
+
+
+
+
 }
 
 
