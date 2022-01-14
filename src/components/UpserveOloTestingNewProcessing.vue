@@ -691,6 +691,13 @@
 <div class="col-md-12 col-lg-8">
       <div class="container no-pad"> 
       <h4 class="text-left red">full menu (new processing)</h4>
+
+
+<!--
+<pre>
+{{$store.state.googleAddress}}
+</pre>-->
+
 <template v-if="reOrder && $store.state.storeCurrentOrder && reOrder.id && $store.state.storeCurrentOrder.id">
 <div class="order-modal"> 
         <div class="container online-menu order-modal-width" style="padding: 20px 0 15px !important; margin-top: 24px;">
@@ -1536,9 +1543,9 @@ add
 <div v-if="currentOrder.fulfillment_info.type === 'delivery'">
 <div class="small-message" v-if="currentOrder.fulfillment_info.delivery_info.address.address_line1 === ''">please enter a valid delivery address</div>
 </div>
-              <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="delivery-box mt10">
+              <div v-if="currentOrder.fulfillment_info.type === 'delivery'" class="mt10">
                
-                <div class="updateAddress">
+                <div class="">
                   <button
                     v-if="this.currentOrder.fulfillment_info.type === 'delivery'"
                     @click="refreshGoogle()"
@@ -1759,10 +1766,32 @@ add
                                 <div class="small-message" v-if="fullNameErrorVisibleTf && !validFullName(currentOrder.billing.billing_name)">please enter a valid full name</div>
 
 
+<!--here-->
+
+             <!--<div class="mt10" style="display:none;">
+                                     
+                                        <div class="googleValidate2">
+                                          <GoogleValidate2
+                                            class="pointer-all"
+                                            :key="renderKey"
+                                          />
+                                        </div>
+                                           <div class="updateAddress2">
+                                          <button @click="refreshGoogle()"
+                                          >update address</button>
+                                        </div>
+                            </div>-->
+
+
+
+<!--here-->
+           <div style="">
+<div style="width: 100%;display: inline-block;">
                 <label class="smblk" for="address">street address:</label>
                 <br />
  <!--    <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
                 <input
+                style="width:100%;"
                   type="text"
                   id="address"
                   name="address"
@@ -1771,7 +1800,28 @@ add
                   v-model="currentOrder.billing.billing_address"
                 />
 
+     </div>
+
+<!--<div style="width: 20%;display: inline-block;">-->
+
+    <!--   <label class="smblk" for="unit">unit:</label>
+                <br />
+   <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
+           <!--     <input
+                  type="text"
+                  id="unit"
+                  name="unit"
+                  placeholder="unit"
+                  v-model="currentOrder.billing.billing_address_line2"
+                />-->
+
+<!--
 <div class="small-message" v-if="addressErrorVisibleTf && !validAddress(currentOrder.billing.billing_address)">please enter a valid address</div>
+         
+             </div>    -->
+             </div>
+             
+             
                 <label class="smblk" for="city">city:</label>
                 <br />
  <!--    <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
@@ -2537,7 +2587,7 @@ cart empty
       </section>
 <!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre> -->
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>-->
 
 
    <!--// ccc-->
@@ -2561,6 +2611,7 @@ cart empty
 import vSelect from "vue-select";
 import carousel from "vue-owl-carousel";
 import GoogleValidate from "@/components/GoogleValidate";
+import GoogleValidate2 from "@/components/GoogleValidate2";
 import CloseModal from "@/components/svgIcons/CloseModal";
 import CloseModalMed from "@/components/svgIcons/CloseModalMed";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
@@ -2631,6 +2682,7 @@ export default {
     CloseModal,
     CloseModalRedSm,
     GoogleValidate,
+        GoogleValidate2,
     carousel,
     VueAspectRatio,
     Next,
@@ -3268,11 +3320,11 @@ if(newAddress){
       )[0].long_name;	
 }	
 if(newAddress){	
-      googleAddressObject.state = newAddress.address_components.filter(	
-        (obj) => {	
-          return obj.types[0] === "administrative_area_level_1";	
-        }	
-      )[0].long_name;	
+
+console.log('newAddress');
+console.log(newAddress.address_components[5].short_name);
+
+      googleAddressObject.state = newAddress.address_components[5].short_name;	
 }	
 if(newAddress){	
       googleAddressObject.zip = newAddress.address_components.filter((obj) => {	
@@ -3280,14 +3332,17 @@ if(newAddress){
       })[0].long_name;	
 }	
       this.googleAddressObject = googleAddressObject;	
-      this.currentOrder.fulfillment_info.delivery_info.address.city =	
+      this.currentOrder.billing.billing_address_city =	
         googleAddressObject.locality;	
-      this.currentOrder.fulfillment_info.delivery_info.address.state =	
+      this.currentOrder.billing.billing_address_state =	
         googleAddressObject.state;	
-      this.currentOrder.fulfillment_info.delivery_info.address.zip_code =	
+      this.currentOrder.billing.billing_postal_code =	
         googleAddressObject.zip;	
-      this.currentOrder.fulfillment_info.delivery_info.address.address_line1 =	
+      this.currentOrder.billing.billing_address =	
         googleAddressObject.streetNumber + " " + googleAddressObject.route;	
+
+
+googleAddressObject.state;	
 
     }
     },
@@ -3422,6 +3477,7 @@ if(newAddress){
         billing:{
           billing_name: '',
           billing_address: '',
+          billing_address_unit: '',
           billing_address_city: '',
           billing_address_state:'',
           billing_postal_code: ''
@@ -4997,7 +5053,6 @@ showGiftcard(){
  
               let self = this
               this.$http
-              .get("/user/email/" + this.emailAddress)
               .then(function (response) {
               let userInfo = response.data;
               self.user = userInfo
@@ -5395,10 +5450,11 @@ if(index === 0){
         address_line1: "",
         address_line2: "",
       };
-this.attention = true
       this.$store.commit("googleAddress", { googleAddress });
     },
-    cippaybutton() {
+
+
+        cippaybutton() {
       // this.checkForm()
       let self = this;
       this.getToken().then(function (transactionToken) {

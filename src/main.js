@@ -241,6 +241,7 @@ const store = new Vuex.Store({
       billing: {
         billing_name: "",
         billing_address: "",
+
         billing_address_city: "",
         billing_address_state: "",
         billing_postal_code: "",
@@ -318,6 +319,7 @@ const store = new Vuex.Store({
       billing: {
         billing_name: "",
         billing_address: "",
+
         billing_address_city: "",
         billing_address_state: "",
         billing_postal_code: "",
@@ -398,6 +400,7 @@ const store = new Vuex.Store({
       billing: {
         billing_name: "",
         billing_address: "",
+
         billing_address_city: "",
         billing_address_state: "",
         billing_postal_code: "",
@@ -476,6 +479,7 @@ const store = new Vuex.Store({
       billing: {
         billing_name: "",
         billing_address: "",
+
         billing_address_city: "",
         billing_address_state: "",
         billing_postal_code: "",
@@ -553,6 +557,7 @@ const store = new Vuex.Store({
       billing: {
         billing_name: "",
         billing_address: "",
+
         billing_address_city: "",
         billing_address_state: "",
         billing_postal_code: "",
@@ -686,6 +691,7 @@ const store = new Vuex.Store({
       let billing = {
         billing_name: "",
         billing_address: "",
+
         billing_postal_code: "",
       };
 
