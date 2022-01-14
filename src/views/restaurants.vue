@@ -153,8 +153,7 @@
 
 <template v-for="(link,i) in restaurant.tile_list_links">
 
-<div v-if="i!==0" class="listLinks">
-
+<div v-if="link.visible" class="listLinks">
 <a class="listLink" :href="link.link">{{link.title}} &#x203A;</a>
 
 </div>
