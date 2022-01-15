@@ -145,7 +145,7 @@ all orders ({{orderAmount}})
     </span>&nbsp;    
 </h1>
   <h1 class="dashboardHeader">
-<input type="text" v-model="search" class="nameSearch" placeholder="search by name"/>  </h1>
+<input type="text" v-model="search" class="nameSearch" placeholder="search"/>  </h1>
 
 
 
@@ -176,10 +176,13 @@ tips: ${{ totals.mamnoon.tips | showToFixed}}<br>
 
 
 
-
+<!--    // v-if="containsFirstName(order.orderInfo.fulfillment_info.customer) || containsLastName(order.orderInfo.fulfillment_info.customer)"-->
 <template v-if="orderhistory">
       <div
-    v-if="containsFirstName(order.orderInfo.fulfillment_info.customer) || containsLastName(order.orderInfo.fulfillment_info.customer)"
+
+
+
+    v-if="userMatchesText(search,order)"
       v-for="order in orderhistory.user.slice().reverse()"
       :key="order._id"
     >
@@ -358,6 +361,11 @@ export default {
 
 // },
   methods: {
+userMatchesText(text, user) {
+  console.log(user);
+    if (typeof user === "string") return user.includes(text);
+    return Object.values(user).some(val => this.userMatchesText(text, val));
+},
     renderPanels(){
 if(this.orderhistory && this.orderhistory.user){
 
