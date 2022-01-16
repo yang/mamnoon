@@ -193,7 +193,7 @@ tips: ${{ totals.mamnoon.tips | showToFixed}}<br>
 
 
 
-    v-if="userMatchesText(search,order)"
+    v-if="userMatchesText(search,formattedOrder(order))"
       v-for="order in orderhistory.user.slice().reverse()"
       :key="order._id"
     >
@@ -414,6 +414,15 @@ console.log(this.totals)
 
 // },
   methods: {
+    formattedOrder(order){
+      
+      let formattedorder = order;
+      formattedorder.items = order.orderInfo.charges.items;
+      console.log(formattedorder);
+      return formattedorder;
+
+      
+    },
         showToFixed: function(value) {
       let decvalue = value / 100;
 
