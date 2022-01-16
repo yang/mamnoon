@@ -154,6 +154,13 @@ all orders ({{orderAmount}})
 <div v-if="showDailyTotals === true" class="dailyTotal">
 
 
+<download-csv
+	class="btn-nadi csv-download"
+	:data="json_data"
+	name="filename.csv">
+	Download CSV
+</download-csv>
+
 <template v-if="currentView === 'Mamnoon Street'|| currentView ==='empty'">
 <b>mamnoon street totals:</b><br>pretotal: ${{ totals.street.pretotal | showToFixed}}<br>
 tips: ${{ totals.street.tips | showToFixed}}<br>
@@ -165,6 +172,10 @@ tips: ${{ totals.mamnoon.tips | showToFixed}}<br>
 
 <input style="padding: 2px 10px;margin: 10px 0;" v-model="sendEmail" placeholder="email" />
 <button style="margin-left:5px;"  v-if="validEmail(sendEmail)" @click="sendTotals(totals,sendEmail)">send</button><button style="background-color: #ddd;color:#bbb;margin-left:5px;"  v-else disabled>send</button>
+
+
+
+
 </div>
 
 
@@ -255,6 +266,9 @@ tips: ${{ totals.mamnoon.tips | showToFixed}}<br>
 </template>
 
 <script>
+
+
+
 import Datepicker from 'vuejs-datepicker';
 
 import moment from "moment";
@@ -280,16 +294,32 @@ import StreetLogo from "@/components/svgIcons/StreetLogo"
 export default {
   data() {
     return {
-      totals: {
-          street: {
-            pretotal: 0,
-            tips: 0
-          },
-          mamnoon: {
-            pretotal: 0,
-            tips: 0
-          }
-      },
+        json_data: [
+        ],
+totals: [
+            {
+                street: {
+                      pretotal: 0,
+                    tips: 0
+                }
+            },
+            {
+                mamnoon: {
+                pretotal: 0,
+                    tips: 0
+                }
+            }
+        ],
+      // totals: {
+      //     street: {
+      //       pretotal: 0,
+      //       tips: 0
+      //     },
+      //     mamnoon: {
+      //       pretotal: 0,
+      //       tips: 0
+      //     }
+      // },
       orderAmount:0,
       openOrders:0,
       closedOrders: 0,
@@ -340,6 +370,29 @@ export default {
       return decvalue.toFixed(2);
     },
   },
+watch:{
+    totals:{
+handler(val){
+
+this.json_data = [];
+
+for (const [key, value] of Object.entries(this.totals)) {
+this.json_data.push({
+                'name': key,
+                'pretotal': this.showToFixed(value.pretotal),
+                'tips': this.showToFixed(value.tips),
+                'date': moment(this.$refs.myDatePicker._data.selectedDate).format('YYYY-MM-DD')
+            });
+
+
+
+}
+
+console.log(this.totals)
+
+          }, deep: true
+    }
+},
 // watch:{
 //     orderhistory:{
 // handler(val){
@@ -361,10 +414,19 @@ export default {
 
 // },
   methods: {
+        showToFixed: function(value) {
+      let decvalue = value / 100;
+
+      return decvalue.toFixed(2);
+    },
 userMatchesText(text, user) {
-  console.log(user);
+  if(user === null){
+    return false
+  }else{
     if (typeof user === "string") return user.includes(text);
-    return Object.values(user).some(val => this.userMatchesText(text, val));
+    return Object.values(user).some(val => this.userMatchesText(text, val));    
+  }
+
 },
     renderPanels(){
 if(this.orderhistory && this.orderhistory.user){
@@ -1111,6 +1173,15 @@ transition: all .5s ease;
     padding-right: 0;
   }
 
+}
+
+.csv-download{
+    width: 200px;
+    /* float: right; */
+    clear: both;
+    display: block;
+    text-align: center;
+    cursor: pointer;
 }
 
 </style>

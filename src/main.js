@@ -30,6 +30,12 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
 
 import VideoBg from "vue-videobg";
 
+
+import JsonCSV from 'vue-json-csv'
+
+Vue.component('downloadCsv', JsonCSV)
+
+
 Vue.component("video-bg", VideoBg);
 
 Vue.use(Auth0Plugin, {
