@@ -176,10 +176,7 @@ export default {
         }
 
 
-
-
-
-        let filteredArray = array3.filter(x=>x.charges.items[0].price>299);
+        let filteredArray = array3.filter(x=>x.charges?.items[0]?.price>299);
         let inputArray = filteredArray;
         console.log(`inputArray`, inputArray)
         const uniqueArrayWithCounts = inputArray.reduce((accum, val) => {
