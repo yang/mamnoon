@@ -142,7 +142,7 @@ return{
 }
     },
     name: 'slidernav',
-    props: ['valid','preOrderToggleState','upserveSections','upserveList','noFiltering','nowDate','nowTime','futureDay','futureTime'],
+    props: ['valid','preOrderToggleState','upserveSections','upserveList','noFiltering','nowDate','nowTime','futureDay','futureTime','selectedDate','selectedTime'],
     methods:{
         toggleExpand(e){
             this.expandedMenu = e;

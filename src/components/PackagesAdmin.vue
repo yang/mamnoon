@@ -53,6 +53,9 @@
         <template v-for="up in upserve">
 
 
+
+
+
 <div class="packageTile">
 <div class="inside">
 <h2>{{up.name}}</h2>
@@ -83,9 +86,9 @@
 <template v-if="pa.object.images.online_ordering_menu && pa.object.images.online_ordering_menu.main">
 <img class="packageImage" :src="pa.object.images.online_ordering_menu.main" />
 </template><br>
+{{pa.orderDate}}
 
-
-
+<br>
 link for marketing: <a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
 https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
 </a>

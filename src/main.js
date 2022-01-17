@@ -71,8 +71,8 @@ Vue.component("v-select", vSelect);
 
 Vue.use(VueSweetalert2);
 
-console.log(process.env.VUE_APP_BASE_URL);
-console.log(process.env);
+// console.log(process.env.VUE_APP_BASE_URL);
+// console.log(process.env);
 
 
 const checkURL = () => {

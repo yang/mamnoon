@@ -238,15 +238,16 @@
    
     
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
-                    <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" -- to go only", "")}}</b>   <b v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'" style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
+                    <!--<b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" to go only", "")}}</b>   -->
+                <br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
 
 
 
-<div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
-<div style="white-space: pre;overflow:hidden;font-size: 12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" v-html="currentItem.description"></div>
-    <div style="overflow:hidden;font-size: 12px;" v-else v-html="currentItem.description"></div>                                   
+
+
+    <div style="overflow:hidden;font-size: 12px;" v-html="currentItem.description"></div>                                   
                      </p>
                     <hr />
           <template v-if="currentItem.modifier_group_ids">
@@ -341,7 +342,6 @@
           </div>
           </template>
             <textarea 
-            v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'"
             type="text"
             placeholder="special instructions"
             v-model="textdescription"
@@ -451,8 +451,7 @@
   </div>
       </div>
           <div class="item-image-container" v-else style="height: 70px;background: #ffffff;">
-            <!-- <NadiIcon70 v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" /> -->
-                 <!-- <NadiIcon v-else /> -->
+      
             </div>
           </template>
       </div>
@@ -468,12 +467,13 @@
               <!-- <pre>{{currentItem}}</pre> -->
                   <!-- <pre>{{currentItem.item_object.modifier_group_ids}}</pre> -->
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
-                    <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" -- to go only", "")}}</b>   <b v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'" style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
+                   <!-- <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" to go only", "")}}</b>  -->
+                    
+                     <b style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
-<div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
-<div style="white-space: pre;overflow:hidden;font-size: 12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" v-html="currentItem.description"></div>
-    <div style="overflow:hidden;font-size: 12px;" v-else v-html="currentItem.description"></div>                                   
+
+    <div style="overflow:hidden;font-size: 12px;" v-html="currentItem.description"></div>                                   
                      </p>
                     <hr />
           <template v-if="currentItem.modifier_group_ids">
@@ -570,7 +570,6 @@
           </div>
           </template>
             <textarea 
-            v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'"
             type="text"
             placeholder="special instructions"
             v-model="textdescription"
@@ -693,10 +692,7 @@
       <h4 class="text-left red">full menu (new processing)</h4>
 
 
-<!--
-<pre>
-{{$store.state.googleAddress}}
-</pre>-->
+
 
 <template v-if="reOrder && $store.state.storeCurrentOrder && reOrder.id && $store.state.storeCurrentOrder.id">
 <div class="order-modal"> 
@@ -781,7 +777,7 @@ add
                   <div class="leftDropdown">
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
                   </div>
-                  <div class="rightDropdown" v-if="selectedDate !== null">
+                  <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
                   <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
                   </div>
                 </template>
@@ -790,7 +786,7 @@ add
                   <template>
                      <div class="leftDropdown">
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
-                      <div class="rightDropdown" v-if="selectedDate !== null">
+                      <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
                       <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
                       </div>
                   </template>
@@ -817,10 +813,10 @@ add
 
 <div class="stickyPosition"> 
 <div class="relative"> 
-<MoreInfo v-if="sliderNavVisible" :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :upserveList="upserveList" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
+<MoreInfo v-if="sliderNavVisible" :selectedDate="selectedDate" :selectedTime="selectedTime" :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :upserveList="upserveList" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
  
 
-<SliderNav v-if="sliderNavVisible" :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
+<SliderNav v-if="sliderNavVisible" :selectedDate="selectedDate" :selectedTime="selectedTime" :valid="valid" :preOrderToggleState="preOrderToggleState" :upserveSections="upserveSections" :noFiltering="noFiltering" :nowDate="nowDate" :nowTime="nowTime" :futureDay="futureDay" :futureTime="futureTime" />
 </div> 
 </div> 
 
@@ -1464,7 +1460,7 @@ add
                   <div class="leftDropdown" style="width: 100%;padding: 0 0 10px 0;">
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
                   </div>
-                  <div class="rightDropdown" style="width: 100%;padding: 0 0 0px 0;" v-if="selectedDate !== null">
+                  <div class="rightDropdown" style="width: 100%;padding: 0 0 0px 0;" v-if="selectedDate && selectedDate !== null">
                   <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
                   </div>
                 </template>
@@ -1473,7 +1469,7 @@ add
                   <template>
                       <div class="leftDropdown">
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
-                      <div class="rightDropdown" v-if="selectedDate !== null">
+                      <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
                       <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
                       </div>
                   </template>
@@ -1514,7 +1510,7 @@ add
   <div style="margin-top:15px;">
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
-<div style="margin-top:15px;" v-if="selectedDate !== null">
+<div style="margin-top:15px;" v-if="selectedDate && selectedDate !== null">
 <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
 </div>
 </template>
@@ -1523,7 +1519,7 @@ add
       <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
       <br>  
       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
-      <div style="margin-top:15px;" v-if="selectedDate !== null">
+      <div style="margin-top:15px;" v-if="selectedDate && selectedDate !== null">
       <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
       </div>
 
@@ -2885,10 +2881,18 @@ return this.currentOrder.tipSelected === i
 
 
 
-console.log(this.title);
+// console.log(this.title);
 let startdate = window.location.search.substring(1);
-var new_date = moment(startdate, "YYYY-MM-DD").add('days', 1);
 
+console.log('startdate');
+
+console.log(startdate.substring(0,10));
+
+
+// 2022-01-14
+
+var new_date = moment(startdate.substring(0,10), "YYYY-MM-DD").add(1,'days');
+console.log(new_date);
 var day = new_date.format('DD');
 var month = new_date.format('MM');
 var year = new_date.format('YYYY');
@@ -2899,6 +2903,7 @@ var year = new_date.format('YYYY');
 let correctDate = year + '-' + month + '-' + day;
 
 if(window.location.search){
+  // console.log(window.location.search);
 this.preOrderToggle(true);
 // console.log(moment(window.location.search.substring(1)).add(1,'days'));
 // console.log(correctDate);
@@ -2923,7 +2928,7 @@ this.preOrderToggle(true);
       },
     reOrder:{
       handler(val){
-console.log('reorder changes')
+// console.log('reorder changes')
 // console.log(this.reOrder)
 
       }
@@ -3008,10 +3013,10 @@ handler(val){
 
 if(this.currentOrder.fulfillment_info.customer && this.user.user){
 
-  console.log('this.user.user.email');
-    console.log(this.user.user.email);
+  // console.log('this.user.user.email');
+    // console.log(this.user.user.email);
 this.currentOrder.fulfillment_info.customer.email = this.user.user.email;
-this.currentOrder.fulfillment_info.customer.first_name = user.user.deliveryAddress.name;
+this.currentOrder.fulfillment_info.customer.first_name = this.user.user.deliveryAddress.name;
 }
 
 
@@ -4264,7 +4269,7 @@ self.decrementPackageByUpserveId(result.upserveId,currentOrder.charges.items[i].
 
 },
       async decrementPackageByUpserveId(id,amount) {
-            console.log('retriev orders frome')
+            // console.log('retriev orders frome')
             console.log(id);
                  console.log('end id')
             let decrementPack = await this.$http.post(`/package/decrementpackagebyupserveid`, {
@@ -4277,16 +4282,18 @@ self.decrementPackageByUpserveId(result.upserveId,currentOrder.charges.items[i].
         },
     async retrievePackages() {
 
-    console.log('retriev orders frome')
+    // console.log('retriev orders frome')
     let responseUpserve = await this.$http.get(`/package/retrieve`);
     this.packages = responseUpserve.data.packs;
 
     },
     async retrieveOnePackage(upserveId) {
 let self = this;
-    console.log('retriev orders frome')
+    // console.log('retriev orders frome')
     let responseUpserve = await this.$http.get(`/package/retrieveone/${upserveId}`);
- console.log(responseUpserve.data.package.object);
+
+    // console.log(responseUpserve);
+//  console.log(responseUpserve.data.package.object);
 
 
   // this.forPackageModal = responseUpserve.data.package.object;
@@ -5073,9 +5080,15 @@ showGiftcard(){
             if(this.emailAddress){
  
               let self = this
-              this.$http
-              .then(function (response) {
+              this.$http.get(`/user/email/${this.emailAddress}`).then(function (response) {
               let userInfo = response.data;
+
+              // console.log('response.data');
+              // console.log('response.data');
+              // console.log('response.data');
+              // console.log('response.data');
+              // console.log(response.data);
+
               self.user = userInfo
               self.cardNumberInput = userInfo.user.giftcard
               self.preferredGiftCard = userInfo.user.giftcard
@@ -5780,6 +5793,9 @@ removeFromOrder(removal) {
 
       // console.log(current.modifier_group_ids)
 
+
+
+if(current.modifier_group_ids){
       this.currentModifiers = current.modifier_group_ids.map(function(x){
         return { name: x,
                 selected: false,
@@ -5788,7 +5804,9 @@ removeFromOrder(removal) {
               }
       })
 
-
+    }else{
+     this.currentModifiers = [];
+    }
       this.modalOpen = true;
       this.currentItem = current;
 
@@ -6629,13 +6647,13 @@ this.setTip(0)
 
     },
     checkOlo() {
-console.log('check olod')
+// console.log('check olod')
             let self = this
-            console.log(`this.title is: ${this.title}`)
+            // console.log(`this.title is: ${this.title}`)
                 this.$http.get(`/order/acceptingOrdersBoolean/${this.title.replace(" ","")}`).then(function (response) {
               // self.orderHistory = response.data
               // console.log("acceptingOrdersBooleanStreet");
-              console.log(response.data);
+              // console.log(response.data);
 
 if(response.data.result === "success"){
   self.oloAvailable = true;
@@ -6654,8 +6672,8 @@ let pageData = self.$store.state.pageData[0]
 for(var i in pageData.restaurant_repeater){
 
 if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.title.toLowerCase().replace(" ","")){
-console.log('match')
-console.log(pageData.restaurant_repeater[i].online_ordering)
+// console.log('match')
+// console.log(pageData.restaurant_repeater[i].online_ordering)
 
 
  self.oloAvailable = pageData.restaurant_repeater[i].online_ordering;
@@ -6696,9 +6714,9 @@ this.employeeCheckout = true
 
 
 
-console.log('this.$store.state');
-console.log('this.$store.state');
-console.log('this.$store.state');
+// console.log('this.$store.state');
+// console.log('this.$store.state');
+// console.log('this.$store.state');
 // console.log(this.$store.state.pageData[0].restaurant_repeater);
 
 // console.log(this.title.toLowerCase().replace(" ",""));
@@ -6734,9 +6752,9 @@ console.log('this.$store.state');
 
 
 
-console.log("streetcheck")
-    const urlParamsStreetCheck = new URLSearchParams(window.location.search);
-console.log(urlParamsStreetCheck);
+// console.log("streetcheck")
+// const urlParamsStreetCheck = new URLSearchParams(window.location.search);
+// console.log(urlParamsStreetCheck);
 
 
 // if(this.title === "Mamnoon Street"){
@@ -6799,20 +6817,23 @@ console.log(urlParamsStreetCheck);
 
 const urlParams = new URLSearchParams(window.location.search);
 const product = urlParams.get('packageid');
-console.log(product);
-console.log(product);
-console.log(product);
-console.log(product);
+// console.log(product);
+// console.log(product);
+// console.log(product);
+// console.log(product);
 
 
 
 
-if(product !== ""){
+if(product !== null){
 
 
-this.retrieveOnePackage(product)
+this.retrieveOnePackage(product);
+// console.
+// console.log(this.forPackageModal);
 
-console.log(this.forPackageModal);
+// console.log(this.forPackageModal);
+
 // this.openModal(this.forPackageModal);
 
 // this.openModal({

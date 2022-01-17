@@ -134,7 +134,7 @@ return{
 }
     },
     name: 'slidernav',
-    props: ['valid','preOrderToggleState','upserveSections','noFiltering','nowDate','nowTime','futureDay','futureTime'],
+    props: ['valid','preOrderToggleState','upserveSections','noFiltering','nowDate','nowTime','futureDay','futureTimes','selectedDate','selectedTime'],
     methods:{
   onItemChanged(event, currentItem, lastActiveItem) {
     if(currentItem){
