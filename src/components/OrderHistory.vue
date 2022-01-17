@@ -89,7 +89,7 @@
     </div></td>
 <td class="hide-mob">
     
-    <div  v-if="order.payInfo.TransmissionID">
+    <div  v-if="order.payInfo && order.payInfo.TransmissionID">
 <!-- {{order.payInfo}} -->
 gift card
    </div>
@@ -175,6 +175,10 @@ export default {
             array3[i].charges.items.cartId = null;
         }
 
+
+
+
+
         let filteredArray = array3.filter(x=>x.charges.items[0].price>299);
         let inputArray = filteredArray;
         console.log(`inputArray`, inputArray)
@@ -198,6 +202,11 @@ export default {
         console.log(`self.result`, self.result)
         return self.result;
       })
+
+
+
+
+
     },
         },
             filters: {

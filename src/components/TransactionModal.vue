@@ -20,7 +20,7 @@ status: <b>ticket closed</b>
 </template>
 <template v-else>
 
-<template v-if="cancellable(loadedorderRendered.orderInfo.scheduled_time)">
+<template v-if="!loadedorderRendered.timeClosed && cancellable(loadedorderRendered.orderInfo.scheduled_time)">
 <a @click="cancelPreorder(loadedorderRendered._id)">&nbsp;<u>cancel</u></a>
 </template>
 </template>
