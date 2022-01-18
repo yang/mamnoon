@@ -185,7 +185,7 @@
 
 
 
-<UnableToProcessModal :unableToProcessModal="unableToProcessModal" />
+<UnableToProcessModal :unableToProcessModal="unableToProcessModal" :currentOrder="currentOrder"/>
 
 <!--end??-->
 <!--end??-->
