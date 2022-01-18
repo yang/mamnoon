@@ -154,7 +154,6 @@ export default {
           }else{
               // location.reload();
               this.$router.push("/mamnoonstreettesting");
-                   
           }
         },
 
@@ -178,11 +177,10 @@ export default {
 
         let filteredArray = array3.filter(x=>x.charges?.items[0]?.price>299);
         let inputArray = filteredArray;
-        console.log(`inputArray`, inputArray)
         const uniqueArrayWithCounts = inputArray.reduce((accum, val) => {
           // const dupeIndex = accum.findIndex(arrayItem => arrayItem.name === val.name);
-        const dupeIndex = accum.findIndex(arrayItem => arrayItem.charges.items[0].name === val.name);
-          if (dupeIndex === -1) {
+        const dupeIndex = accum.findIndex(arrayItem => arrayItem.charges.items[0].item_id === val.charges.items[0].item_id);
+          if (dupeIndex == -1) {
             // Not found, so initialize.
             accum.push({
               qty: 1,
@@ -195,7 +193,8 @@ export default {
           return accum;
         }, []);
         
-        self.result = filteredArray.sort((a,b) => (a.qty > b.qty) ? 1 : ((b.qty > a.qty) ? -1 : 0)).slice(filteredArray.length-3, filteredArray.length).reverse();
+        
+        self.result = uniqueArrayWithCounts.sort((a,b) => (a.qty > b.qty) ? 1 : ((b.qty > a.qty) ? -1 : 0)).slice(uniqueArrayWithCounts.length-3, uniqueArrayWithCounts.length).reverse();
         console.log(`self.result`, self.result)
         return self.result;
       })
