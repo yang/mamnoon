@@ -1,127 +1,68 @@
 <template>
+<div>
   <div class="container">
-
-  <h1 class="red">Mamnoon Packages</h1>
+ <button class="btn-nadi fl-right" @click="toggleMamnoonMenu()">toggle mamnoon menu</button>
+  <h1 class="red">Mamnoon Packages</h1>   
   <hr>
-  <br>
-    <button class="btn-nadi" @click="toggleMamnoonMenu()">toggle mamnoon menu</button>
-    <br />
-    <div class="col-4 mt-3 mr-2" style="display:none;">
-      <span class=" mr-2 mt-3"><b>Mamnoon: </b></span>
-      <div class="row mt-1">
-        <button
-          @click="toggleOnlineOrders('Mamnoon')"
-          :style="{
-            color: [mamnoonToggled ? 'black' : ''],
-            'background-color': [mamnoonToggled ? '#f05d5b4a' : ''],
-            'border-color': [mamnoonToggled ? 'red' : ''],
-          }"
-        >
-          <span v-if="mamnoonToggled">
-            turn on online ordering
-          </span>
-          <span v-else>
-            turn off online ordering
-          </span>
-        </button>
-      </div>
-      <br />
 
-      <span class=" mr-2 mt-2"><b>Mamnoon Street: </b></span>
-      <div class="row mt-1">
-        <button
-          @click="toggleOnlineOrders('Mamnoon Street')"
-          :style="{
-            color: [streetToggled ? 'black' : ''],
-            'background-color': [streetToggled ? '#f05d5b4a' : ''],
-            'border-color': [streetToggled ? 'red' : ''],
-          }"
-        >
-          <span v-if="streetToggled">
-            turn on online ordering
-          </span>
-          <span v-else>
-            turn off online ordering
-          </span>
-        </button>
-      </div>
+
+
+
+
+
+
     </div>
-    <br />
-    <div v-if="mamnoonmenuexpanded">
-      <div class="container">
+
+<!---->
+
+    <!---->
+      <div class="container" v-if="mamnoonmenuexpanded" data="ise">
       <div class="packageList">
-        <template v-for="up in upserve">
+            <template v-for="up in upserve">
+            <div class="packageTile">
+            <div class="inside">
+            <h2>{{up.name}}</h2>
+            <p>{{up.description}}</p>
+            <template v-if="up.images.online_ordering_menu && up.images.online_ordering_menu.main">
+            <!--<img class="packageImage" :src="up.images.online_ordering_menu.main" />-->
+            </template>
+            <br>
+            <br>
+            <button class="btn-nadi" @click="useForPackage(up)">use for package</button>
+            </div>
+            </div>
 
 
-
-
-
-<div class="packageTile">
-<div class="inside">
-<h2>{{up.name}}</h2>
-<p>{{up.description}}</p>
-<template v-if="up.images.online_ordering_menu && up.images.online_ordering_menu.main">
-<img class="packageImage" :src="up.images.online_ordering_menu.main" />
-</template>
-<br>
-<br>
-          <button class="btn-nadi" @click="useForPackage(up)">use for package</button>
-</div>
-</div>
-
-      
-        </template>
-      </div>
+            </template>
+  
           </div>
     </div>
-    <br />
-    <div class="container">
-        <div class="row">
-    <template v-for="pa in packages">
- <div class="packageTile">
-<div class="inside">
+<!--fff-->
 
-<h2>{{pa.name}}</h2>
-<p>amount remaining: {{pa.number}}</p>
-<template v-if="pa.object.images.online_ordering_menu && pa.object.images.online_ordering_menu.main">
-<img class="packageImage" :src="pa.object.images.online_ordering_menu.main" />
-</template><br>
-{{pa.orderDate}}
-
-<br>
-link for marketing: <a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
-https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
-</a>
-<br>
-    <div class="recipientList">
-   
-   <h5>recipient list:</h5>
-<div v-for="(recipient,index) in pa.recipients">
-{{recipient}} 
-</span>
-</div>
-
-   </div>
-<br>
-      <h1 v-if="pa.number === 0">sold out</h1>
-
-      <button class="btn-nadi" @click="decrementPackage(pa._id)" v-if="pa.number > 0">
-        decrement</button
-      >&nbsp;
-      <button class="btn-nadi" @click="deletePackage(pa._id)">delete package</button>
-      <br /><br />
-    </div>
-        </div>
+<!--fff-->
 
 
-    </template>
-</div></div>
-    <div class="container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--end-->
+    <div class="container" v-if="packageAdd.name">
     <br>
       <h2 class="red">add a package:</h2>
       <hr />
 
-      
+
 
 name: {{packageAdd.name}}
       <br />
@@ -134,7 +75,7 @@ name: {{packageAdd.name}}
          @change="checkPackAdd"
                   style="display:none"
       />
-
+            <div style="display:none">
       <br />
       upserve id: {{packageAdd.upserveId}}<br>
       <input
@@ -146,8 +87,8 @@ name: {{packageAdd.name}}
          @change="checkPackAdd"
          style="display:none"
       />
-      
-      <br />
+      </div>
+    
       date:<br>
       <datepicker
         v-model="packageAdd.orderDate"
@@ -198,10 +139,9 @@ staff notification email recipients:
    <br />
    <br />
    <div class="recipientList">
-   
-   <h5>recipient list:</h5>
+   <h5 v-if="packageAdd.recipients.length>0">recipient list:</h5>
 <div v-for="(recipient,index) in packageAdd.recipients">
-{{recipient}} <button @click="removeRecipient(index)">x</button>
+{{recipient}} <button class="btn-nadi" @click="removeRecipient(index)">x</button>
 </span>
 </div>
 
@@ -222,7 +162,52 @@ staff notification email recipients:
 
       <br><br>
     </div>
-  </div>
+    <!--end-->
+
+
+
+
+<!--beginning-->
+    <div class="container">
+        <div class="row">
+    <template v-for="pa in packages">
+ <div class="packageTile">
+<div class="inside">
+<h2>{{pa.name}}</h2>
+<p>amount remaining: {{pa.number}}</p>
+<template v-if="pa.object.images.online_ordering_menu && pa.object.images.online_ordering_menu.main">
+</template><br>
+{{formatDate(pa.orderDate)}}
+<br>
+link for marketing: <a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
+https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
+</a>
+<br>
+    <div class="recipientList">
+      <h5 v-if="pa.recipients.length>0">recipient list:</h5>
+<div v-for="(recipient,index) in pa.recipients">
+{{recipient}} 
+</span>
+</div>
+   </div>
+<br>
+      <h1 v-if="pa.number === 0">sold out</h1>
+      <button class="btn-nadi" @click="decrementPackage(pa._id)" v-if="pa.number > 0">
+        decrement</button
+      >&nbsp;
+      <button class="btn-nadi" @click="deletePackage(pa._id)">delete package</button>
+      <br /><br />
+    </div>
+        </div>
+    </template>
+</div></div>
+<!--beginning-->
+
+
+
+
+</div>
+
 </template>
 <script>
 import Datepicker from "vuejs-datepicker";
@@ -264,6 +249,9 @@ export default {
 
 
   methods: {
+    formatDate(date){
+      return moment(date).format('MM-DD-YYYY')
+    },
         validEmail: function (email) {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
