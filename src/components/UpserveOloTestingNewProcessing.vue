@@ -2581,9 +2581,9 @@ cart empty
       
       </div>
       </section>
-<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>-->
 
 
    <!--// ccc-->
@@ -2884,15 +2884,11 @@ return this.currentOrder.tipSelected === i
 // console.log(this.title);
 let startdate = window.location.search.substring(1);
 
-console.log('startdate');
-
-console.log(startdate.substring(0,10));
 
 
-// 2022-01-14
 
 var new_date = moment(startdate.substring(0,10), "YYYY-MM-DD").add(1,'days');
-console.log(new_date);
+
 var day = new_date.format('DD');
 var month = new_date.format('MM');
 var year = new_date.format('YYYY');

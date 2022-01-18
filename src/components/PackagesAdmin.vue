@@ -22,12 +22,11 @@
             <div class="packageTile">
             <div class="inside">
             <h2>{{up.name}}</h2>
-            <p>{{up.description}}</p>
+            <p class="small-message grey">{{up.description}}</p>
             <template v-if="up.images.online_ordering_menu && up.images.online_ordering_menu.main">
             <!--<img class="packageImage" :src="up.images.online_ordering_menu.main" />-->
             </template>
-            <br>
-            <br>
+  
             <button class="btn-nadi" @click="useForPackage(up)">use for package</button>
             </div>
             </div>
@@ -173,16 +172,30 @@ staff notification email recipients:
     <template v-for="pa in packages">
  <div class="packageTile">
 <div class="inside">
-<h2>{{pa.name}}</h2>
-<p>amount remaining: {{pa.number}}</p>
+<h5>{{pa.name}} ({{pa.number}} remain)</h5>
+
 <template v-if="pa.object.images.online_ordering_menu && pa.object.images.online_ordering_menu.main">
-</template><br>
+</template>
 {{formatDate(pa.orderDate)}}
 <br>
-link for marketing: <a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
+
+
+<template v-if="origin === 'http://localhost:8080'">
+<a ref="mylink" rel="noopener noreferrer" :href="'http://localhost:8080/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
+http://localhost:8080/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
+</a>
+</template>
+<template v-else>
+
+<a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
 https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
 </a>
-<br>
+
+
+</template>
+
+
+
     <div class="recipientList">
       <h5 v-if="pa.recipients.length>0">recipient list:</h5>
 <div v-for="(recipient,index) in pa.recipients">
@@ -190,7 +203,7 @@ https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&pack
 </span>
 </div>
    </div>
-<br>
+
       <h1 v-if="pa.number === 0">sold out</h1>
       <button class="btn-nadi" @click="decrementPackage(pa._id)" v-if="pa.number > 0">
         decrement</button
@@ -223,6 +236,7 @@ export default {
   name: "PackagesAdmin",
   data() {
     return {
+      origin: '',
       emailErrorVisibleTf: false,
        dnsCheck: false,
       recipient: '',
@@ -473,6 +487,12 @@ if(this.packages){
     },
   },
   mounted() {
+
+
+this.origin = window.location.origin;
+
+
+console.log(this);
     this.retrievePackages();
 
     // this.addPackage();
@@ -519,7 +539,7 @@ margin-top: 10px;
   margin: 10px;
   border: 1px solid #ddd;
   width: calc(100%-20px);
-  height: 450px;
+  height: 300px;
 
 
   @media only screen and (max-width: 1280px){
