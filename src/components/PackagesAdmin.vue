@@ -93,7 +93,15 @@ link for marketing: <a ref="mylink" rel="noopener noreferrer" :href="'https://ww
 https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
 </a>
 <br>
- 
+    <div class="recipientList">
+   
+   <h5>recipient list:</h5>
+<div v-for="(recipient,index) in pa.recipients">
+{{recipient}} 
+</span>
+</div>
+
+   </div>
 <br>
       <h1 v-if="pa.number === 0">sold out</h1>
 
@@ -113,7 +121,9 @@ https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&pack
       <h2 class="red">add a package:</h2>
       <hr />
 
+      
 
+name: {{packageAdd.name}}
       <br />
       <input
         id="name"
@@ -121,37 +131,90 @@ https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&pack
         type="text"
         name="name"
         placeholder="add name"
+         @change="checkPackAdd"
+                  style="display:none"
       />
+
       <br />
-      <br />
+      upserve id: {{packageAdd.upserveId}}<br>
       <input
         id="upserveId"
         v-model="packageAdd.upserveId"
         type="text"
         name="upserveId"
         placeholder="add upserveId"
+         @change="checkPackAdd"
+         style="display:none"
       />
+      
       <br />
-      <br />
+      date:<br>
       <datepicker
         v-model="packageAdd.orderDate"
         placeholder="Pick A Date"
+         @selected="checkPackAdd"
+         
       ></datepicker>
       <br />
+      quantity:<br>
       <input
         id="number"
         v-model="packageAdd.number"
         type="number"
         name="number"
+        @change="checkPackAdd"
         placeholder="ie 10"
       />
       <br />
       <br />
 
 
-      <button class="btn-nadi" @click="addPackage()">
+staff notification email recipients:
+  <br />
+
+      
+      
+              <input
+                  type="text"
+              id="recipient"
+                  name="recipient"
+                 placeholder="add email recipient"
+                  @change="emailErrorVisible(recipient)"
+                v-model="recipient"
+                />
+<div class="small-message" v-if="emailErrorVisibleTf && !validEmail(recipient)">please enter a valid email</div>
+<div class="small-message" v-if="emailErrorVisibleTf && !dnsCheck">invalid email domain</div>
+
+      
+      
+      
+      
+      
+      &nbsp;
+      
+      
+            <button class="btn-nadi" v-if="validEmail(recipient) && dnsCheck" @click="addRecipient">add recipient</button>
+      <button v-else class="btn-nadi disabled">add recipient</button>
+   <br />
+   <br />
+   <div class="recipientList">
+   
+   <h5>recipient list:</h5>
+<div v-for="(recipient,index) in packageAdd.recipients">
+{{recipient}} <button @click="removeRecipient(index)">x</button>
+</span>
+</div>
+
+   </div>
+   <br />
+   
+      <br />
+
+
+      <button class="btn-nadi" :class="{disabled: !packageFilledOut }" @click="addPackage()">
         Add Package
       </button>
+           
 &nbsp;
       <button class="btn-nadi" @click="clearPackage()">
         Clear Package
@@ -175,6 +238,10 @@ export default {
   name: "PackagesAdmin",
   data() {
     return {
+      emailErrorVisibleTf: false,
+       dnsCheck: false,
+      recipient: '',
+      packageFilledOut: false,
       datePicked: null,
       mamnoonmenuexpanded: false,
       upserve: null,
@@ -185,14 +252,101 @@ export default {
         orderData: null,
         number: null,
         soldOut: false,
-        object: {}
+        object: {},
+        recipients: [],
       },
       mamnoonToggled: false,
       streetToggled: false,
     };
   },
-  methods: {
 
+
+
+
+  methods: {
+        validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+        emailValidFromServer(email){
+console.log('valid from server')
+console.log('valid from server')
+console.log('valid from server')
+console.log('valid from server')
+
+
+
+if(this.validEmail(email)){
+            let self = this
+                this.$http.get(`/emailverified/${email}`).then(function (response) {
+                  console.log(response.data.data);
+
+                    if(response.data.data.dnsCheck === 'true'){
+                        self.dnsCheck = true;
+                    }else{
+                        self.dnsCheck = false;
+                    }
+
+            })
+  
+
+
+    }
+
+    },
+emailErrorVisible(emailEntry){
+
+
+this.emailErrorVisibleTf = true;
+
+
+
+
+
+this.emailValidFromServer(emailEntry);
+
+
+
+
+
+
+
+
+},
+
+    removeRecipient(index){
+
+
+this.packageAdd.recipients.splice(index, 1);
+this.checkPackAdd();
+
+    },
+    addRecipient(){
+
+
+          this.packageAdd.recipients.push(this.recipient);
+          this.recipient = '';
+          this.emailErrorVisibleTf = false;
+this.checkPackAdd();
+    },
+checkPackAdd(){
+
+
+console.log(this.packageAdd.name);
+console.log(this.packageAdd.number);
+console.log(this.packageAdd.orderDate);
+console.log(this.packageAdd.upserveId);
+if(this.packageAdd.name !== null && this.packageAdd.number !== null && this.packageAdd.upserveId !== null && this.packageAdd.orderDate && this.packageAdd.recipients.length > 0){
+
+
+  this.packageFilledOut = true;
+
+}else{
+    this.packageFilledOut = false;
+}
+
+
+},
     formattedLinkDate(date){
 return moment(date).format('YYYY-MM-DD');
     },
@@ -201,6 +355,7 @@ return moment(date).format('YYYY-MM-DD');
       this.packageAdd.upserveId = null;
       this.packageAdd.orderDate = null;
       this.packageAdd.number = null;
+      this.packageAdd.recipients = [];
       this.packageAdd.object = {};
     },
     toggleMamnoonMenu() {
@@ -238,6 +393,8 @@ return moment(date).format('YYYY-MM-DD');
       // this.packageAdd.number = null;
 
       this.toggleMamnoonMenu();
+
+      this.checkPackAdd();
     },
     async upserves() {
       let responseUpserve = await this.$http.get("/product/upserveolo");
@@ -249,7 +406,7 @@ return moment(date).format('YYYY-MM-DD');
     },
 
     async retrievePackages() {
-      console.log("retriev orders frome");
+      // console.log("retriev orders frome");
       let responseUpserve = await this.$http.get(`/package/retrieve`);
       this.packages = responseUpserve.data.packs;
     },
@@ -260,7 +417,7 @@ return moment(date).format('YYYY-MM-DD');
       //   }else{
       //       return false;
       //   }
-
+if(this.packages){
       let clashes = this.packages.filter(
         (packages) => packages.upserveId === packageAdd.upserveId
       );
@@ -272,11 +429,14 @@ return moment(date).format('YYYY-MM-DD');
         this.packageAdd.upserveId = null;
         this.packageAdd.orderDate = null;
         this.packageAdd.number = null;
+         this.packageAdd.recipients = [];
         this.packageAdd.object = {};
         return true;
       } else {
         return false;
       }
+
+    }
     },
     async addPackage() {
       if (!this.checkForClash(this.packageAdd)) {
@@ -296,6 +456,7 @@ return moment(date).format('YYYY-MM-DD');
         this.packageAdd.upserveId = null;
         this.packageAdd.orderDate = null;
         this.packageAdd.number = null;
+         this.packageAdd.recipients = [];
         this.packageAdd.object = {};
       }
     },
@@ -326,7 +487,7 @@ return moment(date).format('YYYY-MM-DD');
   mounted() {
     this.retrievePackages();
 
-    this.addPackage();
+    // this.addPackage();
     this.upserves();
   },
 };

@@ -2450,6 +2450,16 @@ font-weight: 500;
     -moz-appearance: none;
      border: none;
      padding: 5px 10px;
+
+
+&.disabled{
+
+  border: 1px solid #999999 !important;
+  background-color: #cccccc;
+  color: #666666;
+pointer-events: none;
+}
+
 }
 
 
