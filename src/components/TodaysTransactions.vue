@@ -383,35 +383,21 @@ this.json_data.push({
     formattedOrder(order){
 
     let formattedorder = order;
-    // let orderToLowerCase = order;
+    let orderToLowerCase = order;
     let emptArry = [];
 
     for(let i in orderToLowerCase.orderInfo.charges.items){
+      for (const [key, value] of Object.entries(orderToLowerCase.orderInfo.charges.items[i])) {
+        if(typeof(value)==='string'){
+        // console.log(value.toLowerCase())
+        orderToLowerCase.orderInfo.charges.items[i][key] = value.toLowerCase();
+        }
+      }
+    }
 
-
-for (const [key, value] of Object.entries(orderToLowerCase.orderInfo.charges.items[i])) {
-
-
-if(typeof(value)==='string'){
-  // console.log(value.toLowerCase())
-
-
-
-// orderToLowerCase.orderInfo.charges.items[i][key] = value.toLowerCase();
-
-}
-
-
-}
-
-
-
-
-}
-
-console.log(orderToLowerCase);
-// formattedorder.items = order.orderInfo.charges.items;
-formattedorder.items = orderToLowerCase;
+// console.log(orderToLowerCase);
+formattedorder.items = order.orderInfo.charges.items;
+// formattedorder.items = orderToLowerCase;
 
 
       // console.log(formattedorder);
