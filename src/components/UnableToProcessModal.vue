@@ -12,7 +12,12 @@
         <div class="container modal-body order-modal-width order-modal-body">
           <h2>there is something wrong on our end, and we are currently unable to process your order :(</h2>
           <div class="mb-15"><b>please try again later</b><br></div>
-         
+        <div v-if="currentOrder.restaurant === 'Mamnoon'">
+          <p>please use this link to complete your order: <a href="https://app.upserve.com/s/mamnoon-llc-seattle">order here</a></p>
+        </div>
+          <div v-else-if="currentOrder.restaurant === 'Mamnoon Street'">
+            <p>please use this link to complete your order: <a href="https://app.upserve.com/s/mamnoon-street-seattle">order here</a></p>
+          </div>
           <div>
 
 
@@ -44,7 +49,7 @@ import moment from 'moment'
 import tz from 'moment-timezone'
 export default {
     name: 'UnableToProcessModal',
-props: ['unableToProcessModal'],
+props: ['unableToProcessModal', 'currentOrder'],
 components: {
 
     CloseModal2
