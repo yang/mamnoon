@@ -27,7 +27,7 @@
 
            <a  @click="logUserOut"><u>Logout</u></a>  &nbsp;&nbsp;
 
-    <a  @click="showAllOrders()"><u>all orders</u></a>&nbsp;&nbsp;&nbsp;
+<!--    // <a  @click="showAllOrders()"><u>all orders</u></a>&nbsp;&nbsp;&nbsp;-->
 
  <a  @click="showTodaysOrders()"><u>todays orders</u></a>&nbsp;&nbsp;&nbsp;
 
@@ -147,13 +147,7 @@ all orders ({{orderAmount}})
   <h1 class="dashboardHeader">
 <input type="text" v-model="search" class="nameSearch" placeholder="search"/>  </h1>
 
-
-
-
-
 <div v-if="showDailyTotals === true" class="dailyTotal">
-
-
 <download-csv
 	class="btn-nadi csv-download"
 	:data="json_data"
@@ -172,32 +166,15 @@ tips: ${{ totals.mamnoon.tips | showToFixed}}<br>
 
 <input style="padding: 2px 10px;margin: 10px 0;" v-model="sendEmail" placeholder="email" />
 <button style="margin-left:5px;"  v-if="validEmail(sendEmail)" @click="sendTotals(totals,sendEmail)">send</button><button style="background-color: #ddd;color:#bbb;margin-left:5px;"  v-else disabled>send</button>
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
 <!--    // v-if="containsFirstName(order.orderInfo.fulfillment_info.customer) || containsLastName(order.orderInfo.fulfillment_info.customer)"-->
 <template v-if="orderhistory">
       <div
-
-
 
     v-if="userMatchesText(search,formattedOrder(order))"
       v-for="order in orderhistory.user.slice().reverse()"
       :key="order._id"
     >
-
 <!--here-->
 <!--// start filter-->
 <div v-if="showFilter(order.timeClosed)" class="position-relative">
@@ -227,15 +204,11 @@ tips: ${{ totals.mamnoon.tips | showToFixed}}<br>
         <template v-if="order.void">
           VOID
         </template>
-     
 <template v-if="order.orderInfo.preorder">
-
-
 <b>preorder</b> &nbsp;
 <template v-if="order.cancelled">
 (cancelled)
 </template>
-
 </template>
 <br>
 </div>
@@ -247,26 +220,19 @@ tips: ${{ totals.mamnoon.tips | showToFixed}}<br>
         <br />
 </div>
 </div>
-
       </template>
-
 <!--here-->
 <!--// end filter-->
 </div>
 <!--here-->
-
     </div>
 </template>
-
-
-
   </div>
   </div>
   </div>
 </template>
 
 <script>
-
 
 
 import Datepicker from 'vuejs-datepicker';
@@ -388,7 +354,7 @@ this.json_data.push({
 
 }
 
-console.log(this.totals)
+// console.log(this.totals)
 
           }, deep: true
     }
@@ -415,10 +381,40 @@ console.log(this.totals)
 // },
   methods: {
     formattedOrder(order){
-      
-      let formattedorder = order;
-      formattedorder.items = order.orderInfo.charges.items;
-      console.log(formattedorder);
+
+    let formattedorder = order;
+    // let orderToLowerCase = order;
+    let emptArry = [];
+
+    for(let i in orderToLowerCase.orderInfo.charges.items){
+
+
+for (const [key, value] of Object.entries(orderToLowerCase.orderInfo.charges.items[i])) {
+
+
+if(typeof(value)==='string'){
+  // console.log(value.toLowerCase())
+
+
+
+// orderToLowerCase.orderInfo.charges.items[i][key] = value.toLowerCase();
+
+}
+
+
+}
+
+
+
+
+}
+
+console.log(orderToLowerCase);
+// formattedorder.items = order.orderInfo.charges.items;
+formattedorder.items = orderToLowerCase;
+
+
+      // console.log(formattedorder);
       return formattedorder;
 
       
