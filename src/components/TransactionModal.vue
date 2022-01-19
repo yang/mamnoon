@@ -107,15 +107,21 @@ status: <b>ticket closed</b>
             >&nbsp;&nbsp;&nbsp;
             <br />
             &nbsp;&nbsp; &nbsp;&nbsp;
+
             <template v-if="loadedorderRendered.orderPosted">
+
             <template v-if="item.returned === true">
-            <template v-if="!loadedorderRendered.cancelled">
-              <span>(returned)</span>
-              </template>
+                    <template v-if="!loadedorderRendered.cancelled">
+                      <span>(returned)</span>
+                      </template>
             </template>
             <template v-else>
-              <template v-if="loadedorderRendered.payInfo.uniqueTransId && !loadedorderRendered.cancelled">
 
+
+              <template v-if="loadedorderRendered.payInfo.uniqueTransId">
+ <!--&& !loadedorderRendered.cancelled-->
+
+ 
                 <span
                   class="line-link"
                   v-if="!loadedorderRendered.void"
@@ -130,14 +136,12 @@ status: <b>ticket closed</b>
                     )
                   "
                   ><u :id="'not-'+item.cartId">issue return</u>
-                  <span style="display:none;" :id="'is-'+item.cartId">(returned)</span>
-       
-                  </span
-                >
+                  <span style="display:none;" :id="'is-'+item.cartId">(returned)</span></span>
 
 
               </template>
             </template>
+
             </template>
 
           </li>
