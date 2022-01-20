@@ -30,7 +30,42 @@
     </div>
 
 
-<div class="container pad-yellow-background module-header"> food order history</div>
+    <div id="upserveolo">
+      <div class="container pad-yellow-background module-header">favorite orders</div>
+        <div class="container pad-yellow-background">
+          <div class="row no-lr-margin" id="order-history" >
+          <template v-for="order in favOrders">
+                  <div class="filtree-full-testing-favorites" @click="reorder(item)">
+                    <div class="yellow-bg-test" >
+                      <div class="half-width2left">
+                        <div class="content-box">
+                          <ul v-for="(item, index) in order">
+                            <li class="name">{{index}}</li>
+                          </ul>
+                            <!-- <div class="name">{{order[0].name}}</div> -->
+                            <!-- <div class="name">{{order[1].name}}</div> -->
+                              <!-- <div
+                                  v-if="item.charges.items[0].item_object.description"
+                                  class="food-description"
+                                >{{item.charges.items[0].item_object.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
+                            <div class="food-price">
+                                  ${{ formatPrice(item.charges.items[0].price_cents) }}<span class="checkIfPackage" ></span> 
+                            </div> -->
+                    <br />
+                      </div>
+                    </div>
+                    <div class="half-width2right" >
+                      <!-- <img :src="item.charges.items[0].item_object.images.online_ordering_menu.main" class="backgroundImage"/> -->
+                      </div> 
+                  </div>
+                </div>
+        </template>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container pad-yellow-background module-header">previously ordered</div>
 <div class="container pad-yellow-background">
 
 <div id="order-history">
@@ -134,6 +169,7 @@ export default {
         orderhistory: null,
         response: null,
         result: [],
+        favOrders: [],
         image: image
         }
     },
@@ -165,16 +201,51 @@ export default {
           console.log('retrieve orders from end')
         let self = this
           this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
-
         self.orderhistory = response.data
+        console.log(`self.orderhistory`, self.orderhistory)
         let array2 = response.data.user.map(items => items.orderInfo)
         let array3 = array2.flat();
+        
+        self.getFavoriteItems(array3);
+        self.getFavoriteOrders(array3);
+      })
+    },
 
+    getFavoriteOrders(array3){
+        let favoriteOrders = [];
+        let temp = [];
+        let favOrders = [];
+        for(let i in array3){
+          if(array3[i].charges.items.length > 1){
+            favoriteOrders.push(array3[i].charges.items)
+          }
+        }
+
+        let orderTotal = 0;
+        console.log(`favoriteOrders`, favoriteOrders)
+        for(let i = 0; i < favoriteOrders.length; i++){
+          console.log(`favoriteOrders[i]`, favoriteOrders[i])
+          favoriteOrders[i].map(x =>{
+            orderTotal += x.price_cents
+          })
+          temp.push({
+            total: orderTotal,
+            ...favoriteOrders[i]
+          })
+        }
+
+        
+        
+        // this.favOrders = temp.sort((a,b) => (a.price_cents > b.price_cents) ? 1 : ((b.price_cents > a.price_cents) ? -1 : 0)).slice(temp.length-3, temp.length).reverse();
+        this.favOrders = temp.sort((a,b) => (a.price_cents > b.price_cents) ? 1 : ((b.price_cents > a.price_cents) ? -1 : 0)).slice(temp.length-3, temp.length).reverse();
+
+        console.log(`this.favOrders`, this.favOrders)
+        return favOrders;
+    },
+    getFavoriteItems(array3) {
         for(let i in array3){
             array3[i].charges.items.cartId = null;
         }
-
-
         let filteredArray = array3.filter(x=>x.charges?.items[0]?.price>299);
         let inputArray = filteredArray;
         const uniqueArrayWithCounts = inputArray.reduce((accum, val) => {
@@ -192,18 +263,10 @@ export default {
           }
           return accum;
         }, []);
-        
-        
-        self.result = uniqueArrayWithCounts.sort((a,b) => (a.qty > b.qty) ? 1 : ((b.qty > a.qty) ? -1 : 0)).slice(uniqueArrayWithCounts.length-3, uniqueArrayWithCounts.length).reverse();
-        console.log(`self.result`, self.result)
-        return self.result;
-      })
-
-
-
-
-
+        this.result = uniqueArrayWithCounts.sort((a,b) => (a.qty > b.qty) ? 1 : ((b.qty > a.qty) ? -1 : 0)).slice(uniqueArrayWithCounts.length-3, uniqueArrayWithCounts.length).reverse();
+        return this.result;
     },
+
         },
             filters: {
 toFixed(value){
