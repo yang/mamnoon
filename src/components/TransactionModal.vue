@@ -10,6 +10,11 @@
        location: {{ loadedorderRendered.orderInfo.restaurant }}
      <br>
 
+
+
+
+     accepted on upserve pos: {{ loadedorderRendered.orderAccepted}}
+<br>
 <template v-if="loadedorderRendered.timeClosed">
 status: <b>ticket closed</b>
 </template>
@@ -102,6 +107,28 @@ status: <b>ticket closed</b>
             style="margin-bottom:30px;"
           >
 
+
+<!--return checkboxes-->
+          <div v-if="returnMultiple" class="returnCheck" :id="'returnList-'+item.cartId" @click="
+                    addToReturnList(
+                      loadedorderRendered.payInfo.uniqueTransId,
+                      item.price,
+                      loadedorderRendered.orderInfo.charges.taxes /
+                        loadedorderRendered.orderInfo.charges.preTotal,
+                      item.cartId,
+                      loadedorderRendered._id
+                    )
+                  "></div>
+        <div v-if="returnMultiple" class="returnCheck remove" :id="'returnListRemove-'+item.cartId" @click="
+                    removeFromReturnList(item.cartId)" style="display:none;"></div>
+<!--return checkboxes-->
+
+
+
+
+
+
+
             <b>{{ item.quantity }} x</b> {{ item.name }}&nbsp;&nbsp;&nbsp;<b
               >${{ item.price.toFixed() / 100 }}</b
             >&nbsp;&nbsp;&nbsp;
@@ -110,48 +137,80 @@ status: <b>ticket closed</b>
 
             <template v-if="loadedorderRendered.orderPosted">
 
-            <template v-if="item.returned === true">
-                    <template v-if="!loadedorderRendered.cancelled">
-                      <span>(returned)</span>
-                      </template>
-            </template>
-            <template v-else>
 
 
-              <template v-if="loadedorderRendered.payInfo.uniqueTransId">
- <!--&& !loadedorderRendered.cancelled-->
+                  <template v-if="item.returned === true">
 
- 
-                <span
-                  class="line-link"
-                  v-if="!loadedorderRendered.void"
-                  @click.once="
-                    issueTokenizedReturn(
-                      loadedorderRendered.payInfo.uniqueTransId,
-                      item.price,
-                      loadedorderRendered.orderInfo.charges.taxes /
-                        loadedorderRendered.orderInfo.charges.preTotal,
-                      item.cartId,
-                      loadedorderRendered._id
-                    )
-                  "
-                  ><u :id="'not-'+item.cartId">issue return</u>
-                  <span style="display:none;" :id="'is-'+item.cartId">(returned)</span></span>
+                          <template v-if="!loadedorderRendered.cancelled">
+                            <span>(returned)</span>
+                            </template>
+                            <template v-else>
+                            <span>  (returned)</span>
+                            </template>
+
+                  </template>
+                  <template v-else>
+
+                        <template v-if="loadedorderRendered.payInfo.uniqueTransId">
+                          <span
+                            class="line-link"
+                            v-if="!loadedorderRendered.void && !returnMultiple"
+                            @click.once="
+                              issueTokenizedReturn(
+                                loadedorderRendered.payInfo.uniqueTransId,
+                                item.price,
+                                loadedorderRendered.orderInfo.charges.taxes /
+                                  loadedorderRendered.orderInfo.charges.preTotal,
+                                item.cartId,
+                                loadedorderRendered._id,
+                                true
+                              )
+                            "
+                            ><u :id="'not-'+item.cartId">issue return</u>
+                            <span style="display:none;" :id="'is-'+item.cartId">(returned)</span></span>
+                        </template>
 
 
-              </template>
-            </template>
+                  </template>
+
+
 
             </template>
 
           </li>
         </ul>
+
         <br />
+
+
+
+<template v-if="loadedorderRendered.orderAccepted">
+<template v-if="loadedorderRendered.orderInfo.charges.items.length >1">
+<template v-if="!loadedorderRendered.void">
+<template v-if="checkForReturnable">
+
+        <u v-if="returnMultiple" @click="toggleReturnMultiple()">cancel return multiple</u>
+        <u v-else @click="toggleReturnMultiple()">return multiple</u>
+        <br/>
+       <u v-if="returnMultiple && returnList.length > 0" @click="returnMultipleItems()">return selected</u>
+
+</template>
+</template>
+</template>
+</template>
+
+<br />
+
     <template v-if="loadedorderRendered.orderInfo.preorder">
     <span class="small-message grey">
 <template v-if="!loadedorderRendered.orderPosted">
 this preorder has not been posted yet. items cannot be voided or refunded until order is posted.
 </template>
+<!--{{returnList}}-->
+
+        <br/>
+
+
     </span>
 </template>
         <br/>
@@ -198,6 +257,9 @@ import tz from "moment-timezone";
 export default {
   data() {
     return {
+      checkForReturnable: false,
+      returnMultiple: false,
+      returnList: [],
       toggleOrderState: false,
       loadedorderRendered: null,
       loadedorder: null,
@@ -227,8 +289,52 @@ export default {
   },
 
   methods: {
+    returnMultipleItems(){
 
-    cancellable(scheduled_time){
+        for(let i in this.returnList){
+              this.issueTokenizedReturn(
+                      this.returnList[i].transId,
+                      this.returnList[i].price,
+                      this.returnList[i].taxDivPretotal,
+                      this.returnList[i].cartId,
+                      this.returnList[i].mongoId,
+                      false
+                    )
+        }
+
+
+          this.returnMultiple = false;
+    },
+
+    toggleReturnMultiple(){
+      this.returnMultiple = !this.returnMultiple;
+    },
+    removeFromReturnList(cartId){
+
+
+document.getElementById('returnList-' + cartId).style.display = 'block';   
+document.getElementById('returnListRemove-' + cartId).style.display = 'none';
+
+this.returnList = this.returnList.filter(x => x.cartId !== cartId);
+
+},
+addToReturnList(transId,price,taxDivPretotal,cartId,mongoId){
+
+
+this.returnList.push({
+transId,
+price,
+taxDivPretotal,
+mongoId,
+cartId
+});
+
+document.getElementById('returnList-' + cartId).style.display = 'none';   
+document.getElementById('returnListRemove-' + cartId).style.display = 'block';
+
+
+},
+cancellable(scheduled_time){
 
 if(moment(scheduled_time).valueOf() - moment().valueOf() < 2700000){
   return false
@@ -392,19 +498,22 @@ if(order.cancelled){
     }
 
     },
+
+
     issueTokenizedReturn(
       uniqueTransIdString,
       amount,
       taxRate,
       cartId,
-      orderId
+      orderId,
+      ids
     ) {
 
-
+if(ids){
           document.getElementById('not-' + cartId).style.display = 'none';   
           document.getElementById('is-' + cartId).style.display = 'block';
 
-
+}
 
       let tax = amount * taxRate;
       let amountToCalcWithTax = amount + tax;
@@ -494,11 +603,23 @@ if(order.cancelled){
   created(){
     this.loadedorder = this.order;
     this.loadedorderRendered = this.order;
+
+    let notReturnedItems = this.loadedorder.items.filter(x => !x.returned);
+
+            console.log(notReturnedItems.length);
+
+            if(notReturnedItems.length > 0){
+this.checkForReturnable = true;
+            }
+
+
   },
   watch: {
     loadedorder: {
       handler(val){
         this.loadedorderRendered = this.loadedorder
+
+
       },
       deep: true
     } 
@@ -508,6 +629,22 @@ if(order.cancelled){
 </script>
 
 <style lang="scss">
+
+
+
+.returnCheck{
+  width: 20px;
+  height: 20px;
+  font-size: 0;
+  background: white;
+  border: 1px solid black;
+    float: right;
+
+&.remove{
+   background: black;
+}
+
+}
 
 .not-returned span{
   display:none;
@@ -535,5 +672,7 @@ if(order.cancelled){
 
 }
 
-
+u{
+  cursor: pointer;
+}
 </style>

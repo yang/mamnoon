@@ -35,13 +35,23 @@
         <div class="container pad-yellow-background">
           <div class="row no-lr-margin" id="order-history" >
           <template v-for="order in favOrders">
-                  <div class="filtree-full-testing-favorites" @click="reorder(item)">
+
+           
+                  <div class="filtree-full-testing-favorites" @click="reorderFavoriteOrder(order.favoriteOrders)">
                     <div class="yellow-bg-test" >
                       <div class="half-width2left">
                         <div class="content-box">
-                          <ul v-for="(item, index) in order">
-                            <li class="name">{{index}}</li>
+                          <ul class="favOrderList">
+                            <li>{{order.favoriteOrders[0].restaurant}}</li>
+                        <li class="name" v-for="o, index in order.favoriteOrders">
+                         {{o.quantity}} x {{o.name}}</li>
+                         <li class="name">
+                         <a class="" @click="reorderFavoriteOrder(order.favoriteOrders)"><u>order again</u></a>
+                         </li>
                           </ul>
+
+<!--<button class="fl-right sm-button mr-0" @click="reorderFavoriteOrder(order.favoriteOrders)">order again</button>-->
+
                             <!-- <div class="name">{{order[0].name}}</div> -->
                             <!-- <div class="name">{{order[1].name}}</div> -->
                               <!-- <div
@@ -146,6 +156,8 @@ debit/credit
       <!-- {{order.orderInfo.restaurant}} -->
 
 <button v-if="order.orderInfo.restaurant === 'Mamnoon' || order.orderInfo.restaurant === 'Mamnoon Street'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order again</button>
+
+
 <!-- <pre>{{order.orderInfo}}</pre> -->
 </div></td>
 </tr>
@@ -176,36 +188,61 @@ export default {
     name: 'OrderHistory',
     props: ['currentUser','emailAddress'],
     methods: {
-        reorder(order){
-          let storeCurrentOrder = order
+       reorderFavoriteOrder(order){
+
+          let storeCurrentOrder
+
+          if(order[0].restaurant === 'Mamnoon'){
+              storeCurrentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
+
+          }else{
+              storeCurrentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
+          }
+
+
+          storeCurrentOrder.charges.items = order;
+
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
           
           
           this.$store.commit("reordertrue");
-          
-          if(order.restaurant === 'Mamnoon'){
-              // location.reload();
+          if(order[0].restaurant === 'Mamnoon'){
               this.$router.push("/mamnoontesting");
-                      
-          }else{
-              // location.reload();
+              }else{
               this.$router.push("/mamnoonstreettesting");
           }
         },
+        reorder(order){
 
+                let storeCurrentOrder = order;
+
+        
+
+
+   
+          this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
+          
+          
+          this.$store.commit("reordertrue");
+          if(order.restaurant === 'Mamnoon'){
+              this.$router.push("/mamnoontesting");
+              }else{
+              this.$router.push("/mamnoonstreettesting");
+          }
+        },
         formatPrice(value) {
         let val = (value/100).toFixed(2)
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(".00","");
     },
       retrieveOrders() {
-          console.log('retrieve orders from end')
+          // console.log('retrieve orders from end')
         let self = this
           this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
         self.orderhistory = response.data
-        console.log(`self.orderhistory`, self.orderhistory)
+        // console.log(`self.orderhistory`, self.orderhistory)
         let array2 = response.data.user.map(items => items.orderInfo)
         let array3 = array2.flat();
-        
+        console.log(array3);
         self.getFavoriteItems(array3);
         self.getFavoriteOrders(array3);
       })
@@ -217,20 +254,17 @@ export default {
         let favOrders = [];
         for(let i in array3){
           if(array3[i].charges.items.length > 1){
+            array3[i].charges.items[0].restaurant = array3[i].restaurant
             favoriteOrders.push(array3[i].charges.items)
           }
         }
 
         let orderTotal = 0;
-        console.log(`favoriteOrders`, favoriteOrders)
+        // console.log(`favoriteOrders`, favoriteOrders)
         for(let i = 0; i < favoriteOrders.length; i++){
-          console.log(`favoriteOrders[i]`, favoriteOrders[i])
-          favoriteOrders[i].map(x =>{
-            orderTotal += x.price_cents
-          })
           temp.push({
-            total: orderTotal,
-            ...favoriteOrders[i]
+            favoriteOrders: favoriteOrders[i]
+
           })
         }
 
@@ -580,6 +614,13 @@ display: none !important;
     background-position: center center;
     background-size: cover;
     height: 100%;
+}
+
+
+.favOrderList{
+  list-style-type: none;
+  padding-left: 0;
+  font-weight: 400;
 }
 
 </style>

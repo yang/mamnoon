@@ -2563,22 +2563,11 @@ cart empty
   
       </div>
  </div>
-<!--      // end of right col-->
-
-
-
-
-
-
-
+<!--// end of right col-->
       </div>
-      <!--<h1>ccc</h1>-->   
       </div>
       <div>
-
       </div>
-      
-      
       </div>
       </section>
 <!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>

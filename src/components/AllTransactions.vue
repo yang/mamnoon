@@ -208,7 +208,6 @@ export default {
         return true;
       }
     },
-
     setCurrentView(param) {
       this.currentView = param;
     },

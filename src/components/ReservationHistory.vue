@@ -96,14 +96,14 @@ export default {
     methods: {
 
     retrieveReservationsMamnoon() {
-        console.log('retrieve reservations')
+        // console.log('retrieve reservations')
     let self = this
         this.$http.get(`/reservation/retrievemamnoon/${this.currentUser.currentUserEmail}`).then(function (response) {
 // this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
 
 
 
-console.log(response.data.reservations)
+// console.log(response.data.reservations)
 
         self.reservationsmamnoon = response.data.reservations
     })
@@ -111,14 +111,14 @@ console.log(response.data.reservations)
 
 
     retrieveReservations() {
-        console.log('retrieve reservations')
+        // console.log('retrieve reservations'  )
     let self = this
         this.$http.get(`/reservation/retrieve/${this.currentUser.currentUserEmail}`).then(function (response) {
 // this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
 
 
 
-console.log(response.data.reservations)
+// console.log(response.data.reservations)
 
         self.reservations = response.data.reservations
     })
