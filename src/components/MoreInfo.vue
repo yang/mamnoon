@@ -128,7 +128,7 @@
 
 import ListIcon from "@/components/svgIcons/ListIcon";
 import CloseModalRedSm2 from "@/components/svgIcons/CloseModalRedSm2";
-
+import moment from 'moment'
 
 export default {
     name: 'moreInfoClickModal',

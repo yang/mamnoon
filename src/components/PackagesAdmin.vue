@@ -208,6 +208,9 @@ https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&pack
       <button class="btn-nadi" @click="decrementPackage(pa._id)" v-if="pa.number > 0">
         decrement</button
       >&nbsp;
+            <button class="btn-nadi" @click="incrementPackage(pa._id)">
+        increment</button
+      >&nbsp;
       <button class="btn-nadi" @click="deletePackage(pa._id)">delete package</button>
       <br /><br />
     </div>
@@ -224,7 +227,7 @@ https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&pack
 </template>
 <script>
 import Datepicker from "vuejs-datepicker";
-
+import swal from "vue-sweetalert2";
 
 import moment from 'moment'
 import tz from 'moment-timezone'
@@ -473,17 +476,75 @@ if(this.packages){
       console.log(decrementPackResponse);
       this.retrievePackages();
     },
-    async deletePackage(id) {
+
+    async incrementPackage(id) {
       console.log("retriev orders frome");
       console.log(id);
-      let deletePack = await this.$http.post(`/package/deletepackage`, {
+      let incrementPack = await this.$http.post(`/package/incrementpackage`, {
         _id: id,
       });
 
-      let deletePackResponse = deletePack.data;
+      let incrementPackResponse = incrementPack.data;
+      console.log(incrementPackResponse);
+      this.retrievePackages();
+    },
+
+
+
+    async deletePackage(id) {
+
+
+
+
+
+let self = this;
+
+  this.$swal({ 
+      title: "delete this package?",
+    showDenyButton: true,
+    denyButtonText: `Cancel`,
+    confirmButtonText: `Confirm`
+  }).then((confirmed) => {
+    if (confirmed) {
+
+      if(confirmed.isConfirmed){
+  
+
+
+   self.$http
+            .post(`/package/deletepackage`,{
+                _id: id,
+            })
+            .then((response) => {
+    let deletePackResponse = response.data;
 
       console.log(deletePackResponse);
       this.retrievePackages();
+
+
+            })
+            .catch((e) => {
+              // this.errors.push(e);
+              console.log("errors");
+              console.log(e);
+            });
+
+
+
+
+
+      }
+    } else {
+    }
+  });
+
+
+
+
+
+
+
+
     },
   },
   mounted() {

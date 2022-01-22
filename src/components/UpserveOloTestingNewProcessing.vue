@@ -239,6 +239,9 @@
     
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                     <!--<b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" to go only", "")}}</b>   -->
+
+    <b>{{currentItem.name.toLowerCase()}}&nbsp;<template v-if="packageObjectMaximum !== null">({{ packageObjectMaximum}}&nbsp;remain)</template></b>
+
                 <br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
@@ -359,6 +362,11 @@
         </div>
 <div class="orderModalFooter" v-if="oloAvailable">
 <hr/>
+
+
+
+
+
           <div class="add-to-order-footer" v-if="oloAvailable">
             item total: <b>${{ formatExtraZero(computedAddition * currentItemQuantity) }}</b>
           </div>
@@ -367,7 +375,30 @@
           <button v-else disabled>-</button>
           &nbsp;&nbsp;
           <span id="value">{{currentItemQuantity}}</span>&nbsp;&nbsp;
+
+
+
+<template v-if="packageObjectMaximum !== null">
+
+
+
+
+<template v-if="currentItemQuantity < packageObjectMaximum">
           <button @click="incrementCurrentItem()">+</button>
+</template>
+<template v-else>
+          <button disabled>+</button>
+</template>
+
+</template>
+<template v-else>
+
+
+<button @click="incrementCurrentItem()">+</button>
+
+</template>
+
+
                 <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
                     <template v-if="allOptionsSelected">
                       <button
@@ -468,7 +499,7 @@
                   <!-- <pre>{{currentItem.item_object.modifier_group_ids}}</pre> -->
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                    <!-- <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" to go only", "")}}</b>  -->
-                    
+                       <b>{{currentItem.name.toLowerCase()}}&nbsp;<template v-if="packageObjectMaximum !== null">({{packageObjectMaximum}} remain)</template></b>
                      <b style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
@@ -876,7 +907,10 @@ add
 
                       <!-- <br> -->
                       
-                      ${{ formatPrice(serve.price_cents) }}<span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span>   
+                      ${{ formatPrice(serve.price_cents) }}
+                       <template v-if="checkIfPackage(serve.id)">
+                      <span class="checkIfPackage" v-if="checkIfPackage(serve.id) !== 'false'" v-html="checkIfPackage(serve.id)"></span>   
+                      </template>
                     </div>
                     <br />
                   </div>
@@ -959,7 +993,10 @@ add
                                                                                                             class="food-description"
                                                                                                           >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
-                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}            <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}   
+                                                                                                            
+          <template v-if="checkIfPackage(serve.id)">                                                                                                            <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+          </template>
                                                                                                           </div>
                                                                                                           <br />
                                                                                                         </div>
@@ -1026,7 +1063,14 @@ add
                                 class="food-description"
                               >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                               <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}            <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                ${{ serve.price_cents.toFixed(2)/100}}            
+                                <template v-if="checkIfPackage(serve.id)">
+
+ <template v-if="checkIfPackage(serve.id)">
+
+                                <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                </template>
+                                </template>
                               </div>
                               <br />
                             </div>
@@ -1210,7 +1254,10 @@ add
                                                                                                             class="food-description"
                                                                                                           >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                                                                                                           <div class="food-price">
-                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}      <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                                                                                            ${{ serve.price_cents.toFixed(2)/100}}     
+                                                                                                            
+                                            <template v-if="checkIfPackage(serve.id)">                                                                  <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                            </template>
                                                                                                           </div>
                                                                                                           <br />
                                                                                                         </div>
@@ -1281,7 +1328,12 @@ add
                                 class="food-description"
                               >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                               <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}       <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                ${{ serve.price_cents.toFixed(2)/100}}     
+                                
+                                
+                                 <template v-if="checkIfPackage(serve.id)">
+                                  <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                  </template>
                               </div>
                               <br />
                             </div>
@@ -1345,7 +1397,11 @@ add
                                 class="food-description"
                               >{{serve.description.replace("[LINEBREAK]","") | truncate(60, '...')}}</div>
                               <div class="food-price">
-                                ${{ serve.price_cents.toFixed(2)/100}}       <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                ${{ serve.price_cents.toFixed(2)/100}} 
+                                 <template v-if="checkIfPackage(serve.id)"> 
+                                     <span class="checkIfPackage" v-html="checkIfPackage(serve.id)"></span> 
+                                     </template>
+
                               </div>
                               <br />
                             </div>
@@ -3150,7 +3206,7 @@ for (var value of this.currentOrder.charges.items) {
     // console.log(value.timing_mask.rules)
     // console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
   if(!value.timing_mask.rules.includes(this.selectedDate.dayLabel.substring(0,3).toLowerCase())){
-    this.removeFromOrder(value)
+    // this.removeFromOrder(value)
     itemsToRemove.push(value)
   }
   }
@@ -3173,20 +3229,24 @@ if(removalItems.length === 2){
 if(itemsToRemove.length === 1){
 
 
-        this.$swal({ 
-           title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
+        // this.$swal({ 
+        //    title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
+        //   });
+
+      this.$swal({ 
+           title: removalItems + ' is not available at the selected pick-up time. please select another time.'
           });
-
-
 
 }else if(itemsToRemove.length>1){
 
 
+        // this.$swal({ 
+        //    title: removalItems + ' are not available at the selected pick-up time and have been removed from your shopping bag'
+        //   });
+
         this.$swal({ 
-           title: removalItems + ' are not available at the selected pick-up time and have been removed from your shopping bag'
+           title: removalItems + ' are not available at the selected pick-up time. please select another time.'
           });
-
-
 
 }
 
@@ -3215,7 +3275,7 @@ for (var value of this.currentOrder.charges.items) {
 if(value.timing_mask){
 if(!this.isBetween(value.timing_mask.start_time,value.timing_mask.end_time,moment(this.selectedTime.time).format('HH:mm:ss'))){
 // console.log(value + " not available")
-this.removeFromOrder(value)
+// this.removeFromOrder(value)
 itemsToRemove.push(value)
 }}}
 }
@@ -3239,17 +3299,45 @@ if(itemsToRemove.length === 1){
 
 
 
-        this.$swal({ 
-           title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
+        // this.$swal({ 
+        //    title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
+        //   });
+
+
+
+
+
+
+
+
+    this.$swal({ 
+           title: removalItems + ' is not available at the selected pick-up time. please select another time.'
           });
+
+
+
+
+
+
+
+
 
 
 
 }else if(itemsToRemove.length>1){
 
+        // this.$swal({ 
+        //    title: removalItems + ' are not available at the selected pick-up time and have been removed from your shopping bag'
+        //   });
+          
+
         this.$swal({ 
-           title: removalItems + ' are not available at the selected pick-up time and have been removed from your shopping bag'
+           title: removalItems + ' are not available at the selected pick-up time. please select another time.'
           });
+
+
+
+
 
 
 }
@@ -3338,6 +3426,7 @@ googleAddressObject.state;
     },
   data() {
   return {
+    packageObjectMaximum: null,
     forPackageModal: {},
     employeeCheckout: false,
     dnsCheck: false,
@@ -4284,7 +4373,7 @@ let self = this;
   // this.forPackageModal = responseUpserve.data.package.object;
 
 
-self.openModal(responseUpserve.data.package.object);
+self.openModal(responseUpserve.data.package.object,null,responseUpserve.data.package.number);
 
     },
 
@@ -4339,19 +4428,18 @@ checkIfPackage(itemid){
         return pack.upserveId === itemid
       });
 
-// console.log(result);
-if(result !== undefined){
-
-
-
-if(result.number === 0){
-  return 'sold out'
+    // console.log(result);
+if(result === undefined){
+return false;
 }else{
-  return ' (' + result.number + ' remain)';
-}
 
-}else{
-  // return 'dsf';
+  if(result.number>0){
+    return result.number + ' remain';
+  }else{
+    return 'sold out';
+  }
+
+  // return result.number;
 }
 
     }
@@ -5761,7 +5849,7 @@ removeFromOrder(removal) {
       this.currentItem = null;
       this.currentItemQuantity = 1;
       this.textdescription = "";
-
+      this.packageObjectMaximum = null;
       this.currentItemModifierArray = [];
 
 
@@ -5771,7 +5859,7 @@ removeFromOrder(removal) {
       this.orderConfirmationModal = false;
       this.orderCMR = "";
     },
-    openModal(serve,timing_mask) {
+    openModal(serve,timing_mask,amountOfPackagesRemaining) {
 
       let current = Object.assign({}, serve);
       current.timing_mask = timing_mask
@@ -5795,7 +5883,10 @@ if(current.modifier_group_ids){
       this.modalOpen = true;
       this.currentItem = current;
 
-
+      // console.log(packageObject);
+      if(amountOfPackagesRemaining){
+      this.packageObjectMaximum = amountOfPackagesRemaining;
+    }
  document.documentElement.style.overflow = 'hidden'
 
     },
@@ -5946,7 +6037,7 @@ items.forEach(function(x){
 
           // this.currentItemModifierArray = [];
           // this.allOptionsSelected = false
-          // this.closeModal();
+          
 
     },
     addToOrder(item) {
@@ -6239,7 +6330,7 @@ return searchResult;
 
           //then close the modal
           this.currentItemModifierArray = [];
-          // this.closeModal();
+          
           // let storeCurrentOrder = this.currentOrder;
 
   
@@ -6801,13 +6892,9 @@ this.employeeCheckout = true
 // console.log(this.returnCorrect);
 
 const urlParams = new URLSearchParams(window.location.search);
-const product = urlParams.get('packageid');
-// console.log(product);
-// console.log(product);
-// console.log(product);
-// console.log(product);
+const product = urlParams.get('packageId');
 
-
+console.log(product);
 
 
 if(product !== null){

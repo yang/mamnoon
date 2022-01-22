@@ -111,7 +111,7 @@
 
 
 <script>
-
+import moment from 'moment'
   import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
     import 'swiper/swiper.min.css'
 // import  MoreInfo from "@/components/MoreInfo";

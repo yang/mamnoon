@@ -182,7 +182,7 @@ status: <b>ticket closed</b>
 
         <br />
 
-
+{{loadedorderRendered.orderAccepted}}
 
 <template v-if="loadedorderRendered.orderAccepted">
 <template v-if="loadedorderRendered.orderInfo.charges.items.length >1">
