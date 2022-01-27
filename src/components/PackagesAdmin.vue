@@ -2,7 +2,11 @@
 <div>
   <div class="container">
  <button class="btn-nadi fl-right" @click="toggleMamnoonMenu()">toggle mamnoon menu</button>
-  <h1 class="red">Mamnoon Packages</h1>   
+  <h1 class="red">Mamnoon Packages</h1>  
+
+
+<!--
+  {{packageAdd}} -->
   <hr>
 
 
@@ -18,13 +22,78 @@
     <!---->
       <div class="container" v-if="mamnoonmenuexpanded" data="ise">
       <div class="packageList">
-            <template v-for="up in upserve">
+
+      
+
+
+            <template v-for="section in upserveSections">
+<div class="row">
+            <h2 class="menu-header">         
+{{section.name}}
+
+
+
+</h2>
+</div>
+<div class="row">
+
+<template v-for="id in section.item_ids">
+
+<template v-for="item in upserve">
+
+<template v-if="item.id === id">
+
+<!--{{item}}-->
+
+
+
+
+            <div class="packageTile">
+            <div class="inside">
+            <h2>{{item.name}}</h2>
+            <p class="small-message grey">{{item.description}}</p>
+ 
+            <template v-if="section.timing_mask && section.timing_mask.start_date && section.timing_mask.end_date">
+            <template v-if="section.timing_mask.start_date">start date: {{section.timing_mask.start_date}}</template><br>
+            <template v-if="section.timing_mask.end_date">end date: {{section.timing_mask.end_date}}</template><br>
+        
+        
+                    <button class="btn-nadi" v-if="section.timing_mask.start_date && section.timing_mask.end_date" @click="useForPackage(item,section.timing_mask)">use for package</button>
+
+            </template>
+            <template v-else>
+                    <span class="small-message">to add this as a package, please select a start and end date for the display group the item is under in upserve.</span>
+            </template>
+
+
+            </div>
+            </div>
+
+
+
+</template>
+</template>
+
+
+</template>
+
+</div>
+
+
+
+
+
+            </template>
+
+
+
+           <!-- <template v-for="up in upserve">
             <div class="packageTile">
             <div class="inside">
             <h2>{{up.name}}</h2>
             <p class="small-message grey">{{up.description}}</p>
             <template v-if="up.images.online_ordering_menu && up.images.online_ordering_menu.main">
-            <!--<img class="packageImage" :src="up.images.online_ordering_menu.main" />-->
+      <img class="packageImage" :src="up.images.online_ordering_menu.main" />
             </template>
   
             <button class="btn-nadi" @click="useForPackage(up)">use for package</button>
@@ -32,7 +101,7 @@
             </div>
 
 
-            </template>
+            </template>-->
   
           </div>
     </div>
@@ -64,6 +133,10 @@
 
 
 name: {{packageAdd.name}}
+<br />
+timing mask:<br>
+<template v-if="packageAdd.timing_mask.start_date">start date: {{packageAdd.timing_mask.start_date}}</template><br>
+<template v-if="packageAdd.timing_mask.end_date">end date: {{packageAdd.timing_mask.end_date}}</template><br>
       <br />
       <input
         id="name"
@@ -174,6 +247,9 @@ staff notification email recipients:
 <div class="inside">
 <h5>{{pa.name}} ({{pa.number}} remain)</h5>
 
+
+<!--{{pa}}-->
+
 <template v-if="pa.object.images.online_ordering_menu && pa.object.images.online_ordering_menu.main">
 </template>
 {{formatDate(pa.orderDate)}}
@@ -239,6 +315,7 @@ export default {
   name: "PackagesAdmin",
   data() {
     return {
+      upserveSections: [],
       origin: '',
       emailErrorVisibleTf: false,
        dnsCheck: false,
@@ -255,6 +332,7 @@ export default {
         number: null,
         soldOut: false,
         object: {},
+        timing_mask: {},
         recipients: [],
       },
       mamnoonToggled: false,
@@ -362,6 +440,7 @@ return moment(date).format('YYYY-MM-DD');
       this.packageAdd.number = null;
       this.packageAdd.recipients = [];
       this.packageAdd.object = {};
+      this.packageAdd.timing_mask = {};
     },
     toggleMamnoonMenu() {
       this.mamnoonmenuexpanded = !this.mamnoonmenuexpanded;
@@ -390,10 +469,11 @@ return moment(date).format('YYYY-MM-DD');
     },
 
 
-    useForPackage(up) {
+    useForPackage(up,timingMask) {
       this.packageAdd.name = up.name;
       this.packageAdd.upserveId = up.id;
        this.packageAdd.object = up;
+       this.packageAdd.timing_mask = timingMask;
       // this.packageAdd.orderDate = null;
       // this.packageAdd.number = null;
 
@@ -404,7 +484,15 @@ return moment(date).format('YYYY-MM-DD');
     async upserves() {
       let responseUpserve = await this.$http.get("/product/upserveolo");
       // console.log(responseUpserve)
+
       if (responseUpserve.data.body) {
+
+
+        // console.log(responseUpserve.data.body.sections);
+
+
+        this.upserveSections = responseUpserve.data.body.sections;
+
         let upserveProducts = responseUpserve.data.body.items;
         this.upserve = upserveProducts;
       }
@@ -436,6 +524,7 @@ if(this.packages){
         this.packageAdd.number = null;
          this.packageAdd.recipients = [];
         this.packageAdd.object = {};
+        this.packageAdd.timing_mask = {};
         return true;
       } else {
         return false;
@@ -463,6 +552,7 @@ if(this.packages){
         this.packageAdd.number = null;
          this.packageAdd.recipients = [];
         this.packageAdd.object = {};
+        this.packageAdd.timing_mask = {};
       }
     },
     async decrementPackage(id) {

@@ -236,7 +236,8 @@
 <div class="scrollItems">
             <p class="item-description-p" :class="{noTopMarge: true === true}">
    
-    
+
+
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                     <!--<b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" to go only", "")}}</b>   -->
 
@@ -404,8 +405,8 @@
                       <button
                       v-if="oloAvailable"
                       class="float-right"
-                      @click="addToOrder(currentItem)"
-                      >add to order</button>
+                      @click="addToOrder(currentItem,packageOrderDate)"
+                      >add to order  {{packageOrderDate}}</button>
                     </template>
                     <template v-else>
                       <button
@@ -418,7 +419,7 @@
                   <button
                   v-if="oloAvailable"
                     class="float-right"
-                    @click="addToOrder(currentItem)"
+                    @click="addToOrder(currentItem,packageOrderDate)"
                   >add to order</button>
                 </template>
           </div>
@@ -495,7 +496,7 @@
 <!-- {{currentItem.item_object.modifier_group_ids}} -->
 
             <p class="item-description-p" :class="{noTopMarge: true === true}">
-              <!-- <pre>{{currentItem}}</pre> -->
+             <pre>{{currentItem}}</pre>
                   <!-- <pre>{{currentItem.item_object.modifier_group_ids}}</pre> -->
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                    <!-- <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" to go only", "")}}</b>  -->
@@ -871,13 +872,21 @@ add
     <!-- beggin 1 -->
     
       <template>
-              <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
+
+          <!-- check if package section -->
+           <template v-if="!checkIfPackageSection(item)">
+              <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="checkIfPackageSection(item) && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
                 
                 <div
                   :id="'drawertop-'+ item.id"
                   class="display-block row no-lr-margin"
                 >
                     <h2 class="menu-header">
+<!--first landing version
+selected time
+{{selectedDate.dateformatted}}
+selected time
+{{checkIfPackageSection(item)}}-->
             <!-- <div >{{item.id}}</div> -->
                         {{item.name.replace('- To Go', '').replace('To Go', '')}}
                         <!-- {{item.timing_mask}} -->
@@ -936,8 +945,18 @@ add
           </div>
         </div>
       </div>
+
+      </template>
+          <!-- end check if package section -->
+
       </template>
       <!-- end 1 -->
+
+
+
+
+
+
   </template>
   <!-- end 0 -->
 </template>
@@ -969,7 +988,15 @@ add
                                                   class="display-block row no-lr-margin"
                                                 >
                                                   <h2 class="menu-header">
-                                                        
+                                   
+<!--first landing version 33
+selected time
+
+{{selectedDate.dateformatted}}
+selected time
+{{checkIfPackageSection(item)}}-->
+
+
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
                                                   </h2>
@@ -1026,8 +1053,8 @@ add
   </template>
 <template v-else>
 <!-- else -->
-<!-- {{selectedDate}} -->
-<!-- {{selectedTime}} -->
+<!-- <!--{{selectedDate.dateformatted}}--> -->
+<!-- <!--{{selectedDate.dateformatted}}--> -->
            <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line-testing">
             <!-- this is available at the started time -->
             
@@ -1036,10 +1063,16 @@ add
                 @click="expandChild(item.id)"
                 class="display-block row no-lr-margin"
               >
-              <!-- {{selectedTime}} -->
+              <!-- <!--{{selectedDate.dateformatted}}--> -->
 
               <!-- {{item.timing_mask}} -->
                 <h2 class="menu-header">
+  <!--     
+first landing version 44
+selected time
+{{selectedDate.dateformatted}}
+selected time
+{{checkIfPackageSection(item)}}-->
                   <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
                   <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
@@ -1219,6 +1252,15 @@ add
                                                   class="display-block row no-lr-margin"
                                                 >
                                                   <h2 class="menu-header">
+
+
+
+<!--first landing version55-->
+<!--selected time-->
+<!--{{selectedDate.dateformatted}}-->
+<!--selected time
+{{checkIfPackageSection(item)}}-->
+
                                                     <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
                                                     <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
@@ -1304,10 +1346,16 @@ add
                 class="display-block row no-lr-margin"
               >
                 <h2 class="menu-header">
+<!--first landing version 66
+selected time-->
+<!--{{selectedDate.dateformatted}}-->
+<!--selected time
+{{checkIfPackageSection(item)}}-->
+
                   <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
                   <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
-                  {{item.timing_mask}}
+   
                 </h2>
               </div>
               <div :data="'drawer' + item.id" class=" row no-lr-margin">
@@ -1373,6 +1421,12 @@ add
                 class="display-block row no-lr-margin"
               >
                 <h2 class="menu-header">
+<!--first landing version 77
+selected time
+{{selectedDate.dateformatted}}
+selected time
+{{checkIfPackageSection(item)}}-->
+          
                   <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
                   <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
@@ -2070,6 +2124,8 @@ add
                         <TrashCan />         
                   </button>
 <div class="mt5 inline-flex" style="cursor:pointer;"  @click="openModal2(order)">
+
+
 
 
 <div class="roundSquareBox">
@@ -3201,15 +3257,27 @@ let itemsToRemove = []
 
 if(this.currentOrder.charges){
 for (var value of this.currentOrder.charges.items) {
+
+console.log(value);
+
   // console.log(moment(this.selectedTime.time).format('HH:mm:ss'))
   if(value.timing_mask){
     // console.log(value.timing_mask.rules)
     // console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
   if(!value.timing_mask.rules.includes(this.selectedDate.dayLabel.substring(0,3).toLowerCase())){
-    // this.removeFromOrder(value)
+    this.removeFromOrder(value)
     itemsToRemove.push(value)
   }
   }
+
+
+if(value.specific_date){
+if(this.selectedDate.dateFormatted !== moment(value.specific_date).add(1, 'days').format('YYYY-MM-DD')){
+       this.removeFromOrder(value)
+    itemsToRemove.push(value)
+}
+}
+  
 }
 }
 let removalItems = []
@@ -3229,25 +3297,25 @@ if(removalItems.length === 2){
 if(itemsToRemove.length === 1){
 
 
-        // this.$swal({ 
-        //    title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
-        //   });
-
-      this.$swal({ 
-           title: removalItems + ' is not available at the selected pick-up time. please select another time.'
+        this.$swal({ 
+           title: removalItems + ' is not available at the selected pick-up date and has been removed from your shopping bag'
           });
 
+      // this.$swal({ 
+      //      title: removalItems + ' is not available at the selected pick-up time. please select another time.'
+      //     });
+// this.selectedTime = null;
 }else if(itemsToRemove.length>1){
 
 
-        // this.$swal({ 
-        //    title: removalItems + ' are not available at the selected pick-up time and have been removed from your shopping bag'
-        //   });
-
         this.$swal({ 
-           title: removalItems + ' are not available at the selected pick-up time. please select another time.'
+           title: removalItems + ' are not available at the selected pick-up date and have been removed from your shopping bag'
           });
 
+        // this.$swal({ 
+        //    title: removalItems + ' are not available at the selected pick-up time. please select another time.'
+        //   });
+// this.selectedTime = null
 }
 
 this.currentOrder.scheduled_time = null
@@ -3311,7 +3379,7 @@ if(itemsToRemove.length === 1){
 
 
     this.$swal({ 
-           title: removalItems + ' is not available at the selected pick-up time. please select another time.'
+           title: removalItems + ' is not available at the selected pick-up time. please select another time between ' +value.timing_mask.start_time + ' and ' + value.timing_mask.end_time
           });
 
 
@@ -3319,7 +3387,7 @@ if(itemsToRemove.length === 1){
 
 
 
-
+this.selectedTime = null
 
 
 
@@ -3332,11 +3400,11 @@ if(itemsToRemove.length === 1){
           
 
         this.$swal({ 
-           title: removalItems + ' are not available at the selected pick-up time. please select another time.'
+           title: removalItems + ' are not available at the selected pick-up time. please select another time between ' +value.timing_mask.start_time + ' and ' +value.timing_mask.end_time
           });
 
 
-
+this.selectedTime = null
 
 
 
@@ -3426,6 +3494,7 @@ googleAddressObject.state;
     },
   data() {
   return {
+    packageOrderDate: null,
     packageObjectMaximum: null,
     forPackageModal: {},
     employeeCheckout: false,
@@ -3654,7 +3723,36 @@ showToFixed: function (value) {
 }
   },
   methods: {
+checkIfPackageSection(f){
 
+  let result = false;
+
+console.log(this.packages.length);
+  if(f.timing_mask && f.timing_mask.id){
+
+
+
+for(let i in this.packages){
+
+
+if(this.packages[i].timing_mask.id === f.timing_mask.id){
+  console.log(f)
+result = true;
+
+  
+}
+
+}
+
+
+
+  }
+
+return result;
+
+
+
+},
     emailValidFromServer(email){
 console.log('valid from server')
 console.log('valid from server')
@@ -4373,7 +4471,11 @@ let self = this;
   // this.forPackageModal = responseUpserve.data.package.object;
 
 
-self.openModal(responseUpserve.data.package.object,null,responseUpserve.data.package.number);
+
+let timingMask = { "id": "32ee8a54-e9dd-4964-8996-0a290b768073", "start_time": "11:00", "end_time": "14:30", "rules": [ "tue", "wed", "thu", "fri", "sat" ], "status": "enabled", "owner_id": "ac9a087b-f4c5-4778-bdcc-1d9db6847e82" }
+
+// console.log(responseUpserve.data.package.timing_mask)
+self.openModal(responseUpserve.data.package.object,responseUpserve.data.package.timing_mask,responseUpserve.data.package);
 
     },
 
@@ -5850,6 +5952,7 @@ removeFromOrder(removal) {
       this.currentItemQuantity = 1;
       this.textdescription = "";
       this.packageObjectMaximum = null;
+      this.packageOrderDate = null;
       this.currentItemModifierArray = [];
 
 
@@ -5859,8 +5962,10 @@ removeFromOrder(removal) {
       this.orderConfirmationModal = false;
       this.orderCMR = "";
     },
-    openModal(serve,timing_mask,amountOfPackagesRemaining) {
+    openModal(serve,timing_mask,packageObject) {
+// console.log(timing_mask);
 
+console.log(packageObject);
       let current = Object.assign({}, serve);
       current.timing_mask = timing_mask
 
@@ -5883,10 +5988,19 @@ if(current.modifier_group_ids){
       this.modalOpen = true;
       this.currentItem = current;
 
-      // console.log(packageObject);
-      if(amountOfPackagesRemaining){
-      this.packageObjectMaximum = amountOfPackagesRemaining;
+
+      if(packageObject){
+
+        if(packageObject.number){
+          this.packageObjectMaximum = packageObject.number;
+        }
+
+        if(packageObject.orderDate){
+          this.packageOrderDate = packageObject.orderDate;
+        }
+
     }
+
  document.documentElement.style.overflow = 'hidden'
 
     },
@@ -6042,6 +6156,10 @@ items.forEach(function(x){
     },
     addToOrder(item) {
 
+    console.log('specificDate');
+
+
+
 
 
       // console.log(item)
@@ -6143,6 +6261,14 @@ this.currentOrder.charges.items.push(itemToAdd);
     },
 
     updateOrderItem(item) {
+
+
+    console.log('specificDate');
+
+
+
+
+
 
 // console.log(item);
 
