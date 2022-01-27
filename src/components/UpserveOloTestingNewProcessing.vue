@@ -1501,7 +1501,7 @@ selected time
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
 
 
-<div class="right-column">
+<div class="right-column" style="position: absolute !important;">
 
 
 
@@ -1764,7 +1764,7 @@ selected time
 
                      </div>
             <input style="width: auto;margin-right: 10px;transform: translateY(1px);" type="checkbox" id="cutlery" name="cutlery" value="cutlery" v-model="currentOrder.fulfillment_info.no_tableware">
-  <label class="smblk" for="cutlery">don't include disposable cutlery </label>
+  <label class="smblk" for="cutlery">please include plastic cutlery </label>
                   <br />
 
 <h4 v-if="currentOrder.fulfillment_info.type === '' || currentOrder.fulfillment_info.type === 'pickup'" class="customer-info text-left mt10">guest info</h4>
@@ -4483,9 +4483,9 @@ self.openModal(responseUpserve.data.package.object,responseUpserve.data.package.
 
 emptyReOrderObject(){
 
-this.$store.commit('upserveOrderCurrentOrder', {});
+  this.reOrder = {};
+  this.$store.commit('upserveOrderCurrentOrder', {});
 
-this.reOrder = {};
 },
 returnOrder(itemid){
 
@@ -6103,18 +6103,17 @@ this.currentItemQuantity = this.currentItem.quantity;
         document.getElementById("minus-" + drawer).classList.remove("visible");
       }
     },
-addToAllItemsToOrder(items){
 
+    addToAllItemsToOrder(items){
+      this.reOrder = {};
+      let self = this
+      items.forEach(function(x){
+        self.addToOrderFromReorder(x)
+      });
 
-let self = this
+      self.emptyReOrderObject()
 
-items.forEach(function(x){
-  self.addToOrderFromReorder(x)
-});
-
-  this.emptyReOrderObject()
-
-},
+    },
     addToOrderFromReorder(item) {
 
       console.log(item)
@@ -6909,7 +6908,7 @@ if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.
   mounted() {
 
 
-
+    // this.printStore();
 if(window.location.hash === '#mamnoonEmployee'){
 this.employeeCheckout = true
 }

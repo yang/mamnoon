@@ -201,6 +201,11 @@ const routes = [
     component: () => import("../views/restaurants.vue")
   },
   {
+    path: "/careers",
+    name: "careers",
+    component: () => import("../views/careers.vue")
+  },
+  {
     path: "/:id/menu",
     component: () => import("../components/MenuTemplate.vue")
   },
@@ -210,7 +215,8 @@ const routes = [
     meta: {
       title: 'facebook'
     }
-  }
+  },
+  
 
 ];
 

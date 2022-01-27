@@ -188,22 +188,20 @@ export default {
     name: 'OrderHistory',
     props: ['currentUser','emailAddress'],
     methods: {
-       reorderFavoriteOrder(order){
-
+      printStore() {
+        console.log('this.$store.state', this.$store.state);
+      },
+      reorderFavoriteOrder(order){
           let storeCurrentOrder
-
           if(order[0].restaurant === 'Mamnoon'){
               storeCurrentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
 
           }else{
               storeCurrentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
           }
-
-
           storeCurrentOrder.charges.items = order;
 
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-          
           
           this.$store.commit("reordertrue");
           if(order[0].restaurant === 'Mamnoon'){
@@ -213,13 +211,7 @@ export default {
           }
         },
         reorder(order){
-
-                let storeCurrentOrder = order;
-
-        
-
-
-   
+          let storeCurrentOrder = order;
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
           
           
@@ -242,7 +234,7 @@ export default {
         // console.log(`self.orderhistory`, self.orderhistory)
         let array2 = response.data.user.map(items => items.orderInfo)
         let array3 = array2.flat();
-        console.log(array3);
+
         self.getFavoriteItems(array3);
         self.getFavoriteOrders(array3);
       })
@@ -264,16 +256,10 @@ export default {
         for(let i = 0; i < favoriteOrders.length; i++){
           temp.push({
             favoriteOrders: favoriteOrders[i]
-
           })
         }
-
-        
-        
-        // this.favOrders = temp.sort((a,b) => (a.price_cents > b.price_cents) ? 1 : ((b.price_cents > a.price_cents) ? -1 : 0)).slice(temp.length-3, temp.length).reverse();
         this.favOrders = temp.sort((a,b) => (a.price_cents > b.price_cents) ? 1 : ((b.price_cents > a.price_cents) ? -1 : 0)).slice(temp.length-3, temp.length).reverse();
 
-        console.log(`this.favOrders`, this.favOrders)
         return favOrders;
     },
     getFavoriteItems(array3) {
@@ -326,7 +312,7 @@ showToFixed: function (value) {
     
     mounted(){
         this.retrieveOrders()
-        
+        this.printStore()
     }
 
 }
