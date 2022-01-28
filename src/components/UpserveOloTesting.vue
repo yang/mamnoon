@@ -6302,7 +6302,7 @@ div {
   // height: 100px;
   position: relative;
   padding: 10px;
-    min-width: 200px;
+  min-width: 190px;
 
 
   .itemTitle{
