@@ -161,14 +161,27 @@ timing mask:<br>
       />
       </div>
     
-      date:<br>
-      <datepicker
-        v-model="packageAdd.orderDate"
+      start date:<br>
+      {{packageAdd.timing_mask.start_date}}
+      <!--<datepicker
+        v-model="packageAdd.timing_mask.start_date"
         placeholder="Pick A Date"
          @selected="checkPackAdd"
          
-      ></datepicker>
+      ></datepicker>-->
       <br />
+
+end date:<br>
+      {{packageAdd.timing_mask.end_date}}
+   <!--alt pickup date (optional):<br>
+      <datepicker
+        v-model="packageAdd.endDate"
+        placeholder="Pick A Date"
+      ></datepicker>-->
+      <br />
+
+
+
       quantity:<br>
       <input
         id="number"
@@ -246,30 +259,47 @@ staff notification email recipients:
  <div class="packageTile">
 <div class="inside">
 <h5>{{pa.name}} ({{pa.number}} remain)</h5>
+<br>
 
+
+
+start date: {{pa.timing_mask.start_date}}<br>
+end date: {{pa.timing_mask.end_date}}<br>
+
+pickup start time: {{pa.timing_mask.start_time}}<br>
+pickup end time: {{pa.timing_mask.end_time}}<br>
 
 <!--{{pa}}-->
 
 <template v-if="pa.object.images.online_ordering_menu && pa.object.images.online_ordering_menu.main">
 </template>
-{{formatDate(pa.orderDate)}}
+{{formatDate(pa.timing_mask.start_date)}}
 <br>
 
 
 <template v-if="origin === 'http://localhost:8080'">
-<a ref="mylink" rel="noopener noreferrer" :href="'http://localhost:8080/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
-http://localhost:8080/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
+<a ref="mylink" rel="noopener noreferrer" :href="'http://localhost:8080/mamnoontesting?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
+http://localhost:8080/mamnoontesting?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
 </a>
 </template>
 <template v-else>
 
-<a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.orderDate)+'&packageId='+pa.upserveId" target="_blank">
-https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.orderDate)}}&packageId={{pa.upserveId}}
+<a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
+https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
 </a>
 
 
 </template>
 
+
+
+<div>
+preorders:
+
+{{preOrders}}
+
+
+</div>
 
 
     <div class="recipientList">
@@ -315,6 +345,7 @@ export default {
   name: "PackagesAdmin",
   data() {
     return {
+      preOrders: null,
       upserveSections: [],
       origin: '',
       emailErrorVisibleTf: false,
@@ -334,6 +365,9 @@ export default {
         object: {},
         timing_mask: {},
         recipients: [],
+        endDate: null,
+        startTime: null,
+        endTime: null
       },
       mamnoonToggled: false,
       streetToggled: false,
@@ -344,6 +378,29 @@ export default {
 
 
   methods: {
+   returnendDate(endDate){
+if(endDate){
+
+
+
+  
+  return `&endDate=${this.formattedLinkDate(endDate)}`
+}else{
+  return ``;
+}
+    },
+
+   returnTimeRange(timing_mask){
+if(timing_mask){
+
+  
+  return `&startTime=${encodeURIComponent(timing_mask.start_time)}&endTime=${encodeURIComponent(timing_mask.end_time)}`
+}else{
+  return ``;
+}
+    },
+
+
     formatDate(date){
       return moment(date).format('MM-DD-YYYY')
     },
@@ -417,9 +474,10 @@ checkPackAdd(){
 
 console.log(this.packageAdd.name);
 console.log(this.packageAdd.number);
-console.log(this.packageAdd.orderDate);
+console.log(this.packageAdd.timing_mask.start_date);
 console.log(this.packageAdd.upserveId);
-if(this.packageAdd.name !== null && this.packageAdd.number !== null && this.packageAdd.upserveId !== null && this.packageAdd.orderDate && this.packageAdd.recipients.length > 0){
+console.log(this.packageAdd.endDate);
+if(this.packageAdd.name !== null && this.packageAdd.number !== null && this.packageAdd.upserveId !== null && this.packageAdd.timing_mask.start_date && this.packageAdd.recipients.length > 0){
 
 
   this.packageFilledOut = true;
@@ -436,11 +494,12 @@ return moment(date).format('YYYY-MM-DD');
     clearPackage() {
       this.packageAdd.name = null;
       this.packageAdd.upserveId = null;
-      this.packageAdd.orderDate = null;
+      this.packageAdd.timing_mask.start_date = null;
       this.packageAdd.number = null;
       this.packageAdd.recipients = [];
       this.packageAdd.object = {};
       this.packageAdd.timing_mask = {};
+      this.packageAdd.endDate = null;
     },
     toggleMamnoonMenu() {
       this.mamnoonmenuexpanded = !this.mamnoonmenuexpanded;
@@ -470,11 +529,27 @@ return moment(date).format('YYYY-MM-DD');
 
 
     useForPackage(up,timingMask) {
+
+
+// console.log(up);
+console.log(timingMask.start_date);
+console.log(timingMask.end_date);
+console.log(timingMask.start_time);
+console.log(timingMask.end_time);
+
+console.log(this.packageAdd);
+
+
+
+
+
+
       this.packageAdd.name = up.name;
       this.packageAdd.upserveId = up.id;
        this.packageAdd.object = up;
        this.packageAdd.timing_mask = timingMask;
-      // this.packageAdd.orderDate = null;
+  
+      // this.packageAdd.timing_mask.start_date = null;
       // this.packageAdd.number = null;
 
       this.toggleMamnoonMenu();
@@ -503,6 +578,17 @@ return moment(date).format('YYYY-MM-DD');
       let responseUpserve = await this.$http.get(`/package/retrieve`);
       this.packages = responseUpserve.data.packs;
     },
+
+
+    async retrievePreorders() {
+      console.log("retriev orders frome");
+      let responseUpserve = await this.$http.get(`/order/retrievepreorders`);
+      console.log(responseUpserve);
+      this.preOrders = responseUpserve.data;
+    },
+
+
+
     checkForClash(packageAdd) {
       //   if(there is a this.checkForClash){
 
@@ -520,7 +606,6 @@ if(this.packages){
         alert("already a package for this item.");
         this.packageAdd.name = null;
         this.packageAdd.upserveId = null;
-        this.packageAdd.orderDate = null;
         this.packageAdd.number = null;
          this.packageAdd.recipients = [];
         this.packageAdd.object = {};
@@ -548,7 +633,6 @@ if(this.packages){
 
         this.packageAdd.name = null;
         this.packageAdd.upserveId = null;
-        this.packageAdd.orderDate = null;
         this.packageAdd.number = null;
          this.packageAdd.recipients = [];
         this.packageAdd.object = {};
@@ -645,6 +729,10 @@ this.origin = window.location.origin;
 
 console.log(this);
     this.retrievePackages();
+
+
+    // this.retrievePreorders();
+
 
     // this.addPackage();
     this.upserves();

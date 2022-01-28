@@ -496,7 +496,7 @@
 <!-- {{currentItem.item_object.modifier_group_ids}} -->
 
             <p class="item-description-p" :class="{noTopMarge: true === true}">
-             <pre>{{currentItem}}</pre>
+             <!--<pre>{{currentItem}}</pre>-->
                   <!-- <pre>{{currentItem.item_object.modifier_group_ids}}</pre> -->
                             <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
                    <!-- <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" to go only", "")}}</b>  -->
@@ -788,14 +788,11 @@ add
               <div class="toggleLr">
                 <div>
  <button class="oloButton" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
-                  <!-- <button @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button> -->
-                  <!-- <h2 v-if="!preOrderToggleState">Get it now (or <u>preorder</u>)</h2> -->
-                  <!-- <h2 v-if="preOrderToggleState">Preorder</h2> -->
+  
                   </div> 
                 <div>
-                  <button class="oloButton"  @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
-                  <!-- <button @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button>  -->
-                  <!-- <button v-if="preOrderToggleState" @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button> -->
+                  <button class="oloButton" v-if="!packageLink"  @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
+          
                   </div> 
               </div>
               </template>
@@ -810,7 +807,10 @@ add
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
                   </div>
                   <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
-                  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                  <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                  <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
+
+         
                   </div>
                 </template>
               </template>
@@ -819,7 +819,8 @@ add
                      <div class="leftDropdown">
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
                       <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
-                      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
                       </div>
                   </template>
             </template>
@@ -882,12 +883,7 @@ add
                   class="display-block row no-lr-margin"
                 >
                     <h2 class="menu-header">
-<!--first landing version
-selected time
-{{selectedDate.dateformatted}}
-selected time
-{{checkIfPackageSection(item)}}-->
-            <!-- <div >{{item.id}}</div> -->
+
                         {{item.name.replace('- To Go', '').replace('To Go', '')}}
                         <!-- {{item.timing_mask}} -->
                         
@@ -989,12 +985,7 @@ selected time
                                                 >
                                                   <h2 class="menu-header">
                                    
-<!--first landing version 33
-selected time
 
-{{selectedDate.dateformatted}}
-selected time
-{{checkIfPackageSection(item)}}-->
 
 
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
@@ -1053,8 +1044,8 @@ selected time
   </template>
 <template v-else>
 <!-- else -->
-<!-- <!--{{selectedDate.dateformatted}}--> -->
-<!-- <!--{{selectedDate.dateformatted}}--> -->
+<!--{{selectedDate.dateformatted}}-->
+<!--{{selectedDate.dateformatted}}-->
            <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line-testing">
             <!-- this is available at the started time -->
             
@@ -1063,7 +1054,7 @@ selected time
                 @click="expandChild(item.id)"
                 class="display-block row no-lr-margin"
               >
-              <!-- <!--{{selectedDate.dateformatted}}--> -->
+              <!--{{selectedDate.dateformatted}}-->
 
               <!-- {{item.timing_mask}} -->
                 <h2 class="menu-header">
@@ -1553,7 +1544,7 @@ selected time
               <template v-if="valid">
               <div class="toggleLr hide-on-desktop" v-if="oloAvailable">
                 <div>
-                  <button class="oloButton" @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
+                  <button v-if="!packageLink" class="oloButton" @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button></div> 
                 <div>
                   <button class="oloButton" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
                   </div> 
@@ -1571,7 +1562,8 @@ selected time
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
                   </div>
                   <div class="rightDropdown" style="width: 100%;padding: 0 0 0px 0;" v-if="selectedDate && selectedDate !== null">
-                  <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                               <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                               <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
                   </div>
                 </template>
               </template>
@@ -1580,7 +1572,8 @@ selected time
                       <div class="leftDropdown">
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
                       <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
-                      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
                       </div>
                   </template>
             </template>
@@ -1621,7 +1614,8 @@ selected time
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
 <div style="margin-top:15px;" v-if="selectedDate && selectedDate !== null">
-<v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+             <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+             <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
 </div>
 </template>
 </template>
@@ -1630,7 +1624,8 @@ selected time
       <br>  
       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
       <div style="margin-top:15px;" v-if="selectedDate && selectedDate !== null">
-      <v-select v-if="rendered" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
+                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
       </div>
 
 </template>
@@ -3006,12 +3001,42 @@ this.preOrderToggle(true);
 // console.log(correctDate);
 // console.log(this.dropDownDays[0].dateFormatted);
 
+
+  // console.log(this.dropDownDays);
+
       let filteredSelection = this.dropDownDays.filter(function(x){
         return x.dateFormatted === correctDate;
       });
 
       // console.log(filteredSelection)
-      this.selectedDate = filteredSelection[0]
+      this.selectedDate = this.dropDownDays[0];
+
+
+// console.log('filteredSelection[0]');
+// console.log('filteredSelection[0]');
+// console.log('filteredSelection[0]');
+// console.log('filteredSelection[0]');
+//       console.log(filteredSelection[0]);
+
+}else{
+
+
+
+      let filteredSelection = this.dropDownDays.filter(function(x){
+        return x.dateFormatted === correctDate;
+      });
+
+      // console.log(filteredSelection)
+
+
+
+console.log('filteredSelection[0]');
+console.log('filteredSelection[0]');
+console.log('filteredSelection[0]');
+console.log('filteredSelection[0]');
+      console.log(filteredSelection[0]);
+
+
 
 }
 
@@ -3494,6 +3519,7 @@ googleAddressObject.state;
     },
   data() {
   return {
+    packageLink: false,
     packageOrderDate: null,
     packageObjectMaximum: null,
     forPackageModal: {},
@@ -3723,11 +3749,34 @@ showToFixed: function (value) {
 }
   },
   methods: {
+
+enumerateDaysBetweenDates(startDate, endDate) {
+    var dates = [];
+
+    var currDate = moment(startDate).startOf('day');
+    var lastDate = moment(endDate).startOf('day');
+
+
+dates.push(currDate.clone().toDate());
+
+    while(currDate.add(1, 'days').diff(lastDate) < 0) {
+        console.log(currDate.toDate());
+        dates.push(currDate.clone().toDate());
+    }
+
+
+dates.push(lastDate.clone().toDate());
+
+
+    return dates;
+},
+
+
 checkIfPackageSection(f){
 
   let result = false;
 
-console.log(this.packages.length);
+// console.log(this.packages.length);
   if(f.timing_mask && f.timing_mask.id){
 
 
@@ -3736,7 +3785,7 @@ for(let i in this.packages){
 
 
 if(this.packages[i].timing_mask.id === f.timing_mask.id){
-  console.log(f)
+  // console.log(f)
 result = true;
 
   
@@ -4472,8 +4521,6 @@ let self = this;
 
 
 
-let timingMask = { "id": "32ee8a54-e9dd-4964-8996-0a290b768073", "start_time": "11:00", "end_time": "14:30", "rules": [ "tue", "wed", "thu", "fri", "sat" ], "status": "enabled", "owner_id": "ac9a087b-f4c5-4778-bdcc-1d9db6847e82" }
-
 // console.log(responseUpserve.data.package.timing_mask)
 self.openModal(responseUpserve.data.package.object,responseUpserve.data.package.timing_mask,responseUpserve.data.package);
 
@@ -5105,6 +5152,98 @@ if(responseUpserve.data.doc[0].menu){
       this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
 }
 },
+
+  async getPackageHours(){
+
+      console.log('get packages hour');
+
+
+    let self = this
+    let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+    let AcfBlock = responseAcf
+    this.hours = AcfBlock.data.acf.content_fields.find(o => o.acf_fc_layout === 'timeranges');   
+
+
+    this.currentRestaurantHours = this.hours.restaurant_hours[0].restaurant_name.find(o => o.name === this.title.toLowerCase());
+    this.openDays = this.currentRestaurantHours.information.days_of_week
+    let curRest = this.currentRestaurantHours.information.open_time_range
+
+    this.dates_additional_information = this.currentRestaurantHours.information.additional_information
+
+
+
+
+
+// console.log('this.currentRestaurantHours');
+// console.log(this.currentRestaurantHours);
+
+
+
+// console.log('this.openDays');
+// console.log(this.openDays);
+
+
+// console.log('this.dates_additional_information');
+// console.log(this.dates_additional_information);
+
+
+// console.log('curRest.length');
+// console.log(curRest.length);
+    for(let i = 0; i < curRest.length; i++){
+
+
+      console.log(curRest[i].time_slot.open.split(':')[0]);
+      console.log(curRest[i].time_slot.close.split(':')[0]);
+         
+
+
+
+
+
+
+
+
+let startTimeString = location.search.substring(1).split('&')[3].replace('startTime=','').split('%3A')[0];
+let endTimeString = location.search.substring(1).split('&')[4].replace('endTime=','').split('%3A')[0];
+
+
+
+// **get before and end time from packages object **
+
+                  this.showTimeInterVals(startTimeString,endTimeString)
+    }
+
+
+  let today = new Date()
+  let todayDay = today.getDay()
+  // console.log('todayDay');
+  // console.log(todayDay);
+  let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let subdays = days.map(function(x){
+    return x.substring(0,3).toLowerCase()
+  })
+
+if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
+    for(let i = 0; i < curRest.length; i++){
+      if(self.returnAvailableNow(curRest[i].time_slot.open,curRest[i].time_slot.close)){
+        this.valid = true
+        this.currentOrder.preorder = false
+        break
+        }else{
+      this.currentOrder.preorder = true
+
+    }
+}
+}else{
+      this.currentOrder.preorder = true
+
+}
+
+
+
+},
+
+
   async getHours(){
 
 
@@ -5120,13 +5259,38 @@ if(responseUpserve.data.doc[0].menu){
 
     this.dates_additional_information = this.currentRestaurantHours.information.additional_information
 
+
+
+
+
+console.log('this.currentRestaurantHours');
+console.log(this.currentRestaurantHours);
+
+
+
+console.log('this.openDays');
+console.log(this.openDays);
+
+
+console.log('this.dates_additional_information');
+console.log(this.dates_additional_information);
+
+
+console.log('curRest.length');
+console.log(curRest.length);
     for(let i = 0; i < curRest.length; i++){
+
+
+      console.log(curRest[i].time_slot.open.split(':')[0]);
+      console.log(curRest[i].time_slot.close.split(':')[0]);
           this.showTimeInterVals(curRest[i].time_slot.open.split(':')[0],curRest[i].time_slot.close.split(':')[0])
     }
 
 
   let today = new Date()
   let todayDay = today.getDay()
+  console.log('todayDay');
+  console.log(todayDay);
   let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let subdays = days.map(function(x){
     return x.substring(0,3).toLowerCase()
@@ -6686,6 +6850,25 @@ thanksgiving(m,dy) {
 showTimeInterVals(startTime,endTime){
 
 let items = [];
+
+
+
+
+if(this.packageLink){
+for (var hour = startTime; hour <= endTime; hour++) {
+
+  items.push([parseInt(hour), 0]);
+
+  if(hour != endTime){
+  items.push([parseInt(hour), 15]);
+  items.push([parseInt(hour), 30]);
+  items.push([parseInt(hour), 45]);
+
+  }
+
+}
+}
+
 for (var hour = startTime; hour < endTime; hour++) {
   items.push([parseInt(hour), 0]);
   items.push([parseInt(hour), 15]);
@@ -6706,6 +6889,10 @@ const range = items.map(time => {
   date.setMinutes(minute);
   return formatter.format(date);
 });
+
+// console.log('this.openTimes.concat(items)');
+// console.log(this.openTimes.concat(items));
+
 
 this.openTimes = this.openTimes.concat(items)
 
@@ -6772,6 +6959,8 @@ this.nowDate = createdItem
 },
 dropDown(){
 
+
+
      let today = new Date()
      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -6785,6 +6974,136 @@ dropDown(){
         })
 
 
+
+console.log(window.location);
+const urlParams = new URLSearchParams(window.location.search);
+const product = urlParams.get('packageId');
+
+console.log(window.location);
+const endDate = urlParams.get('endDate');
+
+
+// console.log(location.search.substring(1).split('&'));
+
+// console.log('endDate');
+// console.log(endDate);
+// console.log(endDate);
+// console.log(endDate);
+
+
+
+
+if(product !== null){
+
+   let tomorrow = new Date(today)
+          tomorrow.setDate(tomorrow.getDate())
+      let timeslotsCreated = [];
+
+
+            for(let i = 0; i < this.openTimesUpdated.length; i++){ 
+              timeslotsCreated.push({
+              time: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)),
+              timelabel: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)).toLocaleTimeString().replace(":00","")
+              })
+            } 
+
+
+
+let dateString = location.search.substring(1).split('&')[0]
+
+
+
+
+
+
+
+let endDateString2 = location.search.substring(1).split('&')[2].replace('endDate=','');
+
+
+
+console.log('enumerate through these');
+
+
+console.log(dateString);
+
+
+console.log(endDateString2);
+
+
+console.log(this.enumerateDaysBetweenDates(dateString,endDateString2));
+
+
+
+              // console.log(timeslotsCreated);
+
+
+let timeslotsCreatedNoDuplicates = timeslotsCreated.filter((value, index, self) =>
+  index === self.findIndex((t) => (
+    t.timelabel === value.timelabel
+  ))
+)
+
+
+let datesToAdd = this.enumerateDaysBetweenDates(dateString,endDateString2);
+
+
+console.log(datesToAdd);
+for(let i in datesToAdd){
+
+
+console.log(moment(datesToAdd[i]).format('dddd'));
+
+
+            this.dropDownDays.push({
+            dayLabel: moment(datesToAdd[i]).format('dddd'),
+            dayName: moment(datesToAdd[i]).format('dddd'),
+            closed: false,
+            dateData: moment(datesToAdd[i]).format('dddd') + ', ' + moment(datesToAdd[i]).format("MMM Do"),
+            dateFormatted: datesToAdd[i],
+            timeslots: timeslotsCreatedNoDuplicates
+            })
+
+};
+
+
+
+// console.log('timeslotsCreatedNoDuplicates');
+// console.log(timeslotsCreatedNoDuplicates);
+
+            // this.dropDownDays.push({
+            // dayLabel: "d",
+            // dayName: "d",
+            // closed: false,
+            // dateData: moment(dateString).format('dddd') + ', ' + moment(dateString).format("MMM Do"),
+            // dateFormatted: dateString,
+            // timeslots: timeslotsCreatedNoDuplicates
+            // })
+
+// if(location.search.substring(1).split('&')[2]){
+
+// let endDateString = location.search.substring(1).split('&')[2].replace('endDate=','');
+//               console.log(timeslotsCreated);
+//             this.dropDownDays.push({
+//             dayLabel: "d",
+//             dayName: "d",
+//             closed: false,
+//             dateData: moment(endDateString).format('dddd') + ', ' + moment(endDateString).format("MMM Do"),
+//             dateFormatted: endDateString,
+//             timeslots: timeslotsCreatedNoDuplicates
+//             })
+
+
+
+// }
+             
+
+
+}else{
+
+
+
+
+
          for(let i = 0;i<42;i++){
           let tomorrow = new Date(today)
           tomorrow.setDate(tomorrow.getDate() + i)
@@ -6792,6 +7111,10 @@ dropDown(){
         if('January 1st' === moment(String(tomorrow)).format('MMMM Do') || 'December 25th' === moment(String(tomorrow)).format('MMMM Do') || !tFs[tomorrow.getDay()] || moment(String(this.thanksgiving(11,'thu'))).format('MMMM Do YYYY') === moment(String(tomorrow)).format('MMMM Do YYYY')){
               
             let timeslotsCreated = [];
+
+
+      console.log('this.openTimesUpdated');
+            console.log(this.openTimesUpdated);
 
             for(let i = 1; i < this.openTimesUpdated.length; i++){ 
               timeslotsCreated.push({
@@ -6819,6 +7142,10 @@ dropDown(){
               timelabel: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)).toLocaleTimeString().replace(":00","")
               })
             } 
+
+
+        
+
             this.dropDownDays.push({
             dayLabel: days[tomorrow.getDay()],
             dayName: days[tomorrow.getDay()],
@@ -6833,6 +7160,14 @@ dropDown(){
 
 
 
+
+}
+
+
+
+
+// console.log('this.dropDownDays[0]');
+// console.log(this.dropDownDays[0]);
 
    this.rendered = true;
     },
@@ -6908,23 +7243,10 @@ if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.
   mounted() {
 
 
-    // this.printStore();
+
 if(window.location.hash === '#mamnoonEmployee'){
 this.employeeCheckout = true
 }
-
-
-
-// console.log('this.$store.state');
-// console.log('this.$store.state');
-// console.log('this.$store.state');
-// console.log(this.$store.state.pageData[0].restaurant_repeater);
-
-// console.log(this.title.toLowerCase().replace(" ",""));
-
-
-
-
 
         this.$nextTick(function () {
             window.setInterval(() => {
@@ -6940,47 +7262,10 @@ this.employeeCheckout = true
         })
 
 
-    
-
-
-
 
     this.checkOlo();
 
 
-
-
-
-
-
-// console.log("streetcheck")
-// const urlParamsStreetCheck = new URLSearchParams(window.location.search);
-// console.log(urlParamsStreetCheck);
-
-
-// if(this.title === "Mamnoon Street"){
-// window.location.replace('https://app.upserve.com/s/mamnoon-street-seattle');
-// }
-
-
-//if(this.title === "Mamnoon"){
-//window.location.replace('https://app.upserve.com/s/mamnoon-llc-seattle');
-//}
-
-
-// populate forms
-// populate forms
-
-//if(user && user.user && user.user.deliveryAddress && user.user.deliveryAddress.name && user.user.deliveryAddress.name !== ''){
-
-//console.log(user);
-
-  //this.currentOrder.fulfillment_info.customer.first_name = user.user.deliveryAddress.name;
-
-//}
-
-// populate forms
-// populate forms
 
         this.$nextTick(function () {
             window.setInterval(() => {
@@ -7024,59 +7309,18 @@ console.log(product);
 
 if(product !== null){
 
+  this.packageLink = true;
+
 
 this.retrieveOnePackage(product);
-// console.
-// console.log(this.forPackageModal);
-
-// console.log(this.forPackageModal);
-
-// this.openModal(this.forPackageModal);
-
-// this.openModal({
-//   "id": "6bed4f99-0b7f-4215-a7b4-fed7314e9c8d",
-//   "name": "4th of July BBQ Package - 7/3 pickup only",
-//   "price": "125.0",
-//   "price_cents": 12500,
-//   "description": "Feeds 4\r\nMamnoon shish taouk: yogurt marinated chicken, garlic, za’atar (raw, 14oz)\r\nmamnoon kefta: ground beef & lamb, pistachio, baharat spice, caramelized onions (raw, 12oz)\r\nSmoked and pulled lamb shoulder, mamnoon BBQ (1#, fully cooked)\r\nHummus (8oz)\r\nLabneh (8oz)\r\nmama chips and fresh pita\r\nHouse pickles (12oz)\r\nLabneh toum (4oz)\r\nMarinated olives (8oz)\r\nCabbage slaw, pickled fresno pepper, carrot, herbs, black lime dressing (8oz)\r\nMelon & stone fruit salad, halloumi cheese, pistachio dressing, basil, mint (20oz)\r\nMama’s cookies (4ea.)",
-//   "min_sides": 0,
-//   "max_sides": 0,
-//   "item_type": "normal",
-//   "tax_inclusive": false,
-//   "images": {
-//     "online_ordering_menu": {
-//       "main": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
-//     }
-//   },
-//   "tax_rate_id": "47d234b1-3c4c-47cf-84cf-c558cd1013b6",
-//   "item_images": [
-//     {
-//       "id": "6fb58514-b271-430d-8f6d-76d7c6ad4d32",
-//       "metadata": {
-//         "image_path": "v1623864367/mgbjlzt7x3b2wi0vttyu.jpg",
-//         "curated": false,
-//         "url": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
-//       },
-//       "url": "https://res-3.cloudinary.com/upserve/image/upload/v1623864367/mgbjlzt7x3b2wi0vttyu.jpg"
-//     }
-//   ],
-//   "modifier_group_ids": [],
-//   "side_ids": [],
-//   "tax_rate_ids": []
-// },{
-//   "id": "13d530ca-5dad-434d-b475-e6891f4090d3",
-//   "start_time": "12:45",
-//   "end_time": "21:00",
-//   "rules": [
-//     "sat"
-//   ],
-//   "status": "enabled",
-//   "owner_id": "6b9aed6f-3dc0-4277-b746-4709c89b39aa"
-// });
 
 
+this.getPackageHours();
 
-
+}else{
+  
+  console.log('    this.getHours();')
+      this.getHours();
 }
 
 
@@ -7121,7 +7365,7 @@ this.filterForNow()
 
 
     this.upserveMongo();
-    this.getHours();
+    // this.getHours();
     this.getUser();
 
 
@@ -7211,20 +7455,16 @@ if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
         this.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29);
   // }
 
-
 this.$nextTick(function() {
 window.addEventListener(`resize`, this.setResizeIndex);
-
 })
 
-
 this.currentOrder.scheduled_time = null
-
-
-
-
-  
 this.oloAvailable = false;
+
+
+
+
 
 
 
