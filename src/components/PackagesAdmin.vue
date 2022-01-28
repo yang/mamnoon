@@ -312,10 +312,10 @@ preorders:
 
       <h1 v-if="pa.number === 0">sold out</h1>
       <button class="btn-nadi" @click="decrementPackage(pa._id)" v-if="pa.number > 0">
-        decrement</button
+        decrease</button
       >&nbsp;
             <button class="btn-nadi" @click="incrementPackage(pa._id)">
-        increment</button
+        increase</button
       >&nbsp;
       <button class="btn-nadi" @click="deletePackage(pa._id)">delete package</button>
       <br /><br />
