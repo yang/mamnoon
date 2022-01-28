@@ -3793,17 +3793,17 @@ const product = urlParams.get('packageId');
 
 
 
-if(product === null){
-  if(f.timing_mask && f.timing_mask.id){
-      for(let i in this.packages){
-          if(this.packages[i].timing_mask.id === f.timing_mask.id){
+// if(product === null){
+//   if(f.timing_mask && f.timing_mask.id){
+//       for(let i in this.packages){
+//           if(this.packages[i].timing_mask.id === f.timing_mask.id){
 
 
-              result = true;
-          }
-      }
-}
-}
+//               result = true;
+//           }
+//       }
+// }
+// }
 
 
 
@@ -4560,28 +4560,28 @@ var result = jsObjects.find(obj => {
 },
 
     checkIfPackageAvailable(itemid){
-      if(this.packages){
-      let result = this.packages.find(pack => {
-        return pack.upserveId === itemid
-      });
+//       if(this.packages){
+//       let result = this.packages.find(pack => {
+//         return pack.upserveId === itemid
+//       });
 
-// console.log(result);
-if(result !== undefined){
+// // console.log(result);
+// if(result !== undefined){
 
 
 
-if(result.number === 0){
-  return false;
-}else{
-  return true;
-}
+// if(result.number === 0){
+//   return false;
+// }else{
+//   return true;
+// }
 
-}else{
+// }else{
+// return true;
+// }
+
+//     }
 return true;
-}
-
-    }
-
       },
 
 
