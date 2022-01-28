@@ -883,7 +883,7 @@ add
                   class="display-block row no-lr-margin"
                 >
                     <h2 class="menu-header">
-
+<!--{{checkIfPackageSection(item)}}-->
                         {{item.name.replace('- To Go', '').replace('To Go', '')}}
                         <!-- {{item.timing_mask}} -->
                         
@@ -976,6 +976,7 @@ add
   <!-- beggin 0 -->
   <template v-if="noFiltering">
     <!-- beggin 1 -->
+  <template v-if="!checkIfPackageSection(item)">
                              <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="container menu-line-testing">
                    
                                                 <div
@@ -986,7 +987,7 @@ add
                                                   <h2 class="menu-header">
                                    
 
-
+<!--{{checkIfPackageSection(item)}}-->
 
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
                                                     <!-- {{item.timing_mask}} -->
@@ -1039,10 +1040,13 @@ add
                                             </div>
                                       </div>
                                     </div>
-
+</template>
       <!-- end 1 -->
   </template>
 <template v-else>
+
+
+  <template v-if="!checkIfPackageSection(item)">
 <!-- else -->
 <!--{{selectedDate.dateformatted}}-->
 <!--{{selectedDate.dateformatted}}-->
@@ -1058,14 +1062,7 @@ add
 
               <!-- {{item.timing_mask}} -->
                 <h2 class="menu-header">
-  <!--     
-first landing version 44
-selected time
-{{selectedDate.dateformatted}}
-selected time
-{{checkIfPackageSection(item)}}-->
-                  <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
-                  <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
+                  <!--{{checkIfPackageSection(item)}}-->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
@@ -1120,7 +1117,7 @@ selected time
               </div>
               </div>
 
-
+</template>
 
 
 
@@ -1231,6 +1228,7 @@ selected time
               <!-- <br />  -->
               <!-- no filtering -->
                   <!-- beggin 1 -->
+                    <template v-if="!checkIfPackageSection(item)">
                                <template v-if="item.timing_mask === item.timing_mask">
                                       <!-- <template v-if="!item.timing_mask"> -->
                                 <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="container menu-line-testing">
@@ -1244,19 +1242,9 @@ selected time
                                                 >
                                                   <h2 class="menu-header">
 
-
-
-<!--first landing version55-->
-<!--selected time-->
-<!--{{selectedDate.dateformatted}}-->
-<!--selected time
-{{checkIfPackageSection(item)}}-->
-
-                                                    <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
-                                                    <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
+                                                    <!--{{checkIfPackageSection(item)}}-->
                                                     {{item.name.replace('- To Go', '').replace('To Go', '')}}
-                                                    <!-- {{item.timing_mask}} -->
-<!-- vvv -->
+
                                                   </h2>
                                                 </div>
                                         <div :data="'drawer' + item.id" class=" row no-lr-margin">
@@ -1318,7 +1306,7 @@ selected time
                                 </template>
                   <!-- end 1 -->
 
-
+</template>
 
       <!-- end 0 - this one below -->
       </template>
@@ -1326,7 +1314,7 @@ selected time
 
 <!-- filtering -->
 <!-- {{item.timing_mask}} -->
-
+  <template v-if="!checkIfPackageSection(item)">
          <template v-if="item.timing_mask === null">
            <!-- no timing mask -->
               <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="container menu-line-testing">
@@ -1337,14 +1325,7 @@ selected time
                 class="display-block row no-lr-margin"
               >
                 <h2 class="menu-header">
-<!--first landing version 66
-selected time-->
-<!--{{selectedDate.dateformatted}}-->
-<!--selected time
-{{checkIfPackageSection(item)}}-->
-
-                  <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
-                  <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
+                    <!--{{checkIfPackageSection(item)}}-->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
    
                 </h2>
@@ -1398,10 +1379,15 @@ selected time-->
                 </div>
               </div>
               </div>
+
+
+
+</template>
+
                 </template>
                 <template v-else>
 
-
+  <template v-if="!checkIfPackageSection(item)">
 
           <div :id="item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line-testing">
                 
@@ -1412,14 +1398,8 @@ selected time-->
                 class="display-block row no-lr-margin"
               >
                 <h2 class="menu-header">
-<!--first landing version 77
-selected time
-{{selectedDate.dateformatted}}
-selected time
-{{checkIfPackageSection(item)}}-->
-          
-                  <!-- <span :id="'plus-'+ item.id" class="expand-contract plus visible">+</span> -->
-                  <!-- <span :id="'minus-'+ item.id" class="expand-contract minus">-</span> -->
+
+                    <!--{{checkIfPackageSection(item)}}-->
                   {{item.name.replace('- To Go', '').replace('To Go', '')}}
                 </h2>
               </div>
@@ -1432,8 +1412,6 @@ selected time
                           <div class="half-width2left">
                                 <div class="content-box">
         <div class="showBox" v-if="serve.images" v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"></div>
-        
-                               <!--{{serve.id}}-->
                      
                               <div  class="orderedOn" v-html="checkIfOrdered(serve.id)"></div>
                               <div class="name">{{checkIfGiftCard(serve.name)}}</div>
@@ -1453,17 +1431,17 @@ selected time
                           </div>
                           <div class="half-width2right">
                                   <template v-if="serve.images">
-                                                                                                  <div
-                                                                                                    v-if="serve.images.online_ordering_menu"
-                                                                                                    class="backgroundImage"
-                                                                                                    v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
-                                                                                                  ></div>
-                                                                                              </template>
-                                                                                                <template v-else>
-                                                                                                  <div class="backgroundImage"
-                                                                                                    v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
-                                                                                                  >     <NadiIconSmX style="height:140px;" /></div>
-                                                                                                </template>
+                          <div
+                            v-if="serve.images.online_ordering_menu"
+                            class="backgroundImage"
+                            v-bind:style="{ backgroundImage: 'url(' + serve.images.online_ordering_menu.main + ')' }"
+                          ></div>
+                      </template>
+                        <template v-else>
+                          <div class="backgroundImage"
+                            v-bind:style="{ height: '140px', backgroundSize: '100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }"
+                          >     <NadiIconSmX style="height:140px;" /></div>
+                        </template>
                           </div>
                         </div>
                       </template>
@@ -1471,6 +1449,10 @@ selected time
                 </div>
               </div>
               </div>
+
+
+</template>
+
   </template>
   </template>
   </template>
@@ -3287,8 +3269,32 @@ console.log(value);
 
   // console.log(moment(this.selectedTime.time).format('HH:mm:ss'))
   if(value.timing_mask){
+
     // console.log(value.timing_mask.rules)
     // console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
+
+console.log('this.selectedDate');
+console.log('this.selectedDate');
+console.log('this.selectedDate');
+console.log('this.selectedDate');
+console.log(this.selectedDate);
+
+
+console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
+console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
+console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
+console.log(this.enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date).map(x=>moment(x).format('YYYY-MM-DD')));
+
+
+
+let mappedFormattedDates = this.enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date).map(x=>moment(x).format('YYYY-MM-DD'));
+console.log(mappedFormattedDates);
+
+if(!mappedFormattedDates.includes(moment(this.selectedDate.dateFormatted).format('YYYY-MM-DD'))){
+     this.removeFromOrder(value)
+    itemsToRemove.push(value)
+}
+
   if(!value.timing_mask.rules.includes(this.selectedDate.dayLabel.substring(0,3).toLowerCase())){
     this.removeFromOrder(value)
     itemsToRemove.push(value)
@@ -3296,12 +3302,7 @@ console.log(value);
   }
 
 
-if(value.specific_date){
-if(this.selectedDate.dateFormatted !== moment(value.specific_date).add(1, 'days').format('YYYY-MM-DD')){
-       this.removeFromOrder(value)
-    itemsToRemove.push(value)
-}
-}
+
   
 }
 }
@@ -3366,6 +3367,9 @@ let itemsToRemove = []
 if(this.currentOrder.charges){
 for (var value of this.currentOrder.charges.items) {
 if(value.timing_mask){
+
+console.log(this.selectedTime);
+
 if(!this.isBetween(value.timing_mask.start_time,value.timing_mask.end_time,moment(this.selectedTime.time).format('HH:mm:ss'))){
 // console.log(value + " not available")
 // this.removeFromOrder(value)
@@ -3760,7 +3764,7 @@ enumerateDaysBetweenDates(startDate, endDate) {
 dates.push(currDate.clone().toDate());
 
     while(currDate.add(1, 'days').diff(lastDate) < 0) {
-        console.log(currDate.toDate());
+        // console.log(currDate.toDate());
         dates.push(currDate.clone().toDate());
     }
 
@@ -3774,28 +3778,40 @@ dates.push(lastDate.clone().toDate());
 
 checkIfPackageSection(f){
 
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const product = urlParams.get('packageId');
+
+
+
+
+
+
+
   let result = false;
 
-// console.log(this.packages.length);
+
+
+if(product === null){
   if(f.timing_mask && f.timing_mask.id){
+      for(let i in this.packages){
+          if(this.packages[i].timing_mask.id === f.timing_mask.id){
 
 
+              result = true;
+          }
+      }
+}
+}
 
-for(let i in this.packages){
 
-
-if(this.packages[i].timing_mask.id === f.timing_mask.id){
-  // console.log(f)
-result = true;
 
   
-}
-
-}
 
 
 
-  }
+
 
 return result;
 
@@ -5155,7 +5171,7 @@ if(responseUpserve.data.doc[0].menu){
 
   async getPackageHours(){
 
-      console.log('get packages hour');
+      // console.log('get packages hour');
 
 
     let self = this
@@ -5192,8 +5208,8 @@ if(responseUpserve.data.doc[0].menu){
     for(let i = 0; i < curRest.length; i++){
 
 
-      console.log(curRest[i].time_slot.open.split(':')[0]);
-      console.log(curRest[i].time_slot.close.split(':')[0]);
+      // console.log(curRest[i].time_slot.open.split(':')[0]);
+      // console.log(curRest[i].time_slot.close.split(':')[0]);
          
 
 
@@ -5369,8 +5385,8 @@ isBetween(startTime,endTime,proposedTime){
 var format = 'HH:mm'
 // var time = moment() gives you current time. no format required.
 var time = moment(proposedTime,format),
-  beforeTime = moment(startTime, format),
-  afterTime = moment(endTime, format);
+  beforeTime = moment(startTime, format).subtract(1, 'seconds'),
+  afterTime = moment(endTime, format).add(1, 'seconds');;
 
 
   // console.log(time,beforeTime,afterTime)
@@ -6975,11 +6991,11 @@ dropDown(){
 
 
 
-console.log(window.location);
+// console.log(window.location);
 const urlParams = new URLSearchParams(window.location.search);
 const product = urlParams.get('packageId');
 
-console.log(window.location);
+// console.log(window.location);
 const endDate = urlParams.get('endDate');
 
 
@@ -7021,16 +7037,16 @@ let endDateString2 = location.search.substring(1).split('&')[2].replace('endDate
 
 
 
-console.log('enumerate through these');
+// console.log('enumerate through these');
 
 
-console.log(dateString);
+// console.log(dateString);
 
 
-console.log(endDateString2);
+// console.log(endDateString2);
 
 
-console.log(this.enumerateDaysBetweenDates(dateString,endDateString2));
+// console.log(this.enumerateDaysBetweenDates(dateString,endDateString2));
 
 
 
@@ -7047,15 +7063,19 @@ let timeslotsCreatedNoDuplicates = timeslotsCreated.filter((value, index, self) 
 let datesToAdd = this.enumerateDaysBetweenDates(dateString,endDateString2);
 
 
-console.log(datesToAdd);
+// console.log(datesToAdd);
 for(let i in datesToAdd){
 
 
-console.log(moment(datesToAdd[i]).format('dddd'));
+// console.log(moment(datesToAdd[i]).format('dddd'));
 
+
+
+
+// console.log(moment(datesToAdd[i]).format('dddd').substring(0,3).toLowerCase());
 
             this.dropDownDays.push({
-            dayLabel: moment(datesToAdd[i]).format('dddd'),
+            dayLabel: moment(datesToAdd[i]).format('dddd').substring(0,3).toLowerCase(),
             dayName: moment(datesToAdd[i]).format('dddd'),
             closed: false,
             dateData: moment(datesToAdd[i]).format('dddd') + ', ' + moment(datesToAdd[i]).format("MMM Do"),
@@ -7113,8 +7133,8 @@ console.log(moment(datesToAdd[i]).format('dddd'));
             let timeslotsCreated = [];
 
 
-      console.log('this.openTimesUpdated');
-            console.log(this.openTimesUpdated);
+      // console.log('this.openTimesUpdated');
+      //       console.log(this.openTimesUpdated);
 
             for(let i = 1; i < this.openTimesUpdated.length; i++){ 
               timeslotsCreated.push({
