@@ -6871,11 +6871,17 @@ let items = [];
 
 
 if(this.packageLink){
-for (var hour = startTime; hour <= endTime; hour++) {
+
+console.log(endTime);
+console.log(endTime+1);
+
+let timeToEnd = parseInt(endTime) + 1;
+
+for (var hour = startTime; hour <= timeToEnd; hour++) {
 
   items.push([parseInt(hour), 0]);
 
-  if(hour != endTime){
+  if(hour != timeToEnd){
   items.push([parseInt(hour), 15]);
   items.push([parseInt(hour), 30]);
   items.push([parseInt(hour), 45]);
