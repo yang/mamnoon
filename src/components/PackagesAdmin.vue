@@ -30,9 +30,6 @@
 <div class="row">
             <h2 class="menu-header">         
 {{section.name}}
-
-
-
 </h2>
 </div>
 <div class="row">
@@ -50,10 +47,13 @@
 
             <div class="packageTile">
             <div class="inside">
-            <h2>{{item.name}}</h2>
-            <p class="small-message grey">{{item.description}}</p>
+            <p>{{item.name}}</p>
+<!--            // <p class="small-message grey">{{item.description}}</p>-->
  
             <template v-if="section.timing_mask && section.timing_mask.start_date && section.timing_mask.end_date">
+
+            start time: {{section.timing_mask.start_time}}<br>
+            end time: {{section.timing_mask.end_time}}<br>
             <template v-if="section.timing_mask.start_date">start date: {{section.timing_mask.start_date}}</template><br>
             <template v-if="section.timing_mask.end_date">end date: {{section.timing_mask.end_date}}</template><br>
         
@@ -135,6 +135,12 @@
 name: {{packageAdd.name}}
 <br />
 timing mask:<br>
+
+<br>
+pickup start time: {{packageAdd.timing_mask.start_time}}
+<br>
+pickup end time: {{packageAdd.timing_mask.end_time}}
+<br>
 <template v-if="packageAdd.timing_mask.start_date">start date: {{packageAdd.timing_mask.start_date}}</template><br>
 <template v-if="packageAdd.timing_mask.end_date">end date: {{packageAdd.timing_mask.end_date}}</template><br>
       <br />
@@ -160,28 +166,7 @@ timing mask:<br>
          style="display:none"
       />
       </div>
-    
-      start date:<br>
-      {{packageAdd.timing_mask.start_date}}
-      <!--<datepicker
-        v-model="packageAdd.timing_mask.start_date"
-        placeholder="Pick A Date"
-         @selected="checkPackAdd"
-         
-      ></datepicker>-->
-      <br />
-
-end date:<br>
-      {{packageAdd.timing_mask.end_date}}
-   <!--alt pickup date (optional):<br>
-      <datepicker
-        v-model="packageAdd.endDate"
-        placeholder="Pick A Date"
-      ></datepicker>-->
-      <br />
-
-
-
+    <br>
       quantity:<br>
       <input
         id="number"
@@ -257,26 +242,12 @@ staff notification email recipients:
         <div class="row">
     <template v-for="pa in packages">
  <div class="packageTile">
-<div class="inside">
+<div class="inside bigger">
 <h5>{{pa.name}} ({{pa.number}} remain)</h5>
-<br>
+<b>start date:&nbsp;</b>{{pa.timing_mask.start_date}}&nbsp;<b>end date:&nbsp;</b>{{pa.timing_mask.end_date}}<br>
+<b>pickup time range:</b> {{pa.timing_mask.start_time}}-{{pa.timing_mask.end_time}}<br>
 
-
-
-start date: {{pa.timing_mask.start_date}}<br>
-end date: {{pa.timing_mask.end_date}}<br>
-
-pickup start time: {{pa.timing_mask.start_time}}<br>
-pickup end time: {{pa.timing_mask.end_time}}<br>
-
-<!--{{pa}}-->
-
-<template v-if="pa.object.images.online_ordering_menu && pa.object.images.online_ordering_menu.main">
-</template>
-{{formatDate(pa.timing_mask.start_date)}}
-<br>
-
-
+<b>marketing link:</b>
 <template v-if="origin === 'http://localhost:8080'">
 <a ref="mylink" rel="noopener noreferrer" :href="'http://localhost:8080/mamnoontesting?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
 http://localhost:8080/mamnoontesting?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
@@ -778,9 +749,12 @@ margin-top: 10px;
   margin: 10px;
   border: 1px solid #ddd;
   width: calc(100%-20px);
-  height: 300px;
+  height: 250px;
+    &.bigger{
+      height: 400px;
+    }
 
-
+p{margin-bottom:0px;}
   @media only screen and (max-width: 1280px){
 height: auto;
 padding-bottom: 20px;
