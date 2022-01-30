@@ -870,8 +870,12 @@ add
     <!-- beggin 1 -->
       <!-- check if package section -->
         
-              <div :id="trimmedName(item)" v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) || !item.timing_mask" class="container menu-line-testing">
+              <div :id="trimmedName(item)" v-if="currentlyAvailable(nowDate,nowTime,item.name,item) || !item.timing_mask" class="container menu-line-testing">
                 
+
+
+ 
+
              <div class="display-block row no-lr-margin">
               
                         <h2 class="menu-header"><template v-if="showScenarios">scenario 1 get it now landing page</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
@@ -954,8 +958,10 @@ add
 
 
 
-           <div :id="trimmedName(item)" v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) || !item.timing_mask" class="container menu-line-testing">
+           <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask" class="container menu-line-testing">
             <!-- this is available at the started time -->
+            
+
             
             
      <div class="display-block row no-lr-margin">
@@ -1091,7 +1097,7 @@ add
 </template>
 <template v-else>
 <template v-if="item.name !== 'featured item'">
-          <div :id="trimmedName(item)" v-if="currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime)" class="container menu-line-testing">
+          <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item.timing_mask)" class="container menu-line-testing">
                         <div class="display-block row no-lr-margin">
     <h2 class="menu-header"><template v-if="showScenarios">scenario 6 preorder</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
 
@@ -2715,14 +2721,16 @@ this.preOrderToggle(true);
 }
 
     },
-//     valid:{
-// handler(val){
-//   console.log('valid - changed')
+    valid:{
+handler(val){
+  console.log('valid - changed')
 
-
-//   
-// }
-//     },
+if(this.valid){
+this.filterForNow()
+}
+  
+}
+    },
     upserveSections:{
 handler(val){
 //   console.log('this.upserveSections')
@@ -4963,10 +4971,103 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 
 
 },
-currentlyAvailable(startTime,endTime,rules,futureDay,futureTime){
+currentlyAvailable(futureDay,futureTime,name,item){
 
 
-console.log('currently available');
+
+if(!item.timing_mask){
+  return true
+}else{
+
+// currentlyAvailable(nowDate,nowTime,item.name,item) 
+
+
+// console.log(timing_mask);
+
+
+
+// console.log(name);
+// console.log('currently available');
+// console.log(name);
+// console.log(item.timing_mask);
+
+let startTime = item.timing_mask.start_time;
+let endTime = item.timing_mask.end_time;
+let rules = item.timing_mask.rules;
+
+
+// console.log(startTime);
+// console.log(endTime);
+// console.log(futureDay);
+// console.log(futureTime);
+
+
+    let weekday = ['mon','tue','wed','thu','fri','sat','sun']
+            if(!futureDay && !futureTime){
+                let currentDate = new Date();   
+                let startDate = new Date(currentDate.getTime());
+
+                startDate.setHours(startTime.split(":")[0]);
+                startDate.setMinutes(startTime.split(":")[1]);
+
+                let endDate = new Date(currentDate.getTime());
+                endDate.setHours(endTime.split(":")[0]);
+                endDate.setMinutes(endTime.split(":")[1]);
+
+                if(rules.includes(weekday[currentDate.getDay()])){
+                    return startDate < currentDate && endDate > currentDate
+                }
+            }
+
+    if(futureDay && !futureTime){
+      if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
+        return true
+      }
+    }
+    if(futureDay && futureTime){
+
+    let currentDate = Date.parse(futureTime.time) 
+    let startDate2 = new Date(currentDate);
+    let startDate3 = moment(startDate2)._i
+    startDate3.setHours(startTime.split(":")[0]);
+    startDate3.setMinutes(startTime.split(":")[1]);
+    let endDate2 = new Date(currentDate);
+    let endDate3 = moment(endDate2)._i
+    endDate3.setHours(endTime.split(":")[0]);
+    endDate3.setMinutes(endTime.split(":")[1]);
+    let validTime = startDate3 < currentDate && endDate3 > currentDate
+    let validDay = rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())
+
+
+
+    if(validTime && validDay){
+
+console.log('is showing up: '+name);
+
+      return true
+    }else{
+
+// console.log(name);
+console.log('not showing up: '+name);
+
+      return false
+    }
+}
+
+
+}
+
+},
+excurrentlyAvailable(startTime,endTime,rules,futureDay,futureTime,name,timing_mask){
+// currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime,item.name,item.timing_mask) 
+
+
+console.log(timing_mask);
+
+
+
+// console.log(name);
+// console.log('currently available');
 console.log(startTime);
 console.log(endTime);
 console.log(rules);
@@ -5009,9 +5110,18 @@ console.log(futureTime);
     let validTime = startDate3 < currentDate && endDate3 > currentDate
     let validDay = rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())
 
+
+
     if(validTime && validDay){
+
+console.log('is showing up: '+name);
+
       return true
     }else{
+
+// console.log(name);
+console.log('not showing up: '+name);
+
       return false
     }
 }
@@ -6561,7 +6671,7 @@ this.openTimes = this.openTimes.concat(items)
 
 },
 filterForNow(){
-
+console.log('rrrr');
 
 let today = new Date()
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -6609,6 +6719,14 @@ let createdTime = {
 time: new Date(),
 timelabel: new Date().toLocaleTimeString().replace(":00","")
 }
+
+console.log(new Date().toLocaleTimeString().replace(":00",""));
+console.log(new Date().toLocaleTimeString().replace(":00",""));
+console.log(new Date().toLocaleTimeString().replace(":00",""));
+console.log(new Date().toLocaleTimeString().replace(":00",""));
+console.log(new Date().toLocaleTimeString().replace(":00",""));
+console.log(new Date().toLocaleTimeString().replace(":00",""));
+
 console.log('createdTime')
 console.log(createdTime)
 
@@ -6618,6 +6736,13 @@ console.log(createdTime)
 
 this.nowTime = createdTime
 this.nowDate = createdItem
+
+
+// t
+
+
+console.log(createdTime);
+console.log(createdItem);
 
 },
 dropDown(){
