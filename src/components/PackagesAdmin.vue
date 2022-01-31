@@ -29,8 +29,89 @@
 
 <hr>
 
+<!--<template v-if="packages">
+{{packages.map(function(x){return x.upserveId})}}
+</template>-->
 
 
+<table class="packageTable" style="width: 100%;" v-if="preOrders.length>0">
+<tr>
+<th>phone</th>
+<th>email</th>
+<th>name</th>
+
+<th>time</th>
+<th>date</th>
+<th>items</th>
+
+</tr>
+<template v-for="order in preOrders">
+
+
+
+
+<tr v-if="checkIfHasPackageId(packages,order.orderInfo.charges.items) && pageTitle === order.orderInfo.restaurant">
+<td>
+<div>
+{{order.orderInfo.fulfillment_info.customer.phone}}
+</div>
+</td>
+<td>
+<div>
+{{order.orderInfo.fulfillment_info.customer.email}}
+</div>
+</td>
+<td>
+<div>
+{{order.orderInfo.fulfillment_info.customer.first_name}}&nbsp;{{order.orderInfo.fulfillment_info.customer.last_name}}
+</div>
+</td>
+<td>
+<div>
+{{returnTime(order.orderInfo.scheduled_time)}}
+</div>
+</td>
+<td>
+<div>
+{{returnDate(order.orderInfo.scheduled_time)}}
+</div>
+</td>
+<td>
+<!--{{order.orderInfo.charges.items.map(function(x){ return x.name })}}-->
+
+<div v-for="item in order.orderInfo.charges.items">
+{{item.name}}
+
+
+<div v-for="mod in item.modifiers">
+<span class="small-message">
+{{mod.name}}
+</span>
+
+</div>
+
+</div>
+
+
+</td>
+</tr>
+
+
+
+
+
+
+</template>
+
+</table>
+
+
+
+
+      <hr />
+
+
+<hr>
 
 
 
@@ -148,6 +229,9 @@
     <br>
       <h2 class="red">add a package:</h2>
       <hr />
+
+
+
 
 <b>{{packageAdd.restaurant}}</b><br>
 
@@ -292,13 +376,6 @@ https://www.nadimama.com/{{pa.restaurant.toLowerCase().replace(' ','')}}-olo?{{f
 
 
 
-<div>
-preorders:
-
-{{preOrders}}
-
-
-</div>
 
 
     <div class="recipientList">
@@ -378,6 +455,32 @@ export default {
 
 
   methods: {
+
+
+returnTime(time){
+return  moment(time).format('LT')
+},
+
+returnDate(date){
+
+
+
+return  moment(date).format('dddd MMM Do')
+
+},
+checkIfHasPackageId(packages,items){
+
+
+let arr1 = packages.map(function(x){return x.upserveId});
+
+let arr2 = items.map(function(x){return x.item_id});
+
+
+return arr1.some(r=> arr2.indexOf(r) >= 0)
+
+
+
+},
    returnendDate(endDate){
 if(endDate){
 
@@ -579,9 +682,9 @@ console.log(this.packageAdd);
 async upserveMongo(){
 
 
-console.log('upserveMongo');
-console.log('upserveMongo');
-console.log('upserveMongo');
+// console.log('upserveMongo');
+// console.log('upserveMongo');
+// console.log('upserveMongo');
 
       let self = this
       // let responseUpserve = await this.$http.get(`product/upserve_mongo/${self.title.toLowerCase().replace(' ','')}`);
@@ -643,7 +746,10 @@ if(responseUpserve.data.doc[0].menu){
       console.log("retriev orders frome");
       let responseUpserve = await this.$http.get(`/order/retrievepreorders`);
       console.log(responseUpserve);
-      this.preOrders = responseUpserve.data;
+
+
+      this.preOrders = responseUpserve.data.preorder.sort((a, b) => (moment(a.orderInfo.scheduled_time).unix() > moment(b.orderInfo.scheduled_time).unix()) ? 1 : -1);
+
     },
 
 
@@ -806,7 +912,7 @@ console.log(this);
     this.retrievePackages();
 
 
-    // this.retrievePreorders();
+    this.retrievePreorders();
 
 
     // this.addPackage();
@@ -883,5 +989,28 @@ padding-bottom: 20px;
 
 }
 
+
+
+
+.packageTable{
+ 
+ tr{
+   margin-bottom: 10px;
+ }
+ 
+ td{
+      vertical-align: top;
+
+
+          vertical-align: top;
+    border: 1px solid black;
+
+
+    div{
+      margin: 5px;
+    }
+
+ }
+}
 
 </style>

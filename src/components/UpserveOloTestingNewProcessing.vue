@@ -76,9 +76,6 @@
 </div>
 
 
-
-
-
 <div class="billingEdit">
 
 
@@ -170,32 +167,13 @@
 
 </div>
 
-
-
-
-
-
-
-
-
   </div>
-
-
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
-
 
 
 <UnableToProcessModal :unableToProcessModal="unableToProcessModal" :currentOrder="currentOrder"/>
 
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
+
 
 
       <div v-if="modalOpen" class="order-modal">
@@ -253,7 +231,7 @@
 
 
 
-    <div style="overflow:hidden;font-size: 12px;" v-html="currentItem.description"></div>                                   
+    <div style="overflow:hidden;font-size: 12px;white-space: pre;" v-html="currentItem.description"></div>                                   
                      </p>
                     <hr />
           <template v-if="currentItem.modifier_group_ids">
@@ -284,7 +262,7 @@
                                                <!--  <div v-if="m === mod.id && mod.name !== 'None'"-->
                                                   <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
-           
+   
                                                             <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
@@ -321,8 +299,9 @@
                                                   </div>
                                                   </template>
                                                 <template v-else>
-                                                <div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                <div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1,biggerWidth: packageObjectMaximum !== null }">
                                                     <div class="box-inner">
+                                                           <!-- {{packageObjectMaximum}}-->
                                                                           <div class="pad-10 leftmodbuttons">
                                                                             <!-- {{mod.id}} -->
                                                                           <span class="title-bolder">{{mod.name.replace('add ','')}} <span class="italicize" v-if="mod.price != 0.0"><span class="thin">+</span>${{mod.price}}</span></span>
@@ -506,7 +485,7 @@
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
 
-    <div style="overflow:hidden;font-size: 12px;" v-html="currentItem.description"></div>                                   
+    <div style="overflow:hidden;font-size: 12px;white-space: pre;" v-html="currentItem.description"></div>                                   
                      </p>
                     <hr />
           <template v-if="currentItem.modifier_group_ids">
@@ -534,6 +513,7 @@
               <!--<div v-if="m === mod.id && mod.name !== 'None'"-->
               <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
                                                     <div class="box-inner">
+                                                 
                                                             <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
@@ -577,7 +557,7 @@
                                                 <!--<div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">-->
       <div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal selected" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{'selected selectedAddOn': currentlyContains(currentItem.modifiers,m,mod.id) }">
                                       <div class="box-inner">
-              
+       
                                                                           <div class="pad-10 leftmodbuttons">
                                                                             <!-- {{mod.id}} -->
                                                                           <span class="title-bolder">{{mod.name.replace('add ','')}} <span class="italicize" v-if="mod.price != 0.0"><span class="thin">+</span>${{mod.price}}</span></span>
@@ -1827,12 +1807,17 @@ add
 <!--{{order}}-->
 
 <div v-if="order.name === 'Lunch Combo Special'" class="small-message grey">+{{order.modifiers.length}} selections</div>
-<!--<div v-else class="small-message grey">+{{order.modifiers.length}} add-ons</div>-->
+<div v-else class="small-message grey">+{{order.modifiers.length}} items</div>
 
-
+<!--
 <template v-if="order.name !== 'Lunch Combo Special'" v-for="(item, index) in order.modifiers">
 <div class="small-message grey" v-if="index <= 1">+{{item.name.replace("add","")}} <span style="font-weight: 100" v-if="index === 1&& order.modifiers.length - 2 >0">(+{{order.modifiers.length -2 }} more)</span></div>
-</template>
+</template>-->
+
+
+
+
+
 
 <!--<div class="small-message grey" v-for="(mod, i) in order.modifiers">
 <span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b> <span style="color:#F05D5B;font-weight:500;" v-if="i === 1 && order.modifiers.length>2">(+{{ order.modifiers.length - 2}} more)</span></span>
@@ -4919,9 +4904,9 @@ if(responseUpserve.data.body){
 async upserveMongo(){
 
 
-console.log('upserveMongo');
-console.log('upserveMongo');
-console.log('upserveMongo');
+// console.log('upserveMongo');
+// console.log('upserveMongo');
+// console.log('upserveMongo');
 
       let self = this
       let responseUpserve = await this.$http.get(`product/upserve_mongo/${self.title.toLowerCase().replace(' ','')}`);
