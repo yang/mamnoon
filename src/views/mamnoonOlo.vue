@@ -1,13 +1,15 @@
 <template>
   <div class="mamnoon">
     <Nav3 />
-<UpserveOloTesting :title="'Mamnoon'" :oloEndpoint="'/oloorder'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
-  
+<!-- <UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" /> -->
+    <UpserveOloTestingNewProcessing :title="'Mamnoon'" :oloEndpoint="'/order/oloorder'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
+
+
   <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>
 <script>
-import UpserveOloTesting from "@/components/UpserveOloTesting";
+import UpserveOloTestingNewProcessing from "@/components/UpserveOloTestingNewProcessing";
 import Nav3 from "@/components/Nav3";
 export default {
   data(){
@@ -17,7 +19,7 @@ user: null
   },
   components: {
     Nav3,
-    UpserveOloTesting
+    UpserveOloTestingNewProcessing
   },
   methods:{
   getUser() {

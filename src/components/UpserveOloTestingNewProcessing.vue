@@ -4900,6 +4900,9 @@ if(c === true){
 
       let responseUpserve = await this.$http.get(this.menuEndpoint);
 // console.log(responseUpserve)
+
+
+console.log(this.menuEndpoint);
 if(responseUpserve.data.body){
       let upserveProducts = responseUpserve.data.body.items;
       this.upserve = upserveProducts;
@@ -4914,6 +4917,11 @@ if(responseUpserve.data.body){
     }
     },
 async upserveMongo(){
+
+
+console.log('upserveMongo');
+console.log('upserveMongo');
+console.log('upserveMongo');
 
       let self = this
       let responseUpserve = await this.$http.get(`product/upserve_mongo/${self.title.toLowerCase().replace(' ','')}`);
@@ -7263,16 +7271,6 @@ if(product !== null){
 let endDateString2 = location.search.substring(1).split('&')[2].replace('endDate=','');
 
 
-// console.log('endDateString2');
-// console.log('endDateString2');
-// console.log(endDateString2);
-
-
-
-// console.log("moment().tz('America/Los_Angeles').format('YYYY-DD-MM'))");
-// console.log("moment().tz('America/Los_Angeles').format('YYYY-DD-MM'))");
-// console.log(moment().tz('America/Los_Angeles').format('YYYY-MM-DD'));
-
 
 
 if(endDateString2 === moment().tz('America/Los_Angeles').format('YYYY-MM-DD')){
@@ -7327,13 +7325,6 @@ this.reOrder = this.$store.state.storeCurrentOrder
 
  this.getCreditCards()
    }
-// if(this.valid){
-  // console.log('open now so filter to what is available now')
-  // this.createSingle()
-// }else{
-    // console.log('open now so filter to what is available now')
-  // this.createSingle()
-// }
 
 if(this.valid){
 this.filterForNow()

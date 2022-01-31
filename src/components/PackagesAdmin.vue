@@ -1,14 +1,33 @@
 <template>
 <div>
   <div class="container">
- <button class="btn-nadi fl-right" @click="toggleMamnoonMenu()">toggle mamnoon menu</button>
-  <h1 class="red">Mamnoon Packages</h1>  
+ <button class="btn-nadi fl-right" @click="toggleMamnoonMenu()">toggle menu</button>
+  <h1 class="red">{{pageTitle}} Packages</h1>  
+
+
+
 
 
 <!--
   {{packageAdd}} -->
   <hr>
 
+
+
+<template v-if="pageTitle === 'Mamnoon'">
+    <router-link :to="'packages-street'">mamnoon street packages</router-link>
+
+
+
+
+
+
+</template>
+<template v-else>
+    <router-link :to="'packages'">mamnoon packages</router-link>
+</template>
+
+<hr>
 
 
 
@@ -58,7 +77,7 @@
             <template v-if="section.timing_mask.end_date">end date: {{section.timing_mask.end_date}}</template><br>
         
         
-                    <button class="btn-nadi" v-if="section.timing_mask.start_date && section.timing_mask.end_date" @click="useForPackage(item,section.timing_mask)">use for package</button>
+                    <button class="btn-nadi" v-if="section.timing_mask.start_date && section.timing_mask.end_date" @click="useForPackage(item,section.timing_mask,pageTitle)">use for package</button>
 
             </template>
             <template v-else>
@@ -130,6 +149,7 @@
       <h2 class="red">add a package:</h2>
       <hr />
 
+<b>{{packageAdd.restaurant}}</b><br>
 
 
 name: {{packageAdd.name}}
@@ -241,22 +261,30 @@ staff notification email recipients:
     <div class="container">
         <div class="row">
     <template v-for="pa in packages">
- <div class="packageTile">
+
+
+ <div v-if="pageTitle === pa.restaurant" class="packageTile">
 <div class="inside bigger">
+<b>
+{{pa.restaurant}}
+
+
+
+</b>
 <h5>{{pa.name}} ({{pa.number}} remain)</h5>
 <b>start date:&nbsp;</b>{{pa.timing_mask.start_date}}&nbsp;<b>end date:&nbsp;</b>{{pa.timing_mask.end_date}}<br>
 <b>pickup time range:</b> {{pa.timing_mask.start_time}}-{{pa.timing_mask.end_time}}<br>
 
 <b>marketing link:</b>
 <template v-if="origin === 'http://localhost:8080'">
-<a ref="mylink" rel="noopener noreferrer" :href="'http://localhost:8080/mamnoontesting?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
-http://localhost:8080/mamnoontesting?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
+<a ref="mylink" rel="noopener noreferrer" :href="'http://localhost:8080/' + pa.restaurant.toLowerCase().replace(' ','') + '-olo?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
+http://localhost:8080/{{pa.restaurant.toLowerCase().replace(' ','')}}-olo?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
 </a>
 </template>
 <template v-else>
 
-<a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/mamnoontesting?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
-https://www.nadimama.com/mamnoontesting?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
+<a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/' + pa.restaurant.toLowerCase().replace(' ','') + '-olo?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
+https://www.nadimama.com/{{pa.restaurant.toLowerCase().replace(' ','')}}-olo?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
 </a>
 
 
@@ -316,6 +344,7 @@ export default {
   name: "PackagesAdmin",
   data() {
     return {
+      pageTitle: '',
       preOrders: null,
       upserveSections: [],
       origin: '',
@@ -499,7 +528,7 @@ return moment(date).format('YYYY-MM-DD');
     },
 
 
-    useForPackage(up,timingMask) {
+    useForPackage(up,timingMask,pageTitle) {
 
 
 // console.log(up);
@@ -507,6 +536,7 @@ console.log(timingMask.start_date);
 console.log(timingMask.end_date);
 console.log(timingMask.start_time);
 console.log(timingMask.end_time);
+console.lo
 
 console.log(this.packageAdd);
 
@@ -519,6 +549,7 @@ console.log(this.packageAdd);
       this.packageAdd.upserveId = up.id;
        this.packageAdd.object = up;
        this.packageAdd.timing_mask = timingMask;
+       this.packageAdd.restaurant = pageTitle;
   
       // this.packageAdd.timing_mask.start_date = null;
       // this.packageAdd.number = null;
@@ -543,6 +574,63 @@ console.log(this.packageAdd);
         this.upserve = upserveProducts;
       }
     },
+
+
+async upserveMongo(){
+
+
+console.log('upserveMongo');
+console.log('upserveMongo');
+console.log('upserveMongo');
+
+      let self = this
+      // let responseUpserve = await this.$http.get(`product/upserve_mongo/${self.title.toLowerCase().replace(' ','')}`);
+  // let responseUpserve = await this.$http.get(`product/upserve_mongo/mamnoon`);
+
+let routeString = '';
+if(window.location.pathname==='/packages-street'){
+routeString = 'mamnoonstreet';
+}else{
+routeString = 'mamnoon';
+}
+  let responseUpserve = await this.$http.get(`product/upserve_mongo/${routeString}`);
+
+
+if(responseUpserve.data.doc[0].menu){
+
+      let upserveProducts = responseUpserve.data.doc[0].menu.items;
+      this.upserve = upserveProducts;
+      this.upserveList = upserveProducts;
+      this.upserveSections = responseUpserve.data.doc[0].menu.sections;
+
+      this.upserveTaxRate = Number(responseUpserve.data.doc[0].menu.tax_rates.filter(x=>x.name === "Sales Tax")[0].percentage_rate)
+
+      this.modifierGroups = responseUpserve.data.doc[0].menu.modifier_groups;
+      this.modifiers =responseUpserve.data.doc[0].menu.modifiers;
+      this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
+}
+},
+
+
+
+
+    async upservesStreet() {
+      let responseUpserve = await this.$http.get("/product/upserveolo");
+      // console.log(responseUpserve)
+
+      if (responseUpserve.data.body) {
+
+
+        // console.log(responseUpserve.data.body.sections);
+
+
+        this.upserveSections = responseUpserve.data.body.sections;
+
+        let upserveProducts = responseUpserve.data.body.items;
+        this.upserve = upserveProducts;
+      }
+    },
+
 
     async retrievePackages() {
       // console.log("retriev orders frome");
@@ -581,6 +669,7 @@ if(this.packages){
          this.packageAdd.recipients = [];
         this.packageAdd.object = {};
         this.packageAdd.timing_mask = {};
+         this.packageAdd.restaurant = null;
         return true;
       } else {
         return false;
@@ -608,6 +697,7 @@ if(this.packages){
          this.packageAdd.recipients = [];
         this.packageAdd.object = {};
         this.packageAdd.timing_mask = {};
+         this.packageAdd.restaurant = null;
       }
     },
     async decrementPackage(id) {
@@ -695,6 +785,20 @@ let self = this;
   mounted() {
 
 
+
+
+
+
+if(window.location.pathname==='/packages-street'){
+
+
+this.pageTitle = 'Mamnoon Street'
+
+}else{
+this.pageTitle = 'Mamnoon'
+}
+
+
 this.origin = window.location.origin;
 
 
@@ -706,7 +810,13 @@ console.log(this);
 
 
     // this.addPackage();
-    this.upserves();
+
+
+    this.upserveMongo();
+
+
+
+
   },
 };
 </script>

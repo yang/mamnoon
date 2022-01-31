@@ -1,21 +1,25 @@
 <template>
-  <div class="mamnoon-street">
+  <div class="mamnoon">
     <Nav3 />
-    <UpserveOloTesting :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :userData="user" :menuEndpoint="'/product/upserveolostreet'" :emailAddress="$store.state.currentUserEmail" />
+<!-- <UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" /> -->
+    <UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/order/oloorderstreet'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" />
+
+
+  <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>
 <script>
-import UpserveOloTesting from "@/components/UpserveOloTesting";
+import UpserveOloTestingNewProcessing from "@/components/UpserveOloTestingNewProcessing";
 import Nav3 from "@/components/Nav3";
 export default {
-    data(){
+  data(){
 return {
 user: null
 }
   },
   components: {
     Nav3,
-    UpserveOloTesting
+    UpserveOloTestingNewProcessing
   },
   methods:{
   getUser() {
@@ -41,14 +45,26 @@ self.preferredGiftCard = userInfo.user.giftcard
 };
 
 
+
+
+
+
+
+
+
+
+
 </script>
 
-
-
 <style>
-.mamnoon-street{
-    /* padding-top: 120px; */
-    /* padding-top: 92px; */
-padding-top: 132px;
+.mamnoon{
+  padding-top: 132px;
+}
+
+@media only screen and (max-width: 992px) {
+  .mamnoon{
+    padding-top: 112px;
+}
+
 }
 </style>

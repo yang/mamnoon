@@ -129,6 +129,14 @@ const routes = [
     }
   },
   {
+    path: "/packages-street",
+    name: "packages-street",
+    component: () => import("../views/packages-street.vue"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: "/mamnoontesting",
     name: "mamnoontesting",
     component: () => import("../views/mamnoontesting.vue")
@@ -137,6 +145,16 @@ const routes = [
     path: "/mamnoonstreettesting",
     name: "mamnoonstreettesting",
     component: () => import("../views/mamnoonstreettesting.vue")
+  },
+  {
+    path: "/mamnoon-olo",
+    name: "mamnoon-olo",
+    component: () => import("../views/mamnoonOlo.vue")
+  },
+  {
+    path: "/mamnoonstreet-olo",
+    name: "mamnoonstreet-olo",
+    component: () => import("../views/mamnoonstreetOlo.vue")
   },
   {
     path: "/orderconfirmation",
