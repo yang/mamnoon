@@ -243,6 +243,8 @@
 
     <b>{{currentItem.name.toLowerCase()}}&nbsp;<template v-if="packageObjectMaximum !== null">({{ packageObjectMaximum}}&nbsp;remain)</template></b>
 
+
+
                 <br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
@@ -376,7 +378,6 @@
           <button v-else disabled>-</button>
           &nbsp;&nbsp;
           <span id="value">{{currentItemQuantity}}</span>&nbsp;&nbsp;
-
 
 
 <template v-if="packageObjectMaximum !== null">
@@ -808,9 +809,9 @@ add
                   </div>
                   <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                  <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
+                  <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
 
-         
+                 
                   </div>
                 </template>
               </template>
@@ -820,7 +821,10 @@ add
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
                       <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
                                    <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
+                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+                    
+                                    
+                    
                       </div>
                   </template>
             </template>
@@ -870,10 +874,10 @@ add
     <!-- beggin 1 -->
       <!-- check if package section -->
         
-              <div :id="trimmedName(item)" v-if="currentlyAvailable(nowDate,nowTime,item.name,item) || !item.timing_mask" class="container menu-line-testing">
+              <div :id="trimmedName(item)" v-if="currentlyAvailable(nowDate,nowTime,item.name,item) || !item.timing_mask" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                 
 
-
+                       
  
 
              <div class="display-block row no-lr-margin">
@@ -885,8 +889,10 @@ add
                 <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
               <template v-for="serve in upserveList" class="grey-bg">
                 <template v-if="serve.id === piece" class="inline-block">
-                      <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
-                        <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" />
+                        {{ checkIfLastDayOfPackage(serve)}}
+                    
+                                                   <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                   </div>
           </template>
         </template>
@@ -926,8 +932,12 @@ add
   <template v-if="noFiltering && item.name !== 'featured item'">
     <!-- beggin 1 -->
 
-                             <div :id="trimmedName(item)" class="container menu-line-testing">
+                             <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
 <div class="display-block row no-lr-margin">
+
+
+
+
 
                                                     <h2 class="menu-header"><template v-if="showScenarios"> 2 closed/no filtering</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
                                                 </div>
@@ -936,8 +946,11 @@ add
                                       
                                                     <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
-                                                  <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">                                                                            
-<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" />
+
+
+                                                                  
+                                                  <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                                                                                 </div>
                                                                   </template>
                                                     </template>
@@ -958,7 +971,7 @@ add
 
 
 
-           <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask" class="container menu-line-testing">
+           <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
             <!-- this is available at the started time -->
             
 
@@ -973,8 +986,8 @@ add
                     
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
-      <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" />
+                                                  <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
                       </template>
                     </template>
@@ -1050,7 +1063,7 @@ add
  <!-- beggin 0 -->
     <template v-if="noFiltering && item.name !== 'featured item'">
                                                       
-                                                            <div :id="trimmedName(item)" class="container menu-line-testing">
+                                                            <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                                                                 <div class="display-block row no-lr-margin">
                                                                   <h2 class="menu-header"><template v-if="showScenarios">scenario 4 preorder clicked, nothing selected</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
                                                                 </div>
@@ -1059,9 +1072,10 @@ add
 
                                                                   <template v-for="serve in upserveList" class="grey-bg">
                                                                   <template v-if="serve.id === piece" class="inline-block">
-                                                                  <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
+                                                 
 
-                                                                  <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" />
+                                                                                                              <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
 
                                                                   </div>
                                                                   </template>
@@ -1075,7 +1089,7 @@ add
       <template v-else>
            <template v-if="item.timing_mask === null">
            <!-- no timing mask -->
-              <div :id="trimmedName(item)" class="container menu-line-testing">
+              <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
          <div class="display-block row no-lr-margin">
                   <h2 class="menu-header"><template v-if="showScenarios">scenario 5 preorder date and/or time selected</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
               </div>
@@ -1084,8 +1098,8 @@ add
            
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
-                          <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" />
+                                                                                                                  <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
                       </template>
                     </template>
@@ -1097,7 +1111,7 @@ add
 </template>
 <template v-else>
 <template v-if="item.name !== 'featured item'">
-          <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item.timing_mask)" class="container menu-line-testing">
+          <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item.timing_mask)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                         <div class="display-block row no-lr-margin">
     <h2 class="menu-header"><template v-if="showScenarios">scenario 6 preorder</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
 
@@ -1109,8 +1123,8 @@ add
                 
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                        <div class="yellow-bg-test" @click="openModal(serve,item.timing_mask)">
-                <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" />
+                                                                                                                              <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
                       </template>
                     </template>
@@ -1216,7 +1230,10 @@ add
                   </div>
                   <div class="rightDropdown" style="width: 100%;padding: 0 0 0px 0;" v-if="selectedDate && selectedDate !== null">
                                <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                               <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
+                               <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+                
+                                    
+
                   </div>
                 </template>
               </template>
@@ -1226,7 +1243,10 @@ add
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
                       <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
                                    <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
+                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+                     
+                     
+                     
                       </div>
                   </template>
             </template>
@@ -1268,7 +1288,10 @@ add
 </div>
 <div style="margin-top:15px;" v-if="selectedDate && selectedDate !== null">
              <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-             <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
+             <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+
+            
+
 </div>
 </template>
 </template>
@@ -1278,7 +1301,9 @@ add
       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
       <div style="margin-top:15px;" v-if="selectedDate && selectedDate !== null">
                    <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime"></v-select>
+                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+      
+                
       </div>
 
 </template>
@@ -3181,6 +3206,7 @@ googleAddressObject.state;
     },
   data() {
   return {
+    tFs: null,
     showScenarios: false,
     packageLink: false,
     packageOrderDate: null,
@@ -3412,6 +3438,34 @@ showToFixed: function (value) {
 }
   },
   methods: {
+returnAsMappedTimeSlots(timeslots){
+
+
+
+// return timeslots.map(function(tx) {  return moment(tx.time).valueOf() > Date.now()})
+
+
+return timeslots.map(function(tx) {  return tx.time })
+
+    },
+hideIfExpired(item){
+
+
+
+
+if(item.timing_mask && item.timing_mask.end_date){
+// console.log('2');
+// console.log(item.timing_mask.end_date);
+// console.log('mom');
+// console.log(moment().tz('America/Los_Angeles').format('YYYY-MM-DD'));
+if(item.timing_mask.end_date === moment().tz('America/Los_Angeles').format('YYYY-MM-DD')){
+  return true;
+
+}
+
+
+}
+},
     trimmedName(item){
       return item.name.replace(/[^0-9a-zA-Z]/g, '').trim()
     },
@@ -4179,7 +4233,7 @@ self.decrementPackageByUpserveId(result.upserveId,currentOrder.charges.items[i].
         console.log(decrementPackResponse);
         },
     async retrievePackages() {
-
+// console.log('retrieve packages');
     // console.log('retriev orders frome')
     let responseUpserve = await this.$http.get(`/package/retrieve`);
     this.packages = responseUpserve.data.packs;
@@ -4197,9 +4251,31 @@ let self = this;
   // this.forPackageModal = responseUpserve.data.package.object;
 
 
+if(responseUpserve.data.package.number === 0){
 
-// console.log(responseUpserve.data.package.timing_mask)
+  this.$swal({ 
+    title: "this package has unfortunately sold out!",
+    showDenyButton: false,
+    confirmButtonText: `Okay`
+  }).then((confirmed) => {
+    if (confirmed) {
+
+      if(confirmed.isConfirmed){
+        self.$router.push('/');
+      }
+    } 
+  });
+
+
+}else{
 self.openModal(responseUpserve.data.package.object,responseUpserve.data.package.timing_mask,responseUpserve.data.package);
+}
+
+
+
+
+
+
 
     },
 
@@ -4246,9 +4322,34 @@ return true;
       },
 
 
+notAvailableDayOf(item){
+
+return false;
+// console.log(item);
+
+//      if(this.packages){
+// // console.log(this.packages)
+// // console.log(this.packages);
+
+//       let result = this.packages.find(pack => {
+//         return pack.upserveId === item.id
+//       });
+
+// // console.log(result);
+// if(result){
+//     return true;
+//     }else{
+//        return false;
+//      }
+
+//     }
 
 
-checkIfPackage(itemid){
+
+
+
+},
+    checkIfPackage(itemid){
       if(this.packages){
       let result = this.packages.find(pack => {
         return pack.upserveId === itemid
@@ -4258,6 +4359,9 @@ checkIfPackage(itemid){
 if(result === undefined){
 return false;
 }else{
+
+
+
 
   if(result.number>0){
     return result.number + ' remain';
@@ -5896,7 +6000,7 @@ removeFromOrder(removal) {
     openModal(serve,timing_mask,packageObject) {
 // console.log(timing_mask);
 
-console.log(packageObject);
+// console.log(packageObject);
       let current = Object.assign({}, serve);
       current.timing_mask = timing_mask
 
@@ -5921,9 +6025,10 @@ if(current.modifier_group_ids){
 
 
       if(packageObject){
-
         if(packageObject.number){
           this.packageObjectMaximum = packageObject.number;
+
+          // console.log(packageObject.number);
         }
 
         if(packageObject.orderDate){
@@ -6623,8 +6728,8 @@ let items = [];
 
 if(this.packageLink){
 
-console.log(endTime);
-console.log(endTime+1);
+// console.log(endTime);
+// console.log(endTime+1);
 
 let timeToEnd = parseInt(endTime) + 1;
 
@@ -6686,6 +6791,7 @@ return self2.openDays.includes(x)
 })
 
 
+this.tFs = tFs;
 
 let tomorrow = new Date(today)
 tomorrow.setDate(tomorrow.getDate() + 0)
@@ -6762,6 +6868,8 @@ dropDown(){
         })
 
 
+this.tFs = tFs;
+
 
 // console.log(window.location);
 const urlParams = new URLSearchParams(window.location.search);
@@ -6788,6 +6896,7 @@ if(product !== null){
       let timeslotsCreated = [];
 
 
+
             for(let i = 0; i < this.openTimesUpdated.length; i++){ 
               timeslotsCreated.push({
               time: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)),
@@ -6798,31 +6907,14 @@ if(product !== null){
 
 
 let dateString = location.search.substring(1).split('&')[0]
-
-
-
-
-
-
-
 let endDateString2 = location.search.substring(1).split('&')[2].replace('endDate=','');
 
 
-
 // console.log('enumerate through these');
-
-
 // console.log(dateString);
-
-
 // console.log(endDateString2);
-
-
 // console.log(this.enumerateDaysBetweenDates(dateString,endDateString2));
-
-
-
-              // console.log(timeslotsCreated);
+// console.log(timeslotsCreated);
 
 
 let timeslotsCreatedNoDuplicates = timeslotsCreated.filter((value, index, self) =>
@@ -6832,55 +6924,91 @@ let timeslotsCreatedNoDuplicates = timeslotsCreated.filter((value, index, self) 
 )
 
 
-let datesToAdd = this.enumerateDaysBetweenDates(dateString,endDateString2);
-
-
-console.log('dateString');
-console.log('dateString');
-console.log('dateString');
-console.log('dateString');
-console.log(dateString);
+let datesToAddList = this.enumerateDaysBetweenDates(dateString,endDateString2);
 
 
 
-console.log('endDateString2');
-console.log('endDateString2');
-console.log('endDateString2');
-console.log('endDateString2');
-console.log(endDateString2);
 
 
-console.log('datesToAdd');
-console.log('datesToAdd');
-console.log('datesToAdd');
-console.log('datesToAdd');
 console.log(datesToAdd);
 
-// console.log(datesToAdd);
+let datesToAdd = datesToAddList.map(function(x){
+  return moment(x).format();
+})
+
+
+
+console.log(datesToAdd);
+
+
 
 if(dateString === endDateString2){
+
+let testArray = [];
+            for(let x = 0; x < this.openTimesUpdated.length; x++){ 
+              testArray.push({
+              time: new Date(datesToAddList[0].setHours(this.openTimesUpdated[x][0], this.openTimesUpdated[x][1], 0, 0)),
+              timelabel: new Date(datesToAddList[0].setHours(this.openTimesUpdated[x][0], this.openTimesUpdated[x][1], 0, 0)).toLocaleTimeString().replace(":00","")
+              })
+            } 
+
+
+let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
+  index === self.findIndex((t) => (
+    t.timelabel === value.timelabel
+  ))
+)
+
+
+
 
 
             this.dropDownDays.push({
             dayLabel: moment(datesToAdd[0]).format('dddd').substring(0,3).toLowerCase(),
             dayName: moment(datesToAdd[0]).format('dddd'),
-            closed: false,
+            closed: !this.tFs[moment(datesToAdd[0]).day()],
             dateData: moment(datesToAdd[0]).format('dddd') + ', ' + moment(datesToAdd[0]).format("MMM Do"),
             dateFormatted: datesToAdd[0],
-            timeslots: timeslotsCreatedNoDuplicates
+            timeslots: timeslotsCreatedNoDuplicates2
             })
 
 
 
 }else{
 for(let i in datesToAdd){
+
+
+
+console.log(datesToAddList[i]);
+
+let testArray = [];
+            for(let j = 0; j < this.openTimesUpdated.length; j++){ 
+              testArray.push({
+              time: new Date(datesToAddList[i].setHours(this.openTimesUpdated[j][0], this.openTimesUpdated[j][1], 0, 0)),
+              timelabel: new Date(datesToAddList[i].setHours(this.openTimesUpdated[j][0], this.openTimesUpdated[j][1], 0, 0)).toLocaleTimeString().replace(":00","")
+              })
+            } 
+
+// console.log(testArray);
+
+
+let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
+  index === self.findIndex((t) => (
+    t.timelabel === value.timelabel
+  ))
+)
+
+
+
+
+
             this.dropDownDays.push({
             dayLabel: moment(datesToAdd[i]).format('dddd').substring(0,3).toLowerCase(),
             dayName: moment(datesToAdd[i]).format('dddd'),
-            closed: false,
+            closed: !this.tFs[moment(datesToAdd[i]).day()],
             dateData: moment(datesToAdd[i]).format('dddd') + ', ' + moment(datesToAdd[i]).format("MMM Do"),
             dateFormatted: datesToAdd[i],
-            timeslots: timeslotsCreatedNoDuplicates
+            timeslots: timeslotsCreatedNoDuplicates2
             })
 
 }
@@ -7129,13 +7257,43 @@ const product = urlParams.get('packageId');
 
 if(product !== null){
 
-  this.packageLink = true;
+
+
+
+let endDateString2 = location.search.substring(1).split('&')[2].replace('endDate=','');
+
+
+// console.log('endDateString2');
+// console.log('endDateString2');
+// console.log(endDateString2);
+
+
+
+// console.log("moment().tz('America/Los_Angeles').format('YYYY-DD-MM'))");
+// console.log("moment().tz('America/Los_Angeles').format('YYYY-DD-MM'))");
+// console.log(moment().tz('America/Los_Angeles').format('YYYY-MM-DD'));
+
+
+
+if(endDateString2 === moment().tz('America/Los_Angeles').format('YYYY-MM-DD')){
+
+
+
+  this.$router.push(window.location.pathname);
+     this.getHours();
+
+
+
+}else{
+ this.packageLink = true;
 
 
 this.retrieveOnePackage(product);
 
 
 this.getPackageHours();
+}
+
 
 }else{
   
@@ -8330,5 +8488,17 @@ text-transform: lowercase;
 .container.online-menu.order-modal-width .block{
   width:100%;
 }
+
+
+.unavailable2,
+.unavailable{
+  pointer-events:none;
+  opacity:.6;
+}
+
+.hideIfExpired{
+  display:none !important;
+}
+
 
 </style>

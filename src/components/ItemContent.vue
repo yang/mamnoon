@@ -19,7 +19,11 @@
                       
                       ${{ formatPrice(serve.price_cents) }}
                        <template v-if="checkIfPackage(serve.id)">
-                      <span class="checkIfPackage" v-if="checkIfPackage(serve.id) !== 'false'" v-html="checkIfPackage(serve.id)"></span>   
+                      
+                      <span v-if="notAvailableDayOf" class="checkIfPackage">sold out</span> 
+                            <template v-else>
+                       <span class="checkIfPackage" v-if="checkIfPackage(serve.id) !== 'false'" v-html="checkIfPackage(serve.id)"></span>  
+                            </template> 
                       </template>
                     </div>
                     <br />
@@ -51,7 +55,7 @@ import NadiIconSmX from "@/components/svgIcons/NadiIconSmX";
 export default{
 
 name: 'ItemContent',
-  props: ["serve","orderHistoryList","packages"],
+  props: ["serve","orderHistoryList","packages","notAvailableDayOf"],
   components:{
     NadiIconSmX  
   },
@@ -100,6 +104,9 @@ if(result !== undefined){
 if(result === undefined){
 return false;
 }else{
+
+
+
 
   if(result.number>0){
     return result.number + ' remain';

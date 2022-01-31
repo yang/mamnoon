@@ -24,7 +24,7 @@
     <template v-if="noFiltering && item.name !== 'featured item'">
         <template v-if="item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime) ||!item.timing_mask">
                   
-                  <div class="block text-left mb10">
+                  <div class="block text-left mb10" v-if="!hideIfExpired(item)"> 
                       <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
        
                                  
@@ -42,7 +42,7 @@
  
   <template v-for="(item, index) in upserveSections">
   <template v-if="noFiltering && item.name !== 'featured item'">
-        <div class="block text-left mb10">
+        <div class="block text-left mb10" v-if="!hideIfExpired(item)"> 
      <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
   
 
@@ -54,7 +54,7 @@
   </template>
   <template v-else>
     <template v-if="item.name !== 'featured item' && item.timing_mask && currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,selectedDate,selectedTime) ||!item.timing_mask">
-          <div class="block text-left mb10">
+          <div class="block text-left mb10" v-if="!hideIfExpired(item)"> 
     <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
     
 
@@ -75,7 +75,7 @@
   <template v-for="(item, index) in upserveSections">
  <template v-if="noFiltering && item.name !== 'featured item'">
 
-        <div class="block text-left mb10">
+        <div class="block text-left mb10" v-if="!hideIfExpired(item)"> 
      <a @click="toggleExpand(false)" :index="index"  :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
      
 
@@ -89,7 +89,7 @@
 </template>
 <template v-else>
   <template v-if="item.timing_mask === null && item.name !== 'featured item'">
-        <div class="block text-left mb10">
+        <div class="block text-left mb10" v-if="!hideIfExpired(item)"> 
      <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
  
 
@@ -100,7 +100,7 @@
   </template>
   <template v-else>
     <template v-if="item.name !== 'featured item' && currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
-         <div class="block text-left mb10">
+         <div class="block text-left mb10" v-if="!hideIfExpired(item)"> 
        <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
    
 
@@ -129,6 +129,7 @@
 import ListIcon from "@/components/svgIcons/ListIcon";
 import CloseModalRedSm2 from "@/components/svgIcons/CloseModalRedSm2";
 import moment from 'moment'
+import tz from 'moment-timezone'
 
 export default {
     name: 'moreInfoClickModal',
@@ -144,6 +145,24 @@ return{
     name: 'slidernav',
     props: ['valid','preOrderToggleState','upserveSections','upserveList','noFiltering','nowDate','nowTime','futureDay','futureTime','selectedDate','selectedTime'],
     methods:{
+      hideIfExpired(item){
+
+
+
+
+if(item.timing_mask && item.timing_mask.end_date){
+// console.log('2');
+// console.log(item.timing_mask.end_date);
+// console.log('mom');
+// console.log(moment().tz('America/Los_Angeles').format('YYYY-MM-DD'));
+if(item.timing_mask.end_date === moment().tz('America/Los_Angeles').format('YYYY-MM-DD')){
+  return true;
+
+}
+
+
+}
+},
         toggleExpand(e){
             this.expandedMenu = e;
         },
