@@ -91,6 +91,8 @@
     </swiper-slide>
   </template>
   <template v-else>
+
+    <template v-if="item.name !== 'featured item'">
     <template v-if="currentlyAvailable(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
         <swiper-slide v-if="!hideIfExpired(item)" :id="item.id">
         <a :index="index" :indexId="item.id" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item">
@@ -99,6 +101,7 @@
        </a>
       </swiper-slide>
       </template>
+        </template>
   </template>
 </template>
 </template>

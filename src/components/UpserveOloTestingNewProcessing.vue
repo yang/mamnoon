@@ -869,7 +869,7 @@ add
                 <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
               <template v-for="serve in upserveList" class="grey-bg">
                 <template v-if="serve.id === piece" class="inline-block">
-                        {{ checkIfLastDayOfPackage(serve)}}
+ 
                     
                                                    <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
@@ -950,7 +950,7 @@ add
 
 
 
-
+<template v-if="item.name !== 'featured item'">
            <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
             <!-- this is available at the started time -->
             
@@ -975,7 +975,7 @@ add
               </div>
               </div>
 
-
+</template>
 
 </template>
   <!-- end 0 -->
@@ -1067,7 +1067,7 @@ add
 
       </template>
       <template v-else>
-           <template v-if="item.timing_mask === null">
+           <template v-if="item.timing_mask === null && item.name !== 'featured item'">
            <!-- no timing mask -->
               <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
          <div class="display-block row no-lr-margin">
