@@ -545,7 +545,7 @@ transition: all .5s ease;
     font-size: 14px;
     margin-bottom: 15px;
 
-&.biggerWidth{
+// &.biggerWidth{
   width: 100% !important;
 
 float: left !important;
@@ -570,7 +570,7 @@ font-size: 13px;
 
 }
 
-}
+// }
 
 
 }

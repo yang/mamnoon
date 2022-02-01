@@ -792,6 +792,9 @@ add
                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
 
                  
+
+
+
                   </div>
                 </template>
               </template>
@@ -2669,6 +2672,8 @@ this.preOrderToggle(true);
 
 
 
+  console.log(this.dropDownDays);
+
 
 }else{
 
@@ -2733,7 +2738,7 @@ this.preOrderToggle(true);
     },
     valid:{
 handler(val){
-  console.log('valid - changed')
+  // console.log('valid - changed')
 
 if(this.valid){
 this.filterForNow()
@@ -2933,7 +2938,7 @@ let itemsToRemove = []
 if(this.currentOrder.charges){
 for (var value of this.currentOrder.charges.items) {
 
-console.log(value);
+// console.log(value);
 
   // console.log(moment(this.selectedTime.time).format('HH:mm:ss'))
   if(value.timing_mask){
@@ -3019,6 +3024,8 @@ this.selectedTime = null
 },
 selectedTime(){
 
+
+
 if(this.selectedDate === null && this.selectedTime === null){
 this.noFiltering = true
 }else{
@@ -3082,28 +3089,16 @@ if(itemsToRemove.length === 1){
 
 
 
-
-
 this.selectedTime = null
 
 
-
-
 }else if(itemsToRemove.length>1){
-
-        // this.$swal({ 
-        //    title: removalItems + ' are not available at the selected pick-up time and have been removed from your shopping bag'
-        //   });
-          
 
         this.$swal({ 
            title: removalItems + ' are not available at the selected pick-up time. please select another time between ' + formatNonMilitary(value.timing_mask.start_time) + ' and ' + formatNonMilitary(value.timing_mask.end_time)
           });
 
-
 this.selectedTime = null
-
-
 
 }
 
@@ -5032,6 +5027,12 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 
 
     this.currentRestaurantHours = this.hours.restaurant_hours[0].restaurant_name.find(o => o.name === this.title.toLowerCase());
+
+    console.log('this.currentRestaurantHours');
+    console.log(this.currentRestaurantHours);
+        console.log(this.currentRestaurantHours);
+            console.log(this.currentRestaurantHours);
+                console.log(this.currentRestaurantHours);
     this.openDays = this.currentRestaurantHours.information.days_of_week
     let curRest = this.currentRestaurantHours.information.open_time_range
 
@@ -6729,7 +6730,7 @@ if(this.packageLink){
 // console.log(endTime);
 // console.log(endTime+1);
 
-let timeToEnd = parseInt(endTime) + 1;
+let timeToEnd = parseInt(endTime);
 
 for (var hour = startTime; hour <= timeToEnd; hour++) {
 
@@ -6745,11 +6746,19 @@ for (var hour = startTime; hour <= timeToEnd; hour++) {
 }
 }
 
-for (var hour = startTime; hour < endTime; hour++) {
+let timeToEnd = parseInt(endTime);
+
+for (var hour = startTime; hour <= timeToEnd; hour++) {
+
+
+
   items.push([parseInt(hour), 0]);
+  
+   if(hour != timeToEnd){
   items.push([parseInt(hour), 15]);
   items.push([parseInt(hour), 30]);
   items.push([parseInt(hour), 45]);
+   }
 }
 
 const date = new Date();
@@ -6774,7 +6783,7 @@ this.openTimes = this.openTimes.concat(items)
 
 },
 filterForNow(){
-console.log('rrrr');
+// console.log('rrrr');
 
 let today = new Date()
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -6795,7 +6804,7 @@ let tomorrow = new Date(today)
 tomorrow.setDate(tomorrow.getDate() + 0)
 
 let timeslotsCreated = [];
-console.log(this.openTimesUpdated)
+// console.log(this.openTimesUpdated)
 for(let i = 1; i < this.openTimesUpdated.length; i++){ 
 timeslotsCreated.push({
 time: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)),
@@ -6824,15 +6833,15 @@ time: new Date(),
 timelabel: new Date().toLocaleTimeString().replace(":00","")
 }
 
-console.log(new Date().toLocaleTimeString().replace(":00",""));
-console.log(new Date().toLocaleTimeString().replace(":00",""));
-console.log(new Date().toLocaleTimeString().replace(":00",""));
-console.log(new Date().toLocaleTimeString().replace(":00",""));
-console.log(new Date().toLocaleTimeString().replace(":00",""));
-console.log(new Date().toLocaleTimeString().replace(":00",""));
+// console.log(new Date().toLocaleTimeString().replace(":00",""));
+// console.log(new Date().toLocaleTimeString().replace(":00",""));
+// console.log(new Date().toLocaleTimeString().replace(":00",""));
+// console.log(new Date().toLocaleTimeString().replace(":00",""));
+// console.log(new Date().toLocaleTimeString().replace(":00",""));
+// console.log(new Date().toLocaleTimeString().replace(":00",""));
 
-console.log('createdTime')
-console.log(createdTime)
+// console.log('createdTime')
+// console.log(createdTime)
 
 // console.log(createdItem)
 // this.selectedDate = createdItem
@@ -6845,8 +6854,8 @@ this.nowDate = createdItem
 // t
 
 
-console.log(createdTime);
-console.log(createdItem);
+// console.log(createdTime);
+// console.log(createdItem);
 
 },
 dropDown(){
@@ -7059,6 +7068,11 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
             let timeslotsCreated = [];
 
 
+
+        console.log('timeslotsCreated 1');
+        console.log('timeslotsCreated 1');
+        console.log(timeslotsCreated);
+              console.log(timeslotsCreated.slice(2));
       // console.log('this.openTimesUpdated');
       //       console.log(this.openTimesUpdated);
 
@@ -7081,6 +7095,12 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
             }else{
 
             let timeslotsCreated = [];
+
+        console.log('timeslotsCreated 2');
+        console.log('timeslotsCreated 2');
+        console.log(timeslotsCreated);
+                console.log(timeslotsCreated.slice(2));
+
 
             for(let i = 1; i < this.openTimesUpdated.length; i++){ 
               timeslotsCreated.push({
@@ -7317,8 +7337,13 @@ this.reOrder = this.$store.state.storeCurrentOrder
    }
 
 if(this.valid){
+
+  
 this.filterForNow()
 }
+
+
+
 
 // console.log(this.valid)
 
@@ -7371,7 +7396,7 @@ if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
              console.log('Your Nadi Mama order has expired and your shopping bag is now empty. To place an order, please return to the current menu on this page.');
           this.emptyCart()
       }else{
-        console.log('not empty yet')
+        // console.log('not empty yet')
       }
 
         this.currentOrder = this.$store.state.storeCurrentOrderUpdateStreet
