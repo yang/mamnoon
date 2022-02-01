@@ -34,7 +34,9 @@
 </template>-->
 
 
-<table class="packageTable" style="width: 100%;" v-if="preOrders.length>0">
+
+
+<table class="packageTable" style="width: 100%;">
 <tr>
 <th>phone</th>
 <th>email</th>
@@ -361,14 +363,23 @@ staff notification email recipients:
 
 <b>marketing link:</b>
 <template v-if="origin === 'http://localhost:8080'">
-<a ref="mylink" rel="noopener noreferrer" :href="'http://localhost:8080/' + pa.restaurant.toLowerCase().replace(' ','') + '-olo?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
 http://localhost:8080/{{pa.restaurant.toLowerCase().replace(' ','')}}-olo?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
+<a ref="mylink" rel="noopener noreferrer" :href="encodeURI('http://localhost:8080/' + pa.restaurant.toLowerCase().replace(' ','') + '-olo?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask))" target="_blank">
+
+
+
+{{'http://localhost:8080/'+pa.restaurant.toLowerCase().replace(' ','')+'-olo?'+formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId+returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)}}
+
 </a>
 </template>
 <template v-else>
+<!--https://www.nadimama.com/{{pa.restaurant.toLowerCase().replace(' ','')}}-olo?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}-->
+<a ref="mylink" rel="noopener noreferrer" :href="encodeURI('https://www.nadimama.com/' + pa.restaurant.toLowerCase().replace(' ','') + '-olo?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask))" target="_blank">
 
-<a ref="mylink" rel="noopener noreferrer" :href="'https://www.nadimama.com/' + pa.restaurant.toLowerCase().replace(' ','') + '-olo?' + formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId + returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)" target="_blank">
-https://www.nadimama.com/{{pa.restaurant.toLowerCase().replace(' ','')}}-olo?{{formattedLinkDate(pa.timing_mask.start_date)}}&packageId={{pa.upserveId}}{{returnendDate(pa.timing_mask.end_date)}}{{returnTimeRange(pa.timing_mask)}}
+
+{{'https://www.nadimama.com/'+pa.restaurant.toLowerCase().replace(' ','')+'-olo?'+formattedLinkDate(pa.timing_mask.start_date)+'&packageId='+pa.upserveId+returnendDate(pa.timing_mask.end_date)+returnTimeRange(pa.timing_mask)}}
+
+
 </a>
 
 
