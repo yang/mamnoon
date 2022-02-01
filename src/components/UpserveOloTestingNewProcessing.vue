@@ -502,7 +502,7 @@
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
 
-{{modifier}}
+
 
                   <div class="fw">
 
@@ -8098,12 +8098,23 @@ height: 560px;
 }
 #upserveolo.smallerBoxes .box,
 #upserveolo.smallerBoxes .box.normal{
-  width: 50%;
+  width: 50% !important;
 
   .mt10{
     display:none;
   }
 }
+
+
+#upserveolo.smallerBoxes .box.fifth,
+#upserveolo.smallerBoxes .box.normal{
+  width: 100% !important;
+
+  .mt10{
+    display:none;
+  }
+}
+
 
 
 #upserveolo.smallerBoxes .box .box-inner,
@@ -8128,6 +8139,9 @@ height: 560px;
 #upserveolo .box-inner{
   margin: 0;
 }
+
+
+
 
 
 

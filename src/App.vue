@@ -2523,6 +2523,19 @@ pointer-events: none;
       color: #EE5E68;
 }
 
+
+
+
+@media only screen and (max-width: 992px) {
+
+
+#upserveolo.smallerBoxes .box.fifth{
+  width: 100% !important;
+}
+
+}
+
+
 </style>
 
 
