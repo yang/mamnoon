@@ -847,6 +847,57 @@ add
 
 
 
+
+
+
+<!-- // staff selection --> 
+<!-- // staff selection --> 
+<!-- // staff selection --> 
+<!-- // staff selection --> 
+
+
+<!--staff display group-->
+ <template v-if="employeeCheckout">
+
+
+
+                           <div :id="trimmedName(itemStaff)" v-if="currentlyAvailable(selectedDate,selectedTime,itemStaff.name,itemStaff.timing_mask)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(itemStaff)}">
+<div class="display-block row no-lr-margin">
+                                                    <h2 class="menu-header"><template v-if="showScenarios">scenario 6 staff menu {{currentlyAvailable(selectedDate,selectedTime,itemStaff.name,itemStaff.timing_mask)}}</template>{{itemStaff.name.replace('- To Go', '').replace('To Go', '')}}</h2>
+                                                </div>
+                                        <div :data="'drawer' + itemStaff.id" class=" row no-lr-margin">
+                                              <template v-for="(serve,index) in upserveListStaff" class="grey-bg">
+                                            <div class="filtree-full-testing">
+                                                                  <template class="inline-block">
+            <div class="yellow-bg-test" @click="openModal(serve,itemStaff.timing_mask)"> 
+<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
+                                                                        </div>
+                                                                  </template>
+                                            </div>
+                                         </template>
+                                      </div>
+                                    </div>
+</template>
+<!-- staff display group-->
+<!-- // staff selection --> 
+<!-- // staff selection --> 
+<!-- // staff selection --> 
+<!-- // staff selection --> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- BEGINNING OF ORIGINAL -->
 <!-- BEGINNING OF ORIGINAL -->
 <!-- BEGINNING OF ORIGINAL -->
@@ -856,12 +907,49 @@ add
  <!-- beggin 00 -->
 
  <template v-if="valid && !preOrderToggleState">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <template v-for="item in upserveSections">
+
+
+
+
+
+
+
   <!-- beggin 0 -->
   <template v-if="noFiltering && item.name !== 'featured item'">
     <!-- beggin 1 -->
       <!-- check if package section -->
         
+
+
+
+
+
+
+
+
+
+
+
               <div :id="trimmedName(item)" v-if="currentlyAvailable(nowDate,nowTime,item.name,item) || !item.timing_mask" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                 
 
@@ -880,7 +968,11 @@ add
  
                     
                                                    <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<!--{{serve}}{{item.timing_mask}}-->
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
+
+
+
                   </div>
           </template>
         </template>
@@ -915,30 +1007,56 @@ add
 
  <template v-if="!valid">
 
+
+
+
+
+
+
+
+
 <template v-for="item in upserveSections">
   <!-- beggin 0 -->
   <template v-if="noFiltering && item.name !== 'featured item'">
     <!-- beggin 1 -->
 
+
+
+
+
+
+
+
                              <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
 <div class="display-block row no-lr-margin">
-
-
-
-
-
                                                     <h2 class="menu-header"><template v-if="showScenarios"> 2 closed/no filtering</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
                                                 </div>
+
+
+
+
                                         <div :data="'drawer' + item.id" class=" row no-lr-margin">
                                             <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
-                                      
-                                                    <template v-for="serve in upserveList" class="grey-bg">
+
+
+
+
+                                              <template v-for="serve in upserveList" class="grey-bg">
+
+
+
+
                                                                   <template v-if="serve.id === piece" class="inline-block">
+            <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
 
 
-                                                                  
-                                                  <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+
+
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
+
+
+
+
                                                                                 </div>
                                                                   </template>
                                                     </template>
@@ -959,6 +1077,12 @@ add
 
 
 <template v-if="item.name !== 'featured item'">
+
+
+
+
+
+
            <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
             <!-- this is available at the started time -->
             
@@ -975,6 +1099,7 @@ add
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                                                   <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<!--{{serve}}{{item.timing_mask}}-->
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
                       </template>
@@ -1050,7 +1175,16 @@ add
             <template v-for="item in upserveSections">
  <!-- beggin 0 -->
     <template v-if="noFiltering && item.name !== 'featured item'">
-                                                      
+
+
+
+
+
+
+
+
+
+
                                                             <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                                                                 <div class="display-block row no-lr-margin">
                                                                   <h2 class="menu-header"><template v-if="showScenarios">scenario 4 preorder clicked, nothing selected</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
@@ -1063,8 +1197,8 @@ add
                                                  
 
                                                                                                               <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<!--{{serve}}{{item.timing_mask}}-->
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
-
                                                                   </div>
                                                                   </template>
                                                                   </template>
@@ -1075,11 +1209,17 @@ add
 
       </template>
       <template v-else>
+
+<!--this one shouldnt show staff because staff has a timing mask-->
+
+
            <template v-if="item.timing_mask === null && item.name !== 'featured item'">
+
+
            <!-- no timing mask -->
               <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
          <div class="display-block row no-lr-margin">
-                  <h2 class="menu-header"><template v-if="showScenarios">scenario 5 preorder date and/or time selected</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
+                  <h2 class="menu-header"><template v-if="showScenarios">scenario 5 preorder date and/or time selected {{item.timing_mask}}</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
               </div>
               <div :data="'drawer' + item.id" class=" row no-lr-margin">
                 <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
@@ -1087,6 +1227,7 @@ add
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                                                                                                                   <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<!--{{serve}}{{item.timing_mask}}-->
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
                       </template>
@@ -1098,6 +1239,16 @@ add
 
 </template>
 <template v-else>
+
+
+
+
+
+
+
+
+
+
 <template v-if="item.name !== 'featured item'">
           <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item.timing_mask)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                         <div class="display-block row no-lr-margin">
@@ -1112,6 +1263,7 @@ add
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                                                                                                                               <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+<!--{{serve}}{{item.timing_mask}}-->
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
                       </template>
@@ -1121,6 +1273,9 @@ add
               </div>
 
 </template>
+
+
+
 </template>
 
   </template>
@@ -2952,20 +3107,18 @@ for (var value of this.currentOrder.charges.items) {
     // console.log(value.timing_mask.rules)
     // console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
 
-console.log('this.selectedDate');
-console.log('this.selectedDate');
-console.log('this.selectedDate');
-console.log('this.selectedDate');
-console.log(this.selectedDate);
+// console.log('this.selectedDate');
+// console.log('this.selectedDate');
+// console.log('this.selectedDate');
+// console.log('this.selectedDate');
+// console.log(this.selectedDate);
+// console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
+// console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
+// console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
+// console.log(this.enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date).map(x=>moment(x).format('YYYY-MM-DD')));
 
 
-console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
-console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
-console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
-console.log(this.enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date).map(x=>moment(x).format('YYYY-MM-DD')));
-
-
-
+if(value.timing_mask.start_date && value.timing_mask.end_date){
 let mappedFormattedDates = this.enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date).map(x=>moment(x).format('YYYY-MM-DD'));
 console.log(mappedFormattedDates);
 
@@ -2973,6 +3126,9 @@ if(this.selectedDate && this.selectedDate.dateFormatted && !mappedFormattedDates
      this.removeFromOrder(value)
     itemsToRemove.push(value)
 }
+
+}
+
 
   if(this.selectedDate && this.selectedDate.dayLabel && !value.timing_mask.rules.includes(this.selectedDate.dayLabel.substring(0,3).toLowerCase())){
     this.removeFromOrder(value)
@@ -3192,8 +3348,260 @@ googleAddressObject.state;
     },
   data() {
   return {
+staffTimingMask: {
+  "id": "7af998f6-20f1-4984-a625-943f787be339",
+  "start_time": "14:30",
+  "end_time": "16:00",
+  "rules": [
+    "tue",
+    "wed",
+    "thu",
+    "fri",
+    "sat"
+  ],
+  "status": "enabled",
+  "owner_id": "447606b2-ef3c-4df3-9f47-56e123a2c6c6"
+}, 
+    upserveListStaff:   [
+   {
+  "id": "512d6558-aa69-46a3-980d-300e23f5e05f",
+  "name": "Lunch Combo Special",
+  "price": "25.0",
+  "price_cents": 2500,
+  "description": "Takeout only Tuesday-Saturday 11:30-2:30pm\r\n\r\nYour choice of either\r\n~chicken shawarma (halal) shawarma spiced chicken, lettuce, tomato, house pickles, fries & roasted garlic sauce\r\nOR\r\n~mamnoon falafel (veg) chickpea fritters, cabbage, pickles, hummus, yogurt, tomato, parsley, mint\r\n\r\nAND\r\n\r\n~ labneh with mint, four pieces of housemade pita \r\n~ harra frites\r\n\r\nSorry, no substitutions\r\n",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "tax_rate_id": "4c4734ea-c91d-412e-a2e3-67a8409908bf",
+  "item_images": [],
+  "modifier_group_ids": [
+    "9426fb7e-a114-4d76-94ba-63e3e0c4c84f",
+    "a024a7f9-2199-4684-b351-37d6cec41447"
+  ],
+  "side_ids": [],
+  "tax_rate_ids": []
+},
+ {
+  "id": "62fafabb-240e-4e34-9f80-ee1ea311c59b",
+  "name": "chicken shawarma ",
+  "price": "12.0",
+  "price_cents": 1200,
+  "description": "shawarma spiced chicken, lettuce,\r\ntomato, pickled peppers, frites, roasted garlic sauce, arabic bread",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "images": {
+    "online_ordering_menu": {
+      "main": "https://res-5.cloudinary.com/upserve/image/upload/v1598579602/m680cjftyiivxutgkpi8.jpg"
+    }
+  },
+  "tax_rate_id": "4c4734ea-c91d-412e-a2e3-67a8409908bf",
+  "item_images": [
+    {
+      "id": "da2f08a3-adaa-48c2-a6c2-216ab552bfc2",
+      "metadata": {
+        "image_path": "v1598579602/m680cjftyiivxutgkpi8.jpg",
+        "curated": false,
+        "url": "https://res-5.cloudinary.com/upserve/image/upload/v1598579602/m680cjftyiivxutgkpi8.jpg"
+      },
+      "url": "https://res-5.cloudinary.com/upserve/image/upload/v1598579602/m680cjftyiivxutgkpi8.jpg"
+    }
+  ],
+  "modifier_group_ids": [
+    "a024a7f9-2199-4684-b351-37d6cec41447"
+  ],
+  "side_ids": [],
+  "tax_rate_ids": []
+},
+ {
+  "id": "a3c70f6d-562f-48e3-8cc4-517e96d0c81e",
+  "name": "falafel ",
+  "price": "11.0",
+  "price_cents": 1100,
+  "description": "chickpea fritters, cabbage, tomato, pickles, hummus, yogurt, tarrator, herbs, arabic bread ",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "images": {
+    "online_ordering_menu": {
+      "main": "https://res-2.cloudinary.com/upserve/image/upload/v1598579656/ftoyhwzhhwlat98qiscc.jpg"
+    }
+  },
+  "tax_rate_id": "4c4734ea-c91d-412e-a2e3-67a8409908bf",
+  "item_images": [
+    {
+      "id": "a423a8c5-24b6-42a9-b004-d1bdd6acd5cd",
+      "metadata": {
+        "image_path": "v1598579656/ftoyhwzhhwlat98qiscc.jpg",
+        "curated": false,
+        "url": "https://res-2.cloudinary.com/upserve/image/upload/v1598579656/ftoyhwzhhwlat98qiscc.jpg"
+      },
+      "url": "https://res-2.cloudinary.com/upserve/image/upload/v1598579656/ftoyhwzhhwlat98qiscc.jpg"
+    }
+  ],
+  "modifier_group_ids": [
+    "a024a7f9-2199-4684-b351-37d6cec41447"
+  ],
+  "side_ids": [],
+  "tax_rate_ids": []
+},
+ {
+  "id": "4965a936-7c93-4b47-b86b-d7d41adec278",
+  "name": "za'atar man'oushe ",
+  "price": "9.0",
+  "price_cents": 900,
+  "description": "king of lebanese street food! wild thyme,\r\nsesame, olive, labneh, tomato, herbs, arabic bread",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "images": {
+    "online_ordering_menu": {
+      "main": "https://res-1.cloudinary.com/upserve/image/upload/v1598579793/gppll9561fcdwxn18n8f.jpg"
+    }
+  },
+  "tax_rate_id": "4c4734ea-c91d-412e-a2e3-67a8409908bf",
+  "item_images": [
+    {
+      "id": "403e45be-96c2-404b-9ec2-5e0c4cfe670d",
+      "metadata": {
+        "image_path": "v1598579793/gppll9561fcdwxn18n8f.jpg",
+        "curated": false,
+        "url": "https://res-1.cloudinary.com/upserve/image/upload/v1598579793/gppll9561fcdwxn18n8f.jpg"
+      },
+      "url": "https://res-1.cloudinary.com/upserve/image/upload/v1598579793/gppll9561fcdwxn18n8f.jpg"
+    }
+  ],
+  "modifier_group_ids": [
+    "a024a7f9-2199-4684-b351-37d6cec41447"
+  ],
+  "side_ids": [],
+  "tax_rate_ids": []
+},
+ {
+  "id": "1e29ca0b-8e11-4c49-aa4c-0e2d10dc4033",
+  "name": "jibneh wi za'atar",
+  "price": "10.0",
+  "price_cents": 1000,
+  "description": "za’atar, mozzarella, tomato, olive, herbs, arabic bread ",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "images": {
+    "online_ordering_menu": {
+      "main": "https://res-2.cloudinary.com/upserve/image/upload/v1598582695/gstdkf8fghc6famufqcg.jpg"
+    }
+  },
+  "tax_rate_id": "4c4734ea-c91d-412e-a2e3-67a8409908bf",
+  "item_images": [
+    {
+      "id": "304533d5-f5cb-44a5-ac06-a21827556b79",
+      "metadata": {
+        "image_path": "v1598582695/gstdkf8fghc6famufqcg.jpg",
+        "curated": false,
+        "url": "https://res-2.cloudinary.com/upserve/image/upload/v1598582695/gstdkf8fghc6famufqcg.jpg"
+      },
+      "url": "https://res-2.cloudinary.com/upserve/image/upload/v1598582695/gstdkf8fghc6famufqcg.jpg"
+    }
+  ],
+  "modifier_group_ids": [
+    "a024a7f9-2199-4684-b351-37d6cec41447"
+  ],
+  "side_ids": [],
+  "tax_rate_ids": []
+},
+ {
+  "id": "2b6d7c40-13b2-4e47-aff7-cf4913f6d178",
+  "name": "fleifleh ",
+  "price": "9.0",
+  "price_cents": 900,
+  "description": "roasted red pepper and onion confit,\r\nsesame, nigella, herbs (vegan)\r\n",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "images": {
+    "online_ordering_menu": {
+      "main": "https://res-1.cloudinary.com/upserve/image/upload/v1598579550/swtfbhggtgbl72g7qpru.jpg"
+    }
+  },
+  "tax_rate_id": "4c4734ea-c91d-412e-a2e3-67a8409908bf",
+  "item_images": [
+    {
+      "id": "3c9fec47-121f-4f8a-83b2-c5c0105a364c",
+      "metadata": {
+        "image_path": "v1598579550/swtfbhggtgbl72g7qpru.jpg",
+        "curated": false,
+        "url": "https://res-1.cloudinary.com/upserve/image/upload/v1598579550/swtfbhggtgbl72g7qpru.jpg"
+      },
+      "url": "https://res-1.cloudinary.com/upserve/image/upload/v1598579550/swtfbhggtgbl72g7qpru.jpg"
+    }
+  ],
+  "modifier_group_ids": [
+    "a024a7f9-2199-4684-b351-37d6cec41447"
+  ],
+  "side_ids": [],
+  "tax_rate_ids": []
+},
+ {
+  "id": "0cca54cd-617d-49b4-b872-32f70cd0448e",
+  "name": "lahm bi ajine",
+  "price": "10.0",
+  "price_cents": 1000,
+  "description": "minced lamb, aleppo chili, pomegranate\r\nmolasses, herbs",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "images": {
+    "online_ordering_menu": {
+      "main": "https://res-4.cloudinary.com/upserve/image/upload/v1598579244/cdeq9g0dvg2dquuv8uua.jpg"
+    }
+  },
+  "tax_rate_id": "4c4734ea-c91d-412e-a2e3-67a8409908bf",
+  "item_images": [
+    {
+      "id": "4175d142-2647-4b7c-a251-d83865ccaf86",
+      "metadata": {
+        "image_path": "v1598579244/cdeq9g0dvg2dquuv8uua.jpg",
+        "curated": false,
+        "url": "https://res-4.cloudinary.com/upserve/image/upload/v1598579244/cdeq9g0dvg2dquuv8uua.jpg"
+      },
+      "url": "https://res-4.cloudinary.com/upserve/image/upload/v1598579244/cdeq9g0dvg2dquuv8uua.jpg"
+    }
+  ],
+  "modifier_group_ids": [
+    "a024a7f9-2199-4684-b351-37d6cec41447"
+  ],
+  "side_ids": [],
+  "tax_rate_ids": []
+}     
+],
+    itemStaff: { 
+      "id": "8ce914dc-b26f-4dc9-b0d1-9e2837c484b5",
+      "name": "staff display group",
+      "timing_mask": {
+  "id": "7af998f6-20f1-4984-a625-943f787be339",
+  "start_time": "14:30",
+  "end_time": "16:00",
+  "rules": [
+    "tue",
+    "wed",
+    "thu",
+    "fri",
+    "sat"
+  ],
+  "status": "enabled",
+  "owner_id": "447606b2-ef3c-4df3-9f47-56e123a2c6c6"
+},
+      "item_ids": [ "fa80d069-baa8-4906-8bd9-3887e4a15c38", "e1d4fa26-9fd3-4e0f-9959-06837f93089a", "b40f9c17-a344-4950-9b48-df8acb6fdb51", "e2cf7af3-7060-4209-817d-3970923c5521", "d187d4dd-c95b-4e48-a751-94122920c41d", "2703ead3-bc05-401b-aa00-37c8043c732d" ] },
     tFs: null,
     showScenarios: false,
+    showStaffMenu: false,
     packageLink: false,
     packageOrderDate: null,
     packageObjectMaximum: null,
@@ -4225,7 +4633,7 @@ self.decrementPackageByUpserveId(result.upserveId,currentOrder.charges.items[i].
         },
     async retrievePackages() {
 // console.log('retrieve packages');
-    // console.log('retriev orders frome')
+    // console.log('retriev orders frome')  
     let responseUpserve = await this.$http.get(`/package/retrieve`);
     this.packages = responseUpserve.data.packs;
 
@@ -4235,11 +4643,9 @@ let self = this;
     // console.log('retriev orders frome')
     let responseUpserve = await this.$http.get(`/package/retrieveone/${upserveId}`);
 
-    // console.log(responseUpserve);
+// console.log(responseUpserve);
 //  console.log(responseUpserve.data.package.object);
-
-
-  // this.forPackageModal = responseUpserve.data.package.object;
+// this.forPackageModal = responseUpserve.data.package.object;
 
 
 if(responseUpserve.data.package.number === 0){
@@ -5083,32 +5489,29 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 currentlyAvailable(futureDay,futureTime,name,item){
 
 
+if(name === 'staff display group'){
 
+// console.log(futureDay);
+// console.log(futureTime);
+console.log(name);
+// console.log(item);
+console.log(item.timing_mask);
+}
 if(!item.timing_mask){
   return true
 }else{
 
-// currentlyAvailable(nowDate,nowTime,item.name,item) 
-
-
-// console.log(timing_mask);
 
 
 
-// console.log(name);
-// console.log('currently available');
-// console.log(name);
-// console.log(item.timing_mask);
 
 let startTime = item.timing_mask.start_time;
 let endTime = item.timing_mask.end_time;
 let rules = item.timing_mask.rules;
 
 
-// console.log(startTime);
-// console.log(endTime);
-// console.log(futureDay);
-// console.log(futureTime);
+
+
 
 
     let weekday = ['mon','tue','wed','thu','fri','sat','sun']
@@ -5151,13 +5554,13 @@ let rules = item.timing_mask.rules;
 
     if(validTime && validDay){
 
-console.log('is showing up: '+name);
+// console.log('is showing up: '+name);
 
       return true
     }else{
 
 // console.log(name);
-console.log('not showing up: '+name);
+// console.log('not showing up: '+name);
 
       return false
     }
@@ -7075,9 +7478,9 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
 
 
 
-        console.log('timeslotsCreated 1');
-        console.log('timeslotsCreated 1');
-        console.log(timeslotsCreated);
+        // console.log('timeslotsCreated 1');
+        // console.log('timeslotsCreated 1');
+        // console.log(timeslotsCreated);
               console.log(timeslotsCreated.slice(2));
       // console.log('this.openTimesUpdated');
       //       console.log(this.openTimesUpdated);
@@ -7102,10 +7505,10 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
 
             let timeslotsCreated = [];
 
-        console.log('timeslotsCreated 2');
-        console.log('timeslotsCreated 2');
-        console.log(timeslotsCreated);
-                console.log(timeslotsCreated.slice(2));
+        // console.log('timeslotsCreated 2');
+        // console.log('timeslotsCreated 2');
+        // console.log(timeslotsCreated);
+                // console.log(timeslotsCreated.slice(2));
 
 
             for(let i = 1; i < this.openTimesUpdated.length; i++){ 
@@ -7218,6 +7621,9 @@ if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.
 
 if(window.location.hash === '#mamnoonEmployee'){
 this.employeeCheckout = true
+
+
+
 }
 
         this.$nextTick(function () {
