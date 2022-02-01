@@ -191,7 +191,7 @@
 
         <div class="container online-menu order-modal-width topCurves orderModalHeader" style="margin: 0;max-width: 100% !important;">
 
-          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
+          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`">
           <div
             class="item-image-container topCurves"
             v-if="currentItem.images"
@@ -246,9 +246,11 @@
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
                 <template v-if="modifieritem === modifier.id">
                   <div class="displayInlineBlock">
-                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`">
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
+
+
                   <div class="fw">
                   <div class="option-choices row row-eq-height">
                                               <!-- <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div> -->
@@ -256,17 +258,17 @@
                                                 <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
                                                 <template v-for="(m,i) in modifier.modifier_ids">
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
-                                                  <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                                                  <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`">
                                                  
                                                  
                                                <!--  <div v-if="m === mod.id && mod.name !== 'None'"-->
-                                                  <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+                                                  <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1, fifth: currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two` }">
                                                     <div class="box-inner">
    
-                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
+                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
-                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`">
                                                                         <div style="position: absolute;top:0;width:100%">
                                                                               <NadiIconxx />
                                                                         </div>
@@ -380,7 +382,7 @@
 </template>
 
 
-                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`">
                     <template v-if="allOptionsSelected">
                       <button
                       v-if="oloAvailable"
@@ -392,7 +394,7 @@
                       <button
                       v-if="oloAvailable"
                       class="float-right"
-                      disabled>select 1 option from each course</button>
+                      disabled>select 1 option from each</button>
                     </template>
                 </template>
                 <template v-else>
@@ -448,7 +450,7 @@
 
         <div class="container online-menu order-modal-width topCurves orderModalHeader" style="margin: 0;max-width: 100% !important;">
 
-          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'">
+          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special'|| currentItem.name === `Valentine's Day Kit For Two`">
           <div
             class="item-image-container topCurves"
             v-if="currentItem.images"
@@ -496,9 +498,12 @@
               <div v-for="(modifier,i) in modifierGroups" :key="'B'+ i">
                 <template v-if="modifieritem === modifier.id">
                   <div class="displayInlineBlock">
-                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`">
                     <div class="optionHeader">{{modifier.name.replace(" : choose 1", "")}} (select one)</div>
                   </template>
+
+{{modifier}}
+
                   <div class="fw">
 
 
@@ -508,16 +513,16 @@
                                                 <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
                                                 <template v-for="(m,i) in modifier.modifier_ids">
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
-                                                  <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                                                  <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'|| currentItem.name === `Valentine's Day Kit For Two`">
 
               <!--<div v-if="m === mod.id && mod.name !== 'None'"-->
-              <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1 }">
+              <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1, fifth: currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`}">
                                                     <div class="box-inner">
                                                  
-                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'" class="hide-on-mob square">
+                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'|| currentItem.name === `Valentine's Day Kit For Two`" class="hide-on-mob square">
                                                             <div class="content">
                                                                       <div style="width:100%;position: relative;">
-                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'">
+                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'|| currentItem.name === `Valentine's Day Kit For Two`">
                                                                         <div style="position: absolute;top:0;width:100%">
                                                                               <NadiIconxx />
                                                                         </div>
@@ -609,7 +614,7 @@
           &nbsp;&nbsp;
           <span id="value">{{currentItemQuantity}}</span>&nbsp;&nbsp;
           <button @click="incrementCurrentItem()">+</button>
-                <template v-if="currentItem.item_object.name === 'mamnoon @ home' || currentItem.item_object.name === 'Street Combo' || currentItem.item_object.name === 'Lunch Combo Special'">
+                <template v-if="currentItem.item_object.name === 'mamnoon @ home' || currentItem.item_object.name === 'Street Combo' || currentItem.item_object.name === 'Lunch Combo Special' || currentItem.item_object.name === `Valentine's Day Kit For Two`">
                     <template v-if="allOptionsSelected">
                       <button
                       class="float-right"
@@ -619,7 +624,7 @@
                     <template v-else>
                       <button
                       class="float-right"
-                      disabled>select 1 option from each course</button>
+                      disabled>select 1 option from each</button>
                     </template>
                 </template>
                 <template v-else>
@@ -2545,11 +2550,12 @@ if(this.title === "Mbar"){
 // this.currentItem.name
 
 if(this.currentItem){
-if(this.currentItem.name === "mamnoon @ home"|| this.currentItem.name === "Street Combo" || this.currentItem.name === 'Lunch Combo Special'){
+if(this.currentItem.name === "mamnoon @ home"|| this.currentItem.name === "Street Combo" || this.currentItem.name === 'Lunch Combo Special' || this.currentItem.name === `Valentine's Day Kit For Two`){
   return true
   }else{
     return false
   }
+
 
 }else{
   return false

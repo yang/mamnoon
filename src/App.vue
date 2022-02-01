@@ -548,6 +548,41 @@ transition: all .5s ease;
 // &.biggerWidth{
   width: 100% !important;
 
+&.fifth{
+  width: 20% !important;
+
+
+.box-inner{
+  width: 98% !important;
+  margin-bottom: 0;
+float: left !important;
+font-size: 13px;
+
+
+.title-bolder{
+  font-weight: 400;
+  font-style: italic;
+
+.italicize{
+  .thin{
+ font-weight: 800;
+  }
+}
+
+}
+
+}
+
+
+
+
+
+
+
+
+}
+
+
 float: left !important;
 .box-inner{
   width: 100% !important;
