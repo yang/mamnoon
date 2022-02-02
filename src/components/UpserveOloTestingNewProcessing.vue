@@ -858,12 +858,7 @@ add
 
 <!--staff display group-->
  <template v-if="employeeCheckout">
-
-
- 
-
-
-                           <div :id="trimmedName(itemStaff)" v-if="currentlyAvailable(selectedDate,selectedTime,itemStaff.name,itemStaff.timing_mask)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(itemStaff)}">
+                <div :id="trimmedName(itemStaff)" v-if="currentlyAvailable(selectedDate,selectedTime,itemStaff.name,itemStaff.timing_mask)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(itemStaff)}">
 <div class="display-block row no-lr-margin">
                                                     <h2 class="menu-header"><template v-if="showScenarios">scenario 6 staff menu {{currentlyAvailable(selectedDate,selectedTime,itemStaff.name,itemStaff.timing_mask)}}</template>{{itemStaff.name.replace('- To Go', '').replace('To Go', '')}}</h2>
                                                 </div>
@@ -1137,6 +1132,9 @@ add
 
           <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
 <!--{{serve}}{{item.timing_mask}}-->
+
+<!--{{serve}}-->
+
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                                                                   </div>
                                                                   </template>
@@ -3288,6 +3286,37 @@ staffTimingMask: {
   "owner_id": "447606b2-ef3c-4df3-9f47-56e123a2c6c6"
 }, 
     upserveListStaff:   [
+ {
+  "id": "8fca1abe-f209-4b8b-bd32-968f0a22ae4d",
+  "name": "shish taouk",
+  "price": "29.0",
+  "price_cents": 2900,
+  "description": "yogurt marinated and grilled chicken, tamarind glaze, preserved root vegetables, brown butter toum, grapefruit, herbs, served over rice",
+  "min_sides": 0,
+  "max_sides": 0,
+  "item_type": "normal",
+  "tax_inclusive": false,
+  "images": {
+    "online_ordering_menu": {
+      "main": "https://res-4.cloudinary.com/upserve/image/upload/v1641682331/ctu09uchek7qnsrr3hw1.jpg"
+    }
+  },
+  "tax_rate_id": "4c4734ea-c91d-412e-a2e3-67a8409908bf",
+  "item_images": [
+    {
+      "id": "7995a631-fe31-4c5f-9d53-38aaec6fe7b3",
+      "metadata": {
+        "image_path": "v1641682331/ctu09uchek7qnsrr3hw1.jpg",
+        "curated": false,
+        "url": "https://res-4.cloudinary.com/upserve/image/upload/v1641682331/ctu09uchek7qnsrr3hw1.jpg"
+      },
+      "url": "https://res-4.cloudinary.com/upserve/image/upload/v1641682331/ctu09uchek7qnsrr3hw1.jpg"
+    }
+  ],
+  "modifier_group_ids": [],
+  "side_ids": [],
+  "tax_rate_ids": []
+},
    {
   "id": "512d6558-aa69-46a3-980d-300e23f5e05f",
   "name": "Lunch Combo Special",
