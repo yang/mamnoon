@@ -1,20 +1,6 @@
 <template>
    <div class="moreInfoClickModal">
 
-       <button class="listIcon" @click="toggleExpand(true)">
-
-<ListIcon />
-
-       </button>
-    <div class="menuBarClickModal iconVersion" :class="{ expanded: expandedMenu }">
-   <div class="relative">
-      <div class="inside">
-       <button class="close-toggle" @click="toggleExpand(false)">
-         <CloseModalRedSm2 />
-
-
-       </button>
-        <!-- <moreInfoClickModal /> -->
 
    <scrollactive :offset="200" ref="scrollactive">   
         
@@ -27,7 +13,7 @@
                   <div class="block text-left mb10" v-if="!hideIfExpired(item)"> 
                       <a @click="toggleExpand(false)" :index="index" :href="'#'+item.name.replace(/[^0-9a-zA-Z]/g, '').trim()" class="scrollactive-item nav-item inline">{{item.name.replace('- To Go', '').replace('To Go', '').replace(' (some items change daily & may not be available if ordered in advance)','').trim()}}</a>
        
-                                 <template v-if="showScenarios">eee scenario 1</template>
+                                 <template v-if="showScenarios">dddscenario 1</template>
                                                                                                      {{ item.item_ids.length}}
 
                                    </div>
@@ -126,10 +112,16 @@
 
 
 
-   </scrollactive>   
-                   </div>
-            </div>
-        </div>      </div> 
+   </scrollactive>  
+
+
+
+
+
+
+
+
+   </div> 
 </template>
 
 

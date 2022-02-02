@@ -860,6 +860,8 @@ add
  <template v-if="employeeCheckout">
 
 
+ 
+
 
                            <div :id="trimmedName(itemStaff)" v-if="currentlyAvailable(selectedDate,selectedTime,itemStaff.name,itemStaff.timing_mask)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(itemStaff)}">
 <div class="display-block row no-lr-margin">
@@ -907,26 +909,7 @@ add
  <!-- beggin 00 -->
 
  <template v-if="valid && !preOrderToggleState">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<template v-for="item in upserveSections">
+          <template v-for="item in upserveSections">
 
 
 
@@ -939,22 +922,8 @@ add
     <!-- beggin 1 -->
       <!-- check if package section -->
         
-
-
-
-
-
-
-
-
-
-
-
-              <div :id="trimmedName(item)" v-if="currentlyAvailable(nowDate,nowTime,item.name,item) || !item.timing_mask" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
+    <div :id="trimmedName(item)" v-if="item.timing_mask && currentlyAvailable(nowDate,nowTime,item.name,item) || !item.timing_mask" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                 
-
-                       
- 
 
              <div class="display-block row no-lr-margin">
               
@@ -1076,14 +1045,14 @@ add
 
 
 
-<template v-if="item.name !== 'featured item'">
+<template v-if="item.name !== 'featured item' && currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask">
 
 
 
 
 
 
-           <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
+           <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
             <!-- this is available at the started time -->
             
 
@@ -1149,54 +1118,24 @@ add
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
 <template v-if="preOrderToggleState">
             <template v-for="item in upserveSections">
  <!-- beggin 0 -->
     <template v-if="noFiltering && item.name !== 'featured item'">
 
+                              <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
+          <div class="display-block row no-lr-margin">
+            <h2 class="menu-header"><template v-if="showScenarios">scenario 4 preorder clicked, nothing selected</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
+          </div>
+          <div :data="'drawer' + item.id" class=" row no-lr-margin">
+            <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
 
-
-
-
-
-
-
-
-
-                                                            <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
-                                                                <div class="display-block row no-lr-margin">
-                                                                  <h2 class="menu-header"><template v-if="showScenarios">scenario 4 preorder clicked, nothing selected</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
-                                                                </div>
-                                                                <div :data="'drawer' + item.id" class=" row no-lr-margin">
-                                                                  <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
-
-                                                                  <template v-for="serve in upserveList" class="grey-bg">
-                                                                  <template v-if="serve.id === piece" class="inline-block">
+            <template v-for="serve in upserveList" class="grey-bg">
+            <template v-if="serve.id === piece" class="inline-block">
                                                  
 
-                                                                                                              <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+          <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
 <!--{{serve}}{{item.timing_mask}}-->
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                                                                   </div>
@@ -1209,13 +1148,8 @@ add
 
       </template>
       <template v-else>
-
 <!--this one shouldnt show staff because staff has a timing mask-->
-
-
            <template v-if="item.timing_mask === null && item.name !== 'featured item'">
-
-
            <!-- no timing mask -->
               <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
          <div class="display-block row no-lr-margin">
@@ -1226,7 +1160,7 @@ add
            
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                                                                                                                  <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+          <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
 <!--{{serve}}{{item.timing_mask}}-->
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
@@ -1240,21 +1174,12 @@ add
 </template>
 <template v-else>
 
+<template v-if="item.name !== 'featured item' && currentlyAvailable2(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
 
 
-
-
-
-
-
-
-
-<template v-if="item.name !== 'featured item'">
-          <div :id="trimmedName(item)" v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item.timing_mask)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
+    <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                         <div class="display-block row no-lr-margin">
-    <h2 class="menu-header"><template v-if="showScenarios">scenario 6 preorder</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
-
-
+    <h2 class="menu-header"><template v-if="showScenarios">scenario 6 preorder {{currentlyAvailable(selectedDate,selectedTime,item.name,item.timing_mask)}} {{item.timing_mask}}</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
 
               </div>
               <div :data="'drawer' + item.id" class=" row no-lr-margin">
@@ -1262,9 +1187,9 @@ add
                 
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
-                                                                                                                              <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
+                        <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
 <!--{{serve}}{{item.timing_mask}}-->
-<ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
+                          <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
                       </template>
                     </template>
@@ -5486,17 +5411,60 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 
 
 },
+       currentlyAvailable2(startTime,endTime,rules,futureDay,futureTime){
+
+
+
+
+    let weekday = ['mon','tue','wed','thu','fri','sat','sun']
+
+            if(!futureDay && !futureTime){
+                let currentDate = new Date();   
+                let startDate = new Date(currentDate.getTime());
+
+                startDate.setHours(startTime.split(":")[0]);
+                startDate.setMinutes(startTime.split(":")[1]);
+
+                let endDate = new Date(currentDate.getTime());
+                endDate.setHours(endTime.split(":")[0]);
+                endDate.setMinutes(endTime.split(":")[1]);
+
+                if(rules.includes(weekday[currentDate.getDay()])){
+                    return startDate < currentDate && endDate > currentDate
+                }
+            }
+
+    if(futureDay && !futureTime){
+      if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
+        return true
+      }
+    }
+    if(futureDay && futureTime){
+
+    let currentDate = Date.parse(futureTime.time) 
+    let startDate2 = new Date(currentDate);
+    let startDate3 = moment(startDate2)._i
+    startDate3.setHours(startTime.split(":")[0]);
+    startDate3.setMinutes(startTime.split(":")[1]);
+    let endDate2 = new Date(currentDate);
+    let endDate3 = moment(endDate2)._i
+    endDate3.setHours(endTime.split(":")[0]);
+    endDate3.setMinutes(endTime.split(":")[1]);
+    let validTime = startDate3 < currentDate && endDate3 > currentDate
+    let validDay = rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())
+
+    if(validTime && validDay){
+      return true
+    }else{
+      return false
+    }
+}
+
+
+},
 currentlyAvailable(futureDay,futureTime,name,item){
 
 
-if(name === 'staff display group'){
-
-// console.log(futureDay);
-// console.log(futureTime);
-console.log(name);
-// console.log(item);
-console.log(item.timing_mask);
-}
 if(!item.timing_mask){
   return true
 }else{
@@ -5555,6 +5523,21 @@ let rules = item.timing_mask.rules;
     if(validTime && validDay){
 
 // console.log('is showing up: '+name);
+
+if(name=== 'Lunch Wraps To Go'){
+console.log('here');
+
+console.log(futureDay)
+console.log(futureTime)
+// console.log(name)
+console.log(item)
+
+
+}
+
+
+
+
 
       return true
     }else{
