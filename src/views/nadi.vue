@@ -164,7 +164,13 @@
 {{mod.subheader}}
 </div>
 
-<a class="blockButton" :href="mod.cta_url" target="_blank">{{mod.cta_text}}</a>
+
+
+<template v-for="(button, index) in mod.button_repeater">
+<a class="blockButton" :class="{firstChild: index === 0 }"  :href="button.cta_url" target="_blank">{{button.cta_text}}</a>
+</template>
+
+
 </div>
 
 
@@ -754,6 +760,11 @@ color: black;
 
 .blockButton{
       padding: 5px 10px 7px;
+
+&.firstChild{
+  margin-bottom: 10px;
+}
+
 }
 
 
@@ -780,6 +791,11 @@ font-weight:bold;
 
 }
 a.blockButton{
+
+  &.firstChild{
+  margin-bottom: 10px;
+}
+
 
 color: #F15D58;
 background: white;
