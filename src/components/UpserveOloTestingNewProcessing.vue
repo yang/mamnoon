@@ -74,12 +74,7 @@
 
 
 </div>
-
-
 <div class="billingEdit">
-
-
-
       <div class="address" v-if="!updateBilling">
 <b>billing info:</b> <br />
 <template v-if="user && user.user && user.user.billingAddress">
@@ -108,7 +103,6 @@
       class="add-name-field"
     >
     <br>
-
   
     <input
       id="addressLine1Billing"
@@ -169,8 +163,6 @@
 
   </div>
 <OrderConfirmationModal :orderConfirmationModal="orderConfirmationModal" :orderCMR="orderCMR" />
-
-
 <UnableToProcessModal :unableToProcessModal="unableToProcessModal" :currentOrder="currentOrder"/>
 
 
@@ -189,36 +181,17 @@
                <!-- comment -->
                <div style="overflow-y: scroll;">
 
-        <div class="container online-menu order-modal-width topCurves orderModalHeader" style="margin: 0;max-width: 100% !important;">
+        
 
-          <template v-if="currentItem.name !== 'mamnoon @ home' || currentItem.name !== 'Street Combo' || currentItem.name !== 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`">
-          <div
-            class="item-image-container topCurves"
-            v-if="currentItem.images"
-            :style="{'background-image': currentItem.images.online_ordering_menu.main}"
-          >
-          
-<div v-if="imageDimensions(currentItem.images.online_ordering_menu.main)>1">
-    <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
-</div>
-<div v-else>
-    <img :src="currentItem.images.online_ordering_menu.main" style="width:100%" />
-  </div>
-      </div>
-          <div class="item-image-container" v-else style="height: 70px;background: #ffffff;">
-            <!-- <NadiIcon70 v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" /> -->
-                 <!-- <NadiIcon v-else /> -->
-            </div>
-          </template>
-      </div>
+
+
+<ModalImagePanel :currentItem="currentItem" />
+
+
+
 <div class="scrollItems">
             <p class="item-description-p" :class="{noTopMarge: true === true}">
    
-
-
-                            <!-- <template v-if="currentItem.name === 'mamnoon @ home'"> -->
-                    <!--<b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" to go only", "")}}</b>   -->
-
     <b>{{currentItem.name.toLowerCase()}}&nbsp;<template v-if="packageObjectMaximum !== null">({{ packageObjectMaximum}}&nbsp;remain)</template></b>
 
 
@@ -263,59 +236,25 @@
                                                  
                                                <!--  <div v-if="m === mod.id && mod.name !== 'None'"-->
                                                   <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1, fifth: currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two` }">
-                                                    <div class="box-inner">
-   
-                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`" class="hide-on-mob square">
-                                                            <div class="content">
-                                                                      <div style="width:100%;position: relative;">
-                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`">
-                                                                        <div style="position: absolute;top:0;width:100%">
-                                                                              <NadiIconxx />
-                                                                        </div>
-                                                                        <div style="position: absolute;top:0;width:100%;">
-                                                                            <div>
-                                                                            <template v-for="(piece,i) in upserveList">
-                                                                            <template v-if="piece.name.toLowerCase().replace(' ','').replace('mamnoon','') === mod.name.toLowerCase().replace(' ','').replace('mamnoon','')">
-                                                                          <template v-if="piece.images">
-                                            <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
-                                                                            <div class="content">.</div>
-                                                                            </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
-                                                                          <div class="pad-10">
-                                                                          <span class="title-bolder">
-                                                                          <span v-if="mod.name === 'None'">no add-ons</span>
-                                                                          <span v-else>{{mod.name}}</span>
-                                                                          <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
-                                                                          <br />
-                                                                          </div>
-                                                                          <div v-if="modifier.name.includes(': choose 1')">
-                                                                                  <div v-for="(piece,i) in upserveList" :key="'E'+ i">
-                                                                                    <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
-                                                                                  </div>
-                                                                                </div>
-                                                                                <div v-else class="mt10">
-                                                                <div class="pad-10" style="padding-bottom: 10px;">
-            
-                                                        </div>
-                                                      </div>
-                                                    </div>
+ 
+
+                <OptionSelectInner2 :currentItem="currentItem" :mod="mod" :upserveList="upserveList" :modifier="modifier" />
+
+
                                                   </div>
                                                   </template>
                                                 <template v-else>
-                                                <div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1,biggerWidth: packageObjectMaximum !== null }">
-                                                    <div class="box-inner">
-                                                           <!-- {{packageObjectMaximum}}-->
-                                                                          <div class="pad-10 leftmodbuttons">
-                                                                            <!-- {{mod.id}} -->
-                                                                          <span class="title-bolder">{{mod.name.replace('add ','')}} <span class="italicize" v-if="mod.price != 0.0"><span class="thin">+</span>${{mod.price}}</span></span>
-                                                                          <br />
-                                                                          </div>
-                                                                          <div v-if="modifier.name.includes(': choose 1')">
-                                                                                  <div v-for="(piece,i) in upserveList" :key="'E'+ i">
-                                                                                    <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
-                                                                                  </div>
-                                                                                </div>
-                                                    </div>
-                                                  </div>
+
+
+
+<div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1,biggerWidth: packageObjectMaximum !== null }">
+
+<OptionSelectInner3 @click="toggleAddOn(mod,modifieritem)" :currentItem="currentItem" :upserveList="upserveList" :mod="mod" :modifier="modifier" :m="m" :packageObjectMaximum="packageObjectMaximum" />
+
+
+</div>
+
+                                    
                                                 </template>
                                                 </template>
                                               </template> 
@@ -340,15 +279,11 @@
    <!-- comment -->
       <!-- comment -->
          <!-- comment -->
-            <!-- comment -->
-               <!-- comment -->
+
       </div>
         </div>
 <div class="orderModalFooter" v-if="oloAvailable">
 <hr/>
-
-
-
 
 
           <div class="add-to-order-footer" v-if="oloAvailable">
@@ -415,22 +350,13 @@
 <!--end??-->
 <!--end??-->
 <!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
 
 
 
 
 
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
-<!--end??-->
+
+
 <!--end??-->
 <!--end??-->
 <!--end??-->
@@ -510,48 +436,22 @@
                   <div class="option-choices row row-eq-height">
                                               <!-- <div v-if="modifier.name === 'Promotions'">{{modifier.name}}</div> -->
                                               <template v-for="(mod,i) in modifierItems">
-                                                <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
+                                           <!-- <template v-for="(mod,i) in modifierItems" :key="'C'+ i"> -->
                                                 <template v-for="(m,i) in modifier.modifier_ids">
                                                     <!-- <div v-for="(m,i) in modifier.modifier_ids" :key="'D'+ i"> -->
                                                   <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'|| currentItem.name === `Valentine's Day Kit For Two`">
 
               <!--<div v-if="m === mod.id && mod.name !== 'None'"-->
               <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1, fifth: currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`}">
-                                                    <div class="box-inner">
-                                                 
-                                                            <div v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'|| currentItem.name === `Valentine's Day Kit For Two`" class="hide-on-mob square">
-                                                            <div class="content">
-                                                                      <div style="width:100%;position: relative;">
-                                                            <template v-if="currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special'|| currentItem.name === `Valentine's Day Kit For Two`">
-                                                                        <div style="position: absolute;top:0;width:100%">
-                                                                              <NadiIconxx />
-                                                                        </div>
-                                                                        <div style="position: absolute;top:0;width:100%;">
-                                                                            <div>
-                                                                            <template v-for="(piece,i) in upserveList">
-                                                                            <template v-if="piece.name.toLowerCase().replace(' ','').replace('mamnoon','') === mod.name.toLowerCase().replace(' ','').replace('mamnoon','')">
-                                                                          <template v-if="piece.images">
-                                            <div class="square" style="background-size: cover;background-position: center center" :style="{ backgroundImage: `url(${piece.images.online_ordering_menu.main})` }">
-                                                                            <div class="content">.</div>
-                                                                            </div>  </template> </template></template>  </div> </div>  </template></div></div></div>
-                                                                          <div class="pad-10">
-                                                                          <span class="title-bolder">
-                                                                         <span v-if="mod.name === 'None'">no add-ons</span>
-                                                                         <span v-else>{{mod.name}}</span>
-                                                                            <span class="italicize"v-if="mod.price > 0">+${{mod.price}}</span></span>
-                                                                          <br />
-                                                                          </div>
-                                                                          <div v-if="modifier.name.includes(': choose 1')">
-                                                                                  <div v-for="(piece,i) in upserveList" :key="'E'+ i">
-                                                                                    <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
-                                                                                  </div>
-                                                                                </div>
-                                                                                <div v-else class="mt10">
-                                                                <div class="pad-10" style="padding-bottom: 10px;">
-            
-                                                        </div>
-                                                      </div>
-                                                    </div>
+                                                   
+                            dddddd                       
+          <OptionSelectInner :currentItem="currentItem" :mod="mod" :upserveList="upserveList" />
+                                                   
+                                          
+
+
+
+
                                                   </div>
                                                   </template>
                                                 <template v-else>
@@ -569,7 +469,7 @@
                                                                           <br />
                                                                           </div>
                                                                           <div v-if="modifier.name.includes(': choose 1')">
-                                                                                  <div v-for="(piece,i) in upserveList" :key="'E'+ i">
+                                                <div v-for="(piece,i) in upserveList" :key="'E'+ i">
                                                                                     <div v-if="piece.name.toLowerCase() === mod.name"><div class="pad-10"><p>{{piece.description}}</p></div></div>
                                                                                   </div>
                                                                                 </div>
@@ -1118,21 +1018,16 @@ add
             <template v-for="item in upserveSections">
  <!-- beggin 0 -->
     <template v-if="noFiltering && item.name !== 'featured item'">
-
                               <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
           <div class="display-block row no-lr-margin">
             <h2 class="menu-header"><template v-if="showScenarios">scenario 4 preorder clicked, nothing selected</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
           </div>
           <div :data="'drawer' + item.id" class=" row no-lr-margin">
             <div class="filtree-full-testing" v-if="checkIfPackageAvailable(piece)" v-for="piece in item.item_ids" :key="piece">
-
             <template v-for="serve in upserveList" class="grey-bg">
             <template v-if="serve.id === piece" class="inline-block">
-                                                 
-
           <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
 <!--{{serve}}{{item.timing_mask}}-->
-
 <!--{{serve}}-->
 
 <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
@@ -1174,7 +1069,6 @@ add
 
 <template v-if="item.name !== 'featured item' && currentlyAvailable2(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
 
-
     <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                         <div class="display-block row no-lr-margin">
     <h2 class="menu-header"><template v-if="showScenarios">scenario 6 preorder {{currentlyAvailable(selectedDate,selectedTime,item.name,item.timing_mask)}} {{item.timing_mask}}</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
@@ -1186,7 +1080,6 @@ add
                     <template v-for="serve in upserveList" class="grey-bg">
                       <template v-if="serve.id === piece" class="inline-block">
                         <div class="yellow-bg-test" :class="{unavailable: notAvailableDayOf(serve), unavailable2: checkIfPackage(serve.id) === 'sold out'  }" @click="openModal(serve,item.timing_mask)"> 
-<!--{{serve}}{{item.timing_mask}}-->
                           <ItemContent :serve="serve" :orderHistoryList="orderHistoryList" :packages="packages" :notAvailableDayOf="notAvailableDayOf(serve)" />
                         </div>
                       </template>
@@ -1213,40 +1106,21 @@ add
 
 
 
-
-
 </template>
           </div>
 
-
-
-
-
           <div class="col-sm-4 drawer-on-mobile" :class="{expanded: toggledDrawer}">
 
-
 <div class="right-column" style="position: absolute !important;">
-
-
-
-<!-- <button v-if="toggledDrawer" @click="toggleDrawer()" class="toggle narrowed">
-<span><CloseModalSm2 /></span>
-</button> -->
 <button v-if="!toggledDrawer" @click="toggleDrawer()" class="toggle">
 <span><CartIcon /> {{cartItems}}</span>
 </button>
 
-<!-- {{valid}} -->
-
-<!-- X -->
-
 <div class="container mb6 hide-on-mob"> 
 
 <div class="pad-bot-20 hide-on-desktop-2" @click="toggleDrawer()">
-
   <ExButton />
 </div>
-
 
 <div @click="panelShowChoose('yourOrder')" class="filehalf topPre" style="">
       <template v-if="!preOrderToggleState">
@@ -1260,18 +1134,11 @@ add
         your pick-up pre order from
           <h4 class="text-left red">{{title.toLowerCase()}}</h4>
   </template>
-
-  
   </div>
   </div>
-
-
-<!-- {{panelShow}} -->
-
 
 
 <!-- preorder edit here -->
-
 <div v-if="panelShow !== 'customerInfo'" class="container text-center">
 
               <template v-if="valid">
@@ -1323,19 +1190,7 @@ add
 <!-- preorder edit here -->
 
 
-
-
-
-
 <div v-if="currentOrder && panelShow === 'customerInfo'" class="container text-center">
-
-
-
-
-
-
-
-
 
 
 
@@ -1510,9 +1365,6 @@ add
 
 
 
-
-
-
                 <label class="smblk" for="name">first name:</label>
                 <br />
 
@@ -1593,7 +1445,7 @@ add
               </div>
 </div>
        </template>
-<!-- <div v-if="checked === false"> -->
+
                 <label class="smblk" for="name">name:</label>
                 <br />
   
@@ -1606,15 +1458,9 @@ add
                   @change="checkIfFullNameValid(currentOrder.billing.billing_name)"
                   v-model="currentOrder.billing.billing_name"
                 />
-
-
                                 <div class="small-message" v-if="fullNameErrorVisibleTf && !validFullName(currentOrder.billing.billing_name)">please enter a valid full name</div>
-
-
 <!--here-->
-
              <!--<div class="mt10" style="display:none;">
-                                     
                                         <div class="googleValidate2">
                                           <GoogleValidate2
                                             class="pointer-all"
@@ -1626,9 +1472,6 @@ add
                                           >update address</button>
                                         </div>
                             </div>-->
-
-
-
 <!--here-->
            <div style="">
 <div style="width: 100%;display: inline-block;">
@@ -1835,8 +1678,6 @@ add
 <span v-if="this.title === 'Mbar'"><Phone class="mr6" />&nbsp;&nbsp;<a class="weblink-black" href="tel:+12064578287" target="_blank">(206) 457-8287</a></span>
 
   </div> 
-          <!--      // begin of available conditional-->
-          <!--      // begin of available conditional-->
             <!--      // begin of available conditional-->
   <template v-if="!oloAvailable">
 <div class="text-center">
@@ -1850,93 +1691,17 @@ add
               <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
                 <template v-if="currentOrder.charges">
                  
-
-
-
-
-
 <!-- {{filteredValuesComputed}} -->
-
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
                     <button class="noStyleButton" @click="removeFromOrder(order)">
                         <!-- <CloseModalRedSm />   -->
                         <TrashCan />         
                   </button>
-<div class="mt5 inline-flex" style="cursor:pointer;"  @click="openModal2(order)">
 
-
-
-
-<div class="roundSquareBox">
-
-<div v-if="order.quantity<10" class="quantity">
-  x<div>{{order.quantity}}</div>
-  </div>
-  <div v-else class="quantity biggerNumber">
-  x<div>{{order.quantity}}</div>
-  </div>
-
-<div class="roundSquareImageContainer" v-if="order.images" :style="{ backgroundImage: `url(${order.images.online_ordering_menu.main})` }">
-</div> 
-<div class="roundSquareImageContainer" v-else>
-  <NadiIconSmXSidebar/>
-</div> 
+<div @click="openModal2(order)">
+<OrderLineItem :order="order"  />
 </div>
-
-<div class="textInfo">
-  <div class="itemTitle">
-    {{checkIfGiftCard(order.name)}}
-
-<div class="" v-if="order.modifiers.length > 0"> 
-
-
-<!--{{order}}-->
-
-<div v-if="order.name === 'Lunch Combo Special'" class="small-message grey">+{{order.modifiers.length}} selections</div>
-<div v-else class="small-message grey">+{{order.modifiers.length}} items</div>
-
-<!--
-<template v-if="order.name !== 'Lunch Combo Special'" v-for="(item, index) in order.modifiers">
-<div class="small-message grey" v-if="index <= 1">+{{item.name.replace("add","")}} <span style="font-weight: 100" v-if="index === 1&& order.modifiers.length - 2 >0">(+{{order.modifiers.length -2 }} more)</span></div>
-</template>-->
-
-
-
-
-
-
-<!--<div class="small-message grey" v-for="(mod, i) in order.modifiers">
-<span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b> <span style="color:#F05D5B;font-weight:500;" v-if="i === 1 && order.modifiers.length>2">(+{{ order.modifiers.length - 2}} more)</span></span>
-</div>-->
-
-</div>
-            <div v-if="order.instructions !== ''" class="order-instructions">
-                   {{order.instructions | truncate(16, '...')}}
-                  </div>
-
-  <div class="itemPrice">
-
-
-
-${{formatWithAddons(order)}}
-
-
-</div>
-
-
-  </div>
-
-
-
-
-
-
-                  </div>
-
-
-</div>
-
-                </li>
+            </li>
                 </template>
               </ul>
 
@@ -1947,7 +1712,7 @@ ${{formatWithAddons(order)}}
 <!-- start panel -->
 <!-- start panel -->
 <!-- start panel -->
-<template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
+<template v-if="currentOrder.charges && currentOrder.charges.items.length > 0">
 
               <!-- <div class="mt10" v-if="total > 0"> -->
                 <template v-if="panelShow === 'customerInfo'">
@@ -2040,16 +1805,9 @@ scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
                        <span  v-if="panelShow === 'customerInfo'">tax: ${{currentOrder.charges.taxes | showToFixed}}</span>
               <hr v-if="panelShow === 'customerInfo'" />
               <b v-if="panelShow === 'customerInfo'">order total: ${{currentOrder.charges.total | showToFixed }}</b>
-
-
-
-
-
-
 <!--<br v-if="panelShow === 'customerInfo'">-->
 <br v-if="panelShow === 'customerInfo'">
  <!--<CreditSaveForm2 v-if="panelShow === 'customerInfo'" :emailAddress="$store.state.currentUserEmail" />-->
-
 <br v-if="panelShow === 'customerInfo'"/>
 </template>
 <template v-else>
@@ -2057,7 +1815,6 @@ scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
 cart empty
 </div>
 </template>
-
 <template v-if="panelShow === 'yourOrder'">
 <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;display:none;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">guest info</button>
  <button style="width: 100%;font-size: 24px;padding-top: 3px;padding: 12px 10px;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf red-checkout-button" v-else>
@@ -2161,9 +1918,6 @@ cart empty
 
 <template v-if="this.$store.state.loggedIn">
 
-
-
-
         <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
             <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
@@ -2189,34 +1943,14 @@ cart empty
 
 
 </template>
-
 </template>
 <template v-else>
-<!-- {{user}} -->
-
-
-
-
-
 
   <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
   <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>-->
 
-<template v-if="this.$store.state.loggedIn">
-
-<!--  <div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>-->
 
 
-</template>
-<template v-else>
-  <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.email === ''">please enter a guest email address</div>-->
-
-</template>
-
- <!-- <div class="small-message" v-if="currentOrder.fulfillment_info.customer.phone === ''">please enter a guest phone number</div>-->
-  <!-- <div class="small-message" v-if="currentOrder.billing.billing_name === ''">please enter a billing name</div>-->
- <!--  <div class="small-message" v-if="currentOrder.billing.billing_address === ''">please enter a billing address</div>-->
-<!--  <div class="small-message" v-if="currentOrder.billing.billing_postal_code === ''">please enter a billing zip code</div>-->
 
 
 
@@ -2274,19 +2008,12 @@ cart empty
 
 
 <template v-if="this.$store.state.loggedIn">
-<!-- you are logged in -->
 <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
-
-
-
 <template v-if="employeeCheckout">
 <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button> 
 </template>
-
-
-
 </template>
 <template v-else>
 <!-- you are not logged in -->
@@ -2398,8 +2125,7 @@ cart empty
 </template>
             <!--      // end of available conditional-->
             <!--      // end of available conditional-->
-            <!--      // end of available conditional-->
-            <!--      // end of available conditional-->
+
 
 
 
@@ -2417,14 +2143,11 @@ cart empty
 <!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
 <pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>-->
-
-
    <!--// ccc-->
 
 
 
-<!--
-<pre>{{filterDown(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items)}}</pre>-->
+
 
 
   </div>
@@ -2491,21 +2214,32 @@ import ExButton from "@/components/svgIcons/ExButton";
 import CreditSaveForm2 from "@/components/CreditSaveForm2";
 
 
-import ItemContent from "@/components/ItemContent"
+import ItemContent from "@/components/ItemContent";
 
+import OptionSelectInner from "@/components/OptionSelectInner";
+import OptionSelectInner2 from "@/components/OptionSelectInner2"
+import OptionSelectInner3 from "@/components/OptionSelectInner3"
+
+import ModalImagePanel from "@/components/ModalImagePanel";
+
+
+import OrderLineItem from "@/components/OrderLineItem";
 
 export default {
       metaInfo: {
       name: 'UpserveOloTestingNewProcessing',
-      // if no subcomponents specify a metaInfo.title, this title will be used
       title: 'order online',
-      // all titles will be injected into this template
       titleTemplate: '%s | nadi mama'
     },
   name: "UpserveOloTestingNewProcessing",
   props: ["data","emailAddress","oloEndpoint","menuEndpoint","title","userData"],
   components: {
+    ModalImagePanel,
+    OrderLineItem,
     ItemContent,
+    OptionSelectInner3,
+    OptionSelectInner2,
+    OptionSelectInner,
     CreditSaveForm2,
     OrderConfirmationModal,
     OnlineMenuCarousel,
@@ -3787,7 +3521,6 @@ showToFixed: function (value) {
   },
   methods: {
 
-
 formatNonMilitary(time){
 return moment(time).format('HH:mm');
 },
@@ -4043,8 +3776,6 @@ uniqueTransId:"830ae8cd0cbe4e779e29c0236891bc5a-11e3183c90064c508d3244597d324d32
               }
     }
 
-
-
 },
 cippaybuttoncreditauth() {
 
@@ -4078,7 +3809,6 @@ cippaybuttoncreditauth() {
                 self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
               }
     }
-
 
 // credit save
 // credit save
@@ -4478,23 +4208,6 @@ function findWithAttr(array, value) {
       // return insert.replace(/\\"/g, '"');
             return insert;
     },
-    imageDimensions(imageSource){
-
-
-
-    let img = new Image();
-img.src = imageSource;
-
-
-// console.log(img);
-// console.log(img);
-
-return  img.width/img.height;
-
-
-
-
-},
 checkIfGiftCard(value){
 
   if(value.includes("Gift Card")){
@@ -7625,18 +7338,14 @@ if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.
 
 
    
-    }
-  },
-  mounted() {
+    },
+    mountFunctions(){
 
+console.log('mount functions start');
 
-
-if(window.location.hash === '#mamnoonEmployee'){
-this.employeeCheckout = true
-
-
-
-}
+      if(window.location.hash === '#mamnoonEmployee'){
+          this.employeeCheckout = true
+      }
 
         this.$nextTick(function () {
             window.setInterval(() => {
@@ -7644,18 +7353,13 @@ this.employeeCheckout = true
 
             },1000);
 
-
             window.setInterval(() => {
               this.updateTimeStamp();
             },30000);
 
         })
 
-
-
-    this.checkOlo();
-
-
+        this.checkOlo();
 
         this.$nextTick(function () {
             window.setInterval(() => {
@@ -7683,50 +7387,21 @@ this.employeeCheckout = true
         })
 
 
+        const urlParams = new URLSearchParams(window.location.search);
+        const product = urlParams.get('packageId');
 
+        if(product !== null){
 
+            let endDateString2 = location.search.substring(1).split('&')[2].replace('endDate=','');
+            if(endDateString2 === moment().tz('America/Los_Angeles').format('YYYY-MM-DD')){
+              this.$router.push(window.location.pathname);
+                this.getHours();
 
-
-
-
-// console.log(this.returnCorrect);
-
-const urlParams = new URLSearchParams(window.location.search);
-const product = urlParams.get('packageId');
-
-// console.log(product);
-
-
-if(product !== null){
-
-
-
-
-let endDateString2 = location.search.substring(1).split('&')[2].replace('endDate=','');
-
-
-
-
-if(endDateString2 === moment().tz('America/Los_Angeles').format('YYYY-MM-DD')){
-
-
-
-  this.$router.push(window.location.pathname);
-     this.getHours();
-
-
-
-}else{
- this.packageLink = true;
-
-
-this.retrieveOnePackage(product);
-
-
-this.getPackageHours();
-}
-
-
+              }else{
+                    this.packageLink = true;
+                    this.retrieveOnePackage(product);
+                  this.getPackageHours();
+                }
 }else{
   
   // console.log('    this.getHours();')
@@ -7752,13 +7427,9 @@ this.reOrder = this.$store.state.storeCurrentOrder
     this.retrieveOrders();
 
  
-   if(this.$store.state.loggedIn){
-
-
-
-
+if(this.$store.state.loggedIn){
  this.getCreditCards()
-   }
+}
 
 if(this.valid){
 
@@ -7766,22 +7437,10 @@ if(this.valid){
 this.filterForNow()
 }
 
-
-
-
-// console.log(this.valid)
-
-
     this.upserveMongo();
-    // this.getHours();
     this.getUser();
-
-
     this.showCurrentlyAvailable();
-
     emergepay.init();
-
-
       let ffAgo = Date.now() - 2700000
 // /      let ffAgo = Date.now() - 10000
 
@@ -7857,12 +7516,9 @@ if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
       this.$store.commit("drawerTrue", { drawerTrue });
     }
   
-
-  // if(this.currentOrder){
     this.currentOrder.id = Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29) + "_" + Math.random().toString(36).substr(2, 29);
         this.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29);
-  // }
-
+  
 this.$nextTick(function() {
 window.addEventListener(`resize`, this.setResizeIndex);
 })
@@ -7870,11 +7526,17 @@ window.addEventListener(`resize`, this.setResizeIndex);
 this.currentOrder.scheduled_time = null
 this.oloAvailable = false;
 
+console.log('mount functions end');
+
+},
+  },
+  mounted() {
+
+    this.mountFunctions();
+
   },
   created(){
-    // let recaptchaScriptModal = document.createElement('script')
-    //   recaptchaScriptModal.setAttribute('src', 'https://assets.emergepay.chargeitpro.com/cip-hosted-modal.js')
-    //   document.head.appendChild(recaptchaScriptModal)
+
 
       let recaptchaScriptJquery = document.createElement('script')
       recaptchaScriptJquery.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
@@ -7886,1063 +7548,5 @@ this.oloAvailable = false;
 
 
 <style lang="scss">
-
-
-.float-left-checkout{
-  float: left;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.float-right-checkout{
-  float: right;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.mr6{
-  margin-right: 6px;
-}
-
-.red-checkout-button{
-  background-color: #F05D5B !important;
-  border: 1px solid #F05D5B !important;
-
-  &:hover{
-    background-color: #f05d5b4a !important;
-    color: #F05D5B !important;
-    border: 2px solid transparent !important;
-  }
-
-}
-
-.pad-bot-20{
-  padding-top: 10px;
-  padding-bottom: 15px;
-}
-
-.pad-left-15{
-  padding: 0 15px 15px;
-}
-
-.noStyleButton{
-  background-color: transparent !important;
-  border: 0 !important;
-  outline: none !important;
-  &:hover,
-  &:active,
-  &:focus{
-      outline: none !important;
-  }
-}
-
-
-.topPre{
-  color:#F05D5B;
-  font-weight: 500;
-}
-
-
-
-.inline-flex{
-  display: inline-flex;
-}
-
-.roundSquareBox{
-  width: 80px;
-  height: 80px;
-position: relative;
-display: inline-block;
-    // float: left;
-
-.roundSquareImageContainer{
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-  background-size:cover;
-  background-position: center center;
-
-}
-.quantity{
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  background-color: #F05D5B;
-  border-radius: 15px;
-  padding-top: 2.5px;
-  width: 30px;
-  height: 30px;
-  color: #fff;
-  text-align: center;
-font-size:10px;
-div {
-  font-size: 16px;
-  transform: translateY(-2px);
-  display: inline;
-          font-weight: 500;
-}
-  &.biggerNumber{
-      padding-top: 5px;
-    div  {
-    font-size:13px;
-      transform: translateY(-2px);
-        display: inline;
-                font-weight: 500;
-
-    }
-
-  }
-}
-
-}
-.textInfo{
-
-  // background: orange;
-  display: inline-block;
-  // height: 100px;
-  position: relative;
-  padding: 10px;
-  min-width: 190px;
-
-
-  .itemTitle{
-      position: absolute;
-      top: 0;
-      //left: 5px;
-      left: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-
-      .modifierSidebar{
-        height: 40px;
-        //background: gray;
-        overflow: hidden;
-      }
-  }
-
-  .itemPrice{
-      // position: absolute;
-      // bottom: 0;
-      // left: 5px;
-      left: 8px;
-      font-size: 0.9rem;
-      font-weight: 400;
-  }
-
-
-@media only screen and (max-width: 1280px){
-
-  // min-width: auto;
-      // min-width: 130px;
-          min-width: 150px;
-
-}
-
-
-}
-
-.order-instructions{
-color: #999;
-font-weight: 400;
-}
-
-.scrollItems{
-  padding: 0 15px;
-  padding-bottom: 110px;
-  }
-
-.order-modal-body{
-  height: calc(100vh - 20px);
-    overflow-y: scroll;
-    border-top: 0;
-    top: 10px;
-}
-
-.orderModalHeader{
-  background: white;
-  position: absolute;
-  top: -20px;
-  width: calc(100% - 0px);
-  margin-left: -15px;
-  padding: 10px;
-}
-
-
-.orderModalFooter{
-
-
-
-    // -webkit-box-shadow: 0px 4px 15px 5px rgba(0,0,0,0.41); 
-// box-shadow: 0px 4px 15px 5px rgba(0,0,0,0.41);
-
-
-
-    background: white;
-    position: fixed;
-    bottom: 12px;
-    width: calc(100% - 0px);
-    padding: 0px 10px 10px 10px;
-
-
-    hr{
-          margin: 0;
-    padding: 0;
-    }
-
-
-
-    width: 696px;
-    margin: 0 auto;
-    left: 50%;
-    margin-left: -348px;
-
-
-}
-
-
-@media only screen and (max-width: 768px){
-
-
-  .orderModalFooter{
-
-
-
-
-    width: 94% !important;
-    max-width: 94% !important;
-    width: calc(100% - 0px);
-    padding: -13px 10px 10px 10px;
-    width: 696px;
-    margin: 0 auto;
-    left: 0;
-    /* margin-left: -47%; */
-    margin-left: 3%;
-
-  }
-
-
-}
-
-
-
-
-.showBox{
-  display: none;
-}
-
-@media only screen and (max-width: 992px) {
-.showBox{
-  display: block;
-    float: right;
-    width: 125px;
-    height: 125px;
-    border-radius: 4px;
-    background-size: cover;
-    background-position: center center;
-    margin-top: 2px;
-    border: 1px solid #ddd;
-    transform: translateX(3px);
-}
-}
-.orderedOn{
-  color: rgb(29, 174, 239);
-  font-weight: 600;
-    position: absolute;
-    bottom: 7px;
-    font-size: 12px;
-    font-style: italic;
-}
-
-
-
-
-.checkIfPackage{
-  color: #f47495;
-  font-weight: 600;
-    // position: absolute;
-    //  bottom: 23px;
-    font-size: 12px;
-    font-style: italic;
-}
-
-
-.stickyPosition{
-  background: #fff;
-  position:sticky;
-    top: 90px;
-  // z-index: 1000;
-  z-index: 80;
-
-.relative{
-position: relative;
-}
-    border-bottom: 1px solid #ddd;
-@media only screen and (max-width: 1080px) {
-
-    top: 92px;
-}
-
-} 
-
-
-.toggleLr{
-      display: flow-root;
-  div{
-    width: 49%;
-    display: inline-block;
-
-      &:first-child{
-       float: left;
-      }
-            &:last-child{
-       float: right;
-      }
-
-    button{
-      width: 100%;
-      margin: 0 auto;
-
-    }
-  }
-
-    margin-bottom: 10px;
-    // display: flow-root;
-
-}
-
-
-.toggleLr.hide-on-desktop{
-  display:none;
-}
-
-
-@media only screen and (max-width: 992px) {
-  .toggleLr.hide-on-desktop{
-    display: flow-root;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-.hide-on-desktop-2{
-  display:none;
-}}
-
-// button.selected{
-//   box-sizing: border-box;
-// color: #666666 !important;
-// }
-
-
-
-.mb6{
-  margin-bottom: 6px;
-}
-
-.mb10{
-  margin-bottom: 10px;
-}
-
-.mb16{
-  margin-bottom: 16px;
-}
-
-.red-text{
-  color: #f05d5b;
-}
-.grey-text{
-  color: #666666;
-  }
-
-
-.no-lr-pad{
-  padding-left: 0;
-  padding-right: 0;
-}
-
-
-.leftDropdown{
-    cursor: pointer;
-  width: 50%;
-  display: block;
-  padding: 0 6px 15px 0;
-  margin-top: 15px;
-
-&.in-side-bar{
-  width: 100%;
-  margin-top: 0;
-}
-
-}
-
-
-.rightDropdown{
-width: 50%;
-display: block;
-padding: 0 6px 15px 0;
-
-
-&.in-side-bar{
-  width: 100%;
-}
-}
-
-.show-on-mob{
-  display: none;
-}
-
-@media only screen and (max-width: 992px) {
-
-
-.hide-on-mob{
-  display:none;
-}
-
-
-.show-on-mob{
-  display: block;
-}
-
-}
-
-.if-mobile{
-  display: none;
-}
-
-@media only screen and (max-width: 992px) {
-  .if-mobile{
-  display: block;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-.leftDropdown{
-    cursor: pointer;
-  width: 100%;
-  display:block;
-  padding:0;
-  margin-bottom: 10px;
-}
-
-
-.rightDropdown{
-width: 100%;
-display:block;
-  padding:0;
-    margin-bottom: 10px;
-}
-
-
-#upserveolo .online-menu,
-.no-lr-pad{
-   padding-left: 15px;
-   padding-right: 15px;
- }
-
-
-}
-
- .edit{
-    cursor: pointer;
- }
-
-.edit-link{
-      //color: #f58e58;
-      color: #f05d5b;
-      text-decoration: none;
-    font-size: .9rem;
-    float: right;
-a{
-  text-decoration: none;  color:#f58e58;
-    font-size: .9rem;
- .edit{
-    color: #f05d5b;
-    // font-size: .9rem;
-    color:#f58e58;
-
-}
-  
-
-&:hover{
-   .edit{
-    color: #f58e58;
-    border-bottom: 1px solid #f58e58;
-}
-  
-}
-
-}
-
-}
-
-
-.square {
-  position: relative;
-  width: 100%;
-}
-
-
-.square:after {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
-}
-
-.content {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  color: transparent;
-  background-size: 100%;
-}
-
-
-.square-green{
-      position: absolute;
-    width: 100%;
-
-    background: rgb(29, 174, 239);
-    left: 50%;
-    transform: translate(-50%);
-    height: 440px;
-
-
-
-    .content{
-          position: absolute;
-    width: 400px;
-    height: 400px;
-    color: transparent;
-    background-size: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    // top: 30px;
-        top: 20px;
-    }
-}
-
-
-
-
-
-
-.square-green:after {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
-}
-
-
-
-.pieces{
-width:100%;
-height: 560px;
-
-}
-
-
-@media only screen and (max-width: 992px) {
-
-.square-green{
-      position: absolute;
-    width: 100%;
-    background: rgb(29, 174, 239);
-    left: 50%;
-    transform: translate(-50%);
-    height: 270px;
-
-
-
-    .content{
-    position: absolute;
-    width: 140px;
-    height: 140px;
-    color: transparent;
-    background-size: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    // top: 30px;
-        top: 10px;
-    }
-}
-
-
-
-#upserveolo  .content-box-upper{
-      height: 90px;
-    height: 70px;
-
-//       &:hover{
-// background-color: #f05d5b;
-//       }
-}
-
-.pieces{
-  height: 230px;
-}
-
-}
-
-
-
-
-
-
-#upserveolo.smallerBoxes .box > div{
-  height: 100%;
-}
-
-
-#upserveolo .box-inner{
-      height: 100%;
-
-      .title-bolder{
-        text-transform: lowercase;
-      }
-}
-
-@media only screen and (max-width: 992px) {
-
-  .optionHeader{
-        margin-bottom: 5px;
-  }
-
-
-
-#upserveolo.smallerBoxes .box > div,
-#upserveolo.smallerBoxes .box,
-#upserveolo.smallerBoxes .box.normal > div,
-#upserveolo.smallerBoxes .box.normal{
-  width: 100%;
-}
-#upserveolo.smallerBoxes .box,
-#upserveolo.smallerBoxes .box.normal{
-  width: 50% !important;
-
-  .mt10{
-    display:none;
-  }
-}
-
-
-#upserveolo.smallerBoxes .box.fifth,
-#upserveolo.smallerBoxes .box.normal{
-  width: 100% !important;
-
-  .mt10{
-    display:none;
-  }
-}
-
-
-
-#upserveolo.smallerBoxes .box .box-inner,
-#upserveolo.smallerBoxes .box.normal .box-inner{
-  width: 98%;
-
-}
-
-#upserveolo.smallerBoxes .box:nth-child(odd) .box-inner,
-#upserveolo.smallerBoxes .box.normal:nth-child(odd) .box-inner{
-  float: left;
-
-}
-
-
-#upserveolo.smallerBoxes .box:nth-child(even) .box-inner,
-#upserveolo.smallerBoxes .box.normal:nth-child(even) .box-inner{
-  float: right;
-
-}
-
-#upserveolo .box-inner{
-  margin: 0;
-}
-
-
-
-
-
-
-}
-
-
-.option-choices{
-// width: 100%;
-//   display: flex;
-//   width: 100%;
-//   // display: table;
-//   // width: 100%;
-
-  // display: grid;
-  // Essentially switch the default axis
-  // grid-auto-flow: column;
-
-
-
-    // display: flex;
-  // flex-direction: column;
-    // border: 1px solid red;
-    // display: table;
-        // border-spacing: 20px;
-
-
-}
-
-
-.option-choices .box{
-    // flex: 2;
-// width: 25%;
-  // display: table-cell;
-  // padding: 16px;
-// height: 100%;
-// width: 25%;
-
-
-
-    // display: table-cell;
-
-}
-
-.weblink{
-  color: #666666;
-  text-decoration: underline;
-  &:hover{
-    color: #666666;
-  }
-}
-.weblink-black{
-  color: #000000;
-  text-decoration: none;
-  &:hover{
-    color: #000000;
-  }
-}
-
-
-.owl-item{
-&:hover{
-  cursor: pointer;
-}  
-}
-
-
-
-#upserveolo .box.normal{
-
-@media only screen and (max-width: 992px) {
-
-.mt10{
-  display:none;
-}
-  width: 50%;
-
-.leftmodbuttons{
-    width: 90%;
-    float: left;
-}
-}
-
-
-.box-inner{
-  @media only screen and (max-width: 992px) {
-
-  width: 98%;
-
-
-
-}
-}
-
-
-}
-
-
-  @media only screen and (max-width: 992px) {
-#upserveolo .box.normal:nth-child(odd){
-  .box-inner{
-float: left;
-  }
-}
-
-#upserveolo .box.normal:nth-child(even){
-   .box-inner{
-float: right;
-}
-}
-
-}
-
-  @media only screen and (max-width: 992px) {
-
-    #upserveolo .box.normal{
-          margin-bottom: 6px;
-        .leftmodbuttons{
-          // width: 55%;
-          float: left;
-        }
-
-      .modbuttons{
-          width: 40%;
-          float: right;
-          text-align: right;
-    }
-
-}
-
-
-
-  }
-
-
-.disabled{
-    border: 1px solid #999999 !important;
-    background-color: #cccccc !important;
-    color: #666666 !important;
-    pointer-events: none;
-}
-
-.cIEdit,
-.billingEdit{
-  padding: 20px;
-}
-
-
-.editInfoModalBg{
-position: fixed;
-z-index:999;
-top: 0;
-left: 0;
-background: rgba(255,255,255,.5);
-width: 100%;
-height: 100vh;
-}
-
-.editInfoModal{
-position: fixed;
-z-index:1000;
-top: 100px;
-left: 50%;
-transform: translateX(-50%);
-background: white;
-width: 50%;
-    border: 1px solid #f05d5b;
-}
-
-@media only screen and (max-width: 992px) {
-   .editInfoModal{
-      width: 96%;
-      top: 20px;
-   } 
-
-
-
-.container.online-menu.order-modal-width.full-width-modal-header{
-       width: 100% !important;
-}
-
-}
-
-
-
-.mt40dt{
-  margin-top: 30px;
-}
-
-@media only screen and (max-width: 768px) {
-
-.mt40dt{
-  margin-top: 0px;
-}
-
-
-
-  .container.online-menu.order-modal-width.full-width-modal-header{
-       width: 100% !important;
-}
-}
-
-.full-width-modal-header{
-width: 100%!important;
-max-width:100%;
-margin-top: 0 !important;
-}
-
-
-
-
-
-    // {
-    // -webkit-transition: all 0.25s ease;
-    // transition: all 0.25s ease;
-    // }
-
-
-.selectedAddOn{
-
-
-.box-inner{
-  background-color: rgb(240, 93, 91);
-  .title-bolder,b{
-    color: white;
-  }
-}
-  
-}
-
-
-b span.thin{
-font-weight: 300;
-}
-
-
-
-.testPage{
-  width: 200px;
-  background: pink;
-  position: fixed;
-  top:0;
-  left: 0;
-  z-index: 1000;
-}
-
-
-
-#upserveolo .yellow-bg-test{
-  background: transparent;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-      width: calc(100% - 3px);
-  .content-box{
-      background: transparent;
-  }
-}
-
-
-.text-left{
-  text-align:left;
-}
-
-
-.no-pad{
-  padding: 0;
-}
-
-.red,h4.red{
-      color: #F05D5B;
-}
-
-
-
-#upserveolo{
-  button.oloButton{
-    &:active,
-    &:hover,
-    &:focus{
-      outline: none;
-    }
-
-      //box-sizing: border-box;
-      //background-color: #f8e1d5;
-      //color: #f58e58;
-      //padding: 5px 10px;
-      //border-radius: 4px;
-      //border: 2px solid #f8e1d5;
-     // font-weight: 600;
-
-
-   
-    box-sizing: border-box;
-    background-color: #f05d5b4a;
-    color: #F05D5B;
-    padding: 5px 10px;
-    border-radius: 4px;
-    border: 2px solid #f05d5b00;
-    font-weight: 600;
-
-
-
-      &.selected{
-
-
-      background-color: #F05D5B;
-      color: #ffffff;
-      padding: 5px 10px;
-      border-radius: 4px;
-      border: 2px solid #F05D5B;
-
-
-
-      }
-  }
-}
-
-
-.order-sidebar{
-  border-top: 1px solid #ddd;
-    margin-top: 16px;
-}
-
-
-.reOrderModal{
-    background-color: orange;
-    position: fixed;
-    z-index: 100;
-    width: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 100px;
-}
-
-@media only screen and (max-width: 768px) {
-
-
-#upserveolo .order-modal{
-  .yellow-bg-test {
-    height: 100px;
-  }
-}
-}
-
-.content-box .name{
-      font-size: .9rem;
-    font-weight: 600;
-}
-
-.content-box .name,
-.content-box .food-description,
-.menu-header{
-text-transform: lowercase;
-}
-
-
-.selectState{
-      width: 90%;
-    padding: 7px 9px;
-    border-radius: 4px;
-    border: 1px solid #b7b7b7;
-    margin-bottom: 6px;
-}
-
-
-.inputZip{
-  width: 90%
-}
-
-
-.container.online-menu.order-modal-width .block{
-  width:100%;
-}
-
-
-.unavailable2,
-.unavailable{
-  pointer-events:none;
-  opacity:.6;
-}
-
-.hideIfExpired{
-  display:none !important;
-}
-
-
+  @import '@/assets/styles/olostyles.scss';
 </style>

@@ -873,6 +873,11 @@ background: black;
     font-size: 22px;
     font-weight: 500;
 cursor:pointer;
+
+   @media only screen and (max-width: 500px) {
+width: 100%;
+   }
+
     &:hover{
 background: black;
 color: white;
@@ -1128,6 +1133,10 @@ background-image: none !important;
     font-weight: 500;
     cursor: pointer;
 
+
+   @media only screen and (max-width: 500px) {
+width: 100%;
+   }
 
     &:hover{
       text-decoration: none;

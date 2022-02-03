@@ -1007,8 +1007,8 @@ return true
 }else{
 let date2 = moment(date);
 
-console.log(date2);
-console.log(date2.utc().valueOf());
+// console.log(date2);
+// console.log(date2.utc().valueOf());
 
 if(date2.utc().valueOf()<Date.now().valueOf()){
   return false;

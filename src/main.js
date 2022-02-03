@@ -66,6 +66,52 @@ Vue.use(Meta, {
   refreshOnceOnNavigation: true,
 });
 
+
+Vue.mixin({
+  methods: {
+    imageDimensions(imageSource){
+
+
+
+      let img = new Image();
+  img.src = imageSource;
+  
+  
+  // console.log(img);
+  // console.log(img);
+  
+  return  img.width/img.height;
+  
+  
+  
+  
+  },
+  formatWithAddons(order){
+
+    let finishedPrice = order.price_cents;
+    
+    for(let i = 0;i<order.modifiers.length;i++){
+      finishedPrice = finishedPrice + order.modifiers[i].price;
+    }
+    
+    return finishedPrice.toFixed(2)/100 * order.quantity;
+    
+    },
+    checkIfGiftCard(value){
+
+      if(value.includes("Gift Card")){
+        return 'gift card';
+      }else{
+        return value
+      }
+    
+    },
+  },
+})
+
+
+
+
 Vue.use(VueCurrencyInput);
 Vue.component("v-select", vSelect);
 
