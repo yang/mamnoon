@@ -2140,9 +2140,9 @@ cart empty
       </div>
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>-->
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
    <!--// ccc-->
 
 
@@ -2634,11 +2634,15 @@ this.currentOrder.charges.tip.amount = this.customAmountAddition
 
 
 
+
+
       let preTotal = 0
 
 
       let curOr = this.currentOrder
       curOr.restaurant = this.title
+
+
       //  if(this.currentOrder.charges){
 
 if(this.user){
@@ -6644,6 +6648,10 @@ return searchResult;
 
 
 console.log(currentOrder);
+
+currentOrder.fulfillment_info.customer.first_name = 'nm ' + currentOrder.fulfillment_info.customer.first_name;
+
+
 console.log(approvalData);
 console.log(giftcardbalance);
 
@@ -6711,6 +6719,11 @@ console.log(giftcardbalance);
 
       },
       doAnOrder(currentOrder,approvalData,giftcardbalance) {
+
+
+          currentOrder.fulfillment_info.customer.first_name = "nm " + currentOrder.fulfillment_info.customer.first_name;
+
+
 
 
 
@@ -7230,10 +7243,6 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
 
             let timeslotsCreated = [];
 
-        // console.log('timeslotsCreated 2');
-        // console.log('timeslotsCreated 2');
-        // console.log(timeslotsCreated);
-                // console.log(timeslotsCreated.slice(2));
 
 
             for(let i = 1; i < this.openTimesUpdated.length; i++){ 
@@ -7242,9 +7251,6 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
               timelabel: new Date(tomorrow.setHours(this.openTimesUpdated[i][0], this.openTimesUpdated[i][1], 0, 0)).toLocaleTimeString().replace(":00","")
               })
             } 
-
-
-        
 
             this.dropDownDays.push({
             dayLabel: days[tomorrow.getDay()],
@@ -7256,8 +7262,6 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
             })
             }
         }
-
-
 
 
 
@@ -7320,9 +7324,6 @@ if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.
 
 
 }
-
-
-
 
             })
 
@@ -7407,16 +7408,6 @@ console.log('mount functions start');
   // console.log('    this.getHours();')
       this.getHours();
 }
-
-
-
-
-
-
-
-  
-
-
 
 
 this.retrievePackages();
