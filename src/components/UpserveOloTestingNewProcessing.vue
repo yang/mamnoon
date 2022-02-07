@@ -6641,13 +6641,18 @@ return searchResult;
       for (let i = 0; i < this.upserve.length; i++) {
         if (this.upserve[i].category === cat) {
           this.currentlyFiltered.push(this.upserve[i]);
-        }
+        } 
       }
     },
     scheduleAnOrder(currentOrder,approvalData,giftcardbalance) {
 
 
 console.log(currentOrder);
+
+
+if(currentOrder.fulfillment_info.customer.first_name.substring(0,3) !== "nm "){
+
+
 
 currentOrder.fulfillment_info.customer.first_name = 'nm ' + currentOrder.fulfillment_info.customer.first_name;
 
@@ -6717,9 +6722,15 @@ console.log(giftcardbalance);
           console.log(e);
         });
 
+
+    }
+
       },
       doAnOrder(currentOrder,approvalData,giftcardbalance) {
 
+
+
+if(currentOrder.fulfillment_info.customer.first_name.substring(0,3) !== "nm "){
 
           currentOrder.fulfillment_info.customer.first_name = "nm " + currentOrder.fulfillment_info.customer.first_name;
 
@@ -6816,7 +6827,8 @@ console.log(giftcardbalance);
 self.unableToProcessModal = true;
 
         });
-  
+
+        }
 
       },
     issueReturn() {

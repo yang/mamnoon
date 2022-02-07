@@ -713,6 +713,13 @@ routeString = 'mamnoon';
 if(responseUpserve.data.doc[0].menu){
 
       let upserveProducts = responseUpserve.data.doc[0].menu.items;
+
+      let filter = upserveProducts;
+
+  console.log(filter)
+
+
+
       this.upserve = upserveProducts;
       this.upserveList = upserveProducts;
       this.upserveSections = responseUpserve.data.doc[0].menu.sections;
