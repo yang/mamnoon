@@ -2,125 +2,78 @@
   <div class="mamnoon">
     <Nav3 />
 
-<div>
+    <div>
+      <div v-if="ffdata" class="container pad ff">
+        <div class="row lower-margin" v-if="ffdata">
+          <div class="col-md-4 mb20 offset-md-2">
+            <img style="width: 100%;" :src="ffdata.header_image" />
+          </div>
+          <div class="col-md-4 mb20 pt20" v-html="ffdata.body_text"></div>
+        </div>
 
+        <template v-for="item in ffdata.fine_foods">
+          <!--<h2 :id="item.shop_item.name.replaceAll(' ','-')">{{item.shop_item.name}}</h2>-->
 
- 
+          <div :id="item.shop_item.name.replaceAll(' ', '-')" class="row">
+            <div class="col-md-8 offset-md-2 overflow-x-hidden">
+              <div class="border-red">
+                <div class="col-l">
+                  <img
+                    style="width: 100%;"
+                    :src="item.shop_item.image.sizes.medium_large"
+                  />
+                </div>
 
+                <div class="col-r">
+                  <div>
+                    <h2>{{ item.shop_item.name }}</h2>
+                    <h3>{{ item.shop_item.ingredients }}</h3>
+                    <p>
+                      {{ item.shop_item.description }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
 
+        <div class="row">
+          <div class="mb20 col-md-8 offset-md-2 overflow-x-hidden">
+            <Borderline />
+            <h2>{{ ffdata.locations_sub_header }}</h2>
 
+            <p class="list-of-links">
+              <template v-for="link in ffdata.locations_link_repeater">
+                {{ link.name }} -
+                <a :href="link.url" target="_blank">{{ link.url }}</a
+                ><br />
+              </template>
+            </p>
+            <Borderline />
+          </div>
+        </div>
 
-<div v-if="ffdata" class="container pad ff">
+        <div class="row pad-sm" v-if="ffdata.bottom_images">
+          <div class="mb20 col-md-8 offset-md-2">
+            <template v-for="image in ffdata.bottom_images">
+              <!-- <div class="col-md-4 mb20"> -->
+              <div
+                class="inblock-red"
+                :style="{ backgroundImage: 'url(' + image.image + ')' }"
+              >
+                _
+              </div>
+              <!-- </div> -->
+            </template>
+          </div>
+        </div>
+      </div>
 
-<div class="row lower-margin" v-if="ffdata">
-
-
-<div class="col-md-4 mb20 offset-md-2"><img style="width: 100%;" :src="ffdata.header_image"></div>
-<div class="col-md-4 mb20 pt20" v-html="ffdata.body_text">
-</div>
-</div>
-
-
-
-
-
-
-<template v-for="item in ffdata.fine_foods">
-
-<!--<h2 :id="item.shop_item.name.replaceAll(' ','-')">{{item.shop_item.name}}</h2>-->
-
-
-<div :id="item.shop_item.name.replaceAll(' ','-')" class="row">
-<div class="col-md-8 offset-md-2 overflow-x-hidden">
- 
- 
- <div class="border-red">
- 
-
-<div class="col-l">
-
-  <img style="width: 100%;" :src="item.shop_item.image.sizes.medium_large">
-
-</div>
-
-
-<div class="col-r">
-  <div>  
-<h2>{{item.shop_item.name}}</h2>
-<h3>{{item.shop_item.ingredients}}</h3>
-<p>
-{{item.shop_item.description}}
-</p>
-</div>
-</div>
-
-
-</div>
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-</template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row">
-<div class="mb20 col-md-8 offset-md-2 overflow-x-hidden">
-<Borderline />
-<h2>{{ffdata.locations_sub_header}}</h2>
-
-
-
-
-<p class="list-of-links">
-<template v-for="link in ffdata.locations_link_repeater">
-{{link.name}} - <a :href="link.url" target="_blank">{{link.url}}</a><br />
-</template>
-</p>
-<Borderline />
-</div>
-</div>
-
-
-
-<div class="row pad-sm" v-if="ffdata.bottom_images">
-<div class="mb20 col-md-8 offset-md-2">
-
-
-<template v-for="image in ffdata.bottom_images">
-<!-- <div class="col-md-4 mb20"> -->
-  <div class="inblock-red" :style="{ backgroundImage: 'url(' + image.image + ')' }">
-    _
-
+      <!-- <img style="width: 100%;" src="@/assets/img/mamnoonFF_NADI_2-01.png"> -->
     </div>
-<!-- </div> -->
-</template>
-</div>
-</div>
-</div>
-
-    <!-- <img style="width: 100%;" src="@/assets/img/mamnoonFF_NADI_2-01.png"> -->
-</div>
-  <!-- {{$store.state.currentUserEmail}} -->
-  <GlobalFooter />
+    <!-- {{$store.state.currentUserEmail}} -->
+    <GlobalFooter />
   </div>
 </template>
 <script>
@@ -129,206 +82,169 @@ import Borderline from "@/components/svgIcons/Borderline";
 import GlobalFooter from "@/components/GlobalFooter";
 
 export default {
+  metaInfo() {
+    return {
+      title: `mamnoon fine foods`,
+      meta: [
+        {
+          name: "description",
+          content: `mamnoon fine foods: available in fine retailers across the puget sound`,
+        },
+        { property: "og:title", content: `mamnoon fine foods` },
+        { property: "og:site_name", content: "nadi mama" },
+        {
+          property: "og:description",
+          content: `mamnoon fine foods: available in fine retailers across the puget sound`,
+        },
+        { property: "og:url", content: "https://nadimama.com/" },
+        // {property: 'og:image', content: this.aws_url + '/users/' + this.userData.profileurl + '-main.jpg' }
+      ],
+    };
+  },
 
-
-    metaInfo() {
-        return {
-            title: `mamnoon fine foods`,
-            meta: [
-                { name: 'description', content: `mamnoon fine foods: available in fine retailers across the puget sound`},
-                { property: 'og:title', content: `mamnoon fine foods`},
-                { property: 'og:site_name', content: 'nadi mama'},
-                { property: 'og:description', content: `mamnoon fine foods: available in fine retailers across the puget sound`},
-                {property: 'og:url', content: 'https://nadimama.com/'},
-                // {property: 'og:image', content: this.aws_url + '/users/' + this.userData.profileurl + '-main.jpg' }    
-            ]
-        }},
-
-  props: ['data'],
-  data(){
-return {
-user: null,
-pageData: null,
-ffdata: null
-}
+  props: ["data"],
+  data() {
+    return {
+      user: null,
+      pageData: null,
+      ffdata: null,
+    };
   },
   components: {
     Nav3,
     Borderline,
-    GlobalFooter
+    GlobalFooter,
   },
-  methods:{
-      async individualRestaurant(){
-   
-    let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
-    let AcfBlock = responseAcf
-    this.pageData = AcfBlock.data.acf.content_fields
+  methods: {
+    async individualRestaurant() {
+      let responseAcf = await this.$http.get(
+        `https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`
+      );
+      let AcfBlock = responseAcf;
+      this.pageData = AcfBlock.data.acf.content_fields;
 
-    for(var item in AcfBlock.data.acf.content_fields){
-      // console.log(item)
+      for (var item in AcfBlock.data.acf.content_fields) {
+        // console.log(item)
 
-      // console.log(AcfBlock.data.acf.content_fields[item].acf_fc_layout)
+        // console.log(AcfBlock.data.acf.content_fields[item].acf_fc_layout)
 
-      let acf = AcfBlock.data.acf.content_fields
-      if(acf[item].acf_fc_layout === 'fine foods'){
-        this.ffdata = acf[item]
+        let acf = AcfBlock.data.acf.content_fields;
+        if (acf[item].acf_fc_layout === "fine foods") {
+          this.ffdata = acf[item];
+        }
       }
 
-    }
+      await this.getB();
+    },
+    getB() {
+      console.log("done");
 
-
-   await this.getB() 
-
-},
-getB(){
-  console.log('done');
-
-// window.scrollTop(0,100);
-console.log(document);
-
-
-}
+      // window.scrollTop(0,100);
+      console.log(document);
+    },
   },
 
-  mounted(){
-    this.individualRestaurant()
-
-
-
-
-
-
-
-
-  }
+  mounted() {
+    this.individualRestaurant();
+  },
 };
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 <style lang="scss">
-.mamnoon{
+.mamnoon {
   padding-top: 132px;
 }
 
 @media only screen and (max-width: 992px) {
-  .mamnoon{
+  .mamnoon {
     padding-top: 112px;
+  }
 }
 
+h1 {
+  color: #f05d5b;
+  text-align: center;
+  margin: 30px auto;
 }
 
-h1{
- color: #F05D5B;
- text-align: center;
- margin: 30px auto;
+.pad {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-
-.pad{
-    padding-top: 50px;
-    padding-bottom: 50px;
+.pad-sm {
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
-
-.pad-sm{
-    padding-top: 25px;
-    padding-bottom: 25px;
-}
-
-.mb20{
+.mb20 {
   margin-bottom: 20px;
 }
 
-
-.ff{
-  h2{
-color: #F05D5B;
+.ff {
+  h2 {
+    color: #f05d5b;
   }
 
-  h3{
-font-style: italic;
-font-size: 1em;
-font-weight: bold;
+  h3 {
+    font-style: italic;
+    font-size: 1em;
+    font-weight: bold;
   }
 
-  p{
-
+  p {
   }
 
-  a{
-    color: #F05D5B;
+  a {
+    color: #f05d5b;
     text-decoration: underline;
   }
 }
 
+@media only screen and (max-width: 992px) {
+  .ff {
+    padding-top: 0;
+  }
 
-
-   @media only screen and (max-width: 992px) {
-
-     .ff{
-       padding-top: 0;
-     }
-
-
-.list-of-links{
-  margin-top: 40px;
-  a{
-    display: block;
+  .list-of-links {
+    margin-top: 40px;
+    a {
+      display: block;
+    }
   }
 }
 
-
-   }
-
-
-
-.ff h2{
+.ff h2 {
   text-transform: lowercase;
   margin-bottom: 24px;
   font-size: 36px;
 }
 
-
-
-p.list-of-links{
-font-size: 20px;
-font-weight: bold;
-line-height: 2;
-a{
-  font-style: italic;
-}
+p.list-of-links {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 2;
+  a {
+    font-style: italic;
+  }
 }
 
-
-
-.border-left{
-border: 4px solid #F05D5B;
-box-sizing: border-box;
-padding: 0;
-border-right: 0;
+.border-left {
+  border: 4px solid #f05d5b;
+  box-sizing: border-box;
+  padding: 0;
+  border-right: 0;
 }
-.border-right{
-border: 4px solid #F05D5B;
-box-sizing: border-box;
-border-left: 0;
+.border-right {
+  border: 4px solid #f05d5b;
+  box-sizing: border-box;
+  border-left: 0;
 }
 
-
-
-.border-red{
-    border: 5px solid #F05D5B;
-    margin-bottom: 50px;
-    display: inline-block;
+.border-red {
+  border: 5px solid #f05d5b;
+  margin-bottom: 50px;
+  display: inline-block;
   .col-l {
     width: 50%;
     display: block;
@@ -339,94 +255,71 @@ border-left: 0;
     display: block;
     float: left;
 
-div{
-  padding: 40px;
-} 
+    div {
+      padding: 40px;
+    }
   }
-
 }
 
-.lower-margin{
+.lower-margin {
   margin-bottom: 60px;
 }
 
-
-.pt20{
+.pt20 {
   padding-top: 20px;
 }
 
+.inblock-red {
+  border: 5px solid #f05d5b;
+  display: inline-block;
+  // width: 50%;
+  float: left;
+  color: transparent;
+  background-size: cover;
+  background-position: center center;
 
-.inblock-red{
-border: 5px solid #F05D5B;
-display: inline-block;
-// width: 50%;
-float: left;
-color: transparent;
-background-size: cover;
-background-position: center center;
+  width: 50%;
+  padding-bottom: 50%;
 
- width: 50%;
-    padding-bottom: 50%;
-
-&:first-child{
- border-right: 0px;
-
-}
-
-}
-
-
-
-
-
-
-
-   @media only screen and (max-width: 1220px) {
-
-.border-red{
-  .col-r {
-    div{
-    padding: 10px 20px;
-  } 
-}
-}
-
-
-
-}
-
-   @media only screen and (max-width: 992px) {
-
-
-.border-red{
-  border: 4px solid #F05D5B;
-  margin-bottom: 50px;
-  .col-l {
-width: 100%;
-display: inline-block;
+  &:first-child {
+    border-right: 0px;
   }
-  .col-r {
-width: 100%;
-display: inline-block;
+}
 
-div{
-  padding: 40px;
-} 
+@media only screen and (max-width: 1220px) {
+  .border-red {
+    .col-r {
+      div {
+        padding: 10px 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .border-red {
+    border: 4px solid #f05d5b;
+    margin-bottom: 50px;
+    .col-l {
+      width: 100%;
+      display: inline-block;
+    }
+    .col-r {
+      width: 100%;
+      display: inline-block;
+
+      div {
+        padding: 40px;
+      }
+    }
   }
 
+  .ff {
+    padding-top: 20px;
+  }
 }
 
-.ff{
-  padding-top:20px;
-}
-
-   }
-
-
-
-
-.overflow-x-hidden{
+.overflow-x-hidden {
   overflow-x: hidden;
 }
-
 </style>
