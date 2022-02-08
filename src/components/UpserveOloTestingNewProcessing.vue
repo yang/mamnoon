@@ -757,7 +757,7 @@ add
 
 
 <!--staff display group-->
- <template v-if="employeeCheckout">
+ <template v-if="employeeCheckout && this.title === 'Mamnoon'">
                 <div :id="trimmedName(itemStaff)" v-if="currentlyAvailable(selectedDate,selectedTime,itemStaff.name,itemStaff.timing_mask)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(itemStaff)}">
 <div class="display-block row no-lr-margin">
                                                     <h2 class="menu-header"><template v-if="showScenarios">scenario 6 staff menu {{currentlyAvailable(selectedDate,selectedTime,itemStaff.name,itemStaff.timing_mask)}}</template>{{itemStaff.name.replace('- To Go', '').replace('To Go', '')}}</h2>
