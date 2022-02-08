@@ -882,6 +882,7 @@ background-color: #f05d5b4a;
 
     // border-left: 50px solid #F05D5B;
     z-index: 100;
+        z-index: 1000;
 &.expanded{
       left: 0;
       // border-left: 0px solid #F05D5B;
