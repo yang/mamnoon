@@ -731,7 +731,10 @@ if(params.first_name.replaceAll(" ","").includes(this.search.replaceAll(" ",""))
 }
 },
     firstLast(name){
-        return name.first_name + ' ' + name.last_name;
+
+        
+
+        return name.first_name.replaceAll("nm ","") + ' ' + name.last_name;
     },
 hideTransactionModal(){
 this.modalVisible = false;
