@@ -31,7 +31,7 @@
 <EmailSignup />
 </div>
 
-<div v-if="$store.state.footer.footer_links" v-for="linkgroup in $store.state.footer.footer_links"class="col-md-3 col-12" style="display:none;">
+<div v-if="$store.state.footer.footer_links" v-for="linkgroup in $store.state.footer.footer_links"class="col-md-3 col-12" style="">
 <ul>
 <li>
 
