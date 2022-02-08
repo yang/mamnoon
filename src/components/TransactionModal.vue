@@ -183,9 +183,9 @@ status: <b>ticket closed</b>
         <br />
 
 
-<template v-if="loadedorderRendered.orderAccepted">
-order has been accepted
-</template>
+<!--<template v-if="loadedorderRendered.orderAccepted">
+order has been accepted<br>
+</template>-->
 
 
 

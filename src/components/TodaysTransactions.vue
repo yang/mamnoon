@@ -480,12 +480,12 @@ let streettips = 0;
    for(let i = 0; i < closedOutOrders.length; i++){
 
         if(closedOutOrders[i].orderInfo.restaurant === 'Mamnoon Street'){
-console.log(closedOutOrders[i].orderInfo.charges.preTotal);
+// console.log(closedOutOrders[i].orderInfo.charges.preTotal);
         streetpretotal = streetpretotal + closedOutOrders[i].orderInfo.charges.preTotal;
         streettips =  streettips + closedOutOrders[i].orderInfo.charges.tip.amount;
 
         }else{
-          console.log(closedOutOrders[i].orderInfo.charges.preTotal);
+          // console.log(closedOutOrders[i].orderInfo.charges.preTotal);
         mamnoonpretotal = mamnoonpretotal + closedOutOrders[i].orderInfo.charges.preTotal;
         mamnoontips = mamnoontips + closedOutOrders[i].orderInfo.charges.tip.amount;
 
@@ -494,10 +494,10 @@ console.log(closedOutOrders[i].orderInfo.charges.preTotal);
 
 
 
-console.log(mamnoonpretotal);
-console.log(mamnoontips);
-console.log(streetpretotal);
-console.log(streettips);
+// console.log(mamnoonpretotal);
+// console.log(mamnoontips);
+// console.log(streetpretotal);
+// console.log(streettips);
 
 this.totals.mamnoon.pretotal = mamnoonpretotal;
 this.totals.mamnoon.tips = mamnoontips;
@@ -578,12 +578,12 @@ let self = this;
     self.$http
             .post(`/order/cancelpreorder/${id}`)
             .then((response) => {
-              console.log(response);
+              // console.log(response);
             })
             .catch((e) => {
               // this.errors.push(e);
-              console.log("errors");
-              console.log(e);
+              // console.log("errors");
+              // console.log(e);
             });
 
     self.retrieveTodaysOrders();
@@ -647,13 +647,13 @@ this.orderfilter = param;
               dailyTotal
             })
             .then((response) => {
-              console.log(response);
+              // console.log(response);
 
             })
             .catch((e) => {
               // this.errors.push(e);
-              console.log("errors");
-              console.log(e);
+              // console.log("errors");
+              // console.log(e);
             });
 
 
@@ -891,14 +891,14 @@ this.retrieveTodaysOrders();
             })
             .catch((e) => {
               // this.errors.push(e);
-              console.log("errors");
-              console.log(e);
+              // console.log("errors");
+              // console.log(e);
             });
         })
         .catch((e) => {
           // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
+          // console.log("errors");
+          // console.log(e);
         });
     },
     issueVoid(uniqueTransIdString, data) {
@@ -909,14 +909,14 @@ this.retrieveTodaysOrders();
           data,
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           this.voidByTransId(uniqueTransIdString, data);
         })
         .catch((e) => {
           // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
+          // console.log("errors");
+          // console.log(e);
         });
     },
     voidByTransId(uniqueTransIdString, data) {
@@ -927,15 +927,15 @@ this.retrieveTodaysOrders();
           data,
         })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           // location.reload();
           this.retrieveTodaysOrders();
         })
         .catch((e) => {
           // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
+          // console.log("errors");
+          // console.log(e);
         });
     },
   },

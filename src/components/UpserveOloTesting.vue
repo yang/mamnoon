@@ -763,7 +763,7 @@ add
               </template>
               <template v-else>
               <div class="mb16"> 
-       we are currently closed. now accepting preoders for future pickup.
+       we are currently closed. now accepting preorders for future pickup.
               </div> 
               </template>
               <template v-if="valid">
@@ -1498,7 +1498,7 @@ add
               </template>
               <template v-else>
               <div class="mb16 if-mobile"> 
-      we are currently closed. now accepting preoders for future pickup.
+      we are currently closed. now accepting preorders for future pickup.
               </div> 
               </template>
   <div class="if-mobile">
