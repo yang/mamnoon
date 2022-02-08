@@ -1,56 +1,103 @@
 <template>
   <div>
-    <div style="border-style: solid; border-width: 2px 3px; border-color: #f05d5b; border-radius: 3px; width: 600px; margin: auto; text-align: center; padding-top: 1.5vh;">
-      <h5>Careers with Nadi Mama</h5>
-      <p style="margin-left: auto; margin-right: auto;">Under Construction. Please check back later for the careers page.</p>
+    <Nav3 />
+    <div
+      style="width: 100%; margin: auto; text-align: center; padding-top: 1.5vh;"
+    >
+      <h5>work for mama</h5>
+      <p style="margin-left: auto; margin-right: auto;">
+        interested in joining mama's team? we're always looking for qualified
+        applicants, and can't wait to hear from you.
+      </p>
+      <p style="margin-left: auto; margin-right: auto;">
+        visit the links below to see current openings. when submitting your
+        cover letter and resume, please be sure that all attachments are in pdf
+        format. thank you
+      </p>
     </div>
-    <!-- <p>What is the name(s) of your browser?</p>
-    <button @click="myFunction" style="margin-left: auto; margin-right: auto;">Try it</button>
-    <p id="demo"></p> -->
+    <!-- Start of dynamic loading with top links -->
+    <div class="nav-links">
+      <a @click="showAlert('Retail')"><u>retail</u></a>
+      <a @click="showAlert('Digital')"><u>digital</u></a>
+      <a @click="showAlert('Restaurant')"><u>restaurants</u></a>
+      <a @click="showAlert('All Jobs')"><u>all jobs</u></a>
+    </div>
+    <div v-if="jobsArr" v-for="item in jobsArr">
+      <div class="postings">
+        <h5>
+          <b>{{ item.restaurant_name }}:</b> <i>{{ item.title }}</i>
+        </h5>
+        <p>{{ item.description }}</p>
+        <hr />
+      </div>
+    </div>
+    <GlobalFooter />
   </div>
 </template>
-  <script>
-// export default {
-//   methods: {
-//     myFunction() {
-//       var ua = navigator.userAgent,
-//         tem,
-//         M =
-//           ua.match(
-//             /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
-//           ) || [];
-//           console.log('tem', tem);
-//           console.log('ua', ua);
-//           console.log('M', M);
-//       if (/trident/i.test(M[1])) {
-//         tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-//         return { name: "IE", version: tem[1] || "" };
-//       }
-//       if (M[1] === "Chrome") {
-//         tem = ua.match(/\bOPR|Edge\/(\d+)/);
-//         if (tem != null) {
-//           return { name: "Opera", version: tem[1] };
-//         }
-//       }
-//       M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, "-?"];
-//       console.log("ua", ua);
-//       if ((tem = ua.match(/version\/(\d+)/i)) != null) {
-//         M.splice(1, 1, tem[1]);
-//         return {
-//           name: M[0],
-//           version: M[1],
-//         }
-//       }
-//       if(M[0] == null){
-//         window.alert("Browser not supported")
-//       };
-//     },
-//   },
-//     mounted() {
-//       this.myFunction();
-//     }
-// };
-  </script>
+<script>
+import Nav3 from "@/components/Nav3";
+import GlobalFooter from "@/components/GlobalFooter";
+export default {
+  data() {
+    return {
+      pageData: null,
+      ffdata: null,
+      jobsArr: null,
+    };
+  },
+  components: {
+    Nav3,
+    GlobalFooter,
+  },
+  methods: {
+    async individualRestaurant() {
+      let responseAcf = await this.$http.get(
+        `https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`
+      );
+      let AcfBlock = responseAcf;
+      this.pageData = AcfBlock.data.acf.content_fields;
+
+      for (var item in AcfBlock.data.acf.content_fields) {
+        // console.log(item)
+
+        // console.log(AcfBlock.data.acf.content_fields[item].acf_fc_layout)
+
+        let acf = AcfBlock.data.acf.content_fields;
+        if (acf[item].acf_fc_layout === "careers") {
+          console.log("acf[item]", acf[item]);
+          this.ffdata = acf[item].careers_repeater;
+        }
+        this.jobsArr = this.ffdata;
+      }
+
+      await this.getB();
+    },
+    getB() {
+      console.log("done");
+      console.log(document);
+    },
+    showAlert(type) {
+      console.log('type', type);
+      const allJobs = this.ffdata;
+      let retailArr = allJobs.filter((item) => item.type === "Retail");
+      let digitalArr = allJobs.filter((item) => item.type === "Digital");
+      let restArr = allJobs.filter((item) => item.type === "Restaurant");
+      if(type === "Retail"){
+        this.jobsArr = retailArr;
+      } else if(type === "Digital"){
+        this.jobsArr = digitalArr;
+      } else if(type === "Restaurant"){
+        this.jobsArr = restArr;
+      } else if(type === "All Jobs"){
+        this.jobsArr = allJobs;
+      }
+    },
+  },
+  mounted() {
+    this.individualRestaurant();
+  },
+};
+</script>
 
 <style>
 .careers {
@@ -60,5 +107,29 @@
 .careers p {
   margin-left: 37%;
   margin-right: 20%;
+}
+
+.postings {
+  height: 100px;
+  width: 400px;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+.postings p {
+  margin-left: auto;
+}
+
+.nav-links {
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+  font-size: 24px;
+  padding-left: 7vw;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 </style>
