@@ -32,7 +32,7 @@
 </div>
 
 <div v-if="$store.state.footer.footer_links" v-for="linkgroup in $store.state.footer.footer_links"class="col-md-3 col-12" style="">
-<ul>
+<ul class="footer-links">
 <li>
 
 <h4>
@@ -175,6 +175,13 @@ text-align: center;
         font-size: 14px;
     }
     
+}
+
+
+.footer-links{
+    a{&:hover{
+        color: white;
+    }}
 }
 
 </style>
