@@ -179,8 +179,11 @@ text-align: center;
 
 
 .footer-links{
-    a{&:hover{
+    a{
+        font-size: 16px;
+        &:hover{
         color: white;
+
     }}
 }
 
