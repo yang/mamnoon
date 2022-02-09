@@ -13,7 +13,7 @@
         format. thank you
       </p>
       <p>
-        for current opportunities at our restaurants and commissary, visting
+        for current opportunities at our restaurants and commissary, visit
         <a href="http://www.poachedjobs.com">poachedjobs.com</a> and search by
         the name of the restaurant you're interested in.
       </p>
