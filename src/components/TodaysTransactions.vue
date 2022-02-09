@@ -45,7 +45,7 @@
               ></a
             >
 
-            <a @click="logUserOut"><u>Logout</u></a> &nbsp;&nbsp;
+            <a @click="logUserOut()"><u>Logout</u></a> &nbsp;&nbsp;
 
             <!--    // <a  @click="showAllOrders()"><u>all orders</u></a>&nbsp;&nbsp;&nbsp;-->
 
@@ -298,25 +298,25 @@ export default {
         {
           street: {
             pretotal: 0,
-            tips: 0,
-          },
+            tips: 0
+          }
         },
         {
           mamnoon: {
             pretotal: 0,
-            tips: 0,
-          },
-        },
+            tips: 0
+          }
+        }
       ],
       // totals: {
-      //     street: {
-      //       pretotal: 0,
-      //       tips: 0
-      //     },
-      //     mamnoon: {
-      //       pretotal: 0,
-      //       tips: 0
-      //     }
+      //   street: {
+      //     pretotal: 0,
+      //     tips: 0
+      //   },
+      //   mamnoon: {
+      //     pretotal: 0,
+      //     tips: 0
+      //   }
       // },
       orderAmount: 0,
       openOrders: 0,
@@ -331,7 +331,7 @@ export default {
       dateNow: Date.now(),
       orderhistory: null,
       response: null,
-      currentView: "empty",
+      currentView: "empty"
     };
   },
   components: {
@@ -344,7 +344,7 @@ export default {
     CloseModalRed,
     CloseModalSm,
     MamnoonLogo,
-    StreetLogo,
+    StreetLogo
   },
   name: "OrderHistory",
   props: ["currentUser"],
@@ -361,12 +361,10 @@ export default {
         return order.tz("America/Los_Angeles").format("LLLL");
       }
     },
-
     showToFixed: function(value) {
       let decvalue = value / 100;
-
       return decvalue.toFixed(2);
-    },
+    }
   },
   watch: {
     totals: {
@@ -380,36 +378,24 @@ export default {
             tips: this.showToFixed(value.tips),
             date: moment(this.$refs.myDatePicker._data.selectedDate).format(
               "YYYY-MM-DD"
-            ),
+            )
           });
         }
 
         // console.log(this.totals)
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
-  // watch:{
-  //     orderhistory:{
-  // handler(val){
-  // console.log(this.$store.state.dashboard);
-  // if(this.$store.state.dashboard === 'empty'){
-  // this.openOrders = this.orderhistory.user.filter(order => order.status === "Open").length;
-  // this.closedOrders = this.orderhistory.user.filter(order => order.status === "Closed").length;
-  // this.orderAmount = this.orderhistory.user.length;
-
-  // }else{
-
-  // this.openOrders = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).filter(order => order.status === "Open").length;
-  // this.closedOrders = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).filter(order => order.status === "Closed").length;
-  // this.orderAmount = this.orderhistory.user.filter(order => order.orderInfo.restaurant === this.$store.state.dashboard).length;
-
-  // }
-  //           }, deep: true
-  //     }
-
-  // },
   methods: {
+    selectTransactionDate(e){
+// console.log(moment(e).tz("America/Los_Angeles").toISOString());
+
+
+this.retrieveOrdersByDate(e);
+
+
+    },
     formattedOrder(order) {
       let formattedorder = order;
       let orderToLowerCase = order;
@@ -445,37 +431,34 @@ export default {
         return false;
       } else {
         if (typeof user === "string") return user.includes(text);
-        return Object.values(user).some((val) =>
-          this.userMatchesText(text, val)
-        );
+        return Object.values(user).some(val => this.userMatchesText(text, val));
       }
     },
     renderPanels() {
       if (this.orderhistory && this.orderhistory.user) {
         if (this.$store.state.dashboard === "empty") {
           this.openOrders = this.orderhistory.user.filter(
-            (order) => order.status === "Open"
+            order => order.status === "Open"
           ).length;
           this.closedOrders = this.orderhistory.user.filter(
-            (order) => order.status === "Closed"
+            order => order.status === "Closed"
           ).length;
           this.orderAmount = this.orderhistory.user.length;
         } else {
           this.openOrders = this.orderhistory.user
             .filter(
-              (order) =>
+              order =>
                 order.orderInfo.restaurant === this.$store.state.dashboard
             )
-            .filter((order) => order.status === "Open").length;
+            .filter(order => order.status === "Open").length;
           this.closedOrders = this.orderhistory.user
             .filter(
-              (order) =>
+              order =>
                 order.orderInfo.restaurant === this.$store.state.dashboard
             )
-            .filter((order) => order.status === "Closed").length;
+            .filter(order => order.status === "Closed").length;
           this.orderAmount = this.orderhistory.user.filter(
-            (order) =>
-              order.orderInfo.restaurant === this.$store.state.dashboard
+            order => order.orderInfo.restaurant === this.$store.state.dashboard
           ).length;
         }
       }
@@ -485,41 +468,16 @@ export default {
         this.totals = {
           street: {
             pretotal: 0,
-            tips: 0,
+            tips: 0
           },
           mamnoon: {
             pretotal: 0,
-            tips: 0,
-          },
+            tips: 0
+          }
         };
 
-        // closedOutOrders = this.orderhistory.user.filter(
-        //   (order) => order.status === "Closed"
-        // );
-
-        // let mamnoonpretotal = 0;
-        // let mamnoontips = 0;
-        // let streetpretotal = 0;
-        // let streettips = 0;
-
-        // for (let i = 0; i < closedOutOrders.length; i++) {
-        //   if (closedOutOrders[i].orderInfo.restaurant === "Mamnoon Street") {
-        //     console.log(closedOutOrders[i].orderInfo.charges.preTotal);
-        //     streetpretotal =
-        //       streetpretotal + closedOutOrders[i].orderInfo.charges.preTotal;
-        //     streettips =
-        //       streettips + closedOutOrders[i].orderInfo.charges.tip.amount;
-        //   } else {
-        //     console.log(closedOutOrders[i].orderInfo.charges.preTotal);
-        //     mamnoonpretotal =
-        //       mamnoonpretotal + closedOutOrders[i].orderInfo.charges.preTotal;
-        //     mamnoontips =
-        //       mamnoontips + closedOutOrders[i].orderInfo.charges.tip.amount;
-        //   }
-        // }
-
         let closedOutOrders = this.orderhistory.user.filter(
-          (order) => order.status === "Closed"
+          order => order.status === "Closed"
         );
 
         let mamnoonpretotal = 0;
@@ -543,11 +501,6 @@ export default {
           }
         }
 
-        // console.log(mamnoonpretotal);
-        // console.log(mamnoontips);
-        // console.log(streetpretotal);
-        // console.log(streettips);
-
         this.totals.mamnoon.pretotal = mamnoonpretotal;
         this.totals.mamnoon.tips = mamnoontips;
 
@@ -555,18 +508,17 @@ export default {
         this.totals.street.tips = streettips;
       }
 
-      console.log(mamnoonpretotal);
-      console.log(mamnoontips);
-      console.log(streetpretotal);
-      console.log(streettips);
+      // console.log(mamnoonpretotal);
+      // console.log(mamnoontips);
+      // console.log(streetpretotal);
+      // console.log(streettips);
 
-      this.totals.mamnoon.pretotal = mamnoonpretotal;
-      this.totals.mamnoon.tips = mamnoontips;
+      // this.totals.mamnoon.pretotal = mamnoonpretotal;
+      // this.totals.mamnoon.tips = mamnoontips;
 
-      this.totals.street.pretotal = streetpretotal;
-      this.totals.street.tips = streettips;
+      // this.totals.street.pretotal = streetpretotal;
+      // this.totals.street.tips = streettips;
     },
-  },
   clearTheDate() {
     this.$refs.myDatePicker.clearDate();
     this.dateSelected = false;
@@ -578,16 +530,16 @@ export default {
       title: "cancel this order?",
       showDenyButton: true,
       denyButtonText: `Cancel`,
-      confirmButtonText: `Confirm`,
-    }).then((confirmed) => {
+      confirmButtonText: `Confirm`
+    }).then(confirmed => {
       if (confirmed) {
         if (confirmed.isConfirmed) {
           self.$http
             .post(`/order/cancelpreorder/${id}`)
-            .then((response) => {
+            .then(response => {
               // console.log(response);
             })
-            .catch((e) => {
+            .catch(e => {
               // this.errors.push(e);
               // console.log("errors");
               // console.log(e);
@@ -605,16 +557,16 @@ export default {
       title: "cancel this order?",
       showDenyButton: true,
       denyButtonText: `Cancel`,
-      confirmButtonText: `Confirm`,
-    }).then((confirmed) => {
+      confirmButtonText: `Confirm`
+    }).then(confirmed => {
       if (confirmed) {
         if (confirmed.isConfirmed) {
           self.$http
             .post(`/order/cancelpreorder/${id}`)
-            .then((response) => {
+            .then(response => {
               console.log(response);
             })
-            .catch((e) => {
+            .catch(e => {
               // this.errors.push(e);
               console.log("errors");
               console.log(e);
@@ -648,12 +600,12 @@ export default {
     this.$http
       .post("/order/sendtotals", {
         email: sendEmail,
-        dailyTotal,
+        dailyTotal
       })
-      .then((response) => {
+      .then(response => {
         console.log(response);
       })
-      .catch((e) => {
+      .catch(e => {
         // this.errors.push(e);
         console.log("errors");
         console.log(e);
@@ -670,12 +622,12 @@ export default {
     let totals = {
       street: {
         pretotal: 0,
-        tips: 0,
+        tips: 0
       },
       mamnoon: {
         pretotal: 0,
-        tips: 0,
-      },
+        tips: 0
+      }
     };
 
     for (let i = 0; i < orders.user.length; i++) {
@@ -776,7 +728,6 @@ export default {
       return true;
     }
   },
-
   setCurrentView(param) {
     this.currentView = param;
 
@@ -850,28 +801,28 @@ export default {
     this.$http
       .post("/order/issue-tokenized-return", {
         uniqueTransId: uniqueTransIdString,
-        amount: amountToSend,
+        amount: amountToSend
       })
-      .then((response) => {
+      .then(response => {
         // console.log(response);
 
         this.$http
           .post("/order/update-refunded-items-mongo", {
             cartId: cartId,
-            orderId: orderId,
+            orderId: orderId
           })
-          .then((response) => {
+          .then(response => {
             // console.log(response);
 
             this.retrieveTodaysOrders();
           })
-          .catch((e) => {
+          .catch(e => {
             // this.errors.push(e);
             // console.log("errors");
             // console.log(e);
           });
       })
-      .catch((e) => {
+      .catch(e => {
         // this.errors.push(e);
         // console.log("errors");
         // console.log(e);
@@ -882,14 +833,14 @@ export default {
     this.$http
       .post("/order/issue-void", {
         uniqueTransId: uniqueTransIdString,
-        data,
+        data
       })
-      .then((response) => {
+      .then(response => {
         // console.log(response);
 
         this.voidByTransId(uniqueTransIdString, data);
       })
-      .catch((e) => {
+      .catch(e => {
         // this.errors.push(e);
         // console.log("errors");
         // console.log(e);
@@ -900,20 +851,20 @@ export default {
     this.$http
       .post("/order/void-transid-mongo", {
         uniqueTransId: uniqueTransIdString,
-        data,
+        data
       })
-      .then((response) => {
+      .then(response => {
         // console.log(response);
 
         // location.reload();
         this.retrieveTodaysOrders();
       })
-      .catch((e) => {
+      .catch(e => {
         // this.errors.push(e);
         // console.log("errors");
         // console.log(e);
       });
-  },
+  }},
   mounted() {
     this.setCurrentView(this.$store.state.dashboard);
     this.retrieveTodaysOrders();
@@ -927,7 +878,7 @@ export default {
         }
       }, 1000);
     });
-  },
+  }
 };
 </script>
 

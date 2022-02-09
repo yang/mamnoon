@@ -746,10 +746,6 @@ add
 </div> 
 
 
-
-
-
-
 <!-- // staff selection --> 
 <!-- // staff selection --> 
 <!-- // staff selection --> 
@@ -1691,7 +1687,7 @@ add
               <ul class="order-sidebar" v-if="panelShow === 'yourOrder'">
                 <template v-if="currentOrder.charges">
                  
-<!-- {{filteredValuesComputed}} -->
+
                 <li v-for="order in currentOrder.charges.items" :key="order.cartId" class="smblk">
                     <button class="noStyleButton" @click="removeFromOrder(order)">
                         <!-- <CloseModalRedSm />   -->
@@ -1726,7 +1722,7 @@ Tip the staff:
                   @click="setTip(1)">
                   <b>18%</b>
                   <br>
-                  (${{tip1 | showToFixed }})  
+                  (${{tipReturn(.18) | showToFixed }})  
                   </button>&nbsp;
                 <button
                   id="tipOption2"
@@ -1735,7 +1731,7 @@ Tip the staff:
                   @click="setTip(2)">
                   <b>22%</b>
                   <br>
-                  (${{tip2 | showToFixed }})  
+                  (${{tipReturn(.22) | showToFixed }})  
                   </button>&nbsp;
                 <button
                   id="tipOption3"
@@ -1743,7 +1739,7 @@ Tip the staff:
                   :class="{ disabled: currentOrder.tipSelected === 3 }"
                   @click="setTip(3)"><b>25%</b>
                   <br>
-                  (${{tip3 | showToFixed }})  
+                  (${{tipReturn(.25) | showToFixed }})  
                   </button>&nbsp;
                 <br>
                <button
@@ -2273,116 +2269,30 @@ export default {
     ExButton,
     UnableToProcessModal
   },
-  computed: {	
-filteredValuesComputed(){
-
-// let amount = []
-
-
-
-// for(var item in this.currentOrder.charges.items){
-//   if(amount.length>2){
-//   if(this.currentOrder.charges.items[item].name !== this.currentOrder.charges.items[item-1].name){
-//   amount.push(this.currentOrder.charges.items);
-//   }else{
-//     if(amount[item-1].quantity){
-//     amount[item-1].quantity++;
-//     }
-//   }
-//   }else{
-//       amount.push(this.currentOrder.charges.items);
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-// return amount;
-
-
-
-// let arrr = [];
-
-// let itemsCopy = this.currentOrder.charges.items.slice(0);
-
-
-// for(let i = 0; i < itemsCopy.length; i++){
-// console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-  // if(this.findWithAttr(arrr, itemsCopy[i].name) === -1){
-        // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-      //  console.log('there isnt one, so add it');
-    // arrr.push(itemsCopy[i]);
-  // }else{
-
-
-// arrr[this.findWithAttr(arrr, itemsCopy[i].name)].quantity++;
-  // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-
-  // }
-
-  // else{
-    // console.log(this.findWithAttr(arrr, itemsCopy[i].name));
-      //  console.log('there is one, so increase it by one');
-
-    // arrr[this.findWithAttr(arrr, itemsCopy[i].name)].quantity++;
-    // break;
-  // }
-    
-// }
-// console.log(arrr);
-// this.arrCounted = arrr;
-// return arrr;
-
-
-
-},
+  computed: {
     cartItems(){
-
 if(this.title === "Mamnoon Street"){
       return this.$store.state.storeCurrentOrderUpdateStreet.charges.items.length;
 }
-
 if(this.title === "Mamnoon"){
       return this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length;
 }
-
 if(this.title === "Mbar"){
       return this.$store.state.storeCurrentOrderUpdateMbar.charges.items.length;
 }
-
     },
     returnCorrect(){
-
-// this.currentItem.name
-
 if(this.currentItem){
 if(this.currentItem.name === "mamnoon @ home"|| this.currentItem.name === "Street Combo" || this.currentItem.name === 'Lunch Combo Special' || this.currentItem.name === `Valentine's Day Kit For Two`){
   return true
   }else{
     return false
   }
-
-
 }else{
   return false
 }
-// currentItem.name === "mamnoon @ home" || currentItem.name === "Street Combo"
-
-
-
     },
 computedAddition(){
-  
-
-  //  {{currentItemModifierArray}}
-
-
   let addOn = 0
   this.currentItemModifierArray.forEach(function(x){
     addOn = addOn + x.price
@@ -2400,71 +2310,19 @@ return this.currentOrder.tipSelected === i
     googleAddress() {	
       return this.$store.state.googleAddress;	
     },
-    tip0() {	
 
-    if(this.title === 'Mamnoon'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.preTotal) * 0;	
-    }else if(this.title === 'Mamnoon Street'){
-      return Number(this.$store.state.storeCurrentOrderUpdateStreet.charges.preTotal) * 0;	
-    }else if(this.title === 'Mbar'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMbar.charges.preTotal) * 0;	
-    }
-
-    },	
-    tip1() {	
-
-    if(this.title === 'Mamnoon'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.preTotal) * 0.18;	
-    }else if(this.title === 'Mamnoon Street'){
-      return Number(this.$store.state.storeCurrentOrderUpdateStreet.charges.preTotal) * 0.18;	
-    }else if(this.title === 'Mbar'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMbar.charges.preTotal) * 0.18;		
-    }
-    },	
-    tip2() {	
-
-    if(this.title === 'Mamnoon'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.preTotal) * 0.22;	
-    }else if(this.title === 'Mamnoon Street'){
-      return Number(this.$store.state.storeCurrentOrderUpdateStreet.charges.preTotal) * 0.22;	
-    }else if(this.title === 'Mbar'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMbar.charges.preTotal) * 0.22;		
-    }
-
-
-    },	
-    tip3() {	
-
-    if(this.title === 'Mamnoon'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.preTotal) * 0.25;	
-    }else if(this.title === 'Mamnoon Street'){
-      return Number(this.$store.state.storeCurrentOrderUpdateStreet.charges.preTotal) * 0.25;	
-    }else if(this.title === 'Mbar'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMbar.charges.preTotal) * 0.25;		
-    }
-
-
-
-      
-    }
   },	
   watch: {
     rendered:{
       handler(val){
 
+      let startdate = window.location.search.substring(1);
 
+      var new_date = moment(startdate.substring(0,10), "YYYY-MM-DD").add(1,'days');
 
-// console.log(this.title);
-let startdate = window.location.search.substring(1);
-
-
-
-
-var new_date = moment(startdate.substring(0,10), "YYYY-MM-DD").add(1,'days');
-
-var day = new_date.format('DD');
-var month = new_date.format('MM');
-var year = new_date.format('YYYY');
+      var day = new_date.format('DD');
+      var month = new_date.format('MM');
+      var year = new_date.format('YYYY');
 
 
 
@@ -2495,27 +2353,12 @@ this.preOrderToggle(true);
 
 }else{
 
-
-
       let filteredSelection = this.dropDownDays.filter(function(x){
         return x.dateFormatted === correctDate;
       });
-
       // console.log(filteredSelection)
 
-
-
-
-
-
-
 }
-
-
-
-
-
-
 
       }
       },
@@ -2542,15 +2385,7 @@ this.preOrderToggle(true);
             item: self.orderHistory.user[order].orderInfo.charges.items[item].item_id,
             date: self.orderHistory.user[order].orderInfo.time_placed
         })
-}
-}
-
-
-
-}
-      }
-
-
+}}}}
 }
 
     },
@@ -2724,13 +2559,6 @@ console.log(matches[0].name)
 }
 
 
-
-
-
-
-
-// this.filterDown(this.currentOrder.charges.items);
-
 this.formsValid(this.currentOrder.fulfillment_info.customer.email,this.currentOrder.fulfillment_info.customer.phone);
 
 this.validGiftCard(this.cardNumberInput);
@@ -2760,24 +2588,7 @@ let itemsToRemove = []
 if(this.currentOrder.charges){
 for (var value of this.currentOrder.charges.items) {
 
-// console.log(value);
-
-  // console.log(moment(this.selectedTime.time).format('HH:mm:ss'))
   if(value.timing_mask){
-
-    // console.log(value.timing_mask.rules)
-    // console.log(this.selectedDate.dayLabel.substring(0,3).toLowerCase())
-
-// console.log('this.selectedDate');
-// console.log('this.selectedDate');
-// console.log('this.selectedDate');
-// console.log('this.selectedDate');
-// console.log(this.selectedDate);
-// console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
-// console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
-// console.log('enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date)');
-// console.log(this.enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date).map(x=>moment(x).format('YYYY-MM-DD')));
-
 
 if(value.timing_mask.start_date && value.timing_mask.end_date){
 let mappedFormattedDates = this.enumerateDaysBetweenDates(value.timing_mask.start_date, value.timing_mask.end_date).map(x=>moment(x).format('YYYY-MM-DD'));
@@ -2898,19 +2709,9 @@ if(itemsToRemove.length === 1){
         //    title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
         //   });
 
-
-
-
-
-
-
-
     this.$swal({ 
            title: removalItems + ' is not available at the selected pick-up time. please select another time between ' + formatNonMilitary(value.timing_mask.start_time) + ' and ' + formatNonMilitary(value.timing_mask.end_time)
           });
-
-
-
 
 this.selectedTime = null
 
@@ -3524,36 +3325,31 @@ showToFixed: function (value) {
 }
   },
   methods: {
+tipReturn(amount){
 
+    if(this.title === 'Mamnoon'){
+      return Number(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.preTotal) * amount;	
+    }else if(this.title === 'Mamnoon Street'){
+      return Number(this.$store.state.storeCurrentOrderUpdateStreet.charges.preTotal) * amount;	
+    }else if(this.title === 'Mbar'){
+      return Number(this.$store.state.storeCurrentOrderUpdateMbar.charges.preTotal) * amount;	
+    }
+
+
+},
 formatNonMilitary(time){
 return moment(time).format('HH:mm');
 },
 returnAsMappedTimeSlots(timeslots){
-
-
-
-// return timeslots.map(function(tx) {  return moment(tx.time).valueOf() > Date.now()})
-
-
 return timeslots.map(function(tx) {  return tx.time })
 
     },
 hideIfExpired(item){
 
-
-
-
 if(item.timing_mask && item.timing_mask.end_date){
-// console.log('2');
-// console.log(item.timing_mask.end_date);
-// console.log('mom');
-// console.log(moment().tz('America/Los_Angeles').format('YYYY-MM-DD'));
 if(item.timing_mask.end_date === moment().tz('America/Los_Angeles').format('YYYY-MM-DD')){
   return true;
-
 }
-
-
 }
 },
     trimmedName(item){
@@ -3579,43 +3375,12 @@ dates.push(lastDate.clone().toDate());
 
     return dates;
 },
-
-
 checkIfPackageSection(f){
-
-
 
 const urlParams = new URLSearchParams(window.location.search);
 const product = urlParams.get('packageId');
 
-
-
-
-
-
-
-  let result = false;
-
-
-
-// if(product === null){
-//   if(f.timing_mask && f.timing_mask.id){
-//       for(let i in this.packages){
-//           if(this.packages[i].timing_mask.id === f.timing_mask.id){
-
-
-//               result = true;
-//           }
-//       }
-// }
-// }
-
-
-
-  
-
-
-
+let result = false;
 
 
 return result;
@@ -3652,21 +3417,13 @@ if(this.validEmail(email)){
     },
     changeToPreorderAndShowDropDown(){
 
-
 //  this.$swal({ 
 //     title: "please select a preferred date and time at the top of the page."
 //   });
-
-
 //       this.preOrderToggle(true);
 //   window.scrollTo(0,0);
 // //  this.currentOrder.preorder = true;
 //         // this.changedToDropdown = true;
-
-
-
-
-
 
 
   this.$swal({ 
@@ -3690,14 +3447,7 @@ if(this.validEmail(email)){
     }
   });
 
-
-
-
-
-
-
     },
-
 selectADifferentTime(){
 
   this.$swal({ 
@@ -3719,14 +3469,10 @@ selectADifferentTime(){
   });
     },
 showPickupTime(){
-
-
   this.changePickupTime = true;s
-
 
 },
 employeeCheckoutButton(){
-
 
 let approvalData = {
 accountCardType:"VS",
@@ -3754,11 +3500,7 @@ transactionReference:"",
 transactionType:"CreditSale",
 uniqueTransId:"830ae8cd0cbe4e779e29c0236891bc5a-11e3183c90064c508d3244597d324d32464fd6d6"}
 
-
-
-
  let self = this;
-
 
             if(self.title === 'Mamnoon'){
 
@@ -3782,8 +3524,6 @@ uniqueTransId:"830ae8cd0cbe4e779e29c0236891bc5a-11e3183c90064c508d3244597d324d32
 
 },
 cippaybuttoncreditauth() {
-
-
       let self = this;
       this.getCreditAuthToken().then(function (transactionToken) {
         console.log(transactionToken);
@@ -3831,19 +3571,6 @@ cippaybuttoncreditauth() {
         });
       });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 },
     cippaybuttoncreditsave() {
         
@@ -3855,8 +3582,6 @@ cippaybuttoncreditauth() {
             console.log("Approval Data", approvalData);
             emergepay.close();
             console.log('proceeed with order now you have a transaction');
-
-
 // credit save
 // credit save
 // credit save success
@@ -3882,13 +3607,9 @@ console.log('transasction success')
                 self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
               }
     }
-
 // credit save
 // credit save
 // credit save
-
-
-
 
           },
           onTransactionFailure: function (failureData) {
@@ -3930,7 +3651,6 @@ console.log('transasction success')
           });
       });
     },
-
    getCreditAuthToken() {
       let self = this;
       let dataToSend = {
@@ -3954,34 +3674,18 @@ console.log('transasction success')
           });
       });
     },
-
-
-
-
 emailErrorVisible(emailEntry,phoneEntry){
 
-
 this.emailErrorVisibleTf = true;
-
  this.formsValid(emailEntry,phoneEntry);
-
-
-
 this.emailValidFromServer(emailEntry);
 
 
 
-
-
-
-
-
 },
-
 checkIfFullNameValid(fullname){
 this.fullNameErrorVisibleTf = true;
 },
-
 checkIfFirstNameValid(firstname){
 this.firstNameErrorVisibleTf = true;
 },
@@ -3996,12 +3700,10 @@ this.phoneErrorVisibleTf = true;
 checkIfPostalValid(postalEntry){
   this.postalErrorVisibleTf = true;
 },
-
 checkIfAddressValid(addressEntry){
   this.addressErrorVisibleTf = true;
 },
 checkIfCityValid(city){
-
 console.log(city);
 
 
@@ -4010,17 +3712,13 @@ if(city.length > 0){
 
 this.cityErrorVisibleTf = false;
 
-
 }else{
   console.log('invalid')
   this.cityErrorVisibleTf = true;
 }
 
 },
-
-
 checkIfStateValid(state){
-console.log(state);
 
 
 if(state.length === 2){
@@ -4052,9 +3750,6 @@ if(this.validEmail(emailEntry) && this.validPhone(phoneEntry) && this.currentOrd
 currentlyContains(modifiers,m,modid){
 
 
-        // console.log(modifiers,m,modid);
-
-        // console.log(this.currentItem);
 
 
 if(m !== modid){
@@ -4082,7 +3777,6 @@ amountOfItems = amountOfItems+ items[i].quantity;
   }
 return amountOfItems;
 },
-// findWithInstructions(this.currentOrder.charges.items,this.textdescription) === -1 && this.findWithModifiers
 findWithInstructions(array, value) {
 
 // let ins = null;
@@ -4095,7 +3789,6 @@ return i;
 }
     }
 
-
 // if(ins === null){
   // console.log('finding with arrt no results');
   return -1;
@@ -4103,7 +3796,6 @@ return i;
   //  console.log(array, value);
   // return ins;
 // }
-
 
 
     
@@ -4197,16 +3889,6 @@ function findWithAttr(array, value) {
     return -1;
 }
 
-
-
-
-
-
-
-
-
-
-
     },
      computed3(insert) {
       // return insert.replace(/\\"/g, '"');
@@ -4251,7 +3933,6 @@ return value + '0';
         let val = (value/100).toFixed(2)
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(".00","");
     },
-
 decrementIfMatch(currentOrder){
 
 
@@ -4290,7 +3971,7 @@ self.decrementPackageByUpserveId(result.upserveId,currentOrder.charges.items[i].
 }
 
 },
-      async decrementPackageByUpserveId(id,amount) {
+async decrementPackageByUpserveId(id,amount) {
             // console.log('retriev orders frome')
             console.log(id);
                  console.log('end id')
@@ -4338,17 +4019,7 @@ if(responseUpserve.data.package.number === 0){
 }else{
 self.openModal(responseUpserve.data.package.object,responseUpserve.data.package.timing_mask,responseUpserve.data.package);
 }
-
-
-
-
-
-
-
     },
-
-
-
 emptyReOrderObject(){
 
   this.reOrder = {};
@@ -4363,7 +4034,6 @@ var result = jsObjects.find(obj => {
 })
 
 },
-
     checkIfPackageAvailable(itemid){
 //       if(this.packages){
 //       let result = this.packages.find(pack => {
@@ -4388,8 +4058,6 @@ var result = jsObjects.find(obj => {
 //     }
 return true;
       },
-
-
 notAvailableDayOf(item){
 
 return false;
@@ -4412,10 +4080,6 @@ return false;
 
 //     }
 
-
-
-
-
 },
     checkIfPackage(itemid){
       if(this.packages){
@@ -4427,8 +4091,6 @@ return false;
 if(result === undefined){
 return false;
 }else{
-
-
 
 
   if(result.number>0){
@@ -4443,7 +4105,6 @@ return false;
     }
 
       },
-
     checkIfOrdered(itemid){
 
       // console.log(itemid);
@@ -4471,24 +4132,12 @@ if(result !== undefined){
 // this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
 
 
-
-
- 
-
-
-
         self.orderHistory = response.data
-
-
-
-
-
 
 
 
     })
     },
-
      forceRerender() {
       this.componentKey += 1;
 
@@ -4622,15 +4271,8 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
       }
     },
   sendApprovalDataToMongo(email, approvalData){
-
-
 console.log('send approval ')
-
 console.log(email, approvalData)
-
-
-
-
 
     let infoForPay = {
           payInfo: null,
@@ -4758,17 +4400,7 @@ console.log('transasction success')
 // credit save
 
 
-
-
-        
-  
-
-        
-      
-
         },
-
-
             async xtokenizedPayment(orderTotal,transId){
 ////////
       try {
@@ -5009,7 +4641,6 @@ if(responseUpserve.data.doc[0].menu){
       this.modifierItems = responseUpserve.data.doc[0].menu.modifiers;
 }
 },
-
   async getPackageHours(){
 
       // console.log('get packages hour');
@@ -5098,8 +4729,6 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 
 
 },
-
-
   async getHours(){
 
 
@@ -5297,78 +4926,6 @@ console.log(item)
 
 
 }
-
-},
-excurrentlyAvailable(startTime,endTime,rules,futureDay,futureTime,name,timing_mask){
-// currentlyAvailable(item.timing_mask.start_time,item.timing_mask.end_time,item.timing_mask.rules,nowDate,nowTime,item.name,item.timing_mask) 
-
-
-console.log(timing_mask);
-
-
-
-// console.log(name);
-// console.log('currently available');
-console.log(startTime);
-console.log(endTime);
-console.log(rules);
-console.log(futureDay);
-console.log(futureTime);
-
-    let weekday = ['mon','tue','wed','thu','fri','sat','sun']
-            if(!futureDay && !futureTime){
-                let currentDate = new Date();   
-                let startDate = new Date(currentDate.getTime());
-
-                startDate.setHours(startTime.split(":")[0]);
-                startDate.setMinutes(startTime.split(":")[1]);
-
-                let endDate = new Date(currentDate.getTime());
-                endDate.setHours(endTime.split(":")[0]);
-                endDate.setMinutes(endTime.split(":")[1]);
-
-                if(rules.includes(weekday[currentDate.getDay()])){
-                    return startDate < currentDate && endDate > currentDate
-                }
-            }
-
-    if(futureDay && !futureTime){
-      if(rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())){
-        return true
-      }
-    }
-    if(futureDay && futureTime){
-
-    let currentDate = Date.parse(futureTime.time) 
-    let startDate2 = new Date(currentDate);
-    let startDate3 = moment(startDate2)._i
-    startDate3.setHours(startTime.split(":")[0]);
-    startDate3.setMinutes(startTime.split(":")[1]);
-    let endDate2 = new Date(currentDate);
-    let endDate3 = moment(endDate2)._i
-    endDate3.setHours(endTime.split(":")[0]);
-    endDate3.setMinutes(endTime.split(":")[1]);
-    let validTime = startDate3 < currentDate && endDate3 > currentDate
-    let validDay = rules.includes(futureDay.dayLabel.substring(0,3).toLowerCase())
-
-
-
-    if(validTime && validDay){
-
-console.log('is showing up: '+name);
-
-      return true
-    }else{
-
-// console.log(name);
-console.log('not showing up: '+name);
-
-      return false
-    }
-}
-
-
-
 
 },
 isBetween(startTime,endTime,proposedTime){
@@ -5644,22 +5201,6 @@ this.panelShow = 'customerInfo'
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 },
     showingCustom(e){
 
@@ -5733,58 +5274,6 @@ this.custom = false
 
       e.preventDefault();
     },
-    validGiftCard: function(number){
-      var re = /^[0-9]{16}$/;
-      return re.test(number);
-    },
-    validEmail: function (email) {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    },
-
-   validPhone: function (phone) {
-      var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-
-
-      return re.test(phone);
-    },
-   validPostal: function (postal_code) {
-      var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
-      return re.test(postal_code);
-    },
-
-validCity: function(city){
-  return city.length > 0
-},
-
-
-
-validState: function(state){
-
-
-return state.length === 2;
-
-},
-
-       validAddress: function (address) {
-      var re = /^(?:[Pp][Oo]\s[Bb][Oo][Xx]|[0-9]+)\s(?:[0-9A-Za-z\.'#]|[^\S\r\n])+/gm;
-      return re.test(address);
-    },
-      validFullName: function (fullname) {
-      let name = fullname.trim();
-      var re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
-      return re.test(name);
-    },
-      validFirstName: function (firstname) {
-      var re = /^([ \u00c0-\u01ffa-zA-Z'\-])+$/g;
-      return re.test(firstname);
-    },
-      validLastName: function (lastname) {
-      var re = /^([ \u00c0-\u01ffa-zA-Z'\-])+$/g;
-      return re.test(lastname);
-    },
-
-
 removeAttention(){
 this.attention = false
 },
@@ -5937,14 +5426,6 @@ console.log('transasction success')
           });
       });
     },
-
-
-
-
-
-
-
-
     addAddOnOne(mod, modifieritem) {
 
 
@@ -5993,9 +5474,6 @@ let updatedItems = this.currentItemModifierArray.filter(
        }
 
 },
-
-
-
 toggleAddOn(mod,modifieritem){
 
 
@@ -6276,7 +5754,6 @@ this.currentItemQuantity = this.currentItem.quantity;
         document.getElementById("minus-" + drawer).classList.remove("visible");
       }
     },
-
     addToAllItemsToOrder(items){
       this.reOrder = {};
       let self = this
@@ -6329,10 +5806,6 @@ this.currentItemQuantity = this.currentItem.quantity;
     addToOrder(item) {
 
     console.log('specificDate');
-
-
-
-
 
       // console.log(item)
       let modifierPriceTotal = 0;
@@ -6431,20 +5904,10 @@ this.currentOrder.charges.items.push(itemToAdd);
 
 
     },
-
     updateOrderItem(item) {
-
 
     console.log('specificDate');
 
-
-
-
-
-
-// console.log(item);
-
-      // console.log(item)
       let modifierPriceTotal = 0;
       for (let i = 0; i < this.currentItemModifierArray.length; i++) {
         modifierPriceTotal =
@@ -6992,29 +6455,11 @@ time: new Date(),
 timelabel: new Date().toLocaleTimeString().replace(":00","")
 }
 
-// console.log(new Date().toLocaleTimeString().replace(":00",""));
-// console.log(new Date().toLocaleTimeString().replace(":00",""));
-// console.log(new Date().toLocaleTimeString().replace(":00",""));
-// console.log(new Date().toLocaleTimeString().replace(":00",""));
-// console.log(new Date().toLocaleTimeString().replace(":00",""));
-// console.log(new Date().toLocaleTimeString().replace(":00",""));
-
-// console.log('createdTime')
-// console.log(createdTime)
-
-// console.log(createdItem)
-// this.selectedDate = createdItem
-// this.selectedTime = createdTime
 
 this.nowTime = createdTime
 this.nowDate = createdItem
 
 
-// t
-
-
-// console.log(createdTime);
-// console.log(createdItem);
 
 },
 dropDown(){
@@ -7274,28 +6719,14 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
             })
             }
         }
-
-
-
 }
 
-
-
-
-// console.log('this.dropDownDays[0]');
-// console.log(this.dropDownDays[0]);
 
    this.rendered = true;
     },
     setTipToZero(){
-
       console.log('set tip to zero')
-
 this.setTip(0)
-
-
-
-
 
     },
     checkOlo() {
@@ -7303,9 +6734,7 @@ this.setTip(0)
             let self = this
             // console.log(`this.title is: ${this.title}`)
                 this.$http.get(`/order/acceptingOrdersBoolean/${this.title.replace(" ","")}`).then(function (response) {
-              // self.orderHistory = response.data
-              // console.log("acceptingOrdersBooleanStreet");
-              // console.log(response.data);
+
 
 if(response.data.result === "success"){
   self.oloAvailable = true;

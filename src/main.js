@@ -69,6 +69,47 @@ Vue.use(Meta, {
 
 Vue.mixin({
   methods: {
+    validGiftCard: function(number){
+      var re = /^[0-9]{16}$/;
+      return re.test(number);
+    },
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+
+   validPhone: function (phone) {
+      var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+      return re.test(phone);
+    },
+   validPostal: function (postal_code) {
+      var re = /^[0-9]{5}(?:-[0-9]{4})?$/;
+      return re.test(postal_code);
+    },
+
+validCity: function(city){
+  return city.length > 0
+},
+validState: function(state){
+return state.length === 2;
+},
+       validAddress: function (address) {
+      var re = /^(?:[Pp][Oo]\s[Bb][Oo][Xx]|[0-9]+)\s(?:[0-9A-Za-z\.'#]|[^\S\r\n])+/gm;
+      return re.test(address);
+    },
+      validFullName: function (fullname) {
+      let name = fullname.trim();
+      var re = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
+      return re.test(name);
+    },
+      validFirstName: function (firstname) {
+      var re = /^([ \u00c0-\u01ffa-zA-Z'\-])+$/g;
+      return re.test(firstname);
+    },
+      validLastName: function (lastname) {
+      var re = /^([ \u00c0-\u01ffa-zA-Z'\-])+$/g;
+      return re.test(lastname);
+    },
     imageDimensions(imageSource){
 
 
