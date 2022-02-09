@@ -37,6 +37,15 @@ module.exports = {
         minRatio: 0.8,
       }
     }
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `
+          @import "@/assets/styles/_variables.scss";
+        `
+      }
+    }
   }
 }
 
