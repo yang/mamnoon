@@ -42,11 +42,6 @@ export default {
 </script>
 
 <style lang="scss">
-$nadi-color: #f05d5b;
-
-// body {
-//   background-color: $nadi-color !important;
-// }
 
 .bottom {
   position: fixed !important;
@@ -78,7 +73,7 @@ $nadi-color: #f05d5b;
   text-align: center;
   margin-top: 80px;
   height: 120vh;
-  background-color: $nadi-color !important;
+  background-color: $nadi-red-color !important;
 }
 
 .main-content p {
