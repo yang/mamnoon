@@ -19,7 +19,7 @@
       </p>
       <p>
         for current openings in our head office, visit
-        <a href="http://www.indeed.com">indeed.com</a> and search for mama
+        <a href="http://www.indeed.com">indeed.com</a> and search for mama restaurant
         group.
       </p>
     <div class="image"></div>
@@ -56,6 +56,7 @@ export default {
     width: 80%;
     height: 80%;
     background-repeat: no-repeat;
+
   }
   width: 550px;
   height: 550px;
@@ -72,7 +73,8 @@ export default {
   padding-top: 1.5vh;
   text-align: center;
   margin-top: 80px;
-  height: 120vh;
+  height: 100%;
+  padding-bottom: 20px;
   background-color: $nadi-red-color !important;
 }
 
