@@ -12,7 +12,6 @@
 
 
 
-
      accepted on upserve pos: {{ loadedorderRendered.orderAccepted}}
 <br>
 
@@ -25,7 +24,7 @@
 <br>
 <b>total: ${{loadedorderRendered.orderInfo.charges.total | showToFixed}}</b>
 
-
+<br>
 <template v-if="loadedorderRendered.timeClosed">
 status: <b>ticket closed</b>
 </template>
