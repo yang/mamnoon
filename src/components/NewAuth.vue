@@ -12,31 +12,6 @@
   sign out of {{authEmail.user.email.replace('@gmail.com','')}}
 </a>
 
-
-
-<!-- {{this.$store.state.loggedIn}} -->
-
-
-<!--desktop-->
-    <!-- <a
-    class="hide-on-mobile"
-      type="primary"
-      icon="fas fa-edit"
-      @click="handleClickSignIn"
-      :disabled="!isInit"
-       v-if="$store.state.currentUserEmail === null"
-    >
-      sign in
-    </a>
-    <a
-      class="hide-on-mobile"
-      type="primary"
-      icon="fas fa-edit"
-      @click="toggleDropdown2()"
-      v-if="$store.state.currentUserEmail"
-      :disabled="!isInit"
-    > -->
-
     <div class="navbar-end" style="display:none;position: fixed;width:200px;height:92px;top:40px;right: 0; text-align: center;z-index:10000;background: #f58e58;color: white;">
       <div class="navbar-item">
         <div class="buttons">

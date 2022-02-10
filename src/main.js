@@ -960,9 +960,6 @@ const store = new Vuex.Store({
       state.userInfo = null;
       state.currentUserEmail = null;
     },
-    toggleVegetarian(state) {
-      state.vegetarian = !state.vegetarian;
-    },
     hideUserModal(state) {
       state.userProfileModalVisible = false;
     },

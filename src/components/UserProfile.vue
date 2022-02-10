@@ -1,24 +1,13 @@
 <template>
-
     <div>    <div>
-        <!-- <button class="btn btn-primary right-hide-modal" @click="hideUserModal">hide</button> -->
         <UserForm :emailAddress="$store.state.currentUserEmail"/>
-        <!-- <UserForm :emailAddress="$auth._data.user.email"/> -->
-     <!-- {{$auth._data.user.email}} -->
+
         <template>
         <CreditSaveForm :emailAddress="$store.state.currentUserEmail" />
-               <!-- <CreditSaveForm :emailAddress="$auth._data.user.email" /> -->
+
          </template>
         <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
-        <!-- <GiftCardModule :emailAddress="$auth._data.user.email" /> -->
-        <!-- <TestimonialForm :emailAddress="$store.state.currentUserEmail" /> -->
 
-            <!-- <EmailForm :emailAddress="$store.state.currentUserEmail" /> -->
-        <!-- <ToggleVegetarian /> -->
-        <!-- <addproduct :emailAddress="$store.state.userInfo.user.email" /> -->
-        <!-- order he -->
-
-        <!-- <OrderHistory :currentUser="$store.state" :emailAddress="$auth._data.user.email" /> -->
                 <OrderHistory :currentUser="$store.state" />
 
 
@@ -38,7 +27,6 @@ import TestimonialForm from "@/components/TestimonialForm";
 import CreditSaveForm from "@/components/CreditSaveForm";
 
 import GiftCardModule from "@/components/GiftCardModule";
-import ToggleVegetarian from "@/components/ToggleVegetarian";
 
 import OrderHistory from "@/components/OrderHistory";
 import ReservationHistory from "@/components/ReservationHistory";
@@ -51,7 +39,6 @@ name: 'UserProfile',
     EmailForm,
     UserForm,
     GiftCardModule,
-    ToggleVegetarian,
     OrderHistory,
     CreditSaveForm,
     ReservationHistory

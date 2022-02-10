@@ -657,7 +657,7 @@ cart empty
 <script>
 
 import vSelect from "vue-select";
-import carousel from "vue-owl-carousel";
+
 import GoogleValidate from "@/components/GoogleValidate";
 import CloseModal from "@/components/svgIcons/CloseModal";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
@@ -712,7 +712,7 @@ export default {
     CloseModalSm,
     CloseModalRedSm,
     GoogleValidate,
-    carousel,
+    
     VueAspectRatio,
     Next,
     Prev,

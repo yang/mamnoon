@@ -86,7 +86,7 @@ import GoogleAuth2 from "@/components/GoogleAuth2";
 // import NewAuth from "@/components/NewAuth";
 
 import CartDropdown from "@/components/CartDropdown";
-import NadiIntro from "@/components/NadiIntro";
+
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 
 
@@ -102,8 +102,6 @@ export default {
     LogoMamnoon,
     Burger2,
     GoogleAuth2,
-    // NewAuth,
-    NadiIntro
   },
   data () {
       return {

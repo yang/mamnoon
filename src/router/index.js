@@ -94,16 +94,6 @@ const routes = [
     name: "basallabneh",
     component: () => import("../views/mamnoonff.vue")
   },
-  // {
-  //   path: "/shop",
-  //   name: "shop",
-  //   component: () => import("../views/retail.vue")
-  // },
-  // {
-  //   path: "/retail",
-  //   name: "retail",
-  //   component: () => import("../views/retail.vue")
-  // },
   {
     path: "/reports",
     name: "reports",
@@ -222,10 +212,6 @@ const routes = [
     path: "/careers",
     name: "careers",
     component: () => import("../views/careers.vue")
-  },
-  {
-    path: "/:id/menu",
-    component: () => import("../components/MenuTemplate.vue")
   },
   {
     path: "/:id",

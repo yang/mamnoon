@@ -90,7 +90,7 @@
     </div></div></div>
 </template>
 <script>
-import carousel from "vue-owl-carousel";
+
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
 import ShowAll from "@/components/svgIcons/ShowAll";
@@ -112,7 +112,7 @@ export default {
     },
     components:{
       NadiIconSmInv,
-        carousel,
+        
         Next,
         Prev,
         ShowAll,

@@ -1005,11 +1005,7 @@ export default {
     },
     visibilityChanged(isVisible, entry) {
       this.isVisible = isVisible;
-      ///console.log(entry.target.id)
-      //console.log(entry.isIntersecting)
-      ///console.log(entry)
 
-      // this.visibility[entry.target.id] = true
 
       this.visibility[entry.target.id] = entry.isIntersecting;
     },

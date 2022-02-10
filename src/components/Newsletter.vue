@@ -5,10 +5,6 @@
        <p class="description-para noselect hide-mobile">{{body}}</p>
 
 <div class="width-container text-center translate40">
-<!-- <div v-for="item in data" :key="item.restaurant_title">
-  <Mbar v-if="item.restaurant_title === 'mbar'" />
-  <Mamnoon v-else-if="item.restaurant_title === 'mamnoon'" />
-</div> -->
   <CampaignMonitor />
   <br>
 </div>

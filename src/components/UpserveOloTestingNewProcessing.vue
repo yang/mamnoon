@@ -2157,7 +2157,7 @@ cart empty
 <script>
 
 import vSelect from "vue-select";
-import carousel from "vue-owl-carousel";
+
 import GoogleValidate from "@/components/GoogleValidate";
 import GoogleValidate2 from "@/components/GoogleValidate2";
 import CloseModal from "@/components/svgIcons/CloseModal";
@@ -2246,7 +2246,7 @@ export default {
     CloseModalRedSm,
     GoogleValidate,
         GoogleValidate2,
-    carousel,
+    
     VueAspectRatio,
     Next,
     Prev,

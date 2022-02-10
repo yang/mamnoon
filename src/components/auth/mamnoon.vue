@@ -13,7 +13,7 @@ import AddToCart from "@/components/svgIcons/AddToCart";
 import ShopNow from "@/components/svgIcons/ShopNow";
 import CloseModal from "@/components/svgIcons/CloseModal";
 
-import Carousel from "@/components/Carousel";
+
 
 
 export default {

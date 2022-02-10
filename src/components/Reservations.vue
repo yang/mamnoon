@@ -18,7 +18,7 @@
 
 <script>
 
-import carousel from "vue-owl-carousel";
+
 import Next from "@/components/svgIcons/Next";
 import Prev from "@/components/svgIcons/Prev";
 import Mbar from "@/components/svgIcons/Mbar";
@@ -26,7 +26,7 @@ import Mamnoon from "@/components/svgIcons/Mamnoon";
 
 export default {
     components:{
-        carousel,
+        
         Next,
         Prev,
         Mbar,

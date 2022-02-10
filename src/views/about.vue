@@ -31,7 +31,7 @@
 </template>
 <script>
 import Nav3 from "@/components/Nav3";
-import AboutAlt from "@/components/AboutAlt";
+
 import Borderline from "@/components/svgIcons/Borderline";
 import GlobalFooter from "@/components/GlobalFooter";
 
@@ -61,7 +61,6 @@ export default {
   components: {
     Nav3,
     Borderline,
-    AboutAlt,
     GlobalFooter,
   },
   methods: {

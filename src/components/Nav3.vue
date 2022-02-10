@@ -147,7 +147,7 @@ order <div class="arrow-right"></div>
            <div class="inline-link">
 
                     <li>
-                            <router-link to="/finefoods">
+           <router-link to="/finefoods">
                            fine foods
 </router-link>
                     </li>
@@ -178,8 +178,8 @@ order <div class="arrow-right"></div>
 
 
     <template v-if="$mq === 'lg'">
-<!--    <nav v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" class="navbar navbar-expand-lg navbar-dark fix-top-nav nadi-sub-header2">-->
-        <nav style="display:none;" v-if="this.$route.name === 'home'||this.$route.name === 'landingdrawer'" >
+
+        <nav style="display:none;" v-if="this.$route.name === 'home'" >
         <div class="container">
 
              <ul id="menu">
@@ -456,7 +456,10 @@ order <div class="arrow-right"></div>
 
 
 
-</a></div></div></div>
+</a>
+
+
+</div></div></div>
 
 
 
@@ -517,7 +520,6 @@ import GoogleAuth2 from "@/components/GoogleAuth2";
 // import NewAuth from "@/components/NewAuth";
 
 import CartDropdown from "@/components/CartDropdown";
-import NadiIntro from "@/components/NadiIntro";
 import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 
 
@@ -533,8 +535,7 @@ export default {
     LogoMamnoon,
     Burger2,
     GoogleAuth2,
-    // NewAuth,
-    NadiIntro
+
   },
   data () {
       return {

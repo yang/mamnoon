@@ -30,9 +30,6 @@
 <template v-if="user && user.user.deliveryAddress">
 {{user.user.deliveryAddress.name}}<br>
 {{user.user.deliveryAddress.phone}}<br>
-<!-- {{user.user.deliveryAddress.addressLine1}}<br> -->
-<!-- {{user.user.deliveryAddress.addressLine2}}<br> -->
-<!-- {{user.user.deliveryAddress.city}}&nbsp;{{user.user.deliveryAddress.state}}&nbsp;{{user.user.deliveryAddress.zip}} -->
 </template>
 <br><br>
 <button class="sm-button" @click="updateDeliveryClick()">update guest info</button>
