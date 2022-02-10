@@ -199,7 +199,10 @@ export default {
           }else{
               storeCurrentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
           }
-          storeCurrentOrder.charges.items = order;
+          // storeCurrentOrder.charges.items = order;
+
+console.log('order');
+          console.log(order);
 
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
           
