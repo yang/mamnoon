@@ -8,24 +8,24 @@
         <div class="closeCartMenu" @click="toggleDropdown()"><CloseModalRed2 /></div>
 <ul>
 
-<li v-if="$store.state.storeCurrentOrderUpdateRetail.charges.items.length > 0">
+<li v-if="$store.state.storeRetail.charges.items.length > 0">
         <router-link to="/retail">
-    retail ({{$store.state.storeCurrentOrderUpdateRetail.charges.items.length}})
+    retail ({{$store.state.storeRetail.charges.items.length}})
            </router-link>
     </li>
-<li v-if="$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length > 0">
+<li v-if="$store.state.storeMamnoon.charges.items.length > 0">
           <router-link to="/mamnoon">
-    mamnoon ({{$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length}})
+    mamnoon ({{$store.state.storeMamnoon.charges.items.length}})
           </router-link>
     </li>
-<li v-if="$store.state.storeCurrentOrderUpdateMbar.charges.items.length > 0">
+<li v-if="$store.state.storeMbar.charges.items.length > 0">
           <router-link to="/mbar">
-    mbar ({{$store.state.storeCurrentOrderUpdateMbar.charges.items.length}})
+    mbar ({{$store.state.storeMbar.charges.items.length}})
           </router-link>
     </li>
-<li v-if="$store.state.storeCurrentOrderUpdateStreet.charges.items.length > 0">
+<li v-if="$store.state.storeStreet.charges.items.length > 0">
           <router-link to="/mamnoonstreet">
-    mamnoon street ({{$store.state.storeCurrentOrderUpdateStreet.charges.items.length}})
+    mamnoon street ({{$store.state.storeStreet.charges.items.length}})
           </router-link>
     </li>
  </ul>

@@ -2136,9 +2136,9 @@ cart empty
       </div>
       </div>
       </section>
-<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeCurrentOrderUpdateMamnoon}}</pre>
-<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeCurrentOrderUpdateStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeCurrentOrderUpdateMbar}}</pre>
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
+<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeMbar}}</pre>
    <!--// ccc-->
 
 
@@ -2272,13 +2272,13 @@ export default {
   computed: {
     cartItems(){
 if(this.title === "Mamnoon Street"){
-      return this.$store.state.storeCurrentOrderUpdateStreet.charges.items.length;
+      return this.$store.state.storeStreet.charges.items.length;
 }
 if(this.title === "Mamnoon"){
-      return this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length;
+      return this.$store.state.storeMamnoon.charges.items.length;
 }
 if(this.title === "Mbar"){
-      return this.$store.state.storeCurrentOrderUpdateMbar.charges.items.length;
+      return this.$store.state.storeMbar.charges.items.length;
 }
     },
     returnCorrect(){
@@ -2527,18 +2527,18 @@ if(this.user){
   //  }
 
     if(this.title === 'Mamnoon'){
-        let storeCurrentOrderUpdateMamnoon = curOr;
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+        let storeMamnoon = curOr;
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeMamnoon });	
 
-        // let storeCurrentOrderUpdateMamnoonTesting = curOr;
-        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });
+        // let storeMamnoonTesting = curOr;
+        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeMamnoonTesting });
 
     }else if(this.title === 'Mamnoon Street'){
-        let storeCurrentOrderUpdateStreet = curOr;
-        this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });	
+        let storeStreet = curOr;
+        this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeStreet });	
     }else if(this.title === 'Mbar'){
-        let storeCurrentOrderUpdateMbar = curOr;
-        this.$store.commit("upserveOrderCurrentOrderUpdateMbar", { storeCurrentOrderUpdateMbar });	
+        let storeMbar = curOr;
+        this.$store.commit("upserveOrderCurrentOrderUpdateMbar", { storeMbar });	
     }
     // console.log(curOr)
     
@@ -3328,11 +3328,11 @@ showToFixed: function (value) {
 tipReturn(amount){
 
     if(this.title === 'Mamnoon'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMamnoon.charges.preTotal) * amount;	
+      return Number(this.$store.state.storeMamnoon.charges.preTotal) * amount;	
     }else if(this.title === 'Mamnoon Street'){
-      return Number(this.$store.state.storeCurrentOrderUpdateStreet.charges.preTotal) * amount;	
+      return Number(this.$store.state.storeStreet.charges.preTotal) * amount;	
     }else if(this.title === 'Mbar'){
-      return Number(this.$store.state.storeCurrentOrderUpdateMbar.charges.preTotal) * amount;	
+      return Number(this.$store.state.storeMbar.charges.preTotal) * amount;	
     }
 
 
@@ -3504,21 +3504,21 @@ uniqueTransId:"830ae8cd0cbe4e779e29c0236891bc5a-11e3183c90064c508d3244597d324d32
 
             if(self.title === 'Mamnoon'){
 
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              if(self.$store.state.storeMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeMamnoon,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              if(self.$store.state.storeMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeMamnoon,approvalData,null);
               }
 
             }else if(self.title === 'Mamnoon Street'){
 
-                if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                  self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+                if(self.$store.state.storeStreet.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
-              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              if(self.$store.state.storeStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
     }
 
@@ -3536,21 +3536,21 @@ cippaybuttoncreditauth() {
 
             if(self.title === 'Mamnoon'){
 
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              if(self.$store.state.storeMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeMamnoon,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              if(self.$store.state.storeMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeMamnoon,approvalData,null);
               }
 
             }else if(self.title === 'Mamnoon Street'){
 
-                if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                  self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+                if(self.$store.state.storeStreet.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
-              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              if(self.$store.state.storeStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
     }
 
@@ -3589,22 +3589,22 @@ cippaybuttoncreditauth() {
 console.log('transasction success')
    if(self.title === 'Mamnoon'){
 
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              if(self.$store.state.storeMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeMamnoon,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              if(self.$store.state.storeMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeMamnoon,approvalData,null);
               }
 
 
 
     }else if(self.title === 'Mamnoon Street'){
-      if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+      if(self.$store.state.storeStreet.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
-              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              if(self.$store.state.storeStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
     }
 // credit save
@@ -4376,22 +4376,22 @@ console.log("Approval Data", approvalData);
 console.log('transasction success')
    if(self.title === 'Mamnoon'){
 
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData1,null);
+              if(self.$store.state.storeMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeMamnoon,approvalData1,null);
               }
               
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData1,null);
+              if(self.$store.state.storeMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeMamnoon,approvalData1,null);
               }
 
 
 
     }else if(self.title === 'Mamnoon Street'){
-      if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData1,null);
+      if(self.$store.state.storeStreet.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeStreet,approvalData1,null);
               }
-              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData1,null);
+              if(self.$store.state.storeStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeStreet,approvalData1,null);
               }
     }
 
@@ -4415,34 +4415,34 @@ console.log('transasction success')
 console.log('transasction success')
    if(this.title === 'Mamnoon'){
 
-              if(this.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                this.scheduleAnOrder(this.$store.state.storeCurrentOrderUpdateMamnoon,response.data,null);
+              if(this.$store.state.storeMamnoon.preorder === true){
+                this.scheduleAnOrder(this.$store.state.storeMamnoon,response.data,null);
               }
               
-              if(this.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                this.doAnOrder(this.$store.state.storeCurrentOrderUpdateMamnoon,response.data,null);
+              if(this.$store.state.storeMamnoon.preorder === false){
+                this.doAnOrder(this.$store.state.storeMamnoon,response.data,null);
               }
 
 
 
     }else if(this.title === 'Mamnoon Street'){
 
-              if(this.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                this.scheduleAnOrder(this.$store.state.storeCurrentOrderUpdateStreet,response.data,null);
+              if(this.$store.state.storeStreet.preorder === true){
+                this.scheduleAnOrder(this.$store.state.storeStreet,response.data,null);
               }
               
-              if(this.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                this.doAnOrder(this.$store.state.storeCurrentOrderUpdateStreet,response.data,null);
+              if(this.$store.state.storeStreet.preorder === false){
+                this.doAnOrder(this.$store.state.storeStreet,response.data,null);
               }
 
     }else if(this.title === 'Mbar'){
 
-              if(this.$store.state.storeCurrentOrderUpdateMbar.preorder === true){
-                this.scheduleAnOrder($store.state.storeCurrentOrderUpdateMbar,response.data,null);
+              if(this.$store.state.storeMbar.preorder === true){
+                this.scheduleAnOrder($store.state.storeMbar,response.data,null);
               }
               
-              if(this.$store.state.storeCurrentOrderUpdateMbar.preorder === false){
-                this.doAnOrder($store.state.storeCurrentOrderUpdateMbar,response.data,null);
+              if(this.$store.state.storeMbar.preorder === false){
+                this.doAnOrder($store.state.storeMbar,response.data,null);
               }
 
     }
@@ -4521,19 +4521,19 @@ this.$store.state
       }
 
     if(this.title === 'Mamnoon'){
-        let storeCurrentOrderUpdateMamnoon = this.currentOrder
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeCurrentOrderUpdateMamnoon });	
+        let storeMamnoon = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoon", { storeMamnoon });	
 
 
-        // let storeCurrentOrderUpdateMamnoonTesting = this.currentOrder
-        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeCurrentOrderUpdateMamnoonTesting });	
+        // let storeMamnoonTesting = this.currentOrder
+        // this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonTesting", { storeMamnoonTesting });	
 
     }else if(this.title === 'Mamnoon Street'){
-        let storeCurrentOrderUpdateStreet = this.currentOrder
-        this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeCurrentOrderUpdateStreet });	
+        let storeStreet = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateStreet", { storeStreet });	
     }else if(this.title === 'Mbar'){
-        let storeCurrentOrderUpdateMbar = this.currentOrder
-        this.$store.commit("upserveOrderCurrentOrderUpdateMbar", { storeCurrentOrderUpdateMbar });	
+        let storeMbar = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateMbar", { storeMbar });	
     }
 
 
@@ -5066,11 +5066,11 @@ let self = this;
         .then(function (response) {
       let balanceCheck
     if(self.title === 'Mamnoon'){
-      balanceCheck = self.$store.state.storeCurrentOrderUpdateMamnoon.charges.total.toFixed(2)/100
+      balanceCheck = self.$store.state.storeMamnoon.charges.total.toFixed(2)/100
     }else if(self.title === 'Mamnoon Street'){
-      balanceCheck = self.$store.state.storeCurrentOrderUpdateStreet.charges.total.toFixed(2)/100
+      balanceCheck = self.$store.state.storeStreet.charges.total.toFixed(2)/100
     }else if(self.title === 'Mbar'){
-      balanceCheck = self.$store.state.storeCurrentOrderUpdateMbar.charges.total.toFixed(2)/100
+      balanceCheck = self.$store.state.storeMbar.charges.total.toFixed(2)/100
     }
           
           
@@ -5105,38 +5105,38 @@ console.log(response)
 
 
     if(self.title === 'Mamnoon'){
-    console.log(self.$store.state.storeCurrentOrderUpdateMamnoon)
-                    if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                  self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+    console.log(self.$store.state.storeMamnoon)
+                    if(self.$store.state.storeMamnoon.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeMamnoon,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
                 
         
-               if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                  self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+               if(self.$store.state.storeMamnoon.preorder === false){
+                  self.doAnOrder(self.$store.state.storeMamnoon,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
     
     
     }else if(self.title === 'Mamnoon Street'){
     
-                     if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                  self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+                     if(self.$store.state.storeStreet.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeStreet,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
                 
                 
-               if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                  self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+               if(self.$store.state.storeStreet.preorder === false){
+                  self.doAnOrder(self.$store.state.storeStreet,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
     
     
     }else if(self.title === 'Mbar'){
     
-                  if(self.$store.state.storeCurrentOrderUpdateMbar.preorder === true){
-                  self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMbar,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+                  if(self.$store.state.storeMbar.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeMbar,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
                 
                 
-               if(self.$store.state.storeCurrentOrderUpdateMbar.preorder === false){
-                  self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMbar,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+               if(self.$store.state.storeMbar.preorder === false){
+                  self.doAnOrder(self.$store.state.storeMbar,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
     
     
@@ -5173,8 +5173,8 @@ this.panelShow = 'customerInfo'
 
    if(this.title === 'Mamnoon'){
 
-       if(this.$store.state.storeCurrentOrderUpdateMamnoon.fulfillment_info.customer.email !== ''){
-         this.emailValidFromServer(this.$store.state.storeCurrentOrderUpdateMamnoon.fulfillment_info.customer.email)
+       if(this.$store.state.storeMamnoon.fulfillment_info.customer.email !== ''){
+         this.emailValidFromServer(this.$store.state.storeMamnoon.fulfillment_info.customer.email)
        }
      
 
@@ -5186,8 +5186,8 @@ this.panelShow = 'customerInfo'
 
 
 
-           if(this.$store.state.storeCurrentOrderUpdateStreet.fulfillment_info.customer.email !== ''){
-         this.emailValidFromServer(this.$store.state.storeCurrentOrderUpdateStreet.fulfillment_info.customer.email)
+           if(this.$store.state.storeStreet.fulfillment_info.customer.email !== ''){
+         this.emailValidFromServer(this.$store.state.storeStreet.fulfillment_info.customer.email)
        }   
               
       
@@ -5337,12 +5337,12 @@ if(index === 0){
 console.log('transasction success')
    if(self.title === 'Mamnoon'){
 
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              if(self.$store.state.storeMamnoon.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeMamnoon,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMamnoon,approvalData,null);
+              if(self.$store.state.storeMamnoon.preorder === false){
+                self.doAnOrder(self.$store.state.storeMamnoon,approvalData,null);
               }
 
 
@@ -5350,12 +5350,12 @@ console.log('transasction success')
     }else if(self.title === 'Mamnoon Street'){
 
 
-              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              if(self.$store.state.storeStreet.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateStreet,approvalData,null);
+              if(self.$store.state.storeStreet.preorder === false){
+                self.doAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
 
 
@@ -5363,12 +5363,12 @@ console.log('transasction success')
     }else if(self.title === 'Mbar'){
 
 
-              if(self.$store.state.storeCurrentOrderUpdateMbar.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateMbar,approvalData,null);
+              if(self.$store.state.storeMbar.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeMbar,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrderUpdateMbar.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateMbar,approvalData,null);
+              if(self.$store.state.storeMbar.preorder === false){
+                self.doAnOrder(self.$store.state.storeMbar,approvalData,null);
               }
 
 
@@ -5402,11 +5402,11 @@ console.log('transasction success')
       let self = this;
       let dataToSend
    if(self.title === 'Mamnoon'){
-      dataToSend = self.$store.state.storeCurrentOrderUpdateMamnoon
+      dataToSend = self.$store.state.storeMamnoon
     }else if(self.title === 'Mamnoon Street'){
-      dataToSend = self.$store.state.storeCurrentOrderUpdateStreet
+      dataToSend = self.$store.state.storeStreet
     }else if(self.title === 'Mbar'){
-      dataToSend = self.$store.state.storeCurrentOrderUpdateMbar
+      dataToSend = self.$store.state.storeMbar
   }
 // added 
       return new Promise(function (resolve, reject) {
@@ -6168,7 +6168,7 @@ console.log(giftcardbalance);
           let orderCMR = currentOrder;
           orderCMR.giftcardbalance = giftcardbalance
 
-          self.currentOrder = self.$store.state.storeCurrentOrderUpdate
+          self.currentOrder = self.$store.state.storeOrderUpdate
           self.emptyCart();
 
 
@@ -6878,12 +6878,12 @@ this.filterForNow()
 
     if(this.title === 'Mamnoon'){
 
-      if(this.$store.state.storeCurrentOrderUpdateMamnoon.timeStamp === null){
-        this.$store.state.storeCurrentOrderUpdateMamnoon.timeStamp = Date.now()
+      if(this.$store.state.storeMamnoon.timeStamp === null){
+        this.$store.state.storeMamnoon.timeStamp = Date.now()
       }
 
 
-      let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateMamnoon.timeStamp
+      let cachedTimeStamp = this.$store.state.storeMamnoon.timeStamp
       let decider = cachedTimeStamp - ffAgo
       if(decider < 0){
             console.log('Your Nadi Mama order has expired and your shopping bag is now empty. To place an order, please return to the current menu on this page.');
@@ -6893,19 +6893,19 @@ this.filterForNow()
       }
 
 
-        this.currentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
-        this.setTip(this.$store.state.storeCurrentOrderUpdateMamnoon.tipSelected)
-        this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateMamnoon.currentAmountToAddCustom/100
+        this.currentOrder = this.$store.state.storeMamnoon
+        this.setTip(this.$store.state.storeMamnoon.tipSelected)
+        this.currentAmountToAddCustom = this.$store.state.storeMamnoon.currentAmountToAddCustom/100
     }else if(this.title === 'Mamnoon Street'){
 
 
-if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
-  this.$store.state.storeCurrentOrderUpdateStreet.timeStamp = Date.now()
+if(this.$store.state.storeStreet.timeStamp === null){
+  this.$store.state.storeStreet.timeStamp = Date.now()
 }
 
 
 
-      let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateStreet.timeStamp
+      let cachedTimeStamp = this.$store.state.storeStreet.timeStamp
       let decider = cachedTimeStamp - ffAgo
       if(decider < 0){
              console.log('Your Nadi Mama order has expired and your shopping bag is now empty. To place an order, please return to the current menu on this page.');
@@ -6914,17 +6914,17 @@ if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
         // console.log('not empty yet')
       }
 
-        this.currentOrder = this.$store.state.storeCurrentOrderUpdateStreet
+        this.currentOrder = this.$store.state.storeStreet
 
-        this.setTip(this.$store.state.storeCurrentOrderUpdateStreet.tipSelected)
-        this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateStreet.currentAmountToAddCustom/100
+        this.setTip(this.$store.state.storeStreet.tipSelected)
+        this.currentAmountToAddCustom = this.$store.state.storeStreet.currentAmountToAddCustom/100
     }else if(this.title === 'Mbar'){
 
-      if(this.$store.state.storeCurrentOrderUpdateMbar.timeStamp === null){
-        this.$store.state.storeCurrentOrderUpdateMbar.timeStamp = Date.now()
+      if(this.$store.state.storeMbar.timeStamp === null){
+        this.$store.state.storeMbar.timeStamp = Date.now()
       }
 
-      let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateMbar.timeStamp
+      let cachedTimeStamp = this.$store.state.storeMbar.timeStamp
       let decider = cachedTimeStamp - ffAgo
       if(decider < 0){
           this.emptyCart()
@@ -6933,10 +6933,10 @@ if(this.$store.state.storeCurrentOrderUpdateStreet.timeStamp === null){
         console.log('not empty yet')
       }
 
-        this.currentOrder = this.$store.state.storeCurrentOrderUpdateMbar
+        this.currentOrder = this.$store.state.storeMbar
      
-        this.setTip(this.$store.state.storeCurrentOrderUpdateMbar.tipSelected)
-        this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateMbar.currentAmountToAddCustom/100
+        this.setTip(this.$store.state.storeMbar.tipSelected)
+        this.currentAmountToAddCustom = this.$store.state.storeMbar.currentAmountToAddCustom/100
     }
 
     this.$store.state.orderCMR = {};

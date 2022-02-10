@@ -559,18 +559,18 @@ export default {
     cartItems(){
 
 // if(this.title === "Mamnoon Street"){
-//       return this.$store.state.storeCurrentOrderUpdateStreet.charges.items.length;
+//       return this.$store.state.storeStreet.charges.items.length;
 // }
 
 // if(this.title === "Mamnoon"){
-//       return this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length;
+//       return this.$store.state.storeMamnoon.charges.items.length;
 // }
 
 // if(this.title === "Mbar"){
-//       return this.$store.state.storeCurrentOrderUpdateMbar.charges.items.length;
+//       return this.$store.state.storeMbar.charges.items.length;
 // }
 
-return this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length;
+return this.$store.state.storeMamnoon.charges.items.length;
 
     },
 
@@ -604,7 +604,7 @@ if(this.$route.name === 'home' ||
           showCartDropdown(){
 
 
-            if(this.$store.state.storeCurrentOrderUpdateRetail.charges.items.length > 0 || this.$store.state.storeCurrentOrderUpdateMamnoon.charges.items.length > 0 || this.$store.state.storeCurrentOrderUpdateMbar.charges.items.length > 0 || this.$store.state.storeCurrentOrderUpdateStreet.charges.items.length > 0)  {
+            if(this.$store.state.storeRetail.charges.items.length > 0 || this.$store.state.storeMamnoon.charges.items.length > 0 || this.$store.state.storeMbar.charges.items.length > 0 || this.$store.state.storeStreet.charges.items.length > 0)  {
             return true
               }else{
             return false

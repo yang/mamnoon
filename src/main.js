@@ -326,7 +326,7 @@ const store = new Vuex.Store({
         ],
       },
     },
-    storeCurrentOrderUpdate: {
+    storeOrderUpdate: {
       timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
@@ -404,7 +404,7 @@ const store = new Vuex.Store({
         ],
       },
     },
-    storeCurrentOrderUpdateMamnoon: {
+    storeMamnoon: {
       timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
@@ -482,7 +482,7 @@ const store = new Vuex.Store({
         ],
       },
     },
-    storeCurrentOrderUpdateRetail: {
+    storeRetail: {
       getNow: false,
       schedule: false,
       ship: false,
@@ -564,7 +564,7 @@ const store = new Vuex.Store({
         ],
       },
     },
-    storeCurrentOrderUpdateStreet: {
+    storeStreet: {
       timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
@@ -642,7 +642,7 @@ const store = new Vuex.Store({
         ],
       },
     },
-    storeCurrentOrderUpdateMbar: {
+    storeMbar: {
       timeStamp: null,
       tipSelected: 0,
       currentAmountToAddCustom: 0,
@@ -799,56 +799,56 @@ const store = new Vuex.Store({
         last_name: "",
       };
 
-      state.storeCurrentOrderUpdate.billing = billing;
-      state.storeCurrentOrderUpdate.fulfillment_info.customer = customer;
+      state.storeOrderUpdate.billing = billing;
+      state.storeOrderUpdate.fulfillment_info.customer = customer;
 
-      state.storeCurrentOrderUpdateStreet.billing = billing;
-      state.storeCurrentOrderUpdateStreet.fulfillment_info.customer = customer;
+      state.storeStreet.billing = billing;
+      state.storeStreet.fulfillment_info.customer = customer;
 
-      state.storeCurrentOrderUpdateMamnoon.billing = billing;
-      state.storeCurrentOrderUpdateMamnoon.fulfillment_info.customer = customer;
+      state.storeMamnoon.billing = billing;
+      state.storeMamnoon.fulfillment_info.customer = customer;
 
-      state.storeCurrentOrderUpdateMbar.billing = billing;
-      state.storeCurrentOrderUpdateMbar.fulfillment_info.customer = customer;
+      state.storeMbar.billing = billing;
+      state.storeMbar.fulfillment_info.customer = customer;
 
-      state.storeCurrentOrderUpdateRetail.billing = billing;
-      state.storeCurrentOrderUpdateRetail.fulfillment_info.customer = customer;
+      state.storeRetail.billing = billing;
+      state.storeRetail.fulfillment_info.customer = customer;
     },
     upserveOrderCurrentOrderUpdateMamnoonEmail(
       state,
-      { storeCurrentOrderUpdateMamnoonEmail }
+      { storeMamnoonEmail }
     ) {
-      state.storeCurrentOrderUpdateRetail.fulfillment_info.customer.email = storeCurrentOrderUpdateMamnoonEmail;
+      state.storeRetail.fulfillment_info.customer.email = storeMamnoonEmail;
     },
-    upserveOrderCurrentOrderUpdate(state, { storeCurrentOrderUpdate }) {
-      state.storeCurrentOrderUpdate = storeCurrentOrderUpdate;
+    upserveOrderCurrentOrderUpdate(state, { storeOrderUpdate }) {
+      state.storeOrderUpdate = storeOrderUpdate;
     },
     upserveOrderCurrentOrderUpdateRetail(
       state,
-      { storeCurrentOrderUpdateRetail }
+      { storeRetail }
     ) {
-      state.storeCurrentOrderUpdateRetail = storeCurrentOrderUpdateRetail;
+      state.storeRetail = storeRetail;
     },
     upserveOrderCurrentOrderUpdateStreet(
       state,
-      { storeCurrentOrderUpdateStreet }
+      { storeStreet }
     ) {
-      state.storeCurrentOrderUpdateStreet = storeCurrentOrderUpdateStreet;
+      state.storeStreet = storeStreet;
     },
     upserveOrderCurrentOrderUpdateMamnoon(
       state,
-      { storeCurrentOrderUpdateMamnoon }
+      { storeMamnoon }
     ) {
-      state.storeCurrentOrderUpdateMamnoon = storeCurrentOrderUpdateMamnoon;
+      state.storeMamnoon = storeMamnoon;
     },
     upserveOrderCurrentOrderUpdateMamnoonTesting(
       state,
-      { storeCurrentOrderUpdateMamnoonTesting }
+      { storeMamnoonTesting }
     ) {
-      state.storeCurrentOrderUpdateMamnoonTesting = storeCurrentOrderUpdateMamnoonTesting;
+      state.storeMamnoonTesting = storeMamnoonTesting;
     },
-    upserveOrderCurrentOrderUpdateMbar(state, { storeCurrentOrderUpdateMbar }) {
-      state.storeCurrentOrderUpdateMbar = storeCurrentOrderUpdateMbar;
+    upserveOrderCurrentOrderUpdateMbar(state, { storeMbar }) {
+      state.storeMbar = storeMbar;
     },
     reserveFamilyMeal(state, { timeslot }) {
       state.shoppingCartItems.push({ timeslot: timeslot });

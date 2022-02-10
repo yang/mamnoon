@@ -90,12 +90,12 @@ doAnOrder(currentOrder,approvalData,giftcardbalance) {
 console.log('transasction success')
    if(title === 'Mamnoon'){
 
-              if($store.state.storeCurrentOrderUpdateMamnoon.preorder === true){
-                this.scheduleAnOrder($store.state.storeCurrentOrderUpdateMamnoon,response.data,null);
+              if($store.state.storeMamnoon.preorder === true){
+                this.scheduleAnOrder($store.state.storeMamnoon,response.data,null);
               }
               
-              if($store.state.storeCurrentOrderUpdateMamnoon.preorder === false){
-                this.doAnOrder($store.state.storeCurrentOrderUpdateMamnoon,response.data,null);
+              if($store.state.storeMamnoon.preorder === false){
+                this.doAnOrder($store.state.storeMamnoon,response.data,null);
               }
 
 
@@ -103,12 +103,12 @@ console.log('transasction success')
     }else if(title === 'Mamnoon Street'){
 
 
-              if($store.state.storeCurrentOrderUpdateStreet.preorder === true){
-                this.scheduleAnOrder($store.state.storeCurrentOrderUpdateStreet,response.data,null);
+              if($store.state.storeStreet.preorder === true){
+                this.scheduleAnOrder($store.state.storeStreet,response.data,null);
               }
               
-              if($store.state.storeCurrentOrderUpdateStreet.preorder === false){
-                this.doAnOrder($store.state.storeCurrentOrderUpdateStreet,response.data,null);
+              if($store.state.storeStreet.preorder === false){
+                this.doAnOrder($store.state.storeStreet,response.data,null);
               }
 
 
@@ -116,12 +116,12 @@ console.log('transasction success')
     }else if(title === 'Mbar'){
 
 
-              if($store.state.storeCurrentOrderUpdateMbar.preorder === true){
-                this.scheduleAnOrder($store.state.storeCurrentOrderUpdateMbar,response.data,null);
+              if($store.state.storeMbar.preorder === true){
+                this.scheduleAnOrder($store.state.storeMbar,response.data,null);
               }
               
-              if($store.state.storeCurrentOrderUpdateMbar.preorder === false){
-                this.doAnOrder($store.state.storeCurrentOrderUpdateMbar,response.data,null);
+              if($store.state.storeMbar.preorder === false){
+                this.doAnOrder($store.state.storeMbar,response.data,null);
               }
 
     }

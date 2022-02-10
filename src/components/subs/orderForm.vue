@@ -220,8 +220,8 @@ watch: {
 emailComputed:{
   handler(val){
 
-        let storeCurrentOrderUpdateMamnoonEmail = this.emailComputed;
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonEmail", { storeCurrentOrderUpdateMamnoonEmail });	
+        let storeMamnoonEmail = this.emailComputed;
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonEmail", { storeMamnoonEmail });	
  
 
 
@@ -282,8 +282,8 @@ this.attention = false
     
 },
 mounted(){
-        let storeCurrentOrderUpdateMamnoonEmail = '';
-        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonEmail", { storeCurrentOrderUpdateMamnoonEmail });	
+        let storeMamnoonEmail = '';
+        this.$store.commit("upserveOrderCurrentOrderUpdateMamnoonEmail", { storeMamnoonEmail });	
 }
 }
 

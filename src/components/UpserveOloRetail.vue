@@ -650,7 +650,7 @@ cart empty
 
 
 
-<pre style="display: none;">{{$store.state.storeCurrentOrderUpdateRetail}}</pre>
+<pre style="display: none;">{{$store.state.storeRetail}}</pre>
   </div>
 </template>
 
@@ -724,7 +724,7 @@ export default {
   computed: {	
         cartItems(){
 
-          return this.$store.state.storeCurrentOrderUpdateRetail.charges.items.length;
+          return this.$store.state.storeRetail.charges.items.length;
 
 
     },
@@ -826,8 +826,8 @@ console.log('ffe ' + this.currentOrder.fulfillment_info.customer.email)
 console.log('ue ' + this.user.user.email)
 
 
-let storeCurrentOrderUpdateRetail = this.currentOrder;
-this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
+let storeRetail = this.currentOrder;
+this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeRetail });	
 
 console.log('do this')
 
@@ -938,8 +938,8 @@ curOr.payments.payments[0].amount = curOr.charges.total
 
         this.weightShippingAmount()
 
-        let storeCurrentOrderUpdateRetail = curOr;
-        this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
+        let storeRetail = curOr;
+        this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeRetail });	
 
 
 
@@ -1251,17 +1251,17 @@ showToFixed: function (value) {
       }
 
 
-        let storeCurrentOrderUpdateRetail = this.currentOrder
-        this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeCurrentOrderUpdateRetail });	
+        let storeRetail = this.currentOrder
+        this.$store.commit("upserveOrderCurrentOrderUpdateRetail", { storeRetail });	
 
 
     },
         resetCart(){
-this.currentOrder = this.$store.state.storeCurrentOrderUpdateStreet
+this.currentOrder = this.$store.state.storeStreet
 
-this.currentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
+this.currentOrder = this.$store.state.storeMamnoon
 
-this.currentOrder = this.$store.state.storeCurrentOrderUpdateMbar
+this.currentOrder = this.$store.state.storeMbar
 
 
 
@@ -1656,7 +1656,7 @@ self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInf
         })
         .then(function (response) {
 
-      let balanceCheck = self.$store.state.storeCurrentOrderUpdateRetail.charges.total.toFixed(2)/100
+      let balanceCheck = self.$store.state.storeRetail.charges.total.toFixed(2)/100
 
           
 
@@ -1677,13 +1677,13 @@ self.currentOrder.fulfillment_info.delivery_info.address.address_line2 = userInf
                 self.currentBalance =
                   response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0];
                   
-                if(self.$store.state.storeCurrentOrderUpdateRetail.preorder === true){
-                  self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateRetail,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+                if(self.$store.state.storeRetail.preorder === true){
+                  self.scheduleAnOrder(self.$store.state.storeRetail,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
                 
                 
-               if(self.$store.state.storeCurrentOrderUpdateRetail.preorder === false){
-                  self.doAnOrder(self.$store.state.storeCurrentOrderUpdateRetail,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
+               if(self.$store.state.storeRetail.preorder === false){
+                  self.doAnOrder(self.$store.state.storeRetail,response.data.resSendData,response.data.resSendData.Responses[0].SvUse[0].CurrentBalance[0]);
                 }
         
               })
@@ -1764,12 +1764,12 @@ this.attention = true
 
             
 
-              if(self.$store.state.storeCurrentOrderUpdateRetail.preorder === true){
-                self.scheduleAnOrder(self.$store.state.storeCurrentOrderUpdateRetail,approvalData,null);
+              if(self.$store.state.storeRetail.preorder === true){
+                self.scheduleAnOrder(self.$store.state.storeRetail,approvalData,null);
               }
               
-              if(self.$store.state.storeCurrentOrderUpdateRetail.preorder === false){
-                self.doAnOrder(self.$store.state.storeCurrentOrderUpdateRetail,approvalData,null);
+              if(self.$store.state.storeRetail.preorder === false){
+                self.doAnOrder(self.$store.state.storeRetail,approvalData,null);
               }
           
           },
@@ -1785,7 +1785,7 @@ this.attention = true
     getToken() {
       let self = this;
 
-      console.log(self.$store.state.storeCurrentOrderUpdateRetail);
+      console.log(self.$store.state.storeRetail);
       return new Promise(function (resolve, reject) {
         $.ajax({
           // url: "https://enigmatic-savannah-11908.herokuapp.com/order/start-transaction-retail",
@@ -1794,7 +1794,7 @@ this.attention = true
           type: "POST",
           dataType: "json",
           contentType: "application/json",
-          data: JSON.stringify(self.$store.state.storeCurrentOrderUpdateRetail),
+          data: JSON.stringify(self.$store.state.storeRetail),
         })
           .done(function (data) {
             if (data.transactionToken) resolve(data.transactionToken);
@@ -2439,11 +2439,11 @@ dropDown(){
       let ffAgo = Date.now() - 2700000
       // let ffAgo = Date.now() - 10000
 
-      if(this.$store.state.storeCurrentOrderUpdateRetail.timeStamp === null){
-        this.$store.state.storeCurrentOrderUpdateRetail.timeStamp = Date.now()
+      if(this.$store.state.storeRetail.timeStamp === null){
+        this.$store.state.storeRetail.timeStamp = Date.now()
       }
 
-      let cachedTimeStamp = this.$store.state.storeCurrentOrderUpdateRetail.timeStamp
+      let cachedTimeStamp = this.$store.state.storeRetail.timeStamp
       let decider = cachedTimeStamp - ffAgo
       if(decider < 0){
         console.log('the cached time stamp is more than forty five minutes old, empty the cart.give the cart a new timestamp.')
@@ -2499,9 +2499,9 @@ this.preOrderToggleState = false
 
 
 
-    this.currentOrder = this.$store.state.storeCurrentOrderUpdateRetail
-    // this.setTip(this.$store.state.storeCurrentOrderUpdateRetail.tipSelected)
-    this.currentAmountToAddCustom = this.$store.state.storeCurrentOrderUpdateRetail.currentAmountToAddCustom/100
+    this.currentOrder = this.$store.state.storeRetail
+    // this.setTip(this.$store.state.storeRetail.tipSelected)
+    this.currentAmountToAddCustom = this.$store.state.storeRetail.currentAmountToAddCustom/100
 
 
     // this.$store.state.storeCurrentOrder = {};

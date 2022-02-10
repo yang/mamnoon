@@ -194,12 +194,12 @@ export default {
       reorderFavoriteOrder(order){
           let storeCurrentOrder
           if(order[0].restaurant === 'Mamnoon'){
-              storeCurrentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
+              storeCurrentOrder = this.$store.state.storeMamnoon
 
           }else{
-              storeCurrentOrder = this.$store.state.storeCurrentOrderUpdateMamnoon
+              storeCurrentOrder = this.$store.state.storeMamnoon
           }
-          // storeCurrentOrder.charges.items = order;
+          storeCurrentOrder.charges.items = order;
 
 console.log('order');
           console.log(order);
@@ -208,9 +208,9 @@ console.log('order');
           
           this.$store.commit("reordertrue");
           if(order[0].restaurant === 'Mamnoon'){
-              this.$router.push("/mamnoontesting");
+              this.$router.push("/mamnoon-olo");
               }else{
-              this.$router.push("/mamnoonstreettesting");
+              this.$router.push("/mamnoonstreet-olo");
           }
         },
         reorder(order){
@@ -220,9 +220,9 @@ console.log('order');
           
           this.$store.commit("reordertrue");
           if(order.restaurant === 'Mamnoon'){
-              this.$router.push("/mamnoontesting");
+              this.$router.push("/mamnoonstreet-olo");
               }else{
-              this.$router.push("/mamnoonstreettesting");
+              this.$router.push("/mamnoonstreet-olo");
           }
         },
         formatPrice(value) {
