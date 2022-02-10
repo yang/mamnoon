@@ -71,7 +71,7 @@
 
 
 
-<tr class="w100" v-for="card in savedCards">
+<tr class="w100" v-for="card in savedCards" v-bind:key="card">
   <!-- <td> {{card.approvalData.billingName}} </td> -->
   <td>
 
@@ -103,7 +103,6 @@
 <td>
 <button class="sm-button fl-right hide-mob" @click="removeCreditCard(card._id,card.email)">remove</button>
         &nbsp;&nbsp;&nbsp;
-  
         <button class="sm-button fl-right mr-10" v-if="!card.primary" @click="primaryCreditCard(card._id,card.email)">primary</button>
         <button class="sm-button disabled-b fl-right" v-else disabled style="pointer-events:none;">(primary)</button>
 </td>
@@ -117,18 +116,6 @@
 <button class="mt10 fw mt20 sm-button disabled" style="border:0;padding: 10px 0;" disabled>no saved cards</button>
 </template>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="row" style="display:none;">
      <pre>
       {{user}}

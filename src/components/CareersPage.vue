@@ -79,7 +79,7 @@ export default {
 }
 
 .main-content p {
-  color: white;
+  color: $nadi-white-color;
   text-align: left;
   margin-left: auto;
   margin-right: auto;
@@ -94,7 +94,7 @@ export default {
 }
 
 .main-content h5 {
-  color: white;
+  color: $nadi-white-color;
   text-align: center;
   margin-top: 40px;
   margin-bottom: 40px;
@@ -105,7 +105,7 @@ export default {
 }
 
 .main-content a {
-  color: white;
+  color: $nadi-white-color;
   text-decoration: underline;
 }
 </style>

@@ -24,8 +24,12 @@
       class="position-relative"
     >
       <!-- {{order.orderino}} -->
-    <!-- <template v-if="isToday(order.orderInfo.timeStamp) === true "> -->
-      <template v-if="currentView === order.orderInfo.restaurant || currentView === 'empty'">
+      <!-- <template v-if="isToday(order.orderInfo.timeStamp) === true "> -->
+      <template
+        v-if="
+          currentView === order.orderInfo.restaurant || currentView === 'empty'
+        "
+      >
         {{ isToday(order.orderInfo.timeStamp) }}
 
         <template v-if="hasTransmissionId(order.payInfo)">
@@ -96,8 +100,9 @@
           show/hide full order data
         </button>
 
-        <pre :id="'order-' + order.orderInfo.id" class="hidden">{{ order }}</pre
-        >
+        <pre :id="'order-' + order.orderInfo.id" class="hidden">{{
+          order
+        }}</pre>
         <br />
 
         <br />
@@ -175,12 +180,14 @@ export default {
     },
   },
   methods: {
-    isToday(input){
-    const today = new Date()
-    const date = new Date(input)
-    return date.getDate() === today.getDate() &&
+    isToday(input) {
+      const today = new Date();
+      const date = new Date(input);
+      return (
+        date.getDate() === today.getDate() &&
         date.getMonth() === today.getMonth() &&
-        date.getFullYear() === today.getFullYear();
+        date.getFullYear() === today.getFullYear()
+      );
     },
     hasTransmissionId(order) {
       if (order.TransmissionID !== undefined) {
