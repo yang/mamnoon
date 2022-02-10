@@ -6,7 +6,7 @@
       <div v-if="ffdata" class="container pad ff">
         <div class="row lower-margin" v-if="ffdata">
           <div class="col-md-4 mb20 offset-md-2">
-            <img style="width: 100%;" :src="ffdata.header_image" />
+            <img style="width: 100%;" alt="mamnoon fine foods" :src="ffdata.header_image" />
           </div>
           <div class="col-md-4 mb20 pt20" v-html="ffdata.body_text"></div>
         </div>
@@ -20,6 +20,7 @@
                 <div class="col-l">
                   <img
                     style="width: 100%;"
+                    :alt="item.shop_item.name"
                     :src="item.shop_item.image.sizes.medium_large"
                   />
                 </div>

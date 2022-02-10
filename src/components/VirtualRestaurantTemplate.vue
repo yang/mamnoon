@@ -63,17 +63,10 @@
               <!--begin row-->
               <div class="row">
                 <div class="col-md-6 offset-md-3 col-10 offset-1">
-                  <!--<h3 class="headerNotification">  
-{{item.header_notification}}
-</h3>-->
+
 
                   <div class="header-notification-wrapper">
-                    <!-- <div class="header-notification-image">
-
-<img :src="item.header_notification_group.image" />
-
-
-  </div> -->
+       
 
                     <div class="header-notification-text">
                       {{ item.header_notification_group.text }}<br />
@@ -521,6 +514,7 @@ follow us
                     <div class="row">
                       <div class="col-md-6 col-12">
                         <img
+                            :alt="repeat.image_alt_tag"
                           :src="repeat.image"
                           style="width: 100%;margin: 34px 0;"
                         />
@@ -615,6 +609,7 @@ follow us
                     <div class="row">
                       <div class="col-md-6 col-12">
                         <img
+                          :alt="repeat.image_alt_tag"
                           :src="repeat.image"
                           style="width: 100%;margin: 34px 0;"
                         />
