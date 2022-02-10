@@ -264,7 +264,7 @@ import AllShippingTransactions from "@/components/AllShippingTransactions";
 import PackagesAdmin from "@/components/PackagesAdmin";
 
 import OrderConfirmationModal from "@/components/OrderConfirmationModal"
-import OnlineMenuCarousel from "@/components/OnlineMenuCarousel";
+
 
 import CloseModalRedSm from "@/components/svgIcons/CloseModalRedSm";
 
@@ -292,7 +292,6 @@ export default {
   components: {
     AllShippingTransactions,
     OrderConfirmationModal,
-    OnlineMenuCarousel,
     CloseModal,
     CloseModalRed,
     CloseModalSm,

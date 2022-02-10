@@ -666,7 +666,7 @@ import CloseModalSm from "@/components/svgIcons/CloseModalSm";
 
 
 import OrderConfirmationModal from "@/components/OrderConfirmationModal"
-import OnlineMenuCarousel from "@/components/OnlineMenuCarousel";
+
 
 import CloseModalRedSm from "@/components/svgIcons/CloseModalRedSm";
 
@@ -706,7 +706,7 @@ export default {
     vSelects,
     ErrorMessages,
     OrderConfirmationModal,
-    OnlineMenuCarousel,
+
     CloseModal,
     CloseModalRed,
     CloseModalSm,

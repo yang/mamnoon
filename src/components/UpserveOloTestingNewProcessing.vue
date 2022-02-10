@@ -2173,7 +2173,7 @@ import OrderConfirmationModal from "@/components/OrderConfirmationModal"
 import UnableToProcessModal from "@/components/UnableToProcessModal"
 
 
-import OnlineMenuCarousel from "@/components/OnlineMenuCarousel";
+
 import SavedCard from "@/components/SavedCard";
 import CloseModalRedSm from "@/components/svgIcons/CloseModalRedSm";
 
@@ -2238,7 +2238,6 @@ export default {
     OptionSelectInner,
     CreditSaveForm2,
     OrderConfirmationModal,
-    OnlineMenuCarousel,
     CloseModalSm2,
       CloseModalMed,
     CloseModalRed,
