@@ -433,7 +433,7 @@ form{
 .module-header {
   width: 100%;
   display: block;
-  background: #f05d5b !important;
+  background: $nadi-red-color !important;
   text-align: center;
   color: #fff367;
   padding: 15px;
@@ -613,7 +613,7 @@ ul{
 .module-header{
   width: 100%;
   display: block;
-  background:#F05D5B;
+  background:$nadi-red-color;
   text-align: center;
   color: #fff367;
   padding: 10px;
@@ -714,8 +714,8 @@ tr td{
 .disabled-b{
 
   background: #ffffff;
-  color: #f05d5b;
-  // border: 1px solid #f05d5b;
+  color: $nadi-red-color;
+  // border: 1px solid $nadi-red-color;
 
 
   margin-right: 10px !important;

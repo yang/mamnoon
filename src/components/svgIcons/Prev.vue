@@ -26,7 +26,7 @@ export default{
 
 <style>
 	.st0{fill:#FFFFFF;}
-	.st1{fill:#F05D5B;}
+	.st1{fill:$nadi-red-color;}
 
 
 

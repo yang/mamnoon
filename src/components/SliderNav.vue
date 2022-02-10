@@ -245,7 +245,7 @@ let parent = child.parentNode;
 top: 132px;
 width: 100%;
 background: #ffffff;
-color: #F05D5B;
+color: $nadi-red-color;
 z-index: 99;
 overflow:hidden;
 
@@ -270,7 +270,7 @@ overflow:hidden;
 
 
 a.scrollactive-item.nav-item{
-  color: #F05D5B;
+  color: $nadi-red-color;
   font-size: 14px;
     margin-right: 10px;
   // border-bottom: 1px solid transparent;
@@ -285,7 +285,7 @@ transition: all .25s ease;
    text-transform: lowercase;
 &.is-active{
     // font-weight: 700;
-    border-bottom: 2px solid #F05D5B;
+    border-bottom: 2px solid $nadi-red-color;
 
 }
 
@@ -295,7 +295,7 @@ transition: all .25s ease;
 }
 
 // .swiper-slide-active{
-//   background: #F05D5B;
+//   background: $nadi-red-color;
 
 //      margin-left: 0px;
 //      margin-right: 10px;

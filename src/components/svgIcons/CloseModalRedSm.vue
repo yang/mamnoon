@@ -26,7 +26,7 @@ export default{
 
 .cls-1closeModalRedWhite{fill: #ffffff;}
 
-.cls-1{fill:#F05D5B;}.cls-2{fill:#fff;}
+.cls-1{fill:$nadi-red-color;}.cls-2{fill:#fff;}
 
 
 svg#closemodalredBigRedSm{

@@ -1800,7 +1800,7 @@ cart empty
 </template>
 <template v-if="giftCardPanel ===  true">
 <br>
-<u style="cursor:pointer;color:#f05d5b;" @click="hideGiftcard()">
+<u style="cursor:pointer;color:$nadi-red-color;" @click="hideGiftcard()">
   <span style="color:#f58e58;">  
   use debit/credit instead
   </span>
@@ -4467,7 +4467,7 @@ color: #666666 !important;
 }
 
 .red-text{
-  color: #f05d5b;
+  color: $nadi-red-color;
 }
 .grey-text{
   color: #666666;
@@ -4563,7 +4563,7 @@ a{
   text-decoration: none;  color:#f58e58;
     font-size: .9rem;
  .edit{
-    color: #f05d5b;
+    color: $nadi-red-color;
     // font-size: .9rem;
     color:#f58e58;
 
@@ -4680,7 +4680,7 @@ height: 560px;
     height: 70px;
 
 //       &:hover{
-// background-color: #f05d5b;
+// background-color: $nadi-red-color;
 //       }
 }
 
@@ -4853,7 +4853,7 @@ left: 50%;
 transform: translateX(-50%);
 background: white;
 width: 50%;
-    border: 1px solid #f05d5b;
+    border: 1px solid $nadi-red-color;
 }
 
 @media only screen and (max-width: 992px) {

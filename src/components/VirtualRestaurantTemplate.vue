@@ -1153,7 +1153,7 @@ h4 {
 .is-fullheight,
 .familymeal,
 .narrow {
-  background-color: #f05d5b;
+  background-color: $nadi-red-color;
   h4 {
     color: #fff367;
     font-weight: bold;
@@ -1335,7 +1335,7 @@ button.snipcart-add-item {
 .coverflowsection {
   padding: 0 0 20px 0;
   margin-bottom: 80px;
-  background-color: #f05d5b;
+  background-color: $nadi-red-color;
   overflow: hidden;
   position: relative;
   h4 {
@@ -1497,7 +1497,7 @@ section {
       left: 50%;
       width: 100%;
       font-size: 20px;
-      color: #f05d5b;
+      color: $nadi-red-color;
     }
   }
 }
@@ -1576,12 +1576,12 @@ ul.upserve-cats li {
   text-align: left;
   font-size: 20px;
   font-weight: 400;
-  color: #f05d5b;
+  color: $nadi-red-color;
 }
 
 .intro-paragraph {
   font-size: 14px;
-  color: #f05d5b;
+  color: $nadi-red-color;
 }
 .rollbar {
   position: fixed;

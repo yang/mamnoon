@@ -326,7 +326,7 @@ this.getUserAgent();
     position: fixed;
     width: 100%;
     background: white;
-    color:#F05D5B;
+    color:$nadi-red-color;
     top: 0;
     z-index: 1000;
     padding: 5px;
@@ -950,13 +950,13 @@ margin-bottom: 0;
         height: 40px;
         line-height: 40px;
          a{
-        color: #F05D5B !important;
+        color: $nadi-red-color !important;
         height: 40px;
         line-height: 40px;
         font-size: .8rem;
         font-weight: 400;
         &:hover{
-         color: #F05D5B;
+         color: $nadi-red-color;
          text-decoration: underline;   
         }
     }}

@@ -104,7 +104,7 @@ export default {
 .about {
   h1 {
     // display: inline;
-    color: #f05d5b;
+    color: $nadi-red-color;
     text-align: left;
     margin: 30px 10px 0px auto;
   }
@@ -130,7 +130,7 @@ export default {
 
 .ff {
   h2 {
-    color: #f05d5b;
+    color: $nadi-red-color;
   }
 
   h3 {
@@ -143,7 +143,7 @@ export default {
   }
 
   a {
-    color: #f05d5b;
+    color: $nadi-red-color;
     text-decoration: underline;
   }
 }
@@ -177,19 +177,19 @@ p.list-of-links {
 }
 
 .border-left {
-  border: 4px solid #f05d5b;
+  border: 4px solid $nadi-red-color;
   box-sizing: border-box;
   padding: 0;
   border-right: 0;
 }
 .border-right {
-  border: 4px solid #f05d5b;
+  border: 4px solid $nadi-red-color;
   box-sizing: border-box;
   border-left: 0;
 }
 
 .border-red {
-  border: 5px solid #f05d5b;
+  border: 5px solid $nadi-red-color;
   margin-bottom: 50px;
   display: inline-block;
   .col-l {
@@ -236,7 +236,7 @@ p.list-of-links {
 }
 
 .inblock-red {
-  border: 5px solid #f05d5b;
+  border: 5px solid $nadi-red-color;
   display: inline-block;
   // width: 50%;
   float: left;
@@ -264,7 +264,7 @@ p.list-of-links {
 
 @media only screen and (max-width: 992px) {
   .border-red {
-    border: 4px solid #f05d5b;
+    border: 4px solid $nadi-red-color;
     margin-bottom: 50px;
     .col-l {
       width: 100%;

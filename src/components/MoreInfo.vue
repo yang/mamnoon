@@ -246,7 +246,7 @@ if(item.timing_mask.end_date === moment().tz('America/Los_Angeles').format('YYYY
 top: 132px;
 width: 100%;
 background: #ffffff;
-color: #F05D5B;
+color: $nadi-red-color;
 z-index: 99;
 overflow:hidden;
 
@@ -271,7 +271,7 @@ overflow:hidden;
 
 
 a.scrollactive-item.nav-item{
-  color: #F05D5B;
+  color: $nadi-red-color;
   font-size: 14px;
     margin-right: 10px;
   border-bottom: 2px solid transparent;
@@ -285,11 +285,11 @@ line-height: 30px;
 transition: all .25s ease;
    text-transform: lowercase;
 &.is-active{
-// background: #F05D5B;
+// background: $nadi-red-color;
 // color: white;
 
 
-  border-bottom: 2px solid #F05D5B;
+  border-bottom: 2px solid $nadi-red-color;
 width: max-content;
 // padding: 10px;
     // background: black;
@@ -327,7 +327,7 @@ a{
 }
 
 // .swiper-slide-active{
-//   background: #F05D5B;
+//   background: $nadi-red-color;
 
 //      margin-left: 0px;
 //      margin-right: 10px;

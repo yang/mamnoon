@@ -175,7 +175,7 @@ button:active{
 
 
 h4.text-left.red{
-  color: #f05d5b;
+  color: $nadi-red-color;
   font-weight: 600;
 }
 

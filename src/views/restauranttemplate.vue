@@ -142,7 +142,7 @@ console.log(document);
 }
 
 h1{
- color: #F05D5B;
+ color: $nadi-red-color;
  text-align: center;
  margin: 30px auto;
 }
@@ -166,7 +166,7 @@ h1{
 
 .ff{
   h2{
-color: #F05D5B;
+color: $nadi-red-color;
   }
 
   h3{
@@ -180,7 +180,7 @@ font-weight: bold;
   }
 
   a{
-    color: #F05D5B;
+    color: $nadi-red-color;
     text-decoration: underline;
   }
 }
@@ -226,13 +226,13 @@ a{
 
 
 .border-left{
-border: 4px solid #F05D5B;
+border: 4px solid $nadi-red-color;
 box-sizing: border-box;
 padding: 0;
 border-right: 0;
 }
 .border-right{
-border: 4px solid #F05D5B;
+border: 4px solid $nadi-red-color;
 box-sizing: border-box;
 border-left: 0;
 }
@@ -240,7 +240,7 @@ border-left: 0;
 
 
 .border-red{
-    border: 5px solid #F05D5B;
+    border: 5px solid $nadi-red-color;
     margin-bottom: 50px;
     display: inline-block;
   .col-l {
@@ -271,7 +271,7 @@ div{
 
 
 .inblock-red{
-border: 5px solid #F05D5B;
+border: 5px solid $nadi-red-color;
 display: inline-block;
 // width: 50%;
 float: left;
@@ -313,7 +313,7 @@ background-position: center center;
 
 
 .border-red{
-  border: 4px solid #F05D5B;
+  border: 4px solid $nadi-red-color;
   margin-bottom: 50px;
   .col-l {
 width: 100%;

@@ -80,7 +80,7 @@ export default {};
   transform: translateX(-50%);
 }
 .cls-1delve {
-  fill: #f05d5b;
+  fill: $nadi-red-color;
 }
 .cls-2white {
   fill: #fff;

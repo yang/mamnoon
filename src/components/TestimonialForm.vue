@@ -243,7 +243,7 @@ ul{
 .module-header{
   width: 100%;
   display: block;
-  background:#F05D5B;
+  background:$nadi-red-color;
   text-align: center;
   color: #fff367;
   padding: 10px;

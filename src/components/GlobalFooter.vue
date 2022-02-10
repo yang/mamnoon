@@ -156,7 +156,7 @@ footer ul li{
     position: absolute;
     width: 100%;
     background: white;
-    color:#F05D5B;
+    color:$nadi-red-color;
     top: 0;
     z-index: 1000;
     padding: 5px;

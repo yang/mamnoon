@@ -14,7 +14,7 @@ name: 'nadiicon'
 
 
 <style>
-.cls-3nadiicon2{fill:#fff;fill:#f05d5b;}
+.cls-3nadiicon2{fill:#fff;fill:$nadi-red-color;}
 .cls-1nadiicon2{
     fill: transparent
 }

@@ -757,9 +757,9 @@ input:checked + .slider:before {
   border-radius: 15px;
 
   border: 2px solid transparent;
-  border: 1px solid #f05d5b;
+  border: 1px solid $nadi-red-color;
   &.redBackground {
-    background-color: #f05d5b;
+    background-color: $nadi-red-color;
   }
 
   &:active,
@@ -781,7 +781,7 @@ input:checked + .slider:before {
 }
 
 .bottom-button {
-  // border: 1px solid #f05d5b;
+  // border: 1px solid $nadi-red-color;
 }
 
 .bottom-button a.full-width {
@@ -792,14 +792,14 @@ input:checked + .slider:before {
   width: 100%;
   // background: white;
   min-height: 170px;
-  // border: 1px solid #f05d5b;
+  // border: 1px solid $nadi-red-color;
   margin-top: 0;
   position: relative;
   .description,
   .title,
   .title a,
   a.link {
-    color: #f05d5b;
+    color: $nadi-red-color;
   }
 }
 
@@ -888,7 +888,7 @@ ul.dots li div{
 
 
 .red-header{
-  background-color: #F05D5B;
+  background-color: $nadi-red-color;
   padding: 20px 0 15px;
 }
 
@@ -911,10 +911,10 @@ a.right-button svg {
 
   a{
     text-decoration: none;
-    color: #f05d5b;
+    color: $nadi-red-color;
     &:hover{
           text-decoration: none;
-    color: #f05d5b;
+    color: $nadi-red-color;
     cursor: pointer;
     }
   }
@@ -924,7 +924,7 @@ a.right-button svg {
 .bottom-rectangle{
   font-size:24px;
   font-weight:500;
-  color: #f05d5b;
+  color: $nadi-red-color;
   text-align:center;
   z-index: 100;
   position: absolute;
@@ -946,7 +946,7 @@ a.right-button svg {
 .dialog{
 font-size:24px;
 font-weight:500;
-color: #f05d5b;
+color: $nadi-red-color;
 text-align:center;
 z-index: 100;
 position: absolute;
@@ -1099,7 +1099,7 @@ display: inline;
 &.mamnoonstreetcolors{
    background: #ffffff;
    background: rgb(73, 73, 74);
-   color: #f05d5b;
+   color: $nadi-red-color;
    color: #ffffff;
 }
 
@@ -1125,7 +1125,7 @@ text-align: left;
 &.mamnoonstreetcolors{
    background: #ffffff;
    background: rgb(73, 73, 74);
-   color: #f05d5b;
+   color: $nadi-red-color;
    color: #ffffff;
 }
 
@@ -1200,7 +1200,7 @@ background: #8c8c8c;
     width: 500px;
     color: #FFFFFF;
     height: 500px;
-    background: #F05D5B;
+    background: $nadi-red-color;
     padding-top: 240px;
     left: 50%;
     position: absolute;

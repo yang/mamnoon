@@ -78,7 +78,7 @@ svg{
     line-height: 2;
     font-size: 24px;
     line-height: 1.6;
-    color: #f05d5b;
+    color: $nadi-red-color;
 text-transform: lowercase;
        @media only screen and (max-width: 992px) {
     font-size: 16px;

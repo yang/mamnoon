@@ -19,7 +19,7 @@ export default{
 
 
 <style>
-.cls-1orangeorder{fill:#f05d5b;}.cls-2{fill:#fff;}
+.cls-1orangeorder{fill:$nadi-red-color;}.cls-2{fill:#fff;}
 
 
 svg#order{

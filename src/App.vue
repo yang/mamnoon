@@ -28,12 +28,6 @@ export default {
 
 <style lang="scss">
 
-
-  $nadi-red-color: #f05d5b;
-
-
-
-
 html, body{
     // overflow-x: hidden;
 }
@@ -78,7 +72,7 @@ h4.error{
 .is-fullheight,
 .familymeal,
 .narrow {
-  background-color: #f05d5b;
+  background-color: $nadi-red-color;
   h4 {
     color: #fff367;
   }
@@ -103,7 +97,7 @@ h4.error{
 padding: 2px 9px;
 margin: 0;
 border: 0;
-// background-color: #f05d5b;
+// background-color: $nadi-red-color;
 background-color: #f58e58;
 color: white;
 border-radius: 4px;
@@ -160,18 +154,18 @@ li button {
 
 button {
 
-  border: 1px solid #f05d5b;
+  border: 1px solid $nadi-red-color;
     border: 1px solid #f58e58;
-   background-color: #f05d5b;
+   background-color: $nadi-red-color;
 
   color: #ffffff;
   padding: 5px 10px;
   border-radius: 4px;
-  // border: 2px solid #f05d5b !important;
+  // border: 2px solid $nadi-red-color !important;
   // border: 2px solid #f58e58 !important;
     border: 2px solid transparent;
 
-//border: 2px solid #f05d5b;
+//border: 2px solid $nadi-red-color;
     
 
       &.deactivated{
@@ -180,12 +174,12 @@ button {
 }
 transition: all .5s ease;
 button:hover {
-  // border: 1px solid #f05d5b;
+  // border: 1px solid $nadi-red-color;
   // border: 1px solid #f58e58;
-  background-color: #f05d5b;
+  background-color: $nadi-red-color;
   background-color: #f58e58;
-  background-color: #f05d5b4a;
-  color: #f05d5b;
+  background-color: $nadi-red-color;
+  color: $nadi-red-color;
   padding: 5px 10px;
 }
 
@@ -279,14 +273,14 @@ button.delivery-option {
     width: 49%;
 
     border-radius: 4px;
-    border: 2px solid #f05d5b;
+    border: 2px solid $nadi-red-color;
     background: #fff;
-    color: #f05d5b;
+    color: $nadi-red-color;
     padding-top: 5px;
   &.selected {
-    background: #f05d5b;
+    background: $nadi-red-color;
     color: #ffffff;
-  border: 2px solid #f05d5b;
+  border: 2px solid $nadi-red-color;
     padding-top: 5px;
   }
 }
@@ -295,19 +289,19 @@ button.file {
     width: 49%;
 
     border-radius: 4px;
-    border: 2px solid #f05d5b;
-     border: 2px solid #f05d5b;
+    border: 2px solid $nadi-red-color;
+     border: 2px solid $nadi-red-color;
     background: #fff;
-        background: #f05d5b;
+        background: $nadi-red-color;
         
-    color: #f05d5b;
+    color: $nadi-red-color;
     color: #ffffff;
     padding-top: 5px;
   &.selected {
-    background: #f05d5b;
+    background: $nadi-red-color;
         background: #f58e58;
     color: #ffffff;
-  border: 2px solid #f05d5b;
+  border: 2px solid $nadi-red-color;
    border: 2px solid #f58e58;
     padding-top: 5px;
   }
@@ -323,8 +317,8 @@ button.file {
 
 &:hover{
   //  color: #fff367;
-  background-color: #f05d5b4a;
-  color: #F05D5B;
+  background-color: $nadi-red-color;
+  color: $nadi-red-color;
  border: 2px solid transparent;
 }
 
@@ -486,7 +480,7 @@ form textarea,
 height: 140px;
 transition: all .5s ease;
 &:hover{
-  // background: #f05d5b;
+  // background: $nadi-red-color;
   // color: #ffffff;
 }
 
@@ -498,7 +492,7 @@ transition: all .5s ease;
 }
 
 .online-menu {
-  background-color: #f05d5b;
+  background-color: $nadi-red-color;
   padding: 20px 0 15px;
   padding: 0 !important;
   text-align: center;
@@ -825,12 +819,12 @@ textarea {
   // margin-bottom: 20px;
     margin-bottom: 5px;
     width: calc(33% - 2px);
-    border: 2px solid #f05d5b;
+    border: 2px solid $nadi-red-color;
     border: 2px solid transparent;
     background-color: #ffffff;
     background-color: #f58e58;
-    background-color: #f05d5b;
-    color: #f05d5b;
+    background-color: $nadi-red-color;
+    color: $nadi-red-color;
     color: #f58e58;
     color: #ffffff;
     padding: 5px 10px;
@@ -839,13 +833,13 @@ textarea {
 
 transition: background-color .1s ease;
     &:hover{
-        border: 2px solid #f05d5b4a;
-        border: 2px solid #f05d5b4a;
+        border: 2px solid $nadi-red-color;
+        border: 2px solid $nadi-red-color;
         
 
 
-background-color: #f05d5b4a;
-    color: #F05D5B;
+background-color: $nadi-red-color;
+    color: $nadi-red-color;
 
    border: 2px solid transparent;
     }
@@ -880,12 +874,12 @@ background-color: #f05d5b4a;
     border-left: 1px solid black;
     transition: all .25s ease;
 
-    // border-left: 50px solid #F05D5B;
+    // border-left: 50px solid $nadi-red-color;
     z-index: 100;
         z-index: 1000;
 &.expanded{
       left: 0;
-      // border-left: 0px solid #F05D5B;
+      // border-left: 0px solid $nadi-red-color;
 
 
     .toggle{
@@ -1022,14 +1016,14 @@ input.formatted{
 
 
 &.attention{
-    border: 2px solid #f05d5b;
+    border: 2px solid $nadi-red-color;
 }
 
 }
 
 
 span.attention{
-  color: #f05d5b;
+  color: $nadi-red-color;
 }
 
 
@@ -1045,7 +1039,7 @@ ul.no-left-pad{
 
 
 .small-message{
-    color: #f05d5b;
+    color: $nadi-red-color;
     //color: #f58e58;
     font-size: .9rem;
     font-style: italic;
@@ -1222,7 +1216,7 @@ margin-top: -3px;
 
 
 .removeClose:hover{
-    // background-color: #f05d5b;
+    // background-color: $nadi-red-color;
       padding: 5px 7px;
   svg{
         width: 10px;
@@ -1570,7 +1564,7 @@ input.custom-tip-button{
 
 #upserveolo button.vs__clear{
   
-    background: #F05D5B;
+    background: $nadi-red-color;
     border-radius: 30px;
     padding: 0 1px;
     width: 26px;
@@ -1698,8 +1692,8 @@ cursor: pointer;
    // width: 90%;
     // padding: 10px;  
     box-sizing: border-box;
-    border: 1px solid #f05d5b;
-    background: #f05d5b;
+    border: 1px solid $nadi-red-color;
+    background: $nadi-red-color;
     color: white;
 
 
@@ -1835,7 +1829,7 @@ display: flow-root;
 }
 
 .swal2-header{
-   background-color: #f05d5b !important;
+   background-color: $nadi-red-color !important;
    padding: 10px !important;
         h2{
             color: #fff367 !important;
@@ -1882,7 +1876,7 @@ display: flow-root;
   display: inline-block;
   vertical-align: middle;
   color: #666;
-    color: #F05D5B;
+    color: $nadi-red-color;
   box-sizing: border-box;
   &:after, &:before {
     content: "";
@@ -1978,7 +1972,7 @@ display: flow-root;
   display: inline-block;
   vertical-align: middle;
   color: #666;
-  color: #F05D5B;
+  color: $nadi-red-color;
   box-sizing: border-box;
   &:after, &:before {
     content: "";
@@ -2248,7 +2242,7 @@ display: flow-root;
 
 .redXCircle{
     width: 30px;
-    background:#f05d5b;
+    background:$nadi-red-color;
     border-radius: 15px;
     }
 
@@ -2499,7 +2493,7 @@ font-weight: 500;
 
 .btn-nadi{
   border-radius: 5px;
-  background-color: #F05D5B;
+  background-color: $nadi-red-color;
   color: #FFF;
   box-shadow: none;
   outline: none;

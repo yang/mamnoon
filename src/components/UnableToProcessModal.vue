@@ -105,16 +105,16 @@ li button {
 }
 
 button {
-  border: 1px solid #f05d5b;
-  background-color: #f05d5b;
+  border: 1px solid $nadi-red-color;
+  background-color: $nadi-red-color;
   color: #ffffff;
   padding: 5px 10px;
   border-radius: 4px;
 }
 
 button:hover {
-  border: 1px solid #f05d5b;
-  background-color: #f05d5b;
+  border: 1px solid $nadi-red-color;
+  background-color: $nadi-red-color;
   color: #ffffff;
   padding: 5px 10px;
 }
@@ -199,14 +199,14 @@ button.delivery-option {
     width: 49%;
 
     border-radius: 4px;
-    border: 2px solid #f05d5b;
+    border: 2px solid $nadi-red-color;
     background: #fff;
-    color: #f05d5b;
+    color: $nadi-red-color;
     padding-top: 5px;
   &.selected {
-    background: #f05d5b;
+    background: $nadi-red-color;
     color: #ffffff;
-  border: 2px solid #f05d5b;
+  border: 2px solid $nadi-red-color;
     padding-top: 5px;
   }
 }
@@ -215,14 +215,14 @@ button.filehalf {
     width: 49%;
 
     border-radius: 4px;
-    border: 2px solid #f05d5b;
+    border: 2px solid $nadi-red-color;
     background: #fff;
-    color: #f05d5b;
+    color: $nadi-red-color;
     padding-top: 5px;
   &.selected {
-    background: #f05d5b;
+    background: $nadi-red-color;
     color: #ffffff;
-  border: 2px solid #f05d5b;
+  border: 2px solid $nadi-red-color;
     padding-top: 5px;
   }
 
@@ -374,7 +374,7 @@ form textarea,
 }
 
 .online-menu {
-  background-color: #f05d5b;
+  background-color: $nadi-red-color;
   padding: 20px 0 15px;
   text-align: center;
   position: relative;
@@ -585,16 +585,16 @@ textarea {
   // margin-bottom: 20px;
     margin-bottom: 5px;
     width: calc(33% - 1.8px);
-    border: 2px solid #f05d5b;
+    border: 2px solid $nadi-red-color;
     background-color: #ffffff;
-    color: #f05d5b;
+    color: $nadi-red-color;
     padding: 5px 10px;
     border-radius: 4px;
 
 
 transition: background-color .1s ease;
     &:hover{
-        border: 2px solid #f05d5b;
+        border: 2px solid $nadi-red-color;
     }
 
     &:disabled{
@@ -624,11 +624,11 @@ transition: background-color .1s ease;
     border-left: 1px solid black;
     transition: all .25s ease;
 
-    // border-left: 50px solid #F05D5B;
+    // border-left: 50px solid $nadi-red-color;
     z-index: 100;
 &.expanded{
       left: 0;
-      // border-left: 0px solid #F05D5B;
+      // border-left: 0px solid $nadi-red-color;
 
 
     .toggle{
@@ -729,14 +729,14 @@ input.formatted{
 
 
 &.attention{
-    border: 2px solid #f05d5b;
+    border: 2px solid $nadi-red-color;
 }
 
 }
 
 
 span.attention{
-  color: #f05d5b;
+  color: $nadi-red-color;
 }
 
 
@@ -752,7 +752,7 @@ ul.no-left-pad{
 
 
 .small-message{
-    color: #f05d5b;
+    color: $nadi-red-color;
     color: #f58e58; 
     font-size: .9rem;
     font-style: italic;
@@ -867,7 +867,7 @@ margin-top: -3px;
 
 
 .removeClose:hover{
-    // background-color: #f05d5b;
+    // background-color: $nadi-red-color;
   svg{
 .cls-1closeModalRed {
     fill: #ffffff !important;

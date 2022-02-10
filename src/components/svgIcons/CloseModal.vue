@@ -20,13 +20,13 @@ name: 'CloseModal'
 <style>
 
 .cls-1closeModalRedModal{fill: #ffffff;
-/* fill: #F05D5B; */
+/* fill: $nadi-red-color; */
 }
 
 .cls-1{fill:#ffffff;
-/* fill: #F05D5B; */
+/* fill: $nadi-red-color; */
 }.cls-2{fill:#fff;
-/* fill: #F05D5B; */
+/* fill: $nadi-red-color; */
 }
 
 

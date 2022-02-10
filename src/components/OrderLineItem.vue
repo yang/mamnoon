@@ -28,7 +28,7 @@
                 </template>-->
 
                 <!--<div class="small-message grey" v-for="(mod, i) in order.modifiers">
-                <span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b> <span style="color:#F05D5B;font-weight:500;" v-if="i === 1 && order.modifiers.length>2">(+{{ order.modifiers.length - 2}} more)</span></span>
+                <span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b> <span style="color:$nadi-red-color;font-weight:500;" v-if="i === 1 && order.modifiers.length>2">(+{{ order.modifiers.length - 2}} more)</span></span>
                 </div>-->
                 </div>
                             <div v-if="order.instructions !== ''" class="order-instructions">

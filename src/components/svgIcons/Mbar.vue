@@ -146,7 +146,7 @@ export default {
 
 
 .coming-soon1{
-  color: #f05d5b;
+  color: $nadi-red-color;
     bottom: 4%;
   left: 50%;
   position: absolute;

@@ -241,13 +241,13 @@ margin-bottom: 0;
         height: 40px;
         line-height: 40px;
          a{
-        color: #F05D5B !important;
+        color: $nadi-red-color !important;
         height: 40px;
         line-height: 40px;
         font-size: .8rem;
         font-weight: 400;
         &:hover{
-         color: #F05D5B;
+         color: $nadi-red-color;
          text-decoration: underline;   
         }
     }}
@@ -277,19 +277,19 @@ left: -42px;
       li{
       height: 40px;
       line-height: 40px;
-                  color: #f05d5b;
+                  color: $nadi-red-color;
               font-weight: 400;
               span{
                     font-size: 0.8rem;
               }
         a{
-      color: #F05D5B !important;
+      color: $nadi-red-color !important;
       height: 40px;
       line-height: 40px;
       font-size: .8rem;
       font-weight: 400;
       &:hover{
-        color: #F05D5B;
+        color: $nadi-red-color;
         text-decoration: underline;   
       }
       }}
@@ -316,7 +316,7 @@ margin-bottom: 0;
     li{
         height: 40px;
         line-height: 40px;
-                    color: #f05d5b;
+                    color: $nadi-red-color;
                 font-weight: 400;
 
 
@@ -325,14 +325,14 @@ margin-bottom: 0;
               }
 
          a{
-        color: #F05D5B;
+        color: $nadi-red-color;
         height: 40px;
         line-height: 40px;
-            color: #f05d5b;
+            color: $nadi-red-color;
                 font-weight: 400;
 
         &:hover{
-         color: #F05D5B;
+         color: $nadi-red-color;
          text-decoration: underline;   
         }
     }}

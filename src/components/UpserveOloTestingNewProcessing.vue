@@ -2106,7 +2106,7 @@ cart empty
 </template>
 <template v-if="giftCardPanel ===  true">
 <br>
-<u style="cursor:pointer;color:#f05d5b;" @click="hideGiftcard()">
+<u style="cursor:pointer;color:$nadi-red-color;" @click="hideGiftcard()">
   <span style="color:#f58e58;">  
   use debit/credit instead
   </span>

@@ -241,7 +241,7 @@
 
 
 
-<div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
+<div style="font-style: italic;color: $nadi-red-color;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
 <div style="white-space: pre;overflow:hidden;font-size: 12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" v-html="currentItem.description"></div>
     <div style="overflow:hidden;font-size: 12px;" v-else v-html="currentItem.description"></div>                                   
                      </p>
@@ -468,7 +468,7 @@
                     <b>{{currentItem.name.toLowerCase().replace(" pickup","").replace(" -- to go only", "")}}</b>   <b v-if="currentItem.name !== '4th of July BBQ Package - 7/3 pickup only'" style="float:right;">${{ formatPrice(currentItem.price_cents) }}</b><br>
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
-<div style="font-style: italic;color: #F05D5B;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
+<div style="font-style: italic;color: $nadi-red-color;margin:10px 0 10px;font-size:12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'">please make sure to select July 3 as your pickup date and choose a pickup time between 1 and 9PM</div>
 <div style="white-space: pre;overflow:hidden;font-size: 12px;" v-if="currentItem.name === '4th of July BBQ Package - 7/3 pickup only'" v-html="currentItem.description"></div>
     <div style="overflow:hidden;font-size: 12px;" v-else v-html="currentItem.description"></div>                                   
                      </p>
@@ -1919,7 +1919,7 @@ add
 
 
 <!--<div class="small-message grey" v-for="(mod, i) in order.modifiers">
-<span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b> <span style="color:#F05D5B;font-weight:500;" v-if="i === 1 && order.modifiers.length>2">(+{{ order.modifiers.length - 2}} more)</span></span>
+<span v-if="mod.name !== 'None'">{{mod.name}} <b v-if="mod.price > 0">+${{mod.price | showToFixed}}</b> <span style="color:$nadi-red-color;font-weight:500;" v-if="i === 1 && order.modifiers.length>2">(+{{ order.modifiers.length - 2}} more)</span></span>
 </div>-->
 
 </div>
@@ -2305,7 +2305,7 @@ cart empty
 </template>
 <template v-if="giftCardPanel ===  true">
 <br>
-<u style="cursor:pointer;color:#f05d5b;" @click="hideGiftcard()">
+<u style="cursor:pointer;color:$nadi-red-color;" @click="hideGiftcard()">
   <span style="color:#f58e58;">  
   use debit/credit instead
   </span>
@@ -6205,14 +6205,14 @@ this.currentOrder.scheduled_time = null
 }
 
 .red-checkout-button{
-  background-color: #F05D5B !important;
-  border: 1px solid #F05D5B !important;
+  background-color: $nadi-red-color !important;
+  border: 1px solid $nadi-red-color !important;
 
 
 
   &:hover{
-    background-color: #f05d5b4a !important;
-    color: #F05D5B !important;
+    background-color: $nadi-red-color !important;
+    color: $nadi-red-color !important;
     border: 2px solid transparent !important;
   }
 }
@@ -6239,7 +6239,7 @@ this.currentOrder.scheduled_time = null
 
 
 .topPre{
-  color:#F05D5B;
+  color:$nadi-red-color;
   font-weight: 500;
 }
 
@@ -6268,7 +6268,7 @@ display: inline-block;
   position: absolute;
   top: -10px;
   left: -10px;
-  background-color: #F05D5B;
+  background-color: $nadi-red-color;
   border-radius: 15px;
   padding-top: 2.5px;
   width: 30px;
@@ -6536,7 +6536,7 @@ position: relative;
 }
 
 .red-text{
-  color: #f05d5b;
+  color: $nadi-red-color;
 }
 .grey-text{
   color: #666666;
@@ -6625,7 +6625,7 @@ display:block;
 
 .edit-link{
       //color: #f58e58;
-      color: #f05d5b;
+      color: $nadi-red-color;
       text-decoration: none;
     font-size: .9rem;
     float: right;
@@ -6633,7 +6633,7 @@ a{
   text-decoration: none;  color:#f58e58;
     font-size: .9rem;
  .edit{
-    color: #f05d5b;
+    color: $nadi-red-color;
     // font-size: .9rem;
     color:#f58e58;
 
@@ -6750,7 +6750,7 @@ height: 560px;
     height: 70px;
 
 //       &:hover{
-// background-color: #f05d5b;
+// background-color: $nadi-red-color;
 //       }
 }
 
@@ -6989,7 +6989,7 @@ left: 50%;
 transform: translateX(-50%);
 background: white;
 width: 50%;
-    border: 1px solid #f05d5b;
+    border: 1px solid $nadi-red-color;
 }
 
 @media only screen and (max-width: 992px) {
@@ -7092,7 +7092,7 @@ font-weight: 300;
 }
 
 .red,h4.red{
-      color: #F05D5B;
+      color: $nadi-red-color;
 }
 
 
@@ -7116,11 +7116,11 @@ font-weight: 300;
 
    
     box-sizing: border-box;
-    background-color: #f05d5b4a;
-    color: #F05D5B;
+    background-color: $nadi-red-color;
+    color: $nadi-red-color;
     padding: 5px 10px;
     border-radius: 4px;
-    border: 2px solid #f05d5b00;
+    border: 2px solid $nadi-red-color00;
     font-weight: 600;
 
 
@@ -7128,11 +7128,11 @@ font-weight: 300;
       &.selected{
 
 
-      background-color: #F05D5B;
+      background-color: $nadi-red-color;
       color: #ffffff;
       padding: 5px 10px;
       border-radius: 4px;
-      border: 2px solid #F05D5B;
+      border: 2px solid $nadi-red-color;
 
 
 

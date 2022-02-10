@@ -86,8 +86,8 @@ export default{
 
 
 <style>
-.cls-1{fill:#f05d5b;}.cls-2{fill:#fff;}
-	.st0addtocart{fill:#F05D5B;}
+.cls-1{fill:$nadi-red-color;}.cls-2{fill:#fff;}
+	.st0addtocart{fill:$nadi-red-color;}
 	.st1addtocart{fill:#FFFFFF;}
 
 

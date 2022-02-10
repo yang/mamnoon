@@ -54,7 +54,7 @@ export default {
         .catch(error => {
           console.log(error)
           this.subscribeText = 'error!'
-         this.starState = '#F05D5B'
+         this.starState = '$nadi-red-color'
           setTimeout(() => {
             this.subscribeText = 'send'
             this.starState = '#f58e58'
@@ -82,7 +82,7 @@ export default {
         .catch(error => {
           console.log(error)
           this.subscribeText = 'error!'
-          this.starState = '#F05D5B'
+          this.starState = '$nadi-red-color'
           setTimeout(() => {
             this.subscribeText = 'send'
              this.starState = '#f58e58'

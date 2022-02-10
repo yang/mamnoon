@@ -43,7 +43,7 @@ export default {
 }
 
 h1{
- color: #F05D5B;
+ color: $nadi-red-color;
  text-align: center;
  margin: 30px auto;
 }
@@ -67,7 +67,7 @@ h1{
 
 .ff{
   h2{
-color: #F05D5B;
+color: $nadi-red-color;
   }
 
   h3{
@@ -81,7 +81,7 @@ font-weight: bold;
   }
 
   a{
-    color: #F05D5B;
+    color: $nadi-red-color;
     text-decoration: underline;
   }
 }
@@ -115,7 +115,7 @@ font-weight: bold;
 }
 
 .ff a {
-    color: #F05D5B;
+    color: $nadi-red-color;
     text-decoration: underline;
     // display: block;
     text-decoration: none;

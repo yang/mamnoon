@@ -1777,7 +1777,7 @@ float: left;
 button.selected{
  
    background: transparent !important;
-    border: 2px solid #f05d5b !important;
+    border: 2px solid $nadi-red-color !important;
     box-sizing: border-box;
     color: #f05d5d !important;
 
@@ -1821,7 +1821,7 @@ width: 100%;
 
 position: relative;
 .content {
-  background: #f05d5b;
+  background: $nadi-red-color;
   position: absolute;
   width: 100%;
   height: 100%;

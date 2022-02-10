@@ -26,7 +26,7 @@ export default{
 }
 
 
-.cls-1orangeorder45{fill:#fff;}.cls-245{fill:#f05d5b;}
+.cls-1orangeorder45{fill:#fff;}.cls-245{fill:$nadi-red-color;}
 svg#orderHeight{
     /* width: 100px;
     height: 40px;
