@@ -20,7 +20,6 @@
 </template>
 
 <script type="text/javascript">
-import EmailForm from "@/components/EmailForm";
 import UserForm from "@/components/UserForm";
 import TestimonialForm from "@/components/TestimonialForm";
 
@@ -36,7 +35,6 @@ export default {
 name: 'UserProfile',
   components: {
     TestimonialForm,
-    EmailForm,
     UserForm,
     GiftCardModule,
     OrderHistory,

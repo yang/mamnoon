@@ -123,7 +123,7 @@
 <script>
 
 import VueJwtDecode from "vue-jwt-decode";
-import SlideShow from "@/components/SlideShow";
+
 import UserProfile from "@/components/UserProfile";
 import Products from "@/components/Products";
 import Nav3 from "@/components/Nav3";
@@ -138,7 +138,7 @@ import StarsLeft from "@/components/StarsLeft";
 
 export default {
     components: {
-    SlideShow,
+    
     Products,
     UserProfile,
     Nav3,

@@ -1,51 +1,30 @@
 <template v-if="renderComponent">
   <div id="upserveolo" class="shopRetail" :key="componentKey">
-
-
 <section>
 <PackagesAdmin />
-
-
-
   </section>
-
-
 <section>
-
-
      <AllShippingTransactions />
-
 </section>
-
-
     <section>
-
-
       <div class="container pt20">
-
        <div class="row">
           <div class="col-md-12 col-lg-12">
 <button @click="importNewItems()">
   import new items
 </button>
 <br><br>
-
           </div>
           </div>
         <div class="row">
           <div class="col-md-12 col-lg-12">
-     
-
-
-   <template v-if="1 === 0">
+        <template v-if="1 === 0">
      <div class="container text-center pt20">
        Loading...
      </div>
      </template>
          <template v-else>
-   
-
-</template>
+  </template>
 <div class="container online-menu">
 <h4>items</h4>
 </div>

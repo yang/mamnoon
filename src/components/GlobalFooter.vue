@@ -11,18 +11,9 @@
 <div class="beta">
     this site is in beta. feedback? <a href="https://forms.gle/9d5kmR6PzZwmgUV78" target="_blank"><u>submit here</u></a>!
 </div>
-
 <div class="container">
-
-
 <div class="row">
-
-
-
 <div class="col-md-5 col-12">
-
-
-
 <h4>{{$store.state.footer.newsletter.header}}
 </h4>
 <p>  

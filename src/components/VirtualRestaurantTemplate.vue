@@ -725,7 +725,7 @@ follow us
 </template>
 
 <script type="text/javascript">
-import ALaCarte from "@/components/ALaCarte";
+
 import Nav3 from "@/components/Nav3";
 
 import Phone from "@/components/svgIcons/Phone";
@@ -748,7 +748,7 @@ import tz from "moment-timezone";
 
 export default {
   components: {
-    ALaCarte,
+
     Nav3,
     Phone,
     Clock,
