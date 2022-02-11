@@ -2709,7 +2709,7 @@ if(itemsToRemove.length === 1){
         //   });
 
     this.$swal({ 
-           title: removalItems + ' is not available at the selected pick-up time. please select another time between ' + formatNonMilitary(value.timing_mask.start_time) + ' and ' + formatNonMilitary(value.timing_mask.end_time)
+           title: removalItems + ' is not available at the selected pick-up time. please select another time between ' + value.timing_mask.start_time + ' and ' + value.timing_mask.end_time
           });
 
 this.selectedTime = null
@@ -2718,7 +2718,7 @@ this.selectedTime = null
 }else if(itemsToRemove.length>1){
 
         this.$swal({ 
-           title: removalItems + ' are not available at the selected pick-up time. please select another time between ' + formatNonMilitary(value.timing_mask.start_time) + ' and ' + formatNonMilitary(value.timing_mask.end_time)
+           title: removalItems + ' are not available at the selected pick-up time. please select another time between ' + value.timing_mask.start_time + ' and ' + value.timing_mask.end_time
           });
 
 this.selectedTime = null
@@ -3336,9 +3336,9 @@ tipReturn(amount){
 
 
 },
-formatNonMilitary(time){
-return moment(time).format('HH:mm');
-},
+// formatNonMilitary(time){
+// return moment(time).format('HH:mm');
+// },
 returnAsMappedTimeSlots(timeslots){
 return timeslots.map(function(tx) {  return tx.time })
 
