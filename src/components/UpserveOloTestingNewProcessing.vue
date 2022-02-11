@@ -204,7 +204,7 @@
 
 
 
-    <div style="overflow:hidden;font-size: 12px;white-space: pre;" v-html="currentItem.description"></div>                                   
+    <div style="overflow:hidden;font-size: 12px;" v-html="currentItem.description"></div>                                   
                      </p>
                     <hr />
           <template v-if="currentItem.modifier_group_ids">
@@ -413,7 +413,7 @@
                      <!-- </template> -->
                      <!-- {{currentItem.description}} -->
 
-    <div style="overflow:hidden;font-size: 12px;white-space: pre;" v-html="currentItem.description"></div>                                   
+    <div style="overflow:hidden;font-size: 12px;" v-html="currentItem.description"></div>                                   
                      </p>
                     <hr />
           <template v-if="currentItem.modifier_group_ids">
