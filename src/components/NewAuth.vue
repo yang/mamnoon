@@ -1,55 +1,50 @@
 <template>
   <div class="">
-      <!-- v-if="!isSignIn" -->
-<a class="hide-on-desktop"
-  v-if="!authAuthenticated ">
-  <span @click="login">sign in</span>
-</a>
-<a class="hide-on-desktop"
-  v-if="authAuthenticated"
-@click="logout"
-:disabled="!isInit">
-  sign out of {{authEmail.user.email.replace('@gmail.com','')}}
-</a>
+    <!-- v-if="!isSignIn" -->
+    <a class="hide-on-desktop" v-if="!authAuthenticated">
+      <span @click="login">sign in</span>
+    </a>
+    <a
+      class="hide-on-desktop"
+      v-if="authAuthenticated"
+      @click="logout"
+      :disabled="!isInit"
+    >
+      sign out of {{ authEmail.user.email.replace("@gmail.com", "") }}
+    </a>
 
-    <div class="navbar-end" style="display:none;position: fixed;width:200px;height:92px;top:40px;right: 0; text-align: center;z-index:10000;background: #f58e58;color: white;">
+    <div
+      class="navbar-end"
+      style="display:none;position: fixed;width:200px;height:92px;top:40px;right: 0; text-align: center;z-index:10000;background: #f58e58;color: white;"
+    >
       <div class="navbar-item">
         <div class="buttons">
-
-
           <!-- Check that the SDK client is not currently loading before accessing is methods -->
           <div v-if="!$auth.loading">
             <!-- show login when not authenticated -->
-            <a v-if="!authAuthenticated" @click="login" class="button is-dark"><strong>sign in</strong></a>
+            <a v-if="!authAuthenticated" @click="login" class="button is-dark"
+              ><strong>sign in</strong></a
+            >
             <!-- show logout when authenticated -->
-            <a v-if="authAuthenticated" @click="logout" class="button is-dark"><strong>
-                
-                
-                     {{authEmail.user.email}}
-                </strong></a>
-
-
+            <a v-if="authAuthenticated" @click="logout" class="button is-dark"
+              ><strong>
+                {{ authEmail.user.email }}
+              </strong></a
+            >
           </div>
         </div>
       </div>
     </div>
 
-
-    
-
     <a
-    class="hide-on-mobile"
+      class="hide-on-mobile"
       type="primary"
       icon="fas fa-edit"
       @click="login"
       :disabled="!isInit"
-       v-if="!authAuthenticated"
+      v-if="!authAuthenticated"
     >
       sign in
-
-  
-
-
     </a>
     <a
       class="hide-on-mobile"
@@ -59,29 +54,25 @@
       v-if="authAuthenticated"
       :disabled="!isInit"
     >
-
-
-    <div class="character-icon">
-      {{authEmail.user.email.charAt(0).toUpperCase()}}
-    </div>
-    <div class="dropdown" v-if="dropdown">
-      <ul>
-      <li>
-        <router-link to="/profile">
-            profile
-        </router-link>
-      </li>
-      <li>
-        <span @click="logout">
-          sign out
-        </span>
-      </li>
-</ul>
-</div>
+      <div class="character-icon">
+        {{ authEmail.user.email.charAt(0).toUpperCase() }}
+      </div>
+      <div class="dropdown" v-if="dropdown">
+        <ul>
+          <li>
+            <router-link to="/profile">
+              profile
+            </router-link>
+          </li>
+          <li>
+            <span @click="logout">
+              sign out
+            </span>
+          </li>
+        </ul>
+      </div>
     </a>
-<!--desktop-->
-
-
+    <!--desktop-->
   </div>
 </template>
 
@@ -89,33 +80,30 @@
 /* eslint-disable */
 export default {
   name: "GoogleAuth",
-  props: ['authEmail','authAuthenticated'],
+  props: ["authEmail", "authAuthenticated"],
   data() {
     return {
       isInit: false,
       isSignIn: false,
-      dropdown: false
+      dropdown: false,
     };
   },
   methods: {
-      // Log the user in
+    // Log the user in
     login() {
-    this.$auth.loginWithRedirect();
-           this.$store.commit("logIn");
-  },
-  // Log the user out
-  logout() {
-    this.$auth.logout({
-      returnTo: 'https://nadimama.com'
-    });
+      this.$auth.loginWithRedirect();
+      this.$store.commit("logIn");
+    },
+    // Log the user out
+    logout() {
+      this.$auth.logout({
+        returnTo: "https://nadimama.com",
+      });
 
-
-         this.$store.commit("logOut");
-  },
-    toggleDropdown2(){
-
-        this.dropdown = !this.dropdown
-
+      this.$store.commit("logOut");
+    },
+    toggleDropdown2() {
+      this.dropdown = !this.dropdown;
     },
     handleClickLogin() {
       this.$gAuth
@@ -133,7 +121,7 @@ export default {
       let self = this;
       this.$http
         .get("/api/user/email/" + email)
-        .then(function (response) {
+        .then(function(response) {
           //  console.log(response)
 
           ////
@@ -144,7 +132,7 @@ export default {
           console.log(currentUserInfo);
           self.$store.commit("updateCurrentUser", { currentUserInfo });
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
     },
@@ -167,7 +155,7 @@ export default {
           // console.log(profile)
           // console.log(currentUserEmail)
           this.$store.commit("setCurrentUserEmail", { currentUserEmail });
-          location.reload()
+          location.reload();
         })
         .catch((error) => {
           //on fail do something
@@ -177,9 +165,8 @@ export default {
     handleClickSignOut() {
       localStorage.clear();
 
-
-console.log(this.$store.state)
-this.$store.commit("removeUserInfo");
+      console.log(this.$store.state);
+      this.$store.commit("removeUserInfo");
       this.$store.commit("logOut");
       this.$gAuth
         .signOut()
@@ -210,7 +197,7 @@ this.$store.commit("removeUserInfo");
 
   created() {
     let that = this;
-    let checkGauthLoad = setInterval(function () {
+    let checkGauthLoad = setInterval(function() {
       that.isInit = that.$gAuth.isInit;
       that.isSignIn = that.$gAuth.isAuthorized;
       if (that.isInit) clearInterval(checkGauthLoad);
@@ -220,148 +207,54 @@ this.$store.commit("removeUserInfo");
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 h3 {
   margin: 40px 0 0;
 }
 
-
-.character-icon{
-    text-align: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background: white;
-    color: black;
-    margin-top: 22px;
-    line-height: 52px;
+.character-icon {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background: white;
+  color: black;
+  margin-top: 22px;
+  line-height: 52px;
 }
 
+.dropdown {
+  background: #fff;
+  position: absolute;
+  width: 190px;
+  top: 92px;
+  left: 0px;
+  left: -42px;
 
-.dropdown{
-    background: #fff;
-    position: absolute;
-    width: 190px;
-    top: 92px;
-    left: 0px;
-    left: -42px;
-
-
-
-ul{
-list-style-type: none;
+  ul {
+    list-style-type: none;
     padding: 10px 25px;
-margin-bottom: 0;
+    margin-bottom: 0;
 
-    li{
-        height: 40px;
-        line-height: 40px;
-         a{
+    li {
+      height: 40px;
+      line-height: 40px;
+      a {
         color: $nadi-red-color !important;
         height: 40px;
         line-height: 40px;
-        font-size: .8rem;
+        font-size: 0.8rem;
         font-weight: 400;
-        &:hover{
-         color: $nadi-red-color;
-         text-decoration: underline;   
+        &:hover {
+          color: $nadi-red-color;
+          text-decoration: underline;
         }
-    }}
+      }
+    }
+  }
 }
-
-
-}
-
 </style>
 
-
-
 <style lang="scss">
-      .dropdown{
-      background: #fff;
-      position: absolute;
-      width: 190px;
-      top: 92px;
-      left: 0px;
-      left: -42px;
-
-
-      ul{
-      list-style-type: none;
-      padding: 10px 25px;
-      margin-bottom: 0;
-
-      li{
-      height: 40px;
-      line-height: 40px;
-                  color: $nadi-red-color;
-              font-weight: 400;
-              span{
-                    font-size: 0.8rem;
-              }
-        a{
-      color: $nadi-red-color !important;
-      height: 40px;
-      line-height: 40px;
-      font-size: .8rem;
-      font-weight: 400;
-      &:hover{
-        color: $nadi-red-color;
-        text-decoration: underline;   
-      }
-      }}
-      }
-      }
-
-@media only screen and (max-width: 992px) {
-
-
-
-.dropdown{
-    background: #fff;
-    position: fixed;
-    width: 100%;
-    top: 92px;
-    left: 0px;
-    left: -42px;
-
-
-ul{
-list-style-type: none;
-    padding: 10px 25px;
-margin-bottom: 0;
-
-    li{
-        height: 40px;
-        line-height: 40px;
-                    color: $nadi-red-color;
-                font-weight: 400;
-
-
-        span{
-                    font-size: 0.8rem;
-              }
-
-         a{
-        color: $nadi-red-color;
-        height: 40px;
-        line-height: 40px;
-            color: $nadi-red-color;
-                font-weight: 400;
-
-        &:hover{
-         color: $nadi-red-color;
-         text-decoration: underline;   
-        }
-    }}
-}
-}
-
-
-}
-
-
-
-
-
+  @import '@/assets/styles/css/newauth.scss';
 </style>

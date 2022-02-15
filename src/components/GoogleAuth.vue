@@ -205,7 +205,7 @@ this.$store.commit("removeUserInfo");
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang='scss'>
 h3 {
   margin: 40px 0 0;
 }
@@ -261,89 +261,5 @@ margin-bottom: 0;
 
 
 <style lang="scss">
-      .dropdown{
-      background: #fff;
-      position: absolute;
-      width: 190px;
-      top: 92px;
-      left: 0px;
-left: -42px;
-
-      ul{
-      list-style-type: none;
-      padding: 10px 25px;
-      margin-bottom: 0;
-
-      li{
-      height: 40px;
-      line-height: 40px;
-                  color: $nadi-red-color;
-              font-weight: 400;
-              span{
-                    font-size: 0.8rem;
-              }
-        a{
-      color: $nadi-red-color !important;
-      height: 40px;
-      line-height: 40px;
-      font-size: .8rem;
-      font-weight: 400;
-      &:hover{
-        color: $nadi-red-color;
-        text-decoration: underline;   
-      }
-      }}
-      }
-      }
-
-@media only screen and (max-width: 992px) {
-
-
-
-.dropdown{
-    background: #fff;
-    position: fixed;
-    width: 100%;
-    top: 92px;
-    left: 0px;
-left: -42px;
-
-ul{
-list-style-type: none;
-    padding: 10px 25px;
-margin-bottom: 0;
-
-    li{
-        height: 40px;
-        line-height: 40px;
-                    color: $nadi-red-color;
-                font-weight: 400;
-
-
-        span{
-                    font-size: 0.8rem;
-              }
-
-         a{
-        color: $nadi-red-color;
-        height: 40px;
-        line-height: 40px;
-            color: $nadi-red-color;
-                font-weight: 400;
-
-        &:hover{
-         color: $nadi-red-color;
-         text-decoration: underline;   
-        }
-    }}
-}
-}
-
-
-}
-
-
-
-
-
+  @import '@/assets/styles/css/googleauth.scss';
 </style>

@@ -1,223 +1,207 @@
 <template>
   <div class="nadi">
-  <Nav3 />
-
-
-
-
-<div class="announcementBar" v-if="getTimeStamp(notificationHeader.expiration) &&notificationVisible && notificationHeader.visible">
-
-
-<div class="dismissNotification" @click="dismissNotification">
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="6.36426" width="35" height="9" transform="rotate(45 6.36426 0)" fill="white"/>
-<rect x="31.1128" y="6.36401" width="35" height="9" transform="rotate(135 31.1128 6.36401)" fill="white"/>
-</svg>
-</div>
-
-
-
-
-
-
-
-<div class="container">
-<div class="row">
-<div class="col-md-4 col-10">
-<div class="blockHeader"> 
-
-
-{{notificationHeader.header}}
-
-</div>
-
-<a :href="notificationHeader.cta_url" target="_blank" class="blockButton">
-{{notificationHeader.cta_text}}</a>
-</div>
-<div class="hideOnMob col-md-4 offset-md-4">
-
-
-
-<img class="anouncement-image" :src="notificationHeader.image">
-
-</div>
-</div></div>
-</div>
-
-
-
-
-
-                               <section class="topSection fh" v-bind:style="{ 'text-align':'center', 'background-image': 'url(' + 'http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg' + ')',
- 'background-position': 'center', 'position': 'relative', 'height': '100vh', 'background-size': 'cover'}">
-                        <!--<div class="container mobilePage pt132">-->
-  
-
-
-
-<div class="bottomAttach header black secPadMedAlt">
-<img src="http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg" class="responsiveBannerImage">
-                      <div class="container" style="position: relative;">
-
-                                            <div class="row text-center">
-
-                                            <div class="col-12 offset-0">
-                                                <h1 class="subpage-header white-text mt0 text-left">
-                                                    welcome to nadi mama: the online home for the mama family of restaurants.
-                                                    </h1>
-
-
-                                                    
-                                                </div>
-                                            </div>
-
-                                    <div class="row text-center" >
-                                        <div class="logosInline">
-      <div class="displayInline">
-                                            <router-link :to="'mamnoon'"> <MamnoonLogo :height="70" :marginLeft="0" :marginRight="20" :fill="'white'" />     </router-link>     
-                                              </div>
-                                                  <div class="displayInline">
-                                            <router-link :to="'mbar'"><MbarLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
-                                              </div>      <div class="displayInline">
-                                            <router-link :to="'mamnoonstreet'"><StreetLogo :height="70" :marginLeft="20" :marginRight="20" :fill="'white'" /> </router-link>
-                                                </div>
-                                             <div class="displayInline">
-                                            <router-link :to="'anar'"><AnarLogo :height="70" :marginLeft="20" :marginRight="0" :fill="'white'" />
-                                            </router-link>
-                                            </div>
-                                        </div>
-                           
-
-                                    </div>
-       <div @click="scrollDown">
-                                    <DownArrow />
-                                  </div>  
-                                </div>
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-                      <!--<br>-->
-                       <!-- </div>-->
-                      </section>
-
-
-
-
-
-
-
-
-
-
-
-<!--sub module loop-->
-<!--sub module loop-->
-<!--sub module loop-->
-<!--sub module loop-->
-<!--sub module loop-->
-
-
-<template v-for="mod in subModules">
-
-
-
-
-         <section v-if="getTimeStamp(mod.date_range_end)" class="topSection fh moduleStyling" v-bind:style="{ 'text-align':'center', 'background-color': `${mod.background_color}`, 'background-image': 'url(' + mod.background_image + ')'}" :class="`background-${mod.image_style}`">
-
-
-
-<img class="mobileImage" :src="mod.background_image">
-
-
-<img class="imageStyleCentered" v-if="mod.image_style === 'centered'" :src="mod.background_image">
-
-
-
-
-
-
-<div class="bottomAttach black sub secPadMedAlt">
-<div class="container">
-
-<div class="row text-center">
-
-</div>
-<div class="block">
-<div class="blockHeader">
-{{mod.header}}
-
-
-
-
-</div>
-<div class="blockDescription">
-{{mod.subheader}}
-</div>
-
-
-
-<template v-for="(button, index) in mod.button_repeater">
-<a class="blockButton" :class="{firstChild: index === 0 }"  :href="button.cta_url" target="_blank">{{button.cta_text}}</a>
-</template>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-         </section>
-
-
-  </template>
-
-
-
-
-
-
-
-
-<!--sub module loop-->
-<!--sub module loop-->
-<!--sub module loop-->
-<!--sub module loop-->
-<!--sub module loop-->
-
-
-
-
-
-
-
-
-<GlobalFooter />
-  <!-- {{$store.state.currentUserEmail}} -->
+    <Nav3 />
+
+    <div
+      class="announcementBar"
+      v-if="
+        getTimeStamp(notificationHeader.expiration) &&
+          notificationVisible &&
+          notificationHeader.visible
+      "
+    >
+      <div class="dismissNotification" @click="dismissNotification">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            x="6.36426"
+            width="35"
+            height="9"
+            transform="rotate(45 6.36426 0)"
+            fill="white"
+          />
+          <rect
+            x="31.1128"
+            y="6.36401"
+            width="35"
+            height="9"
+            transform="rotate(135 31.1128 6.36401)"
+            fill="white"
+          />
+        </svg>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-10">
+            <div class="blockHeader">
+              {{ notificationHeader.header }}
+            </div>
+
+            <a
+              :href="notificationHeader.cta_url"
+              target="_blank"
+              class="blockButton"
+            >
+              {{ notificationHeader.cta_text }}</a
+            >
+          </div>
+          <div class="hideOnMob col-md-4 offset-md-4">
+            <img class="anouncement-image" :src="notificationHeader.image" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section
+      class="topSection fh"
+      v-bind:style="{
+        'text-align': 'center',
+        'background-image':
+          'url(' +
+          'http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg' +
+          ')',
+        'background-position': 'center',
+        position: 'relative',
+        height: '100vh',
+        'background-size': 'cover',
+      }"
+    >
+      <!--<div class="container mobilePage pt132">-->
+
+      <div class="bottomAttach header black secPadMedAlt">
+        <img
+          src="http://mamnoontogo.net/wp-content/uploads/2021/11/MStreet-Environment-9131-scaled.jpg"
+          class="responsiveBannerImage"
+        />
+        <div class="container" style="position: relative;">
+          <div class="row text-center">
+            <div class="col-12 offset-0">
+              <h1 class="subpage-header white-text mt0 text-left">
+                welcome to nadi mama: the online home for the mama family of
+                restaurants.
+              </h1>
+            </div>
+          </div>
+
+          <div class="row text-center">
+            <div class="logosInline">
+              <div class="displayInline">
+                <router-link :to="'mamnoon'">
+                  <MamnoonLogo
+                    :height="70"
+                    :marginLeft="0"
+                    :marginRight="20"
+                    :fill="'white'"
+                  />
+                </router-link>
+              </div>
+              <div class="displayInline">
+                <router-link :to="'mbar'"
+                  ><MbarLogo
+                    :height="70"
+                    :marginLeft="20"
+                    :marginRight="20"
+                    :fill="'white'"
+                  />
+                </router-link>
+              </div>
+              <div class="displayInline">
+                <router-link :to="'mamnoonstreet'"
+                  ><StreetLogo
+                    :height="70"
+                    :marginLeft="20"
+                    :marginRight="20"
+                    :fill="'white'"
+                  />
+                </router-link>
+              </div>
+              <div class="displayInline">
+                <router-link :to="'anar'"
+                  ><AnarLogo
+                    :height="70"
+                    :marginLeft="20"
+                    :marginRight="0"
+                    :fill="'white'"
+                  />
+                </router-link>
+              </div>
+            </div>
+          </div>
+          <div @click="scrollDown">
+            <DownArrow />
+          </div>
+        </div>
+      </div>
+
+      <!--<br>-->
+      <!-- </div>-->
+    </section>
+
+    <!--sub module loop-->
+    <!--sub module loop-->
+    <!--sub module loop-->
+    <!--sub module loop-->
+    <!--sub module loop-->
+
+    <template v-for="mod in subModules">
+      <section
+        v-if="getTimeStamp(mod.date_range_end)"
+        class="topSection fh moduleStyling"
+        v-bind:style="{
+          'text-align': 'center',
+          'background-color': `${mod.background_color}`,
+          'background-image': 'url(' + mod.background_image + ')',
+        }"
+        :class="`background-${mod.image_style}`"
+      >
+        <img class="mobileImage" :src="mod.background_image" />
+
+        <img
+          class="imageStyleCentered"
+          v-if="mod.image_style === 'centered'"
+          :src="mod.background_image"
+        />
+
+        <div class="bottomAttach black sub secPadMedAlt">
+          <div class="container">
+            <div class="row text-center"></div>
+            <div class="block">
+              <div class="blockHeader">
+                {{ mod.header }}
+              </div>
+              <div class="blockDescription">
+                {{ mod.subheader }}
+              </div>
+
+              <template v-for="(button, index) in mod.button_repeater">
+                <a
+                  class="blockButton"
+                  :class="{ firstChild: index === 0 }"
+                  :href="button.cta_url"
+                  target="_blank"
+                  >{{ button.cta_text }}</a
+                >
+              </template>
+            </div>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <!--sub module loop-->
+    <!--sub module loop-->
+    <!--sub module loop-->
+    <!--sub module loop-->
+    <!--sub module loop-->
+
+    <GlobalFooter />
+    <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>
 <script>
@@ -225,49 +209,48 @@ import Nav3 from "@/components/Nav3";
 
 import VideoComponent2 from "@/components/VideoComponent2";
 
+import MbarLogo from "@/components/svgIcons/MbarLogo";
+import AnarLogo from "@/components/svgIcons/AnarLogo";
+import StreetLogo from "@/components/svgIcons/StreetLogo";
+import MamnoonLogo from "@/components/svgIcons/MamnoonLogo";
+import DownArrow from "@/components/svgIcons/DownArrow";
 
-import MbarLogo from "@/components/svgIcons/MbarLogo"
-import AnarLogo from "@/components/svgIcons/AnarLogo"
-import StreetLogo from "@/components/svgIcons/StreetLogo"
-import MamnoonLogo from "@/components/svgIcons/MamnoonLogo"
-import DownArrow from "@/components/svgIcons/DownArrow"
-
-import GlobalFooter from "@/components/GlobalFooter"
-
+import GlobalFooter from "@/components/GlobalFooter";
 
 import moment from "moment";
 import tz from "moment-timezone";
 
 export default {
-    metaInfo() {
-        return {
-            title: `nadi mama`,
-            meta: [
-                { name: 'description', content: `welcome to nadi mama: the online home for the mama family of restaurants | levantine cuisine in seattle`},
-                { property: 'og:title', content: `nadi mama`},
-                { property: 'og:site_name', content: 'nadi mama'},
-                { property: 'og:description', content: `welcome to nadi mama: the online home for the mama family of restaurants | levantine cuisine in seattle`},
-                {property: 'og:url', content: 'https://nadimama.com/'},
-                // {property: 'og:image', content: this.aws_url + '/users/' + this.userData.profileurl + '-main.jpg' }    
-            ]
-        }},
+  metaInfo() {
+    return {
+      title: `nadi mama`,
+      meta: [
+        {
+          name: "description",
+          content: `welcome to nadi mama: the online home for the mama family of restaurants | levantine cuisine in seattle`,
+        },
+        { property: "og:title", content: `nadi mama` },
+        { property: "og:site_name", content: "nadi mama" },
+        {
+          property: "og:description",
+          content: `welcome to nadi mama: the online home for the mama family of restaurants | levantine cuisine in seattle`,
+        },
+        { property: "og:url", content: "https://nadimama.com/" },
+        // {property: 'og:image', content: this.aws_url + '/users/' + this.userData.profileurl + '-main.jpg' }
+      ],
+    };
+  },
 
-
-
-
-
-
-
-  props: ['data'],
-  data(){
-return {
-user: null,
-pageData: null,
-notificationHeader: null,
-subModules: null,
-loaded: false,
-notificationVisible: true
-}
+  props: ["data"],
+  data() {
+    return {
+      user: null,
+      pageData: null,
+      notificationHeader: null,
+      subModules: null,
+      loaded: false,
+      notificationVisible: true,
+    };
   },
   components: {
     DownArrow,
@@ -277,896 +260,69 @@ notificationVisible: true
     AnarLogo,
     StreetLogo,
     MamnoonLogo,
-    GlobalFooter
-
+    GlobalFooter,
   },
-  methods:{
-
-    dismissNotification(){
-  this.notificationVisible = false;
-},
-getTimeStamp(date){
-
-if(date === null){
-return true
-}else{
-let date2 = moment(date);
-// console.log(date2.utc().valueOf());
-if(date2.utc().valueOf()<Date.now().valueOf()){
-  return false;
-}else{
-  return true
-}
-}
-
-},
-currentlyVisible(end){
-
-
-if(end === null){
-return true
-
-}
-},
-
-
-    async loadHomePage(){
-
-
-  //  console.log(this.$store.state.homePageData);
-
-
-let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/home/614`)
-    // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
-
-
-
-    let AcfBlock = responseAcf
-
-    this.pageData = AcfBlock.data.acf.home
-
-this.subModules = AcfBlock.data.acf.home[0].sub_modules
-
-
-
-
-this.notificationHeader = AcfBlock.data.acf.home[0].notification_header
-
-
-// this.pageData = this.$store.state.homePageData;
-
+  methods: {
+    dismissNotification() {
+      this.notificationVisible = false;
     },
-    scrollDown(){
+    getTimeStamp(date) {
+      if (date === null) {
+        return true;
+      } else {
+        let date2 = moment(date);
+        // console.log(date2.utc().valueOf());
+        if (date2.utc().valueOf() < Date.now().valueOf()) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    },
+    currentlyVisible(end) {
+      if (end === null) {
+        return true;
+      }
+    },
 
-window.scrollTo(0, this.$el.clientHeight);
-// console.log(pageHeight);
-    }
+    async loadHomePage() {
+      //  console.log(this.$store.state.homePageData);
+
+      let responseAcf = await this.$http.get(
+        `https://mamnoontogo.net/wp-json/acf/v3/home/614`
+      );
+      // let responseAcf = await this.$http.get(`https://mamnoontogo.net/wp-json/acf/v3/restaurant/188`)
+
+      let AcfBlock = responseAcf;
+
+      this.pageData = AcfBlock.data.acf.home;
+
+      this.subModules = AcfBlock.data.acf.home[0].sub_modules;
+
+      this.notificationHeader = AcfBlock.data.acf.home[0].notification_header;
+
+      // this.pageData = this.$store.state.homePageData;
+    },
+    scrollDown() {
+      window.scrollTo(0, this.$el.clientHeight);
+      // console.log(pageHeight);
+    },
   },
 
-  mounted(){
+  mounted() {
+    // console.log(this.$refs)
 
-// console.log(this.$refs)
+    this.loadHomePage();
 
+    window.addEventListener("load", () => {
+      // run after everything is in-place
 
-    this.loadHomePage()
-
-
-
-   window.addEventListener('load', () => {
-         // run after everything is in-place
-
-this.loaded = true;
-
-    })
-
-
-
-
-
-  }
+      this.loaded = true;
+    });
+  },
 };
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 <style lang="scss">
-.nadi{
-  background-color: #F15D58;
-  // padding-top: 132px;
-  // padding-bottom: 100px;
-}
-
-
-
-h1{
- color: $nadi-red-color;
- text-align: center;
- margin: 30px auto;
-}
-
-
-.pad{
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-
-.pad-sm{
-    padding-top: 25px;
-    padding-bottom: 25px;
-}
-
-.mb20{
-  margin-bottom: 20px;
-}
-
-
-.ff{
-  h2{
-color: $nadi-red-color;
-  }
-
-  h3{
-font-style: italic;
-font-size: 1em;
-font-weight: bold;
-  }
-
-  p{
-
-  }
-
-  a{
-    color: $nadi-red-color;
-    text-decoration: underline;
-  }
-}
-
-
-
-   @media only screen and (max-width: 992px) {
-
-     .ff{
-       padding-top: 0;
-     }
-
-
-.list-of-links{
-  margin-top: 40px;
-  a{
-    display: block;
-  }
-}
-
-
-   }
-
-
-
-.ff h2{
-  text-transform: lowercase;
-  margin-bottom: 24px;
-  font-size: 36px;
-}
-
-
-
-p.list-of-links{
-font-size: 20px;
-font-weight: bold;
-line-height: 2;
-a{
-  font-style: italic;
-}
-}
-
-
-
-.border-left{
-border: 4px solid $nadi-red-color;
-box-sizing: border-box;
-padding: 0;
-border-right: 0;
-}
-.border-right{
-border: 4px solid $nadi-red-color;
-box-sizing: border-box;
-border-left: 0;
-}
-
-
-
-.border-red{
-    border: 5px solid $nadi-red-color;
-    margin-bottom: 50px;
-    display: inline-block;
-  .col-l {
-    width: 50%;
-    display: block;
-    float: left;
-  }
-  .col-r {
-    width: 50%;
-    display: block;
-    float: left;
-
-div{
-  padding: 40px;
-} 
-  }
-
-}
-
-.lower-margin{
-  margin-bottom: 60px;
-}
-
-
-.pt20{
-  padding-top: 20px;
-}
-
-
-.inblock-red{
-border: 5px solid $nadi-red-color;
-display: inline-block;
-// width: 50%;
-float: left;
-color: transparent;
-background-size: cover;
-background-position: center center;
-
- width: 50%;
-    padding-bottom: 50%;
-
-&:first-child{
- border-right: 0px;
-
-}
-
-}
-
-
-
-
-
-
-
-   @media only screen and (max-width: 1220px) {
-
-.border-red{
-  .col-r {
-    div{
-    padding: 10px 20px;
-  } 
-}
-}
-
-
-
-}
-
-   @media only screen and (max-width: 992px) {
-
-
-.border-red{
-  border: 4px solid $nadi-red-color;
-  margin-bottom: 50px;
-  .col-l {
-width: 100%;
-display: inline-block;
-  }
-  .col-r {
-width: 100%;
-display: inline-block;
-
-div{
-  padding: 40px;
-} 
-  }
-
-}
-
-.ff{
-  padding-top:20px;
-}
-
-   }
-
-
-
-
-.overflow-x-hidden{
-  overflow-x: hidden;
-}
-
-
-
-.restaurantBox{
-  background: white;
-margin-bottom: 50px;
-    height: 680px;
-  .imgBox{
-    width: 100%;
-    height:300px;
-    background-size: cover;
-background-position: center center;
-  }
-
-
-}
-
-
-.restaurantContent{
-  padding: 40px 20px 20px;
-}
-
-.restaurantName{
-  display: block;
-  height: 100px;
-  
-}
-
-
-.mb60{
-  margin-bottom: 60px;
-}
-
-
-.subpage-header{
-  font-size: 32px;
-  line-height: 46px;
-
-      text-align: center !important;
-
-     @media only screen and (max-width: 992px) {
-font-size: 18px;
-line-height: 24px;
-     }
-
-      @media only screen and (max-width: 640px) {
-margin-bottom: 10px !important;
-
-margin-top: 10px !important;
-      
-    }
-
-
-
-
-    line-height: 46px;
-    width: 840px;
-    font-size: 23.9px;
-    margin: 0 auto 20px auto;
-
-     @media only screen and (max-width: 992px) {
-width: 100%
-     }
-  }
-
-
-.pb100{
-  padding-bottom: 100px;
-}
-
-
-.mb100{
-  margin-bottom: 100px;
-}
-.mb120{
-  margin-bottom: 120px;
-}
-.mt0{
-margin-top: 0;
-}
-
-.infoIconLine2{
-width: 100%;
-margin: 6px 0;
-display: inline-block;
-}
-
-
-
-.text-left{
-  text-align: left;
-}
-
-
-
-.bottomAttach{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-     background: black; 
-  &.black{
-    background: black; 
-    background: #F15D58;
-
-    &.sub{
-    background: #fff;
-    }
-  }
-
-
-
-&.header{
-      @media only screen and (max-width: 640px) {
-
-
-height: calc(100vh - 92px);
-padding-top: 0 !important;
-      
-    }
-}
-
-
-
-}
-
-
-
-.moduleStyling{
-  height: 100vh;
-  .bottomAttach{
-   @media only screen and (max-width: 768px) {
-
-    position: initial;
-   }
-  }
-}
-
-
-.moduleStyling.background-centered{
-  height: 100vh;
-  .bottomAttach{
-       position: initial;
-   @media only screen and (max-width: 768px) {
-
- 
-   }
-  }
-}
-
-
-
-.block{
-text-align: left;
-width: 400px;
-color: white;
-color: black;
-&.whitebg{
-
-    width: min-content;
-  background: white;
-    padding: 21px 21px 26px;
-  color: black;
-  border-radius: 5px;
-
-  .blockHeader{
-    color: #F15D58;
-    margin-bottom: 10px;
-  }
-
-
-.blockButton{
-      padding: 5px 10px 7px;
-
-&.firstChild{
-  margin-bottom: 10px;
-}
-
-}
-
-
-}
-
-.blockHeader{
-font-size: 24px;
-
-font-weight:bold;
-}
-.blockDescription{
-
-  font-size: 16px;
-  font-weight:medium;
-  margin-bottom: 26px;
-  margin-bottom: 20px;
-  margin-bottom: 50px;
-
-
-         @media only screen and (max-width: 1080px) {
-
-       margin-bottom: 30px;
- }
-
-}
-a.blockButton{
-
-  &.firstChild{
-  margin-bottom: 10px;
-}
-
-
-color: #F15D58;
-background: white;
-
-
-&.inverse{
-  background: #F15D58;
-color: white;
-font-size: 18px;
-
-&:hover{
-  color: #FFFFFF;
-background: black;
-}
-}
-
-    display: block;
-    border-radius: 5px;
-    width: 100%;
-    width: 300px;
-    margin: 0 0;
-    text-align: center;
-    padding: 3px 10px 5px;
-    font-size: 22px;
-    font-weight: 500;
-cursor:pointer;
-    &:hover{
-background: black;
-color: white;
-text-decoration: none;
-    }
-
-}
-
-
-
-    @media only screen and (max-width: 640px) {
-
-
-width: 100%;
-      
-    }
-
-
-}
-
-
-
-
-
-.sub{
-  a.blockButton{
-
-color: white;
- background: #F15D58;
-
-&.inverse{
-  background: #F15D58;
-color: white;
-font-size: 18px;
-
-&:hover{
-  color: #FFFFFF;
-background: black;
-}
-}
-
-    display: block;
-    border-radius: 5px;
-    width: 100%;
-    width: 300px;
-    margin: 0 0;
-    text-align: center;
-    padding: 3px 10px 5px;
-    font-size: 22px;
-    font-weight: 500;
-cursor:pointer;
-
-   @media only screen and (max-width: 500px) {
-width: 100%;
-   }
-
-    &:hover{
-background: black;
-color: white;
-text-decoration: none;
-    }
-
-}
-
-
-
-    @media only screen and (max-width: 640px) {
-
-
-width: 100%;
-      
-    }
-
-
-.blockDescription{
-  color: #000;
-}
-  .blockHeader{
-    color: #F15D58;
-
-  }
-
-
-
-}
-
-
-
-.secPadMedAlt{
-  // padding: 32px 0 38px;
-    padding: 32px 0 78px;
-
-    padding: 28px 0 40px; 
-
- @media only screen and (max-width: 1080px) {
-
-        padding: 18px 0 34px;
- }
-}
-
-
-
-.responsiveBannerImage{
-  display:none;
-   @media only screen and (max-width: 640px) {
-// margin-top:92px;
-display:block;
-width: 100%;
-      
-    }
-}
-
-
-
-
-
-  
-
-.popup-background{
-
- background-position: top center;
- position: relative; 
- height: 90vh; 
- background-size: cover;
- background-size: 30%;
- background-color: rgb(0, 0, 0);
- background-repeat: 'no-repeat'
-
-
-
-
-
-}
-
-   @media only screen and (max-width: 992px) {
-     .popup-background{
- background-position:top center;
- background-size: 70%;      
-     }
-    }
-
-
-
-
-    .popup-background2{
-
- background-position: top center;
- position: relative; 
- height: 90vh; 
- background-size: cover;
- background-size: 15%;
- background-color: rgb(0, 0, 0);
- background-repeat: 'no-repeat'
-
-
-
-
-
-}
-
-   @media only screen and (max-width: 992px) {
-     .popup-background2{
- background-position:top center;
- background-size: 10%;      
-     }
-    }
-
-
-
-
-.moduleStyling{
-      position: relative;
-        background-size: cover;
-        background-position: center;
-}
-
-
-
-.logosInline{
-width:100%;
-
-
-   @media only screen and (max-width: 1080px) {
-width: 80%;
-margin: 0 auto;
-    }
-
-
-}
-
-      .displayInline{
-        display: inline-block;
-
-   @media only screen and (max-width: 768px) {
-        display: block;
-
-   }
-
-      }
-
-
-
-
-.background-cover{
-
-}
-
-
-.background-centered{
-
-
-background-image: none !important;
-
-
-// img{
-//       transform: translate(-50%,-50%);
-//     /* margin-top: 0; */
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     width: 50%;
-
-// }
-
-}
-
-.background-tile{
-  background-repeat: repeat !important;
-  background-size: 20% !important;
-  background-position: bottom center !important;
-}
-
-
-
-
-.moduleStyling{
-// background-color: black;
-
-&.background-centered{
-      height: auto !important;
-}
-
-
-    .imageStyleCentered{
-        display: block;
-            height: 70vh;
-            margin: 0 auto;
-      }
-
-    .mobileImage{
-      display: none;
-      width: 100%;
-    }
-
-   @media only screen and (max-width: 768px) {
-      height: auto !important;
-
-      .imageStyleCentered{
-        display: none;
-      }
-
-      .mobileImage{
-        display: block;
-      }
-
-   }
-
-}
-
-.announcementBar{
-  position: absolute;
-  top: 92px;
-  background: pink;
-  width: 100%;
-  // height: 500px;
-  z-index: 1000;
-
-  padding: 28px 0px 40px;
-  background: black;
-
-
-  .blockHeader{
-        color: #F15D58;
-
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 50px;
-  pointer-events: none;
-
-    @media only screen and (max-width: 992px) {
-     margin-bottom: 20px;
-         font-size: 18px;
-    line-height: 24px;
-    }
-
-  }
-
-  a.blockButton {
-    color: black;
-    background: #FFF;
-    display: block;
-    border-radius: 5px;
-    width: 100%;
-    width: 300px;
-    margin: 0 0;
-    text-align: center;
-    padding: 3px 10px 5px;
-    font-size: 22px;
-    font-weight: 500;
-    cursor: pointer;
-
-
-   @media only screen and (max-width: 500px) {
-width: 100%;
-   }
-
-    &:hover{
-      text-decoration: none;
-      background-color: #F15D58;
-    }
-}
-
-
-.anouncement-image{
-height: 200px;
-float: right;
-}
-
-.dismissNotification{
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  cursor: pointer;
-}
-
-
-
-}
-
-
-
-.hideOnMob {
-
-    @media only screen and (max-width: 768px) {
-  display:none;
-    }
-}
+  @import '@/assets/styles/css/nadi.scss';
 </style>

@@ -644,41 +644,33 @@ this.checkForReturnable = true;
 </script>
 
 <style lang="scss">
-
-
-
 .returnCheck{
   width: 20px;
   height: 20px;
   font-size: 0;
   background: white;
   border: 1px solid black;
-    float: right;
-
-&.remove{
-   background: black;
-}
-
+  float: right;
+  &.remove{
+    background: black;
+  }
 }
 
 .not-returned span{
   display:none;
 }
 
-
-
 .fullOrderModal{
-      position: fixed;
-    z-index: 10000;
-    top: 100px;
-    background: white;
-    width: 100%;
-    overflow: scroll;
-    left: 0;
+  position: fixed;
+  z-index: 10000;
+  top: 100px;
+  background: white;
+  width: 100%;
+  overflow: scroll;
+  left: 0;
 }
 
 .codeBox{
-
   height: 200px;
   overflow:scroll;
   background: #ddd;

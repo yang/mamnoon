@@ -1,47 +1,35 @@
 <template>
   <div class="mamnoon">
     <Nav3 />
-<PackagesAdmin />
-  
-  <!-- {{$store.state.currentUserEmail}} -->
+    <PackagesAdmin />
+
+    <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>
 <script>
 import PackagesAdmin from "@/components/PackagesAdmin";
 import Nav3 from "@/components/Nav3";
 export default {
-  data(){
-return {
-user: null
-}
+  data() {
+    return {
+      user: null,
+    };
   },
   components: {
     Nav3,
-    PackagesAdmin
-  }
+    PackagesAdmin,
+  },
 };
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 <style>
-.mamnoon{
+.mamnoon {
   padding-top: 132px;
 }
 
 @media only screen and (max-width: 992px) {
-  .mamnoon{
+  .mamnoon {
     padding-top: 112px;
-}
-
+  }
 }
 </style>

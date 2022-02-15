@@ -1,0 +1,222 @@
+.menuBarClickModal {
+  .inside a {
+    display: block;
+  }
+
+  // position: sticky;
+  top: 132px;
+  width: 100%;
+  background: #ffffff;
+  color: $nadi-red-color;
+  z-index: 99;
+  overflow: hidden;
+
+  // margin-left: -15px;
+  /* margin-right: -15px; */
+  width: calc(100% + 30px);
+
+  @media only screen and (max-width: 992px) {
+    // top: 0;
+    top: 112px;
+  }
+
+  .relative {
+    position: relative;
+  }
+
+  .inside {
+    width: calc(100% - 40px);
+    // background: green;
+    // float: right;
+
+    a.scrollactive-item.nav-item {
+      color: $nadi-red-color;
+      font-size: 14px;
+      margin-right: 10px;
+      border-bottom: 2px solid transparent;
+
+      padding-bottom: 3px;
+      line-height: 30px;
+      &:hover {
+        text-decoration: none;
+      }
+
+      transition: all 0.25s ease;
+      text-transform: lowercase;
+      &.is-active {
+        // background: $nadi-red-color;
+        // color: white;
+
+        border-bottom: 2px solid $nadi-red-color;
+        width: max-content;
+        // padding: 10px;
+        // background: black;
+      }
+    }
+  }
+
+  // display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  &.expanded {
+    pointer-events: all;
+    opacity: 1;
+    position: absolute;
+    top: 50px;
+    /* top: 132px; */
+    width: 300px !important;
+    height: auto;
+    overflow: scroll;
+    left: 0;
+    background: white !important;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: left;
+
+    a {
+      text-align: left;
+    }
+  }
+}
+
+// .swiper-slide-active{
+//   background: $nadi-red-color;
+
+//      margin-left: 0px;
+//      margin-right: 10px;
+//      a{
+//        margin-right: 0;
+//      }
+
+//    a.scrollactive-item.nav-item{
+//      margin-left: 10px;
+//      margin-right: 10px;
+//        color: white !important;
+//    }
+// }
+
+// .scrollactive-item.nav-item.is-active{
+//   text-decoration: underline;
+// }
+
+.inside {
+  // border-bottom: 1px solid #ddd;
+  .scrollactive-nav {
+    text-align: center;
+    padding: 6px 0;
+  }
+}
+
+.menuBarClickModal .relative .inside {
+  .swiper-slide {
+    width: auto !important;
+  }
+
+  .scrollactive-nav {
+    width: calc(100% - 60px);
+  }
+
+  .inside-left {
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    width: 30px;
+    left: 40px;
+  }
+  .inside-right {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    width: 30px;
+    // background:pink;
+
+    .icono-arrow4-left {
+      margin-left: 5px;
+    }
+  }
+}
+
+#swiperMenu {
+  .swiper-wrapper {
+    padding-left: 0px;
+  }
+}
+
+#swiperMenu.morePadding {
+  .swiper-wrapper {
+    padding-left: 20px;
+  }
+}
+
+.moreInfoClickModal {
+  button {
+    float: right;
+    margin: 5px;
+    position: absolute;
+    right: 0;
+
+    border-radius: 10px !important;
+    background-color: white !important;
+    // width: 20px;
+    // height: 20px;
+    border: 0 !important;
+
+    &:active,
+    &:hover,
+    &:focus {
+      outline: none;
+    }
+  }
+
+  position: absolute;
+  background: white;
+  // position: sticky;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+#swiperMenu {
+  .swiper-slide.swiper-slide-active:first-child {
+    margin-left: 0 !important;
+  }
+}
+
+.swiper-slide {
+  margin: 0 5px;
+}
+
+.iconVersion {
+  width: 40px !important;
+  height: 40px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background: white !important;
+}
+
+button.listIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 3px 5px 3px 0 !important;
+  &:active,
+  &:focus,
+  &:hover {
+    outline: none;
+    border: 0 !important;
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.menuBarClickModal .inside a.inline,
+.inline {
+  display: inline;
+}

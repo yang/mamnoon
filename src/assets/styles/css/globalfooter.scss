@@ -1,0 +1,76 @@
+footer h4 {
+  font-size: 32px;
+  text-align: left;
+  color: #fff;
+  margin-bottom: 22px;
+}
+
+footer ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+footer {
+  background: black;
+  p {
+    margin-bottom: 26px;
+  }
+}
+
+footer p,
+footer ul li h4,
+footer ul li a {
+  color: #fff;
+}
+
+footer p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+footer ul li {
+  margin-bottom: 6px;
+  a {
+    font-size: 12px;
+  }
+}
+.mb40 {
+  margin-bottom: 40px;
+}
+
+.secPadFooter {
+  position: relative;
+  padding: 70px 0 110px;
+  padding: 100px 0 110px;
+}
+
+.beta {
+  position: absolute;
+  width: 100%;
+  background: white;
+  color: $nadi-red-color;
+  top: 0;
+  z-index: 1000;
+  padding: 5px;
+
+  font-size: 20px;
+
+  @media only screen and (max-width: 1080px) {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  text-align: center;
+  @media only screen and (max-width: 640px) {
+    font-size: 14px;
+  }
+}
+
+.footer-links {
+  a {
+    font-size: 16px;
+    &:hover {
+      color: white;
+    }
+  }
+}
