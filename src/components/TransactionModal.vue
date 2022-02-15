@@ -11,7 +11,6 @@
      <br>
 
 
-
      accepted on upserve pos: {{ loadedorderRendered.orderAccepted}}
 <br>
 
