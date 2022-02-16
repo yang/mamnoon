@@ -623,7 +623,7 @@
             <div class="container modal-body order-modal-width order-modal-body bottomCurves">
 <div class=""> 
 <div class="block mb20" v-for="item in reOrder.charges.items">
-<div class="yellow-bg-test">
+<div class="yellow-bg-test" v-if="item.reorder !== true">
   <div class="half-width2left">
         <div class="content-box">
         <div class="showBox" v-if="item.images" v-bind:style="{ backgroundImage: 'url(' + item.images.online_ordering_menu.main + ')' }"></div>
@@ -5754,13 +5754,13 @@ this.currentItemQuantity = this.currentItem.quantity;
       }
     },
     addToAllItemsToOrder(items){
-      this.reOrder = {};
-      let self = this
-      items.forEach(function(x){
-        self.addToOrderFromReorder(x)
-      });
+      this.reOrder = this.$store.state.storeCurrentOrder;
+      // let self = this
+      // items.forEach(function(x){
+      //   self.addToOrderFromReorder(x)
+      // });
 
-      self.emptyReOrderObject()
+      this.emptyReOrderObject()
 
     },
     addToOrderFromReorder(item) {
@@ -5787,7 +5787,9 @@ this.currentItemQuantity = this.currentItem.quantity;
         modifiers: item.modifiers,
         quantity: item.quantity,
         sides: item.sides,
-        timing_mask: item.timing_mask
+        timing_mask: item.timing_mask,
+        images: item.images ? item.images : '',
+
       };
 
           // console.log(this.currentOrder)
@@ -5834,12 +5836,11 @@ this.currentItemQuantity = this.currentItem.quantity;
         item_object: item
       };
 
-
-
+    
 // console.log(this.currentOrder.charges.items.length);
 
 
-
+    console.log(`this store current order`, this.$store.state)
 
 
 

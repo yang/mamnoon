@@ -193,6 +193,8 @@ export default {
       },
       reorderFavoriteOrder(order){
           let storeCurrentOrder
+          let temp = this.$store.state.storeMamnoon.charges.items
+          console.log('temp :>> ', temp);
           if(order[0].restaurant === 'Mamnoon'){
               storeCurrentOrder = this.$store.state.storeMamnoon
 
@@ -201,11 +203,14 @@ export default {
           }
           storeCurrentOrder.charges.items = order;
 
-console.log('order');
-          console.log(order);
+          for(let item of temp){
+            console.log('item :>> ', item);
+            item['reorder'] = true;
+            storeCurrentOrder.charges.items.push(item);
+          }
 
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-          
+          console.log('storeCurrentOrder :>> ', storeCurrentOrder);
           this.$store.commit("reordertrue");
           if(order[0].restaurant === 'Mamnoon'){
               this.$router.push("/mamnoon-olo");
@@ -214,13 +219,20 @@ console.log('order');
           }
         },
         reorder(order){
-          let storeCurrentOrder = order;
+          let storeCurrentOrder;
+          let item = order.charges.items[0];
+          if(order.restaurant === 'Mamnoon'){
+              storeCurrentOrder = this.$store.state.storeMamnoon
+
+          }else{
+              storeCurrentOrder = this.$store.state.storeMamnoon
+          }
+          storeCurrentOrder.charges.items.push(item);
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
-          
           
           this.$store.commit("reordertrue");
           if(order.restaurant === 'Mamnoon'){
-              this.$router.push("/mamnoonstreet-olo");
+              this.$router.push("/mamnoon-olo");
               }else{
               this.$router.push("/mamnoonstreet-olo");
           }
