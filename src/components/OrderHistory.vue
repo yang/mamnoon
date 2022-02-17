@@ -221,12 +221,17 @@ export default {
         reorder(order){
           let storeCurrentOrder;
           let item = order.charges.items[0];
+          let temp = this.$store.state.storeMamnoon.charges.items
+          for(let item of temp){
+            item['reorder'] = true;
+          }
           if(order.restaurant === 'Mamnoon'){
               storeCurrentOrder = this.$store.state.storeMamnoon
-
           }else{
               storeCurrentOrder = this.$store.state.storeMamnoon
           }
+          console.log('item', item)
+          console.log('storeCurrentOrder.charges.items', storeCurrentOrder.charges.items)
           storeCurrentOrder.charges.items.push(item);
           this.$store.commit("upserveOrderCurrentOrder", { storeCurrentOrder });	
           
