@@ -622,8 +622,8 @@
         </div>
             <div class="container modal-body order-modal-width order-modal-body bottomCurves">
 <div class=""> 
-<div class="block mb20" v-for="item in reOrder.charges.items">
-<div class="yellow-bg-test" v-if="item.reorder !== true">
+<div class="block mb20" v-for="item in reOrder.charges.items" v-if="item.reorder !== true">
+<div class="yellow-bg-test" >
   <div class="half-width2left">
         <div class="content-box">
         <div class="showBox" v-if="item.images" v-bind:style="{ backgroundImage: 'url(' + item.images.online_ordering_menu.main + ')' }"></div>

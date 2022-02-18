@@ -46,7 +46,7 @@
                         <li class="name" v-for="o, index in order.favoriteOrders">
                          {{o.quantity}} x {{o.name}}</li>
                          <li class="name">
-                         <a class="" @click="reorderFavoriteOrder(order.favoriteOrders)"><u>order again</u></a>
+                         <a class=""><u>order again</u></a>
                          </li>
                           </ul>
 
