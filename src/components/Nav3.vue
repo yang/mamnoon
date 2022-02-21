@@ -46,10 +46,18 @@
                 style="width: 60px;text-align: right;height: 80px;"
               >
                 <Burger2 />
+
+
               </div>
             </template>
             <div class="logo-box">
+
+
+<!--<NavBar />-->
+            
               <router-link to="/">
+
+            
                 <svg
                   id="nadiDesk"
                   width="209"
@@ -600,6 +608,9 @@
 
 <script>
 import VueJwtDecode from "vue-jwt-decode";
+
+import NavBar from "@/components/NavBar";
+
 import Logo from "@/components/Logo";
 import LogoMamnoon from "@/components/LogoMamnoon";
 import Burger2 from "@/components/svgIcons/Burger2";
@@ -612,6 +623,7 @@ import CloseModalRed from "@/components/svgIcons/CloseModalRed";
 
 export default {
   components: {
+    NavBar,
     CloseModalRed,
     CartDropdown,
     Logo,
