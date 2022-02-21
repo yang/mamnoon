@@ -1,5 +1,6 @@
 <template>
-  <div class="nav-container mb-3">
+<div class="nav-container mb-3" style="display:none;">
+  <!-- <div class="nav-container mb-3">-->
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="container">
         <div class="navbar-brand logo"></div>
@@ -47,7 +48,7 @@
 <span style="color: green;">{{$auth.user.email}}</span>
 
               </a>
-              <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-menu dropdown-menu-right" style="display:block;">
                 <div class="dropdown-header">{{ $auth.user.name }}</div>
                 <router-link to="/profile" class="dropdown-item dropdown-profile">
                   <font-awesome-icon class="mr-3" icon="user" />Profile

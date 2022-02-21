@@ -92,13 +92,13 @@ export default {
         }
     },
     name: 'ReservationHistory',
-    props: ['currentUser','emailAddress'],
+    props: ['currentUser','emailAddress','email'],
     methods: {
 
     retrieveReservationsMamnoon() {
         // console.log('retrieve reservations')
     let self = this
-        this.$http.get(`/reservation/retrievemamnoon/${this.currentUser.currentUserEmail}`).then(function (response) {
+        this.$http.get(`/reservation/retrievemamnoon/${this.email}`).then(function (response) {
 // this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
 
 
@@ -113,7 +113,7 @@ export default {
     retrieveReservations() {
         // console.log('retrieve reservations'  )
     let self = this
-        this.$http.get(`/reservation/retrieve/${this.currentUser.currentUserEmail}`).then(function (response) {
+        this.$http.get(`/reservation/retrieve/${this.email}`).then(function (response) {
 // this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
 
 

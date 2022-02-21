@@ -53,7 +53,7 @@
             <div class="logo-box">
 
 
-<!--<NavBar />-->
+
             
               <router-link to="/">
 

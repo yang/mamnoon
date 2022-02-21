@@ -186,7 +186,7 @@ export default {
         }
     },
     name: 'OrderHistory',
-    props: ['currentUser','emailAddress'],
+    props: ['currentUser','emailAddress','email'],
     methods: {
       printStore() {
         console.log('this.$store.state', this.$store.state);
@@ -248,7 +248,7 @@ export default {
       retrieveOrders() {
           // console.log('retrieve orders from end')
         let self = this
-          this.$http.get(`/order/email/${this.currentUser.currentUserEmail}`).then(function (response) {
+          this.$http.get(`/order/email/${this.email}`).then(function (response) {
         self.orderhistory = response.data
         // console.log(`self.orderhistory`, self.orderhistory)
         let array2 = response.data.user.map(items => items.orderInfo)
