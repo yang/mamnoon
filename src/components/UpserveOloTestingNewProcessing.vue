@@ -6113,11 +6113,11 @@ return searchResult;
 console.log(currentOrder);
 
 
-if(currentOrder.fulfillment_info.customer.first_name.substring(0,3) !== "nm "){
+if(currentOrder.fulfillment_info.customer.first_name.substring(0,3) !== "nx "){
 
 
 
-currentOrder.fulfillment_info.customer.first_name = 'nm ' + currentOrder.fulfillment_info.customer.first_name;
+currentOrder.fulfillment_info.customer.first_name = 'nx ' + currentOrder.fulfillment_info.customer.first_name;
 
 
 console.log(approvalData);
@@ -6193,9 +6193,9 @@ console.log(giftcardbalance);
 
 
 
-if(currentOrder.fulfillment_info.customer.first_name.substring(0,3) !== "nm "){
+if(currentOrder.fulfillment_info.customer.first_name.substring(0,3) !== "nx "){
 
-          currentOrder.fulfillment_info.customer.first_name = "nm " + currentOrder.fulfillment_info.customer.first_name;
+          currentOrder.fulfillment_info.customer.first_name = "nx " + currentOrder.fulfillment_info.customer.first_name;
 
 
 

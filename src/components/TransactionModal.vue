@@ -4,14 +4,14 @@
 <div class="row">
 <div class="col-6">
 
-       <h1>{{ loadedorderRendered.orderInfo.fulfillment_info.customer.first_name.replaceAll("nm ","") }} {{ loadedorderRendered.orderInfo.fulfillment_info.customer.last_name }}</h1>
+       <h1>{{ loadedorderRendered.orderInfo.fulfillment_info.customer.first_name.replaceAll("nx ","") }} {{ loadedorderRendered.orderInfo.fulfillment_info.customer.last_name }}</h1>
         <b>{{ loadedorderRendered.email }}</b>
         <br><br>
        location: {{ loadedorderRendered.orderInfo.restaurant }}
      <br>
 
 
-     accepted on upserve pos: {{ loadedorderRendered.orderAccepted}}
+    <!-- accepted on upserve pos: {{ loadedorderRendered.orderAccepted}}-->
 <br>
 
 <br>

@@ -121,12 +121,12 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="header-p-box">
-                    <p
+                    <h1
                       class="header-p"
                       v-bind:style="{ color: item.text_color }"
                     >
                       {{ item.description }}
-                    </p>
+                    </h1>
 
                     <template v-for="button in item.buttons">
                       <a
@@ -1629,6 +1629,7 @@ ul.upserve-cats li {
   padding: 0 0 10px;
   font-weight: 600;
   margin-bottom: 0;
+  text-align: left;
 }
 
 .header-p-box {
