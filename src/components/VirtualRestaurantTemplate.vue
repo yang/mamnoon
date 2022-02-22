@@ -90,6 +90,8 @@
 
         <!--end notification group section-->
 
+
+
         <template v-if="item.name.replace(' ', '') === restaurantName">
           <section
             v-if="!item.background_video"
@@ -114,10 +116,12 @@
             :logo="item.logo_svg"
           />
 
-          <section v-bind:style="{ 'background-color': item.background_color }">
+          <section v-if="item.top_info_panel" v-bind:style="{ 'background-color': item.background_color }">
             <!--begin container-->
             <div class="container mobilePage secPadSmall">
               <!--begin row-->
+
+              <span style="color: black">rrr</span>
               <div class="row">
                 <div class="col-md-4">
                   <div class="header-p-box">
@@ -149,7 +153,7 @@
 
           <!--second contact section-->
 
-          <section v-bind:style="{ 'background-color': item.text_color }">
+          <section v-if="item.top_info_panel" v-bind:style="{ 'background-color': item.text_color }">
             <!--begin container-->
             <div class="container mobilePage secPadSmall">
               <!--begin row-->
