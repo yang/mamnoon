@@ -121,7 +121,7 @@
             <div class="container mobilePage secPadSmall">
               <!--begin row-->
 
-              <span style="color: black">rrr</span>
+              <!--// <span style="color: black">rrr</span>-->
               <div class="row">
                 <div class="col-md-4">
                   <div class="header-p-box">
