@@ -261,7 +261,7 @@ export default {
   data() {
     return {
       expandedMenu: false,
-      showScenarios: true,
+      showScenarios: false,
     };
   },
   name: "slidernav",
