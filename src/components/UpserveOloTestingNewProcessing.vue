@@ -2726,7 +2726,8 @@ this.selectedTime = null
 }
 
   if(this.selectedTime){
-    this.currentOrder.scheduled_time = this.selectedTime.time
+    this.currentOrder.scheduled_time = this.selectedTime.time;
+this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
   }else{
     this.currentOrder.scheduled_time = null
   }
@@ -4187,7 +4188,20 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
           this.currentOrder.confirmation_code = "mamnoon-" + Math.random().toString(36).substr(2, 29)
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
-          this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+
+        // this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+  
+    if(this.selectedTime){
+this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
+
+  }else{
+this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+  }
+
+
+
+  
           // this.$store.commit("orderCMR", { orderCMR });
           // this.$router.push("/orderconfirmation");
 
@@ -4740,10 +4754,10 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
     this.currentRestaurantHours = this.hours.restaurant_hours[0].restaurant_name.find(o => o.name === this.title.toLowerCase());
 
     console.log('this.currentRestaurantHours');
-    console.log(this.currentRestaurantHours);
-        console.log(this.currentRestaurantHours);
-            console.log(this.currentRestaurantHours);
-                console.log(this.currentRestaurantHours);
+    // console.log(this.currentRestaurantHours);
+        // console.log(this.currentRestaurantHours);
+        //     console.log(this.currentRestaurantHours);
+        //         console.log(this.currentRestaurantHours);
     this.openDays = this.currentRestaurantHours.information.days_of_week
     let curRest = this.currentRestaurantHours.information.open_time_range
 
@@ -4934,7 +4948,7 @@ var format = 'HH:mm'
 // var time = moment() gives you current time. no format required.
 var time = moment(proposedTime,format),
   beforeTime = moment(startTime, format).subtract(1, 'seconds'),
-  afterTime = moment(endTime, format).add(1, 'seconds');;
+  afterTime = moment(endTime, format).add(1, 'seconds');
 
 
   // console.log(time,beforeTime,afterTime)
@@ -5797,7 +5811,14 @@ this.currentItemQuantity = this.currentItem.quantity;
 
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
+          
+          //this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          if(this.selectedTime){
+            this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
+          }else{
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          }
+
 
           // this.currentItemModifierArray = [];
           // this.allOptionsSelected = false
@@ -5896,7 +5917,18 @@ this.currentOrder.charges.items.push(itemToAdd);
 
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
+          // this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+
+          if(this.selectedTime){
+            this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
+          }else{
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          }
+
+
+
+
 
           this.currentItemModifierArray = [];
           this.allOptionsSelected = false
@@ -5958,7 +5990,15 @@ this.currentOrder.charges.items[elementPos] = itemToAdd;
   
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
+         // this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+
+          if(this.selectedTime){
+            this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
+          }else{
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          }
+
           this.currentItemModifierArray = [];
           this.allOptionsSelected = false
           this.closeModal();
@@ -6087,7 +6127,14 @@ return searchResult;
 
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
+         // this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+          if(this.selectedTime){
+            this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
+          }else{
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          }
+
 
           //then close the modal
           this.currentItemModifierArray = [];
@@ -6207,6 +6254,16 @@ if(currentOrder.fulfillment_info.customer.first_name.substring(0,3) !== "nx "){
       console.log('this.oloEndpoint');
       console.log(this.oloEndpoint);
       // console.log(currentOrder)
+
+
+// currentOrder.fulfillment_info.estimated_fulfillment_time = new Date();
+  // console.log(moment().add(15, 'minutes'));
+
+
+
+currentOrder.fulfillment_info.estimated_fulfillment_time = moment().add(15, 'minutes').format();
+
+
       this.$http.post(this.oloEndpoint, currentOrder).then((response) => {
 
 
@@ -6676,7 +6733,7 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
         // console.log('timeslotsCreated 1');
         // console.log('timeslotsCreated 1');
         // console.log(timeslotsCreated);
-              console.log(timeslotsCreated.slice(2));
+              // console.log(timeslotsCreated.slice(2));
       // console.log('this.openTimesUpdated');
       //       console.log(this.openTimesUpdated);
 
@@ -6963,6 +7020,8 @@ console.log('mount functions end');
 },
   },
   mounted() {
+
+  console.log(moment().add(15, 'minutes').format());
 
     this.mountFunctions();
 
