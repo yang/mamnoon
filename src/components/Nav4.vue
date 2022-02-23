@@ -993,7 +993,7 @@ position: absolute;
     position: absolute;
     width: 100%;
     transform: translateX(-100%);
-    
+    overflow:hidden;
     ul#menu{
         margin-top: 20px;
     }
