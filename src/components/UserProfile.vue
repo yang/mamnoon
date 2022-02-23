@@ -1,20 +1,17 @@
 <template>
   <div>
     <div>
-      <!--<UserForm :emailAddress="$store.state.currentUserEmail" />-->
+      <UserForm :emailAddress="$store.state.currentUserEmail" />
       <!--<UserForm :emailAddress="$auth.user.email" />-->
 
-
-
-      <template>
-    <!-- <CreditSaveForm :emailAddress="$store.state.currentUserEmail" />-->
+   <CreditSaveForm :emailAddress="$store.state.currentUserEmail" />
                       
 
-      </template>
-        <!--<GiftCardModule :emailAddress="$store.state.currentUserEmail" />-->
+
+   <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
         <!--   <GiftCardModule :emailAddress="$auth.user.email" />-->
-      <!--<OrderHistory :currentUser="$store.state" :email="$auth.user.email" />-->
-      <!--<ReservationHistory :currentUser="$store.state" :email="$auth.user.email" />-->
+      <OrderHistory :currentUser="$store.state" :email="$store.state.currentUserEmail" />
+      <ReservationHistory :currentUser="$store.state" :email="$store.state.currentUserEmail" />
     </div>
 
 

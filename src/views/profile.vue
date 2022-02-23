@@ -24,14 +24,9 @@ export default {
   },
     mounted () {
 
-
-
-
-
 // if(!this.$auth.isAuthenticated){
 //       this.$router.push("/");
 // }
-
 
 if(!this.$store.state.loggedIn){
       this.$router.push("/");

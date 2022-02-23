@@ -279,6 +279,9 @@
               </li>
             </div>
 
+
+
+
             <template v-for="item in pageData">
               <div
                 class="inline-link"
@@ -330,6 +333,18 @@
                 </router-link>
               </li>
             </div>
+
+
+                      <div class="inline-link" style="cursor:pointer;">
+              <li>
+            
+
+ <GoogleAuthText />
+
+              </li>
+            </div>
+
+
           </ul>
         </div>
       </nav>
@@ -616,6 +631,7 @@ import LogoMamnoon from "@/components/LogoMamnoon";
 import Burger2 from "@/components/svgIcons/Burger2";
 import Star from "@/components/svgIcons/Star";
 import GoogleAuth2 from "@/components/GoogleAuth2";
+import GoogleAuthText from "@/components/GoogleAuthText";
 // import NewAuth from "@/components/NewAuth";
 
 import CartDropdown from "@/components/CartDropdown";
@@ -631,6 +647,7 @@ export default {
     LogoMamnoon,
     Burger2,
     GoogleAuth2,
+    GoogleAuthText,
   },
   data() {
     return {
