@@ -43,6 +43,7 @@ module.exports = {
       sass: {
         prependData: `
           @import "@/assets/styles/_variables.scss";
+          @import "@/assets/styles/_classes.scss";
         `
       }
     }

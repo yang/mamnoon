@@ -290,7 +290,7 @@
             item total: <b>${{ formatExtraZero(computedAddition * currentItemQuantity) }}</b>
           </div>
          <div class="add-to-order-footer">
-          <button v-if="currentItemQuantity > 1" @click="decrementCurrentItem()">-</button>
+          <button class="order-confirm-button" v-if="currentItemQuantity > 1" @click="decrementCurrentItem()">-</button>
           <button v-else disabled>-</button>
           &nbsp;&nbsp;
           <span id="value">{{currentItemQuantity}}</span>&nbsp;&nbsp;
@@ -302,7 +302,7 @@
 
 
 <template v-if="currentItemQuantity < packageObjectMaximum">
-          <button @click="incrementCurrentItem()">+</button>
+          <button style="order-confirm-button"@click="incrementCurrentItem()">+</button>
 </template>
 <template v-else>
           <button disabled>+</button>
@@ -312,7 +312,7 @@
 <template v-else>
 
 
-<button @click="incrementCurrentItem()">+</button>
+<button class="order-confirm-button" @click="incrementCurrentItem()">+</button>
 
 </template>
 
@@ -335,7 +335,7 @@
                 <template v-else>
                   <button
                   v-if="oloAvailable"
-                    class="float-right"
+                    class="add-to-order-button"
                     @click="addToOrder(currentItem,packageOrderDate)"
                   >add to order</button>
                 </template>
@@ -1190,7 +1190,7 @@ add
 
 
 
-<button v-if="panelShow === 'customerInfo'" @click="panelShowChoose('yourOrder')" class="filehalf" style="width: 100%;font-size: 24px;padding-top: 3px;margin-top:0px;"><span v-if="currentOrder.preorder === true">edit pre order</span><span v-else>edit order</span></button>
+<button v-if="panelShow === 'customerInfo'" @click="panelShowChoose('yourOrder')" class="edit-order-button"><span v-if="currentOrder.preorder === true">edit pre order</span><span v-else>edit order</span></button>
 
 <template v-if="this.currentOrder.charges && this.currentOrder.charges.items.length > 0">
   <br>
@@ -1717,7 +1717,7 @@ Tip the staff:
                 <button id="noTip" class="tipButton quarter" style="display:none;" @click="setTip(0)"><b>no tip</b><br>(0)</button>&nbsp;
                 <button
                   id="tipOption1"
-                  class="tipButton quarter"
+                  class="tipButtons"
                   :class="{ disabled: currentOrder.tipSelected === 1 }"
                   @click="setTip(1)">
                   <b>18%</b>
@@ -1726,7 +1726,7 @@ Tip the staff:
                   </button>&nbsp;
                 <button
                   id="tipOption2"
-                  class="tipButton quarter"
+                  class="tipButtons"
                  :class="{ disabled: currentOrder.tipSelected === 2 }"
                   @click="setTip(2)">
                   <b>22%</b>
@@ -1735,7 +1735,7 @@ Tip the staff:
                   </button>&nbsp;
                 <button
                   id="tipOption3"
-                  class="tipButton quarter"
+                  class="tipButtons"
                   :class="{ disabled: currentOrder.tipSelected === 3 }"
                   @click="setTip(3)"><b>25%</b>
                   <br>
@@ -1744,7 +1744,7 @@ Tip the staff:
                 <br>
                <button
                   id="customTip"
-                  class="tipButton customtip"
+                  class="tipButtons custom"
                   :class="{activated: this.customTipVisible, disabled: currentOrder.tipSelected === 4 }"
                   @click="setTip(4)"
                 >custom</button>
@@ -1757,14 +1757,14 @@ Tip the staff:
 
 <div style="margin-bottom: 20px;" v-if="panelShow === 'customerInfo'&& currentOrder.preorder === true && this.currentOrder.scheduled_time !== null">
 scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br>
-<button class="mt10 fw" style="margin-top:10px;margin-bottom: 20px;" @click="selectADifferentTime()">Select a different time</button>
+<button class="schedule-later" style="margin-top:10px;margin-bottom: 20px;" @click="selectADifferentTime()">Select a different time</button>
 </div>
 
 
 <div style="margin-bottom: 20px;" v-if="panelShow === 'customerInfo'&& currentOrder.preorder === false">
 scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
 <span style="font-size: .9rem;font-style: italic;">(approximately 20 minutes from now)</span>
-<button class="mt10 fw" style="margin-top:10px;margin-bottom: 20px;" @click="changeToPreorderAndShowDropDown()">Schedule for later</button>
+<button class="schedule-later" style="margin-top:10px;margin-bottom: 20px;" @click="changeToPreorderAndShowDropDown()">Schedule for later</button>
 
 
 </div>
@@ -1915,13 +1915,13 @@ cart empty
 <template v-if="this.$store.state.loggedIn">
 
         <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
-            <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
+            <button v-else class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
 
         <template v-if="employeeCheckout">
         <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
-            <button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button> 
+            <button v-else class="pay-button" style="margin-top:20px;" disabled>Employee Checkout</button> 
         </template>
 
 
@@ -1929,12 +1929,12 @@ cart empty
 <template v-else>
 
         <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
-            <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
+            <button v-else class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
   <template v-if="employeeCheckout">
         <button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
-            <button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button>
+            <button v-else class="pay-button" style="margin-top:20px;" disabled>Employee Checkout</button>
     </template>
 
 
@@ -2004,23 +2004,23 @@ cart empty
 
 
 <template v-if="this.$store.state.loggedIn">
-<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
+<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 <template v-if="employeeCheckout">
-<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button> 
 </template>
 </template>
 <template v-else>
 <!-- you are not logged in -->
 
-<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
+<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
 
 <template v-if="employeeCheckout">
-<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="mt10 fw" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+<button v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
 <button v-else class="mt10 fw" style="margin-top:20px;" disabled>Employee Checkout</button> 
 </template>
 
@@ -2045,16 +2045,16 @@ cart empty
       <template v-if="currentOrder.preorder === true">
       <button 
       v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
-      @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
+      @click="showGiftcard()" id="cip-pay-btn" class="pay-button gift-card" >Use Giftcard</button>
       <button 
-      v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
+      v-else id="cip-pay-btn" class="pay-button gift-card"  disabled>Use Giftcard</button>
       </template>
       <template v-else>
       <button 
       v-if="dnsCheck && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
-      @click="showGiftcard()" id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;">Use Giftcard</button>
+      @click="showGiftcard()" id="cip-pay-btn" class="pay-button gift-card" >Use Giftcard</button>
       <button 
-      v-else id="cip-pay-btn" class="fw" style="margin-bottom: 20px;margin-top: 15px;" disabled>Use Giftcard</button>
+      v-else id="cip-pay-btn" class="pay-button gift-card"  disabled>Use Giftcard</button>
 
 
       </template>
@@ -7026,4 +7026,5 @@ console.log('mount functions end');
 
 <style lang="scss">
   @import '@/assets/styles/olostyles.scss';
+  @import '@/assets/styles/_classes.scss';
 </style>
