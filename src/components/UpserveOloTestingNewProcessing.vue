@@ -3388,33 +3388,19 @@ return result;
 
 
 },
-    emailValidFromServer(email){
-console.log('valid from server')
-console.log('valid from server')
-console.log('valid from server')
-console.log('valid from server')
-
-
-
-if(this.validEmail(email)){
-            let self = this
-                this.$http.get(`/emailverified/${email}`).then(function (response) {
-                  console.log(response.data.data);
-
-                    if(response.data.data.dnsCheck === 'true'){
-                        self.dnsCheck = true;
-                    }else{
-                        self.dnsCheck = false;
-                    }
-
-            })
-  
-
-
+  async emailValidFromServer(email){
+    if(this.validEmail(email)){
+      let self = this
+      await self.$http.get(`/emailverified/${email}`).then(function (response) {
+        console.log(response.data.data);
+        if(response.data.data.dnsCheck === 'true'){
+          self.dnsCheck = true;
+        }else{
+          self.dnsCheck = false;
+        }
+      })
     }
-
-
-    },
+  },
     changeToPreorderAndShowDropDown(){
 
 //  this.$swal({ 
@@ -3675,7 +3661,7 @@ console.log('transasction success')
       });
     },
 emailErrorVisible(emailEntry,phoneEntry){
-
+  emailEntry.trim();
 this.emailErrorVisibleTf = true;
  this.formsValid(emailEntry,phoneEntry);
 this.emailValidFromServer(emailEntry);
