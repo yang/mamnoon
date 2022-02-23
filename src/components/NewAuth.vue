@@ -10,7 +10,7 @@
       @click="logout"
       :disabled="!isInit"
     >
-      sign out of {{ authEmail.user.email.replace("@gmail.com", "") }}
+      sign out of {{ authEmail.user.email }}
     </a>
 
     <div
