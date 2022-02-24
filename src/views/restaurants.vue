@@ -107,7 +107,7 @@
                   <div class="infoIconLine2">
                     <div class="rightIcon">
                       <div class="right-icon-text">
-                        <Phone :width="20" class="mr6 centeredSvg" />
+                        <Phone :width="20" class="mr6 mt6 centeredSvg" />
                         <span>
                           <br/>
                           <a
