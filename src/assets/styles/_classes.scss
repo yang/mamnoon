@@ -22,7 +22,6 @@
     color: $nadi-red-color !important;
     border: $nadi-button-border !important;
   }
-  
 }
 
 %nadi-secondary-button {
@@ -33,5 +32,18 @@
   &:hover {
     background: $nadi-red-color !important;
     color: $nadi-white-color !important;
+  }
+}
+
+
+%nadi-tertiary-button {
+  background: $nadi-red-color;
+  border-radius: $nadi-button-border-radius !important;
+  color: $nadi-white-color;
+  border: none !important;
+  &:hover {
+    background: $nadi-white-color !important;
+    color: $nadi-red-color !important;
+    border: none !important;
   }
 }

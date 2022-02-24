@@ -155,7 +155,7 @@ debit/credit
 
       <!-- {{order.orderInfo.restaurant}} -->
 
-<button v-if="order.orderInfo.restaurant === 'Mamnoon' || order.orderInfo.restaurant === 'Mamnoon Street'" class="fl-right sm-button mr-0" @click="reorder(order.orderInfo)">order again</button>
+<button v-if="order.orderInfo.restaurant === 'Mamnoon' || order.orderInfo.restaurant === 'Mamnoon Street'" class="order-again-button" @click="reorder(order.orderInfo)">order again</button>
 
 
 <!-- <pre>{{order.orderInfo}}</pre> -->

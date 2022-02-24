@@ -6,7 +6,7 @@
       placeholder="enter your email"
       class="lap-right-pad noselect formInput"
     />
-    <button class="nadi-button2 dark ml20" @click="submitForm">
+    <button class="signup-button" @click="submitForm">
       {{ subscribeText }}
     </button>
   </div>
@@ -104,6 +104,16 @@ export default {
   &:active {
     outline: none;
     box-shadow: none;
+  }
+}
+
+.signup-button {
+  margin-left: 20px;
+  padding: 1px 20px 3px;
+  font-size: 22px;
+  font-weight: 500;
+  & {
+    @extend %nadi-tertiary-button;
   }
 }
 

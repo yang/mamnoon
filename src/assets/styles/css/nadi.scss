@@ -301,7 +301,9 @@ p.list-of-links {
 
     .blockButton {
       padding: 5px 10px 7px;
-
+      & {
+        @extend %nadi-primary-button;
+      }
       &.firstChild {
         margin-bottom: 10px;
       }
@@ -327,6 +329,9 @@ p.list-of-links {
   a.blockButton {
     &.firstChild {
       margin-bottom: 10px;
+    }
+    & {
+      @extend %nadi-primary-button;
     }
 
     color: #f15d58;
@@ -369,7 +374,9 @@ p.list-of-links {
   a.blockButton {
     color: white;
     background: #f15d58;
-
+    & {
+      @extend %nadi-primary-button;
+    }
     &.inverse {
       background: #f15d58;
       color: white;
@@ -572,6 +579,8 @@ p.list-of-links {
     }
   }
 
+
+
   a.blockButton {
     color: black;
     background: #fff;
@@ -593,6 +602,9 @@ p.list-of-links {
     &:hover {
       text-decoration: none;
       background-color: #f15d58;
+    }
+    & {
+      @extend %nadi-primary-button;
     }
   }
 
