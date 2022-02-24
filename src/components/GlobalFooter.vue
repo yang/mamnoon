@@ -9,7 +9,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-5 col-12">
+          <div class="col-md-6 col-12">
             <h4>{{ $store.state.footer.newsletter.header }}</h4>
             <p>
               {{ $store.state.footer.newsletter.description }}

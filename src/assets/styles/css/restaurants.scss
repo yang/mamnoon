@@ -257,20 +257,17 @@ p.list-of-links {
 
 .bottomButton {
   display: inline-block;
-  border-radius: 5px;
-  // width: 100%;
   margin: 23px 24px 0 0;
-
   text-align: center;
   padding: 5px 8px 5px;
   padding: 1px 20px 3px;
   font-size: 16px;
   font-weight: 500;
-  background: #f15d58;
-  color: white;
-
   font-size: 22px;
   font-weight: 500;
+  & {
+    @extend %nadi-primary-alt-button;
+  }
 
   &:hover {
     color: #fff;

@@ -257,3 +257,11 @@ ul.order-items {
   padding-left: 0;
   font-weight: 400;
 }
+
+.order-again-button {
+  float: right;
+  margin-right: 0;
+  & {
+    @extend %nadi-primary-alt-button;
+  }
+}
