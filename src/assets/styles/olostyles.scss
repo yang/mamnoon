@@ -10,6 +10,11 @@
   font-weight: 600;
 }
 
+input, textarea, select {
+  background-color: $nadi-white-color !important;
+  color: $nadi-black-color !important;
+}
+
 .add-to-order-button {
   float: right;
   padding: 5px 10px;
@@ -23,6 +28,7 @@
   font-size: 24px;
   padding-top: 3px;
   margin-top: 0px;
+  border: $nadi-button-border !important;
   & {
     @extend %nadi-primary-alt-button;
   }
@@ -44,8 +50,17 @@
   font-size: 16px;
   margin-top: 20px;
   border: $nadi-button-border !important;
+  border-radius: $nadi-button-border-radius !important;
   & {
     @extend %nadi-primary-button;
+  }
+}
+
+.pay-button.disabled {
+  :disabled {
+    pointer-events: none !important;
+    background: #666666 !important;
+    border: 2px solid #999999 !important;
   }
 }
 
@@ -60,6 +75,7 @@
   padding: 5px 5px !important;
   font-size: 12px;
   transition: background-color 0.1s ease;
+  border: $nadi-button-border !important;
   & {
     @extend %nadi-primary-alt-button;
     :disabled {

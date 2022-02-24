@@ -1384,6 +1384,7 @@ input.custom-tip-button {
         fill: #fff367;
       }
     }
+    color: white;
   }
 }
 
