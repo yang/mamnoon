@@ -12,7 +12,7 @@
       </div>
 
       <div class="container pb100">
-        <div class="row">
+        <div class="">
           <template
             v-if="$store && $store.state"
             v-for="restaurant in this.$store.state.pageData[0]
@@ -71,7 +71,7 @@
                   <div class="infoIconLine2 top">
                     <div class="rightIcon">
                       <div class="right-icon-text">
-                        <MapPin class="mr6 centeredSvg" />
+                        <MapPin class="mr6 centeredSvg" style="padding-bottom: 30px !important;"/>
                         <span>
                           <template v-for="address in restaurant.address">
                             <template v-for="line in address">
@@ -92,7 +92,7 @@
                   <div class="infoIconLine2">
                     <div class="rightIcon">
                       <div class="right-icon-text">
-                        <Clock :color="'black'" class="mr6 centeredSvg" />
+                        <Clock :color="'black'" class="mr6 centeredSvg" style="padding-bottom: 20px !important;"/>
                         <span>
                           <template v-for="hour in restaurant.hours">
                             <template v-for="line in hour">
