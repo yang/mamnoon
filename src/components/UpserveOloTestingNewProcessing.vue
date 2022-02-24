@@ -1402,7 +1402,7 @@ add
                   @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
                 v-model="currentOrder.fulfillment_info.customer.email"
                 />
-<div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email)">please enter a valid email</div>
+<div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email.trim())">please enter a valid email</div>
 <div class="small-message" v-if="emailErrorVisibleTf && !dnsCheck">invalid email domain</div>
 
 
@@ -2558,7 +2558,7 @@ console.log(matches[0].name)
 }
 
 
-this.formsValid(this.currentOrder.fulfillment_info.customer.email,this.currentOrder.fulfillment_info.customer.phone);
+this.formsValid(this.currentOrder.fulfillment_info.customer.email.trim(),this.currentOrder.fulfillment_info.customer.phone);
 
 this.validGiftCard(this.cardNumberInput);
 
@@ -5173,7 +5173,7 @@ this.panelShow = 'customerInfo'
    if(this.title === 'Mamnoon'){
 
        if(this.$store.state.storeMamnoon.fulfillment_info.customer.email !== ''){
-         this.emailValidFromServer(this.$store.state.storeMamnoon.fulfillment_info.customer.email)
+         this.emailValidFromServer(this.$store.state.storeMamnoon.fulfillment_info.customer.email.trim())
        }
      
 
@@ -5186,7 +5186,7 @@ this.panelShow = 'customerInfo'
 
 
            if(this.$store.state.storeStreet.fulfillment_info.customer.email !== ''){
-         this.emailValidFromServer(this.$store.state.storeStreet.fulfillment_info.customer.email)
+         this.emailValidFromServer(this.$store.state.storeStreet.fulfillment_info.customer.email.trim())
        }   
               
       
