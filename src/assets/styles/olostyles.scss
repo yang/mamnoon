@@ -166,7 +166,7 @@ input, textarea, select {
     position: absolute;
     top: -10px;
     left: -10px;
-    background-color: #f05d5b;
+    // background-color: #f05d5b;
     border-radius: 15px;
     padding-top: 2.5px;
     width: 30px;
@@ -183,8 +183,8 @@ input, textarea, select {
     &.biggerNumber {
       padding-top: 5px;
       div {
-        font-size: 13px;
-        transform: translateY(-2px);
+        font-size: 12px;
+        transform: translateY(-1px);
         display: inline;
         font-weight: 500;
       }
@@ -966,4 +966,22 @@ h4.red {
 
 .hideIfExpired {
   display: none !important;
+}
+
+
+.st122{
+  fill: $nadi-red-color;
+}
+
+.starCount{
+  position: absolute;
+  top: 5px;
+  left: -12px;
+  width: 30px;
+  text-align: center;
+}
+
+
+.biggerNumber .starCount{
+  top: 8px;
 }
