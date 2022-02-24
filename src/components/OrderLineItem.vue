@@ -2,29 +2,15 @@
   <div class="mt5 inline-flex" style="cursor:pointer;">
     <div class="roundSquareBox">
       <div v-if="order.quantity < 10" class="quantity">
+        <div style="position: relative;">
+          <LittleStar />
 
-<div style="position: relative;">
-
-<LittleStar />
-      
-        <div class="starCount">x{{ order.quantity }}</div>
-
-
-</div>
-
-
-
-
+          <div class="starCount">x{{ order.quantity }}</div>
+        </div>
       </div>
       <div v-else class="quantity biggerNumber">
+        <LittleStar />
 
-      <LittleStar />
-
-
-
-
-
-        
         <div class="starCount">x{{ order.quantity }}</div>
       </div>
 
@@ -74,16 +60,14 @@
 <script>
 import NadiIconSmXSidebar from "@/components/svgIcons/NadiIconSmXSidebar";
 
-
 import LittleStar from "@/components/svgIcons/LittleStar";
-
 
 export default {
   name: "OrderLineItem",
   props: ["order"],
   components: {
     NadiIconSmXSidebar,
-    LittleStar
+    LittleStar,
   },
 };
 </script>

@@ -83,6 +83,7 @@
                               ><br />
                             </template>
                           </template>
+                          <br/>
                         </span>
                       </div>
                     </div>
@@ -95,7 +96,7 @@
                         <span>
                           <template v-for="hour in restaurant.hours">
                             <template v-for="line in hour">
-                              {{ line.line }}<br />
+                              <p>{{ line.line }}</p>
                             </template>
                           </template>
                         </span>
@@ -108,6 +109,7 @@
                       <div class="right-icon-text">
                         <Phone :width="20" class="mr6 centeredSvg" />
                         <span>
+                          <br/>
                           <a
                             :href="
                               `tel:+1${restaurant.phone_number.replace(
@@ -117,6 +119,7 @@
                             "
                             target="_blank"
                             class="linkBlack"
+                            
                             >{{ restaurant.phone_number }}</a
                           >
                         </span>
