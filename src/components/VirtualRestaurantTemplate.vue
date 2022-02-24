@@ -1804,6 +1804,9 @@ a.ctaLinkOpposite {
   font-size: 22px;
   font-weight: 500;
 
+  & {
+    @extend %nadi-secondary-alt-button;
+  }
   @media only screen and (max-width: 768px) {
     width: 100%;
   }

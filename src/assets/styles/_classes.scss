@@ -35,6 +35,16 @@
   }
 }
 
+%nadi-secondary-alt-button {
+  background: $nadi-white-color;
+  border-radius: $nadi-button-border-radius !important;
+  color: $nadi-black-color;
+  border: none !important;
+  &:hover {
+    background: $nadi-black-color !important;
+    color: $nadi-white-color !important;
+  }
+}
 
 %nadi-tertiary-button {
   background: $nadi-red-color;

@@ -266,7 +266,7 @@ p.list-of-links {
   font-size: 22px;
   font-weight: 500;
   & {
-    @extend %nadi-primary-button;
+    @extend %nadi-primary-alt-button;
   }
 
   &:hover {
