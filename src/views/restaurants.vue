@@ -224,10 +224,6 @@ export default {
       this.pageData = AcfBlock.data.acf.content_fields;
 
       for (var item in AcfBlock.data.acf.content_fields) {
-        // console.log(item)
-
-        // console.log(AcfBlock.data.acf.content_fields[item].acf_fc_layout)
-
         let acf = AcfBlock.data.acf.content_fields;
         if (acf[item].acf_fc_layout === "fine foods") {
           this.ffdata = acf[item];

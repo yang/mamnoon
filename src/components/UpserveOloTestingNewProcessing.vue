@@ -1764,7 +1764,7 @@ scheduled time:<br><b>{{currentOrder.scheduled_time | formatDate}}</b><br>
 <div style="margin-bottom: 20px;" v-if="panelShow === 'customerInfo'&& currentOrder.preorder === false">
 scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
 <span style="font-size: .9rem;font-style: italic;">(approximately 20 minutes from now)</span>
-<button class="schedule-later" style="margin-top:10px;margin-bottom: 20px;" @click="changeToPreorderAndShowDropDown()">Schedule for later</button>
+<button class="schedule-later" style="margin-top:10px;margin-bottom: 20px;" @click="changeToPreorderAndShowDropDown()">schedule a different pick-up time</button>
 
 
 </div>

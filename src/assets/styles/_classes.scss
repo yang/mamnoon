@@ -57,3 +57,32 @@
     border: none !important;
   }
 }
+
+%nadi-link-button {
+  border: none !important;
+  border-radius: none !important;
+  background-color: none !important;
+  background: none !important;
+  color: $nadi-red-color !important;
+  font-family: 'Helvetica Neue' !important;
+  font-style: normal !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  line-height: 36px !important;
+  &:hover {
+    color: $nadi-black-color !important;
+  }
+}
+
+%nadi-link-alt-button {
+  border: none;
+  border-radius: none;
+  background-color: none;
+  background: none;
+  color: #000000;
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 36px;
+}
