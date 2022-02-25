@@ -26,7 +26,7 @@
   v-if="$store.state.loggedIn"
 @click="handleClickSignOut"
 :disabled="!isInit">
-  sign out of {{$store.state.currentUserEmail}}
+  sign out
 </a>
     <a
     class="hide-on-mobile"

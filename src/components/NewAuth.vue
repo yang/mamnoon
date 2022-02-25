@@ -10,7 +10,7 @@
       @click="logout"
       :disabled="!isInit"
     >
-      sign out of {{ authEmail.user.email }}
+      sign out
     </a>
 
     <div
