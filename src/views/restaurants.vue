@@ -12,7 +12,7 @@
       </div>
 
       <div class="container pb100">
-        <div class="">
+        <div class="row">
           <template
             v-if="$store && $store.state"
             v-for="restaurant in this.$store.state.pageData[0]
