@@ -59,9 +59,7 @@ select {
 
 .pay-button.disabled {
   :disabled {
-    pointer-events: none !important;
-    background: #666666 !important;
-    border: 2px solid #999999 !important;
+    @extend %nadi-disabled-button;
   }
 }
 
@@ -79,10 +77,7 @@ select {
   & {
     @extend %nadi-secondary-button;
     :disabled {
-      border: 1px solid #999999 !important;
-      background-color: #cccccc !important;
-      color: #666666 !important;
-      pointer-events: none;
+      @extend %nadi-disabled-button;
     }
   }
 }
@@ -93,10 +88,7 @@ select {
   & {
     @extend %nadi-secondary-button;
     :disabled {
-      border: 1px solid #999999 !important;
-      background-color: #cccccc !important;
-      color: #666666 !important;
-      pointer-events: none;
+      @extend %nadi-disabled-button;
     }
   }
 }
@@ -106,7 +98,7 @@ select {
   font-size: 14px;
   margin-top: 10px;
   & {
-    @extend %nadi-primary-alt-button;
+    @extend %nadi-primary-button;
     :disabled {
       @extend %nadi-disabled-button;
     }
