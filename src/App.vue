@@ -156,24 +156,24 @@ h4.error {
     // border-bottom: 1px solid rgba(0,0,0,.51) !important;
   }
 
-  button {
-    border: 1px solid $nadi-red-color;
-    border: 1px solid #f58e58;
-    background-color: $nadi-red-color;
+  // button {
+  //   border: 1px solid $nadi-red-color;
+  //   border: 1px solid #f58e58;
+  //   background-color: $nadi-red-color;
 
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 4px;
-    // border: 2px solid $nadi-red-color !important;
-    // border: 2px solid #f58e58 !important;
-    border: 2px solid transparent;
+  //   color: #ffffff;
+  //   padding: 5px 10px;
+  //   border-radius: 4px;
+  //   // border: 2px solid $nadi-red-color !important;
+  //   // border: 2px solid #f58e58 !important;
+  //   border: 2px solid transparent;
 
-    //border: 2px solid $nadi-red-color;
+  //   //border: 2px solid $nadi-red-color;
 
-    &.deactivated {
-      border: 2px solid #999999 !important;
-    }
-  }
+  //   &.deactivated {
+  //     border: 2px solid #999999 !important;
+  //   }
+  // }
   transition: all 0.5s ease;
   button:hover {
     // border: 1px solid $nadi-red-color;
@@ -1362,31 +1362,31 @@ input.custom-tip-button {
   margin-top: 2px;
 }
 
-#upserveolo button.vs__clear {
-  background: $nadi-red-color;
-  border-radius: 30px;
-  padding: 0 1px;
-  width: 26px;
-  height: 26px;
-  svg {
-    transform: translate(0px, -3px);
-    width: 11px;
-    path {
-      fill: #ffffff;
-    }
-  }
+// #upserveolo button.vs__clear {
+//   background: $nadi-red-color;
+//   border-radius: 30px;
+//   padding: 0 1px;
+//   width: 26px;
+//   height: 26px;
+//   svg {
+//     transform: translate(0px, -3px);
+//     width: 11px;
+//     path {
+//       fill: #ffffff;
+//     }
+//   }
 
-  &:hover {
-    svg {
-      transform: translate(0px, -3px);
-      width: 11px;
-      path {
-        fill: #fff367;
-      }
-    }
-    color: white;
-  }
-}
+//   &:hover {
+//     svg {
+//       transform: translate(0px, -3px);
+//       width: 11px;
+//       path {
+//         fill: #fff367;
+//       }
+//     }
+//     color: white;
+//   }
+// }
 
 .preorder-bottom-pad {
   margin-bottom: 15px;

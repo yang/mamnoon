@@ -10,7 +10,9 @@
   font-weight: 600;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   background-color: $nadi-white-color !important;
   color: $nadi-black-color !important;
 }
@@ -30,7 +32,7 @@ input, textarea, select {
   margin-top: 0px;
   border: $nadi-button-border !important;
   & {
-    @extend %nadi-primary-alt-button;
+    @extend %nadi-secondary-button;
   }
 }
 
@@ -74,13 +76,13 @@ input, textarea, select {
   padding: 5px 5px !important;
   font-size: 12px;
   transition: background-color 0.1s ease;
-  border: $nadi-button-border !important;
   & {
-    @extend %nadi-primary-alt-button;
+    @extend %nadi-secondary-button;
     :disabled {
-      pointer-events: none !important;
-      background: #666666 !important;
-      border: 2px solid #999999 !important;
+      border: 1px solid #999999 !important;
+      background-color: #cccccc !important;
+      color: #666666 !important;
+      pointer-events: none;
     }
   }
 }
@@ -88,10 +90,28 @@ input, textarea, select {
 .tipButtons.custom {
   width: 100%;
   font-size: 14px;
-  border: $nadi-button-border !important;
+  & {
+    @extend %nadi-secondary-button;
+    :disabled {
+      border: 1px solid #999999 !important;
+      background-color: #cccccc !important;
+      color: #666666 !important;
+      pointer-events: none;
+    }
+  }
+}
+
+.checkout-button {
+  width: 100%;
+  font-size: 14px;
+  margin-top: 10px;
   & {
     @extend %nadi-primary-alt-button;
+    :disabled {
+      @extend %nadi-disabled-button;
+    }
   }
+
 }
 
 .order-confirm-button {
@@ -967,12 +987,11 @@ h4.red {
   display: none !important;
 }
 
-
-.st122{
+.st122 {
   fill: $nadi-red-color;
 }
 
-.starCount{
+.starCount {
   position: absolute;
   top: 5px;
   left: -12px;
@@ -980,7 +999,6 @@ h4.red {
   text-align: center;
 }
 
-
-.biggerNumber .starCount{
+.biggerNumber .starCount {
   top: 8px;
 }

@@ -86,3 +86,10 @@
   font-size: 16px;
   line-height: 36px;
 }
+
+%nadi-disabled-button {
+  border: 1px solid #999999 !important;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  pointer-events: none;
+}

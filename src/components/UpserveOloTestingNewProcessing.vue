@@ -1813,7 +1813,7 @@ cart empty
 </template>
 <template v-if="panelShow === 'yourOrder'">
 <button @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf deactivated" disabled="disabled" style="width:100%;margin-top: 15px;pointer-events:none;display:none;" v-if="this.currentOrder.charges && this.currentOrder.charges.items.length === 0">guest info</button>
- <button style="width: 100%;font-size: 24px;padding-top: 3px;padding: 12px 10px;" @click="panelShowChoose('customerInfo')" class="mt10 fw filehalf red-checkout-button" v-else>
+ <button style="width: 100%;font-size: 24px;padding-top: 3px;padding: 12px 10px;" @click="panelShowChoose('customerInfo')" class="checkout-button" v-else>
  <span class="float-left-checkout">checkout ({{itemsInCart(this.currentOrder.charges.items)}})</span> <span class="float-right-checkout">${{currentOrder.charges.total | showToFixed }}</span></button>
 </template>
 <template v-if="panelShow === 'customerInfo'">
