@@ -612,6 +612,8 @@
 
 
 
+
+
 <template v-if="reOrder && $store.state.storeCurrentOrder && reOrder.id && $store.state.storeCurrentOrder.id">
 <div class="order-modal"> 
         <div class="container online-menu order-modal-width" style="padding: 20px 0 15px !important; margin-top: 24px;">
@@ -2833,6 +2835,7 @@ googleAddressObject.state;
     },
   data() {
   return {
+domains: ["mamnoonrestaurant.com","gmail.com","yahoo.com","hotmail.com","aol.com","hotmail.co.uk","hotmail.fr","msn.com","yahoo.fr","wanadoo.fr","orange.fr","comcast.net","yahoo.co.uk","yahoo.com.br","yahoo.co.in","live.com","rediffmail.com","free.fr","gmx.de","web.de","yandex.ru","ymail.com","libero.it","outlook.com","uol.com.br","bol.com.br","mail.ru","cox.net","hotmail.it","sbcglobal.net","sfr.fr","live.fr","verizon.net","live.co.uk","googlemail.com","yahoo.es","ig.com.br","live.nl","bigpond.com","terra.com.br","yahoo.it","neuf.fr","yahoo.de","alice.it","rocketmail.com","att.net","laposte.net","facebook.com","bellsouth.net","yahoo.in","hotmail.es","charter.net","yahoo.ca","yahoo.com.au","rambler.ru","hotmail.de","tiscali.it","shaw.ca","yahoo.co.jp","sky.com","earthlink.net","optonline.net","freenet.de","t-online.de","aliceadsl.fr","virgilio.it","home.nl","qq.com","telenet.be","me.com","yahoo.com.ar","tiscali.co.uk","yahoo.com.mx","voila.fr","gmx.net","mail.com","planet.nl","tin.it","live.it","ntlworld.com","arcor.de","yahoo.co.id","frontiernet.net","hetnet.nl","live.com.au","yahoo.com.sg","zonnet.nl","club-internet.fr","juno.com","optusnet.com.au","blueyonder.co.uk","bluewin.ch","skynet.be","sympatico.ca","windstream.net","mac.com","centurytel.net","chello.nl","live.ca","aim.com","bigpond.net.au"],
 staffTimingMask: {
   "id": "7af998f6-20f1-4984-a625-943f787be339",
   "start_time": "14:30",
@@ -3412,7 +3415,19 @@ return result;
 
 },
   async emailValidFromServer(email){
+
+
+
+
+
     if(this.validEmail(email)){
+
+if(this.domains.includes(email.split("@")[1])){
+      self.dnsCheck = 1;
+}else{
+
+
+
       let self = this
       await self.$http.get(`/emailverified/${email}`).then(function (response) {
         console.log(`line 3395 olo testing`,response.data.data);
@@ -3422,6 +3437,8 @@ return result;
           self.dnsCheck = 0;
         }
       })
+
+      }
     }
   },
     changeToPreorderAndShowDropDown(){
@@ -6831,7 +6848,25 @@ if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.
 
    
     },
+
+getCustomerEmails(){
+console.log('333');
+    let self = this
+        this.$http.get(`/order/getemaildomains`).then(function (response) {
+// this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
+
+let domainSet = new Set(self.domains.concat(response.data.domains));
+self.domains = [...domainSet];
+
+    })
+  
+},
     mountFunctions(){
+
+
+
+this.getCustomerEmails();
+
 
 console.log('mount functions start');
 
