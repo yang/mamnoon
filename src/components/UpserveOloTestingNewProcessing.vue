@@ -1401,12 +1401,16 @@ add
                   id="email"
                   name="email"
                   placeholder="email"
-                  @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
+                  @focus="emailErrorVisibleTf = true"
+
                 v-model="currentOrder.fulfillment_info.customer.email"
                 />
 
-{{dnsCheck}}
+<!--                  @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"-->
 
+
+<!--{{dnsCheck}}
+{{dnsChecker}}-->
 <div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email.trim())">please enter a valid email</div>
 <div class="small-message" v-if="emailErrorVisibleTf && dnsCheck === 0">invalid email domain</div>
 
@@ -2340,6 +2344,17 @@ return this.currentOrder.tipSelected === i
 
   },	
   watch: {
+    dnsCheck:{
+      handler(val){
+
+
+        this.dnsChecker = this.dnsCheck;
+
+
+      }
+      },
+
+
     rendered:{
       handler(val){
 
@@ -2497,6 +2512,11 @@ this.currentOrder.charges.tip.amount = this.customAmountAddition
 
 
 
+// console.log(this.currentOrder.fulfillment_info.customer.email);
+
+// this.checkEmailValidation();
+
+this.emailValidFromServer(this.currentOrder.fulfillment_info.customer.email);
 
       let preTotal = 0
 
@@ -3419,14 +3439,15 @@ return result;
 },
   async emailValidFromServer(email){
 
-
+// console.log('this happen');
 
 
 
     if(this.validEmail(email)){
 
 if(this.domains.includes(email.split("@")[1])){
-      self.dnsCheck = 1;
+  // console.log('33');
+      this.dnsCheck = 1;
 }else{
 
 
@@ -3704,10 +3725,14 @@ console.log('transasction success')
       });
     },
     emailErrorVisible(emailEntry,phoneEntry){
+
+
+console.log('change done');
+
       emailEntry.trim();
       this.formsValid(emailEntry,phoneEntry);
       this.emailValidFromServer(emailEntry);
-      this.emailErrorVisibleTf = true;
+      // this.emailErrorVisibleTf = true;
     },
     checkIfFullNameValid(fullname){
       this.fullNameErrorVisibleTf = true;
