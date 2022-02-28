@@ -132,8 +132,15 @@
                       {{ item.description }}
                     </h1>
 
+<template v-if="item.online_ordering">
+<a class="ctaLink" target="_blank" :href="item.olo_path">order for pickup</a>
+</template>
+
+
+
                     <template v-for="button in item.buttons">
                       <a
+                      v-if="button.enabled"
                         class="ctaLink"
                         target="_blank"
                         :style="styleObject"
