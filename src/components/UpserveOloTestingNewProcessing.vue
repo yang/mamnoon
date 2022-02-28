@@ -1679,6 +1679,29 @@ add
 <div class="text-center">
     <h4>online ordering is currently unavailable</h4>
   sorry for the inconvenience.
+
+  <template v-if="this.title === 'Mamnoon'">
+    <br>
+
+          please use this link to complete your order:<br>
+          <a href="https://app.upserve.com/s/mamnoon-llc-seattle">order here</a>
+
+  </template>
+  <template v-if="this.title === 'Mamnoon Street'">
+    <br>
+     please use this link to complete your order:<br>
+   <a href="https://app.upserve.com/s/mamnoon-street-seattle"
+            >order here</a
+          >
+
+  </template>
+
+
+
+
+
+
+
   </div>
   </template>
   <template v-else>

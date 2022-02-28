@@ -132,7 +132,7 @@
                       {{ item.description }}
                     </h1>
 
-<template v-if="item.online_ordering">
+<template v-if="item.online_ordering_link">
 <a class="ctaLink" target="_blank" :href="item.olo_path">order for pickup</a>
 </template>
 
