@@ -1404,6 +1404,9 @@ add
                   @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
                 v-model="currentOrder.fulfillment_info.customer.email"
                 />
+
+{{dnsCheck}}
+
 <div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email.trim())">please enter a valid email</div>
 <div class="small-message" v-if="emailErrorVisibleTf && dnsCheck === 0">invalid email domain</div>
 
@@ -6870,9 +6873,9 @@ this.getCustomerEmails();
 
 console.log('mount functions start');
 
-      if(window.location.hash === '#mamnoonEmployee'){
-          this.employeeCheckout = true
-      }
+      // if(window.location.hash === '#mamnoonEmployee'){
+      //     this.employeeCheckout = true
+      // }
 
         this.$nextTick(function () {
             window.setInterval(() => {
