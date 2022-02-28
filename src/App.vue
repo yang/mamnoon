@@ -174,23 +174,23 @@ h4.error {
   //     border: 2px solid #999999 !important;
   //   }
   // }
-  transition: all 0.5s ease;
-  button:hover {
-    // border: 1px solid $nadi-red-color;
-    // border: 1px solid #f58e58;
-    background-color: $nadi-red-color;
-    background-color: #f58e58;
-    background-color: $nadi-red-color;
-    color: $nadi-red-color;
-    padding: 5px 10px;
-  }
+  // transition: all 0.5s ease;
+  // button:hover {
+  //   // border: 1px solid $nadi-red-color;
+  //   // border: 1px solid #f58e58;
+  //   background-color: $nadi-red-color;
+  //   background-color: #f58e58;
+  //   background-color: $nadi-red-color;
+  //   color: $nadi-red-color;
+  //   padding: 5px 10px;
+  // }
 
-  button:disabled,
-  button[disabled="true"] {
-    border: 1px solid #999999 !important;
-    background-color: #cccccc;
-    color: #666666;
-  }
+  // button:disabled,
+  // button[disabled="true"] {
+  //   border: 1px solid #999999 !important;
+  //   background-color: #cccccc;
+  //   color: #666666;
+  // }
 
   div {
     // padding: 5px 10px;
