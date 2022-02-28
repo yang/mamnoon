@@ -607,7 +607,7 @@
         <div class="row no-lr-margin">
 <div class="col-md-12 col-lg-8">
       <div class="container no-pad"> 
-      <h4 class="text-left red">full menu (new processing)</h4>
+      <h4 class="text-left red">full menu</h4>
 
 
 
