@@ -2167,9 +2167,10 @@ cart empty
       </div>
       </div>
       </section>
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
+      
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeMbar}}</pre>-->
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeMbar}}</pre>
    <!--// ccc-->
 
 
