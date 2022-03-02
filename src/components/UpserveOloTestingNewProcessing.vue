@@ -3448,6 +3448,7 @@ return result;
 if(this.domains.includes(email.split("@")[1])){
   // console.log('33');
       this.dnsCheck = 1;
+      this.emailErrorVisibleTf = false;
 }else{
 
 
