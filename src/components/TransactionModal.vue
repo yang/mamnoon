@@ -11,7 +11,10 @@
      <br>
 
 
-    <!-- accepted on upserve pos: {{ loadedorderRendered.orderAccepted}}-->
+<!--accepted on upserve pos: {{ loadedorderRendered.orderAccepted}}-->
+<!--<br>
+order posted to nadimama: {{ loadedorderRendered.orderPosted}}-->
+
 <br>
 
 <br>
