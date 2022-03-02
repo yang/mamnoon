@@ -2682,8 +2682,8 @@ if(itemsToRemove.length === 1){
           });
 
       // this.$swal({ 
-      //      title: removalItems + ' is not available at the selected pick-up time. please select another time.'
-      //     });
+      //  title: removalItems + ' is not available at the selected pick-up time. please select another time.'
+      // });
 // this.selectedTime = null;
 }else if(itemsToRemove.length>1){
 
@@ -3468,12 +3468,12 @@ if(this.domains.includes(email.split("@")[1])){
     changeToPreorderAndShowDropDown(){
 
 //  this.$swal({ 
-//     title: "please select a preferred date and time at the top of the page."
+// title: "please select a preferred date and time at the top of the page."
 //   });
-//       this.preOrderToggle(true);
+//   this.preOrderToggle(true);
 //   window.scrollTo(0,0);
 // //  this.currentOrder.preorder = true;
-//         // this.changedToDropdown = true;
+// // this.changedToDropdown = true;
 
 
   this.$swal({ 
@@ -4073,10 +4073,10 @@ var result = jsObjects.find(obj => {
 
 },
     checkIfPackageAvailable(itemid){
-//       if(this.packages){
-//       let result = this.packages.find(pack => {
-//         return pack.upserveId === itemid
-//       });
+//   if(this.packages){
+//   let result = this.packages.find(pack => {
+// return pack.upserveId === itemid
+//   });
 
 // // console.log(result);
 // if(result !== undefined){
@@ -4093,7 +4093,7 @@ var result = jsObjects.find(obj => {
 // return true;
 // }
 
-//     }
+// }
 return true;
       },
 notAvailableDayOf(item){
@@ -4101,22 +4101,22 @@ notAvailableDayOf(item){
 return false;
 // console.log(item);
 
-//      if(this.packages){
+//  if(this.packages){
 // // console.log(this.packages)
 // // console.log(this.packages);
 
-//       let result = this.packages.find(pack => {
-//         return pack.upserveId === item.id
-//       });
+//   let result = this.packages.find(pack => {
+// return pack.upserveId === item.id
+//   });
 
 // // console.log(result);
 // if(result){
-//     return true;
-//     }else{
-//        return false;
-//      }
+// return true;
+// }else{
+//    return false;
+//  }
 
-//     }
+// }
 
 },
     checkIfPackage(itemid){
@@ -4292,7 +4292,7 @@ this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
 
 
 //  this.$swal({ 
-//     title: "this card has already been saved to your account"
+// title: "this card has already been saved to your account"
 //   });
 
 
@@ -4791,11 +4791,11 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 
     this.currentRestaurantHours = this.hours.restaurant_hours[0].restaurant_name.find(o => o.name === this.title.toLowerCase());
 
-    console.log('this.currentRestaurantHours');
+    // console.log('this.currentRestaurantHours');
     // console.log(this.currentRestaurantHours);
-        // console.log(this.currentRestaurantHours);
-        //     console.log(this.currentRestaurantHours);
-        //         console.log(this.currentRestaurantHours);
+    // console.log(this.currentRestaurantHours);
+    // console.log(this.currentRestaurantHours);
+    // console.log(this.currentRestaurantHours);
     this.openDays = this.currentRestaurantHours.information.days_of_week
     let curRest = this.currentRestaurantHours.information.open_time_range
 
@@ -4951,12 +4951,12 @@ let rules = item.timing_mask.rules;
 // console.log('is showing up: '+name);
 
 if(name=== 'Lunch Wraps To Go'){
-console.log('here');
+// console.log('here');
 
-console.log(futureDay)
-console.log(futureTime)
-// console.log(name)
-console.log(item)
+// console.log(futureDay)
+// console.log(futureTime)
+// // console.log(name)
+// console.log(item)
 
 
 }
@@ -5908,10 +5908,10 @@ this.currentItemQuantity = this.currentItem.quantity;
 //   // console.log('one attribute previously non existent. add to list.')
 //   this.currentOrder.charges.items.push(itemToAdd);
 // // }
-//     }else{
+// }else{
 // console.log(this.searchForItem(item.name,this.textdescription,this.currentItemModifierArray));
 // if(this.searchForItem(item.name,this.textdescription,this.currentItemModifierArray) === 'add'){
-//     this.currentOrder.charges.items.push(itemToAdd);
+// this.currentOrder.charges.items.push(itemToAdd);
 // }
 // }
 
@@ -6736,15 +6736,15 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
 // if(location.search.substring(1).split('&')[2]){
 
 // let endDateString = location.search.substring(1).split('&')[2].replace('endDate=','');
-//               console.log(timeslotsCreated);
-//             this.dropDownDays.push({
-//             dayLabel: "d",
-//             dayName: "d",
-//             closed: false,
-//             dateData: moment(endDateString).format('dddd') + ', ' + moment(endDateString).format("MMM Do"),
-//             dateFormatted: endDateString,
-//             timeslots: timeslotsCreatedNoDuplicates
-//             })
+//       console.log(timeslotsCreated);
+//     this.dropDownDays.push({
+//     dayLabel: "d",
+//     dayName: "d",
+//     closed: false,
+//     dateData: moment(endDateString).format('dddd') + ', ' + moment(endDateString).format("MMM Do"),
+//     dateFormatted: endDateString,
+//     timeslots: timeslotsCreatedNoDuplicates
+//     })
 
 
 
@@ -6773,7 +6773,7 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
         // console.log(timeslotsCreated);
               // console.log(timeslotsCreated.slice(2));
       // console.log('this.openTimesUpdated');
-      //       console.log(this.openTimesUpdated);
+      //   console.log(this.openTimesUpdated);
 
             for(let i = 1; i < this.openTimesUpdated.length; i++){ 
               timeslotsCreated.push({
@@ -6836,6 +6836,17 @@ if(response.data.result === "success"){
 
 }else{
   self.oloAvailable = false;
+
+    if(self.title === 'Mamnoon'){
+      window.location.href = 'https://app.upserve.com/s/mamnoon-llc-seattle';
+    }
+
+    if(self.title === 'Mamnoon Street'){
+      window.location.href = 'https://app.upserve.com/s/mamnoon-street-seattle';
+    }
+
+
+
 }
 
 
@@ -6853,6 +6864,30 @@ if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.
 
 
  self.oloAvailable = pageData.restaurant_repeater[i].online_ordering;
+
+console.log('pageData.restaurant_repeater[i]');
+console.log('pageData.restaurant_repeater[i]');
+console.log(pageData.restaurant_repeater[i].online_ordering);
+
+if(pageData.restaurant_repeater[i].online_ordering === false){
+// self.$router.push('http://www.yoursite.com/blog');
+
+
+if(pageData.restaurant_repeater[i].name === 'mamnoon'){
+window.location.href = 'https://app.upserve.com/s/mamnoon-llc-seattle';
+}
+
+if(pageData.restaurant_repeater[i].name === 'mamnoon street'){
+  window.location.href = 'https://app.upserve.com/s/mamnoon-street-seattle';
+}
+
+
+
+
+}
+
+
+
 
 }
 
@@ -6899,7 +6934,7 @@ this.getCustomerEmails();
 console.log('mount functions start');
 
       // if(window.location.hash === '#mamnoonEmployee'){
-      //     this.employeeCheckout = true
+      // this.employeeCheckout = true
       // }
 
         this.$nextTick(function () {
@@ -7076,6 +7111,8 @@ console.log('mount functions end');
 },
   },
   mounted() {
+
+    
 
   console.log(moment().add(15, 'minutes').format());
 
