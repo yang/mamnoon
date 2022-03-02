@@ -9,7 +9,6 @@
       :userData="user"
       :emailAddress="$store.state.currentUserEmail"
     />
-
     <!-- {{$store.state.currentUserEmail}} -->
   </div>
 </template>

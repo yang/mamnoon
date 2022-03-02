@@ -291,7 +291,7 @@
           </div>
          <div class="add-to-order-footer">
           <button class="order-confirm-button" v-if="currentItemQuantity > 1" @click="decrementCurrentItem()">-</button>
-          <button v-else disabled>-</button>
+          <button class="order-confirm-button disabled" v-else disabled>-</button>
           &nbsp;&nbsp;
           <span id="value">{{currentItemQuantity}}</span>&nbsp;&nbsp;
 

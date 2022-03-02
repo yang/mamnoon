@@ -103,15 +103,27 @@ select {
       @extend %nadi-disabled-button;
     }
   }
-
+  
 }
 
 .order-confirm-button {
   font-size: 16px;
   font-weight: 600;
-  border-radius: $nadi-button-border-radius;
+  padding: 5px;
+  text-align: center;
+  border: $nadi-button-border !important;
   & {
     @extend %nadi-primary-alt-button;
+  } 
+  @media only screen and (max-width: 992px){
+    height: 2em;
+    width: 2em;
+  }
+}
+
+.order-confirm-button.disabled {
+  &{
+    @extend %nadi-disabled-button;
   }
 }
 
