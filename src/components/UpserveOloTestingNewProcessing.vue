@@ -1401,12 +1401,11 @@ add
                   id="email"
                   name="email"
                   placeholder="email"
-                  @focus="emailErrorVisibleTf = true"
-
+                  @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"
                 v-model="currentOrder.fulfillment_info.customer.email"
                 />
 
-<!--                  @change="emailErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"-->
+
 
 
 <!--{{dnsCheck}}
@@ -3443,8 +3442,9 @@ return result;
 
 
 
-    if(this.validEmail(email)){
-
+    if(!this.validEmail(email)){
+      return;
+    }
 if(this.domains.includes(email.split("@")[1])){
   // console.log('33');
       this.dnsCheck = 1;
@@ -3457,13 +3457,15 @@ if(this.domains.includes(email.split("@")[1])){
         console.log(`line 3395 olo testing`,response.data.data);
         if(response.data.data.dnsCheck === 'true'){
           self.dnsCheck = 1;
+          self.emailErrorVisibleTf = false;
         }else{
           self.dnsCheck = 0;
+          self.emailErrorVisibleTf = true;
         }
       })
 
       }
-    }
+    
   },
     changeToPreorderAndShowDropDown(){
 
