@@ -15,7 +15,8 @@
 
         position: absolute;
     top: -7px;
-    left: -20px;
+    left: -34px;
+
 }
 
 </style>

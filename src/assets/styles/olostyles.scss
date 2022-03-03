@@ -197,8 +197,12 @@ select {
   }
   .quantity {
     position: absolute;
-    top: -10px;
-    left: -10px;
+
+
+    left: 5px;
+    top: -8px;
+
+    top: 4px;
     // background-color: #f05d5b;
     border-radius: 15px;
     padding-top: 2.5px;
@@ -213,9 +217,31 @@ select {
       display: inline;
       font-weight: 500;
     }
+
+    &.smallerNumber {
+      padding-top: 5px;
+      left: 5px;
+      left: -10px;
+      // top: 6px;
+      top: -8px;
+      margin-left: 15px;
+      div {
+        font-size: 12px;
+        transform: translateY(-1px);
+        display: inline;
+        font-weight: 500;
+      }
+    }
+
+
+
     &.biggerNumber {
       padding-top: 5px;
       left: 5px;
+      left: -10px;
+      // top: 6px;
+      top: -8px;
+      margin-left: 15px;
       div {
         font-size: 12px;
         transform: translateY(-1px);
@@ -1017,13 +1043,21 @@ h4.red {
 }
 
 .starCount {
+  // position: absolute;
+  // top: 5px;
+  // left: -12px;
+  // width: 30px;
+  // text-align: center;
   position: absolute;
-  top: 5px;
-  left: -12px;
-  width: 30px;
-  text-align: center;
+  left: -19px;
+  top: 4px;
+  &.biggerNumber{
+    left: -20px;
+    font-size: 11px !important;
+    top: 9px;
+  }
 }
 
-.biggerNumber .starCount {
-  top: 8px;
-}
+// .biggerNumber .starCount {
+//   top: 8px;
+// }
