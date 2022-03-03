@@ -4,19 +4,19 @@
       <UserForm :emailAddress="$store.state.currentUserEmail" />
       <!--<UserForm :emailAddress="$auth.user.email" />-->
 
-   <CreditSaveForm :emailAddress="$store.state.currentUserEmail" />
-                      
+      <CreditSaveForm :emailAddress="$store.state.currentUserEmail" />
 
-
-   <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
-        <!--   <GiftCardModule :emailAddress="$auth.user.email" />-->
-      <OrderHistory :currentUser="$store.state" :email="$store.state.currentUserEmail" />
-      <ReservationHistory :currentUser="$store.state" :email="$store.state.currentUserEmail" />
+      <GiftCardModule :emailAddress="$store.state.currentUserEmail" />
+      <!--   <GiftCardModule :emailAddress="$auth.user.email" />-->
+      <OrderHistory
+        :currentUser="$store.state"
+        :email="$store.state.currentUserEmail"
+      />
+      <ReservationHistory
+        :currentUser="$store.state"
+        :email="$store.state.currentUserEmail"
+      />
     </div>
-
-
-
-
     <div></div>
   </div>
 </template>

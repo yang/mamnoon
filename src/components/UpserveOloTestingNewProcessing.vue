@@ -1411,7 +1411,7 @@ add
 <!--{{dnsCheck}}
 {{dnsChecker}}-->
 <div class="small-message" v-if="emailErrorVisibleTf && !validEmail(currentOrder.fulfillment_info.customer.email.trim())">please enter a valid email</div>
-<div class="small-message" v-if="emailErrorVisibleTf && dnsCheck === 0">invalid email domain</div>
+
 
 
                <label class="smblk" for="phone">phone:</label>
@@ -1945,13 +1945,13 @@ cart empty
 
 <template v-if="this.$store.state.loggedIn">
 
-        <button v-if="dnsCheck === 1 && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
+        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
 
         <template v-if="employeeCheckout">
-        <button v-if="dnsCheck === 1 && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" disabled>Employee Checkout</button> 
         </template>
 
@@ -1959,12 +1959,12 @@ cart empty
 </template>
 <template v-else>
 
-        <button v-if="dnsCheck === 1 && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
+        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth">Credit/Debit Pay</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
   <template v-if="employeeCheckout">
-        <button v-if="dnsCheck === 1 && validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" disabled>Employee Checkout</button>
     </template>
 
@@ -2344,15 +2344,15 @@ return this.currentOrder.tipSelected === i
 
   },	
   watch: {
-    dnsCheck:{
-      handler(val){
+    // dnsCheck:{
+    //   handler(val){
 
 
-        this.dnsChecker = this.dnsCheck;
+    //     this.dnsChecker = this.dnsCheck;
 
 
-      }
-      },
+    //   }
+    //   },
 
 
     rendered:{
@@ -2516,7 +2516,7 @@ this.currentOrder.charges.tip.amount = this.customAmountAddition
 
 // this.checkEmailValidation();
 
-this.emailValidFromServer(this.currentOrder.fulfillment_info.customer.email);
+//this.emailValidFromServer(this.currentOrder.fulfillment_info.customer.email);
 
       let preTotal = 0
 
@@ -3439,35 +3439,31 @@ return result;
 },
   async emailValidFromServer(email){
 
-// console.log('this happen');
-
-
-
     if(!this.validEmail(email)){
-      return;
+      return false;
     }
-if(this.domains.includes(email.split("@")[1])){
-  // console.log('33');
-      this.dnsCheck = 1;
-      this.emailErrorVisibleTf = false;
-}else{
 
-
+    if(this.domains.includes(email.split("@")[1])){
+      return true;
+    } else {
 
       let self = this
-      await self.$http.get(`/emailverified/${email}`).then(function (response) {
+      await self.$http.get(`/emailverified/${email}`)
+      .then(response => {
         console.log(`line 3395 olo testing`,response.data.data);
         if(response.data.data.dnsCheck === 'true'){
-          self.dnsCheck = 1;
-          self.emailErrorVisibleTf = false;
+          // self.dnsCheck = 1;
+          // self.emailErrorVisibleTf = false;
+          return true;
         }else{
-          self.dnsCheck = 0;
-          self.emailErrorVisibleTf = true;
+          // self.dnsCheck = 0;
+          // self.emailErrorVisibleTf = true;
+          return false;
         }
+      }).catch(err => {
+        console.log('err lie 3465', err)
       })
-
-      }
-    
+    }
   },
     changeToPreorderAndShowDropDown(){
 
@@ -3578,6 +3574,14 @@ uniqueTransId:"830ae8cd0cbe4e779e29c0236891bc5a-11e3183c90064c508d3244597d324d32
 
 },
 cippaybuttoncreditauth() {
+  console.log('entering function',this.$store.state.storeMamnoon.fulfillment_info.customer.email.trim());
+  console.log('emailValidFromServer line 3577',this.emailValidFromServer(this.$store.state.storeMamnoon.fulfillment_info.customer.email.trim()));
+
+    if(!this.emailValidFromServer(this.$store.state.storeMamnoon.fulfillment_info.customer.email.trim())){
+      alert("Invalid Email Domain. Please update your email");
+      console.log('inside the email',this.$store.state.storeMamnoon.fulfillment_info.customer.email.trim());
+    } else {
+      console.log("enter else on line 3582")
       let self = this;
       this.getCreditAuthToken().then(function (transactionToken) {
         console.log(transactionToken);
@@ -3606,7 +3610,8 @@ cippaybuttoncreditauth() {
               if(self.$store.state.storeStreet.preorder === false){
                 self.doAnOrder(self.$store.state.storeStreet,approvalData,null);
               }
-    }
+      }
+    
 
 // credit save
 // credit save
@@ -3624,7 +3629,7 @@ cippaybuttoncreditauth() {
           },
         });
       });
-
+    }
 },
     cippaybuttoncreditsave() {
         
@@ -3735,7 +3740,7 @@ console.log('change done');
 
       emailEntry.trim();
       this.formsValid(emailEntry,phoneEntry);
-      this.emailValidFromServer(emailEntry);
+      //this.emailValidFromServer(emailEntry);
       // this.emailErrorVisibleTf = true;
     },
     checkIfFullNameValid(fullname){

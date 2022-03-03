@@ -46,18 +46,10 @@
                 style="width: 60px;text-align: right;height: 80px;"
               >
                 <Burger2 />
-
-
               </div>
             </template>
             <div class="logo-box">
-
-
-
-            
               <router-link to="/">
-
-            
                 <svg
                   id="nadiDesk"
                   width="209"
@@ -279,9 +271,6 @@
               </li>
             </div>
 
-
-
-
             <template v-for="item in pageData">
               <div
                 class="inline-link"
@@ -334,17 +323,11 @@
               </li>
             </div>
 
-
-                      <div class="inline-link" style="cursor:pointer;">
+            <div class="inline-link" style="cursor:pointer;">
               <li>
-            
-
- <GoogleAuthText />
-
+                <GoogleAuthText />
               </li>
             </div>
-
-
           </ul>
         </div>
       </nav>
@@ -857,5 +840,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '@/assets/styles/css/nav3.scss';
+@import "@/assets/styles/css/nav3.scss";
 </style>
