@@ -3463,7 +3463,7 @@ return result;
   async emailValidFromServer(email){
 
     if(!this.validEmail(email)){
-              alert('invalid: please double check the spelling of your email address domain.');
+              alert(`Hmmm...the email address "${email}" doesn't look right. Please enter a valid email address`);
       // return false;
     }
 
@@ -3477,7 +3477,7 @@ return result;
         if(response.data.data.dnsCheck === 'true'){
     this.cippaybuttoncreditauth();
         }else{
-        alert('invalid: please double check the spelling/formatting of your email address.');
+        alert(`Hmmm...the email address "${email}" doesn't look right. Please enter a valid email address`);
         }
       }).catch(err => {
         console.log('err lie 3465', err)
@@ -3487,7 +3487,7 @@ return result;
     async emailValidFromServer2(email){
 
     if(!this.validEmail(email)){
-              alert('invalid: please double check the spelling/formatting of your email address.');
+              alert(`Hmmm...the email address "${email}" doesn't look right. Please enter a valid email address`);
       // return false;
     }
 
@@ -3504,7 +3504,7 @@ return result;
         if(response.data.data.dnsCheck === 'true'){
           self.showGiftcard();
         }else{
-            alert('invalid: please double check the spelling of your email address domain.');
+            alert(`Hmmm...the email address "${email}" doesn't look right. Please enter a valid email address`);
         }
       }).catch(err => {
         console.log('err lie 3465', err)
@@ -3529,7 +3529,7 @@ console.log(this.savedCards);
 console.log(primaryCard[0]);
 
     if(!this.validEmail(email)){
-              alert('invalid: please double check the spelling/formatting of your email address.');
+              alert(`Hmmm...the email address "${email}" doesn't look right. Please enter a valid email address`);
       // return false;
     }
 
@@ -3551,7 +3551,10 @@ this.confirmTokenizedPreAuth(primaryCard[0].approvalData,this.currentOrder.charg
         if(response.data.data.dnsCheck === 'true'){
         self.confirmTokenizedPreAuth(primaryCard[0].approvalData,self.currentOrder.charges.total,primaryCard[0].approvalData.uniqueTransId,primaryCard[0].approvalData.maskedAccount.replace('************',''));
         }else{
-            alert('invalid: please double check the spelling of your email address domain.');
+            alert(`Hmmm...the email address "${email}" doesn't look right. Please enter a valid email address`);
+
+
+
         }
       }).catch(err => {
         console.log('err lie 3465', err)
