@@ -116,7 +116,7 @@ status: <b>ticket closed</b>
           <li
             v-for="item in loadedorderRendered.orderInfo.charges.items"
             :key="item.cartId"
-            style="margin-bottom:30px;"
+            style="margin-bottom:20px;"
           >
 
 
@@ -144,7 +144,21 @@ status: <b>ticket closed</b>
             <b>{{ item.quantity }} x</b> {{ item.name }}&nbsp;&nbsp;&nbsp;<b
               >${{ item.price.toFixed() / 100 }}</b
             >&nbsp;&nbsp;&nbsp;
+            
             <br />
+
+            <template v-if="item.modifiers.length > 0 ">
+              <ul style="padding-left: 0;list-style-type:none;font-size:12px;">
+              <li v-for="mod in item.modifiers">
+              {{mod.name}} +${{mod.price/100}}
+                </li>
+              </ul>
+            </template>
+            
+            &nbsp;&nbsp;&nbsp;
+            
+            <i v-if="item.instructions != ''"style="font-size:10px;">({{item.instructions}})</i>
+          
             &nbsp;&nbsp; &nbsp;&nbsp;
 
             <template v-if="loadedorderRendered.orderPosted">

@@ -3,13 +3,13 @@
     <div class="roundSquareBox">
       <div v-if="order.quantity < 10" class="quantity">
         <div style="position: relative;">
-          <LittleStar />
+          <LittleStar style="position: absolute;top: -8px;left: -30px;" />
           <div class="starCount">x{{ order.quantity }}</div>
           </div>
       </div>
         <div v-else class="quantity">
         <div style="position: relative;">
-        <LittleStar />
+        <LittleStar style="position: absolute;top: -10px;left: -30px;" />
         <div class="starCount biggerNumber">x{{ order.quantity }}</div>
         </div>
       </div>

@@ -13,9 +13,7 @@
 .itemStar{
     width: 46px;
 
-        position: absolute;
-    top: -7px;
-    left: -34px;
+
 
 }
 
