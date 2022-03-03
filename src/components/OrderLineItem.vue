@@ -4,14 +4,14 @@
       <div v-if="order.quantity < 10" class="quantity">
         <div style="position: relative;">
           <LittleStar />
-
           <div class="starCount">x{{ order.quantity }}</div>
-        </div>
+          </div>
       </div>
-      <div v-else class="quantity biggerNumber">
+        <div v-else class="quantity">
+        <div style="position: relative;">
         <LittleStar />
-
-        <div class="starCount">x{{ order.quantity }}</div>
+        <div class="starCount biggerNumber">x{{ order.quantity }}</div>
+        </div>
       </div>
 
       <div
