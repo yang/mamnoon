@@ -97,6 +97,12 @@ select {
   }
 }
 
+.link-button {
+  & {
+    @extend %nadi-link-button;
+  }
+}
+
 .checkout-button {
   width: 100%;
   font-size: 14px;
