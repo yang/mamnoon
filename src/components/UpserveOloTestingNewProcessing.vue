@@ -1428,8 +1428,8 @@ add
                   <!--// @change="phoneErrorVisible(currentOrder.fulfillment_info.customer.email,currentOrder.fulfillment_info.customer.phone)"-->
                 <div class="small-message" v-if="phoneErrorVisibleTf && !validPhone(currentOrder.fulfillment_info.customer.phone)">please enter a valid phone number</div>
 
-            <input style="width: auto;margin-right: 10px;transform: translateY(1px);display:none;" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
-  <label class="smblk" for="sms" style="display:none;">enable SMS order updates </label>
+            <input style="width: auto;margin-right: 10px;transform: translateY(1px);margin-top:5px;display:none;" type="checkbox" id="sms" name="sms" value="sms" v-model="currentOrder.sms">
+  <label class="smblk" for="sms" style="margin-top:5px;display:none;">enable SMS order updates </label>
 <!-- billing info -->
           <h4 class="customer-info text-left mt10">billing info
           
@@ -2191,9 +2191,9 @@ cart empty
       </div>
       </section>
       
-<!--<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
+<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeMbar}}</pre>-->
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeMbar}}</pre>
    <!--// ccc-->
 
 
