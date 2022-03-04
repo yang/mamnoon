@@ -234,7 +234,7 @@ p.list-of-links {
 
 .infoIconLine2 {
   width: 100%;
-  margin: 6px 0;
+  margin: 0;
   display: inline-block;
 
   &.top {
@@ -286,12 +286,13 @@ p.list-of-links {
   position: relative;
   min-height: 50px;
   margin-top: 1rem;
-  span {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-44%);
-    padding-bottom: 35px;
-  }
+  margin-top: 10px;
+  // span {
+  //   position: absolute;
+  //   top: 50%;
+  //   transform: translateY(-44%);
+  //   padding-bottom: 35px;
+  // }
   svg {
     width: 20px;
     position: initial;

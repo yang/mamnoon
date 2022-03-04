@@ -55,7 +55,7 @@
 
 
 
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg class="iPhone" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 34 58" :style="{'enable-background':'new 0 0 34 58', 'width': this.width ? this.width :'20px'}"  xml:space="preserve">
 <g>
 	<path :fill="color" d="M29,0H5C2.2,0,0,2.2,0,5v48c0,2.8,2.2,5,5,5h24c2.8,0,5-2.2,5-5V5C34,2.2,31.8,0,29,0z M12.5,4h9C21.8,4,22,4.2,22,4.5
@@ -87,6 +87,13 @@ export default{
 
 .cellPhone{
 	width: 20px;
+}
+
+
+.iPhone{
+	    transform: translateY(-25%);
+		    width: 16px;
+			margin-left: 2px;
 }
 </style>
 

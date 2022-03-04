@@ -68,7 +68,24 @@
                     </router-link>
                   </div>
 
-                  <div class="infoIconLine2 top">
+
+                  <div class="infoIconLine2">
+                    <div class="rightIcon">
+                      <div class="right-icon-text">
+                        <Clock :color="'black'" class="mr6 centeredSvg" style="padding-bottom: 20px !important;"/>
+                    
+                          <template v-for="hour in restaurant.hours">
+                            <template v-for="line in hour">
+                              <span style="display:block;">{{ line.line }}</span>
+                            </template>
+                          </template>
+                 
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="infoIconLine2">
                     <div class="rightIcon">
                       <div class="right-icon-text">
                         <MapPin class="mr6 centeredSvg" style="padding-bottom: 30px !important;"/>
@@ -80,7 +97,7 @@
                                 target="_blank"
                                 class="linkBlack"
                                 >{{ line.line_group.text }}</a
-                              ><br />
+                              >
                             </template>
                           </template>
                           <br/>
@@ -89,27 +106,14 @@
                     </div>
                   </div>
 
-                  <div class="infoIconLine2">
-                    <div class="rightIcon">
-                      <div class="right-icon-text">
-                        <Clock :color="'black'" class="mr6 centeredSvg" style="padding-bottom: 20px !important;"/>
-                        <span>
-                          <template v-for="hour in restaurant.hours">
-                            <template v-for="line in hour">
-                              <p>{{ line.line }}</p>
-                            </template>
-                          </template>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+
 
                   <div class="infoIconLine2">
                     <div class="rightIcon">
                       <div class="right-icon-text">
-                        <Phone :width="20" class="mr6 mt6 centeredSvg" />
+                        <Phone :width="16" class="mr6 mt6 centeredSvg" />
                         <span>
-                          <br/>
+                         
                           <a
                             :href="
                               `tel:+1${restaurant.phone_number.replace(

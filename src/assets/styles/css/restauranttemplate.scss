@@ -227,7 +227,7 @@ p.list-of-links {
 
 .infoIconLine2 {
   width: 100%;
-  margin: 6px 0;
+  margin: 0;
   display: inline-block;
 
   &.top {
@@ -281,7 +281,7 @@ p.list-of-links {
   padding-left: 50px;
   position: relative;
   min-height: 50px;
-
+  margin-top: 10px;
   span {
     position: absolute;
     top: 50%;
