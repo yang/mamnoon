@@ -634,7 +634,7 @@
       <!-- <div class="food-description">chickpeas, garlic, lemon, tahini (served with 4 pita)</div> -->
       <div class="food-price"> ${{item.price | showToFixed }} </div>
 
-  <button class="float-right mt40dt" @click="addToOrderFromReorder(item)">
+  <button class="add-to-order-button" @click="addToOrderFromReorder(item)">
 add
 </button>
       </div>
@@ -648,8 +648,8 @@ add
 </div>
 </div>
           <div class="add-to-order-footer">
- <button  style="margin-right: 10px;" class="float-right" @click="emptyReOrderObject()">cancel  </button>  &nbsp;&nbsp;
- <button class="float-right" style="margin-right: 10px;" @click="addToAllItemsToOrder(reOrder.charges.items)">
+ <button  style="margin-right: 10px;" class="add-to-order-button" @click="emptyReOrderObject()">cancel  </button>  &nbsp;&nbsp;
+ <button class="add-to-order-button" style="margin-right: 10px;" @click="addToAllItemsToOrder(reOrder.charges.items)">
    <template v-if="reOrder.charges.items.length > 1"> 
    add everything to order
    </template>
@@ -3470,7 +3470,7 @@ return result;
         alert(`Hmmm...the email address "${email}" doesn't look right. Please enter a valid email address`);
         }
       }).catch(err => {
-        console.log('err lie 3465', err)
+        console.log('err line 3465', err)
       })
     }
   },
