@@ -1377,7 +1377,7 @@ add
               @change="checkIfFirstNameValid(currentOrder.fulfillment_info.customer.first_name)"
               v-model="currentOrder.fulfillment_info.customer.first_name"
               />
-                        <div class="small-message" v-if="firstNameErrorVisibleTf && !validFirstName(currentOrder.fulfillment_info.customer.first_name)">please enter a valid first name</div>
+                        <div class="small-message" v-if="firstNameErrorVisibleTf && !validFirstName(currentOrder.fulfillment_info.customer.first_name)">please enter a first name</div>
              <label class="smblk" for="name">last name:</label>
                 <br />
 
@@ -1393,7 +1393,7 @@ add
               v-model="currentOrder.fulfillment_info.customer.last_name"
               />
 
-                        <div class="small-message" v-if="lastNameErrorVisibleTf && !validLastName(currentOrder.fulfillment_info.customer.last_name)">please enter a valid last name</div>
+                        <div class="small-message" v-if="lastNameErrorVisibleTf && !validLastName(currentOrder.fulfillment_info.customer.last_name)">please enter a last name</div>
                <label class="smblk" for="email">email:</label>
                 <br />
                 <input
