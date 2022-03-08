@@ -684,7 +684,7 @@ this.retrieveOrdersByDate(e);
     }
   },
   firstLast(name) {
-    return name.first_name + " " + name.last_name;
+    return name.first_name.replace("nx ","") + " " + name.last_name.replace("nx ", "");
   },
   hideTransactionModal() {
     this.modalVisible = false;
@@ -764,8 +764,12 @@ this.retrieveOrdersByDate(e);
       });
   },
   retrieveTodaysOrders() {
+
+    console.log('retrieve today');
     let self = this;
     this.$http.get(`/order/todaysorderhistory/`).then(function(response) {
+
+      console.log(response);
       self.orderhistory = response.data;
       self.calculateTotals();
     });
