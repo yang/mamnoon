@@ -157,7 +157,7 @@ status: <b>ticket closed</b>
             
             &nbsp;&nbsp;&nbsp;
             
-            <i v-if="item.instructions != ''"style="font-size:10px;">({{item.instructions}})</i>
+            <i v-if="item.instructions != ''"style="font-size:10px;display:block;">({{item.instructions}})</i>
           
             &nbsp;&nbsp; &nbsp;&nbsp;
 

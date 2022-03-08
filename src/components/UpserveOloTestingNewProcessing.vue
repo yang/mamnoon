@@ -2002,7 +2002,6 @@ cart empty
 <template v-if="this.$store.state.loggedIn && panelShow === 'customerInfo'">
 
 <template v-if="currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''">
-<!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="false" :emailAddress="emailAddress" :title="title" /> -->
 
 
   <template v-if="$store.state.currentUserEmail">
@@ -2036,7 +2035,6 @@ cart empty
 </template>
 
 </template>
-<!-- <SavedCard :orderTotal="currentOrder.charges.total" :disabled="true" :emailAddress="emailAddress" :title="title" /> -->
 </template>
 
 
