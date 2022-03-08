@@ -38,18 +38,9 @@ li button {
 }
 
 button {
-  border: 1px solid $nadi-red-color;
-  background-color: $nadi-red-color;
-  color: #ffffff;
-  padding: 5px 10px;
-  border-radius: 4px;
-}
-
-button:hover {
-  border: 1px solid $nadi-red-color;
-  background-color: $nadi-red-color;
-  color: #ffffff;
-  padding: 5px 10px;
+  & {
+    @extend %nadi-primary-alt-button;
+  }
 }
 
 button:disabled,
@@ -59,9 +50,6 @@ button[disabled="true"] {
   color: #666666;
 }
 
-div {
-  // padding: 5px 10px;
-}
 
 .closeModal {
   opacity: 1;
