@@ -611,7 +611,7 @@
 
 
 
-    <div style="margin-left: 0px;">
+    <div style="margin-top: 20px;">
       This page is for pickup orders only. For delivery, please visit 
  <template v-if="this.title === 'Mamnoon'">
        <a :href="'https://www.doordash.com/store/mamnoon-seattle-37814/'">Doordash.</a>
