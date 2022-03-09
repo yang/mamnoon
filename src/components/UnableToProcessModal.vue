@@ -1,7 +1,6 @@
 <template>
   <div v-if="unableToProcessModal" class="order-confirmation-modal">
     <div class="container online-menu order-modal-width" style="padding: 10px;">
-      <!-- <div @click="closeConfirmationModal()" class="close closeModal"> -->
       <div class="close closeModal closeModalConfirmation">
         <router-link to="/">
           <CloseModal2 />
@@ -33,10 +32,6 @@
         <br />
         <br />
         <hr />
-
-        <!-- <div v-if="orderCMR.giftcardBalance">
-current giftcard balance: ${{orderCMR.giftcardBalance}}
-</div> -->
       </div>
     </div>
   </div>
@@ -44,8 +39,6 @@ current giftcard balance: ${{orderCMR.giftcardBalance}}
 
 <script>
 import CloseModal2 from "@/components/svgIcons/CloseModal2";
-import moment from "moment";
-import tz from "moment-timezone";
 export default {
   name: "UnableToProcessModal",
   props: ["unableToProcessModal", "currentOrder"],

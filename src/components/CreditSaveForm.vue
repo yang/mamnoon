@@ -1,128 +1,86 @@
 <template>
-<div>
-<div class="container pad-yellow-background module-header">saved credit cards for {{emailAddress}}</div>
-
-
-  <div class="container pad-yellow-background">
-    
-    <div class="row no-lr-margin">
-
-
-<div class="col-sm-6 no-lr-pad">
-
-      <div class="save-button" v-if="!updateDelivery">
-<button class="sm-button" @click="cippaybuttoncreditsave">add new card</button>
-<!-- <button class="sm-button disabled" v-else disabled>add new card</button> -->
-<div class="bg-modal-2" v-if="showAddCardFormVisible"></div>
-<div class="modal-2" v-if="showAddCardFormVisible">
-
-<div class="modalheader">
-  add new card
-  <div class="closeM" @click="showAddCardFormVisible = false"><CloseModalSm /></div>
-</div>
-<div class="modal-body">
-<label>name:</label>
-<input v-model="ccBillingName" />
-<label>billing address:</label>
-<input v-model="ccBillingAddress" />
-<label>postal code:</label>
-<input v-model="ccBillingPostalCode" />
-<br>
-
-<!-- <button class="mt10 fw mt20 sm-button disabled" v-if="!ccSaveFieldsValid" disabled>complete fields to enter card number</button> -->
-<!-- <button class="mt10 fw mt20 sm-button" id="cip-pay-btn" @click="cippaybuttoncreditsave" v-else>click here to enter card number</button> -->
-<br><br>
-
-
-
-</div>
-</div>
-
-</div>
-
-</div>
-
-<template v-if="savedCards && savedCards.length > 0">
-<div id="credit-save-table" class="col-12 col-lg-12 creditcards-list no-lr-pad">
-<table class="w100">
-
-<th class="w100 no-bot-pad">
-<!-- <td>
-   <div>
-  name
-   </div>
-  </td> -->
-  <td>
-       <div>
-    number
-     </div>
-    </td><td>
-         <div>
-      expires
-       </div>
-      </td><td>
-           <div>
-        actions
+  <div>
+    <div class="container pad-yellow-background module-header">saved credit cards for {{emailAddress}}</div>
+    <div class="container pad-yellow-background">
+      <div class="row no-lr-margin">
+        <div class="col-sm-6 no-lr-pad">
+          <div class="save-button" v-if="!updateDelivery">
+            <button class="sm-button" @click="cippaybuttoncreditsave">add new card</button>
+            <div class="bg-modal-2" v-if="showAddCardFormVisible"></div>
+            <div class="modal-2" v-if="showAddCardFormVisible">
+              <div class="modalheader">
+                add new card
+                <div class="closeM" @click="showAddCardFormVisible = false"><CloseModalSm /></div>
+              </div>
+              <div class="modal-body">
+                <label>name:</label>
+                <input v-model="ccBillingName" />
+                <label>billing address:</label>
+                <input v-model="ccBillingAddress" />
+                <label>postal code:</label>
+                <input v-model="ccBillingPostalCode" />
+                <br><br><br>
+              </div>
+            </div>
+          </div>
         </div>
-        </td>
-</th>
+      <template v-if="savedCards && savedCards.length > 0">
+        <div id="credit-save-table" class="col-12 col-lg-12 creditcards-list no-lr-pad">
+          <table class="w100">
+            <th class="w100 no-bot-pad">
+              <td>
+                <div>
+                  number
+                </div>
+              </td>
+              <td>
+                <div>
+                  expires
+                </div>
+              </td>
+              <td>
+                <div>
+                  actions
+                </div>
+              </td>
+            </th>
+            <tr class="w100" v-for="card in savedCards" v-bind:key="card">
+              <td>
+                <span>
+                  <span v-if="card.approvalData.accountCardType === 'VS'" class="visa-xs"></span>
+                  <span v-else-if="card.approvalData.accountCardType === 'MC'" class="mastercard-xs"></span>
+                  <span v-else-if="card.approvalData.accountCardType === 'JC'" class="jcb-xs"></span>
+                  <span v-else-if="card.approvalData.accountCardType === 'DN'" class="dinersclub-xs"></span>
+                  <span v-else-if="card.approvalData.accountCardType === 'DC'" class="discover-xs"></span>
+                  <span v-else-if="card.approvalData.accountCardType === 'AX'" class="amex-xs"></span>
+                  <span class="desktop">ends in</span>  {{card.approvalData.maskedAccount.replace('************','')}}
+                  <br>
+                </span>
+              </td>
+              <td>
+                {{card.approvalData.accountExpiryDate.slice(0,2)}}/{{card.approvalData.accountExpiryDate.slice(2,4)}}
+              </td>
 
-
-
-
-
-<tr class="w100" v-for="card in savedCards" v-bind:key="card">
-  <!-- <td> {{card.approvalData.billingName}} </td> -->
-  <td>
-
-
-<span>
-  <span v-if="card.approvalData.accountCardType === 'VS'" class="visa-xs"></span>
-<span v-else-if="card.approvalData.accountCardType === 'MC'" class="mastercard-xs"></span>
-<span v-else-if="card.approvalData.accountCardType === 'JC'" class="jcb-xs"></span>
-<span v-else-if="card.approvalData.accountCardType === 'DN'" class="dinersclub-xs"></span>
-<span v-else-if="card.approvalData.accountCardType === 'DC'" class="discover-xs"></span>
-<span v-else-if="card.approvalData.accountCardType === 'AX'" class="amex-xs"></span>
-<span class="desktop">ends in</span>  {{card.approvalData.maskedAccount.replace('************','')}}
-
-<br>
-<!-- <span class="amex-xs"></span>
-<span class="dinersclub-xs"></span>
-<span class="discover-xs"></span>
-<span class="jcb-xs"></span>
--->
-
-</span>
-</td>
-
-<td>
-{{card.approvalData.accountExpiryDate.slice(0,2)}}/{{card.approvalData.accountExpiryDate.slice(2,4)}}
-</td>
-
-
-<td>
-<button class="sm-button fl-right hide-mob" @click="removeCreditCard(card._id,card.email)">remove</button>
-        &nbsp;&nbsp;&nbsp;
-        <button class="sm-button fl-right mr-10" v-if="!card.primary" @click="primaryCreditCard(card._id,card.email)">primary</button>
-        <button class="sm-button disabled-b fl-right" v-else disabled style="pointer-events:none;">(primary)</button>
-</td>
-
-</tr>
-
-</table>
-</div>
-  </template>
-  <template v-else>
-<button class="mt10 fw mt20 sm-button disabled" style="border:0;padding: 10px 0;" disabled>no saved cards</button>
-</template>
-    </div>
-    <div class="row" style="display:none;">
-     <pre>
-      {{user}}
-     </pre>
-    </div>
- </div>  </div>
-    </div>
+              <td>
+                <button class="sm-button fl-right hide-mob" @click="removeCreditCard(card._id,card.email)">remove</button>&nbsp;&nbsp;&nbsp;
+                <button class="sm-button fl-right mr-10" v-if="!card.primary" @click="primaryCreditCard(card._id,card.email)">primary</button>
+                <button class="sm-button disabled-b fl-right" v-else disabled style="pointer-events:none;">(primary)</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </template>
+      <template v-else>
+        <button class="mt10 fw mt20 sm-button disabled" style="border:0;padding: 10px 0;" disabled>no saved cards</button>
+      </template>
+      </div>
+      <div class="row" style="display:none;">
+        <pre>
+          {{user}}
+        </pre>
+      </div>
+    </div>  
+  </div>
 </template>
 
 

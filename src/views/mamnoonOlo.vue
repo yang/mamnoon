@@ -1,7 +1,10 @@
 <template>
   <div class="mamnoon">
     <Nav3 />
-    <!-- <UpserveOloTestingNewProcessing :title="'Mamnoon Street'" :oloEndpoint="'/oloorderstreet'" :menuEndpoint="'/product/upserveolo'" :userData="user" :emailAddress="$store.state.currentUserEmail" /> -->
+    <div style="margin-left: 44px;">
+      This page is for pickup orders only. For delivery, please visit 
+      <a :href="'https://www.doordash.com/store/mamnoon-street-seattle-89822/'">Doordash.</a>
+    </div>
     <UpserveOloTestingNewProcessing
       :title="'Mamnoon'"
       :oloEndpoint="'/order/oloorder'"

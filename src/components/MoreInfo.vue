@@ -350,5 +350,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '@/assets/styles/css/moreinfo.scss';
+@import "@/assets/styles/css/moreinfo.scss";
 </style>

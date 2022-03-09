@@ -39,7 +39,6 @@
 
 <script>
 import moment from "moment";
-import tz from "moment-timezone";
 
 export default {
   data() {

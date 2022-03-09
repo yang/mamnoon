@@ -2,23 +2,10 @@
   <div>
     <div class="container pad-yellow-background module-header" style="display:none;">your giftcard</div>
     <div class="container pad-yellow-background pd50" style="display:none;">
-      <!-- {{cardNumberInput}}
-      <input
-      type="number"
-      min="0.00"
-      max="10000.00"
-      step="0.01"
-      v-model="amountUse"
-      placeholder="withdraw balance"
-      />
-
-      <br />
-      <button @click="useBalance(amountUse)">Use {{ amountUse }} Balance</button> -->
       <div class="button-panel top">
       <div class="button-box text-left">
 <div class="thick-grey">check your balance</div>
       <br />
-        <!-- v-model="cardNumberInput" -->
       <input
         type="number"
         v-model="cardNumberInput"
@@ -30,7 +17,6 @@
       </button>
       </div>
       <div class="button-box text-left moneytotal pl50">
-       <!-- GIFTCARD BALANCE for {{ cardNumberInput }} : -->
       <input
         type="number"
         class="placeholder-balance"
@@ -39,15 +25,11 @@
       />
       </div>
       </div>
-  
       <div class="button-panel bottom">
-
       <div class="button-box">
     <h4 v-if="showInsufficientFunds === true" class="error">insufficient funds</h4>
 <br>
     <a target="_blank" href="https://ecommerce.custcon.com/Purchase/Select?c=364cfc03-d428-44bf-b814-1efbdcaed08d">buy new card</a>
-
-
       </div>
       <div class="button-box">
         <a
@@ -59,13 +41,6 @@
 
       </div>
     </div>
-
-
-
-
-
-
-
 <div>
 <div class="container pad-yellow-background module-header">
 add a giftcard for {{emailAddress}}
