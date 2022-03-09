@@ -23,14 +23,30 @@
                 <router-link
                   v-if="restaurant.background_image.sizes"
                   :to="restaurant.name.replace(' ', '')"
+                  :title="restaurant.name"
                 >
                   <div
-                    class="imgBox"
+                    class="imgBox imgBoxRelative"
                     :style="{
                       'background-image': `url(${restaurant.background_image.sizes.medium_large})`,
                     }"
                   >
                     <!--<div class="imgBox">->>-->
+<!--
+// <pre>
+
+
+
+//             {{restaurant.logo_svg}}
+//             </pre>
+-->
+
+
+
+
+    <div v-html="restaurant.logo_svg" class="restaurantLogo"></div>
+
+
 
                     .
                   </div>
@@ -42,7 +58,7 @@
                   </div>
                 </router-link>
                 <div class="restaurantContent">
-                  <div class="restaurantName">
+                 <!-- <div class="restaurantName">
                     <router-link :to="restaurant.name.replace(' ', '')">
                       <template v-if="restaurant.name === 'mbar'">
                         <MbarLogo :height="90" :marginLeft="6" />
@@ -66,7 +82,7 @@
                         {{ restaurant.name }}
                       </template>
                     </router-link>
-                  </div>
+                  </div>-->
 
 
                   <div class="infoIconLine2">
@@ -96,6 +112,7 @@
                                 :href="line.line_group.url"
                                 target="_blank"
                                 class="linkBlack"
+                                :title="restaurant.name+' address'"
                                 >{{ line.line_group.text }}</a
                               >
                             </template>
@@ -121,6 +138,7 @@
                                 ''
                               )}`
                             "
+                            :title="restaurant.name+' phone number'"
                             target="_blank"
                             class="linkBlack"
                             
@@ -134,7 +152,7 @@
                   <div style="">
                     <template v-for="(link, i) in restaurant.tile_list_links">
                       <div v-if="link.visible" class="listLinks">
-                        <a class="listLink" :href="link.link"
+                        <a class="listLink" :title="restaurant.name + ' ' + link.title" :href="link.link"
                           >{{ link.title }} &#x203A;</a
                         >
                       </div>
@@ -252,4 +270,9 @@ export default {
 
 <style lang="scss">
   @import '@/assets/styles/css/restaurants.scss';
+
+
+
+
+  
 </style>

@@ -154,10 +154,22 @@ p.list-of-links {
   }
 }
 
-@media only screen and (max-width: 390px){
+@media only screen and (max-width: 768px){
   .restaurantBox {
-    height: 900px;
+    height: auto !important;
   }
+
+
+  .bottomButton{
+    width: 100%;
+    font-size: 18px !important;
+    margin: 16px 24px 0 0 !important;
+  }
+
+  .bottomLinks {
+    padding-left: 0px !important;
+}
+
 }
 
 @media only screen and (max-width: 992px) {
@@ -203,11 +215,25 @@ p.list-of-links {
     background-size: cover;
     background-position: center center;
     border-radius: 10px 10px 0 0;
+
+    @media only screen and (max-width: 768px) {
+      height: 220px;
+    }
+
+
+
   }
 }
 
 .restaurantContent {
   padding: 20px 20px 20px;
+
+  @media only screen and (max-width: 768px) {
+
+    padding: 10px 15px 20px;
+  }
+
+
 }
 
 .restaurantName {
@@ -301,10 +327,44 @@ p.list-of-links {
     height: 100%;
     // background: pink;
     left: 10px;
+    @media only screen and (max-width: 768px) {
+    left: 2px;
+    }
+
   }
   
+
+
+
+@media only screen and (max-width: 768px) {
+  padding-left: 40px;
+}
+
+
 }
 
 .imgBox {
   color: transparent;
+}
+
+
+.imgBoxRelative{
+  position: relative;
+
+.restaurantLogo{
+  width: 40%;
+  top: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+}
+
+
+.linkBlack{
+  color: black; 
+  &:hover{
+    color: black;
+  }
 }
