@@ -611,7 +611,19 @@
 
 
 
+    <div style="margin-left: 0px;">
+      This page is for pickup orders only. For delivery, please visit 
+ <template v-if="this.title === 'Mamnoon'">
+       <a :href="'https://www.doordash.com/store/mamnoon-seattle-37814/'">Doordash.</a>
+  </template>
 
+ <template v-if="this.title === 'Mamnoon Street'">
+       <a :href="'https://www.doordash.com/store/mamnoon-street-seattle-89822/'">Doordash.</a>
+  </template>
+
+
+
+    </div>
 
 
 <template v-if="reOrder && $store.state.storeCurrentOrder && reOrder.id && $store.state.storeCurrentOrder.id">
