@@ -67,7 +67,7 @@
       >
       <br />
     </div>
-    <div v-if="modifier.name.includes(': choose 1')">
+    <div v-if="mod.name.includes(': choose 1')">
       <div v-for="(piece, i) in upserveList" :key="'E' + i">
         <div v-if="piece.name.toLowerCase() === mod.name">
           <div class="pad-10">

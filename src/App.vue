@@ -758,7 +758,7 @@ h4.error {
   .tipButton {
     // margin-bottom: 20px;
     margin-bottom: 5px;
-    width: calc(33% - 2px);
+    width: calc(33% - 2.25px);
     border: 2px solid $nadi-red-color;
     border: 2px solid transparent;
     background-color: #ffffff;
@@ -1125,7 +1125,7 @@ h4.error {
       margin-bottom: 5px;
       // width: calc(25% - 3.5px);
 
-      width: calc(33% - 2.5px);
+      width: calc(33% - 2.25px);
       // width: calc(33% - 1.4px);
       padding: 5px 5px !important;
       font-size: 12px;

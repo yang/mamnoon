@@ -15,14 +15,14 @@
           <br /><br />
         </div>
       </div>
-
       <div class="row">
         <div class="col-sm-6">
           <div class="address" v-if="!updateDelivery">
             <!-- <b>delivery address:</b><br> -->
             <b>guest info:</b><br />
             <template v-if="user && user.user.deliveryAddress">
-              {{ user.user.deliveryAddress.name }}<br />
+              {{ user.user.deliveryAddress.first_name }}&nbsp;
+                {{ user.user.deliveryAddress.last_name }}<br />
               {{ user.user.deliveryAddress.phone }}<br />
             </template>
             <br /><br />
@@ -49,10 +49,19 @@
             <p>
               <input
                 id="name"
-                v-model="deliveryAddress.name"
+                v-model="deliveryAddress.first_name"
                 type="text"
                 name="name"
-                placeholder="add name"
+                placeholder="first name"
+                class="add-name-field"
+              />
+              <br />
+                        <input
+                id="last_name"
+                v-model="deliveryAddress.last_name"
+                type="text"
+                name="name"
+                placeholder="last name"
                 class="add-name-field"
               />
               <br />
@@ -200,7 +209,7 @@
                 class="add-city-field"
               />
               <br />
-              <input
+              <!-- <input
                 id="stateBilling"
                 v-model="billingAddress.state"
                 type="text"
@@ -208,7 +217,81 @@
                 placeholder="add state"
                 class="add-state-field"
               />
-              <br />
+              <br /> -->
+
+
+
+
+                <label class="smblk" for="state">state:</label>&nbsp;
+               
+ <!--    <div v-if="user && user.user && user.user.billingAddress && user.user.billingAddress.addressLine1 !== ''" style="margin-bottom: 10px;">{{user.user.billingAddress.addressLine1}}&nbsp;{{user.user.billingAddress.addressLine2}}</div>-->
+
+
+<select id="stateBilling" class="selectState" v-model="billingAddress.state">
+	<option value="" placeholder="state"></option>
+  <option value="AL">AL</option>
+	<option value="AK">AK</option>
+	<option value="AR">AR</option>	
+	<option value="AZ">AZ</option>
+	<option value="CA">CA</option>
+	<option value="CO">CO</option>
+	<option value="CT">CT</option>
+	<option value="DC">DC</option>
+	<option value="DE">DE</option>
+	<option value="FL">FL</option>
+	<option value="GA">GA</option>
+	<option value="HI">HI</option>
+	<option value="IA">IA</option>	
+	<option value="ID">ID</option>
+	<option value="IL">IL</option>
+	<option value="IN">IN</option>
+	<option value="KS">KS</option>
+	<option value="KY">KY</option>
+	<option value="LA">LA</option>
+	<option value="MA">MA</option>
+	<option value="MD">MD</option>
+	<option value="ME">ME</option>
+	<option value="MI">MI</option>
+	<option value="MN">MN</option>
+	<option value="MO">MO</option>	
+	<option value="MS">MS</option>
+	<option value="MT">MT</option>
+	<option value="NC">NC</option>	
+	<option value="NE">NE</option>
+	<option value="NH">NH</option>
+	<option value="NJ">NJ</option>
+	<option value="NM">NM</option>			
+	<option value="NV">NV</option>
+	<option value="NY">NY</option>
+	<option value="ND">ND</option>
+	<option value="OH">OH</option>
+	<option value="OK">OK</option>
+	<option value="OR">OR</option>
+	<option value="PA">PA</option>
+	<option value="RI">RI</option>
+	<option value="SC">SC</option>
+	<option value="SD">SD</option>
+	<option value="TN">TN</option>
+	<option value="TX">TX</option>
+	<option value="UT">UT</option>
+	<option value="VT">VT</option>
+	<option value="VA">VA</option>
+	<option value="WA">WA</option>
+	<option value="WI">WI</option>	
+	<option value="WV">WV</option>
+	<option value="WY">WY</option>
+</select>
+
+
+
+
+
+
+
+
+
+<br>
+
               <input
                 id="zipBilling"
                 v-model="billingAddress.zip"
@@ -314,7 +397,8 @@ export default {
         email: this.emailAddress,
       },
       deliveryAddress: {
-        name: "",
+        first_name: "",
+        last_name: "",
         addressLine1: "",
         addressLine2: "",
         city: "",
@@ -347,7 +431,9 @@ export default {
     updateDeliveryClick() {
       this.updateDelivery = true;
 
-      this.deliveryAddress.name = this.user.user.deliveryAddress.name;
+
+      this.deliveryAddress.first_name = this.user.user.deliveryAddress.first_name;
+this.deliveryAddress.last_name = this.user.user.deliveryAddress.last_name;
       this.deliveryAddress.phone = this.user.user.deliveryAddress.phone;
       this.deliveryAddress.addressLine1 = this.user.user.deliveryAddress.addressLine1;
       this.deliveryAddress.addressLine2 = this.user.user.deliveryAddress.addressLine2;

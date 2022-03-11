@@ -25,7 +25,8 @@
       <div class="address" v-if="!updateCI">
 <b>guest info:</b> <br />
 <template v-if="user && user.user && user.user.deliveryAddress">
-{{user.user.deliveryAddress.name}}<br>
+{{user.user.deliveryAddress.first_name}}&nbsp;{{user.user.deliveryAddress.last_name}}
+<br>
 {{user.user.deliveryAddress.phone}}<br>
 </template>
 <br>
@@ -237,7 +238,7 @@
                                                <!--  <div v-if="m === mod.id && mod.name !== 'None'"-->
                                                   <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1, fifth: currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two` }">
  
-
+<!-- option select inner 2 -->
                 <OptionSelectInner2 :currentItem="currentItem" :mod="mod" :upserveList="upserveList" :modifier="modifier" />
 
 
@@ -248,7 +249,7 @@
 
 
 <div v-if="m === mod.id && mod.id !== '7d6b8ea8-4bc7-4716-b8f8-44b5d5184f79'" class="box normal" :id="'toggle-' + mod.id" @click="toggleAddOn(mod,modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1,biggerWidth: packageObjectMaximum !== null }">
-
+<!-- option select inner 3 -->
 <OptionSelectInner3 @click="toggleAddOn(mod,modifieritem)" :currentItem="currentItem" :upserveList="upserveList" :mod="mod" :modifier="modifier" :m="m" :packageObjectMaximum="packageObjectMaximum" />
 
 
@@ -443,8 +444,18 @@
 
               <!--<div v-if="m === mod.id && mod.name !== 'None'"-->
               <div v-if="m === mod.id" class="box" @click="selectedOption(m, modifier, mod, modifieritem)" :class="{selected: currentModifiers.findIndex(p => p.option === m) > -1, fifth: currentItem.name === 'mamnoon @ home' || currentItem.name === 'Street Combo' || currentItem.name === 'Lunch Combo Special' || currentItem.name === `Valentine's Day Kit For Two`}">
-                                                   
-                            dddddd                       
+                             <!-- option select inner 1      -->
+
+
+                             <!-- {{currentItem}} -->
+
+                             <!-- {{mod}} -->
+
+                             <!-- {{upserveList}} -->
+
+                            <!-- dddddd       
+                            
+                                             -->
           <OptionSelectInner :currentItem="currentItem" :mod="mod" :upserveList="upserveList" />
                                                    
                                           
@@ -1863,6 +1874,10 @@ cart empty
 
 <template v-if="currentOrder.preorder === true">
 
+<!-- hello -->
+
+
+
 
   <div class="small-message" v-if="selectedTime === null">please select a date and time at the top of this page</div>
 
@@ -1969,10 +1984,10 @@ cart empty
 
 
 
-        <template v-if="employeeCheckout">
+        <!-- <template v-if="employeeCheckout">
         <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" disabled>Employee Checkout</button> 
-        </template>
+        </template> -->
 
 
 </template>
@@ -1988,10 +2003,10 @@ cart empty
 
 
 
-  <template v-if="employeeCheckout">
+  <!-- <template v-if="employeeCheckout">
         <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" disabled>Employee Checkout</button>
-    </template>
+    </template> -->
 
 
 </template>
@@ -2002,6 +2017,15 @@ cart empty
   <!--<div class="small-message" v-if="currentOrder.fulfillment_info.customer.first_name === ''">please enter a guest name</div>-->
 
 
+
+
+  <div class="small-message" v-if="currentOrder.billing.billing_address_city === ''">please enter a billing city</div>
+
+  <div class="small-message" v-if="currentOrder.billing.billing_address_state === ''">please select a billing state</div>
+
+
+
+  <div class="small-message" v-if="currentOrder.charges.total === 0">please add some items to your cart</div>
 
 
 
@@ -2067,10 +2091,12 @@ cart empty
 
 
 
-<template v-if="employeeCheckout">
+<!-- <template v-if="employeeCheckout">
 <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
 <button v-else class="pay-button disabled" style="margin-top:20px;" disabled>Employee Checkout</button> 
-</template>
+</template> -->
+
+
 </template>
 <template v-else>
 <!-- you are not logged in -->
@@ -2080,10 +2106,10 @@ cart empty
 <!--@click="cippaybuttoncreditauth"-->
 
 
-<template v-if="employeeCheckout">
+<!-- <template v-if="employeeCheckout">
 <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
 <button v-else class="pay-buton disabled" style="margin-top:20px;" disabled>Employee Checkout</button> 
-</template>
+</template> -->
 
 
 </template>
@@ -2104,6 +2130,11 @@ cart empty
 
       <!--////-->
       <template v-if="currentOrder.preorder === true">
+
+
+     <!-- {{currentOrder.scheduled_time.toISOString()}} -->
+     <!-- <br> -->
+        <!-- {{currentOrder.scheduled_time.toISOString()}} -->
       <button 
       v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
       @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'giftCard')" id="cip-pay-btn" class="pay-button gift-card">Use Giftcard</button>
@@ -2200,10 +2231,10 @@ cart empty
       </div>
       </div>
       </section>
-      <!--
+      
 <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
 <pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>
-<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeMbar}}</pre>-->
+<pre v-if="this.title === 'Mbar'">{{this.$store.state.storeMbar}}</pre>
    <!--// ccc-->
 
 
@@ -2521,7 +2552,7 @@ if(this.currentOrder.fulfillment_info.customer && this.user.user){
   // console.log('this.user.user.email');
     // console.log(this.user.user.email);
 this.currentOrder.fulfillment_info.customer.email = this.user.user.email;
-this.currentOrder.fulfillment_info.customer.first_name = this.user.user.deliveryAddress.name;
+this.currentOrder.fulfillment_info.customer.first_name = this.user.user.deliveryAddress.first_name;
 }
 
 
@@ -2780,18 +2811,36 @@ if(itemsToRemove.length === 1){
         //    title: removalItems + ' is not available at the selected pick-up time and has been removed from your shopping bag'
         //   });
 
+
+   if(value){
+    if(value.timing_mask){
+      if(value.timing_mask.start_time){
+        if(value.timing_mask.end_time){
     this.$swal({ 
            title: removalItems + ' is not available at the selected pick-up time. please select another time between ' + value.timing_mask.start_time + ' and ' + value.timing_mask.end_time
           });
+        }
+          }
+        }
+      }
 
 this.selectedTime = null
 
 
 }else if(itemsToRemove.length>1){
 
+  if(value){
+    if(value.timing_mask){
+      if(value.timing_mask.start_time){
+        if(value.timing_mask.end_time){
         this.$swal({ 
            title: removalItems + ' are not available at the selected pick-up time. please select another time between ' + value.timing_mask.start_time + ' and ' + value.timing_mask.end_time
           });
+            }
+          }
+        }
+      }
+
 
 this.selectedTime = null
 
@@ -5083,8 +5132,17 @@ if(self.currentOrder.billing && userInfo.user.billingAddress){
               self.currentOrder.billing.billing_address = userInfo.user.billingAddress.addressLine1 + ' ' + userInfo.user.billingAddress.addressLine2
               self.currentOrder.billing.billing_postal_code = userInfo.user.billingAddress.zip
 
+              self.currentOrder.billing.billing_address_city = userInfo.user.billingAddress.city;
+              self.currentOrder.billing.billing_address_state = userInfo.user.billingAddress.state;
+
+
+
+
+
+
               self.currentOrder.fulfillment_info.customer.phone = userInfo.user.deliveryAddress.phone
-              self.currentOrder.fulfillment_info.customer.first_name = userInfo.user.deliveryAddress.name
+              self.currentOrder.fulfillment_info.customer.first_name = userInfo.user.deliveryAddress.first_name
+              self.currentOrder.fulfillment_info.customer.last_name = userInfo.user.deliveryAddress.last_name
               self.currentOrder.fulfillment_info.delivery_info.address.city = userInfo.user.deliveryAddress.city
               self.currentOrder.fulfillment_info.delivery_info.address.state = userInfo.user.deliveryAddress.state
               self.currentOrder.fulfillment_info.delivery_info.address.zip_code = userInfo.user.deliveryAddress.zip
