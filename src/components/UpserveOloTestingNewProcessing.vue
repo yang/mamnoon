@@ -2241,9 +2241,9 @@ bag empty
       </div>
       </div>
       </section>
-      <!--
+    
 <pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
-<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>--
+<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>
 
    <!--// ccc-->
 
@@ -2582,6 +2582,13 @@ this.currentOrder.charges.tip.amount = this.customAmountAddition
 
  currentOrder: {
      handler(val){
+
+
+
+
+// if(this.currentOrder.charges.total>20000){
+//   alert(this.currentOrder.charges.total);
+// }
 
 
       let preTotal = 0
@@ -4265,13 +4272,14 @@ this.savedDeliveryAddress = response.data.user.deliveryAddress
           this.currentOrder.time_placed = newDate;
 
 
-        // this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
   
     if(this.selectedTime){
 this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
 
   }else{
 this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+
+
   }
 
 
@@ -5834,6 +5842,7 @@ this.currentItemQuantity = this.currentItem.quantity;
           if(this.selectedTime){
             this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
           }else{
+          // this.currentOrder.fulfillment_info.estimated_fulfillment_time = moment(newDate).add(20,'minutes');
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
           }
 
@@ -5942,6 +5951,8 @@ this.currentOrder.charges.items.push(itemToAdd);
             this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
           }else{
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+                //  this.currentOrder.fulfillment_info.estimated_fulfillment_time = moment(newDate).add(20,'minutes');
+          
           }
 
 
@@ -6015,6 +6026,9 @@ this.currentOrder.charges.items[elementPos] = itemToAdd;
             this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
           }else{
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+          // this.currentOrder.fulfillment_info.estimated_fulfillment_time = moment(newDate).add(20,'minutes');
+
+
           }
 
           this.currentItemModifierArray = [];
@@ -6145,12 +6159,18 @@ return searchResult;
 
           let newDate = new Date();
           this.currentOrder.time_placed = newDate;
+
+          // this.currentOrder.time_placed = moment(newDate).add(20,'minutes');
+
          // this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
 
           if(this.selectedTime){
             this.currentOrder.fulfillment_info.estimated_fulfillment_time = this.selectedTime.time;
           }else{
           this.currentOrder.fulfillment_info.estimated_fulfillment_time = newDate;
+        // this.currentOrder.fulfillment_info.estimated_fulfillment_time = moment(newDate).add(20,'minutes');
+
+          
           }
 
 
@@ -6279,7 +6299,7 @@ if(currentOrder.fulfillment_info.customer.first_name.substring(0,3) !== "nx "){
 
 
 
-currentOrder.fulfillment_info.estimated_fulfillment_time = moment().add(15, 'minutes').format();
+currentOrder.fulfillment_info.estimated_fulfillment_time = moment().add(20, 'minutes').format();
 
 
       this.$http.post(this.oloEndpoint, currentOrder).then((response) => {
