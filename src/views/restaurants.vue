@@ -88,7 +88,7 @@
                   <div class="infoIconLine2">
                     <div class="rightIcon">
                       <div class="right-icon-text">
-                        <Clock :color="'black'" class="mr6 centeredSvg" style="padding-bottom: 20px !important;"/>
+                        <Clock :color="black" class="mr6 centeredSvg" style="padding-bottom: 20px !important;"/>
                     
                           <template v-for="hour in restaurant.hours">
                             <template v-for="line in hour">

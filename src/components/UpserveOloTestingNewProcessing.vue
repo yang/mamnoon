@@ -322,14 +322,14 @@
                     <template v-if="allOptionsSelected">
                       <button
                       v-if="oloAvailable"
-                      class="float-right"
+                      class="float-right add-to-order-button"
                       @click="addToOrder(currentItem,packageOrderDate)"
                       >add to order  {{packageOrderDate}}</button>
                     </template>
                     <template v-else>
                       <button
                       v-if="oloAvailable"
-                      class="float-right"
+                      class="float-right add-to-order-button"
                       disabled>select 1 option from each</button>
                     </template>
                 </template>
@@ -520,27 +520,27 @@
             item total: <b>${{ formatExtraZero(computedAddition * currentItemQuantity) }}</b>
           </div>
          <div class="add-to-order-footer">
-          <button v-if="currentItemQuantity > 1" @click="decrementCurrentItem()">-</button>
-          <button v-else disabled>-</button>
+          <button class="order-confirm-button" v-if="currentItemQuantity > 1" @click="decrementCurrentItem()">-</button>
+          <button class="order-confirm-button disabled" v-else disabled>-</button>
           &nbsp;&nbsp;
           <span id="value">{{currentItemQuantity}}</span>&nbsp;&nbsp;
-          <button @click="incrementCurrentItem()">+</button>
+          <button class="order-confirm-button" @click="incrementCurrentItem()">+</button>
                 <template v-if="currentItem.item_object.name === 'mamnoon @ home' || currentItem.item_object.name === 'Street Combo' || currentItem.item_object.name === 'Lunch Combo Special' || currentItem.item_object.name === `Valentine's Day Kit For Two`">
                     <template v-if="allOptionsSelected">
                       <button
-                      class="float-right"
+                      class="float-right add-to-order-button"
                       @click="updateOrderItem(currentItem)"
                       >update</button>
                     </template>
                     <template v-else>
                       <button
-                      class="float-right"
+                      class="float-right add-to-order-button"
                       disabled>select 1 option from each</button>
                     </template>
                 </template>
                 <template v-else>
                   <button
-                    class="float-right"
+                    class="float-right add-to-order-button"
                     @click="updateOrderItem(currentItem)"
                   >update</button>
                 </template>
@@ -1694,7 +1694,8 @@ add
 
 <div class="mb16">
 
-<Clock class="mr6" /> <span v-if="valid">open</span><span v-else>closed</span>
+
+<Clock :color="'#000000'" class="mr6" /> <span v-if="valid">open</span><span v-else>closed</span>
 </div>
 
 <div class="mb16">
@@ -1874,6 +1875,9 @@ cart empty
 
 <template v-if="currentOrder.preorder === true">
 
+
+
+
 <!-- hello -->
 
 
@@ -1916,7 +1920,7 @@ cart empty
 
 <template v-if="this.$store.state.loggedIn && panelShow === 'customerInfo'">
 
-<template v-if="selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone && currentOrder.fulfillment_info.customer.phone !== ''">
+<template v-if="currentOrder.scheduled_time !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone && currentOrder.fulfillment_info.customer.phone !== ''">
 
 
   <template v-if="$store.state.currentUserEmail">
@@ -1924,7 +1928,7 @@ cart empty
 
 <template v-if="savedCard.primary ===  true">
 
-   <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" :class='{disabled: !formsValidClass }' @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'primaryCard')">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
+   <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.scheduled_time !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" :class='{disabled: !formsValidClass }' @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'primaryCard')">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
       </button>
         <button v-else class="pay-button" :class='{disabled: !formsValidClass }' style="margin-top:20px;" disabled>Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
       </button>
@@ -1949,7 +1953,7 @@ cart empty
 
 
 
-<template v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)">
+<template v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.scheduled_time !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)">
 
 <button v-if="savedCard.primary === true" class="pay-button disabled" style="margin-top:20px;" @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'primaryCard')">Use Stored Card<br>({{savedCard.approvalData.maskedAccount}})
 </button>
@@ -1975,7 +1979,7 @@ cart empty
 
 <template v-if="this.$store.state.loggedIn">
 
-        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'debit')">Credit/Debit Pay</button> 
+        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.scheduled_time !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'debit')">Credit/Debit Pay</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
  <!--@click="cippaybuttoncreditauth"-->
 
@@ -1985,7 +1989,7 @@ cart empty
 
 
         <!-- <template v-if="employeeCheckout">
-        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.scheduled_time !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" disabled>Employee Checkout</button> 
         </template> -->
 
@@ -1993,7 +1997,7 @@ cart empty
 </template>
 <template v-else>
 
-        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'debit')">Credit/Debit Pay</button> 
+        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.scheduled_time !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" id="cip-pay-btn" @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'debit')">Credit/Debit Pay</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" id="cip-pay-btn" @click="cippaybuttoncreditauth" disabled>Credit/Debit Pay</button> 
 
 
@@ -2004,7 +2008,7 @@ cart empty
 
 
   <!-- <template v-if="employeeCheckout">
-        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
+        <button v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.scheduled_time !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== '' && validPostal(currentOrder.billing.billing_postal_code)" class="pay-button" style="margin-top:20px;" @click="employeeCheckoutButton">Employee Checkout</button> 
             <button v-else class="pay-button disabled" style="margin-top:20px;" disabled>Employee Checkout</button>
     </template> -->
 
@@ -2136,7 +2140,7 @@ cart empty
      <!-- <br> -->
         <!-- {{currentOrder.scheduled_time.toISOString()}} -->
       <button 
-      v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && selectedTime !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
+      v-if="validState(currentOrder.billing.billing_address_state) && validPostal(currentOrder.billing.billing_postal_code) && currentOrder.scheduled_time !== null && currentOrder.charges.total > 0 && currentOrder.billing.billing_name !== '' && currentOrder.billing.billing_address !== '' && currentOrder.billing.billing_postal_code !== '' && currentOrder.fulfillment_info.customer.first_name !== '' && currentOrder.fulfillment_info.customer.last_name !== '' && currentOrder.fulfillment_info.customer.email !== '' && currentOrder.fulfillment_info.customer.phone !== ''"
       @click="emailValidFromServer(currentOrder.fulfillment_info.customer.email, 'giftCard')" id="cip-pay-btn" class="pay-button gift-card">Use Giftcard</button>
 
 
@@ -3594,57 +3598,6 @@ showPickupTime(){
   this.changePickupTime = true;s
 
 },
-// employeeCheckoutButton(){
-
-// let approvalData = {
-// accountCardType:"VS",
-// accountEntryMethod:"Keyed",
-// accountExpiryDate:"0625",
-// amount:"99.99",
-// amountBalance:"",
-// amountProcessed:"99.99",
-// amountTaxed:"0.00",
-// amountTipped:"99.99",
-// approvalNumberResult:"03157G",
-// avsResponseCode:"N",
-// avsResponseText:"Street: No match & Postal code: No match",
-// batchNumber:"0",
-// billingName:"Employee Transaction",
-// cashier:"",
-// cvvResponseCode:"M",
-// cvvResponseText:"Match",
-// externalTransactionId:"000-000-000-000",
-// isPartialApproval:false,
-// maskedAccount:"************0000",
-// resultMessage:"Approved",
-// resultStatus:"true",
-// transactionReference:"",
-// transactionType:"CreditSale",
-// uniqueTransId:"830ae8cd0cbe4e779e29c0236891bc5a-11e3183c90064c508d3244597d324d32464fd6d6"}
-
-//  let self = this;
-
-//             if(self.title === 'Mamnoon'){
-
-//               if(self.$store.state.storeMamnoon.preorder === true){
-//                 self.scheduleAnOrder(self.$store.state.storeMamnoon,approvalData,null);
-//               }
-              
-//               if(self.$store.state.storeMamnoon.preorder === false){
-//                 self.doAnOrder(self.$store.state.storeMamnoon,approvalData,null);
-//               }
-
-//             }else if(self.title === 'Mamnoon Street'){
-
-//                 if(self.$store.state.storeStreet.preorder === true){
-//                   self.scheduleAnOrder(self.$store.state.storeStreet,approvalData,null);
-//               }
-//               if(self.$store.state.storeStreet.preorder === false){
-//                 self.doAnOrder(self.$store.state.storeStreet,approvalData,null);
-//               }
-//     }
-
-// },
 cippaybuttoncreditauth() {
 
 
