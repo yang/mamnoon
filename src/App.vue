@@ -844,7 +844,7 @@ h4.error {
         border-radius: 0;
         /* padding: 15px 10px; */
         width: 50px;
-        width: 80px;
+        // width: 80px;
         right: 10px;
         bottom: 70px;
         border-radius: 25px;
@@ -853,7 +853,8 @@ h4.error {
 
         bottom: 10px;
         // transition: all .5s ease;
-
+    background: transparent;
+    border: 0;
         &:focus {
           outline: none;
         }

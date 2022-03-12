@@ -1072,3 +1072,24 @@ left: -16px;
 
 
 }
+
+
+.bagIcon{
+  color: white;
+  position: relative;
+
+  position: relative;
+  width: 35px;
+  // background: green;
+  height: 60px
+
+}
+
+.bagNumbers{
+position: absolute;
+left: 50%;
+top: 44%;
+transform: translate(-50%,-50%);
+font-weight: 600;
+width: 100%;
+}

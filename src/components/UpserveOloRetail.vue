@@ -487,7 +487,7 @@ calculate shipping
 <template v-else>
 <div v-if="panelShow === 'yourOrder'" class="text-center cart-empty-class" style="margin-top: 10px;">
 
-cart empty
+bag empty
 
 </div>
 

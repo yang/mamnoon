@@ -1134,7 +1134,13 @@ add
 
 <div class="right-column" style="position: absolute !important;">
 <button v-if="!toggledDrawer" @click="toggleDrawer()" class="toggle">
-<span><CartIcon /> {{cartItems}}</span>
+<!--<span><CartIcon /> {{cartItems}}</span>-->
+
+<div class="bagIcon"><BagIcon /><div class="bagNumbers" v-if="itemsInCart(this.currentOrder.charges.items) >0">{{itemsInCart(this.currentOrder.charges.items)}}</div></div>
+
+
+
+
 </button>
 
 <div class="container mb6 hide-on-mob"> 
@@ -1862,7 +1868,7 @@ scheduled time:<br><b>{{thirtyMinutesFromNow}}</b><br>
 </template>
 <template v-else>
 <div class="text-center cart-empty-class">
-cart empty
+bag empty
 </div>
 </template>
 <template v-if="panelShow === 'yourOrder'">
@@ -2296,6 +2302,8 @@ import tz from 'moment-timezone'
 
 import swal from "vue-sweetalert2";
 import CartIcon from "@/components/svgIcons/CartIcon";
+import BagIcon from "@/components/svgIcons/BagIcon";
+
 import CloseModalSm2 from "@/components/svgIcons/CloseModalSm2";
 
 
@@ -2361,6 +2369,7 @@ export default {
     SliderNav,
     MoreInfo,
     CartIcon,
+    BagIcon,
     TrashCan,
     Phone,
     Clock,
