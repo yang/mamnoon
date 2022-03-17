@@ -692,7 +692,9 @@ this.checkForReturnable = true;
   background: #ddd;
   margin-top:20px;
   padding: 20px;
-
+pre{
+      text-transform: none !important;
+}
 }
 
 u{

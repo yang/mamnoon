@@ -2241,9 +2241,9 @@ bag empty
       </div>
       </div>
       </section>
-    <!--
-<pre v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
-<pre v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>-->
+    
+<pre style="text-transform: none !important" v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
+<pre style="text-transform: none !important" v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>
 
    <!--// ccc-->
 
@@ -4801,15 +4801,11 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
         break
         }else{
       this.currentOrder.preorder = true
-
     }
 }
 }else{
       this.currentOrder.preorder = true
-
 }
-
-
 
 },
   async getHours(){
@@ -4823,13 +4819,19 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
 
     this.currentRestaurantHours = this.hours.restaurant_hours[0].restaurant_name.find(o => o.name === this.title.toLowerCase());
 
-    // console.log('this.currentRestaurantHours');
+
+
+
+    // console.log(this.currentRestaurantHours);
     // console.log(this.currentRestaurantHours);
     // console.log(this.currentRestaurantHours);
     // console.log(this.currentRestaurantHours);
     // console.log(this.currentRestaurantHours);
     this.openDays = this.currentRestaurantHours.information.days_of_week
     let curRest = this.currentRestaurantHours.information.open_time_range
+
+
+// console.log(curRest);
 
     this.dates_additional_information = this.currentRestaurantHours.information.additional_information
 
@@ -5035,6 +5037,19 @@ if (time.isBetween(beforeTime, afterTime)) {
 returnAvailableNow(startTime,endTime){
 
 
+let adjustedEndTime = moment().set('hour', endTime.split(":")[0]).set('minute', endTime.split(":")[1]).set('second', endTime.split(":")[2]).subtract(30,'minutes');
+
+
+console.log(adjustedEndTime.format('LTS').split(' '));
+
+
+
+let endTimeTrimmed = adjustedEndTime.format('LTS').split(' ')[0];
+
+
+// console.log(moment(endTime).subtract('minutes',30));
+
+
               if(startTime && endTime){
 
               let currentDate = new Date()   
@@ -5045,9 +5060,15 @@ returnAvailableNow(startTime,endTime){
               startDate.setSeconds(startTime.split(":")[2]);
 
               let endDate = new Date(currentDate.getTime());
-              endDate.setHours(endTime.split(":")[0]);
-              endDate.setMinutes(endTime.split(":")[1]);
-              endDate.setSeconds(endTime.split(":")[2]);
+              // endDate.setHours(endTime.split(":")[0]);
+              // endDate.setMinutes(endTime.split(":")[1]);
+              // endDate.setSeconds(endTime.split(":")[2]);
+              endDate.setHours(endTimeTrimmed.split(":")[0]);
+              endDate.setMinutes(endTimeTrimmed.split(":")[1]);
+              endDate.setSeconds(endTimeTrimmed.split(":")[2]);
+
+
+
 
               let tF = startDate < currentDate && endDate > currentDate
               // this.valid = startDate < currentDate && endDate > currentDate
@@ -6913,7 +6934,7 @@ if(pageData.restaurant_repeater[i].name === 'mamnoon street'){
     },
 
 getCustomerEmails(){
-console.log('333');
+// console.log('333');
     let self = this
         this.$http.get(`/order/getemaildomains`).then(function (response) {
 // this.$http.get(`/order/email/${this.$auth._data.user.email}`).then(function (response) {
