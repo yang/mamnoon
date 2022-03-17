@@ -2241,10 +2241,10 @@ bag empty
       </div>
       </div>
       </section>
-    
+    <!--
 <pre style="text-transform: none !important" v-if="this.title === 'Mamnoon'">{{this.$store.state.storeMamnoon}}</pre>
 <pre style="text-transform: none !important" v-if="this.title === 'Mamnoon Street'">{{this.$store.state.storeStreet}}</pre>
-
+-->
    <!--// ccc-->
 
 
