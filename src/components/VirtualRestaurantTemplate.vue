@@ -103,6 +103,7 @@
               position: 'relative',
             }"
           >
+
             <!--<div class="container mobilePage pt132">-->
 
             <div v-html="item.logo_svg" class="restaurantLogo"></div>
