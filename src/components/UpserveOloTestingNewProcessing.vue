@@ -5056,12 +5056,12 @@ let endTimeTrimmed = adjustedEndTime.format('LTS').split(' ')[0];
               startDate.setSeconds(startTime.split(":")[2]);
 
               let endDate = new Date(currentDate.getTime());
-              // endDate.setHours(endTime.split(":")[0]);
-              // endDate.setMinutes(endTime.split(":")[1]);
-              // endDate.setSeconds(endTime.split(":")[2]);
-              endDate.setHours(endTimeTrimmed.split(":")[0]);
-              endDate.setMinutes(endTimeTrimmed.split(":")[1]);
-              endDate.setSeconds(endTimeTrimmed.split(":")[2]);
+              endDate.setHours(endTime.split(":")[0]);
+              endDate.setMinutes(endTime.split(":")[1]);
+              endDate.setSeconds(endTime.split(":")[2]);
+              // endDate.setHours(endTimeTrimmed.split(":")[0]);
+              // endDate.setMinutes(endTimeTrimmed.split(":")[1]);
+              // endDate.setSeconds(endTimeTrimmed.split(":")[2]);
 
 
 
