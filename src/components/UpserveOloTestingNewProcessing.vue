@@ -5040,10 +5040,6 @@ returnAvailableNow(startTime,endTime){
 let adjustedEndTime = moment().set('hour', endTime.split(":")[0]).set('minute', endTime.split(":")[1]).set('second', endTime.split(":")[2]).subtract(30,'minutes');
 
 
-console.log(adjustedEndTime.format('LTS').split(' '));
-
-
-
 let endTimeTrimmed = adjustedEndTime.format('LTS').split(' ')[0];
 
 
