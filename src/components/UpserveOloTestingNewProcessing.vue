@@ -2680,7 +2680,7 @@ this.formsValid(this.currentOrder.fulfillment_info.customer.email.trim(),this.cu
 
 this.validGiftCard(this.cardNumberInput);
 
-this.lookupBalance();
+// this.lookupBalance();
 
     },
     
