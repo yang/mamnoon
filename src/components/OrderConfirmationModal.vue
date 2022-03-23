@@ -16,6 +16,7 @@
         ><br />
       </div>
       <h2 v-else>thank you for your order.</h2>
+      <h6>if you do not receive a confirmation email, please check your spam folder</h6>
       <div>
         <b>{{ orderCMR.fulfillment_info.customer.email }}</b> <br />
         <b>{{ orderCMR.fulfillment_info.customer.phone }}</b>

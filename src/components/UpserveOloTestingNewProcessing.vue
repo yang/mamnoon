@@ -623,6 +623,7 @@
 
 
     <div style="margin-top: 20px;">
+      <p>this location is on capitol hill, <span style="text-decoration: underline;">not South Lake Union</span></p>
       This page is for pickup orders only. For delivery, please visit 
  <template v-if="this.title === 'Mamnoon'">
        <a target="_blank" :href="'https://www.doordash.com/store/mamnoon-seattle-37814/'">Doordash.</a>
