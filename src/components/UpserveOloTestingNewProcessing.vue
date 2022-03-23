@@ -623,9 +623,15 @@
 
 
     <div class="locationBox">
+        <template v-if="this.title === 'Mamnoon'">
       <h5>this is a pickup order</h5>
-      <p>you'll need to go to <b>Mamnoon</b> to pick up this order: 1508 melrose ave (capitol hill)</p>
-      This page is for pickup orders only. For delivery, please visit 
+      <p>you'll need to go to <b>Mamnoon</b> to pick up this order: 1508 melrose ave (capitol hill)<br>
+      
+      looking for mamnoon street in south lake union? <a target="_blank" href="https://app.upserve.com/s/mamnoon-street-seattle">click here</a>.
+      
+      </p>
+      </template>
+      For delivery, please visit 
       <template v-if="this.title === 'Mamnoon'">
         <a target="_blank" :href="'https://www.doordash.com/store/mamnoon-seattle-37814/'">Doordash.</a>
       </template>
