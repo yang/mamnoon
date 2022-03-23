@@ -154,6 +154,21 @@
           </section>
 
           <!--second contact section-->
+<!--<pre>
+{{item}}
+
+
+{{item.phone_number_visibility}}
+{{item.social_visibility}}
+{{item.address_visibility}}
+{{item.contact_visibility}}
+{{item.hours_visibility}}
+{{item.map_visibility}}
+</pre>-->
+
+
+
+
 
           <section v-if="item.top_info_panel" v-bind:style="{ 'background-color': item.text_color }">
             <!--begin container-->
@@ -165,7 +180,7 @@
                     class="rightContactCol"
                     :style="{ color: item.background_color }"
                   >
-                    <template v-if="item.hours">
+                    <template v-if="item.hours && item.hours_visibility">
                       <div class="infoPoints">
                         <div class="iconPoint">
                           <Clock :width="40" :color="'#ffffff'" class="mr6" />
@@ -181,7 +196,7 @@
                       </div>
                     </template>
 
-                    <template v-if="item.phone_number">
+                    <template v-if="item.phone_number && item.phone_number_visibility">
                       <div class="infoPoints">
                         <div class="iconPoint">
                           <Phone
@@ -207,7 +222,7 @@
                     </template>
 
                     <br />
-                    <template v-if="item.contact">
+                    <template v-if="item.contact && item.contact_visibility">
                       <div class="infoPoints">
                         <div class="iconPoint">
                           <Envelope
@@ -236,7 +251,11 @@
                       </div>
                     </template>
 
-                    <template v-if="item.phone_number">
+
+
+
+
+                    <template v-if="item.social.length > 0 && item.social_visibility">
                       <div class="infoPoints">
                         <div class="iconPoint">
                           <Heart :color="'white'" />
@@ -275,9 +294,8 @@
                   </div>
                 </div>
 
-                <div class="col-lg-6 col-md-12 mapBoxOuter">
-                  <div
-                    class="map m15Mob mapBox"
+                <div class="col-lg-6 col-md-12 mapBoxOuter" v-if="item.map_visibility">
+                  <div class="map m15Mob mapBox"
                     v-html="item.map.map_embed"
                   ></div>
 
@@ -305,7 +323,10 @@
                     </div>
                   </div>
 
-                  <div class="mapAddress">
+
+
+
+                  <div class="mapAddress" v-if="item.address_visibility">
                     <div class="mapAddressBox infoPoints mb0">
                       <MapPin2 :color="'white'" />
                       <template v-if="item.address">
