@@ -166,10 +166,6 @@
 {{item.map_visibility}}
 </pre>-->
 
-
-
-
-
           <section v-if="item.top_info_panel" v-bind:style="{ 'background-color': item.text_color }">
             <!--begin container-->
             <div class="container mobilePage secPadSmall">

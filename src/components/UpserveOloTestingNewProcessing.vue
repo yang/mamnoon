@@ -622,6 +622,8 @@
 
 
 
+<!--// {{selectedDate.timeslots.slice(0,-2)}}-->
+
     <div class="locationBox">
         <template v-if="this.title === 'Mamnoon'">
       <h5>this is a pickup order</h5>
@@ -724,8 +726,8 @@ add
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
                   </div>
                   <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
-                  <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                  <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+                  <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now() + 1500000" v-model="selectedTime"></v-select>
+                  <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now() + 1500000" ></v-select>
 
                  
 
@@ -739,8 +741,8 @@ add
                      <div class="leftDropdown">
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
                       <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
-                                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+                                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now() + 1500000" v-model="selectedTime"></v-select>
+                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now() + 1500000" ></v-select>
                     
                                     
                     
@@ -1195,8 +1197,8 @@ add
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
                   </div>
                   <div class="rightDropdown" style="width: 100%;padding: 0 0 0px 0;" v-if="selectedDate && selectedDate !== null">
-                               <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                               <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+                               <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now() + 1500000" v-model="selectedTime"></v-select>
+                               <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now() + 1500000" ></v-select>
                 
                                     
 
@@ -1208,8 +1210,8 @@ add
                       <div class="leftDropdown">
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
                       <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
-                                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+                                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now() + 1500000" v-model="selectedTime"></v-select>
+                                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now() + 1500000" ></v-select>
                      
                      
                      
@@ -1241,8 +1243,8 @@ add
 <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
 </div>
 <div style="margin-top:15px;" v-if="selectedDate && selectedDate !== null">
-             <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-             <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+             <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now() + 1500000" v-model="selectedTime"></v-select>
+             <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now() + 1500000" ></v-select>
 
             
 
@@ -1254,8 +1256,8 @@ add
       <br>  
       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
       <div style="margin-top:15px;" v-if="selectedDate && selectedDate !== null">
-                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now()" v-model="selectedTime"></v-select>
-                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now()" ></v-select>
+                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now() + 1500000" v-model="selectedTime"></v-select>
+                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now() + 1500000" ></v-select>
       
                 
       </div>
@@ -2460,18 +2462,21 @@ this.preOrderToggle(true);
 // console.log(this.dropDownDays[0].dateFormatted);
 
 
-  // console.log(this.dropDownDays);
+  // 
 
       let filteredSelection = this.dropDownDays.filter(function(x){
         return x.dateFormatted === correctDate;
       });
 
+
+console.log('this.dropDownDays[0]');
+console.log(this.dropDownDays[0]);
       // console.log(filteredSelection)
       this.selectedDate = this.dropDownDays[0];
 
 
 
-  console.log(this.dropDownDays);
+  
 
 
 }else{
@@ -4740,14 +4745,10 @@ if(responseUpserve.data.doc[0].menu){
     let AcfBlock = responseAcf
     this.hours = AcfBlock.data.acf.content_fields.find(o => o.acf_fc_layout === 'timeranges');   
 
-
     this.currentRestaurantHours = this.hours.restaurant_hours[0].restaurant_name.find(o => o.name === this.title.toLowerCase());
     this.openDays = this.currentRestaurantHours.information.days_of_week
     let curRest = this.currentRestaurantHours.information.open_time_range
-
     this.dates_additional_information = this.currentRestaurantHours.information.additional_information
-
-
 
 
 
@@ -4766,6 +4767,7 @@ if(responseUpserve.data.doc[0].menu){
 
 // console.log('curRest.length');
 // console.log(curRest.length);
+
     for(let i = 0; i < curRest.length; i++){
 
 
@@ -4836,8 +4838,8 @@ if(this.openDays.includes(subdays[todayDay].substring(0,3).toLowerCase())){
     this.openDays = this.currentRestaurantHours.information.days_of_week
     let curRest = this.currentRestaurantHours.information.open_time_range
 
-
-// console.log(curRest);
+console.log('curRest');
+console.log(curRest);
 
     this.dates_additional_information = this.currentRestaurantHours.information.additional_information
 
@@ -5050,7 +5052,8 @@ let endTimeTrimmed = adjustedEndTime.format('LTS').split(' ')[0];
 
 
 // console.log(moment(endTime).subtract('minutes',30));
-
+// console.log(adjustedEndTime);
+// console.log(endTimeTrimmed);
 
               if(startTime && endTime){
 
@@ -5070,9 +5073,11 @@ let endTimeTrimmed = adjustedEndTime.format('LTS').split(' ')[0];
               // endDate.setSeconds(endTimeTrimmed.split(":")[2]);
 
 
+// console.log(endDate);
 
 
               let tF = startDate < currentDate && endDate > currentDate
+// console.log(tF);
               // this.valid = startDate < currentDate && endDate > currentDate
               return tF
 
@@ -6460,6 +6465,9 @@ thanksgiving(m,dy) {
 },
 showTimeInterVals(startTime,endTime){
 
+
+
+
 let items = [];
 
 
@@ -6701,6 +6709,7 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
             timeslots: timeslotsCreatedNoDuplicates2
             })
 
+  
 
 
 }else{
@@ -6740,9 +6749,11 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
             timeslots: timeslotsCreatedNoDuplicates2
             })
 
+
 }
 }
 
+              
 
 // console.log('timeslotsCreatedNoDuplicates');
 // console.log(timeslotsCreatedNoDuplicates);
@@ -6813,7 +6824,10 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
             dateFormatted: tomorrow.toISOString().slice(0,10),
             timeslots: timeslotsCreated.slice(2)
             })
-                            
+
+
+                            // 
+
             }else{
 
             let timeslotsCreated = [];
@@ -6835,7 +6849,12 @@ let timeslotsCreatedNoDuplicates2 = testArray.filter((value, index, self) =>
             dateFormatted: tomorrow.toISOString().slice(0,10),
             timeslots: timeslotsCreated.slice(2)
             })
+  // 
+
             }
+
+  
+
         }
 }
 
@@ -6888,9 +6907,9 @@ if(pageData.restaurant_repeater[i].name.toLowerCase().replace(" ","") ===  self.
 
  self.oloAvailable = pageData.restaurant_repeater[i].online_ordering;
 
-console.log('pageData.restaurant_repeater[i]');
-console.log('pageData.restaurant_repeater[i]');
-console.log(pageData.restaurant_repeater[i].online_ordering);
+// console.log('pageData.restaurant_repeater[i]');
+// console.log('pageData.restaurant_repeater[i]');
+// console.log(pageData.restaurant_repeater[i].online_ordering);
 
 if(pageData.restaurant_repeater[i].online_ordering === false){
 // self.$router.push('http://www.yoursite.com/blog');
@@ -7118,7 +7137,7 @@ console.log('mount functions end');
 
     
 
-  console.log(moment().add(15, 'minutes').format());
+
 
     this.mountFunctions();
 
