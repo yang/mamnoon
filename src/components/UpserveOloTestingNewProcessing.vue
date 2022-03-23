@@ -622,18 +622,17 @@
 
 
 
-    <div style="margin-top: 20px;">
-      <p>this location is on capitol hill, <span style="text-decoration: underline;">not South Lake Union</span></p>
+    <div class="locationBox">
+      <h5>this is a pickup order</h5>
+      <p>you'll need to go to <b>Mamnoon</b> to pick up this order: 1508 melrose ave (capitol hill)</p>
       This page is for pickup orders only. For delivery, please visit 
- <template v-if="this.title === 'Mamnoon'">
-       <a target="_blank" :href="'https://www.doordash.com/store/mamnoon-seattle-37814/'">Doordash.</a>
-  </template>
+      <template v-if="this.title === 'Mamnoon'">
+        <a target="_blank" :href="'https://www.doordash.com/store/mamnoon-seattle-37814/'">Doordash.</a>
+      </template>
 
- <template v-if="this.title === 'Mamnoon Street'">
-       <a target="_blank" :href="'https://www.doordash.com/store/mamnoon-street-seattle-89822/'">Doordash.</a>
-  </template>
-
-
+      <template v-if="this.title === 'Mamnoon Street'">
+        <a target="_blank" :href="'https://www.doordash.com/store/mamnoon-street-seattle-89822/'">Doordash.</a>
+      </template>
 
     </div>
 
