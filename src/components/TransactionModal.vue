@@ -112,6 +112,18 @@ status: <b>ticket closed</b>
 <div class="col-6">
 <br>
 
+<pre>{{loadedorderRendered}}</pre>
+
+
+
+<button @click="fixedRefundTrue(loadedorderRendered._id)">fixed refund true</button>
+
+<br>
+
+<button @click="percentRefundTrue(loadedorderRendered._id)">percentage refund true</button>
+<br>
+
+
         <ul class="no-left-pad">
           <li
             v-for="item in loadedorderRendered.orderInfo.charges.items"
@@ -206,6 +218,18 @@ status: <b>ticket closed</b>
           </li>
         </ul>
 
+
+
+
+
+
+<input v-model="refundAmountFixed" />
+
+
+
+
+<input v-model="refundAmountPercentage" />
+
         <br />
 
 
@@ -288,6 +312,8 @@ import tz from "moment-timezone";
 export default {
   data() {
     return {
+      refundAmountFixed:0,
+      refundAmountPercentage: 0,
       checkForReturnable: false,
       returnMultiple: false,
       returnList: [],
@@ -320,6 +346,33 @@ export default {
   },
 
   methods: {
+    percentRefundTrue(id) {
+      this.$http
+        .post(`/order/percent-refund-true/${id}`)
+        .then((response) => {
+          console.log(response);
+
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+    },
+    fixedRefundTrue(id) {
+      this.$http
+        .post(`/order/fixed-refund-true/${id}`)
+        .then((response) => {
+          console.log(response);
+
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+    },
+
     returnMultipleItems(){
 
         for(let i in this.returnList){
@@ -414,22 +467,10 @@ let self = this;
 
 
 
-
-
-
-
-
-
       }
     } else {
     }
   });
-
-
-
-
-
-
 
 
 
@@ -529,8 +570,6 @@ if(order.cancelled){
     }
 
     },
-
-
     issueTokenizedReturn(
       uniqueTransIdString,
       amount,
