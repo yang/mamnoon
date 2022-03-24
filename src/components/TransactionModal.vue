@@ -111,17 +111,14 @@ status: <b>ticket closed</b>
 
 <div class="col-6">
 <br>
+<!--
+<pre>{{loadedorderRendered}}</pre>-->
 
-<pre>{{loadedorderRendered}}</pre>
-
-
-
-<button @click="fixedRefundTrue(loadedorderRendered._id)">fixed refund true</button>
+<!--<button @click="partialRefundTrue(loadedorderRendered._id)">partial refund true</button>-->
 
 <br>
 
-<button @click="percentRefundTrue(loadedorderRendered._id)">percentage refund true</button>
-<br>
+
 
 
         <ul class="no-left-pad">
@@ -204,8 +201,14 @@ status: <b>ticket closed</b>
                                 true
                               )
                             "
-                            ><u :id="'not-'+item.cartId">issue return</u>
-                            <span style="display:none;" :id="'is-'+item.cartId">(returned)</span></span>
+                            >
+                 
+                            <template v-if="!loadedorderRendered.partialFixedRefund && !loadedorderRendered.partialPercentageRefund">
+                              <u :id="'not-'+item.cartId">issue return</u>
+                              <span style="display:none;" :id="'is-'+item.cartId">(returned)</span>
+                            </template>
+    </span>
+                        
                         </template>
 
 
@@ -218,17 +221,18 @@ status: <b>ticket closed</b>
           </li>
         </ul>
 
+        <div v-if="loadedorderRendered.partialFixedRefund">
+        partial fixed refund has been processed
+        </div>
+  
 
-
-
-
-
+<!--
 <input v-model="refundAmountFixed" />
 
 
 
 
-<input v-model="refundAmountPercentage" />
+<input v-model="refundAmountPercentage" />-->
 
         <br />
 
@@ -346,25 +350,13 @@ export default {
   },
 
   methods: {
-    percentRefundTrue(id) {
+    partialRefundTrue(id) {
+         let self = this;
       this.$http
-        .post(`/order/percent-refund-true/${id}`)
+        .post(`/order/partial-refund-true/${id}`)
         .then((response) => {
           console.log(response);
-
-        })
-        .catch((e) => {
-          // this.errors.push(e);
-          console.log("errors");
-          console.log(e);
-        });
-    },
-    fixedRefundTrue(id) {
-      this.$http
-        .post(`/order/fixed-refund-true/${id}`)
-        .then((response) => {
-          console.log(response);
-
+    self.updateLoadedOrder(self.order._id);
         })
         .catch((e) => {
           // this.errors.push(e);
