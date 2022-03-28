@@ -17,7 +17,7 @@
           <scrollactive :offset="200" ref="scrollactive">
             <template v-if="valid && !preOrderToggleState">
               <template v-for="(item, index) in upserveSections">
-                <template v-if="noFiltering && item.name !== 'featured item'">
+                <template v-if="noFiltering">
                   <template
                     v-if="
                       (item.timing_mask &&
@@ -64,7 +64,7 @@
 
             <template v-if="!valid">
               <template v-for="(item, index) in upserveSections">
-                <template v-if="noFiltering && item.name !== 'featured item'">
+                <template v-if="noFiltering">
                   <div class="block text-left mb10" v-if="!hideIfExpired(item)">
                     <a
                       @click="toggleExpand(false)"
@@ -92,8 +92,7 @@
                 <template v-else>
                   <template
                     v-if="
-                      (item.name !== 'featured item' &&
-                        item.timing_mask &&
+                      (item.timing_mask &&
                         currentlyAvailable(
                           item.timing_mask.start_time,
                           item.timing_mask.end_time,
@@ -137,7 +136,7 @@
 
             <template v-if="preOrderToggleState">
               <template v-for="(item, index) in upserveSections">
-                <template v-if="noFiltering && item.name !== 'featured item'">
+                <template v-if="noFiltering">
                   <div class="block text-left mb10" v-if="!hideIfExpired(item)">
                     <a
                       @click="toggleExpand(false)"
@@ -165,7 +164,7 @@
                 <template v-else>
                   <template
                     v-if="
-                      item.timing_mask === null && item.name !== 'featured item'
+                      item.timing_mask === null
                     "
                   >
                     <div
@@ -197,9 +196,7 @@
                   </template>
                   <template v-else>
                     <template
-                      v-if="
-                        item.name !== 'featured item' &&
-                          currentlyAvailable(
+                      v-if="currentlyAvailable(
                             item.timing_mask.start_time,
                             item.timing_mask.end_time,
                             item.timing_mask.rules,

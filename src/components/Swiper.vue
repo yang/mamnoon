@@ -3,7 +3,7 @@
     <swiper class="swiper" ref="mySwiperRef" :options="swiperOption">
       <template
         v-for="item in upserveSections"
-        v-if="item.name === 'mamnoon @ home' || item.name == 'featured item'"
+        v-if="item.name === 'mamnoon @ home'"
       >
         <swiper-slide>
           <!-- {{item.name}} -->
@@ -66,7 +66,7 @@
 
       <template
         v-for="item in upserveSections"
-        v-if="item.name === 'mamnoon @ home' || item.name == 'featured item'"
+        v-if="item.name === 'mamnoon @ home'"
       >
         <swiper-slide>
           <!-- {{item.name}} -->
@@ -129,7 +129,7 @@
 
       <template
         v-for="item in upserveSections"
-        v-if="item.name === 'mamnoon @ home' || item.name == 'featured item'"
+        v-if="item.name === 'mamnoon @ home'"
       >
         <swiper-slide>
           <!-- {{item.name}} -->

@@ -21,7 +21,7 @@
           >
             <template v-if="valid && !preOrderToggleState">
               <template v-for="(item, index) in upserveSections">
-                <template v-if="noFiltering && item.name !== 'featured item'">
+                <template v-if="noFiltering">
                   <template
                     v-if="
                       (item.timing_mask &&
@@ -61,7 +61,7 @@
             </template>
             <template v-if="!valid">
               <template v-for="(item, index) in upserveSections">
-                <template v-if="noFiltering && item.name !== 'featured item'">
+                <template v-if="noFiltering">
                   <swiper-slide v-if="!hideIfExpired(item)" :id="item.id">
                     <a
                       :index="index"
@@ -87,8 +87,7 @@
                 <template v-else>
                   <template
                     v-if="
-                      (item.name !== 'featured item' &&
-                        item.timing_mask &&
+                      (item.timing_mask &&
                         currentlyAvailable(
                           item.timing_mask.start_time,
                           item.timing_mask.end_time,
@@ -126,7 +125,7 @@
             </template>
             <template v-if="preOrderToggleState">
               <template v-for="(item, index) in upserveSections">
-                <template v-if="noFiltering && item.name !== 'featured item'">
+                <template v-if="noFiltering">
                   <template v-if="item.timing_mask === item.timing_mask">
                     <swiper-slide v-if="!hideIfExpired(item)" :id="item.id">
                       <a
@@ -153,7 +152,7 @@
                   </template>
                 </template>
                 <template v-else>
-                  <template v-if="item.name !== 'featured item'">
+                  <template v-if="true === true">
                     <template v-if="item.timing_mask === null">
                       <swiper-slide v-if="!hideIfExpired(item)" :id="item.id">
                         <a
@@ -178,7 +177,7 @@
                       </swiper-slide>
                     </template>
                     <template v-else>
-                      <template v-if="item.name !== 'featured item'">
+                      <template v-if="true === true">
                         <template
                           v-if="
                             currentlyAvailable(

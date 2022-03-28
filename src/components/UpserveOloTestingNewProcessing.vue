@@ -842,7 +842,7 @@ add
 
 
   <!-- beggin 0 -->
-  <template v-if="noFiltering && item.name !== 'featured item'">
+  <template v-if="noFiltering">
     <!-- beggin 1 -->
       <!-- check if package section -->
         
@@ -910,7 +910,7 @@ add
 
 <template v-for="item in upserveSections">
   <!-- beggin 0 -->
-  <template v-if="noFiltering && item.name !== 'featured item'">
+  <template v-if="noFiltering">
     <!-- beggin 1 -->
 
 
@@ -969,7 +969,7 @@ add
 
 
 
-<template v-if="item.name !== 'featured item' && currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask">
+<template v-if="currentlyAvailable(selectedDate,selectedTime,item.name,item) || !item.timing_mask">
 
 
 
@@ -1046,7 +1046,7 @@ add
 <template v-if="preOrderToggleState">
             <template v-for="item in upserveSections">
  <!-- beggin 0 -->
-    <template v-if="noFiltering && item.name !== 'featured item'">
+    <template v-if="noFiltering">
                               <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
           <div class="display-block row no-lr-margin">
             <h2 class="menu-header"><template v-if="showScenarios">scenario 4 preorder clicked, nothing selected</template>{{item.name.replace('- To Go', '').replace('To Go', '')}}</h2>
@@ -1071,7 +1071,7 @@ add
       </template>
       <template v-else>
 <!--this one shouldnt show staff because staff has a timing mask-->
-           <template v-if="item.timing_mask === null && item.name !== 'featured item'">
+           <template v-if="item.timing_mask === null">
            <!-- no timing mask -->
               <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
          <div class="display-block row no-lr-margin">
@@ -1096,7 +1096,7 @@ add
 </template>
 <template v-else>
 
-<template v-if="item.name !== 'featured item' && currentlyAvailable2(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
+<template v-if="currentlyAvailable2(item.timing_mask.start_time, item.timing_mask.end_time, item.timing_mask.rules, selectedDate, selectedTime)">
 
     <div :id="trimmedName(item)" class="container menu-line-testing" :class="{hideIfExpired: hideIfExpired(item)}">
                         <div class="display-block row no-lr-margin">
