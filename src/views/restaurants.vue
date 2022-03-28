@@ -18,7 +18,10 @@
             v-for="restaurant in this.$store.state.pageData[0]
               .restaurant_repeater"
           >
-            <div class="col-md-6">
+            <div class="col-md-6" v-if="restaurant.published">
+         
+
+         
               <div class="restaurantBox">
                 <router-link
                   v-if="restaurant.background_image.sizes"
@@ -85,10 +88,16 @@
                   </div>-->
 
 
-                  <div class="infoIconLine2">
+                  <div class="infoIconLine2 padIn" v-if="restaurant.optional_card_text">
+                  
+                    {{restaurant.optional_card_text}}
+                    
+                  </div>
+
+                  <div class="infoIconLine2" v-if="restaurant.hours_visibility">
                     <div class="rightIcon">
                       <div class="right-icon-text">
-                        <Clock :color="black" class="mr6 centeredSvg" style="padding-bottom: 20px !important;"/>
+                        <Clock :color="'black'" class="mr6 centeredSvg" style="padding-bottom: 20px !important;"/>
                     
                           <template v-for="hour in restaurant.hours">
                             <template v-for="line in hour">
@@ -101,7 +110,7 @@
                   </div>
 
 
-                  <div class="infoIconLine2">
+                <div class="infoIconLine2" v-if="restaurant.address_visibility">
                     <div class="rightIcon">
                       <div class="right-icon-text">
                         <MapPin class="mr6 centeredSvg" style="padding-bottom: 30px !important;"/>
@@ -125,7 +134,7 @@
 
 
 
-                  <div class="infoIconLine2">
+                       <div class="infoIconLine2" v-if="restaurant.phone_number_visibility">
                     <div class="rightIcon">
                       <div class="right-icon-text">
                         <Phone :width="16" class="mr6 mt6 centeredSvg" />
