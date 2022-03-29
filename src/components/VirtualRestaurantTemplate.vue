@@ -1122,6 +1122,9 @@ export default {
     this.currentDay = dd;
   },
   mounted() {
+
+
+      this.$store.commit("setPageData"); 
     this.individualRestaurant();
     // this.upserves()
 
