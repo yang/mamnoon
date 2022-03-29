@@ -967,13 +967,50 @@ h4.red {
 
     font-weight: 600;
 
+background: white;
+    border: 2px solid #ddd;
+color: #ddd;
+
+
+
+
     &.selected {
       background-color: #f05d5b;
       color: #ffffff;
       padding: 5px 10px;
       border-radius: 0 4px 4px 0;
       border: 2px solid #f05d5b;
+
+      background-color: rgba(240, 93, 91, 0.2901960784);
+      color: #f05d5b;
+border-right:  2px solid #f05d5b;
+border-left:   2px solid #f05d5b;
+
+
+&.leftToggle{
+  // border-radius: 4px 0 0 4px;
+  border-right: 2px solid #f05d5b;
+}
+&.rightToggle{
+  // border-radius: 4px 0 0 4px;
+  border-left: 2px solid #f05d5b;
+}
+
+
     }
+
+
+    &.leftToggle{
+      border-radius: 4px 0 0 4px;
+      // border-right: 0;
+    }
+    
+    &.rightToggle{
+      border-radius: 0 4px 4px 0;
+    }
+
+
+
   }
 }
 

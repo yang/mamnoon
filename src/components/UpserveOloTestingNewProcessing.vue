@@ -706,11 +706,11 @@ add
               <template v-if="valid">
               <div class="toggleLr">
                 <div>
- <button class="oloButton" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
+ <button class="oloButton leftToggle" @click="preOrderToggle(true)" :class="{ selected: preOrderToggleState }">preorder</button> 
   
                   </div> 
                 <div>
-                  <button class="oloButton" v-if="!packageLink"  @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
+                  <button class="oloButton rightToggle" v-if="!packageLink"  @click="preOrderToggle(false)" :class="{ selected: !preOrderToggleState }">get it now</button>
           
                   </div> 
               </div>
@@ -3507,14 +3507,12 @@ enumerateDaysBetweenDates(startDate, endDate) {
     var currDate = moment(startDate).startOf('day');
     var lastDate = moment(endDate).startOf('day');
 
-
 dates.push(currDate.clone().toDate());
 
     while(currDate.add(1, 'days').diff(lastDate) < 0) {
         // console.log(currDate.toDate());
         dates.push(currDate.clone().toDate());
     }
-
 
 dates.push(lastDate.clone().toDate());
 
@@ -3527,10 +3525,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const product = urlParams.get('packageId');
 
 let result = false;
-
-
 return result;
-
 
 
 },
@@ -3575,8 +3570,6 @@ return result;
     }
     
   },
-
-
     changeToPreorderAndShowDropDown(){
 
   this.$swal({ 
@@ -3613,7 +3606,6 @@ selectADifferentTime(){
 
       if(confirmed.isConfirmed){
   
-
       window.scrollTo(0,0);
       this.toggledDrawer = false;
       }
@@ -3622,12 +3614,9 @@ selectADifferentTime(){
   });
     },
 showPickupTime(){
-  this.changePickupTime = true;s
-
+  this.changePickupTime = true;
 },
 cippaybuttoncreditauth() {
-
-
       // console.log("enter else on line 3582")
       let self = this;
       this.getCreditAuthToken().then(function (transactionToken) {
@@ -3841,8 +3830,6 @@ console.log('change done');
       }
     },
 currentlyContains(modifiers,m,modid){
-
-
 
 
 if(m !== modid){
