@@ -18,7 +18,7 @@
             v-for="restaurant in this.$store.state.pageData[0]
               .restaurant_repeater"
           >
-            <div class="col-md-6" v-if="restaurant.published">
+            <div class="col-md-6" v-if="restaurant.published_tile">
          
 
          
