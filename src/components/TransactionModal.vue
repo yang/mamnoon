@@ -111,12 +111,10 @@ status: <b>ticket closed</b>
 
 <div class="col-6">
 <br>
-<!--
-<pre>{{loadedorderRendered}}</pre>-->
+<!--<pre>{{loadedorderRendered}}</pre>-->
+<!--<pre>{{loadedorderRendered.orderInfo.charges.total}}</pre>-->
 
-<!--<button @click="partialRefundTrue(loadedorderRendered._id)">partial refund true</button>-->
 
-<br>
 
 
 
@@ -165,7 +163,7 @@ status: <b>ticket closed</b>
             </template>
             
             &nbsp;&nbsp;&nbsp;
-            
+     
             <i v-if="item.instructions != ''"style="font-size:10px;display:block;">({{item.instructions}})</i>
           
             &nbsp;&nbsp; &nbsp;&nbsp;
@@ -185,7 +183,6 @@ status: <b>ticket closed</b>
 
                   </template>
                   <template v-else>
-
                         <template v-if="loadedorderRendered.payInfo.uniqueTransId">
                           <span
                             class="line-link"
@@ -194,6 +191,7 @@ status: <b>ticket closed</b>
                               issueTokenizedReturn(
                                 loadedorderRendered.payInfo.uniqueTransId,
                                 item.price,
+                                item.quantity,
                                 loadedorderRendered.orderInfo.charges.taxes /
                                   loadedorderRendered.orderInfo.charges.preTotal,
                                 item.cartId,
@@ -202,6 +200,7 @@ status: <b>ticket closed</b>
                               )
                             "
                             >
+                            <!--{{item.price}}<br>{{item.quantity}}-->
                  
                             <template v-if="!loadedorderRendered.partialFixedRefund && !loadedorderRendered.partialPercentageRefund">
                               <u :id="'not-'+item.cartId">issue return</u>
@@ -224,22 +223,45 @@ status: <b>ticket closed</b>
         <div v-if="loadedorderRendered.partialFixedRefund">
         partial fixed refund has been processed
         </div>
-  
+  <br>
 
 <!--
-<input v-model="refundAmountFixed" />
+refund amount fixed:<input v-model="refundAmountFixed" />
 
 
+<br>
+refund amount percentage: <input v-model="refundAmountPercentage" />
+<br />
+{{loadedorderRendered}}
+
+<br />
 
 
-<input v-model="refundAmountPercentage" />-->
+<template v-if="percentRefundAmount>0">
 
+
+{{percentRefundAmount}}
+{{loadedorderRendered.payInfo.amount * 100 - loadedorderRendered.amountRefunded}}
+
+<template v-if="percentRefundAmount * 100 >= loadedorderRendered.payInfo.amount * 100 - loadedorderRendered.amountRefunded">
+more
+</template>
+<template v-else>
+enough
+</template>
+
+
+<u @click.once="issueFixedAmountReturn(loadedorderRendered.payInfo.uniqueTransId,percentRefundAmount,loadedorderRendered._id)">
+refund this percent amount: {{percentRefundAmount}}
+</u>
+</template>
+-->
         <br />
 
 
-<!--<template v-if="loadedorderRendered.orderAccepted">
+<template v-if="loadedorderRendered.orderAccepted">
 order has been accepted<br>
-</template>-->
+</template>
 
 
 
@@ -316,6 +338,7 @@ import tz from "moment-timezone";
 export default {
   data() {
     return {
+      
       refundAmountFixed:0,
       refundAmountPercentage: 0,
       checkForReturnable: false,
@@ -331,6 +354,21 @@ export default {
       response: null,
       currentView: "empty",
     };
+  },
+  computed:{
+percentRefundAmount(){
+
+let amountDivided = this.refundAmountPercentage/100
+let totalTimes100 = this.loadedorderRendered.orderInfo.charges.total *100
+let amountToCompute = totalTimes100 - this.loadedorderRendered.amountRefunded; 
+let amountToDiv = amountToCompute * amountDivided;
+let amountToFix = amountToDiv/100/100;
+
+return amountToFix.toFixed(2);
+
+
+
+}
   },
   name: "OrderHistory",
   props: ["order"],
@@ -350,6 +388,34 @@ export default {
   },
 
   methods: {
+
+
+issueFixedAmountReturn(
+      uniqueTransIdString,
+      amount,
+      id) {
+
+      let amountToSend = amount.toString();
+
+
+      let self = this;
+      this.$http
+        .post("/order/issue-tokenized-return", {
+          uniqueTransId: uniqueTransIdString,
+          amount: amountToSend,
+        })
+        .then((response) => {
+        
+            this.partialRefundTrue(id);
+
+     
+        })
+        .catch((e) => {
+          // this.errors.push(e);
+          console.log("errors");
+          console.log(e);
+        });
+    },
     partialRefundTrue(id) {
          let self = this;
       this.$http
@@ -371,6 +437,7 @@ export default {
               this.issueTokenizedReturn(
                       this.returnList[i].transId,
                       this.returnList[i].price,
+                      this.returnList[i].quantity,
                       this.returnList[i].taxDivPretotal,
                       this.returnList[i].cartId,
                       this.returnList[i].mongoId,
@@ -565,6 +632,7 @@ if(order.cancelled){
     issueTokenizedReturn(
       uniqueTransIdString,
       amount,
+      quantity,
       taxRate,
       cartId,
       orderId,
@@ -582,7 +650,9 @@ if(ids){
 
       console.log(amountToCalcWithTax);
 
-      let amountDiv100 = amountToCalcWithTax / 100;
+      let amountTimesQuantity = quantity * amountToCalcWithTax
+
+      let amountDiv100 = amountTimesQuantity / 100;
       let amountToSend = amountDiv100.toFixed(2).toString();
 
       console.log(amountDiv100.toFixed(2).toString());
