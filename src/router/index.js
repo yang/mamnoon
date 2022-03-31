@@ -231,11 +231,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   scrollBehavior: function (to) {
-    if (to.hash) {
       return {
-        selector: to.hash
+        x: 0,
+        y: 0
       }
-    }}
+    }
 });
 
 router.beforeEach((to, from, next) => {
