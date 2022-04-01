@@ -718,28 +718,23 @@ add
               </template>
               <template v-else>
               <div class="mb16"> 
-       we are currently closed. now accepting preorders for future pickup.
+       we are currently closed. please check back during open hours
               </div> 
               </template>
               <template v-if="valid">
                   <template v-if="preOrderToggleState">
-                  <div class="leftDropdown">
+                  <!-- <div class="leftDropdown">
                   <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select>
                   </div>
                   <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
                   <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now() + 1500000" v-model="selectedTime"></v-select>
                   <v-select v-else :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" v-model="selectedTime" :selectable="x => x.time > Date.now() + 1500000" ></v-select>
-
-                 
-
-
-
-                  </div>
+                  </div> -->
                 </template>
               </template>
               <template v-else>
                   <template>
-                     <div class="leftDropdown">
+                     <!-- <div class="leftDropdown">
                       <v-select v-if="rendered" :options="dropDownDays" label="dateData" placeholder="Select Day" v-model="selectedDate" :selectable="x => !x.closed"></v-select></div>
                       <div class="rightDropdown" v-if="selectedDate && selectedDate !== null">
                                    <v-select v-if="rendered && !packageLink" :options="selectedDate.timeslots" label="timelabel" placeholder="Select Time" :selectable="x => x.time > Date.now() + 1500000" v-model="selectedTime"></v-select>
@@ -747,7 +742,7 @@ add
                     
                                     
                     
-                      </div>
+                      </div> -->
                   </template>
             </template>
 </div>
