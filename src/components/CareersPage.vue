@@ -8,21 +8,16 @@
         applicants, and can't wait to hear from you.
       </p>
       <p>
-        visit the links below to see current openings. when submitting your
-        cover letter and resume, please be sure that all attachments are in pdf
-        format. thank you
+        when submitting your cover letter and resume, please be sure that all
+        attachments are in pdf format.
       </p>
       <p>
-        for current opportunities at our restaurants and commissary, visit
-        <a href="http://www.poachedjobs.com">poachedjobs.com</a> and search by
-        the name of the restaurant you're interested in.
+        scroll below to see current openings.
       </p>
-      <p>
-        for current openings in our head office, visit
-        <a href="http://www.indeed.com">indeed.com</a> and search for mama restaurant
-        group.
-      </p>
-    <div class="image"></div>
+      <div class="logos">
+        <Logos/>
+      </div>
+      
     </div>
     <!-- spot for image -->
     <footer>
@@ -33,14 +28,37 @@
 <script>
 import Nav3 from "@/components/Nav3";
 import GlobalFooter from "@/components/GlobalFooter";
+import Logos from "@/components/Logos";
 export default {
   components: {
     Nav3,
     GlobalFooter,
+    Logos,
   },
+  data() {
+    return {
+      pageData: null,
+      logoArray: []
+    };
+  },
+  // methods: {
+  //   getLogos() {
+  //     this.pageData = this.$store.state.pageData[0].restaurant_repeater;
+  //     console.log(`pageData`, this.pageData);
+  //     for(let svg in this.pageData){
+  //       let logo = this.pageData[svg].logo_svg
+  //       this.logoArray.push(logo);
+  //     }
+  //     console.log('this.logoArray', this.logoArray)
+  //   }
+
+  // },
+  //   mounted() {
+  //     this.getLogos();
+  //   }
 };
 </script>
 
 <style lang="scss">
-  @import '@/assets/styles/css/careers.scss';
+@import "@/assets/styles/css/careers.scss";
 </style>
