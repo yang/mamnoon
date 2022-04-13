@@ -14,11 +14,20 @@
       <p>
         scroll below to see current openings.
       </p>
-      <div class="logos">
-        <Logos/>
-      </div>
       
     </div>
+      <div class="col-md-8 m-auto mt-5">
+        <Logos/>
+      </div>
+      <div>
+        <Hanoon/>
+      </div>
+      <div>
+        <Manna/>
+      </div>
+      <div>
+        <Mbar/>
+      </div>
     <!-- spot for image -->
     <footer>
       <GlobalFooter />
@@ -29,33 +38,19 @@
 import Nav3 from "@/components/Nav3";
 import GlobalFooter from "@/components/GlobalFooter";
 import Logos from "@/components/Logos";
+import Hanoon from '@/components/hanoonCareerModule.vue'
+import Manna from '@/components/mannaCareerModule.vue'
+import Mbar from '@/components/mbarCareerModule.vue'
 export default {
   components: {
     Nav3,
     GlobalFooter,
     Logos,
+    Hanoon,
+    Manna,
+    Mbar
   },
-  data() {
-    return {
-      pageData: null,
-      logoArray: []
-    };
-  },
-  // methods: {
-  //   getLogos() {
-  //     this.pageData = this.$store.state.pageData[0].restaurant_repeater;
-  //     console.log(`pageData`, this.pageData);
-  //     for(let svg in this.pageData){
-  //       let logo = this.pageData[svg].logo_svg
-  //       this.logoArray.push(logo);
-  //     }
-  //     console.log('this.logoArray', this.logoArray)
-  //   }
-
-  // },
-  //   mounted() {
-  //     this.getLogos();
-  //   }
+  
 };
 </script>
 

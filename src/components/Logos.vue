@@ -1,9 +1,8 @@
 <template>
-  <div v-if="$store && $store.state">
-    <div class="restaurantLogos" v-for="restaurant in this.pageData">
-      <pre class="logos" v-html="restaurant.logo_svg"></pre>
+  <div class="logoRow" v-if="$store && $store.state">
+    <div class="logosInline" v-for="restaurant in this.pageData">
+      <div class="displayInline" v-html="restaurant.logo_svg"></div>
     </div>
-    <p>hello world</p>
   </div>
 </template>
 
@@ -12,7 +11,6 @@ export default {
   data() {
     return {
       pageData: null,
-      logoArray: [],
     };
   },
   methods: {
@@ -26,14 +24,37 @@ export default {
   },
 };
 </script>
-<style scoped>
-.restaurantLogos {
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
+<style lang="scss">
+.logosInline {
+  width: 100%;
+  margin-left: 2vw;
+  @media only screen and (max-width: 1080px) {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
-.logos{
-  height: 100px;
-  width: 150px;
+
+.displayInline {
+  display: inline-block;
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
+}
+.displayInline svg {
+  height: 150px;
+  width: 100px;
+}
+
+.logoRow {
+  display: flex;
+  justify-content: space-around;
+  align-content: normal;
+  width: 100%;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+  }
 }
 </style>
