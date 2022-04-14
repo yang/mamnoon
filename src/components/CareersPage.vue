@@ -16,8 +16,20 @@
       </p>
       
     </div>
-      <div class="col-md-8 m-auto mt-5">
+      <div class="col-md-8 m-auto p-auto">
         <Logos/>
+      </div>
+      <div>
+        <Mbar/>
+      </div>
+      <div>
+        <Mamnoon/>
+      </div>
+      <div>
+        <Anar/>
+      </div>
+      <div>
+        <Street/>
       </div>
       <div>
         <Hanoon/>
@@ -26,7 +38,7 @@
         <Manna/>
       </div>
       <div>
-        <Mbar/>
+        <NoOpenings/>
       </div>
     <!-- spot for image -->
     <footer>
@@ -41,6 +53,10 @@ import Logos from "@/components/Logos";
 import Hanoon from '@/components/hanoonCareerModule.vue'
 import Manna from '@/components/mannaCareerModule.vue'
 import Mbar from '@/components/mbarCareerModule.vue'
+import Street from '@/components/streetCareerModule.vue'
+import Mamnoon from '@/components/mamnoonCareerModule.vue'
+import Anar from '@/components/anarCareerModule.vue'
+import NoOpenings from '@/components/noOpeningsModule.vue'
 export default {
   components: {
     Nav3,
@@ -48,7 +64,11 @@ export default {
     Logos,
     Hanoon,
     Manna,
-    Mbar
+    Mbar,
+    Street,
+    Mamnoon,
+    Anar,
+    NoOpenings
   },
   
 };

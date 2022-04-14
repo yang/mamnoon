@@ -22,20 +22,24 @@
 }
 
 .main-content {
-  width: 100%;
-  margin: auto;
-  text-align: center;
   padding-top: 1.5vh;
   margin-top: 80px;
   height: 100%;
   padding-bottom: 20px;
   background-color: $nadi-white-color !important;
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 100%;
+    offset: none;
+
+  }
 }
 
 .main-content p {
   color: $nadi-black-color;
   text-align: left;
   margin-left: auto;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   margin-right: auto;
   width: 40%;
   @media only screen and (max-width: 992px) {
@@ -52,6 +56,7 @@
   text-align: center;
   margin-top: 40px;
   margin-bottom: 40px;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 28px;
@@ -61,6 +66,7 @@
 .main-content a {
   color: $nadi-black-color;
   text-decoration: underline;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .logos {

@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="col-md-8">
-        <div>
+        <div class="hanoon">
           <a :href="'www.google.com'">apply here</a>
           <br />
           <div class="nowHiring">

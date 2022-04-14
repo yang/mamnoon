@@ -2,13 +2,20 @@
 .container {
   text-align: center;
   display: contents;
+  
 }
 .holderMbar {
   background-color: #FFF350;
   height: 100%;
   display: flex;
+  justify-content: start;
   height: 100%;
   padding: 2%;
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 50%;
+    width: 100vw;
+  }
 }
 .logoMbar {
   height: 224px;
@@ -16,24 +23,46 @@
   margin: auto;
   margin-top: 30px;
   margin-bottom: -30px;
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 100%;
+    margin: auto;
+    align-content: center;
+    margin-left: 45%;
+  }
 }
 .col-md-4 p {
-  font-family: "Helvetica Neue";
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 30px;
   color: #005371 !important;
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 100%;
+    margin: auto;
+    margin-left: 50%;
+    width: 100%;
+    align-content: center;
+  }
 }
-.col-md-8 {
+
+.openings {
   margin-top: 50px;
   text-align: justify;
-  margin-left: 30vw;
+  padding-right: 10%;
+  width: 50%;
+  white-space: pre-wrap;
   .listItemMbar {
-    font-family: "Helvetica Neue";
-    font-style: normal;
-    font-weight: 500, bold;
-    font-size: 22px;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: 600 !important;
+    font-size: 24px;
+    line-height: 47px;
     color: #005371 !important;
+  }
+  @media only screen and (max-width: 768px){
+    width: 100%;
+    margin-right: 25%;
   }
 }

@@ -1,0 +1,82 @@
+
+.bg {
+  width: 100%;
+  height: auto;
+  background-color: $nadi-red-color;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 50%;
+    width: 100vw;
+  }
+}
+
+.col-md-12{
+  text-align: middle;
+  p {
+    color: $nadi-white-color !important;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: 600, bold;
+    font-size: 22px;
+    @media screen and (max-width: 768px) {
+      display: grid;
+      grid-template-columns: max-content;
+      margin-left: 6%;
+      font-size: 18px;
+    }
+  }
+  a {
+    color: $nadi-white-color !important;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: 600, bold;
+    font-size: 20px;
+    text-decoration: underline;
+    @media screen and (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
+  h5{
+    color: $nadi-white-color !important;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    margin: auto;
+    font-size: 36px;
+    @media screen and (max-width: 768px) {
+      font-size: 26px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    margin: auto;
+    margin-left: 25px;
+  }
+}
+
+.titleSection {
+  margin: auto;
+  @media screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: max-content;
+    margin-left: 25px;
+  }
+}
+
+.teamImage {
+  margin: auto;
+  margin-bottom: 50px;
+  @media only screen and (max-width: 768px){
+    margin: auto !important;
+    display: grid;
+    width: 91vw;
+    justify-content: center;
+    padding-right: 25%;
+  }
+}
+
+.teamImage img{
+  width: 25vw!important;
+  height: auto !important;
+  @media only screen and (max-width: 768px){
+    width: 75vw !important;
+  }
+}
+

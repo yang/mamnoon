@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <div class="holderManna">
+    <div class="holderAnar">
       <div class="col-md-4">
-        <div class="logoManna" v-html="this.pageData[5].logo_svg"></div>
-        <div class="locationManna">
+        <div class="logoAnar" v-html="this.pageData[2].logo_svg"></div>
+        <div class="locationAnar">
           <p>south lake union</p>
-          <p>446 terry ave n</p>
-          <p>seattle, wa 98109</p>
+          <p>2040 6th ave</p>
+          <p>seattle, wa 98121</p>
         </div>
       </div>
       <div class="col-md-8">
         <div>
-          <p><span class="listItemManna">no openings at this time, please check</span></p>
-          <p><span class="listItemManna">back later</span></p>
+          <p><span class="listItemAnar">no openings at this time, please check</span></p>
+          <p><span class="listItemAnar">back later</span></p>
         </div>
       </div>
     </div>
@@ -38,5 +38,5 @@ export default {
 </script>
 
 <style lang='scss'>
-  @import '@/assets/styles/css/manna.scss';
+  @import '@/assets/styles/css/anar.scss';
 </style>

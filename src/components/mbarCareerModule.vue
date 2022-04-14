@@ -10,9 +10,8 @@
         </div>
       </div>
       <div class="col-md-8">
-        <div>
-          <p><span class="listItemMbar">no openings at this time, please check</span></p>
-          <p><span class="listItemMbar">back later</span></p>
+        <div class="openings">
+          <span class="listItemMbar">no openings at this time, please check back later</span>
         </div>
       </div>
     </div>
