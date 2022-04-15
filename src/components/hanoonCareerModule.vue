@@ -54,7 +54,7 @@
             <br>
             <span class="listItem">assistant general manager</span>
             <br>
-            <span class="listItem">general manager</span>
+            <span class="listItem">general manager - <a href="https://www.indeed.com/job/general-manager-new-restaurant-opening-7bcfa509dd53432b">apply here</a></span>
           </div>
           <div class="nowHiring">
             <span class="listTitle">kitchen</span>

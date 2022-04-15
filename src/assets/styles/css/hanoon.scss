@@ -32,11 +32,16 @@
   }
 }
 .col-md-4 {
+  .locationHanoon {
+    @media only screen and (max-width: 768px){
+      width: 180px;
+    }
+  }
   .locationHanoon p{
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 24px;
     color: $nadi-white-color !important;
   }
 }
@@ -48,7 +53,7 @@
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 22px;
     line-height: 47px;
     text-decoration-line: underline;
     color: #ffffff !important;
@@ -57,8 +62,8 @@
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 33px;
+    font-size: 24px;
+    line-height: 37px;
     color: $nadi-white-color;
   }
   .title {
@@ -81,7 +86,11 @@
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 22px;
     color: $nadi-white-color;
+  }
+  @media only screen and (max-width: 768px){
+    left: -15px;
+    margin-bottom: 10%;
   }
 }

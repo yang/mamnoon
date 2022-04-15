@@ -12,7 +12,7 @@
       <div class="col-md-8">
         <div class="nowHiring">
             <span class="titleStreet">kitchen</span>
-          <p><span class="listItemStreet">cashier / prep cook - <a href="">apply here</a></span></p>
+          <p><span class="listItemStreet">cashier / prep cook - <a href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-street-cashierprep-cook-dollar20-22hr?from=jobs&rec=false">apply here</a></span></p>
         </div>
       </div>
     </div>
