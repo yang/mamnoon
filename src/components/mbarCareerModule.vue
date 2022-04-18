@@ -9,8 +9,9 @@
           <p>seattle, wa 98109</p>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-4"></div>
         <div class="openings">
+          <span class="listTitleMbar">bar</span>
           <p>
             <span class="listItemMbar"
               >barback / server assistant -
@@ -32,7 +33,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

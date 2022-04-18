@@ -9,7 +9,8 @@
           <p>seattle, wa 98109</p>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-4"></div>
+      <div class="mannaJobs">
         <div>
           <p><span class="listItemManna">no openings at this time, please check</span></p>
           <p><span class="listItemManna">back later</span></p>

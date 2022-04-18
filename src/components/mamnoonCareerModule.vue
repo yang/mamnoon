@@ -9,7 +9,8 @@
           <p>seattle, wa 98122</p>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-4"></div>
+      <div class="mamnoonJobs">
         <div class="nowHiring">
             <span class="titleMamnoon">kitchen</span>
           <p><span class="listItemMamnoon">mezze master / prep cook - <a href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-mezze-master-prep-cook?from=jobs&rec=false">apply here</a></span></p>

@@ -10,7 +10,6 @@
   height: 100%;
   display: flex;
   height: 100%;
-  padding: 2%;
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 50%;
@@ -33,11 +32,11 @@
 }
 .col-md-4 {
   .locationHanoon {
-    @media only screen and (max-width: 768px){
+    @media only screen and (max-width: 768px) {
       width: 180px;
     }
   }
-  .locationHanoon p{
+  .locationHanoon p {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -45,11 +44,11 @@
     color: $nadi-white-color !important;
   }
 }
-.col-md-8 {
+.hanoonJobs {
   margin-top: 50px;
+  margin-right: 5vw;
   text-align: justify;
-  margin-left: 30vw;
-  .hanoon a{
+  .hanoon a {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -88,9 +87,20 @@
     font-weight: 400;
     font-size: 22px;
     color: $nadi-white-color;
+    @media only screen and(max-width: 768px) {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-style: initial;
+      font-weight: 500;
+      font-size: 20px;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
   }
-  @media only screen and (max-width: 768px){
+  @media only screen and (max-width: 768px) {
     left: -15px;
     margin-bottom: 10%;
+    width: 100%;
+    margin-left: 10%;
   }
 }

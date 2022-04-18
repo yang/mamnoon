@@ -11,7 +11,8 @@
           <p>kirkland, wa 98034</p>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-4"></div>
+      <div class="hanoonJobs">
         <div class="hanoon">
           <a :href="'www.google.com'">apply here</a>
           <br />

@@ -1,15 +1,12 @@
-
 .container {
   text-align: center;
   display: contents;
-  
 }
 .holderMbar {
-  background-color: #FFF350;
+  background-color: #fff350;
   height: 100%;
   display: flex;
   height: 100%;
-  padding: 2%;
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 50%;
@@ -31,7 +28,7 @@
   }
 }
 .locationMbar {
-  @media only screen and (max-width: 768px){
+  @media only screen and (max-width: 768px) {
     width: 180px;
   }
 }
@@ -42,7 +39,7 @@
   font-size: 20px;
   line-height: 30px;
   color: #005371 !important;
-  
+
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 100%;
@@ -56,7 +53,7 @@
 .openings {
   margin-top: 50px;
   text-align: justify;
-  padding-right: 10%;
+  margin-right: 5vw;
   width: 50%;
   white-space: pre-wrap;
   .listItemMbar {
@@ -70,15 +67,35 @@
       font-size: 22px;
       line-height: 47px;
     }
+    @media only screen and (max-width: 768px) {
+      @media only screen and(max-width: 768px){
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-style: initial;
+      font-weight: 500;
+      font-size: 20px;
+      display: inline-flex;
+      align-items: center;
+      height: 10vh;
+      white-space: nowrap;
+      }
+    }
   }
-  @media only screen and (max-width: 768px){
+    .listTitleMbar {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-weight: 600 !important;
+      font-size: 26px;
+      line-height: 47px;
+      color: #005371 !important;
+    }
+  
+  @media only screen and (max-width: 768px) {
     width: 100%;
-    margin-right: 25%;
+    margin-left: 10%;
   }
 }
 
 .col-md-8 {
-  @media only screen and (max-width: 768px){
+  @media only screen and (max-width: 768px) {
     left: -15px;
     margin-bottom: 10%;
   }

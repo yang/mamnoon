@@ -9,10 +9,10 @@
           <p>seattle, wa 98121</p>
         </div>
       </div>
-      <div class="col-md-8">
+       <div class="col-md-4"></div>
+      <div class="anarJobs">
         <div>
-          <p><span class="listItemAnar">no openings at this time, please check</span></p>
-          <p><span class="listItemAnar">back later</span></p>
+          <p><span class="listItemAnar">no openings at this time, please check back later</span></p>
         </div>
       </div>
     </div>

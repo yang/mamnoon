@@ -9,7 +9,8 @@
           <p>seattle, wa 98121</p>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-4"></div>
+      <div class="streetJobs">
         <div class="nowHiring">
             <span class="titleStreet">kitchen</span>
           <p><span class="listItemStreet">cashier / prep cook - <a href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-street-cashierprep-cook-dollar20-22hr?from=jobs&rec=false">apply here</a></span></p>
