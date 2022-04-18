@@ -19,9 +19,6 @@
               .restaurant_repeater"
           >
             <div class="col-md-6" v-if="restaurant.published_tile">
-         
-
-         
               <div class="restaurantBox">
                 <router-link
                   v-if="restaurant.background_image.sizes"
@@ -34,22 +31,10 @@
                       'background-image': `url(${restaurant.background_image.sizes.medium_large})`,
                     }"
                   >
-                    <!--<div class="imgBox">->>-->
-<!--
-// <pre>
-
-
-
-//             {{restaurant.logo_svg}}
-//             </pre>
--->
-
-
-
-
-    <div v-html="restaurant.logo_svg" class="restaurantLogo"></div>
-
-
+                    <div
+                      v-html="restaurant.logo_svg"
+                      class="restaurantLogo"
+                    ></div>
 
                     .
                   </div>
@@ -61,7 +46,7 @@
                   </div>
                 </router-link>
                 <div class="restaurantContent">
-                 <!-- <div class="restaurantName">
+                  <!-- <div class="restaurantName">
                     <router-link :to="restaurant.name.replace(' ', '')">
                       <template v-if="restaurant.name === 'mbar'">
                         <MbarLogo :height="90" :marginLeft="6" />
@@ -87,33 +72,41 @@
                     </router-link>
                   </div>-->
 
-
-                  <div class="infoIconLine2 padIn" v-if="restaurant.optional_card_text">
-                  
-                    {{restaurant.optional_card_text}}
-                    
+                  <div
+                    class="infoIconLine2 padIn"
+                    v-if="restaurant.optional_card_text"
+                  >
+                    {{ restaurant.optional_card_text }}
                   </div>
 
                   <div class="infoIconLine2" v-if="restaurant.hours_visibility">
                     <div class="rightIcon">
                       <div class="right-icon-text">
-                        <Clock :color="'black'" class="mr6 centeredSvg" style="padding-bottom: 20px !important;"/>
-                    
-                          <template v-for="hour in restaurant.hours">
-                            <template v-for="line in hour">
-                              <span style="display:block;">{{ line.line }}</span>
-                            </template>
+                        <Clock
+                          :color="'black'"
+                          class="mr6 centeredSvg"
+                          style="padding-bottom: 20px !important;"
+                        />
+
+                        <template v-for="hour in restaurant.hours">
+                          <template v-for="line in hour">
+                            <span class="hours">{{ line.line }}</span>
                           </template>
-                 
+                        </template>
                       </div>
                     </div>
                   </div>
 
-
-                <div class="infoIconLine2" v-if="restaurant.address_visibility">
+                  <div
+                    class="infoIconLine2"
+                    v-if="restaurant.address_visibility"
+                  >
                     <div class="rightIcon">
                       <div class="right-icon-text">
-                        <MapPin class="mr6 centeredSvg" style="padding-bottom: 30px !important;"/>
+                        <MapPin
+                          class="mr6 centeredSvg"
+                          style="padding-bottom: 30px !important;"
+                        />
                         <span>
                           <template v-for="address in restaurant.address">
                             <template v-for="line in address">
@@ -121,25 +114,25 @@
                                 :href="line.line_group.url"
                                 target="_blank"
                                 class="linkBlack"
-                                :title="restaurant.name+' address'"
+                                :title="restaurant.name + ' address'"
                                 >{{ line.line_group.text }}</a
                               >
                             </template>
                           </template>
-                          <br/>
+                          <br />
                         </span>
                       </div>
                     </div>
                   </div>
 
-
-
-                       <div class="infoIconLine2" v-if="restaurant.phone_number_visibility">
+                  <div
+                    class="infoIconLine2"
+                    v-if="restaurant.phone_number_visibility"
+                  >
                     <div class="rightIcon">
                       <div class="right-icon-text">
                         <Phone :width="16" class="mr6 mt6 centeredSvg" />
                         <span>
-                         
                           <a
                             :href="
                               `tel:+1${restaurant.phone_number.replace(
@@ -147,10 +140,9 @@
                                 ''
                               )}`
                             "
-                            :title="restaurant.name+' phone number'"
+                            :title="restaurant.name + ' phone number'"
                             target="_blank"
                             class="linkBlack"
-                            
                             >{{ restaurant.phone_number }}</a
                           >
                         </span>
@@ -161,7 +153,10 @@
                   <div style="">
                     <template v-for="(link, i) in restaurant.tile_list_links">
                       <div v-if="link.visible" class="listLinks">
-                        <a class="listLink" :title="restaurant.name + ' ' + link.title" :href="link.link"
+                        <a
+                          class="listLink"
+                          :title="restaurant.name + ' ' + link.title"
+                          :href="link.link"
                           >{{ link.title }} &#x203A;</a
                         >
                       </div>
@@ -278,10 +273,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '@/assets/styles/css/restaurants.scss';
-
-
-
-
-  
+@import "@/assets/styles/css/restaurants.scss";
 </style>

@@ -272,6 +272,13 @@ p.list-of-links {
   padding-left: 10px;
 }
 
+.hours {
+  display: block;
+  :nth-child(even){
+    margin-top: 3px;
+  }
+}
+
 .listLink {
   display: block;
   color: black;
