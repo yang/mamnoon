@@ -8,7 +8,6 @@
   background-color: #FFF350;
   height: 100%;
   display: flex;
-  justify-content: start;
   height: 100%;
   padding: 2%;
   @media only screen and (max-width: 768px) {
@@ -31,6 +30,11 @@
     margin-left: 45%;
   }
 }
+.locationMbar {
+  @media only screen and (max-width: 768px){
+    width: 180px;
+  }
+}
 .col-md-4 p {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-style: normal;
@@ -38,6 +42,7 @@
   font-size: 20px;
   line-height: 30px;
   color: #005371 !important;
+  
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 100%;
@@ -57,12 +62,24 @@
   .listItemMbar {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-weight: 600 !important;
-    font-size: 24px;
+    font-size: 22px;
     line-height: 47px;
     color: #005371 !important;
+    a {
+      color: #005371 !important;
+      font-size: 22px;
+      line-height: 47px;
+    }
   }
   @media only screen and (max-width: 768px){
     width: 100%;
     margin-right: 25%;
+  }
+}
+
+.col-md-8 {
+  @media only screen and (max-width: 768px){
+    left: -15px;
+    margin-bottom: 10%;
   }
 }

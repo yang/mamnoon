@@ -12,8 +12,8 @@
       <div class="col-md-8">
         <div class="nowHiring">
             <span class="titleMamnoon">kitchen</span>
-          <p><span class="listItemMamnoon">mezze master / prep cook - <a href="">apply here</a></span></p>
-          <p><span class="listItemMamnoon">pastry assistant - <a href="">apply here</a></span></p>
+          <p><span class="listItemMamnoon">mezze master / prep cook - <a href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-mezze-master-prep-cook?from=jobs&rec=false">apply here</a></span></p>
+          <p><span class="listItemMamnoon">pastry assistant - <a href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-pastry-assistant?from=jobs&rec=false">apply here</a></span></p>
         </div>
       </div>
     </div>

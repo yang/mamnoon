@@ -3,7 +3,7 @@
     <div class="holderMbar">
       <div class="col-md-4">
         <div class="logoMbar" v-html="this.pageData[0].logo_svg"></div>
-        <div>
+        <div class="locationMbar">
           <p>south lake union</p>
           <p>400 fairview ave n</p>
           <p>seattle, wa 98109</p>
@@ -11,7 +11,24 @@
       </div>
       <div class="col-md-8">
         <div class="openings">
-          <span class="listItemMbar">no openings at this time, please check back later</span>
+          <p>
+            <span class="listItemMbar"
+              >barback / server assistant -
+              <a
+                href="https://poachedjobs.com/jobs/seattle-wa-floor-jobs-mbar-barbackserver-assistant?from=jobs&rec=false"
+                >apply here</a
+              ></span
+            >
+          </p>
+          <p>
+            <span class="listItemMbar"
+              >bartender -
+              <a
+                href="https://poachedjobs.com/jobs/seattle-wa-bar-jobs-mbar-bartender-6?from=jobs&rec=false"
+                >apply here</a
+              ></span
+            >
+          </p>
         </div>
       </div>
     </div>
@@ -36,6 +53,6 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-  @import '@/assets/styles/css/mbar.scss';
+<style lang="scss">
+@import "@/assets/styles/css/mbar.scss";
 </style>
