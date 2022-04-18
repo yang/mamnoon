@@ -274,9 +274,10 @@ p.list-of-links {
 
 .hours {
   display: block;
-  :nth-child(even){
-    margin-top: 3px;
-  }
+  
+}
+.hours:nth-child(odd){
+  margin-top: 5px;
 }
 
 .listLink {
