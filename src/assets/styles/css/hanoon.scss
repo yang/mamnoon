@@ -28,15 +28,16 @@
     margin: auto;
     align-content: center;
     margin-left: 45%;
-    margin-top: 20%;
-    margin-bottom: 20%;
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 }
 .col-md-4 {
   .locationHanoon {
-
     @media only screen and (max-width: 768px) {
-      width: 180px;
+      width: 100vw;
+      margin:auto;
+      margin-left: 8%;
     }
   }
   .locationHanoon p {
@@ -86,6 +87,10 @@
     font-size: 36px;
     line-height: 40px;
     color: $nadi-white-color;
+    @media only screen and (max-width: 768px) {
+      font-size: 24pt;
+      line-height: 30pt;
+    }
   }
   .listItem {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -97,16 +102,20 @@
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-style: initial;
       font-weight: 500;
-      font-size: 20px;
+      font-size: 14pt;
       display: inline-flex;
       align-items: center;
-      white-space: nowrap;
+      height: 3vh;
+      white-space: pre;
+      margin-top: 5px;
+      a {
+        font-size: 14pt;
+      }
     }
   }
   @media only screen and (max-width: 768px) {
-    left: -15px;
-    margin-bottom: 10%;
     width: 100%;
-    margin-left: 10%;
+    margin-left: 20px;
+    margin-bottom: 60px;
   }
 }

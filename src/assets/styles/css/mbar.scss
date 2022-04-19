@@ -25,13 +25,14 @@
     margin: auto;
     align-content: center;
     margin-left: 45%;
+    margin-bottom: 40px;
   }
 }
 .locationMbar {
   margin-bottom: 80px;
   margin-right: 50px;
   @media only screen and (max-width: 768px) {
-    width: 180px;
+    width: 100vw;
   }
 }
 .col-md-4 p {
@@ -47,7 +48,7 @@
     display: grid;
     grid-template-columns: 100%;
     margin: auto;
-    margin-left: 50%;
+    margin-left: 23%;
     width: 100%;
     align-content: center;
   }
@@ -71,16 +72,19 @@
       line-height: 47px;
       text-decoration: underline;
     }
-    @media only screen and (max-width: 768px) {
-      @media only screen and(max-width: 768px) {
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-style: initial;
-        font-weight: 500;
-        font-size: 20px;
-        display: inline-flex;
-        align-items: center;
-        height: 10vh;
-        white-space: nowrap;
+    @media only screen and(max-width: 768px) {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-style: initial;
+      font-weight: 500;
+      font-size: 14pt;
+      display: inline-flex;
+      align-items: center;
+      height: 3vh;
+      white-space: pre;
+      margin-top: 5px;
+      a {
+        font-size: 14pt;
+        line-height: 30px;
       }
     }
   }
@@ -90,11 +94,17 @@
     font-size: 28px;
     line-height: 47px;
     color: #005371 !important;
+    @media only screen and (max-width: 768px) {
+      font-size: 24pt;
+      line-height: 30pt;
+      color: #005371 !important;
+    }
   }
 
   @media only screen and (max-width: 768px) {
     width: 100%;
-    margin-left: 10%;
+    margin-left: 20px;
+    margin-bottom: 60px;
   }
 }
 

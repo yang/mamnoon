@@ -37,12 +37,12 @@
     margin: auto;
     align-content: center;
     margin-left: 45%;
-    margin-top: 20%;
-    margin-bottom: 20%;
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 }
 .col-md-4 {
-  .locationStreet p{
+  .locationStreet p {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -51,8 +51,10 @@
     text-align: left;
     margin-left: 60px;
     color: $nadi-black-color !important;
-    @media only screen and (max-width: 768px){
-      width: 200px;
+    @media only screen and (max-width: 768px) {
+      width: 100vw;
+      margin: auto;
+      margin-left: 57%;
     }
   }
   .locationStreet {
@@ -85,6 +87,10 @@
     font-size: 30px;
     line-height: 47px;
     color: $nadi-black-color;
+    @media only screen and (max-width: 768px) {
+      font-size: 24pt;
+      line-height: 30pt;
+    }
   }
   .listItemStreet {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -92,24 +98,29 @@
     font-weight: 600;
     font-size: 22px;
     color: $nadi-black-color;
-    a{
+    a {
       font-weight: 600;
       font-size: 22px;
       color: $nadi-black-color !important;
     }
-    @media only screen and (max-width: 768px){
+    @media only screen and (max-width: 768px) {
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-style: initial;
-    font-weight: 500;
-    font-size: 20px;
-    display: inline-flex;
-    align-items: center;
-    height: 15vh;
-    white-space: nowrap;
+      font-style: initial;
+      font-weight: 500;
+      font-size: 14pt;
+      display: inline-flex;
+      align-items: center;
+      height: 3vh;
+      white-space: pre;
+      margin-top: 5px;
+      a {
+        font-size: 14pt;
+      }
     }
   }
   @media only screen and (max-width: 768px) {
     width: 100%;
-    margin-left: 10%;
+    margin-left: 20px;
+    margin-bottom: 60px;
   }
 }

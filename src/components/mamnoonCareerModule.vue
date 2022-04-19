@@ -12,9 +12,23 @@
       <div class="col-md-4"></div>
       <div class="mamnoonJobs">
         <div class="nowHiring">
-            <span class="titleMamnoon">kitchen</span>
-          <p><span class="listItemMamnoon">mezze master / prep cook - <a href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-mezze-master-prep-cook?from=jobs&rec=false">apply here</a></span></p>
-          <p><span class="listItemMamnoon">pastry assistant - <a href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-pastry-assistant?from=jobs&rec=false">apply here</a></span></p>
+          <span class="titleMamnoon">kitchen</span>
+          <p>
+            <span class="listItemMamnoon"
+              >mezze master / prep cook -&nbsp;<a
+                href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-mezze-master-prep-cook?from=jobs&rec=false"
+                >apply here</a
+              ></span
+            >
+          </p>
+          <p>
+            <span class="listItemMamnoon"
+              >pastry assistant -&nbsp;<a
+                href="https://poachedjobs.com/jobs/seattle-wa-kitchen-jobs-mamnoon-pastry-assistant?from=jobs&rec=false"
+                >apply here</a
+              ></span
+            >
+          </p>
         </div>
       </div>
     </div>
@@ -39,6 +53,6 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-  @import '@/assets/styles/css/mamnoon.scss';
+<style lang="scss">
+@import "@/assets/styles/css/mamnoon.scss";
 </style>

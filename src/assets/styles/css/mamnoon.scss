@@ -4,11 +4,12 @@
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 22px;
-    line-height: 47px;
+    font-size: 14pt;
+    line-height: 30px;
     text-decoration-line: underline;
     color: $nadi-white-color !important;
   }
+  
 }
 .container {
   text-align: center;
@@ -38,8 +39,8 @@
     margin: auto;
     align-content: center;
     margin-left: 45%;
-    margin-bottom: 10%;
-    margin-top: 20%;
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 }
 .col-md-4 {
@@ -53,7 +54,9 @@
     margin-left: 60px;
     color: $nadi-white-color !important;
     @media only screen and (max-width: 768px){
-      width: 200px;
+      width: 100vw;
+      margin:auto;
+      margin-left: 57%;
     }
   }
   .locationMamnoon {
@@ -61,9 +64,10 @@
   }
 }
 .mamnoonJobs{
-  margin-top: 50px;
+  margin-top: 80px;
   text-align: justify;
   margin-right: 5vw;
+  margin-bottom: 60px;
   p {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
@@ -86,7 +90,10 @@
     font-size: 30px;
     line-height: 47px;
     color: $nadi-white-color;
-    
+    @media only screen and (max-width: 768px) {
+      font-size: 24pt;
+      line-height: 30pt;
+    }
   }
   .listItemMamnoon {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -98,12 +105,12 @@
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-style: initial;
       font-weight: 500;
-      font-size: 20px;
+      font-size: 14pt;
       display: inline-flex;
-      color: #ffffff;
       align-items: center;
-      height: 10vh;
-      white-space: nowrap;
+      height: 3vh;
+      white-space: pre;
+      margin-top: 5px;
       .listItemMamnoon a {
         font-size: 20px;
       }
@@ -111,6 +118,7 @@
   }
   @media only screen and (max-width: 768px) {
     width: 100%;
-    margin-left: 10%;
+    margin-left: 20px;
+    margin-bottom: 60px;
   }
 }

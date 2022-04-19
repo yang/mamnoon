@@ -90,7 +90,7 @@
 
                         <template v-for="hour in restaurant.hours">
                           <template v-for="line in hour">
-                            <span class="hours">{{ line.line }}</span>
+                            <p class="hours">{{ line.line }}</p>
                           </template>
                         </template>
                       </div>

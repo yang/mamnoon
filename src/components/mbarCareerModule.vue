@@ -14,7 +14,7 @@
           <span class="listTitleMbar">bar</span>
           <p>
             <span class="listItemMbar"
-              >barback / server assistant -
+              >barback / server assistant -&nbsp;
               <a
                 href="https://poachedjobs.com/jobs/seattle-wa-floor-jobs-mbar-barbackserver-assistant?from=jobs&rec=false"
                 >apply here</a
@@ -23,7 +23,7 @@
           </p>
           <p>
             <span class="listItemMbar"
-              >bartender -
+              >bartender -&nbsp;
               <a
                 href="https://poachedjobs.com/jobs/seattle-wa-bar-jobs-mbar-bartender-6?from=jobs&rec=false"
                 >apply here</a

@@ -38,7 +38,7 @@ export default {
 <style lang="scss">
 html,
 body {
-  // overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 #preview-coverflow,

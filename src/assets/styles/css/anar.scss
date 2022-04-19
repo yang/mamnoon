@@ -25,10 +25,11 @@
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 100%;
+    margin: auto;
     align-content: center;
     margin-left: 45%;
-    margin-bottom: 10%;
-    margin-top: 10%;
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 }
 .col-md-4 {
@@ -42,11 +43,13 @@
     margin-left: 60px;
     color: $nadi-black-color !important;
     @media only screen and (max-width: 768px){
-      width: 200px;
+      width: 100vw;
+      margin:auto;
+      margin-left: 54%;
     }
   }
   .locationAnar {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
 }
 .anarJobs{
@@ -82,6 +85,10 @@
     font-weight: 500, bold;
     font-size: 30px;
     color: $nadi-black-color;
+    @media only screen and (max-width: 768px) {
+      font-size: 24pt;
+      line-height: 30pt;
+    }
   }
   .listItemAnar {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -92,6 +99,7 @@
   }
   @media only screen and (max-width: 768px) {
     width: 100%;
-    margin-left: 55%;
+    margin-left: 54%;
+    margin-bottom: 60px;
   }
 }

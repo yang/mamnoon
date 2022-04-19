@@ -9,10 +9,14 @@
           <p>seattle, wa 98121</p>
         </div>
       </div>
-       <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
       <div class="anarJobs">
         <div>
-          <p><span class="listItemAnar">no openings at this time, please check back later</span></p>
+          <p>
+            <span class="listItemAnar"
+              >no openings at this time, please check back later</span
+            >
+          </p>
         </div>
       </div>
     </div>
@@ -37,6 +41,6 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-  @import '@/assets/styles/css/anar.scss';
+<style lang="scss">
+@import "@/assets/styles/css/anar.scss";
 </style>

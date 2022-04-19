@@ -276,8 +276,8 @@ p.list-of-links {
   display: block;
   
 }
-.hours:nth-child(odd){
-  margin-top: 5px;
+.hours:nth-of-type(even){
+  margin-top: 10px;
 }
 
 .listLink {

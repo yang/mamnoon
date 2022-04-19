@@ -12,8 +12,11 @@
       <div class="col-md-4"></div>
       <div class="mannaJobs">
         <div>
-          <p><span class="listItemManna">no openings at this time, please check</span></p>
-          <p><span class="listItemManna">back later</span></p>
+          <p>
+            <span class="listItemManna"
+              >no openings at this time, please check back later</span
+            >
+          </p>
         </div>
       </div>
     </div>
@@ -38,6 +41,6 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-  @import '@/assets/styles/css/manna.scss';
+<style lang="scss">
+@import "@/assets/styles/css/manna.scss";
 </style>
