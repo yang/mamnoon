@@ -20,6 +20,8 @@
   height: 224px;
   width: 224px;
   margin: auto;
+  margin-top: 80px;
+  margin-bottom: 60px;
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 100%;
@@ -32,6 +34,7 @@
 }
 .col-md-4 {
   .locationHanoon {
+
     @media only screen and (max-width: 768px) {
       width: 180px;
     }
@@ -39,21 +42,24 @@
   .locationHanoon p {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 24px;
+    line-height: 40px;
+    text-align: left;
+    margin-left: 60px;
     color: $nadi-white-color !important;
   }
 }
 .hanoonJobs {
-  margin-top: 50px;
+  margin-top: 80px;
   margin-right: 5vw;
   text-align: justify;
   .hanoon a {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 47px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 40px;
     text-decoration-line: underline;
     color: #ffffff !important;
   }
@@ -62,14 +68,14 @@
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
-    line-height: 37px;
+    line-height: 40px;
     color: $nadi-white-color;
   }
   .title {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 26px;
+    font-size: 30px;
     text-decoration-line: underline;
     color: $nadi-white-color;
   }
@@ -77,15 +83,15 @@
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 500, bold;
-    font-size: 30px;
-    line-height: 47px;
+    font-size: 36px;
+    line-height: 40px;
     color: $nadi-white-color;
   }
   .listItem {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 24px;
     color: $nadi-white-color;
     @media only screen and(max-width: 768px) {
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;

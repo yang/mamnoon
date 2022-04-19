@@ -17,8 +17,8 @@
   height: 224px;
   width: 224px;
   margin: auto;
-  margin-top: 30px;
-  margin-bottom: -30px;
+  margin-top: 80px;
+  margin-bottom: -20px;
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 100%;
@@ -28,6 +28,8 @@
   }
 }
 .locationMbar {
+  margin-bottom: 80px;
+  margin-right: 50px;
   @media only screen and (max-width: 768px) {
     width: 180px;
   }
@@ -35,11 +37,12 @@
 .col-md-4 p {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 30px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 40px;
+  text-align: left;
+  margin-left: 60px;
   color: #005371 !important;
-
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 100%;
@@ -51,7 +54,7 @@
 }
 
 .openings {
-  margin-top: 50px;
+  margin-top: 80px;
   text-align: justify;
   margin-right: 5vw;
   width: 50%;
@@ -59,35 +62,36 @@
   .listItemMbar {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-weight: 600 !important;
-    font-size: 22px;
+    font-size: 24px;
     line-height: 47px;
     color: #005371 !important;
     a {
       color: #005371 !important;
-      font-size: 22px;
+      font-size: 24px;
       line-height: 47px;
+      text-decoration: underline;
     }
     @media only screen and (max-width: 768px) {
-      @media only screen and(max-width: 768px){
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-style: initial;
-      font-weight: 500;
-      font-size: 20px;
-      display: inline-flex;
-      align-items: center;
-      height: 10vh;
-      white-space: nowrap;
+      @media only screen and(max-width: 768px) {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-style: initial;
+        font-weight: 500;
+        font-size: 20px;
+        display: inline-flex;
+        align-items: center;
+        height: 10vh;
+        white-space: nowrap;
       }
     }
   }
-    .listTitleMbar {
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-weight: 600 !important;
-      font-size: 26px;
-      line-height: 47px;
-      color: #005371 !important;
-    }
-  
+  .listTitleMbar {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: 600 !important;
+    font-size: 28px;
+    line-height: 47px;
+    color: #005371 !important;
+  }
+
   @media only screen and (max-width: 768px) {
     width: 100%;
     margin-left: 10%;

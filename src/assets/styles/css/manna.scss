@@ -17,6 +17,8 @@
   height: 224px;
   width: 224px;
   margin: auto;
+  margin-top: 80px;
+  margin-bottom: 60px;
   @media only screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 100%;
@@ -29,18 +31,24 @@
   .locationManna p {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: left;
+    margin-left: 60px;
     color: $nadi-white-color !important;
     @media only screen and (max-width: 768px) {
       width: 200px;
     }
   }
+  .locationManna {
+    margin-bottom: 80px;
+  }
 }
 .mannaJobs {
-  margin-top: 50px;
+  margin-top: 120px;
   text-align: justify;
-  margin-right: 5vw;
+  margin-right: 10vw !important;
   @media only screen and (max-width: 768px) {
     left: -15px;
     margin-bottom: 10%;
@@ -50,8 +58,8 @@
   .listItemManna {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
+    font-weight: 600;
+    font-size: 24px;
     color: $nadi-white-color !important;
   }
 }
