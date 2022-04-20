@@ -1,7 +1,7 @@
 <template>
   <div class="logoRow" v-if="$store && $store.state">
-    <div class="logosInline" v-for="restaurant in this.pageData">
-      <div class="displayInline" v-html="restaurant.logo_svg"></div>
+    <div class="logosInline" v-for="restaurant in this.logos">
+      <div class="displayInline" v-html="restaurant"></div>
     </div>
   </div>
 </template>
@@ -10,6 +10,7 @@
 export default {
   data() {
     return {
+      logos: [],
       pageData: null,
     };
   },
@@ -17,6 +18,13 @@ export default {
     getLogos() {
       this.pageData = this.$store.state.pageData[0].restaurant_repeater;
       console.log(`pageData`, this.pageData);
+      this.logos.push(this.pageData[4].logo_svg);
+      this.logos.push(this.pageData[5].logo_svg);
+      this.logos.push(this.pageData[0].logo_svg);
+      this.logos.push(this.pageData[3].logo_svg);
+      this.logos.push(this.pageData[1].logo_svg);
+      this.logos.push(this.pageData[2].logo_svg);
+      console.log('this.logos', this.logos)
     },
   },
   mounted() {

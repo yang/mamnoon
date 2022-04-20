@@ -20,22 +20,22 @@
         <Logos/>
       </div>
       <div>
+        <Hanoon/>
+      </div>
+      <div>
+        <Manna/>
+      </div>
+      <div>
         <Mbar/>
+      </div>
+      <div>
+        <Street/>
       </div>
       <div>
         <Mamnoon/>
       </div>
       <div>
         <Anar/>
-      </div>
-      <div>
-        <Street/>
-      </div>
-      <div>
-        <Hanoon/>
-      </div>
-      <div>
-        <Manna/>
       </div>
       <div>
         <NoOpenings/>

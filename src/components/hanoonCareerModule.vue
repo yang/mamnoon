@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <div class="logoHanoon" v-html="this.pageData[4].logo_svg"></div>
         <div class="locationHanoon">
-          <p>opening spring 2022</p>
+          <p>opening june 2022</p>
           <br />
           <p>totem lake</p>
           <p>12670 120th ave ne,</p>

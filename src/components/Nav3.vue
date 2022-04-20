@@ -192,6 +192,13 @@
                     </a>
                   </li>
                 </div>
+                <div class="inline-link">
+                  <li>
+                    <router-link to="/careers">
+                      careers
+                    </router-link>
+                  </li>
+                </div>
               </ul>
             </div>
             <GoogleAuth2 class="logButton googleInHeader" />
@@ -237,6 +244,13 @@
               <li>
                 <router-link to="/about">
                   about
+                </router-link>
+              </li>
+            </div>
+            <div class="inline-link">
+              <li>
+                <router-link to="/careers" class="scrollactive-item nav-item">
+                  careers
                 </router-link>
               </li>
             </div>
@@ -310,6 +324,11 @@
                 >
                   giftcards
                 </a>
+              </li>
+              <li>
+                <router-link to="/careers" class="scrollactive-item nav-item">
+                  careers
+                </router-link>
               </li>
             </div>
 
@@ -681,7 +700,8 @@ export default {
         this.$route.name === "mamnoonff" ||
         this.$route.name === "finefoods" ||
         this.$route.name === "about" ||
-        this.$route.name === "newsletterarchive"
+        this.$route.name === "newsletterarchive" ||
+        this.$route.name === "careers"
       ) {
         return true;
       } else {
