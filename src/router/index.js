@@ -160,6 +160,11 @@ const routes = [
     }
   },
   {
+    path: "/menus",
+    name: "menus",
+    component: () => import("../views/menus.vue")
+  },
+  {
     path: "/profile",
     name: "profile",
     component: () => import("../views/profile.vue")
