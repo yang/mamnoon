@@ -149,7 +149,7 @@ const routes = [
   {
     path: "/orderconfirmation",
     name: "orderconfirmation",
-    component: () => import("../views/orderconfirmation.vue")
+    component: () => import("../views/orderConfirmation.vue")
   },
   {
     path: "/upserveinfo",
@@ -177,12 +177,12 @@ const routes = [
   {
     path: "/loginauth",
     name: "loginauth",
-    component: () => import("../views/loginauth.vue")
+    component: () => import("../views/loginAuth.vue")
   },
   {
     path: "/addproduct",
     name: "addproduct",
-    component: () => import("../views/addproduct.vue")
+    component: () => import("../views/addProduct.vue")
   },
   {
     path: '/todaystransactions',
@@ -195,7 +195,7 @@ const routes = [
   {
     path: '/transactions',
     name: "transactions",
-    component: () => import("../views/todaystransactions.vue"),
+    component: () => import("../views/todaysTransactions.vue"),
     meta: {
       requiresAuth: true
     }
