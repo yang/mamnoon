@@ -85,9 +85,9 @@ export default{
 </script>
 
 
-<style>
-.cls-1{fill:$nadi-red-color;}.cls-2{fill:#fff;}
-	.st0addtocart{fill:$nadi-red-color;}
+<style lang="scss">
+.cls-1{fill: $nadi-red-color}.cls-2{fill:#fff;}
+	.st0addtocart{fill: $nadi-red-color}
 	.st1addtocart{fill:#FFFFFF;}
 
 

@@ -1,55 +1,140 @@
 <template>
-  <div class="menu">
-    <div v-if="!this.loading">
-      <div class="mezzeMenuItems">
-        <h2>mezze, soup, and salad</h2>
-        <hr />
-        <div class="item" v-for="item in this.mezzeItems">
-          <h4>
-            <i>{{ item.name }}</i>
-          </h4>
-          <em>{{ item.description }}</em>
-          <b> {{ showToFixed(item.price) }}</b>
-        </div>
-      </div>
-      <br />
-      <div class="wrapMenuItems">
-        <h2>lebanese wraps</h2>
-        <hr />
-        <div class="item" v-for="item in this.wrapItems">
-          <h4>
-            <i>{{ item.name }}</i>
-          </h4>
-          <em>{{ item.description }}</em>
-          <b> {{ showToFixed(item.price) }}</b>
-        </div>
-      </div>
+  <div>
+    <div class="logo">
+      <HanoonLogo />
     </div>
-    <div v-else-if="this.loading">
-      <h5>loading...</h5>
+    <div class="menu">
+      <div v-if="!this.loading">
+        <div class="menuSection">
+          <div class="menuItems">
+            <h2>mezze &amp; soup</h2>
+            <div class="item" v-for="item in this.mezzeItems">
+              <div class="left">
+                <h4>{{ item.name }} {{ item.health }}</h4>
+                <em>{{ item.description }}</em>
+                <p>{{ item.tag }}</p>
+              </div>
+              <div class="right">
+                <b> {{ showToFixed(item.price) }}</b>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <div class="menuItems">
+            <h2>lebanese wraps</h2>
+            <div class="item" v-for="item in this.wrapItems">
+              <div class="left">
+                <h4>{{ item.name }} {{ item.health }}</h4>
+                <em>{{ item.description }}</em>
+                <p>{{ item.tag }}</p>
+              </div>
+              <div class="right">
+                <b> {{ showToFixed(item.price) }}</b>
+              </div>
+            </div>
+          </div>
+          <br />
+        </div>
+
+        <div class="menuSection">
+          <div class="menuItems">
+            <h2>drinks</h2>
+            <div class="item" v-for="item in this.drinksItems">
+              <div class="left">
+                <h4>{{ item.name }} {{ item.health }}</h4>
+                <em>{{ item.description }}</em>
+                <b>{{ item.tag }}</b>
+              </div>
+              <div class="right">
+                <b> {{ showToFixed(item.price) }}</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="menuItems">
+            <h2>sides</h2>
+            <div class="item" v-for="item in this.sidesItems">
+              <div class="left">
+                <h4>{{ item.name }} {{ item.health }}</h4>
+                <em>{{ item.description }}</em>
+                <b>{{ item.tag }}</b>
+              </div>
+              <div class="right">
+                <b> {{ showToFixed(item.price) }}</b>
+              </div>
+            </div>
+          </div>
+          <br />
+        </div>
+        <div class="menuSection">
+          <div class="menuItems">
+            <h2>helou <span>&#40;sweets&#41;</span></h2>
+            <div class="item" v-for="item in this.sweetsItems">
+              <div class="left">
+                <h4>{{ item.name }} {{ item.health }}</h4>
+                <em>{{ item.description }}</em>
+                <p>{{ item.tag }}</p>
+              </div>
+              <div class="right">
+                <b> {{ showToFixed(item.price) }}</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="menuItems">
+            <div class="item">
+              <div class="left"></div>
+              <div class="right"></div>
+            </div>
+          </div>
+          <br />
+        </div>
+      </div>
+      <div v-else-if="this.loading">
+        <h5>loading...</h5>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import HanoonLogo from "../components/svgIcons/HanoonLogo.vue";
 export default {
+  components: {
+    HanoonLogo,
+  },
   data() {
     return {
       mezzeItems: [],
       wrapItems: [],
+      sidesItems: [],
+      sweetsItems: [],
+      drinksItems: [],
       loading: true,
     };
   },
   methods: {
     async getMenuItems() {
-      let res = await this.$http.get("/product/menuitems");
+      let res = await this.$http.get("/product/hanoonitems");
+      console.log("res: ", res);
       this.mezzeItems = res.data["mezze"];
       this.wrapItems = res.data["wraps"];
-      console.log("loading1", this.loading);
-      if (this.mezzeItems.length !== 0 && this.mezzeItems.length !== 0) {
+      this.sidesItems = res.data["sides"];
+      this.sweetsItems = res.data["sweets"];
+      this.drinksItems = res.data["drinks"];
+
+      if (
+        this.mezzeItems.length !== 0 &&
+        this.mezzeItems.length !== 0 &&
+        this.sidesItems.length !== 0 &&
+        this.sweetsItems.length !== 0 &&
+        this.drinksItems.length !== 0
+      ) {
         this.loading = false;
       }
       console.log("loading2", this.loading);
+      console.log("sweetsItems", this.sweetsItems)
     },
     showToFixed: function(value) {
       let decvalue = value / 100;
@@ -64,79 +149,155 @@ export default {
 
 <style lang="scss">
 .menu {
+  -webkit-print-color-adjust: exact;
   width: 100%;
   margin-top: 15vh;
   margin-bottom: 15vh;
+  margin-left: 6vw;
   h2 {
     font-weight: bold;
     margin-bottom: 1vh;
+    color: $hanoon-pink;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
   }
-  hr {
-    border-top: 3px solid $nadi-red-color;
-    margin-right: 20px;
+  p {
+    font-weight: bold;
+    font-size: 18px;
+    color: $hanoon-gray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
   }
 }
 
 .item {
   margin-bottom: 15px;
+  width: 80%;
   h4 {
-    font-size: 20px;
+    font-size: 22px;
+    color: $hanoon-gray;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
   }
   em {
-    font-size: 16px;
-    line-height: 30px;
-    font-weight: 500;
+    font-size: 20px;
+    line-height: 37px;
+    color: $hanoon-gray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
   }
-  margin-bottom: 10px;
+  b {
+    font-size: 20px;
+    color: $hanoon-pink;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  }
+  .left {
+    width: 80%;
+    float: left;
+  }
+  .right {
+    width: 20%;
+    float: right;
+  }
 }
 
+.menuSection {
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  margin-left: auto;
+  margin-bottom: 3%;
+}
+
+.logo {
+  width: 35%;
+  margin: 120px 0 -10% 75px;
+  padding: 0;
+}
+
+.menuItems {
+  width: 100%;
+  span {
+    font-size: 24px;
+    color: $hanoon-gray;
+    font-weight: 600;
+  }
+}
+
+// PRINT STYLES
 @media print {
   .menu {
-    display: inline-block;
-    margin-top: 3vh;
-
     width: 100%;
+    margin-left: 6vw;
+    margin-top: 1vh;
     h2 {
       font-weight: bold;
-      font-size: 36px;
+      margin-bottom: .5vh;
+      color: $hanoon-pink;
     }
-    hr {
-      border-top: 3px solid $nadi-red-color;
-      margin-right: 30px;
+    p {
+      font-weight: bold;
+      font-size: 18px;
+      color: $hanoon-gray;
     }
   }
-  .mezzeMenuItems {
-    float: left;
-    width: 45%;
-    h4 {
-      font-size: 22px;
-      font-weight: bold;
+
+  .item {
+    width: 80%;
+    span {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 500;
+      color: $hanoon-gray;
     }
+
+    h4 {
+      font-size: 20px;
+      color: $hanoon-gray;
+      font-weight: 600;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+
     em {
       font-size: 16px;
-      line-height: 30px;
+      line-height: 24px;
       font-weight: 500;
+      color: $hanoon-gray;
     }
+
     b {
-      font-size: 18px;
+      font-size: 16px;
+      color: $hanoon-gray;
+    }
+
+    .left {
+      width: 80%;
+      float: left;
+    }
+
+    .right {
+      width: 20%;
+      float: right;
     }
   }
-  .wrapMenuItems {
-    float: right;
-    width: 45%;
-    margin-top: -23px;
-    h4 {
-      font-size: 22px;
-      font-weight: bold;
-    }
-    em {
-      font-size: 16px;
-      line-height: 30px;
-      font-weight: 500;
-    }
-    b {
-      font-size: 18px;
-    }
+
+  .menuSection {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+
+  .logo {
+    width: 35%;
+    margin: 120px 0 0 35px;
+    padding: 0;
+  }
+
+
+  .menuItems {
+    width: 100%;
   }
 }
 </style>
