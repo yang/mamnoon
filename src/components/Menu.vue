@@ -51,7 +51,7 @@
               </div>
             </div>
           </div>
-
+          <br />
           <div class="menuItems">
             <h2>sides</h2>
             <div class="item" v-for="item in this.sidesItems">
@@ -134,7 +134,7 @@ export default {
         this.loading = false;
       }
       console.log("loading2", this.loading);
-      console.log("sweetsItems", this.sweetsItems)
+      console.log("sweetsItems", this.sweetsItems);
     },
     showToFixed: function(value) {
       let decvalue = value / 100;
@@ -158,13 +158,15 @@ export default {
     font-weight: bold;
     margin-bottom: 1vh;
     color: $hanoon-pink;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif !important;
   }
   p {
     font-weight: bold;
     font-size: 18px;
     color: $hanoon-gray;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif !important;
   }
 }
 
@@ -172,23 +174,27 @@ export default {
   margin-bottom: 15px;
   width: 80%;
   h4 {
-    font-size: 22px;
+    font-size: 26px;
     color: $hanoon-gray;
     font-weight: 600;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif !important;
   }
   em {
-    font-size: 20px;
-    line-height: 37px;
+    font-size: 22px;
+    line-height: 24px;
+    font-weight: 600;
     color: $hanoon-gray;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif !important;
   }
   b {
     font-size: 20px;
     color: $hanoon-pink;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif !important;
   }
   .left {
     width: 80%;
@@ -197,6 +203,7 @@ export default {
   .right {
     width: 20%;
     float: right;
+    margin-top: 1.5vh;
   }
 }
 
@@ -210,7 +217,7 @@ export default {
 
 .logo {
   width: 35%;
-  margin: 120px 0 -10% 75px;
+  margin: 130px 0 -7% 75px;
   padding: 0;
 }
 
@@ -223,7 +230,77 @@ export default {
   }
 }
 
-// PRINT STYLES
+/////// MOBILE ///////
+@media only screen and (max-width: 762px) {
+  .menu {
+    width: 100%;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+    margin-left: 15vw;
+  }
+
+  .menuSection {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+
+  .item .right {
+    width: 15%;
+    float: right;
+    margin-top: 1vh;
+  }
+
+  .item h4 {
+    font-size: 22px;
+  }
+
+  .item em {
+    font-size: 20px;
+  }
+
+  .logo {
+    width: 60%;
+    margin: 115px 0px -15% 60px;
+    padding: 0;
+  }
+}
+
+/////// TABLET ///////
+@media only screen and (max-width: 992px) {
+  .menu {
+    width: 100%;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+    margin-left: 15vw;
+  }
+
+  .menuSection {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+
+  .item .right {
+    width: 15%;
+    float: right;
+    margin-top: 1vh;
+  }
+
+  .item h4 {
+    font-size: 22px;
+  }
+
+  .item em {
+    font-size: 20px;
+  }
+
+  .logo {
+    width: 60%;
+    margin: 135px auto -8% auto;
+    padding: 0;
+  }
+}
+
+/////// PRINT STYLES ///////
 @media print {
   .menu {
     width: 100%;
@@ -231,7 +308,7 @@ export default {
     margin-top: 1vh;
     h2 {
       font-weight: bold;
-      margin-bottom: .5vh;
+      margin-bottom: 0.5vh;
       color: $hanoon-pink;
     }
     p {
@@ -294,7 +371,6 @@ export default {
     margin: 120px 0 0 35px;
     padding: 0;
   }
-
 
   .menuItems {
     width: 100%;
