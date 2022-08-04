@@ -84,7 +84,15 @@
 
           <div class="menuItems">
             <div class="item">
-              <div class="left"></div>
+              <div class="left">
+                <div class="dietary">
+                  <p>
+                    v - <span>vegetarian</span> veg - <span>vegan</span> gf -
+                    <span>gluten free</span>
+                  </p>
+                  <p>df - <span>dairy free</span> hal - <span>halal</span></p>
+                </div>
+              </div>
               <div class="right"></div>
             </div>
           </div>
@@ -117,7 +125,7 @@ export default {
   methods: {
     async getMenuItems() {
       let res = await this.$http.get("/product/hanoonitems");
-      console.log("res: ", res);
+      //console.log("res: ", res);
       this.mezzeItems = res.data["mezze"];
       this.wrapItems = res.data["wraps"];
       this.sidesItems = res.data["sides"];
@@ -133,8 +141,6 @@ export default {
       ) {
         this.loading = false;
       }
-      console.log("loading2", this.loading);
-      console.log("sweetsItems", this.sweetsItems);
     },
     showToFixed: function(value) {
       let decvalue = value / 100;
@@ -199,6 +205,17 @@ export default {
   .left {
     width: 80%;
     float: left;
+    p {
+      font-size: 22px;
+      color: $hanoon-gray;
+      font-weight: 600;
+    }
+    span {
+      font-size: 20px;
+      color: $hanoon-pink;
+      font-weight: 600;
+      margin-right: 2%;
+    }
   }
   .right {
     width: 20%;
@@ -244,29 +261,36 @@ export default {
     grid-template-columns: 100%;
   }
 
-  .item .right {
-    width: 15%;
-    float: right;
-    margin-top: 1vh;
-  }
-
-  .item h4 {
-    font-size: 22px;
-  }
-
-  .item em {
-    font-size: 20px;
+  .item {
+    .right {
+      width: 15%;
+      float: right;
+      margin-top: 1vh;
+    }
+    h4 {
+      font-size: 22px;
+    }
+    em {
+      font-size: 20px;
+    }
   }
 
   .logo {
     width: 60%;
-    margin: 115px 0px -15% 60px;
+    margin: 120px auto -12% auto;
     padding: 0;
+  }
+  .dietary {
+    margin-top: 7%;
+    word-wrap: break-word;
+    p {
+      width: 23ch;
+    }
   }
 }
 
 /////// TABLET ///////
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 992px) and (min-width: 763px) {
   .menu {
     width: 100%;
     margin-top: 10vh;
@@ -302,8 +326,13 @@ export default {
 
 /////// PRINT STYLES ///////
 @media print {
+  * {
+    padding: 0;
+    margin: 0;
+  }
   .menu {
     width: 100%;
+    max-height: 95%;
     margin-left: 6vw;
     margin-top: 1vh;
     h2 {
@@ -320,9 +349,10 @@ export default {
 
   .item {
     width: 80%;
+    margin-bottom: 0 !important;
     span {
       font-size: 16px;
-      line-height: 24px;
+      line-height: 20px;
       font-weight: 500;
       color: $hanoon-gray;
     }
@@ -337,14 +367,17 @@ export default {
 
     em {
       font-size: 16px;
-      line-height: 24px;
+      line-height: 20px;
       font-weight: 500;
       color: $hanoon-gray;
     }
 
     b {
       font-size: 16px;
-      color: $hanoon-gray;
+      color: $hanoon-pink;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif !important;
+     
     }
 
     .left {
@@ -355,6 +388,7 @@ export default {
     .right {
       width: 20%;
       float: right;
+      margin-top: .5vh;
     }
   }
 
@@ -368,8 +402,16 @@ export default {
 
   .logo {
     width: 35%;
-    margin: 120px 0 0 35px;
+    margin: 40px 0 0 35px;
     padding: 0;
+  }
+
+  .dietary {
+    margin-top: 7%;
+    word-wrap: break-word;
+    p {
+      width: 23ch;
+    }
   }
 
   .menuItems {

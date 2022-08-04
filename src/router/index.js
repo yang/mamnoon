@@ -160,7 +160,7 @@ const routes = [
     }
   },
   {
-    path: "/menus",
+    path: "/hanoon-test-menu",
     name: "menus",
     component: () => import("../views/menus.vue")
   },
