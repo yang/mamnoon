@@ -10,12 +10,16 @@
             <h2>mezze &amp; soup</h2>
             <div class="item" v-for="item in this.mezzeItems">
               <div class="left">
-                <h4>{{ item.name }} {{ item.health }}</h4>
+                <h4>
+                  {{ item.name }} <i>{{ item.health }}</i>
+                </h4>
                 <em>{{ item.description }}</em>
-                <p>{{ item.tag }}</p>
+                <p>
+                  <i>{{ item.tag }}</i>
+                </p>
               </div>
               <div class="right">
-                <b> {{ showToFixed(item.price) }}</b>
+                <b>{{ showToFixed(item.price) }}</b>
               </div>
             </div>
           </div>
@@ -25,9 +29,13 @@
             <h2>lebanese wraps</h2>
             <div class="item" v-for="item in this.wrapItems">
               <div class="left">
-                <h4>{{ item.name }} {{ item.health }}</h4>
+                <h4>
+                  {{ item.name }} <i>{{ item.health }}</i>
+                </h4>
                 <em>{{ item.description }}</em>
-                <p>{{ item.tag }}</p>
+                <p>
+                  <i>{{ item.tag }}</i>
+                </p>
               </div>
               <div class="right">
                 <b> {{ showToFixed(item.price) }}</b>
@@ -42,12 +50,16 @@
             <h2>drinks</h2>
             <div class="item" v-for="item in this.drinksItems">
               <div class="left">
-                <h4>{{ item.name }} {{ item.health }}</h4>
+                <h4>
+                  {{ item.name }} <i>{{ item.health }}</i>
+                </h4>
                 <em>{{ item.description }}</em>
-                <b>{{ item.tag }}</b>
+                <p>
+                  <i>{{ item.tag }}</i>
+                </p>
               </div>
               <div class="right">
-                <b> {{ showToFixed(item.price) }}</b>
+                <b>{{ showToFixed(item.price) }}</b>
               </div>
             </div>
           </div>
@@ -56,9 +68,13 @@
             <h2>sides</h2>
             <div class="item" v-for="item in this.sidesItems">
               <div class="left">
-                <h4>{{ item.name }} {{ item.health }}</h4>
+                <h4>
+                  {{ item.name }} <i>{{ item.health }}</i>
+                </h4>
                 <em>{{ item.description }}</em>
-                <b>{{ item.tag }}</b>
+                <p>
+                  <i>{{ item.tag }}</i>
+                </p>
               </div>
               <div class="right">
                 <b> {{ showToFixed(item.price) }}</b>
@@ -69,12 +85,18 @@
         </div>
         <div class="menuSection">
           <div class="menuItems">
-            <h2>helou <span>&#40;sweets&#41;</span></h2>
+            <h2>
+              helou <span><i>&#40;sweets&#41;</i></span>
+            </h2>
             <div class="item" v-for="item in this.sweetsItems">
               <div class="left">
-                <h4>{{ item.name }} {{ item.health }}</h4>
+                <h4>
+                  {{ item.name }} <i>{{ item.health }}</i>
+                </h4>
                 <em>{{ item.description }}</em>
-                <p>{{ item.tag }}</p>
+                <p>
+                  <i>{{ item.tag }}</i>
+                </p>
               </div>
               <div class="right">
                 <b> {{ showToFixed(item.price) }}</b>
@@ -87,10 +109,14 @@
               <div class="left">
                 <div class="dietary">
                   <p>
-                    v - <span>vegetarian</span> veg - <span>vegan</span> gf -
-                    <span>gluten free</span>
+                    <i>
+                      v - <span>vegetarian</span> veg - <span>vegan</span> gf -
+                      <span>gluten free</span>
+                    </i>
                   </p>
-                  <p>df - <span>dairy free</span> hal - <span>halal</span></p>
+                  <p>
+                    <i>df - <span>dairy free</span> hal - <span>halal</span></i>
+                  </p>
                 </div>
               </div>
               <div class="right"></div>
@@ -166,9 +192,10 @@ export default {
     color: $hanoon-pink;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif !important;
+    margin-bottom: 15px;
   }
   p {
-    font-weight: bold;
+    font-weight: bolder;
     font-size: 18px;
     color: $hanoon-gray;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
@@ -180,24 +207,28 @@ export default {
   margin-bottom: 15px;
   width: 80%;
   h4 {
-    font-size: 26px;
+    font-size: 29px;
     color: $hanoon-gray;
     font-weight: 600;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif !important;
+
+    i {
+      font-size: 20px;
+    }
   }
   em {
     font-size: 22px;
-    line-height: 24px;
+    line-height: 1.2;
     font-weight: 600;
     color: $hanoon-gray;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif !important;
   }
   b {
-    font-size: 20px;
+    font-size: 28px;
     color: $hanoon-pink;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif !important;
@@ -206,21 +237,23 @@ export default {
     width: 80%;
     float: left;
     p {
-      font-size: 22px;
+      font-size: 20px;
       color: $hanoon-gray;
-      font-weight: 600;
+      font-weight: 900;
+      margin-top: 3px;
+      line-height: 1.75;
     }
     span {
-      font-size: 20px;
+      font-size: 22px;
       color: $hanoon-pink;
       font-weight: 600;
-      margin-right: 2%;
+      margin-right: 3%;
     }
   }
   .right {
     width: 20%;
     float: right;
-    margin-top: 1.5vh;
+    margin-top: 0.8vh;
   }
 }
 
@@ -234,16 +267,29 @@ export default {
 
 .logo {
   width: 35%;
-  margin: 130px 0 -7% 75px;
+  margin: 130px auto -7% auto;
   padding: 0;
 }
 
 .menuItems {
   width: 100%;
+  h2 {
+    font-size: 38px;
+  }
   span {
     font-size: 24px;
     color: $hanoon-gray;
     font-weight: 600;
+  }
+}
+
+.dietary {
+  p {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif !important;
+    font-size: 22px !important;
+    margin-top: -1vh !important;
+    margin-bottom: 1vh;
   }
 }
 
@@ -332,63 +378,61 @@ export default {
   }
   .menu {
     width: 100%;
-    max-height: 95%;
+    height: 80% !important;
     margin-left: 6vw;
     margin-top: 1vh;
     h2 {
       font-weight: bold;
-      margin-bottom: 0.5vh;
+      font-size: 18pt;
       color: $hanoon-pink;
-    }
-    p {
-      font-weight: bold;
-      font-size: 18px;
-      color: $hanoon-gray;
+      margin-top: 6pt;
+      margin-bottom: -5px;
     }
   }
-
   .item {
-    width: 80%;
-    margin-bottom: 0 !important;
+    width: 90%;
     span {
-      font-size: 16px;
-      line-height: 20px;
+      font-size: 12pt;
+      line-height: 15pt;
       font-weight: 500;
       color: $hanoon-gray;
     }
 
     h4 {
-      font-size: 20px;
+      font-size: 17pt;
       color: $hanoon-gray;
       font-weight: 600;
-      margin-top: 6px;
+      margin-top: 8px;
       margin-bottom: 6px;
     }
 
     em {
-      font-size: 16px;
-      line-height: 20px;
-      font-weight: 500;
+      font-size: 14pt;
+      font-weight: 900;
       color: $hanoon-gray;
     }
 
     b {
-      font-size: 16px;
+      font-size: 15pt;
       color: $hanoon-pink;
       font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif !important;
-     
     }
 
     .left {
       width: 80%;
       float: left;
+      margin-bottom: -15px;
+      i {
+        font-size: 14pt;
+        font-weight: bolder;
+      }
     }
 
     .right {
       width: 20%;
       float: right;
-      margin-top: .5vh;
+      margin-top: 0.5vh;
     }
   }
 
@@ -402,15 +446,15 @@ export default {
 
   .logo {
     width: 35%;
-    margin: 40px 0 0 35px;
+    margin: 0 auto 0 auto;
     padding: 0;
   }
 
   .dietary {
     margin-top: 7%;
-    word-wrap: break-word;
+    width: 50% !important;
     p {
-      width: 23ch;
+      width: 40ch;
     }
   }
 
