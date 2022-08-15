@@ -425,7 +425,11 @@ export default {
       margin-bottom: -15px;
       i {
         font-size: 14pt;
-        font-weight: bolder;
+        font-weight: bold;
+      }
+      span {
+        font-size: 14pt;
+        font-weight: bold;
       }
     }
 
@@ -451,8 +455,10 @@ export default {
   }
 
   .dietary {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif !important;
     margin-top: 7%;
-    width: 50% !important;
+    word-wrap: none;
     p {
       width: 40ch;
     }
