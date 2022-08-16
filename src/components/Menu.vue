@@ -335,6 +335,47 @@ export default {
   }
 }
 
+@media only screen and (max-width: 450px){
+  .menu {
+    width: 100%;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+    margin-left: 15vw;
+  }
+
+  .menuSection {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+
+  .item {
+    .right {
+      width: 15%;
+      float: right;
+      margin-top: 1vh;
+    }
+    h4 {
+      font-size: 22px;
+    }
+    em {
+      font-size: 20px;
+    }
+  }
+
+  .logo {
+    width: 60%;
+    margin: 120px auto -12% auto;
+    padding: 0;
+  }
+  .dietary {
+    margin-top: 7%;
+    word-wrap: break-word;
+    p {
+      width: 23ch;
+    }
+  }
+}
+
 /////// TABLET ///////
 @media only screen and (max-width: 992px) and (min-width: 763px) {
   .menu {
