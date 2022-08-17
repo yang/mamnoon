@@ -64,7 +64,7 @@
             </div>
           </div>
           <br />
-          <div class="menuItems">
+          <div class="menuItems sides">
             <h2>sides</h2>
             <div class="item" v-for="item in this.sidesItems">
               <div class="left">
@@ -84,7 +84,7 @@
           <br />
         </div>
         <div class="menuSection">
-          <div class="menuItems">
+          <div class="menuItems helou">
             <h2>
               helou <span><i>&#40;sweets&#41;</i></span>
             </h2>
@@ -335,7 +335,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 450px){
+@media only screen and (max-width: 450px) {
   .menu {
     width: 100%;
     margin-top: 10vh;
@@ -413,7 +413,8 @@ export default {
 
 /////// PRINT STYLES ///////
 @media print {
-  * {
+  @page {
+    size: 11in 17in;
     padding: 0;
     margin: 0;
   }
@@ -426,15 +427,16 @@ export default {
       font-weight: bold;
       font-size: 18pt;
       color: $hanoon-pink;
-      margin-top: 6pt;
-      margin-bottom: -5px;
+      margin-top: 12px;
+      margin-bottom: 5px;
     }
   }
   .item {
     width: 90%;
+    margin-bottom: 20px;
     span {
       font-size: 12pt;
-      line-height: 15pt;
+      line-height: 12pt;
       font-weight: 500;
       color: $hanoon-gray;
     }
@@ -443,13 +445,13 @@ export default {
       font-size: 17pt;
       color: $hanoon-gray;
       font-weight: 600;
-      margin-top: 8px;
+      margin-top: 6px;
       margin-bottom: 6px;
     }
 
     em {
-      font-size: 14pt;
-      font-weight: 900;
+      font-size: 15pt;
+      font-weight: 600;
       color: $hanoon-gray;
     }
 
@@ -465,12 +467,12 @@ export default {
       float: left;
       margin-bottom: -15px;
       i {
-        font-size: 14pt;
-        font-weight: bold;
+        font-size: 15pt;
+        font-weight: 900;
       }
       span {
-        font-size: 14pt;
-        font-weight: bold;
+        font-size: 15pt;
+        font-weight: 600;
       }
     }
 
@@ -494,19 +496,30 @@ export default {
     margin: 0 auto 0 auto;
     padding: 0;
   }
-
   .dietary {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif !important;
     margin-top: 7%;
-    word-wrap: none;
-    p {
-      width: 40ch;
+    position: absolute;
+    bottom: 5;
+    width: 400px;
+    p span {
+      width: 60ch !important;
+      font-size: 10pt !important;
+      font-weight: 300 !important;
+    }
+    p i {
+      width: 60ch !important;
+      font-size: 10pt !important;
+      font-weight: 300 !important;
     }
   }
 
-  .menuItems {
-    width: 100%;
+  .helou {
+    margin-top: -5px;
+  }
+  .sides {
+    margin-top: -80px;
   }
 }
 </style>
