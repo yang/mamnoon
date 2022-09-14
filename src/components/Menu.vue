@@ -465,7 +465,7 @@ export default {
     .left {
       width: 80%;
       float: left;
-      margin-bottom: -15px;
+      margin-bottom: -10px;
       i {
         font-size: 15pt;
         font-weight: 900;
@@ -503,13 +503,17 @@ export default {
     position: absolute;
     bottom: 5;
     width: 400px;
+    border: 1px solid red;
+    p {
+      width: 50ch;
+    }
     p span {
-      width: 60ch !important;
+      width: 35ch !important;
       font-size: 10pt !important;
       font-weight: 300 !important;
     }
     p i {
-      width: 60ch !important;
+      width: 35ch !important;
       font-size: 10pt !important;
       font-weight: 300 !important;
     }
@@ -519,7 +523,7 @@ export default {
     margin-top: -5px;
   }
   .sides {
-    margin-top: -80px;
+    margin-top: -110px;
   }
 }
 </style>
