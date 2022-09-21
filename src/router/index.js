@@ -245,18 +245,18 @@ const routes = [
   {
     path: "/careers",
     name: "careers",
-    component: () => import("../views/careers.vue")
+    component: () => import("../views/careers.vue"),
   },
+  // {
+  //   path: "/:id",
+  //   component: CatchAllPage,
+  // },
   {
-    path: '/plasmic',
-    component: CatchAllPage
-  },
-  {
-    path: "/:id",
+    path: "/menu-test",
     component: () => import("../components/PlasmicHanoonMenu.vue"),
     meta: {
-      title: 'facebook'
-    }
+      title: "facebook",
+    },
   },
   
 ];
