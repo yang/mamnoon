@@ -247,10 +247,6 @@ const routes = [
     name: "careers",
     component: () => import("../views/careers.vue"),
   },
-  // {
-  //   path: "/:id",
-  //   component: CatchAllPage,
-  // },
   {
     path: "/menu-test",
     component: () => import("../components/PlasmicHanoonMenu.vue"),
@@ -258,7 +254,10 @@ const routes = [
       title: "facebook",
     },
   },
-  
+  {
+    path: "/*",
+    component: CatchAllPage,
+  },
 ];
 
 

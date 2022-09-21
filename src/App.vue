@@ -1,16 +1,25 @@
+<!-- @format -->
+
 <template>
-  <div id="app">
+  <PlasmicRootProvider :loader="this.loader">
+    <!-- Router renders everything here, including Plasmic pages. -->
     <router-view />
-  </div>
+  </PlasmicRootProvider>
 </template>
 
 <script type="text/javascript">
-
-
-
-
+import { PlasmicRootProvider } from "@plasmicapp/loader-vue";
+import { PLASMIC } from "./plasmic-init";
 
 export default {
+  components: {
+    PlasmicRootProvider,
+  },
+  computed: {
+    loader() {
+      return PLASMIC;
+    },
+  },
   metaInfo: {
     name: "App",
     // if no subcomponents specify a metaInfo.title, this title will be used
@@ -850,8 +859,8 @@ h4.error {
 
         bottom: 10px;
         // transition: all .5s ease;
-    background: transparent;
-    border: 0;
+        background: transparent;
+        border: 0;
         &:focus {
           outline: none;
         }
